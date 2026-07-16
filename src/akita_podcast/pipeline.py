@@ -8,6 +8,8 @@ from __future__ import annotations
 
 import json
 import subprocess
+import sys
+import wave
 from pathlib import Path
 
 from .config import EPISODES_DIR, Settings
@@ -169,24 +171,48 @@ def _report_audit(coverage: dict, audit: dict) -> None:
         print(f"   ⚠ Afirmação sem base no artigo: {claim[:120]}")
 
 
+def _progress_bar(current: int, total: int, label: str, width: int = 30) -> None:
+    """Barra de progresso de linha única; quebra linha normal quando a saída é um arquivo."""
+    filled = int(width * current / total)
+    bar = "█" * filled + "░" * (width - filled)
+    line = f"   [{bar}] {current}/{total} ({100 * current // total}%) {label}"
+    if sys.stdout.isatty():
+        print(f"\r\033[K{line}", end="" if current < total else "\n", flush=True)
+    else:
+        print(line, flush=True)
+
+
+def _wrap_pcm_as_wav(pcm: bytes, path: Path, sample_rate: int) -> None:
+    """Embrulha PCM cru (16-bit mono) em um contêiner WAV."""
+    with wave.open(str(path), "wb") as wav:
+        wav.setnchannels(1)
+        wav.setsampwidth(2)
+        wav.setframerate(sample_rate)
+        wav.writeframes(pcm)
+
+
 def _synthesize_turns(settings: Settings, directory: Path, turns: list[dict]) -> list[Path]:
     voices = {"apresentador_a": settings.voice_a, "apresentador_b": settings.voice_b}
     segments_dir = directory / "segments"
     segments_dir.mkdir(exist_ok=True)
+    extension = "wav" if settings.tts_format == "pcm" else settings.tts_format
     paths: list[Path] = []
     for index, turn in enumerate(turns, 1):
-        segment = segments_dir / f"{index:03d}_{turn['speaker']}.{settings.tts_format}"
+        segment = segments_dir / f"{index:03d}_{turn['speaker']}.{extension}"
         paths.append(segment)
         if segment.is_file() and segment.stat().st_size > 512:
             continue
         voice = voices.get(turn["speaker"], settings.voice_a)
-        print(f"   [{index}/{len(turns)}] {turn['speaker']} ({voice})…")
+        _progress_bar(index, len(turns), f"{turn['speaker']} ({voice})")
         audio = text_to_speech(
             settings, turn["text"], voice,
             instructions="Fala natural de podcast em português brasileiro, tom conversacional.",
         )
         temporary = segment.with_suffix(segment.suffix + ".tmp")
-        temporary.write_bytes(audio)
+        if settings.tts_format == "pcm":
+            _wrap_pcm_as_wav(audio, temporary, settings.tts_sample_rate)
+        else:
+            temporary.write_bytes(audio)
         temporary.rename(segment)
     return paths
 

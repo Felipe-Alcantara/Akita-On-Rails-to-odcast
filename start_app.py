@@ -218,6 +218,8 @@ def menu() -> None:
 
 
 def main() -> None:
+    # Saída em tempo real mesmo quando redirecionada para arquivo/pipe (tail -f).
+    sys.stdout.reconfigure(line_buffering=True)
     args = sys.argv[1:]
     commands = {"list": do_list, "sync": do_sync, "status": do_status, "setup": do_setup}
     if not args:

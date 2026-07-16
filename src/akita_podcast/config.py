@@ -52,7 +52,12 @@ class Settings:
     )
     voice_a: str = field(default_factory=lambda: os.environ.get("AKITA_VOICE_A", "Kore"))
     voice_b: str = field(default_factory=lambda: os.environ.get("AKITA_VOICE_B", "Puck"))
-    tts_format: str = field(default_factory=lambda: os.environ.get("AKITA_TTS_FORMAT", "mp3"))
+    # O Gemini TTS via OpenRouter só aceita "pcm" (cru, 16-bit mono); o pipeline
+    # embrulha em WAV. Modelos que suportem "mp3"/"wav" podem trocar via env.
+    tts_format: str = field(default_factory=lambda: os.environ.get("AKITA_TTS_FORMAT", "pcm"))
+    tts_sample_rate: int = field(
+        default_factory=lambda: int(os.environ.get("AKITA_TTS_SAMPLE_RATE", "24000"))
+    )
 
     def require_api_key(self) -> str:
         if not self.api_key:
