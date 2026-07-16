@@ -1,0 +1,344 @@
+{
+  "turns": [
+    {
+      "turn_id": "T001",
+      "speaker": "apresentador_a",
+      "text": "Olá e bem-vindos a mais um episódio! Hoje vamos mergulhar fundo no que acontece dentro dos aplicativos que a gente instala no celular, com base em um artigo recente e superinteressante do Fabio Akita, do AkitaOnRails.com. O título já é uma provocação: 'O que tem dentro do TikTok, Clash of Kings e Gov.br?'.",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T002",
+      "speaker": "apresentador_b",
+      "text": "Exato. E antes de começar, o próprio Akita faz um alerta que é crucial a gente repassar. Ele usou uma inteligência artificial, a Claude Fable 5, pra fazer uma análise do código desses três apps. Mas ele não revalidou tudo na mão, arquivo por arquivo. São centenas de milhares de arquivos. Então, o que vamos discutir aqui é um panorama, uma visão geral, e não um laudo pericial 100% factual.",
+      "coverage_ids": [
+        "C001"
+      ]
+    },
+    {
+      "turn_id": "T003",
+      "speaker": "apresentador_a",
+      "text": "Certo, é um ponto de partida, não uma conclusão definitiva. E ele menciona mais alguma camada de incerteza, né?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T004",
+      "speaker": "apresentador_b",
+      "text": "Sim, duas. Primeiro, os arquivos dos apps, os APKs, não vieram da loja oficial do Google, mas do site APKPure. Existe uma chance pequena, mas real, de que eles tenham sido alterados. E segundo, a análise não abriu todas as bibliotecas de código que vêm junto, os pacotes binários. Assumiu-se que eram coisas comuns, como as ferramentas do Google, mas é mais um ponto cego na análise.",
+      "coverage_ids": [
+        "C002",
+        "C003"
+      ]
+    },
+    {
+      "turn_id": "T005",
+      "speaker": "apresentador_a",
+      "text": "Entendido. O projeto todo nasceu da curiosidade dele de saber o que tem nesses apps que a gente instala sem pensar duas vezes. E a primeira surpresa do artigo é que, aparentemente, olhar dentro de um app Android é bem mais fácil do que a gente imagina.",
+      "coverage_ids": [
+        "C004"
+      ]
+    },
+    {
+      "turn_id": "T006",
+      "speaker": "apresentador_b",
+      "text": "É surpreendentemente fácil. Um arquivo de app Android, o APK, é basicamente um arquivo ZIP. Você pode descompactar e usar uma ferramenta chamada 'jadx' pra transformar o código de máquina de volta em código Java legível. Se o app for feito em Flutter, tem outra ferramenta, a 'Blutter', que reconstrói o código. E em alguns jogos, como os feitos em Cocos2d-x, os scripts de lógica estão lá em texto puro.",
+      "coverage_ids": [
+        "C005",
+        "C006",
+        "C007"
+      ]
+    },
+    {
+      "turn_id": "T007",
+      "speaker": "apresentador_a",
+      "text": "Peraí, então qualquer um pode roubar o código fonte de um app e relançar?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T008",
+      "speaker": "apresentador_b",
+      "text": "Não exatamente. Você não consegue recompilar o app a partir disso. Os nomes das funções e variáveis vêm todos embaralhados, faltam recursos, chaves de segurança... Mas para fazer uma análise estática, ou seja, para ler e entender o que o app faz, é mais que suficiente. Dá pra ver pra quais servidores ele se conecta, que permissões ele pede, que SDKs ele usa. O limite é que a parte mais sensível geralmente está em código nativo, que não descompila pra nada legível. E como veremos, isso é fundamental no caso do TikTok.",
+      "coverage_ids": [
+        "C008",
+        "C009",
+        "C010",
+        "C011"
+      ]
+    },
+    {
+      "turn_id": "T009",
+      "speaker": "apresentador_a",
+      "text": "Ok, isso nos leva àquela frase famosa: 'Se é de graça, você é o produto'. O artigo promete concretizar isso. Como, exatamente, a gente vira o produto?",
+      "coverage_ids": [
+        "C012"
+      ]
+    },
+    {
+      "turn_id": "T010",
+      "speaker": "apresentador_b",
+      "text": "A resposta tem um nome técnico: 'fingerprint', ou impressão digital do dispositivo. Pense nisso como um identificador único que o app monta sobre o seu celular. Ele combina dezenas de informações: modelo do aparelho, versão do sistema, resolução da tela, CPU, RAM, operadora, fuso horário, idioma, nível da bateria, fontes instaladas, redes Wi-Fi e Bluetooth ao redor, sensores de movimento...",
+      "coverage_ids": [
+        "C013"
+      ]
+    },
+    {
+      "turn_id": "T011",
+      "speaker": "apresentador_a",
+      "text": "Nossa, mas nenhum desses dados sozinho me identifica, certo?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T012",
+      "speaker": "apresentador_b",
+      "text": "Exato. Nenhum deles sozinho. Mas a combinação de todos eles é tão específica que se torna praticamente única no mundo. Vira um 'número de série' implícito do seu aparelho, que você nunca concordou em fornecer. E o pulo do gato é a persistência. Um cookie você apaga, o ID de anúncio você reseta. Mas um bom fingerprint sobrevive a tudo isso: sobrevive a você limpar os dados do app, a reinstalar, às vezes até a formatar o celular. Ele te re-identifica como a mesma pessoa.",
+      "coverage_ids": [
+        "C014",
+        "C015"
+      ]
+    },
+    {
+      "turn_id": "T013",
+      "speaker": "apresentador_a",
+      "text": "E com essa identidade persistente, as empresas conseguem cruzar meu comportamento entre diferentes apps e sessões, montando um perfil que me segue pra todo lado. Esse perfil é o produto. E o produto sou eu.",
+      "coverage_ids": [
+        "C016"
+      ]
+    },
+    {
+      "turn_id": "T014",
+      "speaker": "apresentador_b",
+      "text": "Exatamente. E os três apps que o Akita analisou mostram pontos bem diferentes desse espectro. Vamos começar pelo mais denso: o TikTok.",
+      "coverage_ids": [
+        "C017"
+      ]
+    },
+    {
+      "turn_id": "T015",
+      "speaker": "apresentador_a",
+      "text": "O gigante TikTok. A análise foi grande, com 37 arquivos de código e mais de 200 bibliotecas nativas. Qual foi a conclusão principal?",
+      "coverage_ids": [
+        "C018"
+      ]
+    },
+    {
+      "turn_id": "T016",
+      "speaker": "apresentador_b",
+      "text": "A conclusão que ele chama de 'a mais justa' é: não é um malware disfarçado, mas é uma coleta de dados em escala industrial, projetada para ser difícil de auditar. Do lado bom, ele não fala com servidores secretos. Tudo vai para a própria TikTok/ByteDance ou para parceiros de anúncio conhecidos, como Google, Meta e Amazon. E ele não coleta dados super sensíveis como IMEI, MAC, não lê seus SMS ou chamadas.",
+      "coverage_ids": [
+        "C019",
+        "C020",
+        "C021",
+        "C022"
+      ]
+    },
+    {
+      "turn_id": "T017",
+      "speaker": "apresentador_a",
+      "text": "Ok, isso é um alívio. Mas qual é o lado preocupante?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T018",
+      "speaker": "apresentador_b",
+      "text": "O lado preocupante é que ele coleta muito. Ele cria aquele fingerprint persistente, pega sua localização precisa, escaneia redes Wi-Fi e Bluetooth, sobe seus contatos se você permitir, usa os sensores de movimento e, olha que interessante, ele verifica se você tem uma lista de 91 outros apps instalados, incluindo concorrentes, apps de pagamento como PayPal, e até o Spotify. E seu ID de anúncio é compartilhado com uns 6 parceiros.",
+      "coverage_ids": [
+        "C023",
+        "C024"
+      ]
+    },
+    {
+      "turn_id": "T019",
+      "speaker": "apresentador_a",
+      "text": "E é aí que entra aquela questão do código nativo, a tal 'caixa-preta'?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T020",
+      "speaker": "apresentador_b",
+      "text": "Precisamente. O achado central é que toda essa montagem do fingerprint e da telemetria acontece em código nativo, numa biblioteca chamada 'libmetasec_ov.so'. E as requisições saem criptografadas. Ou seja, mesmo descompilando o app, você não sabe exatamente quais bytes estão saindo do seu celular. É uma caixa-preta.",
+      "coverage_ids": [
+        "C025"
+      ]
+    },
+    {
+      "turn_id": "T021",
+      "speaker": "apresentador_a",
+      "text": "Mas o artigo conseguiu abrir essa caixa, de alguma forma?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T022",
+      "speaker": "apresentador_b",
+      "text": "Conseguiu espiar por uma fresta. A análise rodou um comando simples, chamado 'strings', que busca por texto legível dentro de arquivos binários. E a 'libmetasec_ov' entregou o jogo! Em texto puro, foi possível ver os nomes dos campos que ela coleta, como 'secdeviceid', 'device_id', nível da bateria, tamanho da tela... confirmando que ela é, de fato, uma 'máquina de fingerprint'. A análise também não achou nada de keyloggers ou gravadores de tela; as palavras-chave assustadoras eram falsos positivos.",
+      "coverage_ids": [
+        "C026",
+        "C027",
+        "C028",
+        "C029"
+      ]
+    },
+    {
+      "turn_id": "T023",
+      "speaker": "apresentador_a",
+      "text": "Então, resumindo o TikTok: as duas coisas são verdade ao mesmo tempo. Não está provado que é um spyware, mas ele definitivamente coleta muito mais dados do que precisa, de forma opaca, e agora temos a confirmação de que esse motor de fingerprint é real.",
+      "coverage_ids": [
+        "C030",
+        "C031"
+      ]
+    },
+    {
+      "turn_id": "T024",
+      "speaker": "apresentador_b",
+      "text": "Exato. Agora vamos para o segundo app, o jogo Clash of Kings, que foi uma surpresa agradável no quesito privacidade.",
+      "coverage_ids": [
+        "C032",
+        "C033"
+      ]
+    },
+    {
+      "turn_id": "T025",
+      "speaker": "apresentador_a",
+      "text": "Um jogo chinês com privacidade boa? Essa é nova. O que ele faz, ou melhor, o que ele não faz?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T026",
+      "speaker": "apresentador_b",
+      "text": "Ele não pede acesso a GPS, câmera, microfone, contatos, SMS ou IMEI. As únicas permissões mais sensíveis, como ver a lista de apps instalados, dependem do seu consentimento. Nada de malware ou coleta de dados escondida. A preocupação de privacidade é uma versão mais simples do que vimos no TikTok: ele também cria um identificador único pro seu aparelho, resistente a reset, e o salva em quatro lugares diferentes pra garantir que ele sobreviva a uma reinstalação. E envia telemetria para a China.",
+      "coverage_ids": [
+        "C034",
+        "C035",
+        "C036",
+        "C037",
+        "C038"
+      ]
+    },
+    {
+      "turn_id": "T027",
+      "speaker": "apresentador_a",
+      "text": "Se a privacidade é decente, onde está o problema com o Clash of Kings?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T028",
+      "speaker": "apresentador_b",
+      "text": "Na monetização. O artigo descreve como um kit completo de free-to-play predatório. Tem loot boxes, ofertas com contador regressivo pra criar senso de urgência, sistema pay-to-win, ranking de quem gasta mais... A conclusão é: privacidade decente, carteira em perigo.",
+      "coverage_ids": [
+        "C039",
+        "C040",
+        "C041"
+      ]
+    },
+    {
+      "turn_id": "T029",
+      "speaker": "apresentador_a",
+      "text": "Entendi. E por último, o contraponto: o app Gov.br, do governo brasileiro. Confesso que estou com um pé atrás.",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T030",
+      "speaker": "apresentador_b",
+      "text": "Pois o autor ficou aliviado. Ele descreve o Gov.br como um exemplo de como fazer direito. É um app bem construído, que respeita a privacidade. O tráfego de dados vai quase todo para domínios do governo, usa criptografia forte, guarda suas credenciais de forma segura e, o mais importante: não tem nenhum tracker de anúncio comercial. Nada de Meta, Google Ads, nada disso.",
+      "coverage_ids": [
+        "C042",
+        "C043",
+        "C044",
+        "C045"
+      ]
+    },
+    {
+      "turn_id": "T031",
+      "speaker": "apresentador_a",
+      "text": "Uau, isso é impressionante para um app de governo. Mas tem alguma ressalva?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T032",
+      "speaker": "apresentador_b",
+      "text": "Tem duas ressalvas que o artigo chama de 'honestas'. A primeira é que ele usa o Google Firebase para analytics e relatórios de crash, com a coleta ligada por padrão. É o que quase todo app faz, mas é um padrão 'preguiçoso'. A segunda é que a sua selfie de prova de vida sobe para os servidores do governo, o que é necessário para a função do app e não é compartilhado com terceiros. No geral, a conclusão é que se todo app fosse construído com esse cuidado, essa discussão nem precisaria existir.",
+      "coverage_ids": [
+        "C046",
+        "C047",
+        "C048",
+        "C049"
+      ]
+    },
+    {
+      "turn_id": "T033",
+      "speaker": "apresentador_a",
+      "text": "Interessante. Cruzando os três, então, quais são os 'passageiros' que quase todo app carrega junto?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T034",
+      "speaker": "apresentador_b",
+      "text": "O padrão que emerge é claro. Primeiro, o Google Firebase ou Play Services, que virou infraestrutura invisível. Segundo, a 'stack de atribuição de anúncio', que são ferramentas como AppsFlyer e Adjust, cuja única função é ligar o clique que você deu num anúncio à sua instalação do app. O TikTok tinha cinco desses ao mesmo tempo! Terceiro, redes de anúncio. E por fim, serviços especializados em fingerprint, como o ThreatMetrix que estava no TikTok, uma empresa cujo negócio é literalmente criar impressões digitais de dispositivos.",
+      "coverage_ids": [
+        "C050",
+        "C051",
+        "C052",
+        "C053",
+        "C054",
+        "C055"
+      ]
+    },
+    {
+      "turn_id": "T035",
+      "speaker": "apresentador_a",
+      "text": "Então, como o artigo diz, não é uma empresa só te espionando. É um 'mutirão'. Vários parceiros, cada um pegando um pedaço dos seus dados, e o fingerprint costurando tudo num perfil só.",
+      "coverage_ids": [
+        "C056"
+      ]
+    },
+    {
+      "turn_id": "T036",
+      "speaker": "apresentador_b",
+      "text": "Exatamente. É um esforço coletivo de vigilância.",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T037",
+      "speaker": "apresentador_a",
+      "text": "Isso tudo é meio assustador. O que uma pessoa comum pode fazer pra se proteger, sem ter que jogar o celular fora?",
+      "coverage_ids": [
+        "C057"
+      ]
+    },
+    {
+      "turn_id": "T038",
+      "speaker": "apresentador_b",
+      "text": "O artigo dá algumas dicas práticas. Primeiro: não consinta com o que não precisa. Um app de vídeo não precisa do seu GPS. Negue a permissão, ou libere só 'enquanto usa o app'. O mesmo pra contatos e microfone. Segundo: de vez em quando, vá nas configurações do seu Android e resete ou até exclua seu ID de publicidade. Não mata o fingerprint, mas quebra uma parte do rastro. Terceiro: desconfie da função 'encontrar amigos', que é o gatilho pra subir toda a sua lista de contatos. E quarto: sempre que possível, prefira usar a versão web dos serviços no navegador, que tem menos acesso ao seu aparelho que o app nativo.",
+      "coverage_ids": [
+        "C058",
+        "C059",
+        "C060",
+        "C061"
+      ]
+    },
+    {
+      "turn_id": "T039",
+      "speaker": "apresentador_a",
+      "text": "E talvez o conselho mais importante: aceitar o trade-off de forma consciente. A questão não é virar paranoico, mas saber o preço que você está pagando. Se o TikTok é divertido o suficiente pra você pagar com seu fingerprint, ótimo, é uma decisão informada.",
+      "coverage_ids": [
+        "C062"
+      ]
+    },
+    {
+      "turn_id": "T040",
+      "speaker": "apresentador_b",
+      "text": "Exato. E esse é o ponto final do artigo. Essa análise estática é um vislumbre, não um veredito final. Ela mostra o que o app é capaz de fazer, não o que ele de fato faz em tempo real. Mas o mais legal é a mensagem de que hoje, com uma boa IA e uma tarde livre, qualquer desenvolvedor curioso pode fazer isso. Pode abrir o capô do próprio celular e ver o que está rodando ali.",
+      "coverage_ids": [
+        "C063",
+        "C064"
+      ]
+    },
+    {
+      "turn_id": "T041",
+      "speaker": "apresentador_a",
+      "text": "É como ele diz, é o mais próximo que a gente tem de 'ler o rótulo antes de comer' no mundo do software. Para quem quiser se aprofundar, as análises completas estão no GitHub do Akita. E com isso, encerramos. Este episódio foi baseado no artigo de Fabio Akita no AkitaOnRails.com, sob a licença Creative Commons Atribuição-NãoComercial-CompartilhaIgual 4.0. Até a próxima!",
+      "coverage_ids": [
+        "C065",
+        "C066"
+      ]
+    }
+  ]
+}

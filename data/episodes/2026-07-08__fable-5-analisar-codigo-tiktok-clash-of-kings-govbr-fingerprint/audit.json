@@ -1,0 +1,335 @@
+{
+  "results": [
+    {
+      "coverage_id": "C001",
+      "status": "completo",
+      "notes": "O roteiro menciona a ressalva de que as informações não são 100% factuais e que a análise foi feita por IA sem reauditoria manual, devendo ser tratada como panorama."
+    },
+    {
+      "coverage_id": "C002",
+      "status": "completo",
+      "notes": "O roteiro aborda a ressalva de que os APKs vieram do APKPure e podem ter sido adulterados."
+    },
+    {
+      "coverage_id": "C003",
+      "status": "completo",
+      "notes": "O roteiro menciona que bibliotecas binárias e SDKs não foram abertos, sendo um ponto cego na análise."
+    },
+    {
+      "coverage_id": "C004",
+      "status": "completo",
+      "notes": "O roteiro afirma que o projeto nasceu da curiosidade do autor sobre o conteúdo dos apps."
+    },
+    {
+      "coverage_id": "C005",
+      "status": "completo",
+      "notes": "O roteiro explica que descompilar apps Android é fácil, comparando APKs a arquivos ZIP e mencionando o uso de jadx para Java legível."
+    },
+    {
+      "coverage_id": "C006",
+      "status": "completo",
+      "notes": "O roteiro menciona a ferramenta Blutter para reconstruir Dart em apps Flutter."
+    },
+    {
+      "coverage_id": "C007",
+      "status": "completo",
+      "notes": "O roteiro cita que scripts Lua em jogos Cocos2d-x estão frequentemente em texto puro."
+    },
+    {
+      "coverage_id": "C008",
+      "status": "completo",
+      "notes": "O roteiro explica que a descompilação não permite recompilar o app devido a ofuscação, falta de recursos e chaves de segurança."
+    },
+    {
+      "coverage_id": "C009",
+      "status": "completo",
+      "notes": "O roteiro afirma que a descompilação é suficiente para análise estática, permitindo ver conexões, permissões e SDKs."
+    },
+    {
+      "coverage_id": "C010",
+      "status": "completo",
+      "notes": "O roteiro menciona que a parte mais sensível em código nativo não descompila de forma legível, sendo um limite da análise."
+    },
+    {
+      "coverage_id": "C011",
+      "status": "completo",
+      "notes": "O roteiro usa o TikTok como exemplo de app cujo 'miolo' está em código nativo."
+    },
+    {
+      "coverage_id": "C012",
+      "status": "completo",
+      "notes": "O roteiro introduz a frase 'Se é de graça, você é o produto' e a conecta ao conceito de fingerprint."
+    },
+    {
+      "coverage_id": "C013",
+      "status": "completo",
+      "notes": "O roteiro descreve o fingerprint como um identificador único montado a partir de dezenas de informações do celular."
+    },
+    {
+      "coverage_id": "C014",
+      "status": "completo",
+      "notes": "O roteiro explica que a combinação de dados do fingerprint é única e persistente, mesmo que dados individuais não identifiquem o usuário."
+    },
+    {
+      "coverage_id": "C015",
+      "status": "completo",
+      "notes": "O roteiro aborda a persistência do fingerprint, que sobrevive a limpeza de dados, reinstalações e formatação, re-identificando o usuário."
+    },
+    {
+      "coverage_id": "C016",
+      "status": "completo",
+      "notes": "O roteiro conclui que o fingerprint permite às empresas cruzar comportamentos e montar um perfil persistente, tornando o usuário o 'produto'."
+    },
+    {
+      "coverage_id": "C017",
+      "status": "completo",
+      "notes": "O roteiro afirma que os três apps analisados mostram diferentes pontos no espectro de coleta de dados."
+    },
+    {
+      "coverage_id": "C018",
+      "status": "completo",
+      "notes": "O roteiro menciona que a análise do TikTok envolveu 37 arquivos de código e mais de 200 bibliotecas nativas."
+    },
+    {
+      "coverage_id": "C019",
+      "status": "completo",
+      "notes": "O roteiro apresenta a conclusão de que o TikTok não é malware, mas faz coleta industrial de dados de forma difícil de auditar."
+    },
+    {
+      "coverage_id": "C020",
+      "status": "completo",
+      "notes": "O roteiro afirma que o TikTok não contata servidores secretos e usa apenas hosts da TikTok/ByteDance ou parceiros conhecidos."
+    },
+    {
+      "coverage_id": "C021",
+      "status": "completo",
+      "notes": "O roteiro menciona que o TikTok não coleta IMEI, MAC, SMS ou chamadas."
+    },
+    {
+      "coverage_id": "C022",
+      "status": "completo",
+      "notes": "O roteiro cita que dados de usuários dos EUA e UE no TikTok vão para enclaves dedicados."
+    },
+    {
+      "coverage_id": "C023",
+      "status": "completo",
+      "notes": "O roteiro detalha a coleta de dados do TikTok: fingerprint persistente, localização precisa, varredura Wi-Fi/Bluetooth, contatos (se permitido) e checagem de 91 outros apps instalados."
+    },
+    {
+      "coverage_id": "C024",
+      "status": "completo",
+      "notes": "O roteiro informa que o ID de anúncio do TikTok é compartilhado com cerca de 6 parceiros."
+    },
+    {
+      "coverage_id": "C025",
+      "status": "completo",
+      "notes": "O roteiro explica que o fingerprint e telemetria do TikTok são montados em código nativo (`libmetasec_ov.so`) e requisições são criptografadas, tornando-o uma 'caixa-preta'."
+    },
+    {
+      "coverage_id": "C026",
+      "status": "completo",
+      "notes": "O roteiro descreve como a análise da `libmetasec_ov.so` revelou em texto puro os campos coletados e confirmou ser uma 'máquina de fingerprint'."
+    },
+    {
+      "coverage_id": "C027",
+      "status": "completo",
+      "notes": "O roteiro reitera que a análise do código nativo confirma o TikTok como uma 'máquina de fingerprint'."
+    },
+    {
+      "coverage_id": "C028",
+      "status": "completo",
+      "notes": "O roteiro menciona que não foram encontrados keyloggers ou gravadores de tela no TikTok, e que palavras-chave assustadoras eram falsos positivos."
+    },
+    {
+      "coverage_id": "C029",
+      "status": "completo",
+      "notes": "O roteiro cita a presença de anti-debug e detecção de frida/xposed no TikTok, classificando-os como normais para segurança."
+    },
+    {
+      "coverage_id": "C030",
+      "status": "completo",
+      "notes": "O roteiro conclui que a opacidade do TikTok persiste, mesmo com a revelação da `libmetasec_ov`, pois os bytes exatos do payload permanecem desconhecidos."
+    },
+    {
+      "coverage_id": "C031",
+      "status": "completo",
+      "notes": "O roteiro afirma que as conclusões 'Não é spyware' e 'coleta muito de forma opaca' são ambas verdadeiras para o TikTok, com o motor de fingerprint confirmado."
+    },
+    {
+      "coverage_id": "C032",
+      "status": "completo",
+      "notes": "O roteiro introduz o Clash of Kings como uma surpresa agradável em privacidade."
+    },
+    {
+      "coverage_id": "C033",
+      "status": "completo",
+      "notes": "O roteiro descreve o Clash of Kings como um jogo chinês Cocos2d-x com scripts Lua em texto puro."
+    },
+    {
+      "coverage_id": "C034",
+      "status": "completo",
+      "notes": "O roteiro destaca que o Clash of Kings não pede permissões sensíveis como GPS, câmera, microfone, contatos, SMS ou IMEI."
+    },
+    {
+      "coverage_id": "C035",
+      "status": "completo",
+      "notes": "O roteiro menciona que permissões sensíveis do Clash of Kings (lista de apps, MAC Wi-Fi) são condicionadas a consentimento."
+    },
+    {
+      "coverage_id": "C036",
+      "status": "completo",
+      "notes": "O roteiro afirma que não foi encontrado malware ou exfiltração escondida no Clash of Kings."
+    },
+    {
+      "coverage_id": "C037",
+      "status": "completo",
+      "notes": "O roteiro identifica a principal preocupação de privacidade do Clash of Kings como um UUID persistente, salvo em quatro locais para sobreviver a resets."
+    },
+    {
+      "coverage_id": "C038",
+      "status": "completo",
+      "notes": "O roteiro menciona que o Clash of Kings envia telemetria para a China."
+    },
+    {
+      "coverage_id": "C039",
+      "status": "completo",
+      "notes": "O roteiro descreve a monetização do Clash of Kings como 'predatória' e 'kit completo de free-to-play', incluindo loot boxes, ofertas e pay-to-win."
+    },
+    {
+      "coverage_id": "C040",
+      "status": "completo",
+      "notes": "O roteiro menciona que as probabilidades de drop são divulgadas e há sistemas anti-vício/nome-real para menores no Clash of Kings."
+    },
+    {
+      "coverage_id": "C041",
+      "status": "completo",
+      "notes": "O roteiro conclui que o Clash of Kings tem privacidade decente, mas a carteira do usuário está em perigo devido à monetização."
+    },
+    {
+      "coverage_id": "C042",
+      "status": "completo",
+      "notes": "O roteiro apresenta o Gov.br como um exemplo de 'como fazer direito' e que aliviou o autor."
+    },
+    {
+      "coverage_id": "C043",
+      "status": "completo",
+      "notes": "O roteiro identifica o Gov.br como o app oficial de identidade digital do governo brasileiro, feito em Flutter."
+    },
+    {
+      "coverage_id": "C044",
+      "status": "completo",
+      "notes": "O roteiro descreve o Gov.br como bem construído e respeitoso com a privacidade, com tráfego para domínios governamentais, criptografia forte e credenciais seguras."
+    },
+    {
+      "coverage_id": "C045",
+      "status": "completo",
+      "notes": "O roteiro destaca que o Gov.br não possui trackers comerciais de anúncio."
+    },
+    {
+      "coverage_id": "C046",
+      "status": "completo",
+      "notes": "O roteiro menciona a ressalva de que o Gov.br usa Google Firebase com coleta padrão e permissão de ad-id, classificando-o como um padrão 'preguiçoso'."
+    },
+    {
+      "coverage_id": "C047",
+      "status": "completo",
+      "notes": "O roteiro aborda a ressalva de que a selfie de prova de vida do Gov.br é enviada ao backend do governo, sendo inerente à função e não para terceiros."
+    },
+    {
+      "coverage_id": "C048",
+      "status": "completo",
+      "notes": "O roteiro menciona que a questão do CPF em relatórios do Crashlytics no Gov.br só seria resolvida com captura de tráfego ao vivo."
+    },
+    {
+      "coverage_id": "C049",
+      "status": "completo",
+      "notes": "O roteiro conclui que o Gov.br é um exemplo de app bem construído e respeitoso, sugerindo que a discussão de privacidade seria desnecessária se todos fossem assim."
+    },
+    {
+      "coverage_id": "C050",
+      "status": "completo",
+      "notes": "O roteiro identifica Google Firebase/Play Services como infraestrutura invisível presente em quase todo app, com coleta padrão."
+    },
+    {
+      "coverage_id": "C051",
+      "status": "completo",
+      "notes": "O roteiro descreve a 'stack de atribuição de anúncio' como ferramentas para vincular cliques em anúncios à instalação do app, coletando ad-id."
+    },
+    {
+      "coverage_id": "C052",
+      "status": "completo",
+      "notes": "O roteiro cita o TikTok como exemplo de ter cinco stacks de atribuição de anúncio redundantes."
+    },
+    {
+      "coverage_id": "C053",
+      "status": "completo",
+      "notes": "O roteiro menciona redes de anúncio como AdMob/DoubleClick e ecossistemas de mediação em jogos como comuns em apps."
+    },
+    {
+      "coverage_id": "C054",
+      "status": "completo",
+      "notes": "O roteiro cita o Tencent Bugly no Clash of Kings como exemplo de analytics/crash regional, enviando telemetria para a China."
+    },
+    {
+      "coverage_id": "C055",
+      "status": "completo",
+      "notes": "O roteiro descreve serviços especializados de fingerprint/antifraude, como ThreatMetrix no TikTok, como máquinas de fingerprint embutidas."
+    },
+    {
+      "coverage_id": "C056",
+      "status": "completo",
+      "notes": "O roteiro conclui que o perfil do usuário é montado por um 'mutirão' de parceiros, com o fingerprint unindo os dados."
+    },
+    {
+      "coverage_id": "C057",
+      "status": "completo",
+      "notes": "O roteiro introduz a ideia de que é possível reduzir a exposição de dados sem sair da internet."
+    },
+    {
+      "coverage_id": "C058",
+      "status": "completo",
+      "notes": "O roteiro aconselha não conceder permissões desnecessárias, como GPS, contatos, microfone e câmera, liberando-as apenas quando essencial."
+    },
+    {
+      "coverage_id": "C059",
+      "status": "completo",
+      "notes": "O roteiro sugere resetar ou excluir o ID de publicidade periodicamente para quebrar parte do rastro."
+    },
+    {
+      "coverage_id": "C060",
+      "status": "completo",
+      "notes": "O roteiro alerta para desconfiar da função 'encontrar amigos' devido ao upload de contatos."
+    },
+    {
+      "coverage_id": "C061",
+      "status": "completo",
+      "notes": "O roteiro recomenda preferir versões web de serviços, pois navegadores com bloqueadores expõem menos fingerprint que apps nativos."
+    },
+    {
+      "coverage_id": "C062",
+      "status": "completo",
+      "notes": "O roteiro enfatiza a importância de aceitar o trade-off conscientemente, sabendo o 'preço' de usar um app."
+    },
+    {
+      "coverage_id": "C063",
+      "status": "completo",
+      "notes": "O roteiro reitera que a análise estática é um vislumbre do que o app é capaz de fazer, e que a captura de tráfego ao vivo revelaria o que de fato é enviado."
+    },
+    {
+      "coverage_id": "C064",
+      "status": "completo",
+      "notes": "O roteiro conclui que, com IA e tempo, qualquer desenvolvedor curioso pode analisar apps para entender o que está rodando."
+    },
+    {
+      "coverage_id": "C065",
+      "status": "completo",
+      "notes": "O roteiro menciona que as análises completas estão disponíveis no GitHub do Akita para quem quiser se aprofundar."
+    },
+    {
+      "coverage_id": "C066",
+      "status": "completo",
+      "notes": "O roteiro finaliza com a analogia de que analisar o código de apps é como 'ler o rótulo antes de comer' no software."
+    }
+  ],
+  "unsupported_claims": []
+}

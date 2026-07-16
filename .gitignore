@@ -3,9 +3,6 @@ Padrão de qualidade - Felixo System Design/
 # Segredos
 .env
 
-# Artefatos locais (repositório do blog, episódios gerados)
-data/
-
 # Python
 __pycache__/
 *.pyc
