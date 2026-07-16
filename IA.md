@@ -46,3 +46,23 @@ executada ponta a ponta com créditos reais.
 
 **Risco que sobrou:** nomes de modelos TTS/voz podem divergir do catálogo atual do OpenRouter —
 o primeiro teste real deve validar `AKITA_TTS_MODEL` e as vozes; ajuste via `.env` sem mudar código.
+
+---
+
+## 2026-07-16 — Primeiro episódio real: correção de PCM e barra de progresso
+
+**O que mudou:** o primeiro teste ponta a ponta com créditos reais confirmou o risco registrado
+acima: o Gemini TTS no OpenRouter rejeita `response_format=mp3` (HTTP 400) e só aceita `pcm`.
+O adaptador agora recebe PCM cru (16-bit mono, taxa configurável via `AKITA_TTS_SAMPLE_RATE`,
+padrão 24 kHz) e o embrulha em WAV — o que o plano já recomendava como intermediário sem perdas.
+A etapa de TTS ganhou barra de progresso (linha única no terminal, linha por turno em log) e a
+saída passou a ter flush por linha, para acompanhamento via `tail -f`.
+
+**Validação:** episódio piloto gerado com sucesso a partir do artigo
+"Fiz o Fable 5 analisar código do TikTok…" (2026-07-08): 66 itens de cobertura, 41 turnos,
+auditoria sem pendências críticas, ~13 min de áudio, MP3 normalizado. A retomada após falha
+funcionou como projetado — matriz/roteiro/auditoria foram reaproveitados do disco e a síntese
+recomeçou do primeiro segmento faltante, sem custo duplicado nas etapas textuais.
+
+**Pendências registradas:** revisão humana integral do episódio piloto (exigência do plano);
+registrar o custo real da rodada (painel do OpenRouter) antes de gerar em lote.
