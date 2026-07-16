@@ -7,3 +7,4 @@ Padrão de qualidade - Felixo System Design/
 __pycache__/
 *.pyc
 .venv/
+data/source/akitaonrails.github.io/
