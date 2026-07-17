@@ -10,7 +10,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-import subprocess
 import sys
 import time
 import wave
@@ -22,6 +21,7 @@ from .config import EPISODES_DIR, Settings, api_key_candidates
 from .estimates import EpisodeMetrics, estimate_tts_cost
 from .prompts import AUDIT_PROMPT, COVERAGE_PROMPT, SYSTEM_PROMPT, script_prompt
 from .providers import openrouter
+from .runtime.process import run_tool
 from .runtime.retry import RetryPolicy
 from .runtime.status import GenerationTracker
 from .sources.base import ContentItem
@@ -393,33 +393,62 @@ def _synthesize_turns(settings: Settings, directory: Path, turns: list[dict],
     return paths
 
 
+_FFPROBE_TIMEOUT = 120
+_FFMPEG_TIMEOUT = 1800
+
+
+def _concat_line(path: Path) -> str:
+    """Linha do concat demuxer do ffmpeg para um segmento.
+
+    O ffmpeg interpreta ``\\`` como escape na lista de concatenação; no Windows
+    o caminho resolvido usa barras invertidas. Normaliza para ``/`` (aceito em
+    todas as plataformas) e escapa aspas simples, evitando falha silenciosa de
+    montagem quando o caminho tem caractere especial.
+    """
+    text = path.resolve().as_posix().replace("'", r"'\''")
+    return f"file '{text}'\n"
+
+
 def _media_duration_seconds(path: Path) -> float:
     """Obtém duração real de WAV/MP3 usando as dependências do pipeline."""
     if path.suffix.lower() == ".wav":
         with wave.open(str(path), "rb") as audio:
-            return audio.getnframes() / audio.getframerate()
-    result = subprocess.run(
+            framerate = audio.getframerate()
+            if framerate <= 0:
+                raise ValueError(f"WAV com taxa de amostragem inválida: {path.name}")
+            return audio.getnframes() / framerate
+    result = run_tool(
+        "ffprobe",
         [
-            "ffprobe", "-v", "error", "-show_entries", "format=duration",
+            "-v", "error", "-show_entries", "format=duration",
             "-of", "default=noprint_wrappers=1:nokey=1", str(path),
         ],
-        check=True, capture_output=True, text=True,
+        timeout=_FFPROBE_TIMEOUT,
     )
-    return float(result.stdout.strip())
+    raw = result.stdout.strip()
+    try:
+        return float(raw)
+    except ValueError as error:
+        raise ValueError(
+            f"ffprobe não retornou a duração de {path.name}: {raw[:100] or 'vazio'}"
+        ) from error
 
 
 def _assemble(directory: Path, segments: list[Path], item: ContentItem) -> Path:
+    if not segments:
+        raise ValueError("Não há segmentos de áudio para montar o episódio.")
     concat_list = directory / "segments.txt"
     concat_list.write_text(
-        "".join(f"file '{p.resolve()}'\n" for p in segments), encoding="utf-8"
+        "".join(_concat_line(p) for p in segments), encoding="utf-8"
     )
     final_path = directory / "episode.mp3"
     temporary = directory / "episode.tmp.mp3"
     temporary.unlink(missing_ok=True)
     try:
-        subprocess.run(
+        run_tool(
+            "ffmpeg",
             [
-                "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat_list),
+                "-y", "-f", "concat", "-safe", "0", "-i", str(concat_list),
                 "-af", "loudnorm=I=-16:TP=-1.5:LRA=11",
                 "-metadata", f"title={item.title}",
                 "-metadata", "artist=Audiofy Content AI",
@@ -427,7 +456,7 @@ def _assemble(directory: Path, segments: list[Path], item: ContentItem) -> Path:
                 "-codec:a", "libmp3lame", "-b:a", "128k",
                 str(temporary),
             ],
-            check=True, capture_output=True, text=True,
+            timeout=_FFMPEG_TIMEOUT,
         )
         temporary.replace(final_path)
     except Exception:

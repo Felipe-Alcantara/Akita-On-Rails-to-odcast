@@ -130,7 +130,7 @@ class ForcedGenerationTest(unittest.TestCase):
             with (
                 patch("audiofy.bridge._episode_dir", return_value=directory),
                 patch("audiofy.bridge.Settings", return_value=settings),
-                patch("audiofy.bridge.subprocess.Popen") as popen,
+                patch("audiofy.runtime.process.subprocess.Popen") as popen,
             ):
                 result = bridge._cmd_generate("custom", "item", force=True)
             status = bridge.GenerationTracker.load(directory)
@@ -140,6 +140,23 @@ class ForcedGenerationTest(unittest.TestCase):
         self.assertEqual(status["state"], "rodando")
         self.assertEqual(status["stage"], "iniciando")
 
+    def test_worker_e_lancado_desanexado_de_forma_portatil(self):
+        """O worker não pode usar start_new_session (POSIX-only) e travar no Windows."""
+        with tempfile.TemporaryDirectory() as tmp:
+            directory = Path(tmp) / "episode"
+            with (
+                patch("audiofy.bridge._episode_dir", return_value=directory),
+                patch("audiofy.bridge.Settings", return_value=Mock()),
+                patch("audiofy.runtime.process.subprocess.Popen") as popen,
+                patch("audiofy.runtime.process.sys.platform", "win32"),
+                patch("audiofy.runtime.process.subprocess.DETACHED_PROCESS", 8, create=True),
+                patch("audiofy.runtime.process.subprocess.CREATE_NEW_PROCESS_GROUP",
+                      512, create=True),
+            ):
+                bridge._cmd_generate("custom", "item")
+            self.assertNotIn("start_new_session", popen.call_args.kwargs)
+            self.assertIn("creationflags", popen.call_args.kwargs)
+
     def test_falha_ao_lancar_worker_fica_visivel_no_status(self):
         with tempfile.TemporaryDirectory() as tmp:
             directory = Path(tmp) / "episode"
@@ -147,7 +164,8 @@ class ForcedGenerationTest(unittest.TestCase):
             with (
                 patch("audiofy.bridge._episode_dir", return_value=directory),
                 patch("audiofy.bridge.Settings", return_value=settings),
-                patch("audiofy.bridge.subprocess.Popen", side_effect=OSError("sem processo")),
+                patch("audiofy.runtime.process.subprocess.Popen",
+                      side_effect=OSError("sem processo")),
             ):
                 with self.assertRaisesRegex(RuntimeError, "worker"):
                     bridge._cmd_generate("custom", "item")

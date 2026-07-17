@@ -617,3 +617,39 @@ sem qualquer pergunta de confirmação.
 **Risco que sobrou:** o conteúdo é redigido pela IA a partir de pesquisa — pode conter
 imprecisões; a revisão humana antes de publicar segue sendo exigência do projeto. Sem a etapa
 de confirmação, um tema mal interpretado gera um conteúdo que precisa ser removido à mão.
+
+---
+
+## 2026-07-17 — Execução de processos portátil: fim do travamento silencioso do TTS no Windows
+
+**O que mudou:** em outra máquina Windows a geração travava na fase de áudio. A causa raiz era
+o lançamento do worker de segundo plano com `start_new_session=True` — argumento exclusivo do
+POSIX. No Windows ele impede a desanexação correta e a geração fica presa em `rodando` sem nunca
+progredir nem falhar visivelmente. Corrigido de forma sistêmica, com TDD:
+
+- **Novo módulo `runtime/process.py`** centraliza as três armadilhas de subprocesso que
+  travavam ou falhavam em silêncio: `detached_flags()` (creationflags no Windows,
+  start_new_session no POSIX), `resolve_tool()` (caminho absoluto de ffmpeg/ffprobe ou erro
+  claro em vez de FileNotFoundError cru), `run_tool()` (sempre com `timeout`, para nenhum
+  subprocesso poder pendurar a geração) e `launch_detached()` (worker desanexado portátil).
+- **Worker de geração** (`bridge._cmd_generate`) passou a usar `launch_detached` — a correção
+  direta do travamento.
+- **Montagem e duração** (`pipeline._assemble`, `_media_duration_seconds`) usam `run_tool` com
+  timeout (ffmpeg 30 min, ffprobe 2 min) e ferramenta resolvida; a lista de concatenação
+  normaliza o caminho para `/` (o ffmpeg trata `\` como escape) e escapa aspas; adicionados
+  guardas para lista de segmentos vazia e saída não numérica do ffprobe.
+
+**Por que não travava antes no Linux:** `start_new_session` é válido no POSIX, então o bug só
+se manifestava no Windows. `generate_episode` já marcava `falhou` em exceção, mas a montagem
+sem timeout e o ffmpeg pelo nome cru continuavam sendo pontos de trava potencial.
+
+**Validação:** 159 testes Python (11 novos: flags por plataforma, resolução/timeout de
+ferramenta, desanexação do worker portátil, normalização do concat, guardas de duração e
+"falha nunca silenciosa" na montagem) e 13 Node verdes; Ruff, compilação, `git diff --check` e
+`npm audit` aprovados. Smoke real no Linux: dois WAVs concatenados em MP3 de 2s via o novo
+`run_tool`, com duração lida por ffprobe e por `wave` — o caminho POSIX segue intacto.
+
+**Risco que sobrou:** se o worker desanexado morrer por erro de importação antes de entrar no
+`generate_episode` (que marca `falhou`), o status pode ficar em `rodando`; o `generation.log`
+por episódio registra o traceback. A confirmação do fluxo completo no Windows real segue
+pendente, mas a causa estrutural do travamento foi removida.

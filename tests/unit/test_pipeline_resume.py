@@ -11,7 +11,13 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
-from audiofy.pipeline import _assemble, _synthesize_turns, _wait_for_retry  # noqa: E402
+from audiofy.pipeline import (  # noqa: E402
+    _assemble,
+    _concat_line,
+    _media_duration_seconds,
+    _synthesize_turns,
+    _wait_for_retry,
+)
 from audiofy.presenters import Presenter  # noqa: E402
 from audiofy.providers.openrouter import OpenRouterError, SpeechResult  # noqa: E402
 from audiofy.runtime.status import GenerationAborted, GenerationTracker  # noqa: E402
@@ -199,8 +205,8 @@ class ResumableSynthesisTest(unittest.TestCase):
 
 
 class AtomicAssemblyTest(unittest.TestCase):
-    @patch("audiofy.pipeline.subprocess.run")
-    def test_mp3_so_substitui_final_depois_do_ffmpeg(self, run):
+    @patch("audiofy.pipeline.run_tool")
+    def test_mp3_so_substitui_final_depois_do_ffmpeg(self, run_tool):
         with tempfile.TemporaryDirectory() as tmp:
             directory = Path(tmp)
             segment = directory / "001.wav"
@@ -208,11 +214,12 @@ class AtomicAssemblyTest(unittest.TestCase):
             old = directory / "episode.mp3"
             old.write_bytes(b"versao-anterior")
 
-            def create_output(arguments, **_kwargs):
+            def create_output(name, arguments, **_kwargs):
+                self.assertEqual(name, "ffmpeg")
                 self.assertEqual(old.read_bytes(), b"versao-anterior")
                 Path(arguments[-1]).write_bytes(b"versao-nova")
 
-            run.side_effect = create_output
+            run_tool.side_effect = create_output
             result = _assemble(
                 directory, [segment],
                 SimpleNamespace(title="Episódio", attribution="Fonte"),
@@ -221,6 +228,70 @@ class AtomicAssemblyTest(unittest.TestCase):
             self.assertEqual(result, old)
             self.assertEqual(old.read_bytes(), b"versao-nova")
             self.assertFalse((directory / "episode.tmp.mp3").exists())
+            self.assertIn("timeout", run_tool.call_args.kwargs)
+
+    def test_assemble_sem_segmentos_falha_em_vez_de_montar_vazio(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaisesRegex(ValueError, "segmento"):
+                _assemble(Path(tmp), [],
+                          SimpleNamespace(title="x", attribution="y"))
+
+
+class FailureIsNeverSilentTest(unittest.TestCase):
+    """Uma falha na montagem (ex.: ffmpeg ausente) deve virar estado 'falhou',
+    nunca deixar o status preso em 'rodando' — a origem do travamento no Windows."""
+
+    @patch("audiofy.pipeline._run")
+    def test_erro_na_montagem_marca_falhou_e_nao_fica_rodando(self, run):
+        from audiofy.pipeline import episode_dir, generate_episode
+        from audiofy.runtime.process import ToolNotFoundError
+
+        run.side_effect = ToolNotFoundError("'ffmpeg' não foi encontrado no PATH.")
+        item = SimpleNamespace(item_id="ep-falha", title="t", published_at="",
+                               text="x", words=1, url="", attribution="a")
+        with tempfile.TemporaryDirectory() as tmp:
+            with patch("audiofy.pipeline.EPISODES_DIR", Path(tmp)):
+                with self.assertRaises(ToolNotFoundError):
+                    generate_episode(_settings(), item)
+                status = GenerationTracker.load(episode_dir("ep-falha"))
+        self.assertEqual(status["state"], "falhou")
+        self.assertIn("ffmpeg", status["last_error"])
+
+
+class ConcatLineTest(unittest.TestCase):
+    def test_usa_barras_normais_para_o_ffmpeg(self):
+        line = _concat_line(Path("/tmp/ep/001.wav"))
+        self.assertNotIn("\\", line)
+        self.assertTrue(line.startswith("file '"))
+        self.assertTrue(line.endswith("'\n"))
+
+    def test_escapa_aspas_simples_no_caminho(self):
+        line = _concat_line(Path("/tmp/ep's/001.wav"))
+        self.assertIn(r"'\''", line)
+
+
+class MediaDurationTest(unittest.TestCase):
+    def test_wav_com_taxa_invalida_falha_claramente(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "bad.wav"
+            with wave.open(str(path), "wb") as audio:
+                audio.setnchannels(1)
+                audio.setsampwidth(2)
+                audio.setframerate(24_000)
+                audio.writeframes(b"\x00\x00")
+            # força framerate 0 relendo com patch do resultado
+            with patch("audiofy.pipeline.wave.open") as wave_open:
+                handle = wave_open.return_value.__enter__.return_value
+                handle.getframerate.return_value = 0
+                handle.getnframes.return_value = 10
+                with self.assertRaisesRegex(ValueError, "taxa de amostragem"):
+                    _media_duration_seconds(path)
+
+    @patch("audiofy.pipeline.run_tool")
+    def test_mp3_com_saida_nao_numerica_falha_claramente(self, run_tool):
+        run_tool.return_value = SimpleNamespace(stdout="N/A\n")
+        with self.assertRaisesRegex(ValueError, "duração"):
+            _media_duration_seconds(Path("episode.mp3"))
 
 
 if __name__ == "__main__":

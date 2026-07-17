@@ -18,7 +18,6 @@
 from __future__ import annotations
 
 import json
-import subprocess
 import sys
 from dataclasses import asdict
 from pathlib import Path
@@ -103,13 +102,16 @@ def _cmd_generate(source_key: str, item_id: str, force: bool = False) -> dict:
     ]
     if force:
         child_args.append("--force")
+    import os
+
+    from .runtime.process import launch_detached
     try:
         with (directory / "generation.log").open("a", encoding="utf-8") as log:
-            subprocess.Popen(
+            launch_detached(
                 child_args,
-                cwd=str(Path(__file__).resolve().parents[2]),
-                stdout=log, stderr=subprocess.STDOUT, start_new_session=True,
-                env={**__import__("os").environ, "PYTHONPATH": "src"},
+                cwd=Path(__file__).resolve().parents[2],
+                env={**os.environ, "PYTHONPATH": "src"},
+                log_handle=log,
             )
     except OSError as error:
         detail = f"Não foi possível iniciar o worker de geração: {error}"
