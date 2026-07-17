@@ -156,8 +156,12 @@ def _default_provider(system: str, user: str, settings: Settings) -> str:
                 f"Não foi possível executar a CLI '{cli.binary}' ({cli.name}): {error}"
             ) from error
         if result.returncode != 0:
-            raise RuntimeError(f"{cli.name} falhou: {result.stderr[:300]}")
-        return result.stdout.strip()
+            detail = (result.stderr or result.stdout or "")[:300]
+            raise RuntimeError(f"{cli.name} falhou: {detail}")
+        reply = (result.stdout or "").strip()
+        if not reply:
+            raise RuntimeError(f"{cli.name} terminou sem retornar uma resposta.")
+        return reply
 
     import requests
     from .config import OPENROUTER_BASE_URL

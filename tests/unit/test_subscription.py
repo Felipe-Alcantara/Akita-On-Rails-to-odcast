@@ -3,6 +3,7 @@
 import sys
 import tempfile
 import unittest
+import subprocess
 from pathlib import Path
 from unittest.mock import patch
 
@@ -83,7 +84,7 @@ class ProfileCompatTest(unittest.TestCase):
 
 
 class RunCliTest(unittest.TestCase):
-    """No Windows as CLIs npm são scripts .cmd, que só o cmd.exe resolve."""
+    """No Windows shims npm são resolvidos sem passar pelo cmd.exe."""
 
     def _run(self, platform: str) -> dict:
         calls = {}
@@ -92,24 +93,42 @@ class RunCliTest(unittest.TestCase):
             calls["command"] = command
             calls["kwargs"] = kwargs
 
-        with (
-            patch.object(subscription.subprocess, "run", side_effect=fake_run),
-            patch.object(subscription.sys, "platform", platform),
-        ):
-            run_cli(["claude", "-p", "--append-system-prompt", "voz calma"], "olá")
+        with tempfile.TemporaryDirectory() as tmp:
+            shim = Path(tmp) / "claude.cmd"
+            shim.write_text(
+                '@ECHO off\n"%dp0%\\node.exe" '
+                '"%dp0%\\node_modules\\@anthropic-ai\\claude-code\\cli.js" %*\n',
+                encoding="utf-8",
+            )
+            paths = {"claude": str(shim), "node": "C:/nodejs/node.exe"}
+            with (
+                patch.object(subscription.subprocess, "run", side_effect=fake_run),
+                patch.object(subscription.shutil, "which", side_effect=paths.get),
+                patch.object(subscription.sys, "platform", platform),
+            ):
+                run_cli(["claude", "-p", "--append-system-prompt", "voz\ncalma"], "olá")
         return calls
 
-    def test_windows_executa_pelo_shell_com_argumentos_citados(self):
+    def test_windows_executa_node_diretamente_e_preserva_prompt_multilinha(self):
         calls = self._run("win32")
-        self.assertEqual(
-            calls["command"], 'claude -p --append-system-prompt "voz calma"'
-        )
-        self.assertTrue(calls["kwargs"]["shell"])
+        self.assertEqual(calls["command"][0], "C:/nodejs/node.exe")
+        self.assertTrue(calls["command"][1].endswith("claude-code/cli.js"))
+        self.assertEqual(calls["command"][-1], "voz\ncalma")
+        self.assertNotIn("shell", calls["kwargs"])
 
     def test_posix_executa_sem_shell(self):
         calls = self._run("linux")
         self.assertEqual(calls["command"][0], "claude")
         self.assertNotIn("shell", calls["kwargs"])
+
+    def test_chat_json_rejeita_stdout_ausente_com_erro_claro(self):
+        empty = subprocess.CompletedProcess(["claude"], 0, None, None)
+        with (
+            patch.object(subscription, "run_cli", return_value=empty),
+            patch.object(subscription.shutil, "which", return_value="claude"),
+        ):
+            with self.assertRaisesRegex(SubscriptionError, "sem retornar uma resposta"):
+                chat_json("claude-code", "sistema", "usuário")
 
     def test_chat_json_traduz_oserror(self):
         with (

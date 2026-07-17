@@ -27,16 +27,39 @@ def run_cli(command: list[str], stdin: str,
             timeout: int = _TIMEOUT_SECONDS) -> subprocess.CompletedProcess:
     """Executa uma CLI de assinatura de forma portátil.
 
-    No Windows as CLIs instaladas via npm (claude, gemini) são scripts ``.cmd``,
-    que o ``CreateProcess`` não executa diretamente — apenas o ``cmd.exe`` os
-    resolve pelo PATH/PATHEXT. Os argumentos são citados por ``list2cmdline``;
-    o comando vem do contrato declarativo, nunca de entrada do usuário.
+    No Windows as CLIs instaladas via npm (claude, gemini) são scripts ``.cmd``.
+    O shim é resolvido para ``node.exe`` + o JavaScript real, evitando o
+    ``cmd.exe``: ele trata quebras de linha dentro do system prompt como fim do
+    comando e pode descartar inclusive os argumentos de permissão seguintes.
     """
     if sys.platform == "win32":
-        return subprocess.run(subprocess.list2cmdline(command), input=stdin,
-                              capture_output=True, text=True, timeout=timeout, shell=True)
+        command = _windows_command(command)
     return subprocess.run(command, input=stdin, capture_output=True, text=True,
                           timeout=timeout)
+
+
+def _windows_command(command: list[str]) -> list[str]:
+    """Converte um shim npm ``.cmd`` em um comando executável sem shell."""
+    executable = shutil.which(command[0]) or command[0]
+    if Path(executable).suffix.lower() not in (".cmd", ".bat"):
+        return [executable, *command[1:]]
+
+    try:
+        shim = Path(executable).read_text(encoding="utf-8", errors="replace")
+    except OSError as error:
+        raise OSError(f"Não foi possível ler o atalho da CLI: {executable}") from error
+    match = re.search(r'["\']%~?dp0%?[\\/]([^"\']+?\.js)["\']', shim, re.IGNORECASE)
+    if not match:
+        # npm/cmd-shim usa normalmente %dp0%; a variante %~dp0 também existe.
+        match = re.search(r'%~?dp0%?[\\/]([^\s"\']+?\.js)', shim, re.IGNORECASE)
+    node = shutil.which("node")
+    if not match or not node:
+        raise OSError(
+            f"O atalho '{executable}' não pôde ser executado sem cmd.exe. "
+            "Reinstale a CLI e confirme que o Node.js está no PATH."
+        )
+    script = Path(executable).parent / Path(match.group(1).replace("\\", os.sep))
+    return [node, str(script), *command[1:]]
 
 
 class SubscriptionError(RuntimeError):
@@ -167,10 +190,13 @@ def chat_json(provider_key: str, system: str, user: str):
         ) from error
     if result.returncode != 0:
         raise SubscriptionError(
-            f"{cli.name} falhou (código {result.returncode}): {result.stderr[:300]}"
+            f"{cli.name} falhou (código {result.returncode}): "
+            f"{(result.stderr or result.stdout or '')[:300]}"
         )
+    if not (result.stdout or "").strip():
+        raise SubscriptionError(f"{cli.name} terminou sem retornar uma resposta.")
     try:
-        data = _extract_json(result.stdout)
+        data = _extract_json(result.stdout or "")
     except (json.JSONDecodeError, ValueError) as error:
         raise SubscriptionError(
             f"{cli.name} não retornou JSON válido: {error}"

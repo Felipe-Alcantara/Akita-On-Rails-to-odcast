@@ -75,6 +75,14 @@ class GenerationTrackerTest(unittest.TestCase):
     def test_load_sem_status(self):
         self.assertIsNone(GenerationTracker.load(Path(self._tmp.name) / "vazio"))
 
+    def test_escrita_substitui_status_existente_sem_tmp_fixo(self):
+        self.tracker.stage("tts", total=2)
+        self.tracker.advance(1)
+
+        self.assertEqual(self._read()["progress"]["current"], 1)
+        self.assertFalse((self.directory / "status.json.tmp").exists())
+        self.assertEqual(list(self.directory.glob(".status.json.*.tmp")), [])
+
     def test_nova_execucao_preserva_custo_e_registra_retomada(self):
         self.tracker.stage("tts", total=5)
         self.tracker.advance(2)

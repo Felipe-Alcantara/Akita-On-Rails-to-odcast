@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import json
 import os
+import tempfile
 import time
 from pathlib import Path
 
@@ -59,11 +60,26 @@ class GenerationTracker:
     def _write(directory: Path, data: dict) -> None:
         data["updated_at"] = time.time()
         target = directory / GenerationTracker.STATUS_FILE
-        temporary = target.with_suffix(".json.tmp")
-        temporary.write_text(
-            json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8"
-        )
-        temporary.rename(target)
+        # Launcher, worker e reconciliação podem publicar quase ao mesmo tempo.
+        # Um nome fixo (status.json.tmp) fazia dois processos disputarem o mesmo
+        # arquivo e o Path.rename não sobrescreve o destino no Windows. Um temporário
+        # exclusivo no mesmo diretório + os.replace mantém a troca atômica inclusive
+        # em pastas sincronizadas pelo OneDrive.
+        temporary_name = None
+        try:
+            with tempfile.NamedTemporaryFile(
+                mode="w", encoding="utf-8", dir=directory,
+                prefix=f".{GenerationTracker.STATUS_FILE}.", suffix=".tmp",
+                delete=False,
+            ) as temporary:
+                temporary_name = temporary.name
+                json.dump(data, temporary, ensure_ascii=False, indent=2)
+                temporary.flush()
+                os.fsync(temporary.fileno())
+            os.replace(temporary_name, target)
+        finally:
+            if temporary_name:
+                Path(temporary_name).unlink(missing_ok=True)
 
     def _flush(self) -> None:
         self._write(self.directory, self._data)
