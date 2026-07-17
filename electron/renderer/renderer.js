@@ -108,7 +108,14 @@ function addChatMessage(role, text, actions = []) {
 async function runAction(action, button) {
   if (button) button.disabled = true;
   let result;
-  if (action.tipo === "adicionar_url") {
+  if (action.tipo === "adicionar_texto") {
+    result = await bridge(["add-text"],
+      JSON.stringify({ title: action.titulo, text: action.texto }));
+    if (result.ok) {
+      addChatMessage("system", `✔ Conteúdo criado: ${result.item_id}`);
+      if (currentSource === "custom") loadItems();
+    }
+  } else if (action.tipo === "adicionar_url") {
     result = await bridge(["add-url", action.url]);
     if (result.ok) {
       addChatMessage("system", `✔ Conteúdo adicionado: ${result.item_id}`);

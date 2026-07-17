@@ -44,10 +44,11 @@ conteúdo → matriz de cobertura → roteiro (N apresentadores) → auditoria �
 ```
 
 **Qualquer conteúdo vira episódio**: cole um texto, aponte uma URL (o extrator puxa o texto
-principal da página) ou peça sugestões ao **chat de pesquisa** — um assistente que pesquisa
-qualquer tema (com busca na web quando roda pela CLI de assinatura) e **executa as ações que
-propõe automaticamente**: adicionar conteúdo, buscar, gerar episódio, exportar para NotebookLM.
-Os botões de cada ação seguem visíveis para reexecutar à mão quando quiser.
+principal da página) ou peça um tema ao **chat de pesquisa** — um assistente que **pesquisa,
+escreve o conteúdo e o adiciona sozinho**, sem pedir aprovação (com busca na web quando roda
+pela CLI de assinatura). Ele também executa automaticamente as demais ações que propõe: buscar,
+gerar episódio, exportar para NotebookLM. Os botões de cada ação seguem visíveis para reexecutar
+à mão quando quiser.
 
 O projeto nasceu como "Akita on Rails to Podcast"; hoje os artigos do
 [AkitaOnRails](https://akitaonrails.com) são apenas uma das fontes, empacotada no módulo

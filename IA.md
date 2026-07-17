@@ -583,3 +583,37 @@ confirmar visualmente o fluxo automático no app.
 **Risco que sobrou:** o chat agora gera episódios sem confirmação explícita; se o modelo propuser
 uma geração indevida, ela inicia (e consome créditos) até ser abortada pela aba Episódios. O
 aviso no chat e o banner global mantêm o gasto visível, mas a barreira de clique deixou de existir.
+
+---
+
+## 2026-07-17 — Chat pesquisa e entrega o conteúdo sozinho
+
+**O que mudou:** o chat via assinatura ficava perguntando/confirmando em vez de agir — o
+protocolo só permitia *propor* ações (buscar, adicionar_url) para a interface executar depois,
+então, pedido um tema, o Claude devolvia perguntas esclarecedoras em vez do resultado. Agora o
+chat pesquisa e entrega o conteúdo pronto na mesma resposta:
+
+- **Nova ação `adicionar_texto {titulo, texto}`**: o modelo escreve ele mesmo um texto próprio,
+  coeso e substancial sobre o tema (sintetizado, não copiado) e o grava direto na fonte `custom`
+  via a bridge `add-text` que já existia. O validador isenta o campo `texto` do limite de 4096
+  caracteres dos identificadores curtos (o limite real de 5 MiB é aplicado por `add_text`).
+- **System prompt reescrito** com a diretriz "AJA, NÃO PERGUNTE": nada de pedir confirmação ou
+  devolver perguntas, a menos que o pedido seja impossível de interpretar; as ações rodam
+  automaticamente, então o modelo não deve pedir permissão para incluí-las.
+- **CLI alinhada ao app**: `do_chat` deixou de perguntar "Executar uma ação proposta?" e passou
+  a rodar cada ação automaticamente; `_run_chat_action` ganhou o caso `adicionar_texto`.
+
+**Decisões:** o texto é redigido pelo próprio modelo (síntese autoral) em vez de copiar páginas,
+o que evita despejar HTML bruto e reduz risco de direitos; a atribuição genérica da fonte custom
+continua avisando para verificar direitos antes de publicar. Complementa a permissão total das
+CLIs ([subscription chat_args]) e a execução automática de ações no renderer.
+
+**Validação:** 142 testes Python (2 novos: corpo longo aceito e título obrigatório) e 13
+verificações Node verdes; Ruff, compilação, sintaxe Electron, `git diff --check` e `npm audit`
+(zero) aprovados. Smoke real no Linux via Claude Code: pedido "pesquise o MCP e adicione",
+o chat retornou a ação `adicionar_texto` com um artigo de ~2,3 mil caracteres, salvo na inbox
+sem qualquer pergunta de confirmação.
+
+**Risco que sobrou:** o conteúdo é redigido pela IA a partir de pesquisa — pode conter
+imprecisões; a revisão humana antes de publicar segue sendo exigência do projeto. Sem a etapa
+de confirmação, um tema mal interpretado gera um conteúdo que precisa ser removido à mão.

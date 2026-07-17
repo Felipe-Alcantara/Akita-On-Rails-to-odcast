@@ -1,5 +1,6 @@
 """Testes do chat de pesquisa: parsing de ações e persistência de sessão."""
 
+import json
 import sys
 import tempfile
 import unittest
@@ -38,6 +39,20 @@ class ParseActionsTest(unittest.TestCase):
     def test_acao_desconhecida_ou_incompleta_e_ignorada(self):
         reply = ('```acao\n{"tipo": "apagar_tudo"}\n```\n'
                  '```acao\n{"tipo": "gerar", "fonte": "akita"}\n```')
+        _, actions = parse_actions(reply)
+        self.assertEqual(actions, [])
+
+    def test_adicionar_texto_com_corpo_longo_e_aceito(self):
+        corpo = "parágrafo. " * 2000  # bem acima do limite de 4096 dos campos curtos
+        reply = ('```acao\n' + json.dumps(
+            {"tipo": "adicionar_texto", "titulo": "Tema pesquisado", "texto": corpo}
+        ) + '\n```')
+        _, actions = parse_actions(reply)
+        self.assertEqual(len(actions), 1)
+        self.assertEqual(actions[0]["tipo"], "adicionar_texto")
+
+    def test_adicionar_texto_sem_titulo_e_ignorado(self):
+        reply = ('```acao\n{"tipo": "adicionar_texto", "texto": "corpo"}\n```')
         _, actions = parse_actions(reply)
         self.assertEqual(actions, [])
 

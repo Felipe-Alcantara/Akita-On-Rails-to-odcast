@@ -536,7 +536,12 @@ def do_add_text() -> None:
 def _run_chat_action(action: dict) -> None:
     global SOURCE_KEY
     kind = action.get("tipo")
-    if kind == "adicionar_url":
+    if kind == "adicionar_texto":
+        from audiofy.sources.custom import CustomSource
+        item_id = CustomSource().add_text(
+            action.get("titulo", ""), action.get("texto", ""))
+        _ok(f"Conteúdo criado: {item_id}")
+    elif kind == "adicionar_url":
         do_add_url(action.get("url", ""))
     elif kind == "buscar":
         hits = get_source(action.get("fonte", SOURCE_KEY)).search(action.get("termos", ""))
@@ -584,15 +589,10 @@ def do_chat() -> None:
             _fail(str(error))
             continue
         print(f"\n{CYAN}{BOLD}Audiofy:{RESET} {text}")
-        for index, action in enumerate(actions, 1):
-            print(f"  {YELLOW}[{index}]{RESET} ⚡ {action.get('descricao', action['tipo'])}")
-        if actions:
-            choice = _tui().choose("Executar uma ação proposta?", [
-                (action.get("descricao", action["tipo"]), index)
-                for index, action in enumerate(actions)
-            ] + [("Não executar agora", None)])
-            if choice is not None:
-                _run_chat_action(actions[choice])
+        # O chat age sozinho: cada ação proposta roda automaticamente, sem pedir aprovação.
+        for action in actions:
+            print(f"  {YELLOW}⚡{RESET} {action.get('descricao', action['tipo'])}")
+            _safe_call(_run_chat_action, action)
 
 
 def do_notebooklm(selector: str) -> None:

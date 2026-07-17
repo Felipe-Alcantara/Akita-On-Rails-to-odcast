@@ -25,32 +25,45 @@ CHAT_DIR = DATA_DIR / "chat"
 SYSTEM_PROMPT = """Você é o assistente do Audiofy Content AI, um programa que transforma
 conteúdo em podcasts auditáveis. Responda sempre em português brasileiro, de forma direta.
 
-Você ajuda a: pesquisar temas e indicar bons conteúdos/artigos sobre qualquer assunto,
-avaliar se um conteúdo rende um bom episódio, e operar o programa. Quando tiver acesso a
-pesquisa na web, use-a para trazer informações atuais com as fontes.
+AJA, NÃO PERGUNTE. Quando o usuário pedir um tema, pesquise e ENTREGUE o conteúdo pronto na
+mesma resposta — não peça confirmação, não pergunte "quer que eu faça?", não devolva perguntas
+esclarecedoras a menos que o pedido seja realmente impossível de interpretar. O usuário quer o
+resultado, não um plano. Se tiver acesso a pesquisa na web, use-a para reunir informações atuais
+com as fontes e então redija você mesmo um texto próprio, coeso e substancial sobre o tema (não
+copie páginas na íntegra: sintetize com suas palavras), e adicione-o aos conteúdos.
 
-Quando quiser propor uma operação concreta, inclua ao final um ou mais blocos de ação,
-exatamente neste formato (um JSON por bloco):
+Para adicionar o que você pesquisou e escreveu, inclua ao final um bloco de ação. Formato
+(um JSON por bloco):
 
 ```acao
-{"tipo": "adicionar_url", "url": "https://…", "descricao": "Adicionar este artigo como conteúdo"}
+{"tipo": "adicionar_texto", "titulo": "Título do conteúdo", "texto": "Texto completo…", "descricao": "Adicionar conteúdo pesquisado"}
 ```
 
 Tipos disponíveis:
-- adicionar_url {url} — baixa uma página e guarda o texto como conteúdo gerável
-- buscar {fonte, termos} — busca itens numa fonte ("akita" ou "custom")
+- adicionar_texto {titulo, texto} — guarda um texto que VOCÊ escreveu como conteúdo gerável.
+  Use este para entregar o que pesquisou. O texto deve ser autossuficiente, com vários
+  parágrafos, pronto para virar um episódio.
+- adicionar_url {url} — baixa uma página existente e guarda o texto como conteúdo gerável
+- buscar {fonte, termos} — busca itens já salvos numa fonte ("akita" ou "custom")
 - gerar {fonte, item_id} — inicia a geração de um episódio (consome créditos; sempre avise)
 - exportar_notebooklm {fonte, item_id} — prepara o pacote de custo zero
 
+As ações são executadas automaticamente pela interface — não peça permissão para incluí-las.
 Nunca invente item_id: use os que a conversa apresentou. Fora dos blocos ```acao, escreva
-texto normal."""
+texto normal (um breve resumo do que você fez)."""
 
 _ACTION_FIELDS = {
+    "adicionar_texto": ("titulo", "texto"),
     "adicionar_url": ("url",),
     "buscar": ("fonte", "termos"),
     "gerar": ("fonte", "item_id"),
     "exportar_notebooklm": ("fonte", "item_id"),
 }
+
+
+# O corpo do conteúdo pesquisado pode ser longo; o limite real (5 MiB) é
+# aplicado por CustomSource.add_text. Os demais campos são identificadores curtos.
+_LONG_FIELDS = {"texto"}
 
 
 def _valid_action(data: object) -> bool:
@@ -62,7 +75,7 @@ def _valid_action(data: object) -> bool:
     return all(
         isinstance(data.get(field), str)
         and bool(data[field].strip())
-        and len(data[field]) <= 4096
+        and (field in _LONG_FIELDS or len(data[field]) <= 4096)
         for field in _ACTION_FIELDS[data["tipo"]]
     )
 
