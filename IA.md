@@ -556,3 +556,30 @@ chat do Claude Code com o flag respondeu normalmente (código 0).
 **Risco que sobrou:** com permissão total, a CLI do chat pode executar ferramentas locais sem
 confirmação caso o modelo decida — aceito pelo usuário como padrão do chat; reverter é remover
 os `chat_args` do contrato.
+
+---
+
+## 2026-07-17 — Chat executa as ações propostas automaticamente
+
+**O que mudou:** o chat pedia aprovação a cada ação — era preciso clicar no botão de cada
+proposta e ainda confirmar a geração num `confirm()`. A pedido do usuário, o chat passou a
+executar tudo sozinho: `addChatMessage` retorna as ações pendentes e `sendChat` roda cada uma
+em ordem, aguardando a anterior, assim que a resposta do assistente chega. O `confirm()` antes
+de gerar episódio foi removido; no lugar, o chat anuncia "Gerando … — consome créditos" com a
+estimativa visível. Os botões de ação continuam na conversa para reexecução manual, e
+`runAction` passou a aceitar chamada sem botão (execução automática).
+
+**Decisões:** a execução é serial (uma ação por vez, com `await`) para não disparar várias
+gerações concorrentes nem competir por recarregamento de lista. A remoção da confirmação de
+custo é segura porque o custo estimado aparece no chat e o banner global de gasto ativo
+continua alertando em todas as abas enquanto qualquer geração roda. Ações destrutivas não
+existem no protocolo do chat (adicionar_url, buscar, gerar, exportar_notebooklm) — a mais cara
+é gerar, coberta pelo aviso e pelo banner.
+
+**Validação:** 140 testes Python e 13 verificações Node verdes; sintaxe do renderer conferida
+pelo `npm run check`, `git diff --check` e `npm audit` (zero vulnerabilidades) aprovados. Falta
+confirmar visualmente o fluxo automático no app.
+
+**Risco que sobrou:** o chat agora gera episódios sem confirmação explícita; se o modelo propuser
+uma geração indevida, ela inicia (e consome créditos) até ser abortada pela aba Episódios. O
+aviso no chat e o banner global mantêm o gasto visível, mas a barreira de clique deixou de existir.

@@ -92,18 +92,21 @@ function addChatMessage(role, text, actions = []) {
   message.className = `msg ${role}`;
   message.textContent = text;
   box.appendChild(message);
+  const pending = [];
   for (const action of actions) {
     const button = document.createElement("button");
     button.className = "action-chip";
     button.textContent = `⚡ ${action.descricao || action.tipo}`;
     button.onclick = () => runAction(action, button);
     box.appendChild(button);
+    pending.push({ action, button });
   }
   box.scrollTop = box.scrollHeight;
+  return pending;
 }
 
 async function runAction(action, button) {
-  button.disabled = true;
+  if (button) button.disabled = true;
   let result;
   if (action.tipo === "adicionar_url") {
     result = await bridge(["add-url", action.url]);
@@ -126,10 +129,9 @@ async function runAction(action, button) {
         `US$ ${detail.estimate.cost_min_usd.toFixed(2)}–` +
         `${detail.estimate.cost_max_usd.toFixed(2)})`
       : "";
-    if (!confirm(`Gerar episódio de "${action.item_id}"${estimate}? Consome créditos.`)) {
-      button.disabled = false;
-      return;
-    }
+    // Sem confirmação por decisão do usuário: o custo fica visível no chat e o
+    // banner global de gasto ativo continua alertando enquanto a geração roda.
+    addChatMessage("system", `Gerando "${action.item_id}"${estimate} — consome créditos.`);
     result = await bridge(["generate", source, action.item_id]);
     if (result.ok && result.started) {
       addChatMessage("system", "✔ Geração iniciada — acompanhe na aba Episódios.");
@@ -162,7 +164,12 @@ async function sendChat() {
   thinking.remove();
   $("chat-send").disabled = false;
   if (result.ok) {
-    addChatMessage("assistant", result.reply, result.actions);
+    const pending = addChatMessage("assistant", result.reply, result.actions);
+    // O chat executa tudo sozinho: cada ação proposta roda automaticamente,
+    // em ordem, sem esperar clique. Os botões continuam para reexecutar à mão.
+    for (const { action, button } of pending) {
+      await runAction(action, button);
+    }
     // O Chat pode criar/atualizar conteúdo enquanto outra aba está aberta.
     // Recarregar aqui evita deixar a lista de Conteúdo próprio com snapshot antigo.
     if (currentSource === "custom") await loadItems($("search").value.trim());

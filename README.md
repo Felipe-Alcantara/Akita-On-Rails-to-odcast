@@ -45,8 +45,9 @@ conteúdo → matriz de cobertura → roteiro (N apresentadores) → auditoria �
 
 **Qualquer conteúdo vira episódio**: cole um texto, aponte uma URL (o extrator puxa o texto
 principal da página) ou peça sugestões ao **chat de pesquisa** — um assistente que pesquisa
-qualquer tema (com busca na web quando roda pela CLI de assinatura) e propõe ações executáveis
-com um clique: adicionar conteúdo, buscar, gerar episódio, exportar para NotebookLM.
+qualquer tema (com busca na web quando roda pela CLI de assinatura) e **executa as ações que
+propõe automaticamente**: adicionar conteúdo, buscar, gerar episódio, exportar para NotebookLM.
+Os botões de cada ação seguem visíveis para reexecutar à mão quando quiser.
 
 O projeto nasceu como "Akita on Rails to Podcast"; hoje os artigos do
 [AkitaOnRails](https://akitaonrails.com) são apenas uma das fontes, empacotada no módulo
@@ -108,7 +109,7 @@ cd electron && npm install && npm start
 (ou opção "Abrir app desktop" no menu). O app tem **paridade completa com a CLI**, em quatro
 abas:
 
-- **💬 Chat** — o assistente de pesquisa: qualquer tema, com ações executáveis em um clique
+- **💬 Chat** — o assistente de pesquisa: qualquer tema, com ações executadas automaticamente
   (adicionar URL, buscar, gerar, exportar NotebookLM);
 - **📚 Conteúdo** — seletor e prontidão da fonte, busca, adicionar por URL ou texto colado,
   estimativa de custo, geração normal ou forçada e NotebookLM;
