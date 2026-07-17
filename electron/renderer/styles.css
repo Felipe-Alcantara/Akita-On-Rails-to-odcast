@@ -196,6 +196,26 @@ header h1 { flex: 0 0 auto; font-size: 20px; line-height: 1.25; letter-spacing: 
   box-shadow: 0 8px 28px rgba(113, 63, 18, 0.18);
 }
 
+.player-dock {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 12px;
+  padding: 10px 14px;
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  border-radius: var(--radius-control);
+  background: rgba(24, 18, 35, 0.92);
+}
+.player-title {
+  min-width: 0;
+  flex: 1 1 180px;
+  overflow-wrap: anywhere;
+  color: #e9d5ff;
+  font-size: 13px;
+  font-weight: 650;
+}
+.player-dock audio { min-width: min(460px, 100%); flex: 1 1 360px; height: 38px; }
+
 main, .tab-page {
   flex: 1;
   min-height: 0;
@@ -399,6 +419,8 @@ pre {
 }
 
 @media (max-width: 700px) {
+  .player-dock { align-items: stretch; flex-direction: column; gap: 6px; }
+  .player-dock audio { width: 100%; min-width: 0; }
   header { padding: 12px 12px 0; }
   .header-row { align-items: stretch; gap: 10px; }
   header h1 { width: 100%; font-size: 19px; }

@@ -20,6 +20,30 @@ function makeElement(tag, className = "", text = "") {
   return element;
 }
 
+function projectPathToFileUrl(target) {
+  const encoded = String(target).split(/[\\/]/).map(encodeURIComponent).join("/");
+  return `file://${encoded.startsWith("/") ? encoded : `/${encoded}`}`;
+}
+
+function setPlayerSource(path, title = "Episódio") {
+  const player = $("episode-player");
+  const url = projectPathToFileUrl(path);
+  if (player.dataset.source !== url) {
+    player.pause();
+    player.src = url;
+    player.dataset.source = url;
+    player.load();
+  }
+  $("player-title").textContent = `🎧 ${title}`;
+  $("player-dock").classList.remove("hidden");
+  return player;
+}
+
+function playInApp(path, title) {
+  const player = setPlayerSource(path, title);
+  player.play().catch(() => player.focus());
+}
+
 let currentSource = "custom";
 let selectedItem = null;
 let pollTimer = null;
@@ -460,7 +484,8 @@ function renderSelectedStatus(episodes) {
   $("progress-track").setAttribute("aria-valuenow", String(feedback.percent));
   $("progress-label").textContent = feedback.label;
   $("cost-label").textContent = feedback.cost;
-  $("btn-play").onclick = () => status && status.mp3 && openProjectPath(status.mp3);
+  $("btn-play").onclick = () => status && status.mp3
+    && playInApp(status.mp3, selectedItem.title);
   $("btn-folder").onclick = () => status && openProjectPath(status.dir);
   void maybeAutoResume(status);
 }
@@ -497,7 +522,7 @@ function renderEpisodes(episodes) {
       play.textContent = "▶️";
       play.title = "Ouvir";
       play.setAttribute("aria-label", `Ouvir ${episode.episode_id}`);
-      play.onclick = () => openProjectPath(episode.mp3);
+      play.onclick = () => playInApp(episode.mp3, episode.episode_id);
       row.appendChild(play);
     }
     const folder = document.createElement("button");

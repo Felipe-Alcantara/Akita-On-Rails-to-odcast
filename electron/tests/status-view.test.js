@@ -77,3 +77,13 @@ test("helper e renderer compartilham a página sem colisão de escopo", () => {
 
   assert.doesNotThrow(() => new vm.Script(source));
 });
+
+test("player embutido fica disponível e não abre o MP3 externamente", () => {
+  const html = fs.readFileSync(path.resolve(__dirname, "../renderer/index.html"), "utf8");
+  const renderer = fs.readFileSync(path.resolve(__dirname, "../renderer/renderer.js"), "utf8");
+
+  assert.match(html, /id="episode-player"[^>]*controls/);
+  assert.match(renderer, /function playInApp\(/);
+  assert.match(renderer, /playInApp\(episode\.mp3/);
+  assert.doesNotMatch(renderer, /onclick = \(\) => openProjectPath\(episode\.mp3\)/);
+});
