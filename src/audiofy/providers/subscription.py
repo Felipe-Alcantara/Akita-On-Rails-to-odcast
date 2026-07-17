@@ -16,10 +16,27 @@ import os
 import re
 import shutil
 import subprocess
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 
 _TIMEOUT_SECONDS = 900
+
+
+def run_cli(command: list[str], stdin: str,
+            timeout: int = _TIMEOUT_SECONDS) -> subprocess.CompletedProcess:
+    """Executa uma CLI de assinatura de forma portátil.
+
+    No Windows as CLIs instaladas via npm (claude, gemini) são scripts ``.cmd``,
+    que o ``CreateProcess`` não executa diretamente — apenas o ``cmd.exe`` os
+    resolve pelo PATH/PATHEXT. Os argumentos são citados por ``list2cmdline``;
+    o comando vem do contrato declarativo, nunca de entrada do usuário.
+    """
+    if sys.platform == "win32":
+        return subprocess.run(subprocess.list2cmdline(command), input=stdin,
+                              capture_output=True, text=True, timeout=timeout, shell=True)
+    return subprocess.run(command, input=stdin, capture_output=True, text=True,
+                          timeout=timeout)
 
 
 class SubscriptionError(RuntimeError):
@@ -131,12 +148,13 @@ def chat_json(provider_key: str, system: str, user: str):
     else:
         command, stdin = [cli.binary], f"{system}\n\n{user}"
     try:
-        result = subprocess.run(
-            command, input=stdin, capture_output=True, text=True,
-            timeout=_TIMEOUT_SECONDS,
-        )
+        result = run_cli(command, stdin)
     except subprocess.TimeoutExpired as error:
         raise SubscriptionError(f"{cli.name} excedeu {_TIMEOUT_SECONDS}s.") from error
+    except OSError as error:
+        raise SubscriptionError(
+            f"Não foi possível executar a CLI '{cli.binary}' ({cli.name}): {error}"
+        ) from error
     if result.returncode != 0:
         raise SubscriptionError(
             f"{cli.name} falhou (código {result.returncode}): {result.stderr[:300]}"

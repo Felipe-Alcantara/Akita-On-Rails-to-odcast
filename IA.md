@@ -504,3 +504,30 @@ local confirmou a resolução do npm real; a abertura no Windows segue pendente 
 **Risco que sobrou:** instalações de Node que não colocam o `npm-cli.js` ao lado do `node.exe`
 caem no fallback do `npm.cmd`, que pode repetir o erro original; nesse caso a mensagem agora
 identifica o comando que falhou.
+
+---
+
+## 2026-07-17 — CLIs de assinatura funcionam no Windows
+
+**O que mudou:** enviar mensagem no chat com o provedor de assinatura (Claude Code) falhava no
+Windows com "o sistema não pode encontrar o arquivo": as CLIs instaladas via npm (`claude`,
+`gemini`) são scripts `.cmd`, que o `subprocess` não executa diretamente — apenas o `cmd.exe`
+os resolve pelo PATH/PATHEXT. A execução foi centralizada em `subscription.run_cli`, que no
+Windows monta a linha de comando com `list2cmdline` e roda pelo shell, e nas demais plataformas
+mantém a chamada direta sem shell. O `chat.py` deixou de duplicar a montagem do subprocess e
+reutiliza o runner e o contrato declarativo da CLI (o caso Claude Code só acrescenta
+`--allowedTools WebSearch`). `OSError` na execução agora vira erro amigável identificando a CLI,
+tanto no pipeline quanto no chat.
+
+**Decisões:** o shell só entra no Windows e a linha é montada por `list2cmdline` a partir do
+contrato declarativo — nenhum conteúdo do usuário entra na linha de comando (o prompt segue por
+stdin), preservando a fronteira de segurança.
+
+**Validação:** 139 testes Python (3 novos: citação e shell no Windows, ausência de shell no
+POSIX e tradução de OSError) e 13 verificações Node verdes; Ruff, compilação, `git diff --check`
+e `npm audit` aprovados. Smoke real no Linux: `chat_json` com o Claude Code respondeu JSON
+válido a custo zero. Confirmação no Windows pendente.
+
+**Risco que sobrou:** no Windows o `cmd.exe` expande `%VAR%` mesmo entre aspas; os argumentos
+vêm do contrato fixo (sem `%`), então o risco prático é nulo hoje, mas argumentos novos com
+`%` exigiriam atenção.

@@ -130,19 +130,21 @@ def _default_provider(system: str, user: str, settings: Settings) -> str:
     """CLI de assinatura quando configurada (com pesquisa web no Claude Code);
     senão, API do OpenRouter em texto livre."""
     if settings.text_provider not in ("", "openrouter"):
-        import subprocess
-        from .providers.subscription import get_cli
+        from .providers.subscription import get_cli, run_cli
         cli = get_cli(settings.text_provider)
         if cli.key == "claude-code":
-            command = ["claude", "-p", "--output-format", "text",
-                       "--allowedTools", "WebSearch", "--append-system-prompt", system]
+            command = [*cli.command(system), "--allowedTools", "WebSearch"]
             stdin = user
         elif cli.args:
             command, stdin = cli.command(system), user
         else:
             command, stdin = [cli.binary], f"{system}\n\n{user}"
-        result = subprocess.run(command, input=stdin, capture_output=True,
-                                text=True, timeout=900)
+        try:
+            result = run_cli(command, stdin)
+        except OSError as error:
+            raise RuntimeError(
+                f"Não foi possível executar a CLI '{cli.binary}' ({cli.name}): {error}"
+            ) from error
         if result.returncode != 0:
             raise RuntimeError(f"{cli.name} falhou: {result.stderr[:300]}")
         return result.stdout.strip()

@@ -8,11 +8,15 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
+from audiofy.providers import subscription  # noqa: E402
 from audiofy.providers.subscription import (  # noqa: E402
     SUBSCRIPTION_CLIS,
+    SubscriptionError,
     available_clis,
+    chat_json,
     configured_model,
     get_cli,
+    run_cli,
 )
 
 
@@ -70,6 +74,46 @@ class ProfileCompatTest(unittest.TestCase):
         from audiofy.profiles import BUILTIN_PROFILES
         assinatura = next(p for p in BUILTIN_PROFILES if p.name == "assinatura")
         self.assertNotEqual(assinatura.text_provider, "openrouter")
+
+
+class RunCliTest(unittest.TestCase):
+    """No Windows as CLIs npm são scripts .cmd, que só o cmd.exe resolve."""
+
+    def _run(self, platform: str) -> dict:
+        calls = {}
+
+        def fake_run(command, **kwargs):
+            calls["command"] = command
+            calls["kwargs"] = kwargs
+
+        with (
+            patch.object(subscription.subprocess, "run", side_effect=fake_run),
+            patch.object(subscription.sys, "platform", platform),
+        ):
+            run_cli(["claude", "-p", "--append-system-prompt", "voz calma"], "olá")
+        return calls
+
+    def test_windows_executa_pelo_shell_com_argumentos_citados(self):
+        calls = self._run("win32")
+        self.assertEqual(
+            calls["command"], 'claude -p --append-system-prompt "voz calma"'
+        )
+        self.assertTrue(calls["kwargs"]["shell"])
+
+    def test_posix_executa_sem_shell(self):
+        calls = self._run("linux")
+        self.assertEqual(calls["command"][0], "claude")
+        self.assertNotIn("shell", calls["kwargs"])
+
+    def test_chat_json_traduz_oserror(self):
+        with (
+            patch.object(subscription, "run_cli",
+                         side_effect=OSError("arquivo não encontrado")),
+            patch.object(subscription.shutil, "which", return_value="claude"),
+        ):
+            with self.assertRaises(SubscriptionError) as context:
+                chat_json("claude-code", "sistema", "usuário")
+        self.assertIn("claude", str(context.exception))
 
 
 if __name__ == "__main__":
