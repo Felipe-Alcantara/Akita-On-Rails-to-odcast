@@ -7,4 +7,7 @@ Padrão de qualidade - Felixo System Design/
 __pycache__/
 *.pyc
 .venv/
+
+# Node/Electron
+electron/node_modules/
 data/source/akitaonrails.github.io/

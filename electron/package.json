@@ -1,0 +1,17 @@
+{
+  "name": "audiofy-desktop",
+  "version": "0.1.0",
+  "description": "Interface desktop do Audiofy Content AI",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Felipe Martin",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^33.0.0"
+  },
+  "allowScripts": {
+    "electron@33.4.11": true
+  }
+}

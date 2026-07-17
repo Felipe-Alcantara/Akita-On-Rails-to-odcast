@@ -1,0 +1,118 @@
+:root {
+  color-scheme: dark;
+  --bg: #12141a;
+  --panel: #1b1e27;
+  --border: #2c3040;
+  --text: #e8eaf0;
+  --muted: #9aa0b0;
+  --accent: #7c5cff;
+  --ok: #37c77f;
+  --warn: #f0b429;
+  --danger: #e5484d;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.5 system-ui, sans-serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header { padding: 14px 20px 0; }
+header h1 { font-size: 20px; }
+
+.banner {
+  margin-top: 10px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--warn) 18%, transparent);
+  border: 1px solid var(--warn);
+  color: var(--warn);
+  font-weight: 600;
+}
+
+main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding: 14px 20px 20px;
+  min-height: 0;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.toolbar { display: flex; gap: 8px; margin-bottom: 10px; }
+
+input[type="search"] {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: var(--text);
+}
+
+button {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 14px;
+  color: var(--text);
+  cursor: pointer;
+}
+button:hover { border-color: var(--accent); }
+button.primary { background: var(--accent); border-color: var(--accent); font-weight: 600; }
+button.danger { background: var(--danger); border-color: var(--danger); font-weight: 600; }
+
+ul { list-style: none; }
+
+#items li, #episodes li {
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+#items li:hover, #items li.selected { background: color-mix(in srgb, var(--accent) 16%, transparent); }
+#items li .date { color: var(--muted); font-size: 12px; white-space: nowrap; }
+
+#episodes li { cursor: default; flex-wrap: wrap; }
+#episodes li .state-concluido { color: var(--ok); }
+#episodes li .state-rodando { color: var(--warn); }
+#episodes li .state-falhou, #episodes li .state-abortado { color: var(--danger); }
+
+h2 { font-size: 17px; margin-bottom: 4px; }
+h3 { margin: 18px 0 8px; font-size: 14px; color: var(--muted); }
+.muted { color: var(--muted); }
+.estimate { margin: 10px 0; color: var(--warn); }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+
+.progress-track {
+  height: 10px;
+  background: var(--bg);
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+#progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  transition: width 0.4s;
+}
+.cost { font-size: 18px; font-weight: 700; color: var(--ok); margin-top: 6px; }
+
+.hidden { display: none !important; }

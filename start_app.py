@@ -323,6 +323,20 @@ def do_catalog() -> None:
     print(f"\n{DIM}Exemplo: AUDIOFY_PRESENTERS=\"ana:Kore:animada, beto:Puck:cético\"{RESET}")
 
 
+def do_desktop() -> None:
+    """Abre a interface Electron (instala as dependências na primeira vez)."""
+    electron_dir = PROJECT_ROOT / "electron"
+    if not shutil.which("npm"):
+        _fail("npm não encontrado — instale Node.js para usar o app desktop.")
+        return
+    if not (electron_dir / "node_modules" / "electron").is_dir():
+        print(f"{CYAN}Instalando dependências do app (primeira vez)…{RESET}")
+        subprocess.run(["npm", "install", "--no-fund", "--no-audit"], cwd=electron_dir)
+    subprocess.Popen(["npm", "start"], cwd=electron_dir, start_new_session=True,
+                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    _ok("App desktop iniciado em outra janela.")
+
+
 def menu() -> None:
     while True:
         running = _running_generations()
@@ -344,6 +358,7 @@ def menu() -> None:
   {BOLD}9{RESET} — 🛑 Abortar geração       {DIM}para no próximo segmento{RESET}
  {BOLD}10{RESET} — 🎛️  Catálogo TTS/vozes   {DIM}modelos e vozes para configurar{RESET}
  {BOLD}11{RESET} — 📊 Status                {DIM}mostra o que está gastando créditos{RESET}
+ {BOLD}12{RESET} — 🖥️  Abrir app desktop    {DIM}interface Electron (npm start){RESET}
   {BOLD}0{RESET} — 🚪 Sair
 """)
         choice = input(f"{BOLD}Opção:{RESET} ").strip()
@@ -372,6 +387,8 @@ def menu() -> None:
             do_catalog()
         elif choice == "11":
             do_status()
+        elif choice == "12":
+            do_desktop()
         elif choice in ("0", "q"):
             if _running_generations():
                 _warn("Atenção: ainda há geração em segundo plano consumindo créditos.")

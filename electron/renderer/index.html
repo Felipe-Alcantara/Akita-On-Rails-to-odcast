@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Audiofy Content AI</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>🎙️ Audiofy Content AI</h1>
+    <div id="running-banner" class="banner hidden">
+      ⚡ Geração em andamento — consumindo créditos!
+      <span id="running-detail"></span>
+    </div>
+  </header>
+
+  <main>
+    <section class="panel" id="panel-items">
+      <div class="toolbar">
+        <input id="search" type="search" placeholder="Buscar por título, slug ou tag…" />
+        <button id="btn-sync" title="Atualiza os artigos da fonte">🔄 Sincronizar</button>
+      </div>
+      <ul id="items"></ul>
+    </section>
+
+    <section class="panel" id="panel-detail">
+      <div id="detail-empty" class="muted">Selecione um item à esquerda.</div>
+
+      <div id="detail" class="hidden">
+        <h2 id="detail-title"></h2>
+        <p class="muted" id="detail-meta"></p>
+        <p id="detail-estimate" class="estimate"></p>
+        <div class="actions">
+          <button id="btn-generate" class="primary">🎙️ Gerar episódio</button>
+          <button id="btn-abort" class="danger hidden">🛑 Abortar geração</button>
+          <button id="btn-play" class="hidden">▶️ Ouvir episódio</button>
+          <button id="btn-folder" class="hidden">📂 Abrir pasta</button>
+        </div>
+
+        <div id="progress-box" class="hidden">
+          <div class="progress-track"><div id="progress-fill"></div></div>
+          <p id="progress-label" class="muted"></p>
+          <p id="cost-label" class="cost"></p>
+        </div>
+      </div>
+
+      <h3>Episódios</h3>
+      <ul id="episodes"></ul>
+    </section>
+  </main>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
