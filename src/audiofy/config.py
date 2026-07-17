@@ -1,6 +1,6 @@
-"""Configuração central: variáveis de ambiente, caminhos e modelos.
+"""Configuração central do Audiofy: env, caminhos, modelos e apresentadores.
 
-Modelos e vozes são configuração, não regra de negócio (ver docs/PLANO-TECNICO.md).
+Modelos, vozes e apresentadores são configuração, não regra de negócio.
 """
 
 from __future__ import annotations
@@ -9,12 +9,11 @@ import os
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from .presenters import Presenter, parse_presenters
+
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = PROJECT_ROOT / "data"
-SOURCE_REPO_DIR = DATA_DIR / "source" / "akitaonrails.github.io"
 EPISODES_DIR = DATA_DIR / "episodes"
-
-SOURCE_REPO_URL = "https://github.com/akitaonrails/akitaonrails.github.io.git"
 
 OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
 
@@ -35,28 +34,33 @@ def _load_dotenv(path: Path) -> None:
 
 _load_dotenv(PROJECT_ROOT / ".env")
 
+# O clone do blog do Akita continua em data/source/ (compartilhado com o módulo
+# akita-articles via variável de ambiente própria dele).
+os.environ.setdefault("AKITA_ARTICLES_HOME", str(DATA_DIR / "source"))
+
 
 @dataclass
 class Settings:
     api_key: str = field(default_factory=lambda: os.environ.get("OPENROUTER_API_KEY", ""))
     text_model: str = field(
-        default_factory=lambda: os.environ.get("AKITA_TEXT_MODEL", "google/gemini-2.5-pro")
+        default_factory=lambda: os.environ.get("AUDIOFY_TEXT_MODEL", "google/gemini-2.5-pro")
     )
     audit_model: str = field(
-        default_factory=lambda: os.environ.get("AKITA_AUDIT_MODEL", "google/gemini-2.5-flash")
+        default_factory=lambda: os.environ.get("AUDIOFY_AUDIT_MODEL", "google/gemini-2.5-flash")
     )
     tts_model: str = field(
         default_factory=lambda: os.environ.get(
-            "AKITA_TTS_MODEL", "google/gemini-3.1-flash-tts-preview"
+            "AUDIOFY_TTS_MODEL", "google/gemini-3.1-flash-tts-preview"
         )
     )
-    voice_a: str = field(default_factory=lambda: os.environ.get("AKITA_VOICE_A", "Kore"))
-    voice_b: str = field(default_factory=lambda: os.environ.get("AKITA_VOICE_B", "Puck"))
     # O Gemini TTS via OpenRouter só aceita "pcm" (cru, 16-bit mono); o pipeline
     # embrulha em WAV. Modelos que suportem "mp3"/"wav" podem trocar via env.
-    tts_format: str = field(default_factory=lambda: os.environ.get("AKITA_TTS_FORMAT", "pcm"))
+    tts_format: str = field(default_factory=lambda: os.environ.get("AUDIOFY_TTS_FORMAT", "pcm"))
     tts_sample_rate: int = field(
-        default_factory=lambda: int(os.environ.get("AKITA_TTS_SAMPLE_RATE", "24000"))
+        default_factory=lambda: int(os.environ.get("AUDIOFY_TTS_SAMPLE_RATE", "24000"))
+    )
+    presenters: list[Presenter] = field(
+        default_factory=lambda: parse_presenters(os.environ.get("AUDIOFY_PRESENTERS", ""))
     )
 
     def require_api_key(self) -> str:

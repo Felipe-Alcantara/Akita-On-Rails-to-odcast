@@ -1,24 +1,32 @@
 #!/usr/bin/env python3
-"""Porta de entrada do Akita on Rails to Podcast.
+"""Porta de entrada do Audiofy Content AI.
 
 Uso:
     python3 start_app.py             # menu interativo (recomendado)
-    python3 start_app.py list        # lista artigos
-    python3 start_app.py generate <artigo-id | número da listagem>
-    python3 start_app.py sync|status|setup
+    python3 start_app.py list|sync|status|setup|catalog
+    python3 start_app.py search <termos>
+    python3 start_app.py generate <item-id | número da listagem> [--bg]
+    python3 start_app.py watch <item-id>
+    python3 start_app.py abort <item-id>
 """
 
 from __future__ import annotations
 
+import json
 import shutil
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).parent
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
-from akita_podcast.config import Settings, SOURCE_REPO_DIR, EPISODES_DIR  # noqa: E402
+from audiofy.config import EPISODES_DIR, Settings  # noqa: E402
+from audiofy.runtime.status import GenerationTracker  # noqa: E402
+from audiofy.sources import get_source  # noqa: E402
+
+SOURCE_KEY = "akita"  # fonte padrão do menu; outras fontes via bridge/registro
 
 BOLD, DIM, GREEN, YELLOW, RED, CYAN, RESET = (
     "\033[1m", "\033[2m", "\033[92m", "\033[93m", "\033[91m", "\033[96m", "\033[0m"
@@ -37,37 +45,43 @@ def _fail(message: str) -> None:
     print(f"  {RED}✖{RESET} {message}")
 
 
-# ── Setup e status ──────────────────────────────────────────────────────────
+# ── Setup, configuração e status ────────────────────────────────────────────
 
 def do_setup() -> None:
-    """Verifica dependências e cria o .env a partir do .env.example."""
+    """Verifica dependências, instala o módulo akita-articles e cria o .env."""
     print(f"\n{BOLD}Verificando dependências…{RESET}")
-    checks_ok = True
     for binary, hint in (("git", "instale via gerenciador de pacotes"),
                          ("ffmpeg", "necessário para montar o áudio")):
-        if shutil.which(binary):
-            _ok(f"{binary} encontrado")
-        else:
-            _fail(f"{binary} não encontrado — {hint}")
-            checks_ok = False
+        _ok(f"{binary} encontrado") if shutil.which(binary) else _fail(
+            f"{binary} não encontrado — {hint}")
     try:
         import requests  # noqa: F401
         _ok("biblioteca requests disponível")
     except ImportError:
         _fail("biblioteca requests ausente — rode: pip install requests")
-        checks_ok = False
+
+    try:
+        import akita_articles  # noqa: F401
+        _ok("módulo akita-articles disponível")
+    except ImportError:
+        _warn("módulo akita-articles ausente — instalando…")
+        result = subprocess.run(
+            [sys.executable, "-m", "pip", "install", "--user",
+             "git+https://github.com/Felipe-Alcantara/akita-articles"],
+            text=True,
+        )
+        _ok("akita-articles instalado") if result.returncode == 0 else _fail(
+            "instalação falhou — instale manualmente (ver README)")
 
     env_path = PROJECT_ROOT / ".env"
     if not env_path.is_file():
         shutil.copy(PROJECT_ROOT / ".env.example", env_path)
-        _warn(f"Criei {env_path.name} a partir do exemplo — edite e preencha a "
-              f"OPENROUTER_API_KEY (https://openrouter.ai/keys).")
+        _warn("Criei .env a partir do exemplo — preencha a OPENROUTER_API_KEY "
+              "(https://openrouter.ai/keys).")
     elif Settings().api_key:
         _ok("OPENROUTER_API_KEY configurada")
     else:
         _warn("Arquivo .env existe, mas OPENROUTER_API_KEY está vazia.")
-    if checks_ok:
-        print(f"\n{GREEN}Setup concluído.{RESET}")
 
 
 def do_configure() -> None:
@@ -79,77 +93,121 @@ def do_configure() -> None:
     if not key:
         print("Nada alterado.")
         return
-    lines = env_path.read_text(encoding="utf-8").splitlines()
-    lines = [line for line in lines if not line.startswith("OPENROUTER_API_KEY=")]
+    lines = [line for line in env_path.read_text(encoding="utf-8").splitlines()
+             if not line.startswith("OPENROUTER_API_KEY=")]
     lines.insert(0, f"OPENROUTER_API_KEY={key}")
     env_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
     _ok("Chave gravada no .env (arquivo ignorado pelo Git).")
 
 
+def _running_generations() -> list[dict]:
+    running = []
+    if EPISODES_DIR.is_dir():
+        for directory in EPISODES_DIR.iterdir():
+            status = GenerationTracker.load(directory) if directory.is_dir() else None
+            if status and status.get("state") == "rodando":
+                status["dir"] = directory
+                running.append(status)
+    return running
+
+
 def do_status() -> None:
-    print(f"\n{BOLD}Status do projeto{RESET}")
+    print(f"\n{BOLD}Status do Audiofy{RESET}")
     settings = Settings()
     _ok("Chave configurada") if settings.api_key else _warn("OPENROUTER_API_KEY ausente")
-    if (SOURCE_REPO_DIR / "content").is_dir():
-        commit = subprocess.run(
-            ["git", "-C", str(SOURCE_REPO_DIR), "rev-parse", "--short", "HEAD"],
-            capture_output=True, text=True,
-        ).stdout.strip()
-        from akita_podcast.source_repo import list_articles
-        _ok(f"Blog sincronizado (commit {commit}, {len(list_articles())} artigos)")
+    source = get_source(SOURCE_KEY)
+    if source.is_ready():
+        _ok(f"Fonte '{source.name}' sincronizada ({len(source.list_items())} itens)")
     else:
-        _warn("Blog ainda não sincronizado (opção Sincronizar)")
+        _warn(f"Fonte '{source.name}' ainda não sincronizada (opção Sincronizar)")
+
+    running = _running_generations()
+    if running:
+        print(f"\n  {YELLOW}{BOLD}⚡ GERAÇÃO EM ANDAMENTO (consumindo créditos):{RESET}")
+        for status in running:
+            progress = status.get("progress", {})
+            print(f"     {status['episode_id']} — etapa {status.get('stage')}"
+                  f" {progress.get('current', 0)}/{progress.get('total', 0)}"
+                  f" — US$ {status.get('cost_usd', 0):.4f}")
+        print(f"     {DIM}Acompanhe (watch) ou aborte (abort) pelo menu.{RESET}")
+    else:
+        _ok("Nenhuma geração em segundo plano — nada consumindo créditos agora")
+
     episodes = sorted(EPISODES_DIR.glob("*/episode.mp3")) if EPISODES_DIR.is_dir() else []
     _ok(f"{len(episodes)} episódio(s) finalizado(s) em {EPISODES_DIR}")
     for episode in episodes:
-        print(f"      {DIM}{episode.parent.name}{RESET}")
+        status = GenerationTracker.load(episode.parent) or {}
+        cost = f" — US$ {status.get('cost_usd', 0):.4f}" if status else ""
+        print(f"      {DIM}{episode.parent.name}{cost}{RESET}")
+    presenters = ", ".join(f"{p.speaker}:{p.voice}" for p in settings.presenters)
     print(f"  {DIM}Modelos: roteiro={settings.text_model} | auditoria={settings.audit_model} | "
           f"tts={settings.tts_model}{RESET}")
+    print(f"  {DIM}Apresentadores: {presenters}{RESET}")
 
 
-# ── Fluxo principal ─────────────────────────────────────────────────────────
+# ── Fonte de conteúdo ────────────────────────────────────────────────────────
 
 def do_sync() -> None:
-    from akita_podcast.source_repo import sync_repo
-    print(f"{CYAN}Sincronizando repositório do blog…{RESET}")
-    commit = sync_repo()
-    _ok(f"Repositório atualizado no commit {commit[:12]}")
+    print(f"{CYAN}Sincronizando fonte '{SOURCE_KEY}'…{RESET}")
+    version = get_source(SOURCE_KEY).sync()
+    _ok(f"Fonte atualizada (versão {version[:12]})")
 
 
 def ensure_synced() -> None:
-    if not (SOURCE_REPO_DIR / "content").is_dir():
+    if not get_source(SOURCE_KEY).is_ready():
         do_sync()
 
 
 def do_list(page_size: int = 30) -> None:
-    from akita_podcast.source_repo import list_articles
     ensure_synced()
-    articles = list_articles()
-    print(f"\n{BOLD}{len(articles)} artigos encontrados (mais recentes primeiro):{RESET}\n")
-    for index, article in enumerate(articles, 1):
-        print(f"  {DIM}{index:4d}.{RESET} {article.date}  {article.title}")
-        if index % page_size == 0 and index < len(articles):
-            answer = input(f"{DIM}— Enter para continuar, q para parar —{RESET} ").strip().lower()
+    items = get_source(SOURCE_KEY).list_items()
+    print(f"\n{BOLD}{len(items)} itens (mais recentes primeiro):{RESET}\n")
+    for index, item in enumerate(items, 1):
+        print(f"  {DIM}{index:4d}.{RESET} {item.published_at}  {item.title}")
+        if index % page_size == 0 and index < len(items):
+            answer = input(
+                f"{DIM}— Enter continua, q para, ou digite o número para gerar —{RESET} "
+            ).strip().lower()
             if answer == "q":
                 break
+            if answer.isdigit():
+                do_generate(answer)
+                return
     print()
 
 
-def do_generate(selector: str, force: bool = False) -> None:
-    from akita_podcast.source_repo import list_articles
+def do_search(query: str) -> None:
     ensure_synced()
-    articles = list_articles()
-    article = None
+    hits = get_source(SOURCE_KEY).search(query)
+    print(f"\n{BOLD}{len(hits)} resultado(s) para \"{query}\":{RESET}\n")
+    for index, item in enumerate(hits[:50], 1):
+        print(f"  {DIM}{index:3d}.{RESET} {item.item_id}  {item.title}")
+    print()
+
+
+# ── Geração ──────────────────────────────────────────────────────────────────
+
+def _resolve_item_id(selector: str) -> str | None:
+    source = get_source(SOURCE_KEY)
     if selector.isdigit():
+        items = source.list_items()
         index = int(selector)
-        if 1 <= index <= len(articles):
-            article = articles[index - 1]
-    else:
-        article = next((a for a in articles if a.article_id == selector), None)
-    if article is None:
-        _fail(f"Artigo '{selector}' não encontrado. Use o número da listagem "
-              f"ou o id no formato AAAA-MM-DD/slug.")
+        if 1 <= index <= len(items):
+            return items[index - 1].item_id
+        return None
+    try:
+        return source.get_item(selector).item_id
+    except LookupError:
+        return None
+
+
+def do_generate(selector: str, force: bool = False, background: bool = False) -> None:
+    ensure_synced()
+    item_id = _resolve_item_id(selector)
+    if item_id is None:
+        _fail(f"Item '{selector}' não encontrado (use o número da listagem ou o id).")
         return
+    item = get_source(SOURCE_KEY).get_item(item_id)
 
     settings = Settings()
     try:
@@ -158,42 +216,134 @@ def do_generate(selector: str, force: bool = False) -> None:
         _fail(str(error))
         return
 
-    words = len(article.path.read_text(encoding="utf-8", errors="replace").split())
-    print(f"\n{BOLD}Artigo:{RESET}  {article.title}")
-    print(f"{BOLD}URL:{RESET}     {article.canonical_url}")
-    print(f"{BOLD}Tamanho:{RESET} ~{words} palavras")
-    print(f"{BOLD}Modelos:{RESET} roteiro={settings.text_model} | "
-          f"auditoria={settings.audit_model} | tts={settings.tts_model}")
-    print(f"{YELLOW}A geração consome créditos do OpenRouter "
-          f"(ordem de US$ 0,30–1,10 por episódio).{RESET}")
+    estimated = 0.60 * item.words / 2200  # razão medida no episódio piloto
+    presenters = ", ".join(f"{p.speaker} ({p.voice})" for p in settings.presenters)
+    print(f"\n{BOLD}Item:{RESET}     {item.title}")
+    print(f"{BOLD}URL:{RESET}      {item.url}")
+    print(f"{BOLD}Tamanho:{RESET}  ~{item.words} palavras de prosa")
+    print(f"{BOLD}Vozes:{RESET}    {presenters}")
+    print(f"{YELLOW}Custo estimado: ~US$ {estimated:.2f} "
+          f"(razão real medida: US$ 0,60 ≈ 13 min ≈ 2200 palavras).{RESET}")
     if input("Continuar? [s/N] ").strip().lower() not in ("s", "sim", "y"):
         print("Cancelado.")
         return
 
-    from akita_podcast.pipeline import generate_episode
+    if background:
+        result = subprocess.run(
+            [sys.executable, "-m", "audiofy.bridge", "generate", SOURCE_KEY, item_id],
+            capture_output=True, text=True, cwd=str(PROJECT_ROOT),
+            env={**__import__("os").environ, "PYTHONPATH": "src"},
+        )
+        payload = json.loads(result.stdout or "{}")
+        if payload.get("started"):
+            _ok(f"Geração iniciada em segundo plano. Log: {payload['log']}")
+            print(f"  {DIM}Acompanhe com watch, aborte com abort. O Status sempre mostra o "
+                  f"que está consumindo créditos.{RESET}")
+            do_watch(item_id)
+        else:
+            _fail(f"Não iniciou: {payload.get('reason') or payload.get('error')}")
+        return
+
+    from audiofy.pipeline import generate_episode
+    from audiofy.runtime.status import GenerationAborted
 
     try:
-        generate_episode(settings, article, force=force)
+        generate_episode(settings, item, force=force)
+    except GenerationAborted:
+        _warn("Geração abortada a pedido. Artefatos preservados; gere de novo para retomar.")
     except Exception as error:  # noqa: BLE001 — o menu reporta e preserva artefatos parciais
         _fail(f"Falha: {error}")
-        print(f"{DIM}Artefatos parciais foram preservados; rode novamente para retomar "
-              f"de onde parou.{RESET}")
+        print(f"{DIM}Artefatos parciais preservados; rode novamente para retomar.{RESET}")
         sys.exit(1)
+
+
+def do_watch(selector: str) -> None:
+    """Acompanha ao vivo uma geração: etapa, progresso, custo. Ctrl+C sai (não aborta)."""
+    from audiofy.pipeline import episode_dir
+    item_id = _resolve_item_id(selector) or selector
+    directory = episode_dir(item_id)
+    print(f"{DIM}Acompanhando {item_id} — Ctrl+C sai do acompanhamento "
+          f"(NÃO aborta a geração).{RESET}")
+    try:
+        while True:
+            status = GenerationTracker.load(directory)
+            if status is None:
+                _warn("Sem status para este item.")
+                return
+            progress = status.get("progress", {})
+            total = progress.get("total", 0)
+            bar = ""
+            if total:
+                filled = int(24 * progress.get("current", 0) / total)
+                bar = f"[{'█' * filled}{'░' * (24 - filled)}] " \
+                      f"{progress.get('current', 0)}/{total} "
+            line = (f"{status['state']} | {status.get('stage', '')} {bar}"
+                    f"| US$ {status.get('cost_usd', 0):.4f}")
+            print(f"\r\033[K  {line}", end="", flush=True)
+            if status["state"] != "rodando":
+                print()
+                if status["state"] == "concluido":
+                    _ok(f"Episódio pronto: {directory / 'episode.mp3'}")
+                else:
+                    _warn(f"Estado final: {status['state']}")
+                return
+            time.sleep(2)
+    except KeyboardInterrupt:
+        print(f"\n{DIM}Saí do acompanhamento; a geração continua. "
+              f"Use abort para cancelar de verdade.{RESET}")
+
+
+def do_abort(selector: str) -> None:
+    from audiofy.pipeline import episode_dir
+    item_id = _resolve_item_id(selector) or selector
+    directory = episode_dir(item_id)
+    status = GenerationTracker.load(directory)
+    if not status or status.get("state") != "rodando":
+        _warn("Nenhuma geração rodando para este item.")
+        return
+    GenerationTracker.request_abort(directory)
+    _ok("Abort solicitado — efetiva no próximo segmento (nada é corrompido).")
+
+
+def do_catalog() -> None:
+    """Lista modelos TTS do OpenRouter e as vozes do Gemini para configurar."""
+    from audiofy.providers.openrouter import GEMINI_VOICES, list_tts_models
+    settings = Settings()
+    try:
+        settings.require_api_key()
+        models = list_tts_models(settings)
+        print(f"\n{BOLD}Modelos com saída de áudio no OpenRouter:{RESET}")
+        for model in models:
+            print(f"  {model['id']}  {DIM}{model['name']}{RESET}")
+    except RuntimeError as error:
+        _warn(f"Sem chave para consultar modelos ao vivo ({error}).")
+    print(f"\n{BOLD}Vozes do Gemini TTS (use em AUDIOFY_PRESENTERS):{RESET}")
+    for voice, style in GEMINI_VOICES.items():
+        print(f"  {voice:<16} {DIM}{style}{RESET}")
+    print(f"\n{DIM}Exemplo: AUDIOFY_PRESENTERS=\"ana:Kore:animada, beto:Puck:cético\"{RESET}")
 
 
 def menu() -> None:
     while True:
+        running = _running_generations()
+        alert = (f"\n  {YELLOW}⚡ {len(running)} geração(ões) em andamento — "
+                 f"consumindo créditos! (opção 8 acompanha, 9 aborta){RESET}"
+                 if running else "")
         print(f"""
 {BOLD}{CYAN}╔══════════════════════════════════════════════════════════╗
-║            🎙️  Akita on Rails to Podcast                  ║
-╚══════════════════════════════════════════════════════════╝{RESET}
-  {BOLD}1{RESET} — 🛠️  Instalar / Setup       {DIM}verifica dependências e cria o .env{RESET}
-  {BOLD}2{RESET} — 🔑 Configurar chave        {DIM}grava a OPENROUTER_API_KEY{RESET}
-  {BOLD}3{RESET} — 🔄 Sincronizar blog        {DIM}clona/atualiza os artigos do Akita{RESET}
-  {BOLD}4{RESET} — 📚 Listar artigos          {DIM}mais recentes primeiro, paginado{RESET}
-  {BOLD}5{RESET} — 🎙️  Gerar episódio         {DIM}matriz → roteiro → auditoria → áudio{RESET}
-  {BOLD}6{RESET} — ♻️  Regerar do zero        {DIM}ignora artefatos salvos do episódio{RESET}
-  {BOLD}7{RESET} — 📊 Status                  {DIM}chave, sincronização e episódios{RESET}
+║              🎙️  Audiofy Content AI                        ║
+╚══════════════════════════════════════════════════════════╝{RESET}{alert}
+  {BOLD}1{RESET} — 🛠️  Instalar / Setup     {DIM}dependências, akita-articles, .env{RESET}
+  {BOLD}2{RESET} — 🔑 Configurar chave      {DIM}grava a OPENROUTER_API_KEY{RESET}
+  {BOLD}3{RESET} — 🔄 Sincronizar fonte     {DIM}atualiza os artigos do Akita{RESET}
+  {BOLD}4{RESET} — 📚 Listar itens          {DIM}digite o número para gerar direto{RESET}
+  {BOLD}5{RESET} — 🔍 Buscar                {DIM}por título, slug ou tag{RESET}
+  {BOLD}6{RESET} — 🎙️  Gerar episódio       {DIM}ao vivo, com barra e custo em US${RESET}
+  {BOLD}7{RESET} — 🚀 Gerar em 2º plano     {DIM}libera o terminal; watch acompanha{RESET}
+  {BOLD}8{RESET} — 👀 Acompanhar geração    {DIM}progresso e custo ao vivo{RESET}
+  {BOLD}9{RESET} — 🛑 Abortar geração       {DIM}para no próximo segmento{RESET}
+ {BOLD}10{RESET} — 🎛️  Catálogo TTS/vozes   {DIM}modelos e vozes para configurar{RESET}
+ {BOLD}11{RESET} — 📊 Status                {DIM}mostra o que está gastando créditos{RESET}
   {BOLD}0{RESET} — 🚪 Sair
 """)
         choice = input(f"{BOLD}Opção:{RESET} ").strip()
@@ -205,13 +355,26 @@ def menu() -> None:
             do_sync()
         elif choice == "4":
             do_list()
-        elif choice in ("5", "6"):
-            selector = input("Número do artigo na listagem (ou id AAAA-MM-DD/slug): ").strip()
+        elif choice == "5":
+            if query := input("Buscar por: ").strip():
+                do_search(query)
+        elif choice in ("6", "7"):
+            selector = input("Número da listagem ou id do item: ").strip()
             if selector:
-                do_generate(selector, force=choice == "6")
-        elif choice == "7":
+                do_generate(selector, background=choice == "7")
+        elif choice == "8":
+            if selector := input("Id do item (ou número): ").strip():
+                do_watch(selector)
+        elif choice == "9":
+            if selector := input("Id do item (ou número): ").strip():
+                do_abort(selector)
+        elif choice == "10":
+            do_catalog()
+        elif choice == "11":
             do_status()
         elif choice in ("0", "q"):
+            if _running_generations():
+                _warn("Atenção: ainda há geração em segundo plano consumindo créditos.")
             return
         else:
             _warn("Opção inválida.")
@@ -221,16 +384,23 @@ def main() -> None:
     # Saída em tempo real mesmo quando redirecionada para arquivo/pipe (tail -f).
     sys.stdout.reconfigure(line_buffering=True)
     args = sys.argv[1:]
-    commands = {"list": do_list, "sync": do_sync, "status": do_status, "setup": do_setup}
+    simple = {"list": do_list, "sync": do_sync, "status": do_status,
+              "setup": do_setup, "catalog": do_catalog}
     if not args:
         try:
             menu()
         except (KeyboardInterrupt, EOFError):
             print("\nAté mais!")
-    elif args[0] in commands:
-        commands[args[0]]()
+    elif args[0] in simple:
+        simple[args[0]]()
+    elif args[0] == "search" and len(args) >= 2:
+        do_search(" ".join(args[1:]))
     elif args[0] == "generate" and len(args) >= 2:
-        do_generate(args[1], force="--force" in args)
+        do_generate(args[1], force="--force" in args, background="--bg" in args)
+    elif args[0] == "watch" and len(args) >= 2:
+        do_watch(args[1])
+    elif args[0] == "abort" and len(args) >= 2:
+        do_abort(args[1])
     else:
         print(__doc__)
         sys.exit(2)
