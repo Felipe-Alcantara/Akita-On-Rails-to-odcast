@@ -43,7 +43,13 @@ GEMINI_VOICES: dict[str, str] = {
 
 
 class OpenRouterError(RuntimeError):
-    pass
+    """Falha controlada da integração, classificada para retry seguro."""
+
+    def __init__(self, message: str, *, retryable: bool = False,
+                 status_code: int | None = None) -> None:
+        super().__init__(message)
+        self.retryable = retryable
+        self.status_code = status_code
 
 
 @dataclass(frozen=True)
@@ -64,23 +70,41 @@ def _request(settings: Settings, method: str, endpoint: str,
                 method, f"{OPENROUTER_BASE_URL}{endpoint}", json=payload,
                 headers=headers, timeout=_TIMEOUT,
             )
-            if response.status_code in (429, 500, 502, 503):
-                raise OpenRouterError(f"HTTP {response.status_code} (transitório)")
+            if response.status_code in (408, 425, 429, 500, 502, 503, 504):
+                raise OpenRouterError(
+                    f"HTTP {response.status_code} (transitório)",
+                    retryable=True, status_code=response.status_code,
+                )
             if response.status_code != 200:
                 # Não logar o corpo integral: pode ecoar conteúdo ou detalhes do provedor.
+                provider_rejected = (
+                    endpoint == "/audio/speech"
+                    and response.status_code == 400
+                    and "Provider returned 400" in response.text
+                )
                 raise OpenRouterError(
-                    f"HTTP {response.status_code} em {endpoint}: {response.text[:300]}"
+                    f"HTTP {response.status_code} em {endpoint}: {response.text[:300]}",
+                    retryable=provider_rejected, status_code=response.status_code,
                 )
             return response
         except requests.RequestException as error:
             last_error = error
+            # No TTS, o pipeline controla a tentativa por fala e a expõe no status.
+            if endpoint == "/audio/speech":
+                raise OpenRouterError(
+                    f"Falha de rede em {endpoint}: {error}", retryable=True
+                ) from error
         except OpenRouterError as error:
             last_error = error
-            if "transitório" not in str(error):
+            if not error.retryable or endpoint == "/audio/speech":
                 raise
         if attempt < _MAX_RETRIES:
             time.sleep(2**attempt)
-    raise OpenRouterError(f"Falha após {_MAX_RETRIES} tentativas em {endpoint}: {last_error}")
+    raise OpenRouterError(
+        f"Falha após {_MAX_RETRIES} tentativas em {endpoint}: {last_error}",
+        retryable=True,
+        status_code=getattr(last_error, "status_code", None),
+    )
 
 
 def _extract_json(text: str) -> Any:
@@ -133,9 +157,11 @@ def text_to_speech(settings: Settings, text: str, voice: str, instructions: str 
     response = _request(settings, "POST", "/audio/speech", payload)
     content_type = response.headers.get("Content-Type", "")
     if "json" in content_type:
-        raise OpenRouterError(f"TTS retornou JSON em vez de áudio: {response.text[:300]}")
+        raise OpenRouterError(
+            f"TTS retornou JSON em vez de áudio: {response.text[:300]}", retryable=True
+        )
     if len(response.content) < 512:
-        raise OpenRouterError("TTS retornou resposta vazia ou curta demais.")
+        raise OpenRouterError("TTS retornou resposta vazia ou curta demais.", retryable=True)
     return response.content
 
 

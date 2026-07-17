@@ -24,6 +24,28 @@ STATE_DIR = PROJECT_ROOT / ".audiofy"  # chaves, perfis e caches locais (gitigno
 OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
 
 
+def _env_int(name: str, default: int, minimum: int, maximum: int) -> int:
+    raw = os.environ.get(name, str(default))
+    try:
+        value = int(raw)
+    except ValueError as error:
+        raise ValueError(f"{name} precisa ser um número inteiro.") from error
+    if not minimum <= value <= maximum:
+        raise ValueError(f"{name} precisa ficar entre {minimum} e {maximum}.")
+    return value
+
+
+def _env_float(name: str, default: float, minimum: float, maximum: float) -> float:
+    raw = os.environ.get(name, str(default))
+    try:
+        value = float(raw)
+    except ValueError as error:
+        raise ValueError(f"{name} precisa ser um número.") from error
+    if not minimum <= value <= maximum:
+        raise ValueError(f"{name} precisa ficar entre {minimum:g} e {maximum:g}.")
+    return value
+
+
 def _load_dotenv(path: Path) -> None:
     """Carrega um .env simples (KEY=VALUE) sem sobrescrever o ambiente."""
     if not path.is_file():
@@ -87,8 +109,21 @@ class Settings:
     tts_sample_rate: int = field(
         default_factory=lambda: int(os.environ.get("AUDIOFY_TTS_SAMPLE_RATE", "24000"))
     )
+    tts_retry_attempts: int = field(
+        default_factory=lambda: _env_int("AUDIOFY_TTS_RETRY_ATTEMPTS", 5, 1, 20)
+    )
+    tts_retry_base_seconds: float = field(
+        default_factory=lambda: _env_float("AUDIOFY_TTS_RETRY_BASE_SECONDS", 2, 0, 300)
+    )
+    tts_retry_max_seconds: float = field(
+        default_factory=lambda: _env_float("AUDIOFY_TTS_RETRY_MAX_SECONDS", 30, 0, 900)
+    )
 
     def __post_init__(self) -> None:
+        if not 1 <= self.tts_retry_attempts <= 20:
+            raise ValueError("tts_retry_attempts precisa ficar entre 1 e 20.")
+        if self.tts_retry_base_seconds < 0 or self.tts_retry_max_seconds < 0:
+            raise ValueError("Os intervalos de retry do TTS não podem ser negativos.")
         defaults = _default_settings()
         for name, value in defaults.items():
             if not getattr(self, name):

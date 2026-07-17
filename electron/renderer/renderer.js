@@ -326,7 +326,12 @@ async function refreshStatus() {
   const banner = $("running-banner");
   if (overview.anything_running) {
     $("running-detail").textContent = overview.running
-      .map((e) => `${e.episode_id} (US$ ${e.cost_usd.toFixed(3)})`).join(", ");
+      .map((e) => {
+        const retry = e.retry
+          ? ` · retomando fala ${e.retry.segment} (${e.retry.attempt}/${e.retry.max_attempts})`
+          : "";
+        return `${e.episode_id} (US$ ${e.cost_usd.toFixed(3)}${retry})`;
+      }).join(", ");
     banner.classList.remove("hidden");
   } else {
     banner.classList.add("hidden");
@@ -357,7 +362,11 @@ function renderSelectedStatus(episodes) {
     $("progress-fill").style.width = `${percent}%`;
     $("progress-track").setAttribute("aria-valuenow", String(percent));
     $("progress-label").textContent =
-      `Etapa: ${status.stage} — ${progress.current || 0}/${progress.total || "?"} (${percent}%)`;
+      `Etapa: ${status.stage} — ${progress.current || 0}/${progress.total || "?"} (${percent}%)` +
+      (status.retry
+        ? ` · retomando fala ${status.retry.segment}, tentativa ` +
+          `${status.retry.attempt}/${status.retry.max_attempts}`
+        : "");
     $("cost-label").textContent = `💰 US$ ${status.cost_usd.toFixed(4)} até agora`;
   } else {
     $("progress-fill").style.width = "0%";
@@ -376,9 +385,11 @@ function renderEpisodes(episodes) {
     const cost = episode.cost_usd ? ` · US$ ${episode.cost_usd.toFixed(4)}` : "";
     const progress = episode.state === "rodando" && episode.progress.total
       ? ` · ${episode.progress.current}/${episode.progress.total}` : "";
+    const retry = episode.retry
+      ? ` · retry ${episode.retry.attempt}/${episode.retry.max_attempts}` : "";
     row.appendChild(makeElement("span", `state-${episode.state}`, "●"));
     row.appendChild(makeElement("span", "episode-title", episode.episode_id));
-    row.appendChild(makeElement("span", "muted", `${episode.state}${progress}${cost}`));
+    row.appendChild(makeElement("span", "muted", `${episode.state}${progress}${retry}${cost}`));
     if (episode.state === "rodando") {
       const abortButton = document.createElement("button");
       abortButton.textContent = "🛑";

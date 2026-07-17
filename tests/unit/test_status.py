@@ -65,6 +65,44 @@ class GenerationTrackerTest(unittest.TestCase):
     def test_load_sem_status(self):
         self.assertIsNone(GenerationTracker.load(Path(self._tmp.name) / "vazio"))
 
+    def test_nova_execucao_preserva_custo_e_registra_retomada(self):
+        self.tracker.stage("tts", total=5)
+        self.tracker.advance(2)
+        self.tracker.add_cost(0.35)
+
+        resumed = GenerationTracker(self.directory, episode_id="ep-teste")
+        resumed.stage("tts", total=5, current=2)
+        data = self._read()
+
+        self.assertEqual(data["cost_usd"], 0.35)
+        self.assertEqual(data["resume_count"], 1)
+        self.assertEqual(data["progress"], {"current": 2, "total": 5})
+
+    def test_status_de_retry_e_limpo_ao_avancar(self):
+        self.tracker.stage("tts", total=5, current=2)
+        self.tracker.retrying(
+            segment=3, next_attempt=2, max_attempts=5,
+            delay_seconds=4, error="falha temporária",
+        )
+        retry = self._read()["retry"]
+        self.assertEqual(retry["segment"], 3)
+        self.assertEqual(retry["attempt"], 2)
+        self.assertEqual(retry["max_attempts"], 5)
+
+        self.tracker.advance(3)
+        self.assertIsNone(self._read()["retry"])
+
+    def test_execucao_forcada_inicia_novo_custo(self):
+        self.tracker.stage("tts", total=2)
+        self.tracker.add_cost(0.35)
+
+        fresh = GenerationTracker(self.directory, episode_id="ep-teste", resume=False)
+        fresh.stage("cobertura")
+        data = self._read()
+
+        self.assertEqual(data["cost_usd"], 0.0)
+        self.assertEqual(data["resume_count"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

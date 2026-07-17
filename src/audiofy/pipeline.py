@@ -8,15 +8,18 @@ episódio interrompe a geração no próximo checkpoint.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import subprocess
 import sys
+import time
 import wave
 from pathlib import Path
 
 from .config import EPISODES_DIR, Settings
 from .prompts import AUDIT_PROMPT, COVERAGE_PROMPT, SYSTEM_PROMPT, script_prompt
 from .providers import openrouter
+from .runtime.retry import RetryPolicy
 from .runtime.status import GenerationTracker
 from .sources.base import ContentItem
 
@@ -26,7 +29,9 @@ def episode_dir(item_id: str) -> Path:
 
 
 def _save_json(path: Path, data: object) -> None:
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+    temporary.replace(path)
 
 
 def _load_json(path: Path) -> object | None:
@@ -38,14 +43,15 @@ def _load_json(path: Path) -> object | None:
 def generate_episode(settings: Settings, item: ContentItem, force: bool = False) -> Path:
     """Executa o pipeline completo para um item e retorna o MP3 final."""
     directory = episode_dir(item.item_id)
-    tracker = GenerationTracker(directory, episode_id=item.item_id)
+    tracker = GenerationTracker(directory, episode_id=item.item_id, resume=not force)
     try:
         result = _run(settings, item, directory, tracker, force)
         tracker.finish("concluido")
         return result
-    except Exception:
-        if GenerationTracker.load(directory).get("state") == "rodando":
-            tracker.finish("falhou")
+    except Exception as error:
+        status = GenerationTracker.load(directory) or {}
+        if status.get("state") == "rodando":
+            tracker.finish("falhou", error=str(error))
         raise
 
 
@@ -105,7 +111,9 @@ def _run(settings: Settings, item: ContentItem, directory: Path,
     _report_audit(coverage, audit)
 
     print("🎙️  4/5 Síntese de áudio por turno…")
-    segments = _synthesize_turns(settings, directory, turns, tracker)
+    segments = _synthesize_turns(
+        settings, directory, turns, tracker, trust_legacy_segments=not force,
+    )
 
     print("🎧 5/5 Montagem com ffmpeg…")
     tracker.stage("montagem")
@@ -156,14 +164,133 @@ def _wrap_pcm_as_wav(pcm: bytes, path: Path, sample_rate: int) -> None:
         wav.writeframes(pcm)
 
 
+def _valid_segment(path: Path) -> bool:
+    """Rejeita arquivos parciais; WAV também precisa ter cabeçalho e frames válidos."""
+    if not path.is_file() or path.stat().st_size <= 512:
+        return False
+    if path.suffix.lower() != ".wav":
+        return True
+    try:
+        with wave.open(str(path), "rb") as audio:
+            return audio.getnchannels() > 0 and audio.getnframes() > 0
+    except (EOFError, wave.Error):
+        return False
+
+
+def _segment_fingerprint(settings: Settings, text: str, voice: str,
+                         instructions: str) -> str:
+    """Vincula o cache ao conteúdo e às opções que alteram a identidade sonora."""
+    payload = {
+        "model": settings.tts_model,
+        "text": text,
+        "voice": voice,
+        "instructions": instructions,
+        "format": settings.tts_format,
+        "sample_rate": settings.tts_sample_rate,
+    }
+    raw = json.dumps(payload, ensure_ascii=False, sort_keys=True).encode("utf-8")
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _wait_for_retry(delay_seconds: float, tracker: GenerationTracker) -> None:
+    """Espera em passos curtos para que o abort continue responsivo."""
+    remaining = delay_seconds
+    while remaining > 0:
+        tracker.checkpoint()
+        step = min(1.0, remaining)
+        time.sleep(step)
+        remaining -= step
+
+
+def _synthesize_with_retry(settings: Settings, text: str, voice: str,
+                           instructions: str, segment_number: int,
+                           tracker: GenerationTracker) -> bytes:
+    policy = RetryPolicy(
+        max_attempts=settings.tts_retry_attempts,
+        base_delay_seconds=settings.tts_retry_base_seconds,
+        max_delay_seconds=settings.tts_retry_max_seconds,
+    )
+    for attempt in range(1, policy.max_attempts + 1):
+        tracker.checkpoint()
+        try:
+            return openrouter.text_to_speech(
+                settings, text, voice, instructions=instructions,
+            )
+        except openrouter.OpenRouterError as error:
+            if not error.retryable or attempt == policy.max_attempts:
+                tracker.record_error(str(error))
+                raise
+            delay = policy.delay_after(attempt)
+            tracker.retrying(
+                segment=segment_number,
+                next_attempt=attempt + 1,
+                max_attempts=policy.max_attempts,
+                delay_seconds=delay,
+                error=str(error),
+            )
+            print(
+                f"\n   ↻ Falha temporária na fala {segment_number}; "
+                f"tentativa {attempt + 1}/{policy.max_attempts} em {delay:.1f}s.",
+                flush=True,
+            )
+            _wait_for_retry(delay, tracker)
+    raise AssertionError("A política de retry terminou sem resultado nem erro.")
+
+
 def _synthesize_turns(settings: Settings, directory: Path, turns: list[dict],
-                      tracker: GenerationTracker) -> list[Path]:
+                      tracker: GenerationTracker,
+                      trust_legacy_segments: bool = True) -> list[Path]:
     voices = {p.speaker: p for p in settings.presenters}
     default = settings.presenters[0]
     segments_dir = directory / "segments"
     segments_dir.mkdir(exist_ok=True)
     extension = "wav" if settings.tts_format == "pcm" else settings.tts_format
-    tracker.stage("tts", total=len(turns))
+    manifest_path = directory / "segments.json"
+    loaded_manifest = _load_json(manifest_path)
+    if loaded_manifest is not None and not isinstance(loaded_manifest, dict):
+        raise ValueError("segments.json inválido: era esperado um objeto JSON.")
+    manifest = loaded_manifest or {"version": 1, "segments": {}}
+    entries = manifest.get("segments")
+    if not isinstance(entries, dict):
+        raise ValueError("segments.json inválido: campo 'segments' ausente ou inválido.")
+
+    plans: list[dict] = []
+    completed = 0
+    for index, turn in enumerate(turns, 1):
+        if (not isinstance(turn, dict) or not isinstance(turn.get("text"), str)
+                or not turn["text"].strip()):
+            raise ValueError(f"Turno {index} inválido no roteiro.")
+        speaker = turn.get("speaker")
+        presenter = voices.get(speaker, default)
+        segment = segments_dir / f"{index:03d}_{presenter.speaker}.{extension}"
+        style = f", tom {presenter.style}" if presenter.style else ""
+        instructions = f"Fala natural de podcast em português brasileiro{style}."
+        fingerprint = _segment_fingerprint(
+            settings, turn["text"], presenter.voice, instructions,
+        )
+        entry = entries.get(segment.name)
+        entry_matches = isinstance(entry, dict) and entry.get("fingerprint") == fingerprint
+        legacy_segment = entry is None and trust_legacy_segments
+        reusable = _valid_segment(segment) and (entry_matches or legacy_segment)
+        if reusable:
+            completed += 1
+            entries[segment.name] = {
+                "fingerprint": fingerprint,
+                "bytes": segment.stat().st_size,
+            }
+        plans.append({
+            "index": index,
+            "turn": turn,
+            "presenter": presenter,
+            "segment": segment,
+            "instructions": instructions,
+            "fingerprint": fingerprint,
+            "reusable": reusable,
+        })
+
+    # Importa segmentos legados para o manifesto antes de qualquer nova chamada.
+    _save_json(manifest_path, manifest)
+    tracker.stage("tts", total=len(turns), current=completed)
 
     # Custo do TTS: a resposta binária não traz valor; usamos o delta de uso da
     # conta desde o início da etapa (aproximação, ver README). Falha na leitura
@@ -177,29 +304,40 @@ def _synthesize_turns(settings: Settings, directory: Path, turns: list[dict],
     usage_baseline = _account_usage()
     cost_baseline = tracker.cost_usd
 
-    paths: list[Path] = []
-    for index, turn in enumerate(turns, 1):
+    paths = [plan["segment"] for plan in plans]
+    for plan in plans:
         tracker.checkpoint()
-        segment = segments_dir / f"{index:03d}_{turn['speaker']}.{extension}"
-        paths.append(segment)
-        if segment.is_file() and segment.stat().st_size > 512:
-            tracker.advance(index)
+        index = plan["index"]
+        segment = plan["segment"]
+        if plan["reusable"]:
             continue
-        presenter = voices.get(turn["speaker"], default)
+        presenter = plan["presenter"]
         cost_label = f"US$ {tracker.cost_usd:.3f}"
         _progress_bar(index, len(turns), f"{presenter.speaker} ({presenter.voice}) {cost_label}")
-        style = f", tom {presenter.style}" if presenter.style else ""
-        audio = openrouter.text_to_speech(
-            settings, turn["text"], presenter.voice,
-            instructions=f"Fala natural de podcast em português brasileiro{style}.",
+        audio = _synthesize_with_retry(
+            settings, plan["turn"]["text"], presenter.voice,
+            plan["instructions"], index, tracker,
         )
         temporary = segment.with_suffix(segment.suffix + ".tmp")
-        if settings.tts_format == "pcm":
-            _wrap_pcm_as_wav(audio, temporary, settings.tts_sample_rate)
-        else:
-            temporary.write_bytes(audio)
-        temporary.rename(segment)
-        tracker.advance(index)
+        temporary.unlink(missing_ok=True)
+        try:
+            if settings.tts_format == "pcm":
+                _wrap_pcm_as_wav(audio, temporary, settings.tts_sample_rate)
+            else:
+                temporary.write_bytes(audio)
+            if not _valid_segment(temporary):
+                raise ValueError(f"O áudio da fala {index} ficou vazio ou inválido.")
+            temporary.replace(segment)
+        except Exception:
+            temporary.unlink(missing_ok=True)
+            raise
+        entries[segment.name] = {
+            "fingerprint": plan["fingerprint"],
+            "bytes": segment.stat().st_size,
+        }
+        _save_json(manifest_path, manifest)
+        completed += 1
+        tracker.advance(completed)
         if usage_baseline is not None and (usage_now := _account_usage()) is not None:
             tts_cost = max(0.0, usage_now - usage_baseline)
             tracker.add_cost(cost_baseline + tts_cost - tracker.cost_usd)

@@ -47,6 +47,9 @@ def _episode_summary(directory: Path) -> dict:
         "stage": status.get("stage", ""),
         "progress": status.get("progress", {}),
         "cost_usd": status.get("cost_usd", 0.0),
+        "retry": status.get("retry"),
+        "last_error": status.get("last_error"),
+        "resume_count": status.get("resume_count", 0),
         "updated_at": status.get("updated_at"),
         "mp3": str(directory / "episode.mp3") if (directory / "episode.mp3").is_file() else None,
     }

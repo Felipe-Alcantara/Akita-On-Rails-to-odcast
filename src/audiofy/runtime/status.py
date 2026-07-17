@@ -25,21 +25,28 @@ class GenerationTracker:
     STATUS_FILE = "status.json"
     ABORT_FILE = "ABORT"
 
-    def __init__(self, directory: Path, episode_id: str) -> None:
+    def __init__(self, directory: Path, episode_id: str, resume: bool = True) -> None:
         self.directory = directory
         self.directory.mkdir(parents=True, exist_ok=True)
+        previous = (self.load(directory) or {}) if resume else {}
+        now = time.time()
         self._data: dict = {
             "episode_id": episode_id,
             "pid": os.getpid(),
             "state": "rodando",
             "stage": "",
             "progress": {"current": 0, "total": 0},
-            "cost_usd": 0.0,
-            "started_at": time.time(),
-            "updated_at": time.time(),
+            "cost_usd": float(previous.get("cost_usd", 0.0) or 0.0),
+            "started_at": previous.get("started_at", now),
+            "run_started_at": now,
+            "updated_at": now,
+            "resume_count": int(previous.get("resume_count", 0) or 0) + bool(previous),
+            "retry": None,
+            "last_error": None,
         }
         # Um início novo limpa pedidos de abort antigos.
         (self.directory / self.ABORT_FILE).unlink(missing_ok=True)
+        self._flush()
 
     # ── Escrita ──────────────────────────────────────────────────────────
 
@@ -52,14 +59,37 @@ class GenerationTracker:
         )
         temporary.rename(target)
 
-    def stage(self, name: str, total: int = 0) -> None:
+    def stage(self, name: str, total: int = 0, current: int = 0) -> None:
         """Entra em uma nova etapa; `total` > 0 habilita progresso granular."""
+        if current < 0 or current > total:
+            raise ValueError("O progresso atual precisa ficar entre zero e o total.")
         self._data["stage"] = name
-        self._data["progress"] = {"current": 0, "total": total}
+        self._data["progress"] = {"current": current, "total": total}
+        self._data["retry"] = None
+        self._data["last_error"] = None
         self._flush()
 
     def advance(self, current: int) -> None:
         self._data["progress"]["current"] = current
+        self._data["retry"] = None
+        self._data["last_error"] = None
+        self._flush()
+
+    def retrying(self, *, segment: int, next_attempt: int, max_attempts: int,
+                 delay_seconds: float, error: str) -> None:
+        """Expõe uma espera de retry sem registrar o conteúdo enviado ao provedor."""
+        self._data["retry"] = {
+            "segment": segment,
+            "attempt": next_attempt,
+            "max_attempts": max_attempts,
+            "retry_at": time.time() + delay_seconds,
+        }
+        self._data["last_error"] = str(error)[:300]
+        self._flush()
+
+    def record_error(self, error: str) -> None:
+        self._data["retry"] = None
+        self._data["last_error"] = str(error)[:300]
         self._flush()
 
     def add_cost(self, usd: float) -> None:
@@ -67,9 +97,12 @@ class GenerationTracker:
             self._data["cost_usd"] = round(self._data["cost_usd"] + usd, 6)
             self._flush()
 
-    def finish(self, state: str) -> None:
+    def finish(self, state: str, error: str | None = None) -> None:
         """Estado final: 'concluido', 'abortado' ou 'falhou'."""
         self._data["state"] = state
+        self._data["retry"] = None
+        if error:
+            self._data["last_error"] = str(error)[:300]
         self._flush()
 
     # ── Abort cooperativo ────────────────────────────────────────────────

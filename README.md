@@ -88,8 +88,13 @@ Para automações e integrações, continuam disponíveis os comandos secundári
 `watch <id>`, `abort <id>`, `sync`, `status`, `setup`, `catalog`.
 
 Cada episódio fica em `data/episodes/<item>/` com artefatos auditáveis (`coverage.json`,
-`script.json`, `audit.json`, `status.json`, `segments/`, `episode.mp3`, `NOTES.md`).
-Falhou no meio? Rodar de novo retoma de onde parou sem regenerar (nem repagar) o que já existe.
+`script.json`, `audit.json`, `status.json`, `segments.json`, `segments/`, `episode.mp3`,
+`NOTES.md`). Falhas temporárias no TTS são retomadas automaticamente por fala, com backoff e
+jitter (cinco tentativas por padrão), sem refazer nem repagar segmentos concluídos. Se o limite
+terminar ou o processo for encerrado, rodar novamente continua do checkpoint; o manifesto vincula
+cada áudio ao texto, modelo, voz e formato usados. A política pode ser ajustada com
+`AUDIOFY_TTS_RETRY_ATTEMPTS`, `AUDIOFY_TTS_RETRY_BASE_SECONDS` e
+`AUDIOFY_TTS_RETRY_MAX_SECONDS`.
 
 ## 🖥️ App desktop (Electron)
 
@@ -198,7 +203,8 @@ TTS). O menu **Catálogo TTS/vozes** lista os modelos de áudio disponíveis no 
   estimativa pré-geração usa essa razão.
 
 O Status (CLI e app) sempre deixa explícito se algo está rodando em segundo plano gastando
-créditos — e o abort para a geração no próximo segmento, sem corromper artefatos.
+créditos, inclusive a fala e a tentativa durante uma retomada automática. O abort continua
+responsivo durante a espera e para a geração no próximo checkpoint, sem corromper artefatos.
 
 ## 🛡️ Segurança
 

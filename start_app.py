@@ -430,7 +430,8 @@ def do_generate(selector: str, force: bool = False, background: bool = False) ->
         _warn("Geração abortada a pedido. Artefatos preservados; gere de novo para retomar.")
     except Exception as error:  # noqa: BLE001 — o menu reporta e preserva artefatos parciais
         _fail(f"Falha: {error}")
-        print(f"{DIM}Artefatos parciais preservados; rode novamente para retomar.{RESET}")
+        print(f"{DIM}As tentativas automáticas terminaram. Os segmentos concluídos e o custo "
+              f"foram preservados; gere novamente para continuar do checkpoint.{RESET}")
         sys.exit(1)
 
 
@@ -456,6 +457,10 @@ def do_watch(selector: str) -> None:
                       f"{progress.get('current', 0)}/{total} "
             line = (f"{status['state']} | {status.get('stage', '')} {bar}"
                     f"| US$ {status.get('cost_usd', 0):.4f}")
+            retry = status.get("retry")
+            if retry:
+                line += (f" | retomando fala {retry['segment']} "
+                         f"({retry['attempt']}/{retry['max_attempts']})")
             print(f"\r\033[K  {line}", end="", flush=True)
             if status["state"] != "rodando":
                 print()

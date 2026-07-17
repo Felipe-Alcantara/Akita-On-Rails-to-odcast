@@ -137,5 +137,22 @@ class ForcedGenerationTest(unittest.TestCase):
         self.assertIn("--force", popen.call_args.args[0])
 
 
+class EpisodeSummaryTest(unittest.TestCase):
+    def test_status_expoe_retomada_sem_conteudo_da_fala(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            directory = Path(tmp)
+            tracker = bridge.GenerationTracker(directory, "episodio")
+            tracker.stage("tts", total=10, current=4)
+            tracker.retrying(
+                segment=5, next_attempt=2, max_attempts=5,
+                delay_seconds=2, error="falha temporária",
+            )
+            summary = bridge._episode_summary(directory)
+
+        self.assertEqual(summary["retry"]["segment"], 5)
+        self.assertEqual(summary["progress"], {"current": 4, "total": 10})
+        self.assertEqual(summary["last_error"], "falha temporária")
+
+
 if __name__ == "__main__":
     unittest.main()

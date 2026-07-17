@@ -286,3 +286,30 @@ smoke test real da TUI aprovados. O Electron 41 com sandbox/CSP foi reinspeciona
 **Risco que sobrou:** o bloqueio de URLs privadas impede importar páginas de intranet por design;
 o caminho seguro é colar o texto. O catálogo remoto e os flags das CLIs continuam integrações
 externas sujeitas a mudança, com erros controlados e valores atuais preservados quando possível.
+
+---
+
+## 2026-07-17 — Retomada automática e idempotente do TTS
+
+**O que mudou:** uma geração real parou na fala 45/92 porque o provedor TTS devolveu um `400`
+genérico depois de 44 WAVs válidos. A síntese agora classifica falhas retomáveis, repete somente a
+fala afetada com backoff exponencial e jitter (limite configurável), mantém o abort responsivo e
+mostra fala/tentativa no Status da CLI e do Electron. Segmentos são gravados por arquivo temporário
+e rename atômico; `segments.json` registra hash de texto, modelo, voz, instruções, formato e taxa de
+amostragem, evitando reutilizar áudio incompatível. Segmentos legados válidos são importados para o
+manifesto, portanto episódios parciais anteriores continuam do primeiro arquivo ausente.
+
+**Decisões:** erros permanentes, como autenticação inválida, falham imediatamente; falhas de rede,
+respostas vazias e o `Provider returned 400` genérico observado no TTS entram na política limitada.
+Uma nova execução preserva também o custo acumulado e registra `resume_count`, em vez de zerar o
+status. O limite evita loop infinito e troca silenciosa de modelo/voz continua proibida.
+
+**Validação:** 101 testes Python e 3 testes Node verdes. As regressões cobrem segmento já pronto +
+falha + sucesso, esgotamento de tentativas sem apagar checkpoint, erro permanente sem retry,
+classificação do `400`, backoff, manifesto e preservação de custo/status entre execuções. Ruff,
+compilação Python, sintaxe Electron, `git diff --check` e `npm audit` (zero vulnerabilidades)
+também foram aprovados.
+
+**Risco que sobrou:** um erro permanente devolvido incorretamente pelo provedor como `Provider
+returned 400` consumirá as tentativas configuradas antes de parar; chamadas rejeitadas não produzem
+áudio e nenhum segmento existente é sobrescrito.
