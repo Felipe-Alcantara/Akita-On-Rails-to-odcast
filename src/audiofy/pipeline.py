@@ -14,9 +14,11 @@ import subprocess
 import sys
 import time
 import wave
+from datetime import datetime
 from pathlib import Path
 
 from .config import EPISODES_DIR, Settings
+from .estimates import EpisodeMetrics, estimate_tts_cost
 from .prompts import AUDIT_PROMPT, COVERAGE_PROMPT, SYSTEM_PROMPT, script_prompt
 from .providers import openrouter
 from .runtime.retry import RetryPolicy
@@ -119,7 +121,19 @@ def _run(settings: Settings, item: ContentItem, directory: Path,
     tracker.stage("montagem")
     tracker.checkpoint()
     final_path = _assemble(directory, segments, item)
-    _write_show_notes(directory, item, tracker.cost_usd)
+    duration_seconds = _media_duration_seconds(final_path)
+    EpisodeMetrics(
+        source_words=item.words,
+        script_words=sum(len(turn.get("text", "").split()) for turn in turns),
+        duration_seconds=duration_seconds,
+        cost_usd=tracker.cost_usd,
+        cost_exact=tracker.cost_exact,
+        tts_model=settings.tts_model,
+        profile_name=settings.profile_name,
+        generated_at=datetime.now().astimezone().isoformat(timespec="seconds"),
+        cost_source=("generation_ids" if tracker.cost_exact else "model_pricing_fallback"),
+    ).write(directory)
+    _write_show_notes(directory, item, tracker.cost_usd, tracker.cost_exact)
     print(f"\n✔ Episódio gerado: {final_path}")
     print(f"💰 Custo total registrado: US$ {tracker.cost_usd:.4f}")
     return final_path
@@ -204,7 +218,7 @@ def _wait_for_retry(delay_seconds: float, tracker: GenerationTracker) -> None:
 
 def _synthesize_with_retry(settings: Settings, text: str, voice: str,
                            instructions: str, segment_number: int,
-                           tracker: GenerationTracker) -> bytes:
+                           tracker: GenerationTracker) -> openrouter.SpeechResult:
     policy = RetryPolicy(
         max_attempts=settings.tts_retry_attempts,
         base_delay_seconds=settings.tts_retry_base_seconds,
@@ -292,18 +306,6 @@ def _synthesize_turns(settings: Settings, directory: Path, turns: list[dict],
     _save_json(manifest_path, manifest)
     tracker.stage("tts", total=len(turns), current=completed)
 
-    # Custo do TTS: a resposta binária não traz valor; usamos o delta de uso da
-    # conta desde o início da etapa (aproximação, ver README). Falha na leitura
-    # do uso nunca pode derrubar a geração.
-    def _account_usage() -> float | None:
-        try:
-            return openrouter.account_usage_usd(settings)
-        except Exception:
-            return None
-
-    usage_baseline = _account_usage()
-    cost_baseline = tracker.cost_usd
-
     paths = [plan["segment"] for plan in plans]
     for plan in plans:
         tracker.checkpoint()
@@ -314,7 +316,7 @@ def _synthesize_turns(settings: Settings, directory: Path, turns: list[dict],
         presenter = plan["presenter"]
         cost_label = f"US$ {tracker.cost_usd:.3f}"
         _progress_bar(index, len(turns), f"{presenter.speaker} ({presenter.voice}) {cost_label}")
-        audio = _synthesize_with_retry(
+        speech = _synthesize_with_retry(
             settings, plan["turn"]["text"], presenter.voice,
             plan["instructions"], index, tracker,
         )
@@ -322,26 +324,57 @@ def _synthesize_turns(settings: Settings, directory: Path, turns: list[dict],
         temporary.unlink(missing_ok=True)
         try:
             if settings.tts_format == "pcm":
-                _wrap_pcm_as_wav(audio, temporary, settings.tts_sample_rate)
+                _wrap_pcm_as_wav(speech.audio, temporary, settings.tts_sample_rate)
             else:
-                temporary.write_bytes(audio)
+                temporary.write_bytes(speech.audio)
             if not _valid_segment(temporary):
                 raise ValueError(f"O áudio da fala {index} ficou vazio ou inválido.")
             temporary.replace(segment)
         except Exception:
             temporary.unlink(missing_ok=True)
             raise
+        duration_seconds = _media_duration_seconds(segment)
+        cost_exact = False
+        segment_cost = 0.0
+        if speech.generation_id:
+            try:
+                segment_cost = openrouter.generation_cost_usd(
+                    settings, speech.generation_id
+                )
+                cost_exact = True
+            except (openrouter.OpenRouterError, RuntimeError, ValueError):
+                pass
+        if not cost_exact:
+            segment_cost = estimate_tts_cost(
+                settings, plan["turn"]["text"], plan["instructions"], duration_seconds
+            )
+        tracker.add_cost(segment_cost, exact=cost_exact)
         entries[segment.name] = {
             "fingerprint": plan["fingerprint"],
             "bytes": segment.stat().st_size,
+            "generation_id": speech.generation_id,
+            "cost_usd": round(segment_cost, 8),
+            "cost_exact": cost_exact,
         }
         _save_json(manifest_path, manifest)
         completed += 1
         tracker.advance(completed)
-        if usage_baseline is not None and (usage_now := _account_usage()) is not None:
-            tts_cost = max(0.0, usage_now - usage_baseline)
-            tracker.add_cost(cost_baseline + tts_cost - tracker.cost_usd)
     return paths
+
+
+def _media_duration_seconds(path: Path) -> float:
+    """Obtém duração real de WAV/MP3 usando as dependências do pipeline."""
+    if path.suffix.lower() == ".wav":
+        with wave.open(str(path), "rb") as audio:
+            return audio.getnframes() / audio.getframerate()
+    result = subprocess.run(
+        [
+            "ffprobe", "-v", "error", "-show_entries", "format=duration",
+            "-of", "default=noprint_wrappers=1:nokey=1", str(path),
+        ],
+        check=True, capture_output=True, text=True,
+    )
+    return float(result.stdout.strip())
 
 
 def _assemble(directory: Path, segments: list[Path], item: ContentItem) -> Path:
@@ -350,27 +383,36 @@ def _assemble(directory: Path, segments: list[Path], item: ContentItem) -> Path:
         "".join(f"file '{p.resolve()}'\n" for p in segments), encoding="utf-8"
     )
     final_path = directory / "episode.mp3"
-    subprocess.run(
-        [
-            "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat_list),
-            "-af", "loudnorm=I=-16:TP=-1.5:LRA=11",
-            "-metadata", f"title={item.title}",
-            "-metadata", "artist=Audiofy Content AI",
-            "-metadata", f"comment={item.attribution}",
-            "-codec:a", "libmp3lame", "-b:a", "128k",
-            str(final_path),
-        ],
-        check=True, capture_output=True, text=True,
-    )
+    temporary = directory / "episode.tmp.mp3"
+    temporary.unlink(missing_ok=True)
+    try:
+        subprocess.run(
+            [
+                "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat_list),
+                "-af", "loudnorm=I=-16:TP=-1.5:LRA=11",
+                "-metadata", f"title={item.title}",
+                "-metadata", "artist=Audiofy Content AI",
+                "-metadata", f"comment={item.attribution}",
+                "-codec:a", "libmp3lame", "-b:a", "128k",
+                str(temporary),
+            ],
+            check=True, capture_output=True, text=True,
+        )
+        temporary.replace(final_path)
+    except Exception:
+        temporary.unlink(missing_ok=True)
+        raise
     return final_path
 
 
-def _write_show_notes(directory: Path, item: ContentItem, cost_usd: float) -> None:
+def _write_show_notes(directory: Path, item: ContentItem, cost_usd: float,
+                      cost_exact: bool) -> None:
     (directory / "NOTES.md").write_text(
         f"# {item.title}\n\n"
         f"{item.attribution}\n\n"
         f"Adaptação em áudio gerada com inteligência artificial; revise `audit.json` antes de\n"
         f"publicar. Fonte original: {item.url}\n\n"
-        f"Custo de geração registrado: US$ {cost_usd:.4f}\n",
+        f"Custo de geração registrado: US$ {cost_usd:.4f} "
+        f"({'exato por geração' if cost_exact else 'aproximado'})\n",
         encoding="utf-8",
     )

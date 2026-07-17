@@ -10,9 +10,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
 from audiofy.providers.openrouter import (  # noqa: E402
     OpenRouterError,
+    SpeechResult,
     _request,
     check_api_key,
     current_key_limit,
+    generation_cost_usd,
+    text_to_speech,
 )
 
 
@@ -92,6 +95,40 @@ class OpenRouterKeyLimitTest(unittest.TestCase):
 
         self.assertFalse(valid)
         self.assertIn("limite esgotado", detail)
+
+
+class OpenRouterSpeechAccountingTest(unittest.TestCase):
+    def setUp(self):
+        self.settings = SimpleNamespace(
+            require_api_key=lambda: "chave-de-teste", tts_model="vendor/tts",
+            tts_format="pcm",
+        )
+
+    @patch("audiofy.providers.openrouter._request")
+    def test_tts_preserva_identificador_da_geracao(self, request):
+        request.return_value = Mock(
+            content=b"x" * 600, text="", headers={
+                "Content-Type": "audio/pcm", "X-Generation-Id": "gen-123",
+            },
+        )
+
+        result = text_to_speech(self.settings, "olá", "Kore")
+
+        self.assertEqual(result, SpeechResult(audio=b"x" * 600, generation_id="gen-123"))
+
+    @patch("audiofy.providers.openrouter._request")
+    def test_custo_da_geracao_vem_do_total_cost(self, request):
+        request.return_value.json.return_value = {"data": {"total_cost": 0.012345}}
+
+        self.assertEqual(generation_cost_usd(self.settings, "gen-123"), 0.012345)
+        request.assert_called_once_with(self.settings, "GET", "/generation?id=gen-123")
+
+    @patch("audiofy.providers.openrouter._request")
+    def test_custo_invalido_da_geracao_e_rejeitado(self, request):
+        request.return_value.json.return_value = {"data": {"total_cost": "nan"}}
+
+        with self.assertRaisesRegex(OpenRouterError, "custo inválido"):
+            generation_cost_usd(self.settings, "gen-123")
 
 if __name__ == "__main__":
     unittest.main()

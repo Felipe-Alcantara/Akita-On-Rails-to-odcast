@@ -37,6 +37,7 @@ test("falha rápida permanece visível com checkpoint e ação recomendada", () 
   assert.match(feedback.label, /66\/92/);
   assert.match(feedback.label, /execução anterior/i);
   assert.match(feedback.label, /progresso foi preservado/i);
+  assert.match(feedback.cost, /aproximado/i);
 });
 
 test("retoma limite antigo somente quando a chave atual tem saldo", () => {
@@ -59,11 +60,13 @@ test("estado de inicialização aparece antes do primeiro segmento", () => {
     stage: "iniciando",
     progress: { current: 66, total: 92 },
     cost_usd: 0.8,
+    cost_exact: true,
   });
 
   assert.equal(feedback.visible, true);
   assert.equal(feedback.tone, "active");
   assert.match(feedback.label, /iniciando/i);
+  assert.doesNotMatch(feedback.cost, /aproximado/i);
 });
 
 test("helper e renderer compartilham a página sem colisão de escopo", () => {

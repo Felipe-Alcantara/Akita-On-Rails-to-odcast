@@ -1,14 +1,15 @@
 """Adaptador OpenRouter: chat JSON com custo por chamada, TTS, catálogo e uso da conta.
 
 Custo em tempo real:
-- chat: o payload pede `usage.include`, e a resposta traz `usage.cost` exato em US$;
-- TTS: a resposta é binária e não carrega custo; o pipeline acompanha pelo delta de
-  `total_usage` da conta (endpoint /credits), uma aproximação honesta documentada no README.
+- chat: a resposta traz `usage.cost` exato em US$;
+- TTS: o cabeçalho `X-Generation-Id` liga o áudio binário ao custo individual consultado
+  em `/generation`, sem misturar consumo de outras chaves da conta.
 """
 
 from __future__ import annotations
 
 import json
+import math
 import re
 import time
 from dataclasses import dataclass
@@ -58,6 +59,12 @@ class ChatResult:
     cost_usd: float
     prompt_tokens: int
     completion_tokens: int
+
+
+@dataclass(frozen=True)
+class SpeechResult:
+    audio: bytes
+    generation_id: str | None
 
 
 def _request(settings: Settings, method: str, endpoint: str,
@@ -144,8 +151,9 @@ def chat_json(settings: Settings, model: str, system: str, user: str) -> ChatRes
     )
 
 
-def text_to_speech(settings: Settings, text: str, voice: str, instructions: str = "") -> bytes:
-    """Sintetiza um turno de fala e retorna os bytes de áudio."""
+def text_to_speech(settings: Settings, text: str, voice: str,
+                   instructions: str = "") -> SpeechResult:
+    """Sintetiza uma fala e preserva o ID necessário para auditar seu custo."""
     payload: dict[str, Any] = {
         "model": settings.tts_model,
         "input": text,
@@ -162,7 +170,38 @@ def text_to_speech(settings: Settings, text: str, voice: str, instructions: str 
         )
     if len(response.content) < 512:
         raise OpenRouterError("TTS retornou resposta vazia ou curta demais.", retryable=True)
-    return response.content
+    return SpeechResult(
+        audio=response.content,
+        generation_id=response.headers.get("X-Generation-Id") or None,
+    )
+
+
+def generation_cost_usd(settings: Settings, generation_id: str) -> float:
+    """Retorna o custo faturado de uma geração individual."""
+    if not re.fullmatch(r"[A-Za-z0-9_-]+", generation_id or ""):
+        raise ValueError("generation_id inválido")
+    endpoint = f"/generation?id={generation_id}"
+    last_error: OpenRouterError | None = None
+    # O registro pode aparecer alguns instantes depois do stream binário do TTS.
+    for attempt in range(4):
+        try:
+            body = _request(settings, "GET", endpoint).json()
+            data = body.get("data") or {}
+            if not isinstance(data, dict):
+                raise OpenRouterError("A geração retornou metadados inválidos.")
+            value = data.get("total_cost", data.get("usage"))
+            if value is None:
+                raise OpenRouterError("A geração não informou custo.")
+            cost = float(value)
+            if not math.isfinite(cost) or cost < 0:
+                raise OpenRouterError("A geração informou custo inválido.")
+            return cost
+        except OpenRouterError as error:
+            last_error = error
+            if error.status_code != 404 or attempt == 3:
+                raise
+            time.sleep(0.5 * (attempt + 1))
+    raise last_error or OpenRouterError("Custo da geração indisponível.")
 
 
 def account_usage_usd(settings: Settings) -> float:

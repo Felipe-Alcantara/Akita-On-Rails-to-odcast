@@ -31,13 +31,15 @@ class GenerationTracker:
         launch_status = self.load(directory) or {}
         previous = launch_status if resume else {}
         now = time.time()
+        previous_cost = float(previous.get("cost_usd", 0.0) or 0.0)
         self._data: dict = {
             "episode_id": episode_id,
             "pid": os.getpid(),
             "state": "rodando",
             "stage": "",
             "progress": {"current": 0, "total": 0},
-            "cost_usd": float(previous.get("cost_usd", 0.0) or 0.0),
+            "cost_usd": previous_cost,
+            "cost_exact": bool(previous.get("cost_exact", previous_cost == 0)),
             "started_at": previous.get("started_at", now),
             "run_started_at": now,
             "updated_at": now,
@@ -86,6 +88,9 @@ class GenerationTracker:
                 "total": int(progress.get("total", 0) or 0),
             },
             "cost_usd": float(previous.get("cost_usd", 0.0) or 0.0),
+            "cost_exact": bool(previous.get(
+                "cost_exact", not float(previous.get("cost_usd", 0.0) or 0.0)
+            )),
             "started_at": previous.get("started_at", now),
             "run_started_at": now,
             "updated_at": now,
@@ -140,9 +145,15 @@ class GenerationTracker:
         self._data["last_error"] = str(error)[:300]
         self._flush()
 
-    def add_cost(self, usd: float) -> None:
+    def add_cost(self, usd: float, *, exact: bool = True) -> None:
+        changed = False
         if usd:
             self._data["cost_usd"] = round(self._data["cost_usd"] + usd, 6)
+            changed = True
+        if not exact and self._data["cost_exact"]:
+            self._data["cost_exact"] = False
+            changed = True
+        if changed:
             self._flush()
 
     def finish(self, state: str, error: str | None = None) -> None:
@@ -172,6 +183,10 @@ class GenerationTracker:
     @property
     def cost_usd(self) -> float:
         return self._data["cost_usd"]
+
+    @property
+    def cost_exact(self) -> bool:
+        return bool(self._data["cost_exact"])
 
     @staticmethod
     def load(directory: Path) -> dict | None:

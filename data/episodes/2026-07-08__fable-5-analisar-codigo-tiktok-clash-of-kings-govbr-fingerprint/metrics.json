@@ -1,0 +1,11 @@
+{
+  "source_words": 2155,
+  "script_words": 1860,
+  "duration_seconds": 781.704,
+  "cost_usd": 0.624287,
+  "cost_exact": true,
+  "tts_model": "google/gemini-3.1-flash-tts-preview",
+  "profile_name": "padrao",
+  "generated_at": "2026-07-16T16:36:09-03:00",
+  "cost_source": "key_daily_total"
+}

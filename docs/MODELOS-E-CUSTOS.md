@@ -2,13 +2,14 @@
 
 > Preços consultados **ao vivo no catálogo do OpenRouter em 17 de julho de 2026**
 > (`/models?output_modalities=speech`). Preços mudam; o menu "Perfis & modelos" consulta o
-> catálogo atual com cache de 24h. A referência de consumo usada nas estimativas é o episódio
-> piloto real: **13 min ≈ 2.200 palavras ≈ 12.500 caracteres de roteiro**.
+> catálogo atual com cache de 24h. As estimativas do app são recalculadas com média ponderada e
+> faixa dos `metrics.json` do mesmo TTS e perfil. O piloto é somente o fallback inicial:
+> **13min01s, 2.155 palavras de fonte, 1.860 palavras de roteiro e US$ 0,624287**.
 
 ## 🔊 Modelos TTS disponíveis (OpenRouter)
 
-A maioria dos TTS cobra por **token de texto de entrada**; o Gemini cobra por **token de áudio
-de saída** (~25 tokens/segundo). Estimativa de voz para um episódio de 13 min:
+A maioria dos TTS cobra por **token ou caractere de entrada**; o Gemini cobra por **token de áudio
+de saída** (25 tokens/segundo na tabela oficial). Estimativa de voz para um episódio de 13 min:
 
 | Modelo | Preço | ~Custo/episódio (voz) | Observações |
 |---|---|---:|---|

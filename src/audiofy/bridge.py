@@ -40,6 +40,7 @@ def _episode_dir(item_id: str) -> Path:
 
 def _episode_summary(directory: Path) -> dict:
     status = GenerationTracker.load(directory) or {}
+    completed_mp3 = directory / "episode.mp3"
     return {
         "dir": str(directory),
         "episode_id": status.get("episode_id", directory.name.replace("__", "/")),
@@ -47,11 +48,14 @@ def _episode_summary(directory: Path) -> dict:
         "stage": status.get("stage", ""),
         "progress": status.get("progress", {}),
         "cost_usd": status.get("cost_usd", 0.0),
+        "cost_exact": status.get("cost_exact", False),
         "retry": status.get("retry"),
         "last_error": status.get("last_error"),
         "resume_count": status.get("resume_count", 0),
         "updated_at": status.get("updated_at"),
-        "mp3": str(directory / "episode.mp3") if (directory / "episode.mp3").is_file() else None,
+        "mp3": (str(completed_mp3)
+                if status.get("state") == "concluido" and completed_mp3.is_file()
+                else None),
     }
 
 
@@ -71,10 +75,18 @@ def _cmd_search(source_key: str, query: str) -> dict:
 
 
 def _cmd_item(source_key: str, item_id: str) -> dict:
+    from .estimates import estimate_episode, read_episode_metrics
     item = get_source(source_key).get_item(item_id)
+    settings = Settings()
+    estimate = estimate_episode(
+        item.words, settings.tts_model, profile_name=settings.profile_name
+    )
     payload = asdict(item)
     payload.pop("text")  # o texto integral não interessa à interface
-    payload["estimated_cost_usd"] = round(0.60 * item.words / 2200, 2)  # razão do piloto real
+    payload["estimated_cost_usd"] = round(estimate.cost_usd, 2)
+    payload["estimate"] = asdict(estimate)
+    metrics = read_episode_metrics(_episode_dir(item_id))
+    payload["actual"] = asdict(metrics) if metrics else None
     return payload
 
 

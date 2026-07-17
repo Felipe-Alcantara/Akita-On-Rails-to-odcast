@@ -96,7 +96,11 @@ async function runAction(action, button) {
   } else if (action.tipo === "gerar") {
     const source = action.fonte || currentSource;
     const detail = await bridge(["item", source, action.item_id]);
-    const estimate = detail.ok ? ` (~US$ ${detail.estimated_cost_usd.toFixed(2)})` : "";
+    const estimate = detail.ok
+      ? ` (~US$ ${detail.estimated_cost_usd.toFixed(2)}; faixa ` +
+        `US$ ${detail.estimate.cost_min_usd.toFixed(2)}–` +
+        `${detail.estimate.cost_max_usd.toFixed(2)})`
+      : "";
     if (!confirm(`Gerar episódio de "${action.item_id}"${estimate}? Consome créditos.`)) {
       button.disabled = false;
       return;
@@ -233,9 +237,20 @@ async function selectItem(item, row) {
   $("detail-title").textContent = detail.title;
   $("detail-meta").textContent =
     `${detail.published_at} · ~${detail.words} palavras · ${detail.url || "texto local"}`;
-  $("detail-estimate").textContent =
-    `Custo estimado: ~US$ ${detail.estimated_cost_usd.toFixed(2)} ` +
-    `(razão real medida: US$ 0,60 ≈ 13 min)`;
+  if (detail.actual) {
+    const accuracy = detail.actual.cost_exact ? "confirmado pelo provedor" : "aproximado";
+    $("detail-estimate").textContent =
+      `Realizado: US$ ${detail.actual.cost_usd.toFixed(4)} (${accuracy}) · ` +
+      `${(detail.actual.duration_seconds / 60).toFixed(1)} min`;
+  } else {
+    const estimate = detail.estimate;
+    const basis = estimate.sample_count
+      ? `${estimate.sample_count} episódio(s) medido(s)` : "piloto medido";
+    $("detail-estimate").textContent =
+      `Estimativa: ~US$ ${estimate.cost_usd.toFixed(2)} ` +
+      `(faixa US$ ${estimate.cost_min_usd.toFixed(2)}–${estimate.cost_max_usd.toFixed(2)}) · ` +
+      `~${estimate.duration_minutes.toFixed(1)} min · ${basis}`;
+  }
   refreshStatus();
 }
 
@@ -353,6 +368,8 @@ $("btn-generate").onclick = async () => {
   const confirmed = confirm(
     `Gerar episódio de "${selectedItem.title}"?\n\n` +
     `Custo estimado: ~US$ ${selectedItem.estimated_cost_usd.toFixed(2)} ` +
+    `(faixa US$ ${selectedItem.estimate.cost_min_usd.toFixed(2)}–` +
+    `${selectedItem.estimate.cost_max_usd.toFixed(2)}) ` +
     `(consome créditos do OpenRouter).` +
     (force ? "\n\nA cobertura, o roteiro e a auditoria serão regenerados." : "")
   );
@@ -408,7 +425,8 @@ async function refreshStatus() {
         const retry = e.retry
           ? ` · retomando fala ${e.retry.segment} (${e.retry.attempt}/${e.retry.max_attempts})`
           : "";
-        return `${e.episode_id} (US$ ${e.cost_usd.toFixed(3)}${retry})`;
+        const accuracy = e.cost_exact ? "" : " aprox.";
+        return `${e.episode_id} (US$ ${e.cost_usd.toFixed(3)}${accuracy}${retry})`;
       }).join(", ");
     banner.classList.remove("hidden");
   } else {
@@ -453,7 +471,9 @@ function renderEpisodes(episodes) {
   if (!episodes.length) list.appendChild(makeElement("li", "muted", "Nenhum episódio ainda."));
   for (const episode of episodes) {
     const row = document.createElement("li");
-    const cost = episode.cost_usd ? ` · US$ ${episode.cost_usd.toFixed(4)}` : "";
+    const accuracy = episode.cost_exact ? "" : " aprox.";
+    const cost = episode.cost_usd
+      ? ` · US$ ${episode.cost_usd.toFixed(4)}${accuracy}` : "";
     const progress = episode.state === "rodando" && episode.progress.total
       ? ` · ${episode.progress.current}/${episode.progress.total}` : "";
     const retry = episode.retry

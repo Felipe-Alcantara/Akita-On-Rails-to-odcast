@@ -31,7 +31,8 @@ function generationFeedback(status) {
   const total = Number(progress.total) || 0;
   const percent = total ? Math.max(0, Math.min(100, Math.round(100 * current / total))) : 0;
   const count = total ? `${current}/${total} (${percent}%)` : "preparando";
-  const cost = `💰 US$ ${(Number(status.cost_usd) || 0).toFixed(4)} até agora`;
+  const accuracy = status.cost_exact ? "" : " (aproximado)";
+  const cost = `💰 US$ ${(Number(status.cost_usd) || 0).toFixed(4)}${accuracy} até agora`;
 
   if (status.state === "rodando") {
     const retry = status.retry

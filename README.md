@@ -202,13 +202,16 @@ TTS). O menu **Catálogo TTS/vozes** lista os modelos de áudio disponíveis no 
 
 - **Etapas de texto** (matriz, roteiro, auditoria): custo **exato** por chamada, retornado pela
   própria API (`usage.cost`).
-- **TTS**: a resposta é binária e não carrega custo; o pipeline acompanha pelo **delta de uso da
-  conta** durante a etapa — uma aproximação honesta (se outra coisa usar a mesma conta ao mesmo
-  tempo, o valor mistura os usos).
+- **TTS**: a resposta binária traz `X-Generation-Id`; o pipeline consulta `/generation` e soma o
+  **custo faturado de cada fala**, sem misturar o uso das outras chaves. Se o metadado remoto não
+  estiver disponível, usa a tabela do modelo e marca explicitamente o total como aproximado.
 - O custo aparece na barra de progresso, no `status.json`, no app desktop, no Status do menu e
   fica registrado no `NOTES.md` do episódio.
-- **Referência real medida**: US$ 0,60 ≈ 13 minutos ≈ 2.200 palavras (episódio piloto). A
-  estimativa pré-geração usa essa razão.
+- **Estimativa adaptativa**: cada conclusão grava palavras da fonte/roteiro, duração, modelo,
+  perfil, custo e precisão em `metrics.json`. A previsão usa totais ponderados dos episódios do
+  mesmo TTS e perfil, e mostra valor central, faixa observada, duração e tamanho da amostra.
+  Sem histórico, o piloto real (2.155 palavras, 13min01s, US$ 0,624287) é apenas o fallback
+  inicial. Data da geração e origem da medição também ficam preservadas.
 
 O Status (CLI e app) sempre deixa explícito se algo está rodando em segundo plano gastando
 créditos, inclusive a fala e a tentativa durante uma retomada automática. O abort continua
@@ -282,8 +285,8 @@ Audiofy-Content-AI/
   episódios é humana (`audit.json` + ouvir).
 - A auditoria do roteiro reporta pendências, mas não bloqueia a geração — a decisão de publicar
   é de quem revisa.
-- O custo do TTS é aproximado pelo uso da conta (ver acima); o valor exato consta no painel do
-  OpenRouter.
+- Gerações antigas, sem `X-Generation-Id`, permanecem identificadas como aproximadas; novas falas
+  guardam ID e custo individual no manifesto para auditoria posterior.
 - Nomes de modelos e vozes mudam com o catálogo do OpenRouter; tudo é configurável via `.env`.
 - A importação por URL não acessa intranets ou serviços locais; nesses casos, cole o texto
   manualmente para preservar a fronteira de segurança.

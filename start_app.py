@@ -388,14 +388,22 @@ def do_generate(selector: str, force: bool = False, background: bool = False) ->
         _fail(str(error))
         return
 
-    estimated = 0.60 * item.words / 2200  # razão medida no episódio piloto
+    from audiofy.estimates import estimate_episode
+    estimate = estimate_episode(
+        item.words, settings.tts_model, profile_name=settings.profile_name
+    )
     presenters = ", ".join(f"{p.speaker} ({p.voice})" for p in settings.presenters)
     print(f"\n{BOLD}Item:{RESET}     {item.title}")
     print(f"{BOLD}URL:{RESET}      {item.url}")
     print(f"{BOLD}Tamanho:{RESET}  ~{item.words} palavras de prosa")
     print(f"{BOLD}Vozes:{RESET}    {presenters}")
-    print(f"{YELLOW}Custo estimado: ~US$ {estimated:.2f} "
-          f"(razão real medida: US$ 0,60 ≈ 13 min ≈ 2200 palavras).{RESET}")
+    basis = (f"{estimate.sample_count} episódio(s) medido(s)"
+             if estimate.sample_count else "piloto medido")
+    print(
+        f"{YELLOW}Estimativa: ~US$ {estimate.cost_usd:.2f} "
+        f"(faixa US$ {estimate.cost_min_usd:.2f}–{estimate.cost_max_usd:.2f}) · "
+        f"~{estimate.duration_minutes:.1f} min · {basis}.{RESET}"
+    )
     if not _tui().confirm("Continuar e consumir créditos?", default=False):
         print("Cancelado.")
         return

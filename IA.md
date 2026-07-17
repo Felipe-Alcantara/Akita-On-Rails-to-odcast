@@ -87,9 +87,9 @@ geração de podcasts a partir de conteúdo. Reposicionamento completo:
 - **1..N apresentadores** por configuração (`AUDIOFY_PRESENTERS="nome:Voz[:tom], …"`), com
   prompts montados dinamicamente; catálogo de modelos TTS (API) e das 30 vozes Gemini no menu.
 - **Custo em tempo real** (feature obrigatória definida pelo usuário): etapas de texto usam
-  `usage.cost` exato da API; TTS usa delta de `total_usage` da conta (aproximação documentada,
-  no espírito do OpenRouter-Monitorator). Custo aparece na barra, no `status.json`, no Status
-  e no `NOTES.md`.
+  `usage.cost` exato da API; cada TTS preserva `X-Generation-Id` e consulta seu `total_cost`
+  individual, sem misturar as outras chaves da conta. Custo e precisão aparecem na barra, no
+  `status.json`, no manifesto, no Status e no `NOTES.md`.
 - **Transparência de gasto em segundo plano**: `status.json` por episódio, geração em 2º plano
   via bridge, `watch` ao vivo, abort cooperativo (arquivo `ABORT`, para no próximo segmento) e
   Status/menu/app sempre alertando quando algo está consumindo créditos.
@@ -97,9 +97,9 @@ geração de podcasts a partir de conteúdo. Reposicionamento completo:
 - **App desktop Electron** (`electron/`): lista/busca, estimativa antes de gerar, banner de
   gasto ativo, progresso+custo ao vivo, abortar, ouvir episódio. Lógica 100% no Python.
 
-**Custo real medido (episódio piloto do TikTok):** **US$ 0,60 ≈ 13 minutos ≈ 2.200 palavras**.
-A estimativa pré-geração da CLI e do app usa essa razão. Feedback do usuário sobre o áudio:
-qualidade muito boa.
+**Piloto medido:** **US$ 0,624287, 13min01s, 2.155 palavras de fonte e 1.860 de roteiro**.
+A estimativa da CLI e do app usa média ponderada e faixa do mesmo TTS e perfil; o piloto
+é apenas fallback quando ainda não há histórico. Feedback do usuário: qualidade muito boa.
 
 **Validação:** 17 testes no repositório principal (presenters, status/abort, sources) +
 17 no akita-articles, todos verdes; CLI e bridge smoke-testados contra a fonte real
@@ -387,3 +387,35 @@ de lint, compilação, sintaxe Electron e integridade do diff também passaram.
 
 **Risco que sobrou:** a recuperação automática depende de o conteúdo afetado permanecer selecionado
 no Electron; episódios falhos não são retomados silenciosamente apenas por abrir o aplicativo.
+
+---
+
+## 2026-07-17 — Custos por geração e médias ponderadas
+
+**O que mudou:** o custo do TTS deixou de usar o delta de `/credits`, que é global à conta e
+misturava potencialmente nove chaves do mesmo workspace. Cada resposta de áudio agora preserva o
+`X-Generation-Id`; o backend consulta `/generation`, soma `total_cost` e registra ID, valor e
+precisão junto ao segmento. Metadado indisponível usa somente a tabela oficial do modelo como
+fallback e marca o total como aproximado.
+
+**Médias:** cada episódio concluído grava `metrics.json` com palavras da fonte e do roteiro,
+duração real, custo, precisão, perfil e TTS. A estimativa usa totais ponderados de episódios do
+mesmo modelo e perfil, e expõe valor central, mínimo/máximo observado, duração, palavras por
+minuto e tamanho da amostra. Data da geração e origem do custo ficam preservadas. Os dois
+episódios locais resultam em 149,71 palavras/minuto quando analisados em conjunto; o piloto é
+fallback somente quando ainda não existe histórico do perfil.
+
+**Decisões:** o Fable, gerado integralmente em 16/07, foi reconciliado em US$ 0,624287 pelo
+total diário confirmado da chave. O episódio de 17/07 trocou de chave na fala 67: US$ 0,854023
+foram registrados antes da troca e US$ 0,337249 na retomada, total aproximado de US$ 1,191272.
+A montagem passou a escrever `episode.tmp.mp3` e fazer rename atômico; a bridge só
+expõe o player quando o estado é `concluido`, impedindo a duração parcial de 15:17 observada.
+
+**Validação:** 122 testes Python e 11 testes Node verdes. As regressões cobrem média ponderada,
+faixa, fallback oficial, captura de ID/custo, isolamento da conta global, precisão persistida,
+montagem atômica e bloqueio do player parcial. Ruff, compilação, sintaxe Electron,
+`git diff --check` e `npm audit` também passaram.
+
+**Risco que sobrou:** o custo do Fable foi confirmado pelo total diário da chave, mas o episódio
+que trocou de chave permanece aproximado. Cada perfil ainda tem uma única amostra; a faixa ganhará
+confiabilidade conforme novas gerações, agora contabilizadas individualmente, forem concluídas.

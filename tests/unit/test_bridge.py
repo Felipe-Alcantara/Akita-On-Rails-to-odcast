@@ -10,7 +10,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
 from audiofy import bridge  # noqa: E402
 from audiofy.catalog import Model  # noqa: E402
+from audiofy.estimates import EpisodeEstimate  # noqa: E402
 from audiofy.profiles import profile_from_payload  # noqa: E402
+from audiofy.sources.base import ContentItem  # noqa: E402
 
 
 class ProfilePayloadTest(unittest.TestCase):
@@ -171,6 +173,47 @@ class EpisodeSummaryTest(unittest.TestCase):
         self.assertEqual(summary["retry"]["segment"], 5)
         self.assertEqual(summary["progress"], {"current": 4, "total": 10})
         self.assertEqual(summary["last_error"], "falha temporária")
+
+    def test_mp3_parcial_nao_e_exposto_enquanto_montagem_esta_rodando(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            directory = Path(tmp)
+            tracker = bridge.GenerationTracker(directory, "episodio")
+            tracker.stage("montagem")
+            (directory / "episode.mp3").write_bytes(b"parcial")
+
+            running = bridge._episode_summary(directory)
+            tracker.finish("concluido")
+            completed = bridge._episode_summary(directory)
+
+        self.assertIsNone(running["mp3"])
+        self.assertTrue(completed["mp3"].endswith("episode.mp3"))
+
+
+class ItemEstimateTest(unittest.TestCase):
+    @patch("audiofy.estimates.read_episode_metrics", return_value=None)
+    @patch("audiofy.estimates.estimate_episode")
+    @patch("audiofy.bridge.Settings")
+    @patch("audiofy.bridge.get_source")
+    def test_item_expoe_media_faixa_duracao_e_amostra(
+        self, get_source, settings, estimate_episode, _metrics
+    ):
+        get_source.return_value.get_item.return_value = ContentItem(
+            item_id="item", title="Título", url="", published_at="2026-01-01",
+            words=3_000, attribution="Fonte", text="conteúdo",
+        )
+        settings.return_value.tts_model = "vendor/tts"
+        settings.return_value.profile_name = "economico"
+        estimate_episode.return_value = EpisodeEstimate(
+            duration_minutes=20, duration_min_minutes=18, duration_max_minutes=22,
+            speaking_rate_wpm=150, cost_usd=1.1, cost_min_usd=0.8,
+            cost_max_usd=1.3, sample_count=2,
+        )
+
+        result = bridge._cmd_item("custom", "item")
+
+        self.assertEqual(result["estimated_cost_usd"], 1.1)
+        self.assertEqual(result["estimate"]["sample_count"], 2)
+        self.assertEqual(result["estimate"]["duration_minutes"], 20)
 
 
 if __name__ == "__main__":

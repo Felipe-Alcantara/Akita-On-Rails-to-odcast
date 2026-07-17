@@ -39,6 +39,15 @@ class GenerationTrackerTest(unittest.TestCase):
         data = self._read()
         self.assertEqual(data["progress"], {"current": 3, "total": 10})
         self.assertAlmostEqual(data["cost_usd"], 0.07)
+        self.assertTrue(data["cost_exact"])
+
+    def test_fallback_de_preco_marca_total_como_aproximado(self):
+        self.tracker.add_cost(0.03, exact=False)
+
+        data = self._read()
+
+        self.assertEqual(data["cost_usd"], 0.03)
+        self.assertFalse(data["cost_exact"])
 
     def test_finalizacao(self):
         self.tracker.stage("montagem")
