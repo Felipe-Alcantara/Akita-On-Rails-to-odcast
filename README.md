@@ -72,6 +72,7 @@ O menu interativo é a porta de entrada única:
 | Catálogo TTS/vozes | modelos de áudio do OpenRouter e vozes do Gemini |
 | Status | mostra **explicitamente** o que está consumindo créditos |
 | Abrir app desktop | interface Electron |
+| Exportar p/ NotebookLM | episódio de **custo zero** dentro da assinatura Google |
 
 Atalhos de linha de comando: `list`, `search <termos>`, `generate <n|id> [--bg]`,
 `watch <id>`, `abort <id>`, `sync`, `status`, `setup`, `catalog`.
@@ -115,6 +116,27 @@ Padrões portados do [Openia](https://github.com/Felipe-Alcantara/Openia):
   variáveis `AUDIOFY_*` continuam tendo prioridade sobre o perfil ativo.
 - **Escolha de modelo em dois passos** — empresa → modelo, com preço por milhão de tokens em
   cada linha, vindo da API ao vivo com cache local de 24h.
+
+### 💳 Modo assinatura (texto a custo zero)
+
+As etapas de **texto** (matriz de cobertura, roteiro, auditoria) podem rodar em uma CLI de IA
+instalada na máquina, sob a assinatura do usuário, em vez da API:
+
+| CLI | Assinatura |
+|---|---|
+| `claude-code` | Anthropic (Claude Code) |
+| `gemini-cli` | Google |
+| `codex` | OpenAI |
+
+Ative com o perfil embutido `assinatura` ou `AUDIOFY_TEXT_PROVIDER=claude-code`. O TTS continua
+via API (assinaturas não expõem TTS programável) — o custo do episódio cai para só a voz
+(~US$ 0,39 no Gemini TTS; centavos em modelos alternativos). O caminho de custo **totalmente
+zero** é o modo NotebookLM (menu "Exportar p/ NotebookLM"): o Audiofy prepara a fonte e as
+instruções de foco, e você gera o Audio Overview manualmente na sua conta — sem garantia de
+cobertura integral, como documentado.
+
+Comparativo completo de modelos TTS/texto e custos por episódio:
+[docs/MODELOS-E-CUSTOS.md](docs/MODELOS-E-CUSTOS.md).
 
 ## 🎛️ Apresentadores e vozes
 

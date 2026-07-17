@@ -142,3 +142,33 @@ conta real (US$ 5,01 restantes / US$ 18,99 usados em 17/07/2026); menu smoke-tes
 
 **Risco que sobrou:** o parse do catálogo assume `pricing.prompt/completion` por token; se o
 OpenRouter mudar o esquema de preços, o seletor mostra valores errados (a geração não é afetada).
+
+---
+
+## 2026-07-17 — Modo assinatura, exportação NotebookLM e pesquisa de modelos/custos
+
+**O que mudou** (correção da interpretação de "assinatura" após feedback do usuário — a
+intenção era usar a assinatura para as etapas de texto, com modelos fora do OpenRouter):
+
+- **Provedor de texto por assinatura** (`providers/subscription.py`): as etapas de matriz,
+  roteiro e auditoria podem rodar em CLI local sob assinatura — `claude-code`, `gemini-cli`
+  ou `codex` — em modo não interativo (prompt via stdin, JSON validado na saída), custo
+  US$ 0,00. Perfil embutido `assinatura` e env `AUDIOFY_TEXT_PROVIDER`. TTS permanece via API
+  (assinaturas não expõem TTS programável). Máquina do usuário tem as três CLIs.
+- **Exportação NotebookLM** (`export.py`, menu 14, CLI `notebooklm <id>`, bridge): gera
+  `notebooklm/fonte.md` + `instrucoes.md` (passo a passo + foco de cobertura integral +
+  atribuição) na pasta do episódio — caminho de custo totalmente zero, com aviso explícito
+  de que Audio Overview é resumo sem auditoria.
+- **Pesquisa de modelos e custos** (`docs/MODELOS-E-CUSTOS.md`): catálogo `speech` consultado
+  ao vivo (12 modelos TTS). Destaques por episódio de 13 min: Gemini TTS ~US$ 0,39 (validado
+  em pt-BR), Voxtral mini ~US$ 0,05, Kokoro ~US$ 0,002 (qualidade pt-BR a validar);
+  combinações sugeridas de US$ 0,60 até US$ 0,00.
+
+**Validação:** 42 testes verdes (7 novos); provedor de assinatura testado ao vivo com o
+Claude Code real (JSON válido, custo zero); exportação NotebookLM executada contra o episódio
+piloto; menu e status smoke-testados.
+
+**Risco que sobrou:** os flags headless das CLIs (`claude -p`, `gemini` via stdin,
+`codex exec -`) podem mudar entre versões; a falha é explícita (stderr no erro) e o fallback
+é voltar o perfil para a API. TTS alternativos (Voxtral/Kokoro) ainda não foram ouvidos em
+pt-BR — testar num artigo curto antes de adotar.

@@ -23,6 +23,9 @@ class Profile:
     tts_model: str
     presenters_spec: str
     description: str = ""
+    # Provedor das etapas de texto: "openrouter" (API, custo por token) ou uma
+    # CLI de assinatura ("claude-code", "gemini-cli", "codex") com custo zero.
+    text_provider: str = "openrouter"
 
 
 BUILTIN_PROFILES: list[Profile] = [
@@ -49,6 +52,15 @@ BUILTIN_PROFILES: list[Profile] = [
         tts_model="google/gemini-3.1-flash-tts-preview",
         presenters_spec="narrador:Sulafat:caloroso",
         description="Narração solo, estilo audiolivro",
+    ),
+    Profile(
+        name="assinatura",
+        text_model="(assinatura)",
+        audit_model="(assinatura)",
+        tts_model="google/gemini-3.1-flash-tts-preview",
+        presenters_spec=DEFAULT_SPEC,
+        description="Texto pela CLI de assinatura (custo zero); só o TTS paga API",
+        text_provider="claude-code",
     ),
 ]
 

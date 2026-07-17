@@ -73,6 +73,15 @@ def do_setup() -> None:
         _ok("akita-articles instalado") if result.returncode == 0 else _fail(
             "instalação falhou — instale manualmente (ver README)")
 
+    from audiofy.providers.subscription import available_clis
+    clis = available_clis()
+    if clis:
+        _ok("CLIs de assinatura disponíveis (texto a custo zero): "
+            + ", ".join(c.key for c in clis))
+    else:
+        _warn("Nenhuma CLI de assinatura encontrada (claude, gemini, codex) — "
+              "as etapas de texto usarão a API.")
+
     env_path = PROJECT_ROOT / ".env"
     if not env_path.is_file():
         shutil.copy(PROJECT_ROOT / ".env.example", env_path)
@@ -184,8 +193,19 @@ def do_profiles() -> None:
                 continue
             base = store.active()
             settings = Settings()
-            text_model = _pick_model(settings, "Modelo do roteiro", base.text_model)
-            audit_model = _pick_model(settings, "Modelo da auditoria", base.audit_model)
+            from audiofy.providers.subscription import SUBSCRIPTION_CLIS
+            print(f"\n{BOLD}Provedor das etapas de texto:{RESET}")
+            print(f"  openrouter {DIM}(API, custo por token){RESET}")
+            for cli in SUBSCRIPTION_CLIS:
+                installed = "" if cli.is_available() else f" {YELLOW}(não instalada){RESET}"
+                print(f"  {cli.key} {DIM}({cli.name}, custo US$ 0){RESET}{installed}")
+            provider = input(f"Provedor [{base.text_provider}]: ").strip() \
+                or base.text_provider
+            if provider == "openrouter":
+                text_model = _pick_model(settings, "Modelo do roteiro", base.text_model)
+                audit_model = _pick_model(settings, "Modelo da auditoria", base.audit_model)
+            else:
+                text_model = audit_model = "(assinatura)"
             tts_model = _pick_model(settings, "Modelo TTS", base.tts_model, modality="audio")
             spec = input(f"Apresentadores [{base.presenters_spec}]: ").strip() \
                 or base.presenters_spec
@@ -194,7 +214,7 @@ def do_profiles() -> None:
                 parse_presenters(spec)  # valida antes de salvar
                 description = input("Descrição curta: ").strip()
                 store.save(Profile(name, text_model, audit_model, tts_model,
-                                   spec, description))
+                                   spec, description, text_provider=provider))
                 store.set_active(name)
                 _ok(f"Perfil '{name}' criado e ativado.")
             except ValueError as error:
@@ -229,7 +249,10 @@ def do_status() -> None:
         _ok(f"Chave configurada ({active_name})")
     else:
         _warn("Nenhuma chave configurada (menu Chaves & saldo)")
-    print(f"  {DIM}Perfil ativo: {settings.profile_name}{RESET}")
+    provider_note = ("assinatura: " + settings.text_provider
+                     if settings.text_provider not in ("", "openrouter")
+                     else "openrouter (API)")
+    print(f"  {DIM}Perfil ativo: {settings.profile_name} — texto via {provider_note}{RESET}")
     source = get_source(SOURCE_KEY)
     if source.is_ready():
         _ok(f"Fonte '{source.name}' sincronizada ({len(source.list_items())} itens)")
@@ -420,6 +443,21 @@ def do_abort(selector: str) -> None:
     _ok("Abort solicitado — efetiva no próximo segmento (nada é corrompido).")
 
 
+def do_notebooklm(selector: str) -> None:
+    """Prepara o pacote NotebookLM (caminho de custo zero na assinatura Google)."""
+    ensure_synced()
+    item_id = _resolve_item_id(selector)
+    if item_id is None:
+        _fail(f"Item '{selector}' não encontrado.")
+        return
+    from audiofy.export import export_notebooklm_pack
+    item = get_source(SOURCE_KEY).get_item(item_id)
+    pack = export_notebooklm_pack(item)
+    _ok(f"Pacote pronto em {pack}")
+    print(f"  {DIM}Abra o instrucoes.md dessa pasta: upload do fonte.md no "
+          f"notebooklm.google.com, foco sugerido incluído. Custo: US$ 0,00.{RESET}")
+
+
 def do_catalog() -> None:
     """Lista modelos TTS do OpenRouter e as vozes do Gemini para configurar."""
     from audiofy.providers.openrouter import GEMINI_VOICES, list_tts_models
@@ -475,6 +513,7 @@ def menu() -> None:
  {BOLD}11{RESET} — 🎛️  Catálogo TTS/vozes   {DIM}modelos e vozes para configurar{RESET}
  {BOLD}12{RESET} — 📊 Status                {DIM}mostra o que está gastando créditos{RESET}
  {BOLD}13{RESET} — 🖥️  Abrir app desktop    {DIM}interface Electron (npm start){RESET}
+ {BOLD}14{RESET} — 📓 Exportar p/ NotebookLM {DIM}episódio de custo zero na assinatura{RESET}
   {BOLD}0{RESET} — 🚪 Sair
 """)
         choice = input(f"{BOLD}Opção:{RESET} ").strip()
@@ -507,6 +546,9 @@ def menu() -> None:
             do_status()
         elif choice == "13":
             do_desktop()
+        elif choice == "14":
+            if selector := input("Número da listagem ou id do item: ").strip():
+                do_notebooklm(selector)
         elif choice in ("0", "q"):
             if _running_generations():
                 _warn("Atenção: ainda há geração em segundo plano consumindo créditos.")
@@ -537,6 +579,8 @@ def main() -> None:
         do_watch(args[1])
     elif args[0] == "abort" and len(args) >= 2:
         do_abort(args[1])
+    elif args[0] == "notebooklm" and len(args) >= 2:
+        do_notebooklm(args[1])
     else:
         print(__doc__)
         sys.exit(2)

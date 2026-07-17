@@ -147,6 +147,10 @@ def main() -> None:
             result = _cmd_abort(rest[0])
         elif command == "tts-catalog":
             result = _cmd_tts_catalog()
+        elif command == "notebooklm" and len(rest) >= 2:
+            from .export import export_notebooklm_pack
+            item = get_source(rest[0]).get_item(rest[1])
+            result = {"pack": str(export_notebooklm_pack(item))}
         else:
             raise ValueError(f"Comando inválido: {' '.join(args)}\n{__doc__}")
         _emit({"ok": True, **result})

@@ -54,16 +54,25 @@ def _run(settings: Settings, item: ContentItem, directory: Path,
     print(f"\n📄 {item.title} ({item.published_at})")
     print(f"   Pasta do episódio: {directory}")
 
+    subscription = settings.text_provider not in ("", "openrouter")
+
     def _chat_step(stage: str, path: Path, model: str, prompt: str) -> dict:
         cached = None if force else _load_json(path)
         if cached is not None:
             return cached
         tracker.stage(stage)
         tracker.checkpoint()
-        result = openrouter.chat_json(settings, model, SYSTEM_PROMPT, prompt)
+        if subscription:
+            from .providers import subscription as subscription_provider
+            result = subscription_provider.chat_json(
+                settings.text_provider, SYSTEM_PROMPT, prompt
+            )
+            print(f"    [{settings.text_provider}] via assinatura — custo US$ 0,00")
+        else:
+            result = openrouter.chat_json(settings, model, SYSTEM_PROMPT, prompt)
+            print(f"    [{model}] {result.prompt_tokens}/{result.completion_tokens} tokens, "
+                  f"US$ {result.cost_usd:.4f}")
         tracker.add_cost(result.cost_usd)
-        print(f"    [{model}] {result.prompt_tokens}/{result.completion_tokens} tokens, "
-              f"US$ {result.cost_usd:.4f}")
         _save_json(path, result.data)
         return result.data
 
