@@ -687,11 +687,12 @@ def do_desktop() -> None:
     )
     electron = _electron_executable(electron_dir)
     command = [str(electron), "."] if electron else [*npm, "start"]
+    print(f"  {DIM}Comando: {' '.join(command)}{RESET}")
     try:
         subprocess.Popen(command, cwd=electron_dir, env=environment,
                          stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, **detach)
     except OSError as error:
-        _fail(f"Não foi possível iniciar o app desktop: {error}")
+        _fail(f"Não foi possível iniciar o app desktop ({command[0]}): {error}")
         return
     _ok("App desktop iniciado em outra janela.")
 
