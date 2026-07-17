@@ -1,0 +1,11 @@
+{
+  "source_words": 686,
+  "script_words": 871,
+  "duration_seconds": 401.88,
+  "cost_usd": 0.202696,
+  "cost_exact": false,
+  "tts_model": "google/gemini-3.1-flash-tts-preview",
+  "profile_name": "assinatura-codex",
+  "generated_at": "2026-07-17T09:20:59-03:00",
+  "cost_source": "model_pricing_fallback"
+}

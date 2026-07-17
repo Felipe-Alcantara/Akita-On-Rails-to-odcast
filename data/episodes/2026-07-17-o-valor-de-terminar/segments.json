@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "segments": {
+    "001_apresentador_a.wav": {
+      "fingerprint": "a33f9111ae13fe27121b21c3d5ba6f4553f230fdcb6a841e756596ed82697a14",
+      "bytes": 1117484,
+      "generation_id": "gen-tts-1784290435-EoBryCqPhx5SS42wsNT0",
+      "cost_usd": 0.0117375,
+      "cost_exact": false
+    },
+    "002_apresentador_b.wav": {
+      "fingerprint": "e6b953eb156dbbfd611f835d9f8e0baef84bf7b5107c8b29d650d4ba880392cf",
+      "bytes": 1188524,
+      "generation_id": "gen-tts-1784290461-KTCpv9sbnqQIvBWMKKPU",
+      "cost_usd": 0.012483,
+      "cost_exact": false
+    },
+    "003_apresentador_a.wav": {
+      "fingerprint": "133c328f44d9b189c6115751f86d24f8d075570c2569ae2d34b20d389a3f1e85",
+      "bytes": 520364,
+      "generation_id": "gen-tts-1784290479-wzShHJmNES5axuAAaf5B",
+      "cost_usd": 0.0054725,
+      "cost_exact": false
+    },
+    "004_apresentador_b.wav": {
+      "fingerprint": "1ad32aee2b2f388d4d27c1335abd6f3126228c87da9621577487d0f2c1e5607d",
+      "bytes": 894764,
+      "generation_id": "gen-tts-1784290491-CtVb0A1OKv8ZJQljTorL",
+      "cost_usd": 0.0094035,
+      "cost_exact": false
+    },
+    "005_apresentador_a.wav": {
+      "fingerprint": "abe1dec52c9955e5ee08dfe2550e22bdb1d7842e53e01f4a07c9a954687e2346",
+      "bytes": 608684,
+      "generation_id": "gen-tts-1784290507-5PLbpCMEy6vYcisowoHs",
+      "cost_usd": 0.00639675,
+      "cost_exact": false
+    },
+    "006_apresentador_b.wav": {
+      "fingerprint": "1ba5afa11bdb7a5ddf48f395eb6a42f984694d789d11f5bed550ca79583e39a9",
+      "bytes": 1125164,
+      "generation_id": "gen-tts-1784290521-939Zd5QfngM5fKKdPXAO",
+      "cost_usd": 0.0118155,
+      "cost_exact": false
+    },
+    "007_apresentador_a.wav": {
+      "fingerprint": "755f27ea9d4683eca8f200f6210c5f1f18f7ed39889e3f0275c47bb6e4df2a35",
+      "bytes": 543404,
+      "generation_id": "gen-tts-1784290541-mkGgqwLdSVX8mSJCjVys",
+      "cost_usd": 0.005716,
+      "cost_exact": false
+    },
+    "008_apresentador_b.wav": {
+      "fingerprint": "3d431db08d614add1ce480aadb7eb2e817f41ff17e67abe0d570ee30087279c2",
+      "bytes": 1157804,
+      "generation_id": "gen-tts-1784290555-kHxHGKrtEGPoNcaNcAaN",
+      "cost_usd": 0.0121635,
+      "cost_exact": false
+    },
+    "009_apresentador_a.wav": {
+      "fingerprint": "75d7421fc6e3f23347098f173d7f0e2dc55fa396dac384aece3dbc2b4a96ec0c",
+      "bytes": 697004,
+      "generation_id": "gen-tts-1784290574-cffL70kFBLuZIpDTHQdN",
+      "cost_usd": 0.00732375,
+      "cost_exact": false
+    },
+    "010_apresentador_b.wav": {
+      "fingerprint": "9af1db12a421d4a0d6acb8d5268b1d046a9c57890c14b966646a37ff810b994c",
+      "bytes": 495404,
+      "generation_id": "gen-tts-1784290588-V7t5Lsx7dNhEUbQ54BUC",
+      "cost_usd": 0.00521625,
+      "cost_exact": false
+    },
+    "011_apresentador_a.wav": {
+      "fingerprint": "177a7361331839cd4170b0a2f2c84c7665a23d4f415d4a2b404313b9220b844c",
+      "bytes": 643244,
+      "generation_id": "gen-tts-1784290602-lkjsjikR0gVzSgT8C3Mg",
+      "cost_usd": 0.00676525,
+      "cost_exact": false
+    },
+    "012_apresentador_b.wav": {
+      "fingerprint": "ca0dd90de863e12714d6c5794f75eeb7ecea4b3f34b578f70744b8d45bd81557",
+      "bytes": 944684,
+      "generation_id": "gen-tts-1784290616-zH4tPBtvvZPLZqOMiMRH",
+      "cost_usd": 0.009925,
+      "cost_exact": false
+    },
+    "013_apresentador_a.wav": {
+      "fingerprint": "bff567a35425fbb586d7f422e4e56ad8b64c1e4250e6cdb7f3ef53046114d7b1",
+      "bytes": 505004,
+      "generation_id": "gen-tts-1784290632-KyjNLJKqzGBTTGJ5a9w2",
+      "cost_usd": 0.00530975,
+      "cost_exact": false
+    },
+    "014_apresentador_b.wav": {
+      "fingerprint": "b4dd20d93f150f43eeff31182275beebd245a39a792c9875f46cc6c65f75bd6a",
+      "bytes": 864044,
+      "generation_id": "gen-tts-1784290645-j36ATxadylzbPGLjPNgt",
+      "cost_usd": 0.00907075,
+      "cost_exact": false
+    },
+    "015_apresentador_a.wav": {
+      "fingerprint": "51816ac9eefe59765b209fcd91197a7b9a55f3e0abdd062247df0c88e2a5fa8e",
+      "bytes": 472364,
+      "generation_id": "gen-tts-1784290661-XFkUj9MItlQQOqqeG9qZ",
+      "cost_usd": 0.0049635,
+      "cost_exact": false
+    },
+    "016_apresentador_b.wav": {
+      "fingerprint": "c91878ef7c9c46458a7e9b1daf9d97c40fff70364e95a3f19963224761f0725d",
+      "bytes": 798764,
+      "generation_id": "gen-tts-1784290672-JsIogBurWwl566I8PM2a",
+      "cost_usd": 0.00839125,
+      "cost_exact": false
+    },
+    "017_apresentador_a.wav": {
+      "fingerprint": "7d29a7eda29887c51674fde0018413159aaf5aa5a2fbbac36a1c08cd28b340f8",
+      "bytes": 432044,
+      "generation_id": "gen-tts-1784290689-8BFaNnFIp9WGlnkrMdYL",
+      "cost_usd": 0.00454675,
+      "cost_exact": false
+    },
+    "018_apresentador_b.wav": {
+      "fingerprint": "4903b6c05cf28583e9fcd48ea2210d26ccf148f0c9945db5b3c7d1be562c0ce7",
+      "bytes": 973484,
+      "generation_id": "gen-tts-1784290702-tAYuLveNpnHbW582j059",
+      "cost_usd": 0.0102345,
+      "cost_exact": false
+    },
+    "019_apresentador_a.wav": {
+      "fingerprint": "e4b22efbbef3bcea2fe5c536194fb8cecd95a70b55e72e3f10c88c5d475698ac",
+      "bytes": 324524,
+      "generation_id": "gen-tts-1784290719-MuX5mobAQQ4i8UN9eWsW",
+      "cost_usd": 0.0034155,
+      "cost_exact": false
+    },
+    "020_apresentador_b.wav": {
+      "fingerprint": "db0b9adcbdd8fc559281d90fb092a6ffb28ddda9d3a2a91481602a00d813384d",
+      "bytes": 1033004,
+      "generation_id": "gen-tts-1784290731-ZZs6xqFQYC29JKpd0vgc",
+      "cost_usd": 0.0108555,
+      "cost_exact": false
+    },
+    "021_apresentador_a.wav": {
+      "fingerprint": "1c5b4b29547a59badd6a167511abc3a962f9c81f424a02276e0c91745e3c5fb3",
+      "bytes": 299564,
+      "generation_id": "gen-tts-1784290748-vUFCcY8FZUjjP9Mxa6wK",
+      "cost_usd": 0.00315625,
+      "cost_exact": false
+    },
+    "022_apresentador_b.wav": {
+      "fingerprint": "50e87e4451751ac818445412509b64bb568d28e8315c8cf54c5c0ce4c2c56025",
+      "bytes": 1157804,
+      "generation_id": "gen-tts-1784290761-LPGiQEXW8iM8BR5HaKVd",
+      "cost_usd": 0.0121595,
+      "cost_exact": false
+    },
+    "023_apresentador_a.wav": {
+      "fingerprint": "9107aff420df93d71c910c1b5b3735590db461c5ea1cabcd6e7bcd1acfe2461e",
+      "bytes": 727724,
+      "generation_id": "gen-tts-1784290780-GldgkUu0fD8RYaanIQoj",
+      "cost_usd": 0.00763925,
+      "cost_exact": false
+    },
+    "024_apresentador_b.wav": {
+      "fingerprint": "33811912644dac36e75dbaf4ccd4a3173bbf8d9feecbfb1a6fce266db9b199d2",
+      "bytes": 1102124,
+      "generation_id": "gen-tts-1784290798-MLJIq04WmI7FRvJZHqFO",
+      "cost_usd": 0.0115745,
+      "cost_exact": false
+    },
+    "025_apresentador_a.wav": {
+      "fingerprint": "2236e8e00ef8aa265e2ccaec2af20506bc73a70c8e90403dcf8af9d10c83a909",
+      "bytes": 662444,
+      "generation_id": "gen-tts-1784290815-PGDRr3XCuOidchQbRkVr",
+      "cost_usd": 0.00696575,
+      "cost_exact": false
+    }
+  }
+}

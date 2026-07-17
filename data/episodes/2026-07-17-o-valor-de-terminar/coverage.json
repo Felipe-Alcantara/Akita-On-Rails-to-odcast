@@ -1,0 +1,417 @@
+{
+  "items": [
+    {
+      "id": "C001",
+      "kind": "opiniao",
+      "criticality": "critica",
+      "statement": "Segundo o autor, existe uma diferença fundamental entre ter ideias e efetivamente construir algo.",
+      "evidence": "Existe uma diferença silenciosa entre ter muitas ideias e construir alguma coisa."
+    },
+    {
+      "id": "C002",
+      "kind": "argumento",
+      "criticality": "importante",
+      "statement": "As ideias geram entusiasmo imediato porque permitem imaginar antecipadamente o produto pronto, os usuários satisfeitos e a narrativa posterior sobre o projeto.",
+      "evidence": "Ideias produzem entusiasmo imediato"
+    },
+    {
+      "id": "C003",
+      "kind": "argumento",
+      "criticality": "critica",
+      "statement": "Construir exige enfrentar detalhes ignorados pela imaginação, escolher entre alternativas imperfeitas e continuar depois que a novidade termina.",
+      "evidence": "descobrir detalhes que a imaginação ignorou, escolher entre alternativas imperfeitas"
+    },
+    {
+      "id": "C004",
+      "kind": "opiniao",
+      "criticality": "critica",
+      "statement": "Segundo o autor, projetos pequenos possuem valor desproporcional ao seu tamanho.",
+      "evidence": "projetos pequenos têm um valor desproporcional"
+    },
+    {
+      "id": "C005",
+      "kind": "argumento",
+      "criticality": "critica",
+      "statement": "Projetos pequenos são valiosos porque diminuem a distância entre a intenção e o resultado concreto.",
+      "evidence": "Eles reduzem a distância entre a intenção e o resultado."
+    },
+    {
+      "id": "C006",
+      "kind": "exemplo",
+      "criticality": "importante",
+      "statement": "Um aplicativo que soluciona apenas um incômodo é apresentado como exemplo de projeto pequeno capaz de gerar aprendizado.",
+      "evidence": "Um aplicativo que resolve um único incômodo"
+    },
+    {
+      "id": "C007",
+      "kind": "exemplo",
+      "criticality": "importante",
+      "statement": "Uma automação utilizada por três pessoas é apresentada como exemplo de projeto pequeno.",
+      "evidence": "uma automação usada por três pessoas"
+    },
+    {
+      "id": "C008",
+      "kind": "numero",
+      "criticality": "contextual",
+      "statement": "O exemplo de automação possui três usuários.",
+      "evidence": "usada por três pessoas"
+    },
+    {
+      "id": "C009",
+      "kind": "exemplo",
+      "criticality": "importante",
+      "statement": "Um texto publicado para uma comunidade pequena é apresentado como exemplo de projeto limitado, mas instrutivo.",
+      "evidence": "um texto publicado para uma comunidade pequena"
+    },
+    {
+      "id": "C010",
+      "kind": "opiniao",
+      "criticality": "importante",
+      "statement": "Segundo o autor, projetos pequenos concluídos podem ensinar mais do que meses dedicados ao planejamento de uma plataforma grandiosa.",
+      "evidence": "podem ensinar mais do que meses planejando uma plataforma grandiosa"
+    },
+    {
+      "id": "C011",
+      "kind": "argumento",
+      "criticality": "critica",
+      "statement": "A limitação de tamanho força o criador a identificar o núcleo do problema.",
+      "evidence": "O tamanho limitado obriga o criador a encontrar o núcleo do problema"
+    },
+    {
+      "id": "C012",
+      "kind": "argumento",
+      "criticality": "importante",
+      "statement": "Encontrar o núcleo do problema exige definir para quem o projeto existe, o que precisa funcionar e o que pode ser adiado.",
+      "evidence": "para quem isso existe, o que precisa funcionar e o que pode ficar para depois?"
+    },
+    {
+      "id": "C013",
+      "kind": "opiniao",
+      "criticality": "critica",
+      "statement": "Segundo o autor, terminar um projeto não é somente uma questão de disciplina, mas também uma habilidade técnica de engenharia.",
+      "evidence": "terminar também é uma habilidade de engenharia"
+    },
+    {
+      "id": "C014",
+      "kind": "argumento",
+      "criticality": "critica",
+      "statement": "A habilidade de terminar envolve delimitar uma fronteira, reconhecer dependências, reduzir riscos e estabelecer o significado de pronto.",
+      "evidence": "definir uma fronteira, reconhecer dependências, reduzir riscos e decidir o que significa \"pronto\""
+    },
+    {
+      "id": "C015",
+      "kind": "conclusao",
+      "criticality": "importante",
+      "statement": "Sem critérios claros de conclusão, qualquer projeto pode continuar aumentando indefinidamente.",
+      "evidence": "Sem esses critérios, qualquer projeto pode crescer indefinidamente."
+    },
+    {
+      "id": "C016",
+      "kind": "ressalva",
+      "criticality": "critica",
+      "statement": "Um bom recorte não deve abranger tudo o que o produto poderá fazer no futuro.",
+      "evidence": "Um bom recorte não descreve tudo o que o produto poderá fazer."
+    },
+    {
+      "id": "C017",
+      "kind": "opiniao",
+      "criticality": "critica",
+      "statement": "Segundo o autor, um bom recorte define a menor experiência capaz de entregar valor completo.",
+      "evidence": "a menor experiência que entrega valor completo"
+    },
+    {
+      "id": "C018",
+      "kind": "exemplo",
+      "criticality": "critica",
+      "statement": "Para uma proposta de transformar artigo em áudio, a primeira versão pode limitar-se a receber texto, gerar narração compreensível e salvar um arquivo reproduzível.",
+      "evidence": "receber um texto, gerar uma narração compreensível e salvar um arquivo reproduzível"
+    },
+    {
+      "id": "C019",
+      "kind": "numero",
+      "criticality": "contextual",
+      "statement": "O recorte mínimo do exemplo é descrito como a primeira versão do produto.",
+      "evidence": "a primeira versão talvez precise apenas"
+    },
+    {
+      "id": "C020",
+      "kind": "ressalva",
+      "criticality": "importante",
+      "statement": "Catálogos, perfis, sincronização e relatórios podem ser importantes, mas não precisam bloquear a conclusão do primeiro ciclo.",
+      "evidence": "podem ser importantes, mas não precisam impedir que o primeiro ciclo seja fechado"
+    },
+    {
+      "id": "C021",
+      "kind": "argumento",
+      "criticality": "critica",
+      "statement": "Concluir o ciclo revela problemas reais que permanecem hipotéticos antes da experiência completa.",
+      "evidence": "Esse fechamento revela problemas reais."
+    },
+    {
+      "id": "C022",
+      "kind": "exemplo",
+      "criticality": "importante",
+      "statement": "O tamanho excessivo do texto é um possível problema revelado ao concluir o fluxo de transformação em áudio.",
+      "evidence": "O texto era grande demais?"
+    },
+    {
+      "id": "C023",
+      "kind": "exemplo",
+      "criticality": "importante",
+      "statement": "O cansaço causado pela voz após dez minutos é um possível problema revelado pelo uso completo.",
+      "evidence": "A voz cansava depois de dez minutos?"
+    },
+    {
+      "id": "C024",
+      "kind": "numero",
+      "criticality": "contextual",
+      "statement": "Dez minutos é o intervalo usado para exemplificar quando uma voz pode começar a cansar o ouvinte.",
+      "evidence": "depois de dez minutos"
+    },
+    {
+      "id": "C025",
+      "kind": "exemplo",
+      "criticality": "importante",
+      "statement": "Um custo inesperado é apresentado como possível problema descoberto ao fechar o ciclo.",
+      "evidence": "O custo surpreendeu?"
+    },
+    {
+      "id": "C026",
+      "kind": "exemplo",
+      "criticality": "importante",
+      "statement": "A dificuldade de localizar o arquivo produzido é apresentada como possível problema real.",
+      "evidence": "O arquivo ficou difícil de encontrar?"
+    },
+    {
+      "id": "C027",
+      "kind": "argumento",
+      "criticality": "critica",
+      "statement": "Perguntas concretas aparecem quando alguém percorre todo o caminho do projeto; antes disso, a discussão tende a confrontar apenas hipóteses.",
+      "evidence": "Perguntas concretas surgem somente quando alguém percorre o caminho inteiro."
+    },
+    {
+      "id": "C028",
+      "kind": "conclusao",
+      "criticality": "importante",
+      "statement": "Antes de um ciclo completo, grande parte das discussões sobre o projeto consiste em uma disputa entre hipóteses.",
+      "evidence": "grande parte da discussão é apenas uma disputa entre hipóteses"
+    },
+    {
+      "id": "C029",
+      "kind": "argumento",
+      "criticality": "critica",
+      "statement": "Quando uma pessoa usa o produto, o projeto deixa de refletir somente o gosto do criador e passa a responder às condições do mundo.",
+      "evidence": "o projeto deixa de ser uma extensão do nosso gosto e passa a responder ao mundo"
+    },
+    {
+      "id": "C030",
+      "kind": "exemplo",
+      "criticality": "importante",
+      "statement": "Um botão considerado óbvio pelo criador pode precisar de um rótulo quando utilizado por outra pessoa.",
+      "evidence": "O botão que parecia óbvio precisa de um rótulo."
+    },
+    {
+      "id": "C031",
+      "kind": "exemplo",
+      "criticality": "importante",
+      "statement": "Uma mensagem de erro aparentemente suficiente pode não orientar o usuário a se recuperar.",
+      "evidence": "A mensagem de erro que parecia suficiente não ajuda ninguém a se recuperar."
+    },
+    {
+      "id": "C032",
+      "kind": "exemplo",
+      "criticality": "importante",
+      "statement": "O uso pode mostrar que uma função considerada secundária é essencial e que outra função sofisticada e trabalhosa é ignorada.",
+      "evidence": "Uma função considerada secundária se torna essencial, enquanto outra, sofisticada e trabalhosa, permanece esquecida."
+    },
+    {
+      "id": "C033",
+      "kind": "ressalva",
+      "criticality": "importante",
+      "statement": "O encontro do projeto com usuários pode ser desconfortável, embora seja necessário para converter experiência em aprendizado.",
+      "evidence": "Esse encontro pode ser desconfortável, mas é justamente o que transforma experiência em aprendizado."
+    },
+    {
+      "id": "C034",
+      "kind": "argumento",
+      "criticality": "critica",
+      "statement": "Projetos inacabados mantêm possibilidades abertas, enquanto projetos concluídos geram evidências.",
+      "evidence": "Projetos inacabados preservam todas as possibilidades; projetos concluídos produzem evidências."
+    },
+    {
+      "id": "C035",
+      "kind": "fato",
+      "criticality": "importante",
+      "statement": "As evidências produzidas por um projeto concluído mostram suas escolhas, limitações e consequências.",
+      "evidence": "Eles mostram escolhas, limitações e consequências."
+    },
+    {
+      "id": "C036",
+      "kind": "argumento",
+      "criticality": "importante",
+      "statement": "Um projeto concluído cria algo que pode ser demonstrado, criticado, medido e melhorado.",
+      "evidence": "pode ser demonstrado, criticado, medido e melhorado"
+    },
+    {
+      "id": "C037",
+      "kind": "ressalva",
+      "criticality": "critica",
+      "statement": "Reduzir o escopo de um projeto não equivale a abandonar a qualidade.",
+      "evidence": "Reduzir o escopo não é abandonar qualidade."
+    },
+    {
+      "id": "C038",
+      "kind": "exemplo",
+      "criticality": "importante",
+      "statement": "Mesmo pequeno, um projeto pode possuir nomes claros, tratamento de erros, instruções honestas e uma arquitetura que exponha suas limitações.",
+      "evidence": "nomes claros, tratamento de erros, instruções honestas e uma arquitetura que não esconda suas limitações"
+    },
+    {
+      "id": "C039",
+      "kind": "opiniao",
+      "criticality": "critica",
+      "statement": "Segundo o autor, qualidade em um projeto pequeno significa cuidar intensamente de poucas promessas.",
+      "evidence": "Qualidade, nesse contexto, significa cuidar intensamente de poucas promessas."
+    },
+    {
+      "id": "C040",
+      "kind": "opiniao",
+      "criticality": "contextual",
+      "statement": "Segundo o autor, existe uma elegância particular em sistemas que reconhecem abertamente seus limites.",
+      "evidence": "Há uma elegância particular em sistemas que assumem seus limites."
+    },
+    {
+      "id": "C041",
+      "kind": "fato",
+      "criticality": "importante",
+      "statement": "Os sistemas que assumem seus limites informam o que acontece, falham de modo compreensível e permitem que o usuário retome o trabalho.",
+      "evidence": "informam o que está acontecendo, falham de maneira compreensível e permitem que o usuário retome o trabalho"
+    },
+    {
+      "id": "C042",
+      "kind": "argumento",
+      "criticality": "critica",
+      "statement": "Sistemas limitados devem buscar confiabilidade em vez de tentar aparentar completude.",
+      "evidence": "Em vez de tentar parecer completos, procuram ser confiáveis."
+    },
+    {
+      "id": "C043",
+      "kind": "opiniao",
+      "criticality": "critica",
+      "statement": "Segundo o autor, a confiabilidade oferece uma base melhor para crescimento do que recursos conectados apenas pela metade.",
+      "evidence": "Essa confiabilidade é uma base melhor para crescer do que uma coleção de recursos conectados pela metade."
+    },
+    {
+      "id": "C044",
+      "kind": "argumento",
+      "criticality": "importante",
+      "statement": "Uma maneira prática de iniciar é escolher um problema observado na própria rotina e limitar o primeiro ciclo a poucos dias.",
+      "evidence": "escolher um problema observado na própria rotina e limitar o primeiro ciclo a poucos dias"
+    },
+    {
+      "id": "C045",
+      "kind": "numero",
+      "criticality": "importante",
+      "statement": "O primeiro ciclo recomendado deve durar poucos dias.",
+      "evidence": "limitar o primeiro ciclo a poucos dias"
+    },
+    {
+      "id": "C046",
+      "kind": "fato",
+      "criticality": "critica",
+      "statement": "A primeira etapa proposta é escrever uma frase que defina a condição verificável de conclusão do projeto.",
+      "evidence": "No início, escreva uma frase: \"isto estará pronto quando uma pessoa conseguir...\""
+    },
+    {
+      "id": "C047",
+      "kind": "numero",
+      "criticality": "contextual",
+      "statement": "A condição de conclusão é formulada em torno de uma pessoa conseguir realizar uma ação.",
+      "evidence": "quando uma pessoa conseguir"
+    },
+    {
+      "id": "C048",
+      "kind": "fato",
+      "criticality": "critica",
+      "statement": "A frase de conclusão deve ser completada com uma ação que possa ser verificada.",
+      "evidence": "Complete a frase com uma ação verificável."
+    },
+    {
+      "id": "C049",
+      "kind": "fato",
+      "criticality": "importante",
+      "statement": "Depois de definir a ação verificável, devem ser listados somente os obstáculos que impedem sua realização.",
+      "evidence": "Depois, liste apenas os obstáculos que impedem essa ação."
+    },
+    {
+      "id": "C050",
+      "kind": "ressalva",
+      "criticality": "critica",
+      "statement": "Durante a construção, ideias novas devem ser registradas, mas não adicionadas automaticamente ao escopo atual.",
+      "evidence": "novas ideias devem ser registradas, não incorporadas automaticamente"
+    },
+    {
+      "id": "C051",
+      "kind": "argumento",
+      "criticality": "importante",
+      "statement": "Uma lista de itens para depois preserva o foco do ciclo sem descartar os novos insights.",
+      "evidence": "A lista de \"depois\" protege o foco sem desperdiçar insights."
+    },
+    {
+      "id": "C052",
+      "kind": "fato",
+      "criticality": "critica",
+      "statement": "Ao final do prazo, a versão deve ser entregue a alguém para que seu uso seja observado e os acontecimentos sejam registrados.",
+      "evidence": "entregue a versão a alguém, observe o uso e anote o que aconteceu"
+    },
+    {
+      "id": "C053",
+      "kind": "opiniao",
+      "criticality": "critica",
+      "statement": "Segundo o autor, o próximo passo do projeto deve resultar da observação do uso, e não da ansiedade de parecer ambicioso.",
+      "evidence": "O próximo passo deve nascer dessa observação, não da ansiedade de parecer ambicioso."
+    },
+    {
+      "id": "C054",
+      "kind": "opiniao",
+      "criticality": "critica",
+      "statement": "Segundo o autor, carreiras raramente se transformam por causa de uma única ideia.",
+      "evidence": "Carreiras raramente mudam por causa de uma ideia isolada."
+    },
+    {
+      "id": "C055",
+      "kind": "conclusao",
+      "criticality": "critica",
+      "statement": "Carreiras mudam por meio do acúmulo de ciclos completos de perceber, recortar, construir, entregar e aprender.",
+      "evidence": "Elas mudam quando acumulamos ciclos completos: perceber, recortar, construir, entregar e aprender."
+    },
+    {
+      "id": "C056",
+      "kind": "argumento",
+      "criticality": "critica",
+      "statement": "Cada ciclo completo aumenta a capacidade de estimar trabalho, conversar com usuários e decidir sob restrições.",
+      "evidence": "Cada ciclo aumenta nossa capacidade de estimar trabalho, conversar com usuários e tomar decisões sob restrições."
+    },
+    {
+      "id": "C057",
+      "kind": "ressalva",
+      "criticality": "critica",
+      "statement": "Um projeto pequeno não deve ser entendido apenas como uma versão reduzida de um projeto maior.",
+      "evidence": "o projeto pequeno não é apenas uma versão reduzida de algo maior"
+    },
+    {
+      "id": "C058",
+      "kind": "conclusao",
+      "criticality": "critica",
+      "statement": "O projeto pequeno é uma unidade completa de experiência.",
+      "evidence": "Ele é uma unidade completa de experiência"
+    },
+    {
+      "id": "C059",
+      "kind": "conclusao",
+      "criticality": "critica",
+      "statement": "Concluir um projeto pequeno comprova a capacidade de atravessar a distância entre imaginar e realizar.",
+      "evidence": "a prova de que conseguimos atravessar a distância entre imaginar e realizar"
+    }
+  ]
+}

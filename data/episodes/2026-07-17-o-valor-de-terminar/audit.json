@@ -1,0 +1,303 @@
+{
+  "results": [
+    {
+      "coverage_id": "C001",
+      "status": "completo",
+      "notes": "T001 apresenta claramente a diferença entre ter ideias e construir."
+    },
+    {
+      "coverage_id": "C002",
+      "status": "completo",
+      "notes": "T002 explica o entusiasmo imediato e as imagens antecipadas do produto, usuários e narrativa."
+    },
+    {
+      "coverage_id": "C003",
+      "status": "completo",
+      "notes": "T002 cobre os detalhes ignorados, as escolhas imperfeitas e a persistência após a novidade."
+    },
+    {
+      "coverage_id": "C004",
+      "status": "completo",
+      "notes": "T003 afirma explicitamente o valor desproporcional dos projetos pequenos."
+    },
+    {
+      "coverage_id": "C005",
+      "status": "completo",
+      "notes": "T003 relaciona esse valor à redução da distância entre intenção e resultado."
+    },
+    {
+      "coverage_id": "C006",
+      "status": "completo",
+      "notes": "T004 inclui o aplicativo que resolve um único incômodo como exemplo."
+    },
+    {
+      "coverage_id": "C007",
+      "status": "completo",
+      "notes": "T004 inclui a automação utilizada por três pessoas."
+    },
+    {
+      "coverage_id": "C008",
+      "status": "completo",
+      "notes": "T004 preserva corretamente o número de três usuários."
+    },
+    {
+      "coverage_id": "C009",
+      "status": "completo",
+      "notes": "T004 inclui o texto publicado para uma comunidade pequena."
+    },
+    {
+      "coverage_id": "C010",
+      "status": "completo",
+      "notes": "T004 compara integralmente o aprendizado desses projetos com meses de planejamento grandioso."
+    },
+    {
+      "coverage_id": "C011",
+      "status": "completo",
+      "notes": "T005 afirma que o tamanho limitado força a identificação do núcleo do problema."
+    },
+    {
+      "coverage_id": "C012",
+      "status": "completo",
+      "notes": "T005 cobre público, funcionamento necessário e itens adiáveis."
+    },
+    {
+      "coverage_id": "C013",
+      "status": "completo",
+      "notes": "T006 apresenta terminar como disciplina e também habilidade técnica de engenharia."
+    },
+    {
+      "coverage_id": "C014",
+      "status": "completo",
+      "notes": "T006 enumera fronteira, dependências, riscos e definição de pronto."
+    },
+    {
+      "coverage_id": "C015",
+      "status": "completo",
+      "notes": "T006 registra que, sem esses critérios, o projeto pode crescer indefinidamente."
+    },
+    {
+      "coverage_id": "C016",
+      "status": "completo",
+      "notes": "T007 esclarece que o recorte não deve abranger todo o futuro do produto."
+    },
+    {
+      "coverage_id": "C017",
+      "status": "completo",
+      "notes": "T007 define o recorte como a menor experiência que entrega valor completo."
+    },
+    {
+      "coverage_id": "C018",
+      "status": "completo",
+      "notes": "T008 preserva as três funções mínimas do exemplo de transformação em áudio."
+    },
+    {
+      "coverage_id": "C019",
+      "status": "completo",
+      "notes": "T008 identifica esse recorte como a primeira versão."
+    },
+    {
+      "coverage_id": "C020",
+      "status": "completo",
+      "notes": "T008 cita todos os recursos adicionais e diz que não devem bloquear o primeiro ciclo."
+    },
+    {
+      "coverage_id": "C021",
+      "status": "completo",
+      "notes": "T009 afirma que fechar o ciclo revela problemas reais."
+    },
+    {
+      "coverage_id": "C022",
+      "status": "completo",
+      "notes": "T009 inclui o possível tamanho excessivo do texto."
+    },
+    {
+      "coverage_id": "C023",
+      "status": "completo",
+      "notes": "T009 inclui o cansaço provocado pela voz após certo tempo."
+    },
+    {
+      "coverage_id": "C024",
+      "status": "completo",
+      "notes": "T009 preserva o intervalo específico de dez minutos."
+    },
+    {
+      "coverage_id": "C025",
+      "status": "completo",
+      "notes": "T009 inclui a possibilidade de custo surpreendente."
+    },
+    {
+      "coverage_id": "C026",
+      "status": "completo",
+      "notes": "T009 inclui a dificuldade de encontrar o arquivo produzido."
+    },
+    {
+      "coverage_id": "C027",
+      "status": "completo",
+      "notes": "T010 relaciona perguntas concretas à realização do caminho inteiro."
+    },
+    {
+      "coverage_id": "C028",
+      "status": "completo",
+      "notes": "T010 caracteriza a discussão anterior ao ciclo completo como disputa entre hipóteses."
+    },
+    {
+      "coverage_id": "C029",
+      "status": "completo",
+      "notes": "T011 explica integralmente a passagem do gosto do criador para a resposta ao mundo."
+    },
+    {
+      "coverage_id": "C030",
+      "status": "completo",
+      "notes": "T012 inclui o botão aparentemente óbvio que precisa de rótulo."
+    },
+    {
+      "coverage_id": "C031",
+      "status": "completo",
+      "notes": "T012 inclui a mensagem de erro que não permite ao usuário se recuperar."
+    },
+    {
+      "coverage_id": "C032",
+      "status": "completo",
+      "notes": "T012 preserva o contraste entre a função secundária essencial e a sofisticada esquecida."
+    },
+    {
+      "coverage_id": "C033",
+      "status": "completo",
+      "notes": "T013 cobre tanto o desconforto quanto sua conversão em aprendizado."
+    },
+    {
+      "coverage_id": "C034",
+      "status": "completo",
+      "notes": "T014 contrasta possibilidades preservadas por projetos inacabados com evidências dos concluídos."
+    },
+    {
+      "coverage_id": "C035",
+      "status": "completo",
+      "notes": "T014 menciona escolhas, limitações e consequências."
+    },
+    {
+      "coverage_id": "C036",
+      "status": "completo",
+      "notes": "T014 inclui demonstrar, criticar, medir e melhorar o resultado."
+    },
+    {
+      "coverage_id": "C037",
+      "status": "completo",
+      "notes": "T015 afirma explicitamente que reduzir escopo não significa abandonar qualidade."
+    },
+    {
+      "coverage_id": "C038",
+      "status": "completo",
+      "notes": "T016 cobre nomes claros, erros, instruções honestas e arquitetura transparente sobre limitações."
+    },
+    {
+      "coverage_id": "C039",
+      "status": "completo",
+      "notes": "T016 define qualidade como cuidar intensamente de poucas promessas."
+    },
+    {
+      "coverage_id": "C040",
+      "status": "completo",
+      "notes": "T017 reproduz a opinião sobre a elegância de sistemas que assumem limites."
+    },
+    {
+      "coverage_id": "C041",
+      "status": "completo",
+      "notes": "T018 cobre informação de estado, falhas compreensíveis e retomada do trabalho."
+    },
+    {
+      "coverage_id": "C042",
+      "status": "completo",
+      "notes": "T018 contrapõe corretamente aparência de completude e confiabilidade."
+    },
+    {
+      "coverage_id": "C043",
+      "status": "completo",
+      "notes": "T018 apresenta a confiabilidade como base superior a recursos conectados pela metade."
+    },
+    {
+      "coverage_id": "C044",
+      "status": "completo",
+      "notes": "T020 recomenda um problema da rotina e um primeiro ciclo limitado a poucos dias."
+    },
+    {
+      "coverage_id": "C045",
+      "status": "completo",
+      "notes": "T020 preserva a duração recomendada de poucos dias."
+    },
+    {
+      "coverage_id": "C046",
+      "status": "completo",
+      "notes": "T020 apresenta inicialmente a frase que define a condição de conclusão."
+    },
+    {
+      "coverage_id": "C047",
+      "status": "completo",
+      "notes": "T020 mantém a formulação centrada em uma pessoa conseguir realizar algo."
+    },
+    {
+      "coverage_id": "C048",
+      "status": "completo",
+      "notes": "T020 determina que a frase seja completada com uma ação verificável."
+    },
+    {
+      "coverage_id": "C049",
+      "status": "completo",
+      "notes": "T020 manda listar somente os obstáculos que impedem a ação."
+    },
+    {
+      "coverage_id": "C050",
+      "status": "completo",
+      "notes": "T022 orienta registrar ideias novas sem incorporá-las automaticamente ao escopo."
+    },
+    {
+      "coverage_id": "C051",
+      "status": "completo",
+      "notes": "T022 explica que a lista de depois protege o foco sem perder insights."
+    },
+    {
+      "coverage_id": "C052",
+      "status": "completo",
+      "notes": "T022 cobre entrega, observação do uso e registro do ocorrido ao fim do prazo."
+    },
+    {
+      "coverage_id": "C053",
+      "status": "completo",
+      "notes": "T022 faz o próximo passo nascer da observação, não da ansiedade de parecer ambicioso."
+    },
+    {
+      "coverage_id": "C054",
+      "status": "completo",
+      "notes": "T023 afirma que uma ideia isolada raramente muda uma carreira."
+    },
+    {
+      "coverage_id": "C055",
+      "status": "completo",
+      "notes": "T023 enumera integralmente os ciclos de perceber, recortar, construir, entregar e aprender."
+    },
+    {
+      "coverage_id": "C056",
+      "status": "completo",
+      "notes": "T024 cobre estimativa de trabalho, conversa com usuários e decisões sob restrições."
+    },
+    {
+      "coverage_id": "C057",
+      "status": "completo",
+      "notes": "T024 nega que o projeto pequeno seja apenas uma versão reduzida de algo maior."
+    },
+    {
+      "coverage_id": "C058",
+      "status": "completo",
+      "notes": "T024 define o projeto pequeno como unidade completa de experiência."
+    },
+    {
+      "coverage_id": "C059",
+      "status": "completo",
+      "notes": "T024 conclui que ele comprova a capacidade de passar de imaginar a realizar."
+    }
+  ],
+  "unsupported_claims": [
+    "A caracterização da ideia isolada como \"brilhante\" em T023 não aparece no conteúdo original.",
+    "A afirmação de T025 de que a adaptação foi gerada com inteligência artificial não pode ser confirmada pelo conteúdo original."
+  ]
+}

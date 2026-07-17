@@ -1,0 +1,235 @@
+{
+  "turns": [
+    {
+      "turn_id": "T001",
+      "speaker": "apresentador_a",
+      "text": "Hoje vamos conversar sobre o texto “O valor de terminar: por que projetos pequenos mudam carreiras”, cuja autoria não foi informada no conteúdo original fornecido. E ele começa com uma diferença silenciosa, mas fundamental: ter muitas ideias não é a mesma coisa que construir alguma coisa. Por que imaginar parece tão mais fácil?",
+      "coverage_ids": [
+        "C001"
+      ]
+    },
+    {
+      "turn_id": "T002",
+      "speaker": "apresentador_b",
+      "text": "Porque a ideia entrega entusiasmo imediato. Por alguns minutos, a gente enxerga mentalmente o produto pronto, os usuários satisfeitos e até a história que contará depois. Construir é menos cinematográfico: exige descobrir detalhes ignorados pela imaginação, escolher entre alternativas imperfeitas e continuar trabalhando quando a novidade já passou.",
+      "coverage_ids": [
+        "C002",
+        "C003"
+      ]
+    },
+    {
+      "turn_id": "T003",
+      "speaker": "apresentador_a",
+      "text": "E é justamente aí que entra o valor desproporcional dos projetos pequenos, certo? Eles encurtam a distância entre a intenção e um resultado concreto.",
+      "coverage_ids": [
+        "C004",
+        "C005"
+      ]
+    },
+    {
+      "turn_id": "T004",
+      "speaker": "apresentador_b",
+      "text": "Exatamente. Pode ser um aplicativo que resolve um único incômodo, uma automação usada por apenas três pessoas ou um texto publicado para uma comunidade pequena. Segundo o texto, iniciativas assim podem ensinar mais do que meses de planejamento de uma plataforma grandiosa.",
+      "coverage_ids": [
+        "C006",
+        "C007",
+        "C008",
+        "C009",
+        "C010"
+      ]
+    },
+    {
+      "turn_id": "T005",
+      "speaker": "apresentador_a",
+      "text": "Porque o tamanho limitado obriga quem cria a ir direto ao núcleo do problema: para quem isso existe, o que realmente precisa funcionar e o que pode ficar para depois.",
+      "coverage_ids": [
+        "C011",
+        "C012"
+      ]
+    },
+    {
+      "turn_id": "T006",
+      "speaker": "apresentador_b",
+      "text": "E isso leva a uma ideia central: terminar não é apenas uma questão de disciplina. Também é uma habilidade técnica de engenharia. É preciso definir uma fronteira, reconhecer dependências, reduzir riscos e decidir claramente o que significa estar pronto. Sem esses critérios, qualquer projeto pode crescer indefinidamente.",
+      "coverage_ids": [
+        "C013",
+        "C014",
+        "C015"
+      ]
+    },
+    {
+      "turn_id": "T007",
+      "speaker": "apresentador_a",
+      "text": "Então um bom recorte não tenta descrever tudo o que o produto poderá fazer no futuro. Ele procura a menor experiência que já seja capaz de entregar valor completo.",
+      "coverage_ids": [
+        "C016",
+        "C017"
+      ]
+    },
+    {
+      "turn_id": "T008",
+      "speaker": "apresentador_b",
+      "text": "O texto usa como exemplo um produto para transformar artigos em áudio. A primeira versão talvez precise somente receber um texto, gerar uma narração compreensível e salvar um arquivo que possa ser reproduzido. Recursos como catálogos, perfis, sincronização e relatórios podem ser importantes, mas não precisam impedir o fechamento desse primeiro ciclo.",
+      "coverage_ids": [
+        "C018",
+        "C019",
+        "C020"
+      ]
+    },
+    {
+      "turn_id": "T009",
+      "speaker": "apresentador_a",
+      "text": "E fechar o ciclo é o que revela os problemas reais. O texto era grande demais? A voz começava a cansar depois de dez minutos? O custo surpreendeu? O arquivo produzido ficou difícil de encontrar?",
+      "coverage_ids": [
+        "C021",
+        "C022",
+        "C023",
+        "C024",
+        "C025",
+        "C026"
+      ]
+    },
+    {
+      "turn_id": "T010",
+      "speaker": "apresentador_b",
+      "text": "Essas perguntas concretas só aparecem quando alguém percorre o caminho inteiro. Antes disso, boa parte da discussão tende a ser apenas uma disputa entre hipóteses.",
+      "coverage_ids": [
+        "C027",
+        "C028"
+      ]
+    },
+    {
+      "turn_id": "T011",
+      "speaker": "apresentador_a",
+      "text": "E quando uma pessoa finalmente usa o que foi construído, o projeto deixa de ser uma extensão do gosto de quem criou e passa a responder ao mundo. Aquilo que parecia óbvio pode não ser tão óbvio assim.",
+      "coverage_ids": [
+        "C029"
+      ]
+    },
+    {
+      "turn_id": "T012",
+      "speaker": "apresentador_b",
+      "text": "Um botão que parecia evidente pode precisar de um rótulo. Uma mensagem de erro considerada suficiente talvez não ajude ninguém a se recuperar. E o uso pode revelar que uma função tratada como secundária é essencial, enquanto outra, sofisticada e trabalhosa, permanece esquecida.",
+      "coverage_ids": [
+        "C030",
+        "C031",
+        "C032"
+      ]
+    },
+    {
+      "turn_id": "T013",
+      "speaker": "apresentador_a",
+      "text": "Esse encontro com o usuário pode ser desconfortável. Mas o texto argumenta que é justamente ele que transforma experiência em aprendizado.",
+      "coverage_ids": [
+        "C033"
+      ]
+    },
+    {
+      "turn_id": "T014",
+      "speaker": "apresentador_b",
+      "text": "Projetos inacabados preservam todas as possibilidades; projetos concluídos produzem evidências. Eles expõem escolhas, limitações e consequências, além de criar algo que pode ser demonstrado, criticado, medido e melhorado.",
+      "coverage_ids": [
+        "C034",
+        "C035",
+        "C036"
+      ]
+    },
+    {
+      "turn_id": "T015",
+      "speaker": "apresentador_a",
+      "text": "Agora, reduzir o escopo não significa abandonar a qualidade. Pequeno não é sinônimo de descartável ou descuidado.",
+      "coverage_ids": [
+        "C037"
+      ]
+    },
+    {
+      "turn_id": "T016",
+      "speaker": "apresentador_b",
+      "text": "Um projeto pequeno ainda pode usar nomes claros, tratar erros, oferecer instruções honestas e ter uma arquitetura que não esconda suas limitações. Nesse contexto, qualidade significa cuidar intensamente de poucas promessas.",
+      "coverage_ids": [
+        "C038",
+        "C039"
+      ]
+    },
+    {
+      "turn_id": "T017",
+      "speaker": "apresentador_a",
+      "text": "O texto diz que existe uma elegância particular nos sistemas que assumem os próprios limites. Como isso aparece para quem usa?",
+      "coverage_ids": [
+        "C040"
+      ]
+    },
+    {
+      "turn_id": "T018",
+      "speaker": "apresentador_b",
+      "text": "Esses sistemas informam o que está acontecendo, falham de maneira compreensível e permitem que a pessoa retome o trabalho. Em vez de tentar parecer completos, procuram ser confiáveis. E, segundo o texto, essa confiabilidade é uma base melhor para crescer do que uma coleção de recursos conectados apenas pela metade.",
+      "coverage_ids": [
+        "C041",
+        "C042",
+        "C043"
+      ]
+    },
+    {
+      "turn_id": "T019",
+      "speaker": "apresentador_a",
+      "text": "Certo, mas como transformar essa ideia em um ciclo que realmente caiba na agenda?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T020",
+      "speaker": "apresentador_b",
+      "text": "Uma forma prática é escolher um problema observado na própria rotina e limitar o primeiro ciclo a poucos dias. No início, escreva uma frase como: “Isto estará pronto quando uma pessoa conseguir...”. Depois, complete essa frase com uma ação verificável e liste somente os obstáculos que impedem essa pessoa de realizá-la.",
+      "coverage_ids": [
+        "C044",
+        "C045",
+        "C046",
+        "C047",
+        "C048",
+        "C049"
+      ]
+    },
+    {
+      "turn_id": "T021",
+      "speaker": "apresentador_a",
+      "text": "E as novas ideias que inevitavelmente aparecem durante a construção? A gente ignora?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T022",
+      "speaker": "apresentador_b",
+      "text": "Não. Elas devem ser registradas, mas não incorporadas automaticamente ao escopo atual. Uma lista de itens para “depois” protege o foco sem desperdiçar os insights. Ao terminar o prazo, entregue a versão a alguém, observe o uso e anote o que aconteceu. O próximo passo deve nascer dessa observação, não da ansiedade de parecer ambicioso.",
+      "coverage_ids": [
+        "C050",
+        "C051",
+        "C052",
+        "C053"
+      ]
+    },
+    {
+      "turn_id": "T023",
+      "speaker": "apresentador_a",
+      "text": "Então a mudança de carreira raramente vem daquela ideia isolada e brilhante. Ela aparece quando acumulamos ciclos completos: perceber, recortar, construir, entregar e aprender.",
+      "coverage_ids": [
+        "C054",
+        "C055"
+      ]
+    },
+    {
+      "turn_id": "T024",
+      "speaker": "apresentador_b",
+      "text": "Isso. Cada ciclo aumenta nossa capacidade de estimar trabalho, conversar com usuários e tomar decisões sob restrições. No fim, um projeto pequeno não é apenas uma versão reduzida de algo maior. Ele é uma unidade completa de experiência e uma prova de que conseguimos atravessar a distância entre imaginar e realizar.",
+      "coverage_ids": [
+        "C056",
+        "C057",
+        "C058",
+        "C059"
+      ]
+    },
+    {
+      "turn_id": "T025",
+      "speaker": "apresentador_a",
+      "text": "Baseado no conteúdo “O valor de terminar: por que projetos pequenos mudam carreiras”. Adaptação em áudio gerada com inteligência artificial. Verifique os direitos do conteúdo original antes de publicar.",
+      "coverage_ids": []
+    }
+  ]
+}
