@@ -31,9 +31,9 @@ def inspect_setup() -> list[SetupCheck]:
     """Retorna um retrato do ambiente sem modificar arquivos ou instalar pacotes."""
     return [
         SetupCheck("git", "Git", bool(shutil.which("git")), True,
-                   "instale pelo gerenciador de pacotes do sistema"),
+                   "pode ser instalado automaticamente"),
         SetupCheck("ffmpeg", "FFmpeg", bool(shutil.which("ffmpeg")), True,
-                   "instale pelo gerenciador de pacotes do sistema"),
+                   "pode ser instalado automaticamente"),
         SetupCheck("requests", "Biblioteca requests",
                    importlib.util.find_spec("requests") is not None, True,
                    "pode ser instalada automaticamente"),
@@ -65,29 +65,62 @@ def setup_report() -> dict:
     }
 
 
+def _run(command: list[str], timeout: int = 20 * 60) -> tuple[bool, str]:
+    try:
+        result = subprocess.run(command, capture_output=True, text=True, timeout=timeout)
+    except (OSError, subprocess.TimeoutExpired) as error:
+        return False, str(error)[:300]
+    detail = (result.stderr or result.stdout).strip().splitlines()
+    return result.returncode == 0, detail[-1][:300] if detail else "instalação concluída"
+
+
 def _install(label: str, *packages: str) -> dict:
     user_scope = [] if sys.prefix != sys.base_prefix else ["--user"]
-    try:
-        result = subprocess.run(
-            [sys.executable, "-m", "pip", "install", *user_scope, *packages],
-            capture_output=True,
-            text=True,
-            timeout=10 * 60,
-        )
-    except (OSError, subprocess.TimeoutExpired) as error:
-        return {"name": label, "ok": False, "detail": str(error)[:300]}
-    detail = (result.stderr or result.stdout).strip().splitlines()
-    return {
-        "name": label,
-        "ok": result.returncode == 0,
-        "detail": detail[-1][:300] if detail else "instalação concluída",
-    }
+    ok, detail = _run([sys.executable, "-m", "pip", "install", *user_scope, *packages])
+    if not ok and "externally-managed-environment" in detail:
+        # Python do Homebrew/Debian bloqueia pip fora de venv (PEP 668).
+        ok, detail = _run([sys.executable, "-m", "pip", "install",
+                           *user_scope, "--break-system-packages", *packages])
+    return {"name": label, "ok": ok, "detail": detail}
+
+
+_SYSTEM_MANAGERS = [
+    ("brew", ["brew", "install"]),
+    ("winget", ["winget", "install", "--accept-source-agreements",
+                "--accept-package-agreements", "-e", "--id"]),
+    ("apt-get", ["sudo", "-n", "apt-get", "install", "-y"]),
+    ("dnf", ["sudo", "-n", "dnf", "install", "-y"]),
+    ("pacman", ["sudo", "-n", "pacman", "-S", "--noconfirm"]),
+]
+
+_WINGET_IDS = {"git": "Git.Git", "ffmpeg": "Gyan.FFmpeg"}
+
+
+def _install_system(tool: str) -> dict:
+    """Instala uma ferramenta de sistema (git/ffmpeg) pelo gerenciador disponível."""
+    for manager, base in _SYSTEM_MANAGERS:
+        if not shutil.which(manager):
+            continue
+        package = _WINGET_IDS.get(tool, tool) if manager == "winget" else tool
+        ok, detail = _run([*base, package])
+        if ok and not shutil.which(tool) and manager == "winget":
+            detail = "instalado; reinicie o app para atualizar o PATH"
+        return {"name": tool, "ok": ok, "detail": f"via {manager}: {detail}"}
+    hint = ("instale o Homebrew (https://brew.sh) e tente novamente"
+            if sys.platform == "darwin"
+            else "nenhum gerenciador de pacotes encontrado (brew/apt/dnf/pacman/winget)")
+    return {"name": tool, "ok": False, "detail": hint}
 
 
 def apply_setup() -> dict:
     """Instala dependências Python ausentes e cria o ``.env`` quando necessário."""
     before = {check.key: check for check in inspect_setup()}
     actions: list[dict] = []
+
+    # git primeiro: o akita-articles é instalado via ``git+https://``.
+    for tool in ("git", "ffmpeg"):
+        if tool in before and not before[tool].ok:
+            actions.append(_install_system(tool))
 
     missing_python = [spec for key, spec in _PYTHON_PACKAGES.items()
                       if key in before and not before[key].ok]

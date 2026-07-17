@@ -44,6 +44,34 @@ class SetupReportTest(unittest.TestCase):
             self.assertTrue((root / ".env").is_file())
         self.assertEqual(result["actions"][0]["name"], ".env")
 
+    @patch("audiofy.setup._install_system")
+    @patch("audiofy.setup.inspect_setup")
+    def test_apply_instala_git_e_ffmpeg_ausentes(self, inspect_setup, install_system):
+        inspect_setup.return_value = [
+            SetupCheck("git", "Git", False, True, ""),
+            SetupCheck("ffmpeg", "FFmpeg", False, True, ""),
+            SetupCheck("akita-articles", "akita", True, True, ""),
+        ]
+        install_system.side_effect = lambda tool: {"name": tool, "ok": True, "detail": ""}
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / ".env.example").write_text("OPENROUTER_API_KEY=\n", encoding="utf-8")
+            with patch("audiofy.setup.PROJECT_ROOT", root):
+                result = apply_setup()
+        self.assertEqual([a["name"] for a in result["actions"][:2]], ["git", "ffmpeg"])
+
+    @patch("audiofy.setup._run")
+    def test_pip_bloqueado_tenta_break_system_packages(self, run):
+        from audiofy.setup import _install
+
+        run.side_effect = [
+            (False, "error: externally-managed-environment"),
+            (True, "instalação concluída"),
+        ]
+        result = _install("pacotes", "rich")
+        self.assertTrue(result["ok"])
+        self.assertIn("--break-system-packages", run.call_args_list[1].args[0])
+
 
 if __name__ == "__main__":
     unittest.main()

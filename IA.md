@@ -420,3 +420,34 @@ montagem atômica e bloqueio do player parcial. Ruff, compilação, sintaxe Elec
 **Risco que sobrou:** o custo do Fable foi confirmado pelo total diário da chave, mas o episódio
 que trocou de chave permanece aproximado. Cada perfil ainda tem uma única amostra; a faixa ganhará
 confiabilidade conforme novas gerações, agora contabilizadas individualmente, forem concluídas.
+
+---
+
+## 2026-07-17 — Instalação automática de git e ffmpeg no setup
+
+**O que mudou:** uma tentativa de instalação no macOS falhou em dois pontos que o botão
+"Instalar/corrigir" não cobria: o `ffmpeg` (que não é pacote Python e nunca instalaria via pip)
+e o `akita-articles` (bloqueado pelo `externally-managed-environment` do Python gerenciado,
+PEP 668). O `apply_setup` agora também instala ferramentas de sistema ausentes — `git` antes do
+`akita-articles`, pois o pip depende dele para `git+https://` — usando o primeiro gerenciador
+disponível: `brew`, `winget`, `apt-get`, `dnf` ou `pacman`. No pip, quando a instalação falha
+com `externally-managed-environment`, há uma nova tentativa automática com
+`--user --break-system-packages`.
+
+**Decisões:** no macOS sem Homebrew a ação falha com orientação explícita de instalá-lo — não é
+seguro automatizar a instalação do próprio brew. No Linux os gerenciadores usam `sudo -n` (sem
+prompt): se a senha não estiver em cache a ação falha com mensagem, em vez de travar o app
+esperando entrada invisível. No Windows via winget, o PATH só atualiza após reiniciar o app, e o
+detalhe da ação avisa. As dicas de `git`/`ffmpeg` no diagnóstico mudaram para "pode ser instalado
+automaticamente" e o README passou a listar como pré-requisitos manuais apenas Python 3.10+,
+Node.js (desktop) e o Homebrew no macOS.
+
+**Validação:** 126 testes Python (2 novos: instalação de git/ffmpeg ausentes na ordem correta e
+retry do pip com `--break-system-packages`) e 13 verificações Node verdes; Ruff, compilação
+Python, sintaxe Electron, `git diff --check` e `npm audit` (zero vulnerabilidades) aprovados.
+A instalação real no macOS ainda não foi reexecutada com as mudanças.
+
+**Risco que sobrou:** a instalação de sistema depende de gerenciador presente e de permissão
+(sudo no Linux); nesses casos a ação reporta a falha com orientação, mas não resolve sozinha.
+O `--break-system-packages` instala no escopo do usuário fora de venv — aceito por ser o mesmo
+escopo que o `--user` já usava, apenas destravando o bloqueio do PEP 668.

@@ -743,7 +743,7 @@ $("btn-setup-check").onclick = async () => {
 };
 
 $("btn-setup-install").onclick = async () => {
-  if (!confirm("Instalar dependências Python ausentes e criar o .env, se necessário?")) return;
+  if (!confirm("Instalar tudo que estiver faltando (git, ffmpeg, dependências Python) e criar o .env, se necessário?")) return;
   const button = $("btn-setup-install");
   button.disabled = true;
   $("setup-message").textContent = "… preparando o ambiente; isso pode levar alguns minutos";

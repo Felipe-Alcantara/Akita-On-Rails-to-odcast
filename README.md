@@ -56,8 +56,11 @@ no núcleo.
 
 ## 🚀 Como usar
 
-Requisitos: Python 3.10+, `git`, `ffmpeg` e uma chave do
+Requisitos: Python 3.10+ e uma chave do
 [OpenRouter](https://openrouter.ai/keys) com créditos. Para o app desktop: Node.js.
+O botão **🛠️ Instalar/corrigir** (aba Configurações) instala o resto — `git`,
+`ffmpeg` e as dependências Python — pelo gerenciador do sistema (brew, apt, dnf,
+pacman ou winget). No macOS é preciso ter o [Homebrew](https://brew.sh) instalado.
 
 ```bash
 python3 start_app.py
