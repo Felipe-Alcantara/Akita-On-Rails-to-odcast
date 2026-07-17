@@ -1,11 +1,15 @@
 "use strict";
 
 (function initStatusView() {
+function isKeyLimitFailure(error) {
+  return /Key limit exceeded|monthly limit/i.test(String(error || ""));
+}
+
 function friendlyGenerationError(error) {
   const detail = String(error || "");
-  if (/Key limit exceeded|monthly limit/i.test(detail)) {
-    return "A chave do OpenRouter atingiu o limite mensal. Aumente o limite da chave " +
-      "ou altere OPENROUTER_API_KEY/.env antes de retomar.";
+  if (isKeyLimitFailure(detail)) {
+    return "A chave usada naquela execução atingiu o limite mensal. A configuração atual " +
+      "pode já ser outra; o Audiofy retoma automaticamente quando ela está disponível.";
   }
   if (/HTTP 401|unauthorized|invalid.*key/i.test(detail)) {
     return "A chave do OpenRouter não foi aceita. Confira a chave configurada.";
@@ -48,8 +52,8 @@ function generationFeedback(status) {
       visible: true,
       tone: "error",
       percent,
-      label: `Falha${stage}${checkpoint}. ${reason} O progresso foi preservado; ` +
-        "retome depois de resolver a causa.",
+      label: `A execução anterior falhou${stage}${checkpoint}. ${reason} ` +
+        "O progresso foi preservado.",
       cost,
     };
   }
@@ -67,7 +71,16 @@ function generationFeedback(status) {
   return { visible: false, tone: "", percent, label: "", cost };
 }
 
-const statusView = { friendlyGenerationError, generationFeedback };
+function canAutoResumeKeyLimit(status, keyCheck) {
+  return Boolean(
+    status && status.state === "falhou" && isKeyLimitFailure(status.last_error)
+    && keyCheck && keyCheck.ok && keyCheck.valid
+  );
+}
+
+const statusView = {
+  canAutoResumeKeyLimit, friendlyGenerationError, generationFeedback, isKeyLimitFailure,
+};
 if (typeof module !== "undefined" && module.exports) module.exports = statusView;
 if (typeof window !== "undefined") window.audiofyStatusView = statusView;
 })();

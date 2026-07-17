@@ -124,6 +124,9 @@ navegação, cartões e formulários ao redimensionar a janela até sua largura 
 O cartão do conteúdo confirma imediatamente o início da geração e mantém falhas rápidas visíveis
 com etapa, checkpoint, custo e orientação segura — por exemplo, limite mensal ou chave recusada —
 em vez de parecer que o botão não respondeu.
+Falhas antigas por limite são identificadas como históricas: ao abrir novamente o conteúdo, o app
+valida a chave efetiva e retoma automaticamente do checkpoint quando houver limite disponível,
+rechecando a configuração a cada minuto enquanto a tela permanecer aberta.
 O app fala com o backend pela bridge JSON
 (`python3 -m audiofy.bridge`), a mesma interface disponível para qualquer automação.
 

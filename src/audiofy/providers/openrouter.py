@@ -232,8 +232,10 @@ def check_api_key(settings: Settings) -> tuple[bool, str]:
         else:
             detail = f"limite US$ {key.limit:.2f}, restante US$ {key.remaining:.2f}"
         reset = f", renovação {key.reset}" if key.reset else ""
-        return True, (f"chave{label} válida — {detail} "
-                      f"(uso mensal US$ {key.usage_monthly:.2f}{reset})")
+        available = key.remaining is None or key.remaining > 0
+        availability = "válida" if available else "válida, mas com limite esgotado"
+        return available, (f"chave{label} {availability} — {detail} "
+                           f"(uso mensal US$ {key.usage_monthly:.2f}{reset})")
     except (OpenRouterError, RuntimeError) as error:
         return False, str(error)
 

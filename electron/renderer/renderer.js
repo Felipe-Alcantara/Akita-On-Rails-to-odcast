@@ -4,7 +4,9 @@
 
 const $ = (id) => document.getElementById(id);
 const bridge = (args, stdin) => window.audiofy.bridge(args, stdin);
-const { friendlyGenerationError, generationFeedback } = window.audiofyStatusView;
+const {
+  canAutoResumeKeyLimit, friendlyGenerationError, generationFeedback, isKeyLimitFailure,
+} = window.audiofyStatusView;
 
 async function openProjectPath(target) {
   const error = await window.audiofy.openPath(target);
@@ -23,6 +25,8 @@ let selectedItem = null;
 let pollTimer = null;
 let sourcesByKey = new Map();
 let generationRequestPending = false;
+const automaticResumeAttempts = new Set();
+const AUTOMATIC_RESUME_RECHECK_MS = 60 * 1000;
 
 // ── Abas ──────────────────────────────────────────────────────────────────
 
@@ -299,6 +303,50 @@ function showGenerationRequest(message, tone = "active") {
   $("cost-label").textContent = "";
 }
 
+function scheduleAutomaticResumeRecheck(status, attemptKey, itemId) {
+  setTimeout(() => {
+    automaticResumeAttempts.delete(attemptKey);
+    if (selectedItem && selectedItem.item_id === itemId) void maybeAutoResume(status);
+  }, AUTOMATIC_RESUME_RECHECK_MS);
+}
+
+async function maybeAutoResume(status) {
+  if (!selectedItem || !status || status.state !== "falhou"
+      || !isKeyLimitFailure(status.last_error)) return;
+  const item = { source: selectedItem.source, itemId: selectedItem.item_id };
+  const attemptKey = `${item.itemId}:${status.updated_at || 0}`;
+  if (automaticResumeAttempts.has(attemptKey)) return;
+  automaticResumeAttempts.add(attemptKey);
+
+  const keyCheck = await bridge(["balance"]);
+  if (!selectedItem || selectedItem.item_id !== item.itemId) return;
+  if (!canAutoResumeKeyLimit(status, keyCheck)) {
+    scheduleAutomaticResumeRecheck(status, attemptKey, item.itemId);
+    return;
+  }
+
+  generationRequestPending = true;
+  updateGenerateButton();
+  showGenerationRequest(
+    "A falha era de uma chave anterior. Retomando automaticamente do checkpoint…"
+  );
+  try {
+    const result = await bridge(["generate", item.source, item.itemId]);
+    if (!result.ok || (!result.started && result.reason !== "geração já em andamento")) {
+      showGenerationRequest(
+        `Não foi possível retomar automaticamente: ${result.reason || result.error}`,
+        "error"
+      );
+      scheduleAutomaticResumeRecheck(status, attemptKey, item.itemId);
+      return;
+    }
+    await refreshStatus();
+  } finally {
+    generationRequestPending = false;
+    updateGenerateButton();
+  }
+}
+
 $("btn-generate").onclick = async () => {
   if (!selectedItem) return;
   const force = $("generate-force").checked;
@@ -396,6 +444,7 @@ function renderSelectedStatus(episodes) {
   $("cost-label").textContent = feedback.cost;
   $("btn-play").onclick = () => status && status.mp3 && openProjectPath(status.mp3);
   $("btn-folder").onclick = () => status && openProjectPath(status.dir);
+  void maybeAutoResume(status);
 }
 
 function renderEpisodes(episodes) {

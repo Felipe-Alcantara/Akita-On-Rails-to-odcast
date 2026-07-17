@@ -81,5 +81,17 @@ class OpenRouterKeyLimitTest(unittest.TestCase):
         self.assertIn("restante US$ 4.38", detail)
         self.assertIn("uso mensal US$ 0.62", detail)
 
+    @patch("audiofy.providers.openrouter.current_key_limit")
+    def test_limite_esgotado_nao_e_considerado_disponivel(self, key_limit):
+        key_limit.return_value = SimpleNamespace(
+            label="sk-or-v1-antiga...40e", limit=1.0, remaining=0.0,
+            usage_monthly=1.02, reset="monthly",
+        )
+
+        valid, detail = check_api_key(self.settings)
+
+        self.assertFalse(valid)
+        self.assertIn("limite esgotado", detail)
+
 if __name__ == "__main__":
     unittest.main()

@@ -364,3 +364,26 @@ próprio, sem iniciar geração nem consumir TTS.
 
 **Risco que sobrou:** processos de geração já iniciados preservam deliberadamente a configuração
 com que nasceram; trocar o `.env` afeta novas operações, não muta workers que estejam em execução.
+
+---
+
+## 2026-07-17 — Recuperação automática após troca de chave
+
+**O que mudou:** um cartão vermelho ainda dizia que "a chave atingiu o limite" depois da troca,
+embora representasse o erro persistido da execução anterior. A mensagem agora usa passado e deixa
+explícito que aquela execução usou outra chave. Ao selecionar um conteúdo parado especificamente
+por limite, o Electron consulta a chave efetiva; havendo limite disponível, inicia a retomada sem
+regenerar os checkpoints. Se a chave continuar esgotada, revalida a cada minuto enquanto o item
+permanecer aberto.
+
+**Decisões:** a consulta de chave retorna indisponível quando `limit_remaining` é zero, mesmo que a
+credencial seja tecnicamente válida. Isso impede um loop de retomadas rejeitadas. A automação é
+restrita ao erro conhecido de limite e ao item selecionado; autenticação, falta de crédito global
+ou falhas desconhecidas continuam exigindo intervenção para não repetir custos ou efeitos.
+
+**Validação:** 110 testes Python e 11 testes Node verdes. Uma retomada real preservou as 66 falas
+existentes e avançou com a chave atual, sem refazer cobertura, roteiro ou auditoria. As verificações
+de lint, compilação, sintaxe Electron e integridade do diff também passaram.
+
+**Risco que sobrou:** a recuperação automática depende de o conteúdo afetado permanecer selecionado
+no Electron; episódios falhos não são retomados silenciosamente apenas por abrir o aplicativo.

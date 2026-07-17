@@ -6,7 +6,9 @@ const path = require("node:path");
 const test = require("node:test");
 const vm = require("node:vm");
 
-const { friendlyGenerationError, generationFeedback } = require("../renderer/status-view");
+const {
+  canAutoResumeKeyLimit, friendlyGenerationError, generationFeedback,
+} = require("../renderer/status-view");
 
 test("traduz limite mensal da chave sem expor URL interna do provedor", () => {
   const message = friendlyGenerationError(
@@ -14,8 +16,8 @@ test("traduz limite mensal da chave sem expor URL interna do provedor", () => {
     "Manage it using https://openrouter.ai/workspaces/default/keys/identificador"
   );
 
-  assert.match(message, /limite mensal/i);
-  assert.match(message, /OPENROUTER_API_KEY/);
+  assert.match(message, /chave usada naquela execução/i);
+  assert.match(message, /retoma automaticamente/i);
   assert.doesNotMatch(message, /https?:\/\//);
   assert.doesNotMatch(message, /identificador/);
 });
@@ -33,7 +35,22 @@ test("falha rápida permanece visível com checkpoint e ação recomendada", () 
   assert.equal(feedback.tone, "error");
   assert.equal(feedback.percent, 72);
   assert.match(feedback.label, /66\/92/);
+  assert.match(feedback.label, /execução anterior/i);
   assert.match(feedback.label, /progresso foi preservado/i);
+});
+
+test("retoma limite antigo somente quando a chave atual tem saldo", () => {
+  const status = {
+    state: "falhou",
+    last_error: "HTTP 403: Key limit exceeded (monthly limit)",
+  };
+
+  assert.equal(canAutoResumeKeyLimit(status, { ok: true, valid: true }), true);
+  assert.equal(canAutoResumeKeyLimit(status, { ok: true, valid: false }), false);
+  assert.equal(canAutoResumeKeyLimit(
+    { ...status, last_error: "HTTP 401: unauthorized" },
+    { ok: true, valid: true }
+  ), false);
 });
 
 test("estado de inicialização aparece antes do primeiro segmento", () => {
