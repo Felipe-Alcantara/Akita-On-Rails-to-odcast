@@ -8,10 +8,20 @@ Padrão de qualidade - Felixo System Design/
 __pycache__/
 *.pyc
 .venv/
+.coverage
+coverage.xml
+htmlcov/
+.ruff_cache/
 
 # Node/Electron
 electron/node_modules/
+npm-debug.log*
 data/source/akitaonrails.github.io/
+
+# Editores e sistema operacional
+.DS_Store
+.idea/
+.vscode/
 
 # Conteúdo local/pessoal inserido pela interface
 data/chat/

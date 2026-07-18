@@ -7,15 +7,13 @@ import shutil
 import subprocess
 import sys
 from dataclasses import asdict, dataclass
+from pathlib import Path
 
 from .config import PROJECT_ROOT, Settings
 from .providers.subscription import SUBSCRIPTION_CLIS
 
-_PYTHON_PACKAGES = {
-    "requests": "requests>=2.31,<3",
-    "questionary": "questionary>=2.0,<3",
-    "rich": "rich>=13,<15",
-}
+_PYTHON_MODULES = ("requests", "questionary", "rich", "akita-articles")
+_TUI_PACKAGES = ("questionary==2.1.1", "rich==15.0.0")
 
 
 @dataclass(frozen=True)
@@ -30,27 +28,80 @@ class SetupCheck:
 def inspect_setup() -> list[SetupCheck]:
     """Retorna um retrato do ambiente sem modificar arquivos ou instalar pacotes."""
     return [
-        SetupCheck("git", "Git", bool(shutil.which("git")), True,
-                   "pode ser instalado automaticamente"),
-        SetupCheck("ffmpeg", "FFmpeg", bool(shutil.which("ffmpeg")), True,
-                   "pode ser instalado automaticamente"),
-        SetupCheck("requests", "Biblioteca requests",
-                   importlib.util.find_spec("requests") is not None, True,
-                   "pode ser instalada automaticamente"),
-        SetupCheck("questionary", "Menu interativo questionary",
-                   importlib.util.find_spec("questionary") is not None, True,
-                   "pode ser instalado automaticamente"),
-        SetupCheck("rich", "Interface colorida Rich",
-                   importlib.util.find_spec("rich") is not None, True,
-                   "pode ser instalada automaticamente"),
-        SetupCheck("akita-articles", "Módulo akita-articles",
-                   importlib.util.find_spec("akita_articles") is not None, True,
-                   "pode ser instalado automaticamente"),
-        SetupCheck("openrouter-key", "Chave OpenRouter", bool(Settings().api_key), True,
-                   "adicione uma chave na aba Configurações"),
+        SetupCheck(
+            "git", "Git", bool(shutil.which("git")), True, "pode ser instalado automaticamente"
+        ),
+        SetupCheck(
+            "ffmpeg",
+            "FFmpeg",
+            bool(shutil.which("ffmpeg")),
+            True,
+            "pode ser instalado automaticamente",
+        ),
+        SetupCheck(
+            "node",
+            "Node.js",
+            bool(shutil.which("node")),
+            False,
+            "opcional; necessário para o app desktop",
+        ),
+        SetupCheck(
+            "npm",
+            "npm",
+            bool(shutil.which("npm")),
+            False,
+            "opcional; instala o app desktop",
+        ),
+        SetupCheck(
+            "electron-deps",
+            "Dependências do app desktop",
+            (PROJECT_ROOT / "electron" / "node_modules" / "electron").is_dir(),
+            False,
+            "opcional; Instalar / Setup prepara quando npm está disponível",
+        ),
+        SetupCheck(
+            "requests",
+            "Biblioteca requests",
+            importlib.util.find_spec("requests") is not None,
+            True,
+            "pode ser instalada automaticamente",
+        ),
+        SetupCheck(
+            "questionary",
+            "Menu interativo questionary",
+            importlib.util.find_spec("questionary") is not None,
+            True,
+            "pode ser instalado automaticamente",
+        ),
+        SetupCheck(
+            "rich",
+            "Interface colorida Rich",
+            importlib.util.find_spec("rich") is not None,
+            True,
+            "pode ser instalada automaticamente",
+        ),
+        SetupCheck(
+            "akita-articles",
+            "Módulo akita-articles",
+            importlib.util.find_spec("akita_articles") is not None,
+            True,
+            "pode ser instalado automaticamente",
+        ),
+        SetupCheck(
+            "openrouter-key",
+            "Chave OpenRouter",
+            bool(Settings().api_key),
+            True,
+            "adicione uma chave na aba Configurações",
+        ),
         *[
-            SetupCheck(f"subscription-{cli.key}", cli.name, cli.is_available(), False,
-                       "opcional; habilita texto pela assinatura")
+            SetupCheck(
+                f"subscription-{cli.key}",
+                cli.name,
+                cli.is_available(),
+                False,
+                "opcional; habilita texto pela assinatura",
+            )
             for cli in SUBSCRIPTION_CLIS
         ],
     ]
@@ -65,13 +116,33 @@ def setup_report() -> dict:
     }
 
 
-def _run(command: list[str], timeout: int = 20 * 60) -> tuple[bool, str]:
+def _run(command: list[str], timeout: int = 20 * 60, cwd: Path | None = None) -> tuple[bool, str]:
     try:
-        result = subprocess.run(command, capture_output=True, text=True, timeout=timeout)
+        result = subprocess.run(
+            command,
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+            cwd=cwd,
+        )
     except (OSError, subprocess.TimeoutExpired) as error:
         return False, str(error)[:300]
     detail = (result.stderr or result.stdout).strip().splitlines()
     return result.returncode == 0, detail[-1][:300] if detail else "instalação concluída"
+
+
+def npm_command() -> list[str] | None:
+    """Resolve o npm sem depender da execução implícita de ``npm.cmd`` no Windows."""
+    npm = shutil.which("npm")
+    if not npm:
+        return None
+    if sys.platform == "win32":
+        node = shutil.which("node")
+        if node:
+            npm_cli = Path(node).parent / "node_modules" / "npm" / "bin" / "npm-cli.js"
+            if npm_cli.is_file():
+                return [node, str(npm_cli)]
+    return [npm]
 
 
 def _install(label: str, *packages: str) -> dict:
@@ -79,15 +150,33 @@ def _install(label: str, *packages: str) -> dict:
     ok, detail = _run([sys.executable, "-m", "pip", "install", *user_scope, *packages])
     if not ok and "externally-managed-environment" in detail:
         # Python do Homebrew/Debian bloqueia pip fora de venv (PEP 668).
-        ok, detail = _run([sys.executable, "-m", "pip", "install",
-                           *user_scope, "--break-system-packages", *packages])
+        ok, detail = _run(
+            [
+                sys.executable,
+                "-m",
+                "pip",
+                "install",
+                *user_scope,
+                "--break-system-packages",
+                *packages,
+            ]
+        )
     return {"name": label, "ok": ok, "detail": detail}
 
 
 _SYSTEM_MANAGERS = [
     ("brew", ["brew", "install"]),
-    ("winget", ["winget", "install", "--accept-source-agreements",
-                "--accept-package-agreements", "-e", "--id"]),
+    (
+        "winget",
+        [
+            "winget",
+            "install",
+            "--accept-source-agreements",
+            "--accept-package-agreements",
+            "-e",
+            "--id",
+        ],
+    ),
     ("apt-get", ["sudo", "-n", "apt-get", "install", "-y"]),
     ("dnf", ["sudo", "-n", "dnf", "install", "-y"]),
     ("pacman", ["sudo", "-n", "pacman", "-S", "--noconfirm"]),
@@ -106,9 +195,11 @@ def _install_system(tool: str) -> dict:
         if ok and not shutil.which(tool) and manager == "winget":
             detail = "instalado; reinicie o app para atualizar o PATH"
         return {"name": tool, "ok": ok, "detail": f"via {manager}: {detail}"}
-    hint = ("instale o Homebrew (https://brew.sh) e tente novamente"
-            if sys.platform == "darwin"
-            else "nenhum gerenciador de pacotes encontrado (brew/apt/dnf/pacman/winget)")
+    hint = (
+        "instale o Homebrew (https://brew.sh) e tente novamente"
+        if sys.platform == "darwin"
+        else "nenhum gerenciador de pacotes encontrado (brew/apt/dnf/pacman/winget)"
+    )
     return {"name": tool, "ok": False, "detail": hint}
 
 
@@ -122,35 +213,47 @@ def apply_setup() -> dict:
         if tool in before and not before[tool].ok:
             actions.append(_install_system(tool))
 
-    missing_python = [spec for key, spec in _PYTHON_PACKAGES.items()
-                      if key in before and not before[key].ok]
+    missing_python = [key for key in _PYTHON_MODULES if key in before and not before[key].ok]
     if missing_python:
-        actions.append(_install("dependências Python", *missing_python))
-    if not before["akita-articles"].ok:
-        actions.append(_install(
-            "akita-articles",
-            "git+https://github.com/Felipe-Alcantara/akita-articles",
-        ))
+        actions.append(
+            _install(
+                "dependências Python",
+                "-r",
+                str(PROJECT_ROOT / "requirements.txt"),
+            )
+        )
+
+    npm = npm_command()
+    electron_dir = PROJECT_ROOT / "electron"
+    electron_missing = "electron-deps" in before and not before["electron-deps"].ok
+    if npm and electron_missing and (electron_dir / "package-lock.json").is_file():
+        ok, detail = _run(
+            [*npm, "ci", "--no-fund", "--no-audit"],
+            cwd=electron_dir,
+        )
+        actions.append({"name": "dependências do app desktop", "ok": ok, "detail": detail})
 
     env_path = PROJECT_ROOT / ".env"
     example_path = PROJECT_ROOT / ".env.example"
     if not env_path.is_file():
         if example_path.is_file():
             shutil.copyfile(example_path, env_path)
-            actions.append({"name": ".env", "ok": True,
-                            "detail": "criado a partir de .env.example"})
+            actions.append(
+                {"name": ".env", "ok": True, "detail": "criado a partir de .env.example"}
+            )
         else:
-            actions.append({"name": ".env", "ok": False,
-                            "detail": ".env.example não encontrado"})
+            actions.append({"name": ".env", "ok": False, "detail": ".env.example não encontrado"})
 
     return {**setup_report(), "actions": actions}
 
 
 def ensure_tui() -> dict | None:
     """Instala o mínimo necessário para desenhar o menu na primeira execução."""
-    missing = [spec for key, spec in _PYTHON_PACKAGES.items()
-               if key in {"questionary", "rich"}
-               and importlib.util.find_spec(key) is None]
+    missing = [
+        spec
+        for key, spec in zip(("questionary", "rich"), _TUI_PACKAGES, strict=True)
+        if importlib.util.find_spec(key) is None
+    ]
     if not missing:
         return None
     action = _install("interface interativa", *missing)

@@ -23,8 +23,9 @@ from pathlib import Path
 _TIMEOUT_SECONDS = 900
 
 
-def run_cli(command: list[str], stdin: str,
-            timeout: int = _TIMEOUT_SECONDS) -> subprocess.CompletedProcess:
+def run_cli(
+    command: list[str], stdin: str, timeout: int = _TIMEOUT_SECONDS
+) -> subprocess.CompletedProcess:
     """Executa uma CLI de assinatura de forma portátil.
 
     No Windows as CLIs instaladas via npm (claude, gemini) são scripts ``.cmd``.
@@ -34,8 +35,7 @@ def run_cli(command: list[str], stdin: str,
     """
     if sys.platform == "win32":
         command = _windows_command(command)
-    return subprocess.run(command, input=stdin, capture_output=True, text=True,
-                          timeout=timeout)
+    return subprocess.run(command, input=stdin, capture_output=True, text=True, timeout=timeout)
 
 
 def _windows_command(command: list[str]) -> list[str]:
@@ -198,7 +198,5 @@ def chat_json(provider_key: str, system: str, user: str):
     try:
         data = _extract_json(result.stdout or "")
     except (json.JSONDecodeError, ValueError) as error:
-        raise SubscriptionError(
-            f"{cli.name} não retornou JSON válido: {error}"
-        ) from error
+        raise SubscriptionError(f"{cli.name} não retornou JSON válido: {error}") from error
     return ChatResult(data=data, cost_usd=0.0, prompt_tokens=0, completion_tokens=0)

@@ -5,17 +5,20 @@
 
 ## Objetivo atual
 
-MVP funcional: listar os artigos do blog AkitaOnRails e gerar episódios de podcast com dois
-apresentadores via OpenRouter, seguindo o pipeline auditável de [docs/PLANO-TECNICO.md](docs/PLANO-TECNICO.md).
+MVP funcional: transformar conteúdo próprio, URLs públicas ou fontes registradas em episódios de
+podcast auditáveis, com 1..N apresentadores, retomada por checkpoint, custo observável e interfaces
+CLI/Electron, seguindo [docs/PLANO-TECNICO.md](docs/PLANO-TECNICO.md).
 
 ## Stack e convenções
 
-- Python 3.12, apenas stdlib + `requests`; `ffmpeg` para montagem de áudio.
-- Estrutura `src/akita_podcast/` com módulos por responsabilidade: `config` (env/modelos),
-  `source_repo` (Git + parser), `openrouter` (adaptador HTTP), `pipeline` (casos de uso).
+- Python 3.10+ com `requests`, `questionary` e `rich`; `ffmpeg` para montagem de áudio.
+- Electron 41 com Node.js 18.18+ para o desktop; lógica de negócio permanece no backend Python.
+- Estrutura `src/audiofy/` separada em fontes, provedores, pipeline, runtime, bridge e interfaces.
 - Porta de entrada: `start_app.py` (menu interativo, padrão Felixo).
-- Artefatos locais em `data/` (ignorado pelo Git); segredos somente em `.env`.
-- Testes com `unittest` em `tests/unit/`.
+- Episódios auditáveis em `data/episodes/`; estado pessoal (`data/chat/`, `data/inbox/`) ignorado.
+- Segredos somente em `.env` ou `.audiofy/keys.json`, ambos fora do Git.
+- Testes com `unittest` e coverage.py; JavaScript com Node test runner; régua em
+  `scripts/check_quality.py`.
 
 ---
 
@@ -686,3 +689,74 @@ morto de verdade reconciliado para `falhou` com checkpoint preservado.
 "rodando" se outro processo nascer com o mesmo PID; a janela é pequena e o custo é apenas
 esperar o usuário abortar. A causa exata da morte do worker naquele Windows será confirmada
 pelo generation.log agora que o erro fica visível.
+
+---
+
+## 2026-07-18 — Régua de qualidade reproduzível para Python e Electron
+
+**O que mudou:** o repositório foi padronizado de ponta a ponta contra o Felixo System Design,
+sem alterar contratos funcionais do pipeline:
+
+- **Configuração central:** `pyproject.toml` define Ruff, formatter e cobertura mínima de 70%;
+  `.editorconfig` e `.gitattributes` estabilizam encoding, indentação e fins de linha.
+- **JavaScript verificável:** Electron ganhou ESLint 9 (linha compatível com Node 18), integrado
+  ao `npm run check`; código Python foi normalizado pelo Ruff formatter e passou a usar um
+  conjunto explícito de regras de bugs, imports e modernização segura.
+- **Dependências reproduzíveis:** pacotes Python diretos ficaram fixados, `akita-articles` passou
+  a apontar para um SHA imutável, ferramentas de desenvolvimento foram separadas em
+  `requirements-dev.txt` e o lockfile npm foi regenerado. O setup instala pelo mesmo arquivo
+  fixado, coberto por regressão.
+- **Automação única:** `scripts/check_quality.py` executa lint, formato, testes+cobertura,
+  Electron, JSON, links Markdown, whitespace e auditorias; `--quick` pula apenas rede. A CI
+  repete Python 3.10/3.12, Node 18 e auditorias, com Actions presas por SHA. Dependabot cobre
+  pip, npm e GitHub Actions.
+- **Governança:** adicionados `AGENTS.md`, `CONTRIBUTING.md`, `SECURITY.md`, template de PR e
+  `docs/QUALIDADE.md`; README e o resumo vivo deste arquivo foram alinhados ao estado real.
+
+**Decisões:** cobertura inicial foi fixada em 70% por refletir a base real sem mascarar módulos
+de UI/integração; aumentos futuros devem vir com testes de comportamento. ESLint 10 não foi usado
+porque exige Node 20.19+, enquanto o produto ainda declara Node 18. O utilitário de qualidade é
+interno, sem usuário final, e por isso é a exceção documentada ao menu `start_app.py`.
+
+**Validação:** instalação do zero em venv temporário; 177 testes Python e 14 testes Node verdes;
+cobertura agregada de 70%; Ruff lint/format, ESLint, `node --check`, compilação Python, JSON,
+links internos, `git diff --check`, `pip-audit` e `npm audit` aprovados. Zero vulnerabilidades
+conhecidas nas árvores auditáveis e lockfile npm reproduzível. A integração ao vivo também
+validou autenticação, saldo e catálogo TTS (12 modelos retornados); a chave efetiva estava válida,
+mas com limite mensal esgotado, então nenhuma chamada paga de texto/voz foi disparada.
+
+**Risco que sobrou:** o `pip-audit` não possui registro PyPI para `akita-articles` e o marca como
+não auditável; o risco foi reduzido prendendo a dependência a um commit e validando sua instalação
+limpa. A compatibilidade Python 3.10 fica coberta pela nova matriz de CI quando ela rodar no GitHub;
+a validação local desta mudança ocorreu em Python 3.12 e Node 25, além do alvo Node 18 configurado.
+
+---
+
+## 2026-07-18 — Conformidade explícita com os guias do padrão de qualidade
+
+**O que mudou:** depois da régua automatizada, os guias de backend, frontend, README e
+`start_app.py` do Felixo System Design foram tratados como requisitos normativos e auditados um
+a um. A porta de entrada agora expõe explicitamente **Iniciar / Rodar**, **Configurar**,
+**Instalar / Setup**, **Status** e **Sair**; paginação, chat e texto multilinha deixaram de usar
+`input()` cru. O Status passou a consultar virtualenv, `.env`, ferramentas e dependências reais.
+O Setup diagnostica Node/npm e instala o Electron com `npm ci`, pelo lockfile, quando disponível.
+
+No frontend, as quatro abas viraram painéis ARIA dentro de um único landmark `<main>`; o rótulo
+dos apresentadores ganhou associação semântica e todas as limpezas do renderer usam
+`replaceChildren()`, eliminando `innerHTML`. Testes estáticos protegem landmark, painéis, labels,
+foco visível e `prefers-reduced-motion`. O README foi reordenado segundo o guia e ganhou estrutura
+comentada, ferramentas disponíveis, exemplos de entrada/saída, guia para iniciantes, objetivo e
+governança na sequência exigida. `docs/QUALIDADE.md` registra a correspondência entre guias e
+controles.
+
+**Validação:** ambiente virtual criado do zero; 184 testes Python e 17 testes Node verdes;
+cobertura agregada de 70%; Ruff lint/format, ESLint, sintaxe Node, JSON, links internos,
+`git diff --check`, `pip-audit` e `npm audit` aprovados. O desktop foi aberto sem chamada paga e
+inspecionado visualmente em 1200 px, 600 px e 380 px; navegação, cartões, configuração ativa e
+campo do chat permaneceram íntegros. A chave já registrada havia sido validada na rodada anterior,
+mas estava com o limite mensal esgotado, então nenhuma geração paga foi feita.
+
+**Risco que sobrou:** o `akita-articles` continua fora do banco do PyPI Audit, mitigado pelo SHA
+imutável e pela instalação limpa. A cobertura está exatamente no piso inicial de 70% e deve subir
+gradualmente. A inspeção visual desta rodada foi no Linux; Windows e macOS seguem cobertos por
+testes de processo/caminhos e pela CI, mas ainda merecem smoke visual nativo antes de uma release.

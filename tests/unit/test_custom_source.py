@@ -51,8 +51,9 @@ class CustomSourceTest(unittest.TestCase):
         self.assertEqual(self.source.list_items(), [])
 
     def test_adicionar_texto(self):
-        item_id = self.source.add_text("Meu Artigo", "Corpo do conteúdo.",
-                                       url="https://exemplo.com/a")
+        item_id = self.source.add_text(
+            "Meu Artigo", "Corpo do conteúdo.", url="https://exemplo.com/a"
+        )
         items = self.source.list_items()
         self.assertEqual(len(items), 1)
         item = self.source.get_item(item_id)
@@ -92,7 +93,8 @@ class PublicUrlValidationTest(unittest.TestCase):
 
     def test_aceita_https_publico(self):
         url = validate_public_url(
-            "https://example.com/artigo", resolver=self._resolver_for("93.184.216.34"),
+            "https://example.com/artigo",
+            resolver=self._resolver_for("93.184.216.34"),
         )
         self.assertEqual(url, "https://example.com/artigo")
 
@@ -101,13 +103,15 @@ class PublicUrlValidationTest(unittest.TestCase):
             validate_public_url("file:///etc/passwd", resolver=self._resolver_for("8.8.8.8"))
         with self.assertRaises(ValueError):
             validate_public_url(
-                "https://user:secret@example.com", resolver=self._resolver_for("8.8.8.8"),
+                "https://user:secret@example.com",
+                resolver=self._resolver_for("8.8.8.8"),
             )
 
     def test_rejeita_destino_de_rede_privada(self):
         with self.assertRaisesRegex(ValueError, "rede local"):
             validate_public_url(
-                "http://localhost/admin", resolver=self._resolver_for("127.0.0.1"),
+                "http://localhost/admin",
+                resolver=self._resolver_for("127.0.0.1"),
             )
 
 

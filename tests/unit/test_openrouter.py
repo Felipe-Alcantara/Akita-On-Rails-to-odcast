@@ -54,14 +54,16 @@ class OpenRouterKeyLimitTest(unittest.TestCase):
 
     @patch("audiofy.providers.openrouter._request")
     def test_consulta_limite_da_chave_em_vez_do_saldo_global(self, request):
-        request.return_value.json.return_value = {"data": {
-            "label": "sk-or-v1-594...81d",
-            "usage": 0.624287,
-            "usage_monthly": 0.624287,
-            "limit": 5,
-            "limit_remaining": 4.375713,
-            "limit_reset": None,
-        }}
+        request.return_value.json.return_value = {
+            "data": {
+                "label": "sk-or-v1-594...81d",
+                "usage": 0.624287,
+                "usage_monthly": 0.624287,
+                "limit": 5,
+                "limit_remaining": 4.375713,
+                "limit_reset": None,
+            }
+        }
 
         limit = current_key_limit(self.settings)
 
@@ -73,8 +75,11 @@ class OpenRouterKeyLimitTest(unittest.TestCase):
     @patch("audiofy.providers.openrouter.current_key_limit")
     def test_diagnostico_identifica_chave_e_saldo_do_limite(self, key_limit):
         key_limit.return_value = SimpleNamespace(
-            label="sk-or-v1-594...81d", limit=5.0, remaining=4.375713,
-            usage_monthly=0.624287, reset=None,
+            label="sk-or-v1-594...81d",
+            limit=5.0,
+            remaining=4.375713,
+            usage_monthly=0.624287,
+            reset=None,
         )
 
         valid, detail = check_api_key(self.settings)
@@ -87,8 +92,11 @@ class OpenRouterKeyLimitTest(unittest.TestCase):
     @patch("audiofy.providers.openrouter.current_key_limit")
     def test_limite_esgotado_nao_e_considerado_disponivel(self, key_limit):
         key_limit.return_value = SimpleNamespace(
-            label="sk-or-v1-antiga...40e", limit=1.0, remaining=0.0,
-            usage_monthly=1.02, reset="monthly",
+            label="sk-or-v1-antiga...40e",
+            limit=1.0,
+            remaining=0.0,
+            usage_monthly=1.02,
+            reset="monthly",
         )
 
         valid, detail = check_api_key(self.settings)
@@ -100,15 +108,19 @@ class OpenRouterKeyLimitTest(unittest.TestCase):
 class OpenRouterSpeechAccountingTest(unittest.TestCase):
     def setUp(self):
         self.settings = SimpleNamespace(
-            require_api_key=lambda: "chave-de-teste", tts_model="vendor/tts",
+            require_api_key=lambda: "chave-de-teste",
+            tts_model="vendor/tts",
             tts_format="pcm",
         )
 
     @patch("audiofy.providers.openrouter._request")
     def test_tts_preserva_identificador_da_geracao(self, request):
         request.return_value = Mock(
-            content=b"x" * 600, text="", headers={
-                "Content-Type": "audio/pcm", "X-Generation-Id": "gen-123",
+            content=b"x" * 600,
+            text="",
+            headers={
+                "Content-Type": "audio/pcm",
+                "X-Generation-Id": "gen-123",
             },
         )
 
@@ -129,6 +141,7 @@ class OpenRouterSpeechAccountingTest(unittest.TestCase):
 
         with self.assertRaisesRegex(OpenRouterError, "custo inválido"):
             generation_cost_usd(self.settings, "gen-123")
+
 
 if __name__ == "__main__":
     unittest.main()

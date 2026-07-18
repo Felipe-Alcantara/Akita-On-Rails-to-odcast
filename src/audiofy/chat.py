@@ -14,8 +14,8 @@ from __future__ import annotations
 import json
 import re
 import time
+from collections.abc import Callable
 from pathlib import Path
-from typing import Callable
 
 from .config import DATA_DIR, Settings
 from .security import validate_identifier
@@ -95,8 +95,7 @@ def parse_actions(reply: str) -> tuple[str, list[dict]]:
 
 
 class ChatSession:
-    def __init__(self, session_id: str = "principal",
-                 chat_dir: Path | None = None) -> None:
+    def __init__(self, session_id: str = "principal", chat_dir: Path | None = None) -> None:
         session_id = validate_identifier(session_id, "ID da sessão", max_length=64)
         self.path = (chat_dir or CHAT_DIR) / f"{session_id}.json"
         self.messages: list[dict] = []
@@ -120,17 +119,21 @@ class ChatSession:
             lines.append(f"{speaker}: {message['content']}")
         return "\n\n".join(lines)
 
-    def send(self, message: str, settings: Settings,
-             call_provider: Callable[[str, str, Settings], str] | None = None,
-             ) -> tuple[str, list[dict]]:
+    def send(
+        self,
+        message: str,
+        settings: Settings,
+        call_provider: Callable[[str, str, Settings], str] | None = None,
+    ) -> tuple[str, list[dict]]:
         """Envia uma mensagem e retorna (texto da resposta, ações propostas)."""
         if not isinstance(message, str) or not message.strip():
             raise ValueError("A mensagem não pode ser vazia.")
         if len(message) > 50_000:
             raise ValueError("A mensagem excede o limite de 50.000 caracteres.")
         history = self._transcript()
-        user_prompt = (f"Histórico da conversa:\n{history}\n\nUsuário: {message}"
-                       if history else message)
+        user_prompt = (
+            f"Histórico da conversa:\n{history}\n\nUsuário: {message}" if history else message
+        )
         caller = call_provider or _default_provider
         reply = caller(SYSTEM_PROMPT, user_prompt, settings)
         self.messages.append({"role": "user", "content": message, "at": time.time()})
@@ -144,6 +147,7 @@ def _default_provider(system: str, user: str, settings: Settings) -> str:
     senão, API do OpenRouter em texto livre."""
     if settings.text_provider not in ("", "openrouter"):
         from .providers.subscription import get_cli, run_cli
+
         cli = get_cli(settings.text_provider)
         if cli.args:
             command, stdin = cli.chat_command(system), user
@@ -164,7 +168,9 @@ def _default_provider(system: str, user: str, settings: Settings) -> str:
         return reply
 
     import requests
+
     from .config import OPENROUTER_BASE_URL
+
     response = requests.post(
         f"{OPENROUTER_BASE_URL}/chat/completions",
         json={

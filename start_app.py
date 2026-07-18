@@ -15,7 +15,6 @@ Uso:
 from __future__ import annotations
 
 import json
-import shutil
 import subprocess
 import sys
 import time
@@ -32,7 +31,13 @@ SOURCE_KEY = "custom"  # fonte ativa do menu (trocável); "custom" = qualquer co
 _TUI = None
 
 BOLD, DIM, GREEN, YELLOW, RED, CYAN, RESET = (
-    "\033[1m", "\033[2m", "\033[92m", "\033[93m", "\033[91m", "\033[96m", "\033[0m"
+    "\033[1m",
+    "\033[2m",
+    "\033[92m",
+    "\033[93m",
+    "\033[91m",
+    "\033[96m",
+    "\033[0m",
 )
 
 
@@ -61,21 +66,23 @@ def _tui():
     global _TUI
     if _TUI is None:
         from audiofy.setup import ensure_tui
+
         action = ensure_tui()
         if action and not action["ok"]:
-            raise RuntimeError(
-                "Não foi possível preparar o menu interativo: " + action["detail"]
-            )
+            raise RuntimeError("Não foi possível preparar o menu interativo: " + action["detail"])
         from audiofy import tui
+
         _TUI = tui
     return _TUI
 
 
 # ── Setup, configuração e status ────────────────────────────────────────────
 
+
 def do_setup() -> None:
     """Verifica dependências, instala o módulo akita-articles e cria o .env."""
     from audiofy.setup import apply_setup
+
     print(f"\n{BOLD}Verificando dependências…{RESET}")
     report = apply_setup()
     for action in report["actions"]:
@@ -92,10 +99,13 @@ def do_setup() -> None:
 def do_keys() -> None:
     """Cofre de chaves nomeadas: listar, adicionar, ativar, remover, checar saldo."""
     from audiofy.config import key_store
+
     store = key_store()
     while True:
-        print(f"\n{BOLD}Chaves do OpenRouter{RESET} "
-              f"{DIM}(.audiofy/keys.json, permissão 0600, fora do Git){RESET}")
+        print(
+            f"\n{BOLD}Chaves do OpenRouter{RESET} "
+            f"{DIM}(.audiofy/keys.json, permissão 0600, fora do Git){RESET}"
+        )
         keys = store.list_keys()
         if not keys:
             _warn("Nenhuma chave no cofre.")
@@ -103,15 +113,19 @@ def do_keys() -> None:
             marker = f"{GREEN}● ativa{RESET}" if named.name == store.active_name() else " "
             print(f"  {named.name:<20} {DIM}{named.masked}{RESET} {marker}")
         if __import__("os").environ.get("OPENROUTER_API_KEY"):
-            _warn("OPENROUTER_API_KEY definida no ambiente/.env — ela tem prioridade "
-                  "sobre o cofre.")
-        choice = _tui().choose("O que deseja fazer?", [
-            ("➕ Adicionar chave — guarda uma nova chave nomeada", "add"),
-            ("✅ Trocar chave ativa — escolhe qual chave será usada", "activate"),
-            ("🗑️ Remover chave — exclui do cofre local", "remove"),
-            ("💰 Consultar saldo — valida a chave e mostra o uso", "balance"),
-            ("↩ Voltar ao menu principal", "back"),
-        ])
+            _warn(
+                "OPENROUTER_API_KEY definida no ambiente/.env — ela tem prioridade sobre o cofre."
+            )
+        choice = _tui().choose(
+            "O que deseja fazer?",
+            [
+                ("➕ Adicionar chave — guarda uma nova chave nomeada", "add"),
+                ("✅ Trocar chave ativa — escolhe qual chave será usada", "activate"),
+                ("🗑️ Remover chave — exclui do cofre local", "remove"),
+                ("💰 Consultar saldo — valida a chave e mostra o uso", "balance"),
+                ("↩ Voltar ao menu principal", "back"),
+            ],
+        )
         if choice == "add":
             name = (_tui().text("Nome da chave:") or "").strip()
             key = (_tui().secret("Chave do OpenRouter (sk-or-…):") or "").strip()
@@ -121,9 +135,9 @@ def do_keys() -> None:
             except ValueError as error:
                 _fail(str(error))
         elif choice == "activate":
-            name = _tui().choose("Qual chave deseja ativar?", [
-                (named.name, named.name) for named in keys
-            ])
+            name = _tui().choose(
+                "Qual chave deseja ativar?", [(named.name, named.name) for named in keys]
+            )
             if not name:
                 continue
             try:
@@ -132,24 +146,27 @@ def do_keys() -> None:
             except LookupError as error:
                 _fail(str(error))
         elif choice == "remove":
-            name = _tui().choose("Qual chave deseja remover?", [
-                (named.name, named.name) for named in keys
-            ])
+            name = _tui().choose(
+                "Qual chave deseja remover?", [(named.name, named.name) for named in keys]
+            )
             if name and _tui().confirm(f"Remover permanentemente a chave '{name}'?"):
                 store.remove(name)
                 _ok("Chave removida.")
         elif choice == "balance":
             from audiofy.providers.openrouter import check_api_key
+
             ok, detail = check_api_key(Settings())
             _ok(detail) if ok else _fail(detail)
         elif choice in ("back", None):
             return
 
 
-def _pick_model(settings: Settings, label: str, current: str,
-                modality: str | tuple[str, ...] | None = None) -> str:
+def _pick_model(
+    settings: Settings, label: str, current: str, modality: str | tuple[str, ...] | None = None
+) -> str:
     """Escolha em dois passos (empresa → modelo, com preço), padrão Openia."""
     from audiofy.catalog import load_models, models_of, vendors
+
     try:
         models = load_models(settings)
     except Exception as error:  # noqa: BLE001 — sem catálogo, mantém o atual
@@ -166,41 +183,52 @@ def _pick_model(settings: Settings, label: str, current: str,
     if not options:
         _warn("Nenhum modelo dessa empresa (para essa modalidade).")
         return current
-    return _tui().choose(
-        f"{label} — escolha o modelo",
-        [(f"{model.id}  ·  {model.price_line}", model.id) for model in options]
-        + [("Manter modelo atual", current)],
-        default=current,
-    ) or current
+    return (
+        _tui().choose(
+            f"{label} — escolha o modelo",
+            [(f"{model.id}  ·  {model.price_line}", model.id) for model in options]
+            + [("Manter modelo atual", current)],
+            default=current,
+        )
+        or current
+    )
 
 
 def do_profiles() -> None:
     """Perfis nomeados: modelos + apresentadores, com troca e criação."""
     from audiofy.config import profile_store
     from audiofy.profiles import Profile
+
     store = profile_store()
     while True:
         print(f"\n{BOLD}Perfis de geração{RESET} {DIM}(env AUDIOFY_* tem prioridade){RESET}")
         for profile in store.list_profiles():
             marker = f"{GREEN}● ativo{RESET}" if profile.name == store.active().name else " "
             print(f"  {profile.name:<16} {marker}  {DIM}{profile.description}{RESET}")
-            print(f"    {DIM}roteiro={profile.text_model} | auditoria={profile.audit_model}"
-                  f" | tts={profile.tts_model}{RESET}")
+            print(
+                f"    {DIM}roteiro={profile.text_model} | auditoria={profile.audit_model}"
+                f" | tts={profile.tts_model}{RESET}"
+            )
             if profile.text_provider != "openrouter":
                 from audiofy.providers.subscription import configured_model
+
                 detected = configured_model(profile.text_provider) or "padrão da CLI"
                 print(f"    {DIM}texto via {profile.text_provider}: {detected}{RESET}")
             print(f"    {DIM}apresentadores: {profile.presenters_spec}{RESET}")
-        choice = _tui().choose("O que deseja fazer?", [
-            ("✅ Trocar perfil ativo", "activate"),
-            ("➕ Criar novo perfil", "new"),
-            ("🗑️ Remover perfil customizado", "remove"),
-            ("↩ Voltar ao menu principal", "back"),
-        ])
+        choice = _tui().choose(
+            "O que deseja fazer?",
+            [
+                ("✅ Trocar perfil ativo", "activate"),
+                ("➕ Criar novo perfil", "new"),
+                ("🗑️ Remover perfil customizado", "remove"),
+                ("↩ Voltar ao menu principal", "back"),
+            ],
+        )
         if choice == "activate":
-            name = _tui().choose("Qual perfil deseja ativar?", [
-                (profile.name, profile.name) for profile in store.list_profiles()
-            ])
+            name = _tui().choose(
+                "Qual perfil deseja ativar?",
+                [(profile.name, profile.name) for profile in store.list_profiles()],
+            )
             if not name:
                 continue
             try:
@@ -215,40 +243,63 @@ def do_profiles() -> None:
             base = store.active()
             settings = Settings()
             from audiofy.providers.subscription import SUBSCRIPTION_CLIS
+
             providers = [("OpenRouter — API, custo por token", "openrouter")]
             providers.extend(
                 (f"{cli.name} — custo US$ 0", cli.key)
-                for cli in SUBSCRIPTION_CLIS if cli.is_available()
+                for cli in SUBSCRIPTION_CLIS
+                if cli.is_available()
             )
-            provider = _tui().choose(
-                "Provedor das etapas de texto:", providers, default=base.text_provider,
-            ) or base.text_provider
+            provider = (
+                _tui().choose(
+                    "Provedor das etapas de texto:",
+                    providers,
+                    default=base.text_provider,
+                )
+                or base.text_provider
+            )
             if provider == "openrouter":
                 text_model = _pick_model(settings, "Modelo do roteiro", base.text_model)
                 audit_model = _pick_model(settings, "Modelo da auditoria", base.audit_model)
             else:
                 text_model = audit_model = "(assinatura)"
             tts_model = _pick_model(
-                settings, "Modelo TTS", base.tts_model, modality=("speech", "audio"),
+                settings,
+                "Modelo TTS",
+                base.tts_model,
+                modality=("speech", "audio"),
             )
-            spec = (_tui().text("Apresentadores:", default=base.presenters_spec)
-                    or base.presenters_spec).strip()
+            spec = (
+                _tui().text("Apresentadores:", default=base.presenters_spec) or base.presenters_spec
+            ).strip()
             try:
                 from audiofy.presenters import parse_presenters
+
                 parse_presenters(spec)  # valida antes de salvar
                 description = (_tui().text("Descrição curta:") or "").strip()
-                store.save(Profile(name, text_model, audit_model, tts_model,
-                                   spec, description, text_provider=provider))
+                store.save(
+                    Profile(
+                        name,
+                        text_model,
+                        audit_model,
+                        tts_model,
+                        spec,
+                        description,
+                        text_provider=provider,
+                    )
+                )
                 store.set_active(name)
                 _ok(f"Perfil '{name}' criado e ativado.")
             except ValueError as error:
                 _fail(str(error))
         elif choice == "remove":
-            removable = [profile for profile in store.list_profiles()
-                         if store.is_custom(profile.name)]
-            name = _tui().choose("Qual perfil deseja remover?", [
-                (profile.name, profile.name) for profile in removable
-            ])
+            removable = [
+                profile for profile in store.list_profiles() if store.is_custom(profile.name)
+            ]
+            name = _tui().choose(
+                "Qual perfil deseja remover?",
+                [(profile.name, profile.name) for profile in removable],
+            )
             if name and _tui().confirm(f"Remover o perfil '{name}'?"):
                 try:
                     store.remove(name)
@@ -274,17 +325,42 @@ def do_status() -> None:
     print(f"\n{BOLD}Status do Audiofy{RESET}")
     settings = Settings()
     from audiofy.config import key_store
+    from audiofy.setup import inspect_setup
+
+    print(f"\n{BOLD}Ambiente{RESET}")
+    if sys.prefix != sys.base_prefix:
+        _ok(f"Ambiente virtual ativo ({sys.prefix})")
+    else:
+        _warn("Ambiente virtual não está ativo (o menu ainda pode funcionar)")
+    if (PROJECT_ROOT / ".env").is_file():
+        _ok("Arquivo .env presente")
+    else:
+        _warn("Arquivo .env ausente — use Instalar / Setup para criá-lo")
+    for check in inspect_setup():
+        if check.key == "openrouter-key":
+            continue
+        if check.ok:
+            _ok(f"{check.name} disponível")
+        elif check.required:
+            _fail(f"{check.name} ausente — {check.hint}")
+        else:
+            _warn(f"{check.name} indisponível — {check.hint}")
+
+    print(f"\n{BOLD}Configuração e execução{RESET}")
     if settings.api_key:
         active_name = key_store().active_name() or "via ambiente/.env"
         _ok(f"Chave configurada ({active_name})")
     else:
-        _warn("Nenhuma chave configurada (menu Chaves & saldo)")
-    provider_note = ("assinatura: " + settings.text_provider
-                     if settings.text_provider not in ("", "openrouter")
-                     else "openrouter (API)")
+        _warn("Nenhuma chave configurada (menu Configurar → Chaves e saldo)")
+    provider_note = (
+        "assinatura: " + settings.text_provider
+        if settings.text_provider not in ("", "openrouter")
+        else "openrouter (API)"
+    )
     print(f"  {DIM}Perfil ativo: {settings.profile_name} — texto via {provider_note}{RESET}")
     if settings.text_provider not in ("", "openrouter"):
         from audiofy.providers.subscription import configured_model
+
         model = configured_model(settings.text_provider) or "padrão da CLI"
         print(f"  {DIM}Modelo efetivo da assinatura: {model}{RESET}")
     source = get_source(SOURCE_KEY)
@@ -298,10 +374,12 @@ def do_status() -> None:
         print(f"\n  {YELLOW}{BOLD}⚡ GERAÇÃO EM ANDAMENTO (consumindo créditos):{RESET}")
         for status in running:
             progress = status.get("progress", {})
-            print(f"     {status['episode_id']} — etapa {status.get('stage')}"
-                  f" {progress.get('current', 0)}/{progress.get('total', 0)}"
-                  f" — US$ {status.get('cost_usd', 0):.4f}")
-        print(f"     {DIM}Acompanhe (watch) ou aborte (abort) pelo menu.{RESET}")
+            print(
+                f"     {status['episode_id']} — etapa {status.get('stage')}"
+                f" {progress.get('current', 0)}/{progress.get('total', 0)}"
+                f" — US$ {status.get('cost_usd', 0):.4f}"
+            )
+        print(f"     {DIM}Use Acompanhar geração ou Abortar geração pelo menu.{RESET}")
     else:
         _ok("Nenhuma geração em segundo plano — nada consumindo créditos agora")
 
@@ -312,12 +390,15 @@ def do_status() -> None:
         cost = f" — US$ {status.get('cost_usd', 0):.4f}" if status else ""
         print(f"      {DIM}{episode.parent.name}{cost}{RESET}")
     presenters = ", ".join(f"{p.speaker}:{p.voice}" for p in settings.presenters)
-    print(f"  {DIM}Modelos: roteiro={settings.text_model} | auditoria={settings.audit_model} | "
-          f"tts={settings.tts_model}{RESET}")
+    print(
+        f"  {DIM}Modelos: roteiro={settings.text_model} | auditoria={settings.audit_model} | "
+        f"tts={settings.tts_model}{RESET}"
+    )
     print(f"  {DIM}Apresentadores: {presenters}{RESET}")
 
 
 # ── Fonte de conteúdo ────────────────────────────────────────────────────────
+
 
 def do_sync() -> None:
     print(f"{CYAN}Sincronizando fonte '{SOURCE_KEY}'…{RESET}")
@@ -337,27 +418,35 @@ def do_list(page_size: int = 30) -> None:
     for index, item in enumerate(items, 1):
         print(f"  {DIM}{index:4d}.{RESET} {item.published_at}  {item.title}")
         if index % page_size == 0 and index < len(items):
-            answer = input(
-                f"{DIM}— Enter continua, q para, ou digite o número para gerar —{RESET} "
-            ).strip().lower()
-            if answer == "q":
+            action = _tui().choose(
+                f"Exibidos {index} de {len(items)} itens. O que deseja fazer?",
+                [
+                    ("Continuar a listagem", "continue"),
+                    ("Gerar um episódio — informar número ou ID", "generate"),
+                    ("Encerrar a listagem", "stop"),
+                ],
+            )
+            if action in ("stop", None):
                 break
-            if answer.isdigit():
-                do_generate(answer)
-                return
+            if action == "generate":
+                selector = (_tui().text("Número da listagem ou ID do item:") or "").strip()
+                if selector:
+                    do_generate(selector)
+                    return
     print()
 
 
 def do_search(query: str) -> None:
     ensure_synced()
     hits = get_source(SOURCE_KEY).search(query)
-    print(f"\n{BOLD}{len(hits)} resultado(s) para \"{query}\":{RESET}\n")
+    print(f'\n{BOLD}{len(hits)} resultado(s) para "{query}":{RESET}\n')
     for index, item in enumerate(hits[:50], 1):
         print(f"  {DIM}{index:3d}.{RESET} {item.item_id}  {item.title}")
     print()
 
 
 # ── Geração ──────────────────────────────────────────────────────────────────
+
 
 def _resolve_item_id(selector: str) -> str | None:
     source = get_source(SOURCE_KEY)
@@ -389,16 +478,18 @@ def do_generate(selector: str, force: bool = False, background: bool = False) ->
         return
 
     from audiofy.estimates import estimate_episode
-    estimate = estimate_episode(
-        item.words, settings.tts_model, profile_name=settings.profile_name
-    )
+
+    estimate = estimate_episode(item.words, settings.tts_model, profile_name=settings.profile_name)
     presenters = ", ".join(f"{p.speaker} ({p.voice})" for p in settings.presenters)
     print(f"\n{BOLD}Item:{RESET}     {item.title}")
     print(f"{BOLD}URL:{RESET}      {item.url}")
     print(f"{BOLD}Tamanho:{RESET}  ~{item.words} palavras de prosa")
     print(f"{BOLD}Vozes:{RESET}    {presenters}")
-    basis = (f"{estimate.sample_count} episódio(s) medido(s)"
-             if estimate.sample_count else "piloto medido")
+    basis = (
+        f"{estimate.sample_count} episódio(s) medido(s)"
+        if estimate.sample_count
+        else "piloto medido"
+    )
     print(
         f"{YELLOW}Estimativa: ~US$ {estimate.cost_usd:.2f} "
         f"(faixa US$ {estimate.cost_min_usd:.2f}–{estimate.cost_max_usd:.2f}) · "
@@ -410,9 +501,18 @@ def do_generate(selector: str, force: bool = False, background: bool = False) ->
 
     if background:
         result = subprocess.run(
-            [sys.executable, "-m", "audiofy.bridge", "generate", SOURCE_KEY, item_id,
-             *(["--force"] if force else [])],
-            capture_output=True, text=True, cwd=str(PROJECT_ROOT),
+            [
+                sys.executable,
+                "-m",
+                "audiofy.bridge",
+                "generate",
+                SOURCE_KEY,
+                item_id,
+                *(["--force"] if force else []),
+            ],
+            capture_output=True,
+            text=True,
+            cwd=str(PROJECT_ROOT),
             env={**__import__("os").environ, "PYTHONPATH": "src"},
         )
         try:
@@ -422,8 +522,10 @@ def do_generate(selector: str, force: bool = False, background: bool = False) ->
             return
         if payload.get("started"):
             _ok(f"Geração iniciada em segundo plano. Log: {payload['log']}")
-            print(f"  {DIM}Acompanhe com watch, aborte com abort. O Status sempre mostra o "
-                  f"que está consumindo créditos.{RESET}")
+            print(
+                f"  {DIM}Acompanhe com watch, aborte com abort. O Status sempre mostra o "
+                f"que está consumindo créditos.{RESET}"
+            )
             do_watch(item_id)
         else:
             _fail(f"Não iniciou: {payload.get('reason') or payload.get('error')}")
@@ -438,18 +540,22 @@ def do_generate(selector: str, force: bool = False, background: bool = False) ->
         _warn("Geração abortada a pedido. Artefatos preservados; gere de novo para retomar.")
     except Exception as error:  # noqa: BLE001 — o menu reporta e preserva artefatos parciais
         _fail(f"Falha: {error}")
-        print(f"{DIM}As tentativas automáticas terminaram. Os segmentos concluídos e o custo "
-              f"foram preservados; gere novamente para continuar do checkpoint.{RESET}")
+        print(
+            f"{DIM}As tentativas automáticas terminaram. Os segmentos concluídos e o custo "
+            f"foram preservados; gere novamente para continuar do checkpoint.{RESET}"
+        )
         sys.exit(1)
 
 
 def do_watch(selector: str) -> None:
     """Acompanha ao vivo uma geração: etapa, progresso, custo. Ctrl+C sai (não aborta)."""
     from audiofy.pipeline import episode_dir
+
     item_id = _resolve_item_id(selector) or selector
     directory = episode_dir(item_id)
-    print(f"{DIM}Acompanhando {item_id} — Ctrl+C sai do acompanhamento "
-          f"(NÃO aborta a geração).{RESET}")
+    print(
+        f"{DIM}Acompanhando {item_id} — Ctrl+C sai do acompanhamento (NÃO aborta a geração).{RESET}"
+    )
     try:
         while True:
             status = GenerationTracker.load(directory)
@@ -461,14 +567,17 @@ def do_watch(selector: str) -> None:
             bar = ""
             if total:
                 filled = int(24 * progress.get("current", 0) / total)
-                bar = f"[{'█' * filled}{'░' * (24 - filled)}] " \
-                      f"{progress.get('current', 0)}/{total} "
-            line = (f"{status['state']} | {status.get('stage', '')} {bar}"
-                    f"| US$ {status.get('cost_usd', 0):.4f}")
+                bar = f"[{'█' * filled}{'░' * (24 - filled)}] {progress.get('current', 0)}/{total} "
+            line = (
+                f"{status['state']} | {status.get('stage', '')} {bar}"
+                f"| US$ {status.get('cost_usd', 0):.4f}"
+            )
             retry = status.get("retry")
             if retry:
-                line += (f" | retomando fala {retry['segment']} "
-                         f"({retry['attempt']}/{retry['max_attempts']})")
+                line += (
+                    f" | retomando fala {retry['segment']} "
+                    f"({retry['attempt']}/{retry['max_attempts']})"
+                )
             print(f"\r\033[K  {line}", end="", flush=True)
             if status["state"] != "rodando":
                 print()
@@ -479,12 +588,15 @@ def do_watch(selector: str) -> None:
                 return
             time.sleep(2)
     except KeyboardInterrupt:
-        print(f"\n{DIM}Saí do acompanhamento; a geração continua. "
-              f"Use abort para cancelar de verdade.{RESET}")
+        print(
+            f"\n{DIM}Saí do acompanhamento; a geração continua. "
+            f"Use abort para cancelar de verdade.{RESET}"
+        )
 
 
 def do_abort(selector: str) -> None:
     from audiofy.pipeline import episode_dir
+
     item_id = _resolve_item_id(selector) or selector
     directory = episode_dir(item_id)
     status = GenerationTracker.load(directory)
@@ -499,10 +611,13 @@ def do_switch_source() -> None:
     """Troca a fonte ativa do menu."""
     global SOURCE_KEY
     from audiofy.sources import available_sources
+
     sources = available_sources()
-    choice = _tui().choose("Escolha a fonte ativa:", [
-        (f"{source.name} — {source.description}", source.key) for source in sources
-    ], default=SOURCE_KEY)
+    choice = _tui().choose(
+        "Escolha a fonte ativa:",
+        [(f"{source.name} — {source.description}", source.key) for source in sources],
+        default=SOURCE_KEY,
+    )
     if choice:
         SOURCE_KEY = choice
         _ok(f"Fonte ativa: {SOURCE_KEY}")
@@ -511,6 +626,7 @@ def do_switch_source() -> None:
 def do_add_url(url: str) -> None:
     """Adiciona uma página como conteúdo próprio (fonte 'custom')."""
     from audiofy.sources.custom import CustomSource
+
     try:
         item_id = CustomSource().add_url(url)
         _ok(f"Conteúdo adicionado: {item_id} (fonte 'custom')")
@@ -519,17 +635,15 @@ def do_add_url(url: str) -> None:
 
 
 def do_add_text() -> None:
-    """Adiciona conteúdo colado no terminal (finalize com uma linha só com '.')."""
+    """Adiciona conteúdo colado pela interface interativa."""
     from audiofy.sources.custom import CustomSource
-    title = input("Título: ").strip()
+
+    title = (_tui().text("Título:") or "").strip()
     if not title:
         return
-    print("Cole o texto (finalize com uma linha contendo só '.'):")
-    lines: list[str] = []
-    while (line := input()) != ".":
-        lines.append(line)
-    if lines:
-        item_id = CustomSource().add_text(title, "\n".join(lines))
+    content = (_tui().multiline_text("Cole o conteúdo:") or "").strip()
+    if content:
+        item_id = CustomSource().add_text(title, content)
         _ok(f"Conteúdo adicionado: {item_id} (fonte 'custom')")
 
 
@@ -538,8 +652,8 @@ def _run_chat_action(action: dict) -> None:
     kind = action.get("tipo")
     if kind == "adicionar_texto":
         from audiofy.sources.custom import CustomSource
-        item_id = CustomSource().add_text(
-            action.get("titulo", ""), action.get("texto", ""))
+
+        item_id = CustomSource().add_text(action.get("titulo", ""), action.get("texto", ""))
         _ok(f"Conteúdo criado: {item_id}")
     elif kind == "adicionar_url":
         do_add_url(action.get("url", ""))
@@ -555,6 +669,7 @@ def _run_chat_action(action: dict) -> None:
             SOURCE_KEY = previous
     elif kind == "exportar_notebooklm":
         from audiofy.export import export_notebooklm_pack
+
         item = get_source(action.get("fonte", SOURCE_KEY)).get_item(action.get("item_id", ""))
         _ok(f"Pacote NotebookLM: {export_notebooklm_pack(item)}")
     else:
@@ -564,15 +679,21 @@ def _run_chat_action(action: dict) -> None:
 def do_chat() -> None:
     """Chat de pesquisa: qualquer tema, com ações executáveis (Enter vazio sai)."""
     from audiofy.chat import ChatSession
+
     session = ChatSession("principal")
     settings = Settings()
-    provider = settings.text_provider if settings.text_provider not in ("", "openrouter") \
+    provider = (
+        settings.text_provider
+        if settings.text_provider not in ("", "openrouter")
         else f"API ({settings.text_model})"
-    print(f"\n{BOLD}💬 Chat de pesquisa{RESET} {DIM}— via {provider}; "
-          f"'limpar' zera a conversa; Enter vazio sai.{RESET}")
+    )
+    print(
+        f"\n{BOLD}💬 Chat de pesquisa{RESET} {DIM}— via {provider}; "
+        f"'limpar' zera a conversa; Enter vazio sai.{RESET}"
+    )
     while True:
         try:
-            message = input(f"\n{BOLD}Você:{RESET} ").strip()
+            message = (_tui().text("Você:") or "").strip()
         except (KeyboardInterrupt, EOFError):
             print()
             return
@@ -603,16 +724,20 @@ def do_notebooklm(selector: str) -> None:
         _fail(f"Item '{selector}' não encontrado.")
         return
     from audiofy.export import export_notebooklm_pack
+
     item = get_source(SOURCE_KEY).get_item(item_id)
     pack = export_notebooklm_pack(item)
     _ok(f"Pacote pronto em {pack}")
-    print(f"  {DIM}Abra o instrucoes.md dessa pasta: upload do fonte.md no "
-          f"notebooklm.google.com, foco sugerido incluído. Custo: US$ 0,00.{RESET}")
+    print(
+        f"  {DIM}Abra o instrucoes.md dessa pasta: upload do fonte.md no "
+        f"notebooklm.google.com, foco sugerido incluído. Custo: US$ 0,00.{RESET}"
+    )
 
 
 def do_catalog() -> None:
     """Lista modelos TTS do OpenRouter e as vozes do Gemini para configurar."""
     from audiofy.providers.openrouter import GEMINI_VOICES, list_tts_models
+
     settings = Settings()
     try:
         settings.require_api_key()
@@ -625,26 +750,36 @@ def do_catalog() -> None:
     print(f"\n{BOLD}Vozes do Gemini TTS (use em AUDIOFY_PRESENTERS):{RESET}")
     for voice, style in GEMINI_VOICES.items():
         print(f"  {voice:<16} {DIM}{style}{RESET}")
-    print(f"\n{DIM}Exemplo: AUDIOFY_PRESENTERS=\"ana:Kore:animada, beto:Puck:cético\"{RESET}")
+    print(f'\n{DIM}Exemplo: AUDIOFY_PRESENTERS="ana:Kore:animada, beto:Puck:cético"{RESET}')
+
+
+def do_configure() -> None:
+    """Centraliza as escolhas de configuração acessíveis pela porta principal."""
+    while True:
+        choice = _tui().choose(
+            "O que deseja configurar?",
+            [
+                ("🔑 Chaves e saldo — credenciais locais do OpenRouter", "keys"),
+                ("👤 Perfis e modelos — provedor, modelos e vozes", "profiles"),
+                ("🎛️ Catálogo TTS/vozes — opções disponíveis", "catalog"),
+                ("↩ Voltar ao menu principal", "back"),
+            ],
+        )
+        if choice == "keys":
+            _safe_call(do_keys)
+        elif choice == "profiles":
+            _safe_call(do_profiles)
+        elif choice == "catalog":
+            _safe_call(do_catalog)
+        elif choice in ("back", None):
+            return
 
 
 def _npm_command() -> list[str] | None:
-    """Comando npm executável sem shell.
+    """Mantém o resolvedor compartilhado acessível à porta de entrada."""
+    from audiofy.setup import npm_command
 
-    No Windows o npm é um script ``npm.cmd``, que só roda de forma confiável através
-    do ``cmd.exe`` — e falha com "arquivo não encontrado" em caminhos com espaços ou
-    acentos. Chamar o ``node.exe`` (executável real) com o ``npm-cli.js`` evita o shell.
-    """
-    npm = shutil.which("npm")
-    if not npm:
-        return None
-    if sys.platform == "win32":
-        node = shutil.which("node")
-        if node:
-            npm_cli = Path(node).parent / "node_modules" / "npm" / "bin" / "npm-cli.js"
-            if npm_cli.is_file():
-                return [node, str(npm_cli)]
-    return [npm]
+    return npm_command()
 
 
 def _electron_executable(electron_dir: Path) -> Path | None:
@@ -669,8 +804,10 @@ def do_desktop() -> None:
         print(f"{CYAN}Instalando dependências do app (primeira vez)…{RESET}")
         try:
             result = subprocess.run(
-                [*npm, "install", "--no-fund", "--no-audit"], cwd=electron_dir,
-                capture_output=True, text=True,
+                [*npm, "ci", "--no-fund", "--no-audit"],
+                cwd=electron_dir,
+                capture_output=True,
+                text=True,
             )
         except OSError as error:
             _fail(f"Não foi possível executar o npm ({npm[0]}): {error}")
@@ -683,14 +820,21 @@ def do_desktop() -> None:
     environment.setdefault("AUDIOFY_PYTHON", sys.executable)
     detach: dict = (
         {"creationflags": subprocess.DETACHED_PROCESS | subprocess.CREATE_NEW_PROCESS_GROUP}
-        if sys.platform == "win32" else {"start_new_session": True}
+        if sys.platform == "win32"
+        else {"start_new_session": True}
     )
     electron = _electron_executable(electron_dir)
     command = [str(electron), "."] if electron else [*npm, "start"]
     print(f"  {DIM}Comando: {' '.join(command)}{RESET}")
     try:
-        subprocess.Popen(command, cwd=electron_dir, env=environment,
-                         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, **detach)
+        subprocess.Popen(
+            command,
+            cwd=electron_dir,
+            env=environment,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            **detach,
+        )
     except OSError as error:
         _fail(f"Não foi possível iniciar o app desktop ({command[0]}): {error}")
         return
@@ -701,34 +845,38 @@ def menu() -> None:
     while True:
         running = _running_generations()
         _tui().show_header(SOURCE_KEY, len(running))
-        choice = _tui().choose("O que deseja fazer?", [
-            ("💬 Chat de pesquisa — converse e execute ações propostas", "chat"),
-            ("➕ Adicionar conteúdo — importe uma URL ou cole um texto", "add"),
-            ("🧭 Trocar fonte — conteúdo próprio, Akita on Rails…", "source"),
-            ("📚 Listar itens — consulte o catálogo da fonte ativa", "list"),
-            ("🔍 Buscar — encontre conteúdo na fonte ativa", "search"),
-            ("🎙️ Gerar episódio — acompanhe progresso e custo ao vivo", "generate"),
-            ("🚀 Gerar em segundo plano — libera o terminal", "generate-bg"),
-            ("👀 Acompanhar geração — veja progresso e custo", "watch"),
-            ("🛑 Abortar geração — para no próximo segmento", "abort"),
-            ("📓 Exportar para NotebookLM — prepara pacote de custo zero", "notebooklm"),
-            ("🔑 Chaves e saldo — gerencie credenciais locais", "keys"),
-            ("👤 Perfis e modelos — configure provedor, modelos e vozes", "profiles"),
-            ("🎛️ Catálogo TTS/vozes — consulte opções disponíveis", "catalog"),
-            ("🔄 Sincronizar fonte — atualiza o conteúdo disponível", "sync"),
-            ("📊 Status — mostra ambiente, modelos e gerações", "status"),
-            ("🛠️ Instalar / Setup — prepara todas as dependências", "setup"),
-            ("🖥️ Abrir app desktop — inicia a interface Electron", "desktop"),
-            ("🚪 Sair do Audiofy", "exit"),
-        ])
+        choice = _tui().choose(
+            "O que deseja fazer?",
+            [
+                ("▶️ Iniciar / Rodar — abra o chat e execute ações propostas", "chat"),
+                ("➕ Adicionar conteúdo — importe uma URL ou cole um texto", "add"),
+                ("🧭 Trocar fonte — conteúdo próprio, Akita on Rails…", "source"),
+                ("📚 Listar itens — consulte o catálogo da fonte ativa", "list"),
+                ("🔍 Buscar — encontre conteúdo na fonte ativa", "search"),
+                ("🎙️ Gerar episódio — acompanhe progresso e custo ao vivo", "generate"),
+                ("🚀 Gerar em segundo plano — libera o terminal", "generate-bg"),
+                ("👀 Acompanhar geração — veja progresso e custo", "watch"),
+                ("🛑 Abortar geração — para no próximo segmento", "abort"),
+                ("📓 Exportar para NotebookLM — prepara pacote de custo zero", "notebooklm"),
+                ("⚙️ Configurar — ajuste chaves, perfis, modelos e vozes", "configure"),
+                ("🔄 Sincronizar fonte — atualiza o conteúdo disponível", "sync"),
+                ("📊 Status — mostra ambiente, modelos e gerações", "status"),
+                ("🛠️ Instalar / Setup — prepara todas as dependências", "setup"),
+                ("🖥️ Abrir app desktop — inicia a interface Electron", "desktop"),
+                ("🚪 Sair do Audiofy", "exit"),
+            ],
+        )
         if choice == "chat":
             _safe_call(do_chat)
         elif choice == "add":
-            mode = _tui().choose("Como deseja adicionar o conteúdo?", [
-                ("🌐 Importar uma URL pública", "url"),
-                ("📝 Colar texto no terminal", "text"),
-                ("↩ Cancelar", None),
-            ])
+            mode = _tui().choose(
+                "Como deseja adicionar o conteúdo?",
+                [
+                    ("🌐 Importar uma URL pública", "url"),
+                    ("📝 Colar texto no terminal", "text"),
+                    ("↩ Cancelar", None),
+                ],
+            )
             if mode == "url":
                 if url := (_tui().text("URL pública:") or "").strip():
                     _safe_call(do_add_url, url)
@@ -749,18 +897,15 @@ def menu() -> None:
             if selector := (_tui().text("ID do item (ou número):") or "").strip():
                 _safe_call(do_watch, selector)
         elif choice == "abort":
-            if selector := (_tui().text("ID do item (ou número):") or "").strip():
-                if _tui().confirm(f"Solicitar o abort da geração '{selector}'?"):
-                    _safe_call(do_abort, selector)
+            if (
+                selector := (_tui().text("ID do item (ou número):") or "").strip()
+            ) and _tui().confirm(f"Solicitar o abort da geração '{selector}'?"):
+                _safe_call(do_abort, selector)
         elif choice == "notebooklm":
             if selector := (_tui().text("Número da listagem ou ID do item:") or "").strip():
                 _safe_call(do_notebooklm, selector)
-        elif choice == "keys":
-            _safe_call(do_keys)
-        elif choice == "profiles":
-            _safe_call(do_profiles)
-        elif choice == "catalog":
-            _safe_call(do_catalog)
+        elif choice == "configure":
+            _safe_call(do_configure)
         elif choice == "sync":
             _safe_call(do_sync)
         elif choice == "status":
@@ -779,9 +924,15 @@ def main() -> None:
     # Saída em tempo real mesmo quando redirecionada para arquivo/pipe (tail -f).
     sys.stdout.reconfigure(line_buffering=True)
     args = sys.argv[1:]
-    simple = {"list": do_list, "sync": do_sync, "status": do_status,
-              "setup": do_setup, "catalog": do_catalog,
-              "keys": do_keys, "profiles": do_profiles}
+    simple = {
+        "list": do_list,
+        "sync": do_sync,
+        "status": do_status,
+        "setup": do_setup,
+        "catalog": do_catalog,
+        "keys": do_keys,
+        "profiles": do_profiles,
+    }
     if not args:
         try:
             menu()

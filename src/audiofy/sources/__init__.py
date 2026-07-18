@@ -25,6 +25,5 @@ def get_source(key: str) -> ContentSource:
         if source.key == key:
             return source
     raise LookupError(
-        f"Fonte '{key}' não registrada. Disponíveis: "
-        f"{', '.join(s.key for s in _SOURCES)}"
+        f"Fonte '{key}' não registrada. Disponíveis: {', '.join(s.key for s in _SOURCES)}"
     )

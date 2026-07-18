@@ -10,7 +10,7 @@
 
 **Transforme qualquer conteúdo em podcasts auditáveis com IA — pipeline verificável, múltiplos apresentadores e custo em tempo real.**
 
-[📖 Plano técnico](docs/PLANO-TECNICO.md) • [🚀 Como usar](#-como-usar) • [🧩 Fontes](#-fontes-de-conteúdo) • [⚠️ Limites](#-limites-atuais)
+[🧰 Ferramentas](#-ferramentas-disponíveis) • [🚀 Como usar](#-como-usar) • [📖 Plano técnico](docs/PLANO-TECNICO.md) • [⚠️ Limites](#-limites-atuais)
 
 </div>
 
@@ -19,17 +19,22 @@
 ## 📋 Índice
 
 - [🎯 Sobre o projeto](#-sobre-o-projeto)
+- [📁 Estrutura do projeto](#-estrutura-do-projeto)
+- [🧰 Ferramentas disponíveis](#-ferramentas-disponíveis)
 - [🚀 Como usar](#-como-usar)
+- [🧭 Guia rápido](#-guia-rápido)
 - [🖥️ App desktop (Electron)](#️-app-desktop-electron)
 - [🧩 Fontes de conteúdo](#-fontes-de-conteúdo)
+- [🔑 Chaves, perfis e modelos](#-chaves-perfis-e-modelos)
 - [🎛️ Apresentadores e vozes](#️-apresentadores-e-vozes)
 - [💰 Custo em tempo real](#-custo-em-tempo-real)
-- [🛡️ Segurança](#️-segurança)
 - [✅ Qualidade e testes](#-qualidade-e-testes)
-- [📁 Estrutura](#-estrutura)
 - [⚠️ Limites atuais](#-limites-atuais)
-- [🤝 Contribuições](#-contribuições)
+- [🛡️ Segurança](#️-segurança)
+- [🎯 Objetivo](#-objetivo)
 - [📝 Licença](#-licença)
+- [👤 Autor](#-autor)
+- [🤝 Contribuições](#-contribuições)
 
 ---
 
@@ -56,15 +61,96 @@ independente [akita-articles](https://github.com/Felipe-Alcantara/akita-articles
 (outros blogs, feeds, pastas de arquivos) entram implementando um contrato pequeno, sem tocar
 no núcleo.
 
+## 📁 Estrutura do projeto
+
+```text
+Audiofy-Content-AI/
+├── 📁 .github/                  # CI, Dependabot e template de pull request
+├── 📁 docs/
+│   ├── PLANO-TECNICO.md         # Arquitetura e decisões do projeto
+│   └── QUALIDADE.md             # Régua automatizada e verificações manuais
+├── 📁 src/
+│   └── 📁 audiofy/
+│       ├── config.py            # Env, caminhos, modelos, apresentadores
+│       ├── presenters.py        # 1..N apresentadores configuráveis
+│       ├── prompts.py           # Prompts montados para N apresentadores
+│       ├── pipeline.py          # Cobertura → roteiro → auditoria → áudio
+│       ├── bridge.py            # Interface JSON (Electron e automações)
+│       ├── setup.py             # Diagnóstico e instalação compartilhados
+│       ├── security.py          # Validações de IDs e URLs públicas
+│       ├── tui.py               # Menu navegável questionary + Rich
+│       ├── 📁 providers/        # OpenRouter: chat+custo, TTS, catálogo
+│       ├── 📁 sources/          # Contrato + registro de fontes
+│       └── 📁 runtime/          # Status, custo acumulado e abort
+├── 📁 electron/                 # App desktop iniciado pelo menu
+├── 📁 scripts/                  # Automações internas de manutenção
+├── 📁 tests/                    # Testes Python e Node
+├── 📁 data/                     # Episódios e conteúdo local
+├── start_app.py                 # Porta de entrada interativa
+├── pyproject.toml               # Lint, formato e cobertura
+├── requirements.txt             # Dependências de execução fixadas
+├── requirements-dev.txt         # Ferramentas de desenvolvimento fixadas
+├── CONTRIBUTING.md              # Fluxo para contribuições
+├── SECURITY.md                  # Canal privado e escopo de segurança
+├── IA.md                        # Linha do tempo de decisões
+└── README.md                    # Este arquivo
+```
+
+## 🧰 Ferramentas disponíveis
+
+### 🎙️ Menu interativo
+
+**Arquivo:** `start_app.py`
+
+- **Quando usar:** para instalar, configurar, iniciar, acompanhar ou diagnosticar o Audiofy.
+- **Entrada:** escolhas por setas, URLs, textos ou IDs de conteúdo.
+- **Saída:** configuração local, episódios, pacotes NotebookLM e estado operacional legível.
+- **Exemplo:** `python3 start_app.py` → **Iniciar / Rodar** → conversar com o assistente.
+
+---
+
+### ⚙️ Pipeline e bridge
+
+**Arquivos:** `src/audiofy/pipeline.py` e `src/audiofy/bridge.py`
+
+- **Quando usar:** o pipeline gera episódios; a bridge atende o desktop e automações.
+- **Entrada:** `ContentItem`, perfil, modelos, vozes e opções de retomada.
+- **Saída:** cobertura, roteiro, auditoria, segmentos, MP3, métricas e resposta JSON previsível.
+- **Exemplo:** um item selecionado no menu → artefatos em `data/episodes/<item>/`.
+
+---
+
+### 🖥️ App desktop
+
+**Diretório:** `electron/`
+
+- **Quando usar:** para operar o mesmo backend por uma interface gráfica responsiva.
+- **Entrada:** ações nas abas Chat, Conteúdo, Episódios e Configurações.
+- **Saída:** progresso, custo, player embutido e configurações persistidas pelo backend.
+- **Exemplo:** menu → **Abrir app desktop** → selecionar conteúdo → **Gerar episódio**.
+
+---
+
+### 🧩 Fontes e integrações
+
+**Diretórios:** `src/audiofy/sources/` e `src/audiofy/providers/`
+
+- **Quando usar:** para importar conteúdo próprio/Akita e acessar texto ou TTS por provedor.
+- **Entrada:** URL pública, texto colado, consulta ou item de uma fonte registrada.
+- **Saída:** `ContentItem`s normalizados e respostas de provedor isoladas do domínio.
+- **Exemplo:** adicionar uma URL → extrair o texto principal → disponibilizar para geração.
+
 ## 🚀 Como usar
 
 Requisitos: Python 3.10+ e uma chave do
-[OpenRouter](https://openrouter.ai/keys) com créditos. Para o app desktop: Node.js.
+[OpenRouter](https://openrouter.ai/keys) com créditos. Para o app desktop: Node.js 18.18+.
 O botão **🛠️ Instalar/corrigir** (aba Configurações) instala o resto — `git`,
-`ffmpeg` e as dependências Python — pelo gerenciador do sistema (brew, apt, dnf,
-pacman ou winget). No macOS é preciso ter o [Homebrew](https://brew.sh) instalado.
+`ffmpeg`, as dependências Python e, quando npm está disponível, o desktop pelo lockfile — usando
+o gerenciador do sistema (brew, apt, dnf, pacman ou winget). No macOS é preciso ter o
+[Homebrew](https://brew.sh) instalado.
 
 ```bash
+# Abre a porta de entrada principal do projeto
 python3 start_app.py
 ```
 
@@ -101,10 +187,32 @@ cada áudio ao texto, modelo, voz e formato usados. A política pode ser ajustad
 `AUDIOFY_TTS_RETRY_ATTEMPTS`, `AUDIOFY_TTS_RETRY_BASE_SECONDS` e
 `AUDIOFY_TTS_RETRY_MAX_SECONDS`.
 
+## 🧭 Guia rápido
+
+### Para iniciantes
+
+1. Rode `python3 start_app.py`.
+2. Escolha **Instalar / Setup** e confira os resultados exibidos.
+3. Entre em **Configurar**, cadastre a chave já disponível e selecione um perfil.
+4. Use **Iniciar / Rodar** para abrir o chat ou **Adicionar conteúdo** para importar uma URL.
+5. Antes de consumir créditos, confira a estimativa; depois acompanhe em **Status**.
+
+### Para desenvolvimento e automação
+
+1. Crie um ambiente virtual e instale `requirements-dev.txt`.
+2. Instale o desktop de forma reproduzível com `npm ci --prefix electron`.
+3. Execute `python scripts/check_quality.py --quick` durante o desenvolvimento.
+4. Antes de entregar, rode `python scripts/check_quality.py`, incluindo auditorias.
+5. Use a bridge JSON ou os comandos secundários somente em integrações não interativas.
+
 ## 🖥️ App desktop (Electron)
 
 ```bash
-cd electron && npm install && npm start
+# Instala exatamente as versões do lockfile
+npm ci --prefix electron
+
+# Inicia o desktop diretamente; o menu continua sendo o caminho recomendado
+npm start --prefix electron
 ```
 
 (ou opção "Abrir app desktop" no menu). O app tem **paridade completa com a CLI**, em quatro
@@ -196,6 +304,7 @@ Comparativo completo de modelos TTS/texto e custos por episódio:
 De 1 a N apresentadores, por configuração (`.env`):
 
 ```bash
+# Define nome, voz e tom de cada apresentador
 AUDIOFY_PRESENTERS="ana:Kore:animada, beto:Puck:cético, carla:Aoede:técnica"
 ```
 
@@ -225,67 +334,37 @@ O Status (CLI e app) sempre deixa explícito se algo está rodando em segundo pl
 créditos, inclusive a fala e a tentativa durante uma retomada automática. O abort continua
 responsivo durante a espera e para a geração no próximo checkpoint, sem corromper artefatos.
 
-## 🛡️ Segurança
-
-- Segredos ficam em `.env` ou `.audiofy/keys.json` (`0600` em sistemas POSIX), ambos ignorados
-  pelo Git; a interface nunca devolve a chave sem máscara. Históricos em `data/chat/` e conteúdo
-  pessoal em `data/inbox/` também não entram no versionamento.
-- A importação por URL aceita somente HTTP(S) público, sem credenciais incorporadas. Destinos
-  locais, privados ou reservados são rejeitados, inclusive após redirecionamento; downloads são
-  limitados a 5 MiB.
-- IDs usados em arquivos, nomes de sessão, perfis e ações propostas pelo modelo são validados na
-  fronteira antes de persistir ou executar.
-- Operações com custo ou destrutivas exigem confirmação; o abort é cooperativo e preserva os
-  artefatos já concluídos.
-- O Electron usa CSP, sandbox, navegação bloqueada, allowlist de IPC e confinamento de caminhos.
-
 ## ✅ Qualidade e testes
 
+Prepare o ambiente de desenvolvimento uma vez:
+
 ```bash
-# Backend, regras de negócio e regressões
-PYTHONPATH=src python3 -m unittest discover -s tests -v
+# Cria e prepara um ambiente isolado de desenvolvimento
+python -m venv .venv
+python -m pip install -r requirements-dev.txt
 
-# Lint Python
-ruff check start_app.py src tests
-
-# Sintaxe e contratos de segurança do Electron
-npm --prefix electron run check
-
-# Auditoria das dependências do desktop
-npm --prefix electron audit
+# Instala exatamente a árvore do lockfile do desktop
+npm ci --prefix electron
 ```
+
+Depois execute a mesma régua usada pela CI:
+
+```bash
+# Lint, formatação, testes, cobertura, JSON, whitespace e auditorias
+python scripts/check_quality.py
+
+# Ciclo rápido sem as auditorias que dependem da rede
+python scripts/check_quality.py --quick
+```
+
+Os controles incluem Ruff, cobertura mínima de 70%, ESLint sem warnings, testes Python/Node,
+`pip-audit`, `npm audit` e validação de todos os JSON versionados. A CI repete a suíte em
+Python 3.10/3.12 e Node 18. Consulte a [régua de qualidade](docs/QUALIDADE.md) para critérios,
+exceções e verificações manuais.
 
 A suíte cobre perfis, chaves, fontes, parsing, chat, setup, status/abort, bridge, modelo efetivo
 do Codex, proteção contra path traversal/SSRF e os limites do IPC Electron. Responsividade foi
 verificada visualmente em 600 px e 380 px, incluindo Chat e Configurações.
-
-## 📁 Estrutura
-
-```text
-Audiofy-Content-AI/
-├── 📁 docs/
-│   └── PLANO-TECNICO.md         # Arquitetura e decisões do projeto
-├── 📁 src/
-│   └── 📁 audiofy/
-│       ├── config.py            # Env, caminhos, modelos, apresentadores
-│       ├── presenters.py        # 1..N apresentadores configuráveis
-│       ├── prompts.py           # Prompts montados para N apresentadores
-│       ├── pipeline.py          # Cobertura → roteiro → auditoria → áudio
-│       ├── bridge.py            # Interface JSON (Electron e automações)
-│       ├── setup.py             # Diagnóstico e instalação compartilhados
-│       ├── security.py          # Validações de IDs e URLs públicas
-│       ├── tui.py               # Menu navegável questionary + Rich
-│       ├── 📁 providers/        # OpenRouter: chat+custo, TTS, catálogo
-│       ├── 📁 sources/          # Contrato + registro de fontes (akita)
-│       └── 📁 runtime/          # status.json, custo acumulado, abort
-├── 📁 electron/                 # App desktop (npm start)
-├── 📁 tests/                    # python3 -m unittest discover -s tests
-├── 📁 data/                     # Episódios e clone da fonte
-├── start_app.py                 # Menu interativo — porta de entrada
-├── requirements.txt             # Dependências Python declaradas
-├── IA.md                        # Linha do tempo de decisões
-└── README.md
-```
 
 ## ⚠️ Limites atuais
 
@@ -299,14 +378,28 @@ Audiofy-Content-AI/
 - A importação por URL não acessa intranets ou serviços locais; nesses casos, cole o texto
   manualmente para preservar a fronteira de segurança.
 
-## 🤝 Contribuições
+## 🛡️ Segurança
 
-Ideias que o projeto adoraria receber:
+- Segredos ficam em `.env` ou `.audiofy/keys.json` (`0600` em sistemas POSIX), ambos ignorados
+  pelo Git; a interface nunca devolve a chave sem máscara. Históricos em `data/chat/` e conteúdo
+  pessoal em `data/inbox/` também não entram no versionamento.
+- A importação por URL aceita somente HTTP(S) público, sem credenciais incorporadas. Destinos
+  locais, privados ou reservados são rejeitados, inclusive após redirecionamento; downloads são
+  limitados a 5 MiB.
+- IDs usados em arquivos, nomes de sessão, perfis e ações propostas pelo modelo são validados na
+  fronteira antes de persistir ou executar.
+- Operações destrutivas exigem confirmação; gerações iniciadas pelo chat podem ser automáticas,
+  mas exibem estimativa e banner global de custo. O abort é cooperativo e preserva os artefatos.
+- O Electron usa CSP, sandbox, navegação bloqueada, allowlist de IPC e confinamento de caminhos.
 
-- **Novas fontes de conteúdo** (outros blogs, feeds RSS, pastas de Markdown, Notion);
-- **Planejamento editorial em lote** — inserir muitos dados e gerar pauta de episódios/tópicos;
-- STT + auditoria automática do MP3 final (fase 4 do plano técnico);
-- Métricas de cobertura semântica reproduzíveis.
+Reporte vulnerabilidades pelo processo privado descrito em [SECURITY.md](SECURITY.md), sem abrir
+uma issue pública com detalhes exploráveis.
+
+## 🎯 Objetivo
+
+O projeto busca tornar a produção de podcasts por IA verificável e operável por qualquer pessoa:
+uma única porta de entrada, custo explícito, fontes extensíveis e artefatos suficientes para
+revisar o que foi coberto, dito e faturado.
 
 ## 📝 Licença
 
@@ -320,6 +413,19 @@ não comercial, atribuição, mesma licença), como detalhado no
 **Felipe Martin**
 
 - GitHub: [@Felipe-Alcantara](https://github.com/Felipe-Alcantara)
+
+## 🤝 Contribuições
+
+Veja [CONTRIBUTING.md](CONTRIBUTING.md) para preparar o ambiente, executar a régua de qualidade
+e abrir uma mudança rastreável. Questões de segurança seguem o canal privado descrito em
+[SECURITY.md](SECURITY.md).
+
+Ideias que o projeto adoraria receber:
+
+- **Novas fontes de conteúdo** (outros blogs, feeds RSS, pastas de Markdown, Notion);
+- **Planejamento editorial em lote** — inserir muitos dados e gerar pauta de episódios/tópicos;
+- STT + auditoria automática do MP3 final (fase 4 do plano técnico);
+- Métricas de cobertura semântica reproduzíveis.
 
 ---
 

@@ -39,8 +39,7 @@ def script_prompt(presenters: list[Presenter], attribution: str) -> str:
         opening = _SCRIPT_SINGLE.format(speakers=presenters[0].speaker)
     else:
         described = ", ".join(
-            f'"{p.speaker}"' + (f" ({p.style})" if p.style else "")
-            for p in presenters
+            f'"{p.speaker}"' + (f" ({p.style})" if p.style else "") for p in presenters
         )
         opening = _SCRIPT_MULTI.format(speakers=described)
     speakers = "|".join(p.speaker for p in presenters)

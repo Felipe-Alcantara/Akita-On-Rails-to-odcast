@@ -1,9 +1,9 @@
 """Testes do provedor de texto por assinatura (CLIs locais)."""
 
+import subprocess
 import sys
 import tempfile
 import unittest
-import subprocess
 from pathlib import Path
 from unittest.mock import patch
 
@@ -42,7 +42,9 @@ class RegistryTest(unittest.TestCase):
 
     def test_comando_inclui_binario(self):
         for cli in SUBSCRIPTION_CLIS:
-            command = cli.command("sistema", )
+            command = cli.command(
+                "sistema",
+            )
             self.assertEqual(command[0], cli.binary)
 
     def test_chat_tem_permissao_total_sem_afetar_o_pipeline(self):
@@ -72,13 +74,21 @@ class RegistryTest(unittest.TestCase):
 class ProfileCompatTest(unittest.TestCase):
     def test_perfil_antigo_sem_text_provider_carrega(self):
         from audiofy.profiles import Profile
-        old = {"name": "meu", "text_model": "a/b", "audit_model": "a/c",
-               "tts_model": "a/d", "presenters_spec": "n:V", "description": ""}
+
+        old = {
+            "name": "meu",
+            "text_model": "a/b",
+            "audit_model": "a/c",
+            "tts_model": "a/d",
+            "presenters_spec": "n:V",
+            "description": "",
+        }
         profile = Profile(**old)
         self.assertEqual(profile.text_provider, "openrouter")
 
     def test_perfil_assinatura_embutido(self):
         from audiofy.profiles import BUILTIN_PROFILES
+
         assinatura = next(p for p in BUILTIN_PROFILES if p.name == "assinatura")
         self.assertNotEqual(assinatura.text_provider, "openrouter")
 
@@ -132,8 +142,7 @@ class RunCliTest(unittest.TestCase):
 
     def test_chat_json_traduz_oserror(self):
         with (
-            patch.object(subscription, "run_cli",
-                         side_effect=OSError("arquivo não encontrado")),
+            patch.object(subscription, "run_cli", side_effect=OSError("arquivo não encontrado")),
             patch.object(subscription.shutil, "which", return_value="claude"),
         ):
             with self.assertRaises(SubscriptionError) as context:

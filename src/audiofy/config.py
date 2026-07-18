@@ -8,9 +8,9 @@ Resolução de configuração (maior prioridade primeiro):
 
 from __future__ import annotations
 
+import json
 import os
 import re
-import json
 from copy import copy
 from dataclasses import dataclass, field, replace
 from pathlib import Path
@@ -80,8 +80,9 @@ def _load_dotenv(path: Path) -> frozenset[str]:
 DOTENV_LOADED_KEYS = _load_dotenv(PROJECT_ROOT / ".env")
 
 
-def desktop_environment(dotenv_path: Path | None = None,
-                        *, prefer_dotenv: bool = False) -> dict[str, str]:
+def desktop_environment(
+    dotenv_path: Path | None = None, *, prefer_dotenv: bool = False
+) -> dict[str, str]:
     """Prepara o Electron com valores atuais e a origem segura das chaves do .env.
 
     O processo principal pode durar horas. A marca de procedência permite que ele remova
@@ -118,7 +119,7 @@ def api_key_source() -> str | None:
     return "ambiente"
 
 
-def api_key_candidates(settings: "Settings") -> list[tuple[str, "Settings"]]:
+def api_key_candidates(settings: Settings) -> list[tuple[str, Settings]]:
     """Retorna a configuração atual e alternativas sem expor os segredos.
 
     A alternativa do `.env` é importante quando o processo pai herdou uma chave
@@ -148,6 +149,7 @@ def api_key_candidates(settings: "Settings") -> list[tuple[str, "Settings"]]:
     except (OSError, ValueError, json.JSONDecodeError):
         pass
     return candidates
+
 
 # O clone do blog do Akita continua em data/source/ (compartilhado com o módulo
 # akita-articles via variável de ambiente própria dele).

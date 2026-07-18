@@ -110,8 +110,9 @@ class LaunchDetachedTest(unittest.TestCase):
             patch.object(process.subprocess, "CREATE_NEW_PROCESS_GROUP", 512, create=True),
             patch.object(process.subprocess, "Popen", side_effect=fake_popen),
         ):
-            launch_detached(["python", "-m", "x"], cwd="/tmp", env={"A": "B"},
-                            log_handle=log_handle)
+            launch_detached(
+                ["python", "-m", "x"], cwd="/tmp", env={"A": "B"}, log_handle=log_handle
+            )
         return captured
 
     def test_windows_desanexa_com_creationflags(self):

@@ -8,8 +8,8 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
-from audiofy.profiles import BUILTIN_PROFILES, Profile, ProfileStore  # noqa: E402
 from audiofy.config import Settings  # noqa: E402
+from audiofy.profiles import BUILTIN_PROFILES, Profile, ProfileStore  # noqa: E402
 
 
 class ProfileStoreTest(unittest.TestCase):
@@ -46,8 +46,11 @@ class ProfileStoreTest(unittest.TestCase):
 
     def test_criar_perfil_customizado(self):
         custom = Profile(
-            name="meu", text_model="x/y", audit_model="x/z",
-            tts_model="x/tts", presenters_spec="solo:Sulafat",
+            name="meu",
+            text_model="x/y",
+            audit_model="x/z",
+            tts_model="x/tts",
+            presenters_spec="solo:Sulafat",
         )
         self.store.save(custom)
         self.store.set_active("meu")

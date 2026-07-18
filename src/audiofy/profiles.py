@@ -80,8 +80,12 @@ def profile_from_payload(payload: dict[str, Any]) -> Profile:
     from .providers.subscription import SUBSCRIPTION_CLIS
 
     name = str(payload.get("name", "")).strip()
-    if (not name or len(name) > 64 or name in {".", ".."}
-            or any(character in name for character in "/\\\r\n\0")):
+    if (
+        not name
+        or len(name) > 64
+        or name in {".", ".."}
+        or any(character in name for character in "/\\\r\n\0")
+    ):
         raise ValueError(
             "O nome do perfil é obrigatório, deve ter até 64 caracteres e não pode "
             "conter barras ou quebras de linha."
@@ -101,8 +105,7 @@ def profile_from_payload(payload: dict[str, Any]) -> Profile:
     if provider == "openrouter":
         text_model = str(payload.get("text_model", "")).strip()
         audit_model = str(payload.get("audit_model", "")).strip()
-        if (not text_model or not audit_model
-                or len(text_model) > 300 or len(audit_model) > 300):
+        if not text_model or not audit_model or len(text_model) > 300 or len(audit_model) > 300:
             raise ValueError("Os modelos de roteiro e auditoria são obrigatórios.")
     else:
         text_model = audit_model = "(assinatura)"
@@ -141,7 +144,8 @@ class ProfileStore:
                     "active": self._active,
                     "profiles": {name: asdict(p) for name, p in self._custom.items()},
                 },
-                ensure_ascii=False, indent=2,
+                ensure_ascii=False,
+                indent=2,
             ),
             encoding="utf-8",
         )

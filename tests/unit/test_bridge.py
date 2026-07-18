@@ -17,60 +17,69 @@ from audiofy.sources.base import ContentItem  # noqa: E402
 
 class ProfilePayloadTest(unittest.TestCase):
     def test_openrouter_exige_e_preserva_modelos(self):
-        profile = profile_from_payload({
-            "name": " meu ",
-            "text_provider": "openrouter",
-            "text_model": "vendor/text",
-            "audit_model": "vendor/audit",
-            "tts_model": "vendor/tts",
-            "presenters_spec": "ana:Kore:curiosa",
-        })
+        profile = profile_from_payload(
+            {
+                "name": " meu ",
+                "text_provider": "openrouter",
+                "text_model": "vendor/text",
+                "audit_model": "vendor/audit",
+                "tts_model": "vendor/tts",
+                "presenters_spec": "ana:Kore:curiosa",
+            }
+        )
         self.assertEqual(profile.name, "meu")
         self.assertEqual(profile.text_model, "vendor/text")
 
     def test_assinatura_normaliza_modelos_de_texto(self):
-        profile = profile_from_payload({
-            "name": "assinante",
-            "text_provider": "codex",
-            "tts_model": "vendor/tts",
-            "presenters_spec": "ana:Kore",
-        })
+        profile = profile_from_payload(
+            {
+                "name": "assinante",
+                "text_provider": "codex",
+                "tts_model": "vendor/tts",
+                "presenters_spec": "ana:Kore",
+            }
+        )
         self.assertEqual(profile.text_model, "(assinatura)")
         self.assertEqual(profile.audit_model, "(assinatura)")
 
     def test_rejeita_provedor_desconhecido(self):
         with self.assertRaisesRegex(ValueError, "Provedor"):
-            profile_from_payload({
-                "name": "inválido",
-                "text_provider": "qualquer-binario",
-                "tts_model": "vendor/tts",
-                "presenters_spec": "ana:Kore",
-            })
+            profile_from_payload(
+                {
+                    "name": "inválido",
+                    "text_provider": "qualquer-binario",
+                    "tts_model": "vendor/tts",
+                    "presenters_spec": "ana:Kore",
+                }
+            )
 
     def test_rejeita_lista_de_apresentadores_vazia(self):
         with self.assertRaisesRegex(ValueError, "apresentador"):
-            profile_from_payload({
-                "name": "sem-voz",
-                "text_model": "vendor/text",
-                "audit_model": "vendor/audit",
-                "tts_model": "vendor/tts",
-                "presenters_spec": "",
-            })
+            profile_from_payload(
+                {
+                    "name": "sem-voz",
+                    "text_model": "vendor/text",
+                    "audit_model": "vendor/audit",
+                    "tts_model": "vendor/tts",
+                    "presenters_spec": "",
+                }
+            )
 
     def test_rejeita_nome_de_perfil_inseguro(self):
         with self.assertRaisesRegex(ValueError, "nome do perfil"):
-            profile_from_payload({
-                "name": "../../perfil",
-                "text_model": "vendor/text",
-                "audit_model": "vendor/audit",
-                "tts_model": "vendor/tts",
-                "presenters_spec": "ana:Kore",
-            })
+            profile_from_payload(
+                {
+                    "name": "../../perfil",
+                    "text_model": "vendor/text",
+                    "audit_model": "vendor/audit",
+                    "tts_model": "vendor/tts",
+                    "presenters_spec": "ana:Kore",
+                }
+            )
 
 
 class CatalogFallbackTest(unittest.TestCase):
-    @patch("audiofy.providers.openrouter.list_tts_models",
-           side_effect=RuntimeError("sem chave"))
+    @patch("audiofy.providers.openrouter.list_tts_models", side_effect=RuntimeError("sem chave"))
     def test_catalogo_tts_mantem_vozes_sem_api(self, _list_models):
         result = bridge._cmd_tts_catalog()
         self.assertEqual(result["models"], [])
@@ -81,10 +90,14 @@ class CatalogFallbackTest(unittest.TestCase):
     @patch("audiofy.catalog.load_models")
     def test_catalogo_separa_texto_e_fala(self, load_models, list_tts_models):
         load_models.return_value = [Model("v/text", "Texto", 1, 2, ("text",))]
-        list_tts_models.return_value = [{
-            "id": "v/voice", "name": "Voz",
-            "prompt_price": "0.000001", "completion_price": "0.000002",
-        }]
+        list_tts_models.return_value = [
+            {
+                "id": "v/voice",
+                "name": "Voz",
+                "prompt_price": "0.000001",
+                "completion_price": "0.000002",
+            }
+        ]
         result = bridge._cmd_models_list()
         self.assertEqual(result["text_models"][0]["id"], "v/text")
         self.assertEqual(result["tts_models"][0]["id"], "v/voice")
@@ -106,8 +119,10 @@ class ChatHistoryContractTest(unittest.TestCase):
     @patch("audiofy.chat.ChatSession")
     def test_historico_inclui_fontes_esperadas_pelo_renderer(self, session, _sources):
         session.return_value.messages = [{"role": "user", "content": "oi"}]
-        with patch("sys.argv", ["bridge", "chat-history", "principal"]), \
-                patch("audiofy.bridge._emit") as emit:
+        with (
+            patch("sys.argv", ["bridge", "chat-history", "principal"]),
+            patch("audiofy.bridge._emit") as emit,
+        ):
             bridge.main()
         payload = emit.call_args.args[0]
         self.assertTrue(payload["ok"])
@@ -150,8 +165,9 @@ class ForcedGenerationTest(unittest.TestCase):
                 patch("audiofy.runtime.process.subprocess.Popen") as popen,
                 patch("audiofy.runtime.process.sys.platform", "win32"),
                 patch("audiofy.runtime.process.subprocess.DETACHED_PROCESS", 8, create=True),
-                patch("audiofy.runtime.process.subprocess.CREATE_NEW_PROCESS_GROUP",
-                      512, create=True),
+                patch(
+                    "audiofy.runtime.process.subprocess.CREATE_NEW_PROCESS_GROUP", 512, create=True
+                ),
             ):
                 bridge._cmd_generate("custom", "item")
             self.assertNotIn("start_new_session", popen.call_args.kwargs)
@@ -177,10 +193,20 @@ class ForcedGenerationTest(unittest.TestCase):
             directory = Path(tmp) / "episode"
             directory.mkdir(parents=True)
             import json as json_module
-            (directory / "status.json").write_text(json_module.dumps({
-                "episode_id": "item", "pid": 99999, "state": "rodando",
-                "stage": "tts", "cost_usd": 0, "cost_exact": True,
-            }), encoding="utf-8")
+
+            (directory / "status.json").write_text(
+                json_module.dumps(
+                    {
+                        "episode_id": "item",
+                        "pid": 99999,
+                        "state": "rodando",
+                        "stage": "tts",
+                        "cost_usd": 0,
+                        "cost_exact": True,
+                    }
+                ),
+                encoding="utf-8",
+            )
             with (
                 patch("audiofy.bridge._episode_dir", return_value=directory),
                 patch("audiofy.bridge.Settings", return_value=Mock()),
@@ -198,8 +224,7 @@ class ForcedGenerationTest(unittest.TestCase):
             bridge.GenerationTracker.mark_starting(directory, "item")
             with (
                 patch("audiofy.bridge._episode_dir", return_value=directory),
-                patch("audiofy.bridge.get_source",
-                      side_effect=LookupError("fonte quebrada")),
+                patch("audiofy.bridge.get_source", side_effect=LookupError("fonte quebrada")),
             ):
                 with self.assertRaises(LookupError):
                     bridge._cmd_run_generation("custom", "item")
@@ -214,8 +239,9 @@ class ForcedGenerationTest(unittest.TestCase):
             with (
                 patch("audiofy.bridge._episode_dir", return_value=directory),
                 patch("audiofy.bridge.Settings", return_value=settings),
-                patch("audiofy.runtime.process.subprocess.Popen",
-                      side_effect=OSError("sem processo")),
+                patch(
+                    "audiofy.runtime.process.subprocess.Popen", side_effect=OSError("sem processo")
+                ),
             ):
                 with self.assertRaisesRegex(RuntimeError, "worker"):
                     bridge._cmd_generate("custom", "item")
@@ -233,8 +259,11 @@ class EpisodeSummaryTest(unittest.TestCase):
             tracker = bridge.GenerationTracker(directory, "episodio")
             tracker.stage("tts", total=10, current=4)
             tracker.retrying(
-                segment=5, next_attempt=2, max_attempts=5,
-                delay_seconds=2, error="falha temporária",
+                segment=5,
+                next_attempt=2,
+                max_attempts=5,
+                delay_seconds=2,
+                error="falha temporária",
             )
             summary = bridge._episode_summary(directory)
 
@@ -266,15 +295,25 @@ class ItemEstimateTest(unittest.TestCase):
         self, get_source, settings, estimate_episode, _metrics
     ):
         get_source.return_value.get_item.return_value = ContentItem(
-            item_id="item", title="Título", url="", published_at="2026-01-01",
-            words=3_000, attribution="Fonte", text="conteúdo",
+            item_id="item",
+            title="Título",
+            url="",
+            published_at="2026-01-01",
+            words=3_000,
+            attribution="Fonte",
+            text="conteúdo",
         )
         settings.return_value.tts_model = "vendor/tts"
         settings.return_value.profile_name = "economico"
         estimate_episode.return_value = EpisodeEstimate(
-            duration_minutes=20, duration_min_minutes=18, duration_max_minutes=22,
-            speaking_rate_wpm=150, cost_usd=1.1, cost_min_usd=0.8,
-            cost_max_usd=1.3, sample_count=2,
+            duration_minutes=20,
+            duration_min_minutes=18,
+            duration_max_minutes=22,
+            speaking_rate_wpm=150,
+            cost_usd=1.1,
+            cost_min_usd=0.8,
+            cost_max_usd=1.3,
+            sample_count=2,
         )
 
         result = bridge._cmd_item("custom", "item")

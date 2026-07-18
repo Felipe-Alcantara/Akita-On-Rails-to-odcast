@@ -69,8 +69,9 @@ def detached_flags() -> dict:
     No POSIX, ``start_new_session`` cria um novo grupo/sessão com o mesmo efeito.
     """
     if sys.platform == "win32":
-        return {"creationflags": (subprocess.DETACHED_PROCESS
-                                  | subprocess.CREATE_NEW_PROCESS_GROUP)}
+        return {
+            "creationflags": (subprocess.DETACHED_PROCESS | subprocess.CREATE_NEW_PROCESS_GROUP)
+        }
     return {"start_new_session": True}
 
 
@@ -85,8 +86,9 @@ def resolve_tool(name: str) -> str:
     return found
 
 
-def run_tool(name: str, args: list[str], *, timeout: float,
-             check: bool = True, **kwargs) -> subprocess.CompletedProcess:
+def run_tool(
+    name: str, args: list[str], *, timeout: float, check: bool = True, **kwargs
+) -> subprocess.CompletedProcess:
     """Executa uma ferramenta externa resolvida, sempre com timeout.
 
     ``kwargs`` repassa opções de ``subprocess.run`` (cwd, input, etc.). O timeout
@@ -94,17 +96,26 @@ def run_tool(name: str, args: list[str], *, timeout: float,
     """
     executable = resolve_tool(name)
     return subprocess.run(
-        [executable, *args], timeout=timeout, check=check,
-        capture_output=True, text=True, **kwargs,
+        [executable, *args],
+        timeout=timeout,
+        check=check,
+        capture_output=True,
+        text=True,
+        **kwargs,
     )
 
 
-def launch_detached(args: list[str], *, cwd: str | Path | None = None,
-                    env: dict | None = None, log_handle=None) -> subprocess.Popen:
+def launch_detached(
+    args: list[str], *, cwd: str | Path | None = None, env: dict | None = None, log_handle=None
+) -> subprocess.Popen:
     """Inicia um worker de segundo plano desanexado, de forma portátil."""
     stdout = log_handle if log_handle is not None else subprocess.DEVNULL
     stderr = subprocess.STDOUT if log_handle is not None else subprocess.DEVNULL
     return subprocess.Popen(
-        args, cwd=str(cwd) if cwd is not None else None, env=env,
-        stdout=stdout, stderr=stderr, **detached_flags(),
+        args,
+        cwd=str(cwd) if cwd is not None else None,
+        env=env,
+        stdout=stdout,
+        stderr=stderr,
+        **detached_flags(),
     )

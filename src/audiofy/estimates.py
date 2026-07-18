@@ -72,8 +72,7 @@ def read_episode_metrics(directory: Path) -> EpisodeMetrics | None:
         return None
 
 
-def _load_samples(root: Path, tts_model: str,
-                  profile_name: str | None = None) -> list[dict]:
+def _load_samples(root: Path, tts_model: str, profile_name: str | None = None) -> list[dict]:
     samples: list[dict] = []
     if not root.is_dir():
         return samples
@@ -86,26 +85,37 @@ def _load_samples(root: Path, tts_model: str,
         except (OSError, ValueError, TypeError, json.JSONDecodeError):
             continue
         same_profile = profile_name is None or data.get("profile_name") == profile_name
-        if (words > 0 and duration > 0 and cost > 0 and same_profile
-                and math.isfinite(duration) and math.isfinite(cost)
-                and data.get("tts_model") == tts_model):
+        if (
+            words > 0
+            and duration > 0
+            and cost > 0
+            and same_profile
+            and math.isfinite(duration)
+            and math.isfinite(cost)
+            and data.get("tts_model") == tts_model
+        ):
             samples.append({"words": words, "duration": duration, "cost": cost})
     return samples
 
 
-def estimate_episode(source_words: int, tts_model: str,
-                     episodes_root: Path = EPISODES_DIR,
-                     profile_name: str | None = None) -> EpisodeEstimate:
+def estimate_episode(
+    source_words: int,
+    tts_model: str,
+    episodes_root: Path = EPISODES_DIR,
+    profile_name: str | None = None,
+) -> EpisodeEstimate:
     """Calcula média ponderada do mesmo modelo e, quando informado, perfil."""
     if source_words <= 0:
         raise ValueError("A estimativa exige uma contagem positiva de palavras.")
     samples = _load_samples(episodes_root, tts_model, profile_name)
     if not samples:
-        samples = [{
-            "words": _PILOT_WORDS,
-            "duration": _PILOT_DURATION_SECONDS,
-            "cost": _PILOT_COST_USD,
-        }]
+        samples = [
+            {
+                "words": _PILOT_WORDS,
+                "duration": _PILOT_DURATION_SECONDS,
+                "cost": _PILOT_COST_USD,
+            }
+        ]
         sample_count = 0
     else:
         sample_count = len(samples)
@@ -139,8 +149,7 @@ def estimate_episode(source_words: int, tts_model: str,
     )
 
 
-def estimate_tts_cost(settings, text: str, instructions: str,
-                      duration_seconds: float) -> float:
+def estimate_tts_cost(settings, text: str, instructions: str, duration_seconds: float) -> float:
     """Fallback por tabela oficial; custo por geração continua sendo preferido."""
     pricing = _TTS_TOKEN_PRICING.get(settings.tts_model)
     if not pricing or duration_seconds <= 0:
@@ -148,6 +157,5 @@ def estimate_tts_cost(settings, text: str, instructions: str,
     input_tokens = max(1.0, len(text + instructions) / 4)
     output_tokens = duration_seconds * pricing["audio_tokens_per_second"]
     return (
-        input_tokens * pricing["input_per_million"]
-        + output_tokens * pricing["output_per_million"]
+        input_tokens * pricing["input_per_million"] + output_tokens * pricing["output_per_million"]
     ) / 1_000_000

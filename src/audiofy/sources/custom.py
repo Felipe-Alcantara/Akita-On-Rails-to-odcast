@@ -20,8 +20,18 @@ from ..security import validate_identifier, validate_public_url
 from .base import ContentItem, ContentSource, ItemSummary
 
 _INBOX_DIR = DATA_DIR / "inbox"
-_SKIP_TAGS = {"script", "style", "nav", "header", "footer", "aside", "noscript",
-              "form", "svg", "iframe"}
+_SKIP_TAGS = {
+    "script",
+    "style",
+    "nav",
+    "header",
+    "footer",
+    "aside",
+    "noscript",
+    "form",
+    "svg",
+    "iframe",
+}
 _BLOCK_TAGS = {"p", "h1", "h2", "h3", "h4", "h5", "h6", "li", "blockquote", "pre"}
 _MAX_CONTENT_BYTES = 5 * 1024 * 1024
 _MAX_REDIRECTS = 5
@@ -117,11 +127,16 @@ class CustomSource(ContentSource):
     def add_url(self, url: str) -> str:
         """Baixa uma página, extrai o texto principal e guarda como item."""
         import requests
+
         current = validate_public_url(url)
         headers = {"User-Agent": "Mozilla/5.0 (Audiofy Content AI)"}
         for redirect_count in range(_MAX_REDIRECTS + 1):
             response = requests.get(
-                current, timeout=60, headers=headers, allow_redirects=False, stream=True,
+                current,
+                timeout=60,
+                headers=headers,
+                allow_redirects=False,
+                stream=True,
             )
             response.raise_for_status()
             if response.is_redirect or response.is_permanent_redirect:
@@ -156,8 +171,7 @@ class CustomSource(ContentSource):
         title, text = extract_main_text(html)
         if len(text) < 200:
             raise ValueError(
-                "Não consegui extrair texto suficiente dessa página; "
-                "cole o conteúdo manualmente."
+                "Não consegui extrair texto suficiente dessa página; cole o conteúdo manualmente."
             )
         return self.add_text(title or current, text, url=current)
 
@@ -177,7 +191,7 @@ class CustomSource(ContentSource):
             for line in match.group(1).splitlines():
                 key, _, value = line.partition(":")
                 meta[key.strip()] = value.strip()
-            raw = raw[match.end():]
+            raw = raw[match.end() :]
         return meta, raw.strip()
 
     def list_items(self) -> list[ItemSummary]:
@@ -186,17 +200,20 @@ class CustomSource(ContentSource):
         items = []
         for path in self.inbox_dir.glob("*.md"):
             meta, _ = self._parse(path)
-            items.append(ItemSummary(
-                item_id=path.stem,
-                title=meta.get("title", path.stem),
-                published_at=meta.get("date", ""),
-            ))
+            items.append(
+                ItemSummary(
+                    item_id=path.stem,
+                    title=meta.get("title", path.stem),
+                    published_at=meta.get("date", ""),
+                )
+            )
         return sorted(items, key=lambda i: i.item_id, reverse=True)
 
     def search(self, query: str) -> list[ItemSummary]:
         terms = query.lower().split()
         return [
-            item for item in self.list_items()
+            item
+            for item in self.list_items()
             if all(term in f"{item.item_id} {item.title}".lower() for term in terms)
         ]
 

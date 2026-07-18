@@ -29,9 +29,7 @@ def parse_presenters(spec: str) -> list[Presenter]:
             continue
         parts = [p.strip() for p in chunk.split(":")]
         if len(parts) < 2 or not parts[0] or not parts[1]:
-            raise ValueError(
-                f"Apresentador inválido: '{chunk}'. Use nome:Voz ou nome:Voz:tom."
-            )
+            raise ValueError(f"Apresentador inválido: '{chunk}'. Use nome:Voz ou nome:Voz:tom.")
         presenters.append(Presenter(parts[0], parts[1], parts[2] if len(parts) > 2 else ""))
     speakers = [p.speaker for p in presenters]
     if len(speakers) != len(set(speakers)):

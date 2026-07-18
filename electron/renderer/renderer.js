@@ -192,7 +192,7 @@ $("chat-text").addEventListener("keydown", (event) => {
 });
 $("chat-clear").onclick = async () => {
   await bridge(["chat-clear", "principal"]);
-  $("chat-messages").innerHTML = "";
+  $("chat-messages").replaceChildren();
 };
 
 async function loadChatHistory() {
@@ -213,7 +213,7 @@ async function loadSources() {
   if (!result.ok) return;
   sourcesByKey = new Map(result.sources.map((source) => [source.key, source]));
   const select = $("source-select");
-  select.innerHTML = "";
+  select.replaceChildren();
   for (const source of result.sources) {
     const option = document.createElement("option");
     option.value = source.key;
@@ -251,7 +251,7 @@ async function loadItems(query = "") {
   const command = query ? ["search", currentSource, query] : ["items", currentSource];
   const result = await bridge(command);
   const list = $("items");
-  list.innerHTML = "";
+  list.replaceChildren();
   if (!result.ok) {
     list.appendChild(makeElement("li", "muted", `Erro: ${result.error}`));
     return;
@@ -511,7 +511,7 @@ function renderSelectedStatus(episodes) {
 
 function renderEpisodes(episodes) {
   const list = $("episodes");
-  list.innerHTML = "";
+  list.replaceChildren();
   if (!episodes.length) list.appendChild(makeElement("li", "muted", "Nenhum episódio ainda."));
   for (const episode of episodes) {
     const row = document.createElement("li");
@@ -568,7 +568,7 @@ function configChip(label, value, className = "") {
 
 function renderActiveConfig(info) {
   const strip = $("active-config-strip");
-  strip.innerHTML = "";
+  strip.replaceChildren();
   strip.appendChild(makeElement("span", "config-strip-label", "Configuração ativa"));
   strip.appendChild(configChip("Perfil", info.profile));
   if (info.overrides.length) {
@@ -605,7 +605,7 @@ async function loadActiveConfig() {
 
 function renderSetup(setup) {
   const list = $("setup-list");
-  list.innerHTML = "";
+  list.replaceChildren();
   for (const check of setup.checks) {
     const row = document.createElement("li");
     row.appendChild(makeElement("span", `badge ${check.ok ? "ok" : "warn"}`,
@@ -626,7 +626,7 @@ async function loadSettings() {
   const keys = await bridge(["keys-list"]);
   if (keys.ok) {
     const list = $("keys-list");
-    list.innerHTML = "";
+    list.replaceChildren();
     if (!keys.keys.length) list.appendChild(makeElement("li", "muted", "Nenhuma chave no cofre."));
     for (const key of keys.keys) {
       const row = document.createElement("li");
@@ -661,7 +661,7 @@ async function loadSettings() {
   const profiles = await bridge(["profiles-list"]);
   if (profiles.ok) {
     const list = $("profiles-list");
-    list.innerHTML = "";
+    list.replaceChildren();
     for (const profile of profiles.profiles) {
       const row = document.createElement("li");
       const active = profile.name === profiles.active;
@@ -795,7 +795,7 @@ $("btn-load-catalog").onclick = async () => {
 // ── Editor de perfil ──────────────────────────────────────────────────────
 
 function fillModelSelect(select, models, current) {
-  select.innerHTML = "";
+  select.replaceChildren();
   const knownIds = new Set(models.map((model) => model.id));
   if (current && !knownIds.has(current)) {
     const currentOption = document.createElement("option");
@@ -826,7 +826,7 @@ function configureModelPicker(vendorSelect, modelSelect, models, current) {
     ...models.map((model) => model.vendor),
     ...(currentVendor ? [currentVendor] : []),
   ])].sort();
-  vendorSelect.innerHTML = "";
+  vendorSelect.replaceChildren();
   for (const vendor of vendors) {
     const option = document.createElement("option");
     option.value = vendor;
@@ -897,7 +897,7 @@ async function openProfileForm(profile = null) {
   $("pf-description").value = profile ? profile.description : "";
 
   const providerSelect = $("pf-provider");
-  providerSelect.innerHTML = "";
+  providerSelect.replaceChildren();
   const openrouter = document.createElement("option");
   openrouter.value = "openrouter";
   openrouter.textContent = "OpenRouter (API, custo por token)";
@@ -935,7 +935,7 @@ async function openProfileForm(profile = null) {
   configureModelPicker($("pf-tts-vendor"), $("pf-tts-model"),
     modelsCatalog.tts_models, base.tts_model);
 
-  $("pf-presenters").innerHTML = "";
+  $("pf-presenters").replaceChildren();
   const presenters = profile
     ? presentersFromSpec(profile.presenters_spec)
     : settingsInfo && settingsInfo.presenters.length

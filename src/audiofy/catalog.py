@@ -31,23 +31,24 @@ class Model:
 
     @property
     def price_line(self) -> str:
-        return (f"US$ {self.prompt_price:.2f}/M entrada · "
-                f"US$ {self.completion_price:.2f}/M saída")
+        return f"US$ {self.prompt_price:.2f}/M entrada · US$ {self.completion_price:.2f}/M saída"
 
 
 def _parse(payload: dict) -> list[Model]:
     models = []
     for item in payload.get("data", []):
         pricing = item.get("pricing", {})
-        models.append(Model(
-            id=item.get("id", ""),
-            name=item.get("name", ""),
-            prompt_price=float(pricing.get("prompt", 0) or 0) * 1_000_000,
-            completion_price=float(pricing.get("completion", 0) or 0) * 1_000_000,
-            output_modalities=tuple(
-                item.get("architecture", {}).get("output_modalities", ["text"])
-            ),
-        ))
+        models.append(
+            Model(
+                id=item.get("id", ""),
+                name=item.get("name", ""),
+                prompt_price=float(pricing.get("prompt", 0) or 0) * 1_000_000,
+                completion_price=float(pricing.get("completion", 0) or 0) * 1_000_000,
+                output_modalities=tuple(
+                    item.get("architecture", {}).get("output_modalities", ["text"])
+                ),
+            )
+        )
     return sorted(models, key=lambda m: m.id)
 
 
@@ -61,6 +62,7 @@ def load_models(settings: Settings, force_refresh: bool = False) -> list[Model]:
                 for m in cached["models"]
             ]
     from .providers.openrouter import _request
+
     payload = _request(settings, "GET", "/models").json()
     models = _parse(payload)
     _CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -78,8 +80,9 @@ def vendors(models: list[Model]) -> list[str]:
     return sorted({m.vendor for m in models})
 
 
-def models_of(models: list[Model], vendor: str,
-              modality: str | tuple[str, ...] | None = None) -> list[Model]:
+def models_of(
+    models: list[Model], vendor: str, modality: str | tuple[str, ...] | None = None
+) -> list[Model]:
     hits = [m for m in models if m.vendor == vendor]
     if modality:
         modalities = (modality,) if isinstance(modality, str) else modality

@@ -25,8 +25,12 @@ class RegistryTest(unittest.TestCase):
 
     def test_content_item_contrato(self):
         item = ContentItem(
-            item_id="2026-07-08/x", title="X", url="https://exemplo.com/x",
-            published_at="2026-07-08", text="corpo", words=1,
+            item_id="2026-07-08/x",
+            title="X",
+            url="https://exemplo.com/x",
+            published_at="2026-07-08",
+            text="corpo",
+            words=1,
             attribution="Baseado em X",
         )
         self.assertEqual(item.item_id, "2026-07-08/x")

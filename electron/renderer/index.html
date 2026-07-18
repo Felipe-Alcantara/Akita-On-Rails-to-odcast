@@ -38,8 +38,9 @@
     </section>
   </header>
 
+  <main id="app-content">
   <!-- ══ Chat ══ -->
-  <main id="tab-chat" class="tab-page" role="tabpanel"
+  <section id="tab-chat" class="tab-page" role="tabpanel"
     aria-labelledby="tab-button-chat" aria-hidden="false" tabindex="0">
     <section class="panel chat-panel">
       <div class="chat-toolbar">
@@ -56,10 +57,10 @@
         <button id="chat-send" class="primary">Enviar</button>
       </div>
     </section>
-  </main>
+  </section>
 
   <!-- ══ Conteúdo ══ -->
-  <main id="tab-content" class="tab-page hidden" role="tabpanel"
+  <section id="tab-content" class="tab-page hidden" role="tabpanel"
     aria-labelledby="tab-button-content" aria-hidden="true" tabindex="0">
     <section class="panel" id="panel-items">
       <div class="toolbar">
@@ -113,19 +114,19 @@
         </div>
       </div>
     </section>
-  </main>
+  </section>
 
   <!-- ══ Episódios ══ -->
-  <main id="tab-episodes" class="tab-page hidden" role="tabpanel"
+  <section id="tab-episodes" class="tab-page hidden" role="tabpanel"
     aria-labelledby="tab-button-episodes" aria-hidden="true" tabindex="0">
     <section class="panel">
       <h2>Todos os episódios</h2>
       <ul id="episodes"></ul>
     </section>
-  </main>
+  </section>
 
   <!-- ══ Configurações ══ -->
-  <main id="tab-settings" class="tab-page hidden" role="tabpanel"
+  <section id="tab-settings" class="tab-page hidden" role="tabpanel"
     aria-labelledby="tab-button-settings" aria-hidden="true" tabindex="0">
     <div class="settings-grid">
 
@@ -204,8 +205,8 @@
               <select id="pf-tts-model"></select>
             </label>
           </div>
-          <label>Apresentadores</label>
-          <div id="pf-presenters"></div>
+          <span id="pf-presenters-label" class="field-label">Apresentadores</span>
+          <div id="pf-presenters" role="group" aria-labelledby="pf-presenters-label"></div>
           <button type="button" id="pf-add-presenter" class="ghost">
             ➕ apresentador</button>
           <div class="form-row">
@@ -217,6 +218,7 @@
       </section>
 
     </div>
+  </section>
   </main>
 
   <script src="status-view.js"></script>

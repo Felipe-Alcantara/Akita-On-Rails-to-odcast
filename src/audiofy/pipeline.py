@@ -13,8 +13,8 @@ import json
 import sys
 import time
 import wave
-from datetime import datetime
 from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
 
 from .config import EPISODES_DIR, Settings, api_key_candidates
@@ -58,8 +58,9 @@ def generate_episode(settings: Settings, item: ContentItem, force: bool = False)
         raise
 
 
-def _run(settings: Settings, item: ContentItem, directory: Path,
-         tracker: GenerationTracker, force: bool) -> Path:
+def _run(
+    settings: Settings, item: ContentItem, directory: Path, tracker: GenerationTracker, force: bool
+) -> Path:
     print(f"\n📄 {item.title} ({item.published_at})")
     print(f"   Pasta do episódio: {directory}")
 
@@ -73,30 +74,36 @@ def _run(settings: Settings, item: ContentItem, directory: Path,
         tracker.checkpoint()
         if subscription:
             from .providers import subscription as subscription_provider
-            result = subscription_provider.chat_json(
-                settings.text_provider, SYSTEM_PROMPT, prompt
-            )
+
+            result = subscription_provider.chat_json(settings.text_provider, SYSTEM_PROMPT, prompt)
             print(f"    [{settings.text_provider}] via assinatura — custo US$ 0,00")
         else:
             result = openrouter.chat_json(settings, model, SYSTEM_PROMPT, prompt)
-            print(f"    [{model}] {result.prompt_tokens}/{result.completion_tokens} tokens, "
-                  f"US$ {result.cost_usd:.4f}")
+            print(
+                f"    [{model}] {result.prompt_tokens}/{result.completion_tokens} tokens, "
+                f"US$ {result.cost_usd:.4f}"
+            )
         tracker.add_cost(result.cost_usd)
         _save_json(path, result.data)
         return result.data
 
     print("🧠 1/5 Matriz de cobertura…")
     coverage = _chat_step(
-        "cobertura", directory / "coverage.json", settings.audit_model,
+        "cobertura",
+        directory / "coverage.json",
+        settings.audit_model,
         COVERAGE_PROMPT.format(content=item.text),
     )
     print(f"   {len(coverage.get('items', []))} itens de cobertura.")
 
     print("✍️  2/5 Roteiro…")
     script = _chat_step(
-        "roteiro", directory / "script.json", settings.text_model,
+        "roteiro",
+        directory / "script.json",
+        settings.text_model,
         script_prompt(settings.presenters, item.attribution).format(
-            content=item.text, matrix=json.dumps(coverage, ensure_ascii=False),
+            content=item.text,
+            matrix=json.dumps(coverage, ensure_ascii=False),
         ),
     )
     turns = script.get("turns", [])
@@ -104,7 +111,9 @@ def _run(settings: Settings, item: ContentItem, directory: Path,
 
     print("✅ 3/5 Auditoria do roteiro…")
     audit = _chat_step(
-        "auditoria", directory / "audit.json", settings.audit_model,
+        "auditoria",
+        directory / "audit.json",
+        settings.audit_model,
         AUDIT_PROMPT.format(
             content=item.text,
             matrix=json.dumps(coverage, ensure_ascii=False),
@@ -115,7 +124,11 @@ def _run(settings: Settings, item: ContentItem, directory: Path,
 
     print("🎙️  4/5 Síntese de áudio por turno…")
     segments = _synthesize_turns(
-        settings, directory, turns, tracker, trust_legacy_segments=not force,
+        settings,
+        directory,
+        turns,
+        tracker,
+        trust_legacy_segments=not force,
     )
 
     print("🎧 5/5 Montagem com ffmpeg…")
@@ -143,15 +156,18 @@ def _run(settings: Settings, item: ContentItem, directory: Path,
 def _report_audit(coverage: dict, audit: dict) -> None:
     criticality = {i["id"]: i.get("criticality", "contextual") for i in coverage.get("items", [])}
     problems = [
-        r for r in audit.get("results", [])
+        r
+        for r in audit.get("results", [])
         if r.get("status") in ("ausente", "distorcido", "parcial")
         and criticality.get(r.get("coverage_id"), "contextual") in ("critica", "importante")
     ]
     if problems:
         print(f"   ⚠ {len(problems)} itens críticos/importantes com pendência:")
         for problem in problems[:10]:
-            print(f"     - {problem['coverage_id']} [{problem['status']}]: "
-                  f"{problem.get('notes', '')[:120]}")
+            print(
+                f"     - {problem['coverage_id']} [{problem['status']}]: "
+                f"{problem.get('notes', '')[:120]}"
+            )
         print("   O episódio será gerado mesmo assim; revise audit.json antes de publicar.")
     else:
         print("   Cobertura crítica e importante completa. ✔")
@@ -192,8 +208,7 @@ def _valid_segment(path: Path) -> bool:
         return False
 
 
-def _segment_fingerprint(settings: Settings, text: str, voice: str,
-                         instructions: str) -> str:
+def _segment_fingerprint(settings: Settings, text: str, voice: str, instructions: str) -> str:
     """Vincula o cache ao conteúdo e às opções que alteram a identidade sonora."""
     payload = {
         "model": settings.tts_model,
@@ -229,9 +244,14 @@ class _SynthesisResult:
     key_label: str
 
 
-def _synthesize_with_retry(settings: Settings, text: str, voice: str,
-                           instructions: str, segment_number: int,
-                           tracker: GenerationTracker) -> _SynthesisResult:
+def _synthesize_with_retry(
+    settings: Settings,
+    text: str,
+    voice: str,
+    instructions: str,
+    segment_number: int,
+    tracker: GenerationTracker,
+) -> _SynthesisResult:
     policy = RetryPolicy(
         max_attempts=settings.tts_retry_attempts,
         base_delay_seconds=settings.tts_retry_base_seconds,
@@ -244,7 +264,10 @@ def _synthesize_with_retry(settings: Settings, text: str, voice: str,
             tracker.checkpoint()
             try:
                 speech = openrouter.text_to_speech(
-                    candidate, text, voice, instructions=instructions,
+                    candidate,
+                    text,
+                    voice,
+                    instructions=instructions,
                 )
                 return _SynthesisResult(speech, candidate, key_label)
             except openrouter.OpenRouterError as error:
@@ -253,7 +276,8 @@ def _synthesize_with_retry(settings: Settings, text: str, voice: str,
                     next_label = candidates[key_index + 1][0]
                     print(
                         f"\n   ↪ Limite da {key_label}; tentando {next_label} "
-                        f"na fala {segment_number}.", flush=True,
+                        f"na fala {segment_number}.",
+                        flush=True,
                     )
                     break
                 if not error.retryable or attempt == policy.max_attempts:
@@ -279,9 +303,13 @@ def _synthesize_with_retry(settings: Settings, text: str, voice: str,
     raise AssertionError("A política de retry terminou sem resultado nem erro.")
 
 
-def _synthesize_turns(settings: Settings, directory: Path, turns: list[dict],
-                      tracker: GenerationTracker,
-                      trust_legacy_segments: bool = True) -> list[Path]:
+def _synthesize_turns(
+    settings: Settings,
+    directory: Path,
+    turns: list[dict],
+    tracker: GenerationTracker,
+    trust_legacy_segments: bool = True,
+) -> list[Path]:
     voices = {p.speaker: p for p in settings.presenters}
     default = settings.presenters[0]
     segments_dir = directory / "segments"
@@ -299,8 +327,11 @@ def _synthesize_turns(settings: Settings, directory: Path, turns: list[dict],
     plans: list[dict] = []
     completed = 0
     for index, turn in enumerate(turns, 1):
-        if (not isinstance(turn, dict) or not isinstance(turn.get("text"), str)
-                or not turn["text"].strip()):
+        if (
+            not isinstance(turn, dict)
+            or not isinstance(turn.get("text"), str)
+            or not turn["text"].strip()
+        ):
             raise ValueError(f"Turno {index} inválido no roteiro.")
         speaker = turn.get("speaker")
         presenter = voices.get(speaker, default)
@@ -308,7 +339,10 @@ def _synthesize_turns(settings: Settings, directory: Path, turns: list[dict],
         style = f", tom {presenter.style}" if presenter.style else ""
         instructions = f"Fala natural de podcast em português brasileiro{style}."
         fingerprint = _segment_fingerprint(
-            settings, turn["text"], presenter.voice, instructions,
+            settings,
+            turn["text"],
+            presenter.voice,
+            instructions,
         )
         entry = entries.get(segment.name)
         entry_matches = isinstance(entry, dict) and entry.get("fingerprint") == fingerprint
@@ -320,15 +354,17 @@ def _synthesize_turns(settings: Settings, directory: Path, turns: list[dict],
                 "fingerprint": fingerprint,
                 "bytes": segment.stat().st_size,
             }
-        plans.append({
-            "index": index,
-            "turn": turn,
-            "presenter": presenter,
-            "segment": segment,
-            "instructions": instructions,
-            "fingerprint": fingerprint,
-            "reusable": reusable,
-        })
+        plans.append(
+            {
+                "index": index,
+                "turn": turn,
+                "presenter": presenter,
+                "segment": segment,
+                "instructions": instructions,
+                "fingerprint": fingerprint,
+                "reusable": reusable,
+            }
+        )
 
     # Importa segmentos legados para o manifesto antes de qualquer nova chamada.
     _save_json(manifest_path, manifest)
@@ -345,8 +381,12 @@ def _synthesize_turns(settings: Settings, directory: Path, turns: list[dict],
         cost_label = f"US$ {tracker.cost_usd:.3f}"
         _progress_bar(index, len(turns), f"{presenter.speaker} ({presenter.voice}) {cost_label}")
         synthesis = _synthesize_with_retry(
-            settings, plan["turn"]["text"], presenter.voice,
-            plan["instructions"], index, tracker,
+            settings,
+            plan["turn"]["text"],
+            presenter.voice,
+            plan["instructions"],
+            index,
+            tracker,
         )
         speech = synthesis.speech
         speech_settings = synthesis.settings
@@ -368,9 +408,7 @@ def _synthesize_turns(settings: Settings, directory: Path, turns: list[dict],
         segment_cost = 0.0
         if speech.generation_id:
             try:
-                segment_cost = openrouter.generation_cost_usd(
-                    speech_settings, speech.generation_id
-                )
+                segment_cost = openrouter.generation_cost_usd(speech_settings, speech.generation_id)
                 cost_exact = True
             except (openrouter.OpenRouterError, RuntimeError, ValueError):
                 pass
@@ -420,8 +458,13 @@ def _media_duration_seconds(path: Path) -> float:
     result = run_tool(
         "ffprobe",
         [
-            "-v", "error", "-show_entries", "format=duration",
-            "-of", "default=noprint_wrappers=1:nokey=1", str(path),
+            "-v",
+            "error",
+            "-show_entries",
+            "format=duration",
+            "-of",
+            "default=noprint_wrappers=1:nokey=1",
+            str(path),
         ],
         timeout=_FFPROBE_TIMEOUT,
     )
@@ -438,9 +481,7 @@ def _assemble(directory: Path, segments: list[Path], item: ContentItem) -> Path:
     if not segments:
         raise ValueError("Não há segmentos de áudio para montar o episódio.")
     concat_list = directory / "segments.txt"
-    concat_list.write_text(
-        "".join(_concat_line(p) for p in segments), encoding="utf-8"
-    )
+    concat_list.write_text("".join(_concat_line(p) for p in segments), encoding="utf-8")
     final_path = directory / "episode.mp3"
     temporary = directory / "episode.tmp.mp3"
     temporary.unlink(missing_ok=True)
@@ -448,12 +489,25 @@ def _assemble(directory: Path, segments: list[Path], item: ContentItem) -> Path:
         run_tool(
             "ffmpeg",
             [
-                "-y", "-f", "concat", "-safe", "0", "-i", str(concat_list),
-                "-af", "loudnorm=I=-16:TP=-1.5:LRA=11",
-                "-metadata", f"title={item.title}",
-                "-metadata", "artist=Audiofy Content AI",
-                "-metadata", f"comment={item.attribution}",
-                "-codec:a", "libmp3lame", "-b:a", "128k",
+                "-y",
+                "-f",
+                "concat",
+                "-safe",
+                "0",
+                "-i",
+                str(concat_list),
+                "-af",
+                "loudnorm=I=-16:TP=-1.5:LRA=11",
+                "-metadata",
+                f"title={item.title}",
+                "-metadata",
+                "artist=Audiofy Content AI",
+                "-metadata",
+                f"comment={item.attribution}",
+                "-codec:a",
+                "libmp3lame",
+                "-b:a",
+                "128k",
                 str(temporary),
             ],
             timeout=_FFMPEG_TIMEOUT,
@@ -465,8 +519,9 @@ def _assemble(directory: Path, segments: list[Path], item: ContentItem) -> Path:
     return final_path
 
 
-def _write_show_notes(directory: Path, item: ContentItem, cost_usd: float,
-                      cost_exact: bool) -> None:
+def _write_show_notes(
+    directory: Path, item: ContentItem, cost_usd: float, cost_exact: bool
+) -> None:
     (directory / "NOTES.md").write_text(
         f"# {item.title}\n\n"
         f"{item.attribution}\n\n"

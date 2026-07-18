@@ -70,9 +70,9 @@ class ResumableSynthesisTest(unittest.TestCase):
         ]
 
         paths = _synthesize_turns(
-            _settings(), self.directory,
-            [{"speaker": "ana", "text": "já pronto"},
-             {"speaker": "ana", "text": "retomar daqui"}],
+            _settings(),
+            self.directory,
+            [{"speaker": "ana", "text": "já pronto"}, {"speaker": "ana", "text": "retomar daqui"}],
             self.tracker,
         )
 
@@ -100,9 +100,9 @@ class ResumableSynthesisTest(unittest.TestCase):
 
         with self.assertRaisesRegex(OpenRouterError, "indisponível"):
             _synthesize_turns(
-                _settings(max_attempts=2), self.directory,
-                [{"speaker": "ana", "text": "preservado"},
-                 {"speaker": "ana", "text": "falha"}],
+                _settings(max_attempts=2),
+                self.directory,
+                [{"speaker": "ana", "text": "preservado"}, {"speaker": "ana", "text": "falha"}],
                 self.tracker,
             )
 
@@ -120,18 +120,20 @@ class ResumableSynthesisTest(unittest.TestCase):
 
         with self.assertRaisesRegex(OpenRouterError, "chave inválida"):
             _synthesize_turns(
-                _settings(max_attempts=5), self.directory,
-                [{"speaker": "ana", "text": "fala"}], self.tracker,
+                _settings(max_attempts=5),
+                self.directory,
+                [{"speaker": "ana", "text": "fala"}],
+                self.tracker,
             )
 
         text_to_speech.assert_called_once()
 
     @patch("audiofy.pipeline.openrouter.generation_cost_usd", return_value=0.01)
-    @patch("audiofy.pipeline.openrouter.text_to_speech",
-           return_value=SpeechResult(b"\x00\x00" * 300, "gen-1"))
-    def test_manifesto_invalida_audio_quando_modelo_muda(
-        self, text_to_speech, _generation_cost
-    ):
+    @patch(
+        "audiofy.pipeline.openrouter.text_to_speech",
+        return_value=SpeechResult(b"\x00\x00" * 300, "gen-1"),
+    )
+    def test_manifesto_invalida_audio_quando_modelo_muda(self, text_to_speech, _generation_cost):
         turns = [{"speaker": "ana", "text": "mesma fala"}]
         first_settings = _settings()
         _synthesize_turns(first_settings, self.directory, turns, self.tracker)
@@ -145,16 +147,22 @@ class ResumableSynthesisTest(unittest.TestCase):
         self.assertEqual(text_to_speech.call_count, original_calls + 1)
 
     @patch("audiofy.pipeline.estimate_tts_cost", return_value=0.02)
-    @patch("audiofy.pipeline.openrouter.generation_cost_usd",
-           side_effect=OpenRouterError("metadado atrasado"))
-    @patch("audiofy.pipeline.openrouter.text_to_speech",
-           return_value=SpeechResult(b"\x00\x00" * 300, "gen-atrasada"))
+    @patch(
+        "audiofy.pipeline.openrouter.generation_cost_usd",
+        side_effect=OpenRouterError("metadado atrasado"),
+    )
+    @patch(
+        "audiofy.pipeline.openrouter.text_to_speech",
+        return_value=SpeechResult(b"\x00\x00" * 300, "gen-atrasada"),
+    )
     def test_fallback_local_nao_consulta_conta_global_e_marca_aproximacao(
         self, _text_to_speech, _generation_cost, estimate_cost
     ):
         _synthesize_turns(
-            _settings(), self.directory,
-            [{"speaker": "ana", "text": "fala"}], self.tracker,
+            _settings(),
+            self.directory,
+            [{"speaker": "ana", "text": "fala"}],
+            self.tracker,
         )
 
         status = GenerationTracker.load(self.directory)
@@ -182,15 +190,15 @@ class ResumableSynthesisTest(unittest.TestCase):
         ]
 
         _synthesize_turns(
-            first, self.directory,
-            [{"speaker": "ana", "text": "usa a alternativa"}], self.tracker,
+            first,
+            self.directory,
+            [{"speaker": "ana", "text": "usa a alternativa"}],
+            self.tracker,
         )
 
         self.assertEqual(text_to_speech.call_count, 2)
-        self.assertEqual(text_to_speech.call_args_list[0].args[0].api_key,
-                         "sk-or-chave-antiga")
-        self.assertEqual(text_to_speech.call_args_list[1].args[0].api_key,
-                         "sk-or-chave-disponivel")
+        self.assertEqual(text_to_speech.call_args_list[0].args[0].api_key, "sk-or-chave-antiga")
+        self.assertEqual(text_to_speech.call_args_list[1].args[0].api_key, "sk-or-chave-disponivel")
         manifest = json.loads((self.directory / "segments.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["segments"]["001_ana.wav"]["key_label"], "disponivel")
 
@@ -221,7 +229,8 @@ class AtomicAssemblyTest(unittest.TestCase):
 
             run_tool.side_effect = create_output
             result = _assemble(
-                directory, [segment],
+                directory,
+                [segment],
                 SimpleNamespace(title="Episódio", attribution="Fonte"),
             )
 
@@ -233,8 +242,7 @@ class AtomicAssemblyTest(unittest.TestCase):
     def test_assemble_sem_segmentos_falha_em_vez_de_montar_vazio(self):
         with tempfile.TemporaryDirectory() as tmp:
             with self.assertRaisesRegex(ValueError, "segmento"):
-                _assemble(Path(tmp), [],
-                          SimpleNamespace(title="x", attribution="y"))
+                _assemble(Path(tmp), [], SimpleNamespace(title="x", attribution="y"))
 
 
 class FailureIsNeverSilentTest(unittest.TestCase):
@@ -247,8 +255,15 @@ class FailureIsNeverSilentTest(unittest.TestCase):
         from audiofy.runtime.process import ToolNotFoundError
 
         run.side_effect = ToolNotFoundError("'ffmpeg' não foi encontrado no PATH.")
-        item = SimpleNamespace(item_id="ep-falha", title="t", published_at="",
-                               text="x", words=1, url="", attribution="a")
+        item = SimpleNamespace(
+            item_id="ep-falha",
+            title="t",
+            published_at="",
+            text="x",
+            words=1,
+            url="",
+            attribution="a",
+        )
         with tempfile.TemporaryDirectory() as tmp:
             with patch("audiofy.pipeline.EPISODES_DIR", Path(tmp)):
                 with self.assertRaises(ToolNotFoundError):

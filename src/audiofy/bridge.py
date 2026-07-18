@@ -34,6 +34,7 @@ def _emit(payload: dict) -> None:
 def _episode_dir(item_id: str) -> Path:
     # Import tardio: o setup precisa funcionar mesmo se ``requests`` ainda faltar.
     from .pipeline import episode_dir
+
     return episode_dir(item_id)
 
 
@@ -54,17 +55,21 @@ def _episode_summary(directory: Path) -> dict:
         "last_error": status.get("last_error"),
         "resume_count": status.get("resume_count", 0),
         "updated_at": status.get("updated_at"),
-        "mp3": (str(completed_mp3)
-                if status.get("state") == "concluido" and completed_mp3.is_file()
-                else None),
+        "mp3": (
+            str(completed_mp3)
+            if status.get("state") == "concluido" and completed_mp3.is_file()
+            else None
+        ),
     }
 
 
 def _cmd_sources() -> dict:
-    return {"sources": [
-        {"key": s.key, "name": s.name, "description": s.description, "ready": s.is_ready()}
-        for s in available_sources()
-    ]}
+    return {
+        "sources": [
+            {"key": s.key, "name": s.name, "description": s.description, "ready": s.is_ready()}
+            for s in available_sources()
+        ]
+    }
 
 
 def _cmd_items(source_key: str) -> dict:
@@ -77,11 +82,10 @@ def _cmd_search(source_key: str, query: str) -> dict:
 
 def _cmd_item(source_key: str, item_id: str) -> dict:
     from .estimates import estimate_episode, read_episode_metrics
+
     item = get_source(source_key).get_item(item_id)
     settings = Settings()
-    estimate = estimate_episode(
-        item.words, settings.tts_model, profile_name=settings.profile_name
-    )
+    estimate = estimate_episode(item.words, settings.tts_model, profile_name=settings.profile_name)
     payload = asdict(item)
     payload.pop("text")  # o texto integral não interessa à interface
     payload["estimated_cost_usd"] = round(estimate.cost_usd, 2)
@@ -102,13 +106,19 @@ def _cmd_generate(source_key: str, item_id: str, force: bool = False) -> dict:
     directory.mkdir(parents=True, exist_ok=True)
     GenerationTracker.mark_starting(directory, item_id, resume=not force)
     child_args = [
-        sys.executable, "-m", "audiofy.bridge", "run-generation", source_key, item_id,
+        sys.executable,
+        "-m",
+        "audiofy.bridge",
+        "run-generation",
+        source_key,
+        item_id,
     ]
     if force:
         child_args.append("--force")
     import os
 
     from .runtime.process import launch_detached
+
     try:
         with (directory / "generation.log").open("a", encoding="utf-8") as log:
             launch_detached(
@@ -116,20 +126,29 @@ def _cmd_generate(source_key: str, item_id: str, force: bool = False) -> dict:
                 cwd=Path(__file__).resolve().parents[2],
                 # UTF-8 forçado: no Windows o worker herdaria cp1252 e os prints
                 # de progresso (emojis) derrubariam o processo em silêncio.
-                env={**os.environ, "PYTHONPATH": "src",
-                     "PYTHONUTF8": "1", "PYTHONIOENCODING": "utf-8"},
+                env={
+                    **os.environ,
+                    "PYTHONPATH": "src",
+                    "PYTHONUTF8": "1",
+                    "PYTHONIOENCODING": "utf-8",
+                },
                 log_handle=log,
             )
     except OSError as error:
         detail = f"Não foi possível iniciar o worker de geração: {error}"
         GenerationTracker.mark_launch_failed(directory, detail)
         raise RuntimeError(detail) from error
-    return {"started": True, "force": force, "dir": str(directory),
-            "log": str(directory / "generation.log")}
+    return {
+        "started": True,
+        "force": force,
+        "dir": str(directory),
+        "log": str(directory / "generation.log"),
+    }
 
 
 def _cmd_run_generation(source_key: str, item_id: str, force: bool = False) -> dict:
     from .pipeline import generate_episode
+
     try:
         settings = Settings()
         item = get_source(source_key).get_item(item_id)
@@ -169,13 +188,19 @@ def _cmd_abort(item_id: str) -> dict:
 def _cmd_settings_info() -> dict:
     """Resumo de configuração para a interface: perfil, provedor, CLIs, apresentadores."""
     import os
+
     from .config import api_key_source
     from .providers.subscription import SUBSCRIPTION_CLIS, configured_model
+
     settings = Settings()
     overrides = [
-        name for name in (
-            "AUDIOFY_TEXT_PROVIDER", "AUDIOFY_TEXT_MODEL", "AUDIOFY_AUDIT_MODEL",
-            "AUDIOFY_TTS_MODEL", "AUDIOFY_PRESENTERS",
+        name
+        for name in (
+            "AUDIOFY_TEXT_PROVIDER",
+            "AUDIOFY_TEXT_MODEL",
+            "AUDIOFY_AUDIT_MODEL",
+            "AUDIOFY_TTS_MODEL",
+            "AUDIOFY_PRESENTERS",
         )
         if os.environ.get(name)
     ]
@@ -187,15 +212,18 @@ def _cmd_settings_info() -> dict:
         "audit_model": settings.audit_model,
         "tts_model": settings.tts_model,
         "presenters": [
-            {"speaker": p.speaker, "voice": p.voice, "style": p.style}
-            for p in settings.presenters
+            {"speaker": p.speaker, "voice": p.voice, "style": p.style} for p in settings.presenters
         ],
         "has_key": bool(settings.api_key),
         "key_source": api_key_source(),
         "overrides": overrides,
         "subscription_clis": [
-            {"key": c.key, "name": c.name, "available": c.is_available(),
-             "configured_model": configured_model(c.key)}
+            {
+                "key": c.key,
+                "name": c.name,
+                "available": c.is_available(),
+                "configured_model": configured_model(c.key),
+            }
             for c in SUBSCRIPTION_CLIS
         ],
     }
@@ -205,6 +233,7 @@ def _cmd_models_list(force_refresh: bool = False) -> dict:
     """Modelos de texto e de TTS com preços, para os seletores da interface."""
     from .catalog import load_models
     from .providers.openrouter import GEMINI_VOICES, list_tts_models
+
     try:
         models = load_models(Settings(), force_refresh)
         errors = []
@@ -213,8 +242,12 @@ def _cmd_models_list(force_refresh: bool = False) -> dict:
         errors = [str(exception)]
 
     def payload(model) -> dict:
-        return {"id": model.id, "name": model.name, "vendor": model.vendor,
-                "price_line": model.price_line}
+        return {
+            "id": model.id,
+            "name": model.name,
+            "vendor": model.vendor,
+            "price_line": model.price_line,
+        }
 
     try:
         tts_models = []
@@ -222,21 +255,22 @@ def _cmd_models_list(force_refresh: bool = False) -> dict:
             prompt = float(model.get("prompt_price", 0) or 0) * 1_000_000
             completion = float(model.get("completion_price", 0) or 0) * 1_000_000
             model_id = model.get("id", "")
-            tts_models.append({
-                "id": model_id,
-                "name": model.get("name", ""),
-                "vendor": model_id.split("/", 1)[0],
-                "price_line": (f"US$ {prompt:.2f}/M entrada · "
-                               f"US$ {completion:.2f}/M saída"),
-            })
+            tts_models.append(
+                {
+                    "id": model_id,
+                    "name": model.get("name", ""),
+                    "vendor": model_id.split("/", 1)[0],
+                    "price_line": (f"US$ {prompt:.2f}/M entrada · US$ {completion:.2f}/M saída"),
+                }
+            )
     except Exception as exception:
-        tts_models = [payload(model) for model in models
-                      if {"audio", "speech"} & set(model.output_modalities)]
+        tts_models = [
+            payload(model) for model in models if {"audio", "speech"} & set(model.output_modalities)
+        ]
         errors.append(str(exception))
 
     return {
-        "text_models": [payload(model) for model in models
-                        if "text" in model.output_modalities],
+        "text_models": [payload(model) for model in models if "text" in model.output_modalities],
         "tts_models": tts_models,
         "gemini_voices": GEMINI_VOICES,
         "catalog_error": " | ".join(dict.fromkeys(errors)) if errors else None,
@@ -245,11 +279,13 @@ def _cmd_models_list(force_refresh: bool = False) -> dict:
 
 def _cmd_setup_check() -> dict:
     from .setup import setup_report
+
     return setup_report()
 
 
 def _cmd_tts_catalog() -> dict:
     from .providers.openrouter import GEMINI_VOICES, list_tts_models
+
     try:
         models = list_tts_models(Settings())
         error = None
@@ -291,20 +327,25 @@ def main() -> None:
             result = _cmd_tts_catalog()
         elif command == "notebooklm" and len(rest) >= 2:
             from .export import export_notebooklm_pack
+
             item = get_source(rest[0]).get_item(rest[1])
             result = {"pack": str(export_notebooklm_pack(item))}
         elif command == "add-url" and rest:
             from .sources.custom import CustomSource
+
             item_id = CustomSource().add_url(rest[0])
             result = {"item_id": item_id, "source": "custom"}
         elif command == "add-text":
             from .sources.custom import CustomSource
+
             payload = json.loads(sys.stdin.read())
             item_id = CustomSource().add_text(
-                payload["title"], payload["text"], payload.get("url", ""))
+                payload["title"], payload["text"], payload.get("url", "")
+            )
             result = {"item_id": item_id, "source": "custom"}
         elif command == "chat":
             from .chat import ChatSession
+
             message = sys.stdin.read().strip()
             if not message:
                 raise ValueError("mensagem vazia (envie pelo stdin)")
@@ -313,52 +354,67 @@ def main() -> None:
             result = {"reply": text, "actions": actions}
         elif command == "chat-history":
             from .chat import ChatSession
+
             result = {
                 "messages": ChatSession(rest[0] if rest else "principal").messages,
                 "sources": _cmd_sources()["sources"],
             }
         elif command == "chat-clear":
             from .chat import ChatSession
+
             ChatSession(rest[0] if rest else "principal").clear()
             result = {"cleared": True}
         elif command == "settings-info":
             result = _cmd_settings_info()
         elif command == "keys-list":
             from .config import key_store
+
             store = key_store()
-            result = {"active": store.active_name(),
-                      "keys": [{"name": k.name, "masked": k.masked}
-                               for k in store.list_keys()]}
+            result = {
+                "active": store.active_name(),
+                "keys": [{"name": k.name, "masked": k.masked} for k in store.list_keys()],
+            }
         elif command == "keys-add" and rest:
             from .config import key_store
+
             key_store().add(rest[0], sys.stdin.read().strip())
             result = {"added": rest[0]}
         elif command == "keys-activate" and rest:
             from .config import key_store
+
             key_store().set_active(rest[0])
             result = {"active": rest[0]}
         elif command == "keys-remove" and rest:
             from .config import key_store
+
             key_store().remove(rest[0])
             result = {"removed": rest[0]}
         elif command == "balance":
             from .providers.openrouter import check_api_key
+
             ok_flag, detail = check_api_key(Settings())
             result = {"valid": ok_flag, "detail": detail}
         elif command == "profiles-list":
             from dataclasses import asdict as _asdict
+
             from .config import profile_store
+
             store = profile_store()
-            result = {"active": store.active().name,
-                      "profiles": [{**_asdict(p), "custom": store.is_custom(p.name)}
-                                   for p in store.list_profiles()]}
+            result = {
+                "active": store.active().name,
+                "profiles": [
+                    {**_asdict(p), "custom": store.is_custom(p.name)} for p in store.list_profiles()
+                ],
+            }
         elif command == "profiles-activate" and rest:
             from .config import profile_store
+
             profile_store().set_active(rest[0])
             result = {"active": rest[0]}
         elif command == "profiles-save":
             from .config import profile_store
             from .profiles import profile_from_payload
+
             payload = json.loads(sys.stdin.read())
             profile = profile_from_payload(payload)
             store = profile_store()
@@ -368,6 +424,7 @@ def main() -> None:
             result = {"saved": profile.name}
         elif command == "profiles-remove" and rest:
             from .config import profile_store
+
             profile_store().remove(rest[0])
             result = {"removed": rest[0]}
         elif command == "models-list":
@@ -376,6 +433,7 @@ def main() -> None:
             result = _cmd_setup_check()
         elif command == "setup-install":
             from .setup import apply_setup
+
             result = apply_setup()
         else:
             raise ValueError(f"Comando inválido: {' '.join(args)}\n{__doc__}")

@@ -99,8 +99,11 @@ class GenerationTrackerTest(unittest.TestCase):
     def test_status_de_retry_e_limpo_ao_avancar(self):
         self.tracker.stage("tts", total=5, current=2)
         self.tracker.retrying(
-            segment=3, next_attempt=2, max_attempts=5,
-            delay_seconds=4, error="falha temporária",
+            segment=3,
+            next_attempt=2,
+            max_attempts=5,
+            delay_seconds=4,
+            error="falha temporária",
         )
         retry = self._read()["retry"]
         self.assertEqual(retry["segment"], 3)
@@ -160,38 +163,42 @@ class ReconcileTest(unittest.TestCase):
 
     def _write_status(self, **overrides):
         import time
+
         data = {
-            "episode_id": "ep", "pid": None, "state": "rodando",
-            "stage": "iniciando", "progress": {"current": 0, "total": 0},
-            "cost_usd": 0.0, "cost_exact": True, "started_at": time.time(),
-            "run_started_at": time.time(), "updated_at": time.time(),
-            "resume_count": 0, "retry": None, "last_error": None,
+            "episode_id": "ep",
+            "pid": None,
+            "state": "rodando",
+            "stage": "iniciando",
+            "progress": {"current": 0, "total": 0},
+            "cost_usd": 0.0,
+            "cost_exact": True,
+            "started_at": time.time(),
+            "run_started_at": time.time(),
+            "updated_at": time.time(),
+            "resume_count": 0,
+            "retry": None,
+            "last_error": None,
         }
         data.update(overrides)
-        (self.directory / "status.json").write_text(
-            json.dumps(data), encoding="utf-8")
+        (self.directory / "status.json").write_text(json.dumps(data), encoding="utf-8")
         return data
 
     def test_worker_morto_vira_falhou(self):
-        with patch("audiofy.runtime.process.pid_alive",
-                                 return_value=False):
+        with patch("audiofy.runtime.process.pid_alive", return_value=False):
             self._write_status(pid=99999, stage="tts")
             data = GenerationTracker.reconcile(self.directory)
         self.assertEqual(data["state"], "falhou")
         self.assertIn("generation.log", data["last_error"])
-        self.assertEqual(
-            GenerationTracker.load(self.directory)["state"], "falhou")
+        self.assertEqual(GenerationTracker.load(self.directory)["state"], "falhou")
 
     def test_worker_vivo_permanece_rodando(self):
-        with patch("audiofy.runtime.process.pid_alive",
-                                 return_value=True):
+        with patch("audiofy.runtime.process.pid_alive", return_value=True):
             self._write_status(pid=1234, stage="tts")
             data = GenerationTracker.reconcile(self.directory)
         self.assertEqual(data["state"], "rodando")
 
     def test_iniciando_ha_muito_tempo_sem_pid_vira_falhou(self):
-        self._write_status(pid=None, stage="iniciando",
-                           run_started_at=1.0)  # passado distante
+        self._write_status(pid=None, stage="iniciando", run_started_at=1.0)  # passado distante
         data = GenerationTracker.reconcile(self.directory)
         self.assertEqual(data["state"], "falhou")
         self.assertIn("não iniciou", data["last_error"])

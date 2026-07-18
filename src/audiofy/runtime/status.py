@@ -68,8 +68,11 @@ class GenerationTracker:
         temporary_name = None
         try:
             with tempfile.NamedTemporaryFile(
-                mode="w", encoding="utf-8", dir=directory,
-                prefix=f".{GenerationTracker.STATUS_FILE}.", suffix=".tmp",
+                mode="w",
+                encoding="utf-8",
+                dir=directory,
+                prefix=f".{GenerationTracker.STATUS_FILE}.",
+                suffix=".tmp",
                 delete=False,
             ) as temporary:
                 temporary_name = temporary.name
@@ -85,8 +88,7 @@ class GenerationTracker:
         self._write(self.directory, self._data)
 
     @classmethod
-    def mark_starting(cls, directory: Path, episode_id: str,
-                      resume: bool = True) -> None:
+    def mark_starting(cls, directory: Path, episode_id: str, resume: bool = True) -> None:
         """Publica o início antes de lançar o worker, fechando a janela sem feedback."""
         directory.mkdir(parents=True, exist_ok=True)
         previous = (cls.load(directory) or {}) if resume else {}
@@ -104,9 +106,9 @@ class GenerationTracker:
                 "total": int(progress.get("total", 0) or 0),
             },
             "cost_usd": float(previous.get("cost_usd", 0.0) or 0.0),
-            "cost_exact": bool(previous.get(
-                "cost_exact", not float(previous.get("cost_usd", 0.0) or 0.0)
-            )),
+            "cost_exact": bool(
+                previous.get("cost_exact", not float(previous.get("cost_usd", 0.0) or 0.0))
+            ),
             "started_at": previous.get("started_at", now),
             "run_started_at": now,
             "updated_at": now,
@@ -120,12 +122,14 @@ class GenerationTracker:
     @classmethod
     def mark_launch_failed(cls, directory: Path, error: str) -> None:
         data = cls.load(directory) or {}
-        data.update({
-            "state": "falhou",
-            "stage": "inicialização",
-            "retry": None,
-            "last_error": str(error)[:300],
-        })
+        data.update(
+            {
+                "state": "falhou",
+                "stage": "inicialização",
+                "retry": None,
+                "last_error": str(error)[:300],
+            }
+        )
         cls._write(directory, data)
 
     def stage(self, name: str, total: int = 0, current: int = 0) -> None:
@@ -144,8 +148,15 @@ class GenerationTracker:
         self._data["last_error"] = None
         self._flush()
 
-    def retrying(self, *, segment: int, next_attempt: int, max_attempts: int,
-                 delay_seconds: float, error: str) -> None:
+    def retrying(
+        self,
+        *,
+        segment: int,
+        next_attempt: int,
+        max_attempts: int,
+        delay_seconds: float,
+        error: str,
+    ) -> None:
         """Expõe uma espera de retry sem registrar o conteúdo enviado ao provedor."""
         self._data["retry"] = {
             "segment": segment,
@@ -231,22 +242,30 @@ class GenerationTracker:
         pid = data.get("pid")
         if pid:
             if not pid_alive(pid):
-                data.update({
-                    "state": "falhou",
-                    "retry": None,
-                    "last_error": ("O processo de geração terminou inesperadamente; "
-                                   "veja generation.log na pasta do episódio."),
-                })
+                data.update(
+                    {
+                        "state": "falhou",
+                        "retry": None,
+                        "last_error": (
+                            "O processo de geração terminou inesperadamente; "
+                            "veja generation.log na pasta do episódio."
+                        ),
+                    }
+                )
                 cls._write(directory, data)
         elif data.get("stage") == "iniciando":
             started = float(data.get("run_started_at", 0) or 0)
             if time.time() - started > cls.STARTUP_GRACE_SECONDS:
-                data.update({
-                    "state": "falhou",
-                    "stage": "inicialização",
-                    "retry": None,
-                    "last_error": ("O worker de geração não iniciou; "
-                                   "veja generation.log na pasta do episódio."),
-                })
+                data.update(
+                    {
+                        "state": "falhou",
+                        "stage": "inicialização",
+                        "retry": None,
+                        "last_error": (
+                            "O worker de geração não iniciou; "
+                            "veja generation.log na pasta do episódio."
+                        ),
+                    }
+                )
                 cls._write(directory, data)
         return data

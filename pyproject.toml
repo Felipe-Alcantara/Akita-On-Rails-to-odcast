@@ -1,0 +1,46 @@
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+extend-exclude = [
+    ".audiofy",
+    ".venv",
+    "data",
+    "electron/node_modules",
+    "Padrão de qualidade - Felixo System Design",
+]
+
+[tool.ruff.lint]
+select = [
+    "B",   # flake8-bugbear: construções propensas a bugs
+    "C4",  # flake8-comprehensions
+    "E4",  # imports e espaços em branco relevantes
+    "E7",  # statements
+    "E9",  # erros de sintaxe
+    "F",   # Pyflakes
+    "I",   # ordenação de imports
+    "PIE", # simplificações seguras
+    "SIM", # simplificações legíveis
+    "UP",  # sintaxe moderna compatível com Python 3.10+
+]
+ignore = [
+    "SIM117", # contextos aninhados deixam patches independentes mais legíveis nos testes
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+
+[tool.coverage.run]
+branch = true
+source = ["src/audiofy"]
+omit = ["tests/*"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+fail_under = 70
+exclude_also = [
+    "if TYPE_CHECKING:",
+    "if __name__ == .__main__.:",
+]

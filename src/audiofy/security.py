@@ -11,14 +11,16 @@ from urllib.parse import urlsplit
 Resolver = Callable[..., list[tuple]]
 
 
-def validate_identifier(value: str, label: str = "identificador",
-                        max_length: int = 100) -> str:
+def validate_identifier(value: str, label: str = "identificador", max_length: int = 100) -> str:
     """Aceita identificadores seguros para nomes de arquivos locais."""
     if not isinstance(value, str):
         raise ValueError(f"O {label} precisa ser texto.")
     value = value.strip()
-    if (not value or len(value) > max_length
-            or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]*", value)):
+    if (
+        not value
+        or len(value) > max_length
+        or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]*", value)
+    ):
         raise ValueError(
             f"O {label} deve usar somente letras, números, '_' ou '-' "
             f"(máx. {max_length} caracteres)."

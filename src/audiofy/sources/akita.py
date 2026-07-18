@@ -45,6 +45,7 @@ class AkitaSource(ContentSource):
         if _akita is None:
             return False
         from akita_articles.config import default_repo_dir
+
         return (default_repo_dir() / "content").is_dir()
 
     def list_items(self) -> list[ItemSummary]:

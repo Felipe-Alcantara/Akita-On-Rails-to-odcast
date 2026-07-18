@@ -1,2 +1,11 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Texto normalizado para diffs estáveis em todas as plataformas.
+* text=auto eol=lf
+
+# Binários nunca passam por normalização de fim de linha.
+*.mp3 binary
+*.wav binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary

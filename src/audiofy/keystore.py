@@ -36,9 +36,7 @@ def validate_api_key(key: str) -> str:
     if not key:
         raise ValueError("a chave não pode ser vazia")
     if not key.startswith("sk-or-"):
-        raise ValueError(
-            "isso não parece uma chave do OpenRouter (o esperado começa com 'sk-or-')"
-        )
+        raise ValueError("isso não parece uma chave do OpenRouter (o esperado começa com 'sk-or-')")
     if len(key) < 20:
         raise ValueError("a chave parece curta demais para ser válida")
     return key
@@ -62,9 +60,7 @@ class KeyStore:
 
     def _flush(self) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
-        self.path.write_text(
-            json.dumps(self._data, ensure_ascii=False, indent=2), encoding="utf-8"
-        )
+        self.path.write_text(json.dumps(self._data, ensure_ascii=False, indent=2), encoding="utf-8")
         if os.name != "nt":
             self.path.chmod(0o600)
 

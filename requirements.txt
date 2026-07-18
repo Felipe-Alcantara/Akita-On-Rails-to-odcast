@@ -1,4 +1,4 @@
-requests>=2.31,<3
-questionary>=2.0,<3
-rich>=13,<15
-git+https://github.com/Felipe-Alcantara/akita-articles
+requests==2.34.2
+questionary==2.1.1
+rich==15.0.0
+akita-articles @ git+https://github.com/Felipe-Alcantara/akita-articles@5fab889f6db8312298c0ce0fd8d4b7355b20231e

@@ -30,24 +30,45 @@ _TIMEOUT = 300
 # Vozes do Gemini TTS (documentação oficial do modelo), com o caráter descrito
 # pelo provedor. A lista é referência para configuração; a API não a expõe.
 GEMINI_VOICES: dict[str, str] = {
-    "Zephyr": "brilhante", "Puck": "animada", "Charon": "informativa",
-    "Kore": "firme", "Fenrir": "empolgada", "Leda": "jovem",
-    "Orus": "firme", "Aoede": "leve", "Callirrhoe": "tranquila",
-    "Autonoe": "brilhante", "Enceladus": "sussurrada", "Iapetus": "clara",
-    "Umbriel": "tranquila", "Algieba": "suave", "Despina": "suave",
-    "Erinome": "clara", "Algenib": "rouca", "Rasalgethi": "informativa",
-    "Laomedeia": "animada", "Achernar": "macia", "Alnilam": "firme",
-    "Schedar": "uniforme", "Gacrux": "madura", "Pulcherrima": "expressiva",
-    "Achird": "amigável", "Zubenelgenubi": "casual", "Vindemiatrix": "gentil",
-    "Sadachbia": "vivaz", "Sadaltager": "erudita", "Sulafat": "calorosa",
+    "Zephyr": "brilhante",
+    "Puck": "animada",
+    "Charon": "informativa",
+    "Kore": "firme",
+    "Fenrir": "empolgada",
+    "Leda": "jovem",
+    "Orus": "firme",
+    "Aoede": "leve",
+    "Callirrhoe": "tranquila",
+    "Autonoe": "brilhante",
+    "Enceladus": "sussurrada",
+    "Iapetus": "clara",
+    "Umbriel": "tranquila",
+    "Algieba": "suave",
+    "Despina": "suave",
+    "Erinome": "clara",
+    "Algenib": "rouca",
+    "Rasalgethi": "informativa",
+    "Laomedeia": "animada",
+    "Achernar": "macia",
+    "Alnilam": "firme",
+    "Schedar": "uniforme",
+    "Gacrux": "madura",
+    "Pulcherrima": "expressiva",
+    "Achird": "amigável",
+    "Zubenelgenubi": "casual",
+    "Vindemiatrix": "gentil",
+    "Sadachbia": "vivaz",
+    "Sadaltager": "erudita",
+    "Sulafat": "calorosa",
 }
 
 
 class OpenRouterError(RuntimeError):
     """Falha controlada da integração, classificada para retry seguro."""
 
-    def __init__(self, message: str, *, retryable: bool = False,
-                 status_code: int | None = None) -> None:
+    def __init__(
+        self, message: str, *, retryable: bool = False, status_code: int | None = None
+    ) -> None:
         super().__init__(message)
         self.retryable = retryable
         self.status_code = status_code
@@ -67,20 +88,25 @@ class SpeechResult:
     generation_id: str | None
 
 
-def _request(settings: Settings, method: str, endpoint: str,
-             payload: dict[str, Any] | None = None) -> requests.Response:
+def _request(
+    settings: Settings, method: str, endpoint: str, payload: dict[str, Any] | None = None
+) -> requests.Response:
     headers = {"Authorization": f"Bearer {settings.require_api_key()}", **_HEADERS_EXTRA}
     last_error: Exception | None = None
     for attempt in range(1, _MAX_RETRIES + 1):
         try:
             response = requests.request(
-                method, f"{OPENROUTER_BASE_URL}{endpoint}", json=payload,
-                headers=headers, timeout=_TIMEOUT,
+                method,
+                f"{OPENROUTER_BASE_URL}{endpoint}",
+                json=payload,
+                headers=headers,
+                timeout=_TIMEOUT,
             )
             if response.status_code in (408, 425, 429, 500, 502, 503, 504):
                 raise OpenRouterError(
                     f"HTTP {response.status_code} (transitório)",
-                    retryable=True, status_code=response.status_code,
+                    retryable=True,
+                    status_code=response.status_code,
                 )
             if response.status_code != 200:
                 # Não logar o corpo integral: pode ecoar conteúdo ou detalhes do provedor.
@@ -91,7 +117,8 @@ def _request(settings: Settings, method: str, endpoint: str,
                 )
                 raise OpenRouterError(
                     f"HTTP {response.status_code} em {endpoint}: {response.text[:300]}",
-                    retryable=provider_rejected, status_code=response.status_code,
+                    retryable=provider_rejected,
+                    status_code=response.status_code,
                 )
             return response
         except requests.RequestException as error:
@@ -151,8 +178,9 @@ def chat_json(settings: Settings, model: str, system: str, user: str) -> ChatRes
     )
 
 
-def text_to_speech(settings: Settings, text: str, voice: str,
-                   instructions: str = "") -> SpeechResult:
+def text_to_speech(
+    settings: Settings, text: str, voice: str, instructions: str = ""
+) -> SpeechResult:
     """Sintetiza uma fala e preserva o ID necessário para auditar seu custo."""
     payload: dict[str, Any] = {
         "model": settings.tts_model,
@@ -273,8 +301,10 @@ def check_api_key(settings: Settings) -> tuple[bool, str]:
         reset = f", renovação {key.reset}" if key.reset else ""
         available = key.remaining is None or key.remaining > 0
         availability = "válida" if available else "válida, mas com limite esgotado"
-        return available, (f"chave{label} {availability} — {detail} "
-                           f"(uso mensal US$ {key.usage_monthly:.2f}{reset})")
+        return available, (
+            f"chave{label} {availability} — {detail} "
+            f"(uso mensal US$ {key.usage_monthly:.2f}{reset})"
+        )
     except (OpenRouterError, RuntimeError) as error:
         return False, str(error)
 
@@ -287,10 +317,12 @@ def list_tts_models(settings: Settings) -> list[dict[str, str]]:
     models = []
     for model in body.get("data", []):
         pricing = model.get("pricing", {})
-        models.append({
-            "id": model.get("id", ""),
-            "name": model.get("name", ""),
-            "prompt_price": pricing.get("prompt", ""),
-            "completion_price": pricing.get("completion", ""),
-        })
+        models.append(
+            {
+                "id": model.get("id", ""),
+                "name": model.get("name", ""),
+                "prompt_price": pricing.get("prompt", ""),
+                "completion_price": pricing.get("completion", ""),
+            }
+        )
     return sorted(models, key=lambda m: m["id"])
