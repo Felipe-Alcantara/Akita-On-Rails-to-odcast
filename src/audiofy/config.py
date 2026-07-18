@@ -1,8 +1,8 @@
 """Configuração central do Audiofy: env, caminhos, perfis, chaves e apresentadores.
 
 Resolução de configuração (maior prioridade primeiro):
-1. variáveis de ambiente `AUDIOFY_*` / `OPENROUTER_API_KEY` (inclusive via .env);
-2. perfil ativo (`.audiofy/profiles.json`) e cofre de chaves (`.audiofy/keys.json`);
+1. variáveis de ambiente `AUDIOFY_*` e uma chave nomeada explicitamente selecionada;
+2. `OPENROUTER_API_KEY` (inclusive via .env), perfil ativo e cofre de chaves;
 3. padrões embutidos.
 """
 
@@ -110,13 +110,21 @@ def desktop_environment(
     return environment
 
 
-def api_key_source() -> str | None:
-    """Informa a origem efetiva da chave sem retornar seu valor."""
+def environment_key_source() -> str | None:
+    """Informa a procedência da chave do ambiente, sem considerar a seleção do cofre."""
     if not os.environ.get("OPENROUTER_API_KEY"):
-        return key_store().active_name()
+        return None
     if "OPENROUTER_API_KEY" in DOTENV_LOADED_KEYS:
         return ".env"
     return "ambiente"
+
+
+def api_key_source() -> str | None:
+    """Informa a origem efetiva da chave sem retornar seu valor."""
+    store = key_store()
+    if store.prefers_named():
+        return store.active_name()
+    return environment_key_source() or store.active_name()
 
 
 def api_key_candidates(settings: Settings) -> list[tuple[str, Settings]]:
@@ -221,7 +229,7 @@ class Settings:
     def require_api_key(self) -> str:
         if not self.api_key:
             raise RuntimeError(
-                "Nenhuma chave do OpenRouter configurada. Use o menu 'Chaves & saldo' "
+                "Nenhuma chave do OpenRouter configurada. Use o menu 'Chaves e verificação' "
                 "(fica em .audiofy/keys.json, fora do Git) ou defina OPENROUTER_API_KEY."
             )
         return self.api_key

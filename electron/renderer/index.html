@@ -135,16 +135,17 @@
         <pre id="settings-info" class="muted" aria-label="Resumo da configuração ativa"></pre>
 
         <h3>🔑 Chaves do OpenRouter</h3>
-        <p class="muted small">Guardadas localmente com permissão restrita, fora do Git.
-          A variável de ambiente tem prioridade.</p>
+        <p class="muted small">Guardadas localmente com permissão restrita e sempre mascaradas.
+          Escolha explicitamente qual origem será usada.</p>
+        <p id="keys-summary" class="muted small" role="status"></p>
         <ul id="keys-list" class="row-list"></ul>
         <div class="form-row">
           <input id="key-name" type="text" placeholder="nome (ex.: pessoal)"
             aria-label="Nome da chave" />
           <input id="key-value" type="password" placeholder="sk-or-…"
             aria-label="Chave do OpenRouter" />
-          <button id="btn-key-add" class="primary">➕ Adicionar</button>
-          <button id="btn-balance">💰 Saldo</button>
+          <button id="btn-key-add" class="primary">➕ Registrar chave</button>
+          <button id="btn-balance">✓ Verificar chave em uso</button>
         </div>
         <p id="balance-line" class="muted small" role="status"></p>
 

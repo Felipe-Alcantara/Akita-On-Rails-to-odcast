@@ -114,6 +114,68 @@ class SettingsInfoTest(unittest.TestCase):
         self.assertIn("AUDIOFY_TEXT_PROVIDER", result["overrides"])
 
 
+class KeyManagementContractTest(unittest.TestCase):
+    @patch("audiofy.config.api_key_source", return_value="trabalho")
+    @patch("audiofy.config.key_store")
+    def test_lista_informa_total_selecao_e_origem_efetiva(self, key_store, _source):
+        named = Mock(name="trabalho", masked="sk-or-v1-abc…1234")
+        named.name = "trabalho"
+        store = key_store.return_value
+        store.active_name.return_value = "trabalho"
+        store.list_keys.return_value = [named]
+        store.prefers_named.return_value = True
+
+        result = bridge._cmd_keys_list()
+
+        self.assertEqual(result["count"], 1)
+        self.assertEqual(result["effective_source"], "trabalho")
+        self.assertTrue(result["keys"][0]["in_use"])
+
+    @patch("audiofy.providers.openrouter.check_api_key_value")
+    @patch("audiofy.config.key_store")
+    def test_verifica_chave_nomeada_especifica(self, key_store, check):
+        named = Mock(key="segredo-da-chave")
+        key_store.return_value.get.return_value = named
+        check.return_value = (True, "chave válida")
+
+        result = bridge._cmd_check_named_key("trabalho")
+
+        check.assert_called_once_with("segredo-da-chave")
+        self.assertEqual(result, {"name": "trabalho", "available": True, "detail": "chave válida"})
+        self.assertNotIn("segredo", str(result))
+
+    @patch("audiofy.providers.openrouter.check_api_key_value")
+    @patch("audiofy.config.environment_key_source", return_value=".env")
+    def test_verifica_chave_do_ambiente_sem_devolver_segredo(self, _source, check):
+        check.return_value = (True, "chave válida")
+        with patch.dict("os.environ", {"OPENROUTER_API_KEY": "segredo-do-ambiente"}):
+            result = bridge._cmd_check_environment_key()
+
+        check.assert_called_once_with("segredo-do-ambiente")
+        self.assertEqual(result, {"name": ".env", "available": True, "detail": "chave válida"})
+        self.assertNotIn("segredo", str(result))
+
+    @patch("audiofy.config.key_store")
+    def test_usar_chave_nomeada_altera_a_selecao_persistida(self, key_store):
+        result = bridge._cmd_use_named_key("trabalho")
+
+        key_store.return_value.set_active.assert_called_once_with("trabalho")
+        self.assertEqual(result, {"active": "trabalho"})
+
+    @patch("audiofy.config.environment_key_source", return_value=".env")
+    @patch("audiofy.config.key_store")
+    def test_pode_voltar_para_chave_do_ambiente(self, key_store, _source):
+        result = bridge._cmd_use_environment_key()
+
+        key_store.return_value.use_environment.assert_called_once_with()
+        self.assertEqual(result, {"active": ".env"})
+
+    @patch("audiofy.config.environment_key_source", return_value=None)
+    def test_nao_seleciona_ambiente_sem_chave_disponivel(self, _source):
+        with self.assertRaisesRegex(RuntimeError, "Nenhuma OPENROUTER_API_KEY"):
+            bridge._cmd_use_environment_key()
+
+
 class ChatHistoryContractTest(unittest.TestCase):
     @patch("audiofy.bridge._cmd_sources", return_value={"sources": [{"key": "custom"}]})
     @patch("audiofy.chat.ChatSession")

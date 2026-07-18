@@ -1,5 +1,6 @@
 """Testes do cofre de chaves nomeadas do OpenRouter."""
 
+import json
 import os
 import stat
 import sys
@@ -55,7 +56,32 @@ class KeyStoreTest(unittest.TestCase):
         self.store.add("trabalho", FAKE_KEY.replace("abc", "xyz"))
         self.store.set_active("trabalho")
         self.assertEqual(self.store.active_name(), "trabalho")
+        self.assertTrue(self.store.prefers_named())
         self.assertEqual(len(self.store.list_keys()), 2)
+
+    def test_selecao_explicita_supera_chave_do_ambiente(self):
+        self.store.add("pessoal", FAKE_KEY)
+        os.environ["OPENROUTER_API_KEY"] = "sk-or-v1-prioridade-do-ambiente-000000"
+
+        self.store.set_active("pessoal")
+
+        self.assertEqual(self.store.resolve(), FAKE_KEY)
+
+    def test_pode_voltar_a_usar_chave_do_ambiente(self):
+        self.store.add("pessoal", FAKE_KEY)
+        self.store.set_active("pessoal")
+        os.environ["OPENROUTER_API_KEY"] = "sk-or-v1-prioridade-do-ambiente-000000"
+
+        self.store.use_environment()
+
+        self.assertFalse(self.store.prefers_named())
+        self.assertEqual(self.store.resolve(), "sk-or-v1-prioridade-do-ambiente-000000")
+
+    def test_busca_chave_nomeada_sem_expor_as_demais(self):
+        self.store.add("pessoal", FAKE_KEY)
+        self.assertEqual(self.store.get("pessoal").key, FAKE_KEY)
+        with self.assertRaises(LookupError):
+            self.store.get("inexistente")
 
     def test_nome_duplicado_sobrescreve(self):
         self.store.add("pessoal", FAKE_KEY)
@@ -85,8 +111,23 @@ class KeyStoreTest(unittest.TestCase):
 
     def test_persistencia_entre_instancias(self):
         self.store.add("pessoal", FAKE_KEY)
+        self.store.set_active("pessoal")
         reloaded = KeyStore(self.store.path)
         self.assertEqual(reloaded.active_key(), FAKE_KEY)
+        self.assertTrue(reloaded.prefers_named())
+
+    def test_cofre_antigo_preserva_prioridade_do_ambiente(self):
+        self.store.path.parent.mkdir(parents=True, exist_ok=True)
+        self.store.path.write_text(
+            json.dumps({"active": "pessoal", "keys": {"pessoal": FAKE_KEY}}),
+            encoding="utf-8",
+        )
+        os.environ["OPENROUTER_API_KEY"] = "sk-or-v1-prioridade-do-ambiente-000000"
+
+        reloaded = KeyStore(self.store.path)
+
+        self.assertFalse(reloaded.prefers_named())
+        self.assertEqual(reloaded.resolve(), "sk-or-v1-prioridade-do-ambiente-000000")
 
 
 if __name__ == "__main__":

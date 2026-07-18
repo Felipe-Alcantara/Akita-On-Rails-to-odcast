@@ -760,3 +760,35 @@ mas estava com o limite mensal esgotado, então nenhuma geração paga foi feita
 imutável e pela instalação limpa. A cobertura está exatamente no piso inicial de 70% e deve subir
 gradualmente. A inspeção visual desta rodada foi no Linux; Windows e macOS seguem cobertos por
 testes de processo/caminhos e pela CI, mas ainda merecem smoke visual nativo antes de uma release.
+
+---
+
+## 2026-07-18 — Gerenciamento completo e verificável de chaves
+
+**O que mudou:** Configurações e a TUI passaram a mostrar o total de chaves cadastradas, seus
+nomes mascarados e a origem efetivamente usada. Cada chave nomeada pode ser registrada, escolhida,
+trocada, verificada individualmente contra `/key` e removida. A `OPENROUTER_API_KEY` do `.env` ou
+ambiente aparece como uma origem protegida, também verificável e selecionável.
+
+**Decisão de precedência:** configurações antigas preservam o comportamento anterior — ambiente
+primeiro. Quando a pessoa clica em **usar** para uma chave nomeada, essa decisão fica persistida no
+cofre e vence o ambiente até que outra chave ou a origem `.env`/ambiente seja selecionada. Isso
+torna o botão de troca efetivo sem copiar segredo para outro arquivo ou devolvê-lo ao renderer.
+
+**Segurança e contratos:** a bridge ganhou comandos separados para listar metadados, selecionar e
+verificar; somente nome, máscara, disponibilidade e resumo de limite saem do backend. O valor
+integral permanece no cofre ou ambiente. Arquivos antigos do cofre são migrados em memória com
+fallback seguro e continuam compatíveis.
+
+**Validação:** testes cobrem precedência, retorno ao ambiente, persistência, chave inexistente,
+verificação de uma chave específica sem vazamento, allowlist IPC e presença das ações na interface.
+A régua completa passou em ambiente virtual criado do zero: 195 testes Python, 18 testes Node,
+71% de cobertura, lint/formatação, JSON, links, whitespace, `pip-audit` e `npm audit` verdes. O
+Electron foi inspecionado manualmente em 600 px e 380 px; um ajuste de linhas `max-content`
+impediu a sobreposição dos painéis no modo compacto. O smoke real consultou `/key` usando a
+origem de ambiente já presente: a autenticação foi aceita e o limite esgotado foi informado sem
+gerar conteúdo, consumir créditos ou expor o segredo. Não havia chave nomeada cadastrada no cofre.
+
+**Risco que sobrou:** verificar uma chave faz uma consulta de rede ao OpenRouter e pode falhar por
+indisponibilidade externa. A operação não gera conteúdo nem consome créditos, e a interface mantém
+a mensagem de erro restrita ao resumo seguro retornado pelo adaptador.

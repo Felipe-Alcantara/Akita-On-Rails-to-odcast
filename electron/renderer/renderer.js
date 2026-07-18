@@ -622,28 +622,78 @@ function renderSetup(setup) {
     : "Há itens obrigatórios que precisam de atenção.";
 }
 
+async function useKey(command, label) {
+  const result = await bridge(command);
+  if (!result.ok) {
+    $("balance-line").className = "small state-falhou";
+    $("balance-line").textContent = `✖ ${result.error}`;
+    return;
+  }
+  $("balance-line").className = "small state-concluido";
+  $("balance-line").textContent = `✓ ${label} agora está em uso.`;
+  await loadSettings();
+}
+
 async function loadSettings() {
   const keys = await bridge(["keys-list"]);
   if (keys.ok) {
     const list = $("keys-list");
     list.replaceChildren();
-    if (!keys.keys.length) list.appendChild(makeElement("li", "muted", "Nenhuma chave no cofre."));
+    const plural = keys.count === 1 ? "chave cadastrada" : "chaves cadastradas";
+    $("keys-summary").textContent =
+      `${keys.count} ${plural} · em uso: ${keys.effective_source || "nenhuma"}`;
+
+    const appendVerificationButton = (row, command) => {
+      const status = makeElement("span", "muted small");
+      const verify = makeElement("button", "ghost", "verificar");
+      verify.onclick = async () => {
+        verify.disabled = true;
+        status.className = "muted small";
+        status.textContent = "consultando…";
+        const result = await bridge(command);
+        verify.disabled = false;
+        status.className = result.ok && result.available
+          ? "small state-concluido" : "small state-falhou";
+        status.textContent = result.ok ? result.detail : `✖ ${result.error}`;
+      };
+      row.querySelector(".row-main").appendChild(status);
+      row.appendChild(verify);
+    };
+
+    if (keys.environment.available) {
+      const row = document.createElement("li");
+      const detail = makeElement("div", "row-main");
+      detail.appendChild(makeElement("span", "row-title", "OPENROUTER_API_KEY"));
+      detail.appendChild(makeElement("span", "muted mono",
+        `${keys.environment.source} · valor protegido`));
+      row.appendChild(detail);
+      if (keys.environment.in_use) row.appendChild(makeElement("span", "badge ok", "em uso"));
+      else {
+        const use = makeElement("button", "ghost", "usar");
+        use.onclick = () => useKey(["keys-use-environment"], keys.environment.source);
+        row.appendChild(use);
+      }
+      appendVerificationButton(row, ["keys-check-environment"]);
+      list.appendChild(row);
+    }
+
+    if (!keys.keys.length && !keys.environment.available) {
+      list.appendChild(makeElement("li", "muted", "Nenhuma chave disponível."));
+    }
     for (const key of keys.keys) {
       const row = document.createElement("li");
-      const active = key.name === keys.active;
       const detail = makeElement("div", "row-main");
       detail.appendChild(makeElement("span", "row-title", key.name));
       detail.appendChild(makeElement("span", "muted mono", key.masked));
       row.appendChild(detail);
-      if (active) row.appendChild(makeElement("span", "badge ok", "ativa"));
-      if (!active) {
-        const activate = document.createElement("button");
-        activate.textContent = "ativar";
-        activate.className = "ghost";
-        activate.onclick = () =>
-          bridge(["keys-activate", key.name]).then(loadSettings);
-        row.appendChild(activate);
+      if (key.in_use) row.appendChild(makeElement("span", "badge ok", "em uso"));
+      else {
+        if (key.selected) row.appendChild(makeElement("span", "badge", "selecionada"));
+        const use = makeElement("button", "ghost", "usar");
+        use.onclick = () => useKey(["keys-use", key.name], key.name);
+        row.appendChild(use);
       }
+      appendVerificationButton(row, ["keys-check", key.name]);
       const remove = document.createElement("button");
       remove.textContent = "🗑️";
       remove.className = "ghost";
@@ -737,6 +787,8 @@ $("btn-key-add").onclick = async () => {
   if (result.ok) {
     $("key-name").value = "";
     $("key-value").value = "";
+    $("balance-line").className = "small state-concluido";
+    $("balance-line").textContent = `✓ Chave "${name}" registrada. Use o botão “usar” para ativá-la.`;
     loadSettings();
   } else {
     alert(result.error);
@@ -746,6 +798,8 @@ $("btn-key-add").onclick = async () => {
 $("btn-balance").onclick = async () => {
   $("balance-line").textContent = "consultando…";
   const result = await bridge(["balance"]);
+  $("balance-line").className = result.ok && result.valid
+    ? "small state-concluido" : "small state-falhou";
   $("balance-line").textContent = result.ok ? result.detail : `✖ ${result.error}`;
 };
 

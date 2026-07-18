@@ -8,6 +8,12 @@ const { resolveProjectPath, validateBridgeRequest } = require("../security");
 
 test("bridge aceita somente comandos públicos conhecidos", () => {
   assert.deepEqual(validateBridgeRequest(["status"], undefined), ["status"]);
+  assert.deepEqual(validateBridgeRequest(["keys-use", "trabalho"]),
+    ["keys-use", "trabalho"]);
+  assert.deepEqual(validateBridgeRequest(["keys-use-environment"]),
+    ["keys-use-environment"]);
+  assert.deepEqual(validateBridgeRequest(["keys-check", "trabalho"]),
+    ["keys-check", "trabalho"]);
   assert.throws(() => validateBridgeRequest(["run-generation", "x", "y"]));
   assert.throws(() => validateBridgeRequest("status"));
 });

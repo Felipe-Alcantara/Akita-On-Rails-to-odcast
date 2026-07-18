@@ -168,7 +168,7 @@ instala as demais dependências declaradas em `requirements.txt` e diagnostica o
 | Gerar em 2º plano | libera o terminal; `watch` acompanha |
 | Acompanhar / Abortar | progresso e custo ao vivo; cancela com segurança |
 | Exportar p/ NotebookLM | episódio de **custo zero** dentro da assinatura Google |
-| Chaves & saldo | chaves **nomeadas** (pessoal, trabalho…), chave ativa, saldo/uso em US$ |
+| Chaves e verificação | registre, use, troque e verifique chaves nomeadas ou a origem de ambiente |
 | Perfis & modelos | presets de modelos + apresentadores; escolha empresa → modelo com preço |
 | Catálogo TTS/vozes | modelos de áudio do OpenRouter e vozes do Gemini |
 | Sincronizar / Status / Setup | fonte atualizada; o que está gastando créditos; instalação |
@@ -224,7 +224,8 @@ abas:
   estimativa de custo, geração normal ou forçada e NotebookLM;
 - **🎧 Episódios** — todos os episódios com estado, progresso, custo, abortar, ouvir e abrir
   pasta;
-- **⚙️ Configurações** — chaves nomeadas (adicionar/ativar/remover), saldo em US$,
+- **⚙️ Configurações** — contador e origem efetiva das chaves, cadastro, troca, verificação
+  individual, remoção e saldo em US$,
   criar/editar/ativar/remover perfis, escolha provedor + empresa + modelo com preços,
   apresentadores, setup compartilhado e catálogo TTS/vozes.
 
@@ -264,12 +265,14 @@ e devolve `ContentItem`s com texto e atribuição. O registro em `src/audiofy/so
 
 Padrões portados do [Openia](https://github.com/Felipe-Alcantara/Openia):
 
-- **Chaves nomeadas** — várias chaves do OpenRouter ("pessoal", "trabalho"…), uma ativa,
-  guardadas em `.audiofy/keys.json` com permissão `0600` e fora do Git. A variável
-  `OPENROUTER_API_KEY` (inclusive via `.env`) tem prioridade, para CI/sessões temporárias.
-  O menu consulta o **limite, o restante e o uso mensal da chave efetiva**; isso evita confundir
-  o saldo global da conta com um limite próprio de chave. O Electron relê valores originados no
-  `.env` a cada operação, enquanto uma chave definida explicitamente no shell mantém prioridade.
+- **Chaves nomeadas** — várias chaves do OpenRouter ("pessoal", "trabalho"…), guardadas em
+  `.audiofy/keys.json` com permissão `0600` e fora do Git. A tela mostra quantas estão cadastradas,
+  nomes e valores mascarados, além da origem realmente usada. É possível registrar, verificar
+  individualmente, usar/trocar ou remover cada chave e também voltar à `OPENROUTER_API_KEY` do
+  `.env`/ambiente. O ambiente continua sendo o padrão para CI e sessões temporárias; uma escolha
+  explícita de chave nomeada permanece efetiva até outra origem ser selecionada. A verificação
+  consulta **limite, restante e uso mensal da própria chave**, sem confundir com o saldo global da
+  conta. O Electron relê valores originados no `.env` a cada operação.
 - **Perfis** — presets nomeados de modelos + apresentadores. Embutidos: `padrao` (qualidade),
   `economico` (tudo no modelo barato), `narrador-unico` (audiolivro), `assinatura`
   (Claude Code) e `assinatura-codex` (Codex CLI). Crie e edite os seus pelo menu ou pelo app;

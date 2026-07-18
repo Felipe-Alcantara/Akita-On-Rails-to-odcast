@@ -309,6 +309,13 @@ def check_api_key(settings: Settings) -> tuple[bool, str]:
         return False, str(error)
 
 
+def check_api_key_value(api_key: str) -> tuple[bool, str]:
+    """Verifica uma chave específica sem alterar a seleção persistida nem expor seu valor."""
+    if not api_key:
+        return False, "nenhuma chave disponível nessa origem"
+    return check_api_key(Settings(api_key=api_key))
+
+
 def list_tts_models(settings: Settings) -> list[dict[str, str]]:
     """Modelos com saída de áudio disponíveis no catálogo do OpenRouter."""
     # O catálogo distingue modelos que sintetizam fala (``speech``) de modelos

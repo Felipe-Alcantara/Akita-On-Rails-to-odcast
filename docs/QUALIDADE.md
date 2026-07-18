@@ -55,6 +55,10 @@ Além da inspeção manual, testes Node impedem regressões no landmark principa
 no uso de `innerHTML`, no foco visível e na preferência por menos movimento. O teste manual ainda
 é necessário para contraste percebido, zoom, textos longos e navegação completa por teclado.
 
+O gerenciamento de chaves tem regressões em três fronteiras: o cofre testa persistência e
+precedência; a bridge testa seleção e verificação sem devolver o segredo; o Electron testa a
+allowlist dos comandos e a presença das ações de registrar, usar, trocar e verificar.
+
 Gerações reais com OpenRouter não rodam na CI porque consomem créditos e exigem segredo. Mudanças
 no pipeline devem usar mocks nos testes e, quando necessário, registrar no `IA.md` o smoke test
 real executado sem incluir conteúdo sensível ou chaves.

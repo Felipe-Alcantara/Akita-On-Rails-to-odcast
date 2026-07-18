@@ -5,7 +5,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
@@ -67,6 +67,17 @@ class DotenvEnvironmentTest(unittest.TestCase):
             patch.object(config, "DOTENV_LOADED_KEYS", frozenset()),
         ):
             self.assertEqual(config.api_key_source(), "ambiente")
+
+    def test_chave_nomeada_explicitamente_selecionada_supera_ambiente(self):
+        store = Mock()
+        store.prefers_named.return_value = True
+        store.active_key.return_value = "chave-nomeada"
+        store.active_name.return_value = "trabalho"
+        with (
+            patch.dict(os.environ, {"OPENROUTER_API_KEY": "chave-ambiente"}, clear=True),
+            patch.object(config, "key_store", return_value=store),
+        ):
+            self.assertEqual(config.api_key_source(), "trabalho")
 
 
 if __name__ == "__main__":

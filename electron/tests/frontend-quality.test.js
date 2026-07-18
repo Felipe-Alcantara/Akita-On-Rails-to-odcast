@@ -32,3 +32,17 @@ test("estilos preservam foco visível e preferência por menos movimento", () =>
   assert.match(styles, /:focus-visible/);
   assert.match(styles, /@media\s*\(prefers-reduced-motion:\s*reduce\)/);
 });
+
+test("gerenciamento permite registrar, usar, trocar e verificar chaves", () => {
+  const html = readRendererFile("index.html");
+  const renderer = readRendererFile("renderer.js");
+  const styles = readRendererFile("styles.css");
+
+  assert.match(html, /id="keys-summary"/);
+  assert.match(html, /Registrar chave/);
+  assert.match(renderer, /\["keys-use", key\.name\]/);
+  assert.match(renderer, /\["keys-use-environment"\]/);
+  assert.match(renderer, /\["keys-check", key\.name\]/);
+  assert.match(renderer, /\["keys-check-environment"\]/);
+  assert.match(styles, /\.settings-grid\s*\{[^}]*grid-template-rows:\s*repeat\(2, max-content\)/s);
+});

@@ -97,32 +97,37 @@ def do_setup() -> None:
 
 
 def do_keys() -> None:
-    """Cofre de chaves nomeadas: listar, adicionar, ativar, remover, checar saldo."""
-    from audiofy.config import key_store
+    """Registra, seleciona, verifica e remove chaves sem expor seus valores."""
+    import os
+
+    from audiofy.config import api_key_source, environment_key_source, key_store
+    from audiofy.keystore import ENV_VAR
+    from audiofy.providers.openrouter import check_api_key_value
 
     store = key_store()
     while True:
+        keys = store.list_keys()
+        effective = api_key_source() or "nenhuma"
         print(
             f"\n{BOLD}Chaves do OpenRouter{RESET} "
-            f"{DIM}(.audiofy/keys.json, permissão 0600, fora do Git){RESET}"
+            f"{DIM}— {len(keys)} cadastrada(s); em uso: {effective}{RESET}"
         )
-        keys = store.list_keys()
+        environment_source = environment_key_source()
+        if environment_source:
+            marker = f"{GREEN}● em uso{RESET}" if effective == environment_source else " "
+            print(f"  {'OPENROUTER_API_KEY':<20} {DIM}{environment_source}{RESET} {marker}")
         if not keys:
             _warn("Nenhuma chave no cofre.")
         for named in keys:
-            marker = f"{GREEN}● ativa{RESET}" if named.name == store.active_name() else " "
+            marker = f"{GREEN}● em uso{RESET}" if named.name == effective else " "
             print(f"  {named.name:<20} {DIM}{named.masked}{RESET} {marker}")
-        if __import__("os").environ.get("OPENROUTER_API_KEY"):
-            _warn(
-                "OPENROUTER_API_KEY definida no ambiente/.env — ela tem prioridade sobre o cofre."
-            )
         choice = _tui().choose(
             "O que deseja fazer?",
             [
-                ("➕ Adicionar chave — guarda uma nova chave nomeada", "add"),
-                ("✅ Trocar chave ativa — escolhe qual chave será usada", "activate"),
+                ("➕ Registrar chave — guarda uma nova chave nomeada", "add"),
+                ("✅ Usar / trocar chave — escolhe a origem efetiva", "use"),
+                ("🔎 Verificar chave — valida e consulta limite/saldo", "check"),
                 ("🗑️ Remover chave — exclui do cofre local", "remove"),
-                ("💰 Consultar saldo — valida a chave e mostra o uso", "balance"),
                 ("↩ Voltar ao menu principal", "back"),
             ],
         )
@@ -132,31 +137,53 @@ def do_keys() -> None:
             try:
                 store.add(name, key)
                 _ok(f"Chave '{name}' guardada.")
+                if _tui().confirm(f"Usar a chave '{name}' agora?", default=True):
+                    store.set_active(name)
+                    _ok(f"'{name}' agora é a chave efetiva.")
             except ValueError as error:
                 _fail(str(error))
-        elif choice == "activate":
-            name = _tui().choose(
-                "Qual chave deseja ativar?", [(named.name, named.name) for named in keys]
-            )
-            if not name:
+        elif choice in {"use", "check"}:
+            options = [(named.name, ("named", named.name)) for named in keys]
+            if environment_source:
+                options.insert(
+                    0,
+                    (f"OPENROUTER_API_KEY ({environment_source})", ("environment", "")),
+                )
+            if not options:
+                _warn("Nenhuma chave disponível; registre uma chave primeiro.")
                 continue
-            try:
-                store.set_active(name)
-                _ok(f"'{name}' agora é a chave ativa.")
-            except LookupError as error:
-                _fail(str(error))
+            selected = _tui().choose(
+                "Qual origem deseja usar?" if choice == "use" else "Qual chave deseja verificar?",
+                options,
+            )
+            if not selected:
+                continue
+            source_kind, name = selected
+            if choice == "use":
+                if source_kind == "environment":
+                    store.use_environment()
+                    _ok(f"{environment_source} agora é a origem efetiva.")
+                else:
+                    store.set_active(name)
+                    _ok(f"'{name}' agora é a chave efetiva.")
+            else:
+                value = (
+                    os.environ.get(ENV_VAR, "")
+                    if source_kind == "environment"
+                    else store.get(name).key
+                )
+                available, detail = check_api_key_value(value)
+                (_ok if available else _warn)(detail)
         elif choice == "remove":
+            if not keys:
+                _warn("Nenhuma chave cadastrada para remover.")
+                continue
             name = _tui().choose(
                 "Qual chave deseja remover?", [(named.name, named.name) for named in keys]
             )
             if name and _tui().confirm(f"Remover permanentemente a chave '{name}'?"):
                 store.remove(name)
                 _ok("Chave removida.")
-        elif choice == "balance":
-            from audiofy.providers.openrouter import check_api_key
-
-            ok, detail = check_api_key(Settings())
-            _ok(detail) if ok else _fail(detail)
         elif choice in ("back", None):
             return
 
@@ -324,7 +351,7 @@ def _running_generations() -> list[dict]:
 def do_status() -> None:
     print(f"\n{BOLD}Status do Audiofy{RESET}")
     settings = Settings()
-    from audiofy.config import key_store
+    from audiofy.config import api_key_source
     from audiofy.setup import inspect_setup
 
     print(f"\n{BOLD}Ambiente{RESET}")
@@ -348,10 +375,9 @@ def do_status() -> None:
 
     print(f"\n{BOLD}Configuração e execução{RESET}")
     if settings.api_key:
-        active_name = key_store().active_name() or "via ambiente/.env"
-        _ok(f"Chave configurada ({active_name})")
+        _ok(f"Chave configurada ({api_key_source() or 'origem desconhecida'})")
     else:
-        _warn("Nenhuma chave configurada (menu Configurar → Chaves e saldo)")
+        _warn("Nenhuma chave configurada (menu Configurar → Chaves e verificação)")
     provider_note = (
         "assinatura: " + settings.text_provider
         if settings.text_provider not in ("", "openrouter")
@@ -759,7 +785,7 @@ def do_configure() -> None:
         choice = _tui().choose(
             "O que deseja configurar?",
             [
-                ("🔑 Chaves e saldo — credenciais locais do OpenRouter", "keys"),
+                ("🔑 Chaves e verificação — credenciais locais do OpenRouter", "keys"),
                 ("👤 Perfis e modelos — provedor, modelos e vozes", "profiles"),
                 ("🎛️ Catálogo TTS/vozes — opções disponíveis", "catalog"),
                 ("↩ Voltar ao menu principal", "back"),

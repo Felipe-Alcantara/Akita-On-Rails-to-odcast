@@ -165,9 +165,6 @@ class MainMenuQualityTest(unittest.TestCase):
         source = Mock()
         source.name = "Fonte local"
         source.is_ready.return_value = False
-        store = Mock()
-        store.active_name.return_value = "teste"
-
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             (root / ".env").write_text("", encoding="utf-8")
@@ -180,7 +177,7 @@ class MainMenuQualityTest(unittest.TestCase):
                 patch.object(start_app, "_running_generations", return_value=[]),
                 patch.object(start_app.sys, "prefix", root / "venv"),
                 patch.object(start_app.sys, "base_prefix", root / "python"),
-                patch("audiofy.config.key_store", return_value=store),
+                patch("audiofy.config.api_key_source", return_value="teste"),
                 patch(
                     "audiofy.setup.inspect_setup",
                     return_value=[setup.SetupCheck("node", "Node.js", True, False, "opcional")],
@@ -193,6 +190,7 @@ class MainMenuQualityTest(unittest.TestCase):
         self.assertIn("Ambiente virtual ativo", rendered)
         self.assertIn("Arquivo .env presente", rendered)
         self.assertIn("Node.js disponível", rendered)
+        self.assertIn("Chave configurada (teste)", rendered)
 
 
 if __name__ == "__main__":

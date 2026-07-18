@@ -229,6 +229,73 @@ def _cmd_settings_info() -> dict:
     }
 
 
+def _cmd_keys_list() -> dict:
+    """Lista somente metadados seguros e identifica a origem realmente usada."""
+    from .config import api_key_source, environment_key_source, key_store
+
+    store = key_store()
+    environment_source = environment_key_source()
+    active_name = store.active_name()
+    named_in_use = store.prefers_named() or environment_source is None
+    return {
+        "count": len(store.list_keys()),
+        "active": active_name,
+        "effective_source": api_key_source(),
+        "environment": {
+            "available": environment_source is not None,
+            "source": environment_source,
+            "in_use": environment_source is not None and not store.prefers_named(),
+        },
+        "keys": [
+            {
+                "name": named.name,
+                "masked": named.masked,
+                "selected": named.name == active_name,
+                "in_use": named.name == active_name and named_in_use,
+            }
+            for named in store.list_keys()
+        ],
+    }
+
+
+def _cmd_check_named_key(name: str) -> dict:
+    from .config import key_store
+    from .providers.openrouter import check_api_key_value
+
+    available, detail = check_api_key_value(key_store().get(name).key)
+    return {"name": name, "available": available, "detail": detail}
+
+
+def _cmd_check_environment_key() -> dict:
+    import os
+
+    from .config import environment_key_source
+    from .providers.openrouter import check_api_key_value
+
+    source = environment_key_source()
+    if source is None:
+        raise RuntimeError("Nenhuma OPENROUTER_API_KEY disponível no ambiente ou .env.")
+    available, detail = check_api_key_value(os.environ["OPENROUTER_API_KEY"])
+    return {"name": source, "available": available, "detail": detail}
+
+
+def _cmd_use_named_key(name: str) -> dict:
+    from .config import key_store
+
+    key_store().set_active(name)
+    return {"active": name}
+
+
+def _cmd_use_environment_key() -> dict:
+    from .config import environment_key_source, key_store
+
+    source = environment_key_source()
+    if source is None:
+        raise RuntimeError("Nenhuma OPENROUTER_API_KEY disponível no ambiente ou .env.")
+    key_store().use_environment()
+    return {"active": source}
+
+
 def _cmd_models_list(force_refresh: bool = False) -> dict:
     """Modelos de texto e de TTS com preços, para os seletores da interface."""
     from .catalog import load_models
@@ -367,23 +434,20 @@ def main() -> None:
         elif command == "settings-info":
             result = _cmd_settings_info()
         elif command == "keys-list":
-            from .config import key_store
-
-            store = key_store()
-            result = {
-                "active": store.active_name(),
-                "keys": [{"name": k.name, "masked": k.masked} for k in store.list_keys()],
-            }
+            result = _cmd_keys_list()
         elif command == "keys-add" and rest:
             from .config import key_store
 
             key_store().add(rest[0], sys.stdin.read().strip())
             result = {"added": rest[0]}
-        elif command == "keys-activate" and rest:
-            from .config import key_store
-
-            key_store().set_active(rest[0])
-            result = {"active": rest[0]}
+        elif command in {"keys-activate", "keys-use"} and rest:
+            result = _cmd_use_named_key(rest[0])
+        elif command == "keys-use-environment":
+            result = _cmd_use_environment_key()
+        elif command == "keys-check" and rest:
+            result = _cmd_check_named_key(rest[0])
+        elif command == "keys-check-environment":
+            result = _cmd_check_environment_key()
         elif command == "keys-remove" and rest:
             from .config import key_store
 

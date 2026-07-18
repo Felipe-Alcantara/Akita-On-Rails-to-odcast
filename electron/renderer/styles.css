@@ -429,6 +429,8 @@ pre {
   #tab-content, .settings-grid { grid-template-columns: 1fr; }
   #tab-content, .settings-grid { overflow-y: auto; }
   #tab-content > .panel, .settings-grid > .panel { overflow: visible; }
+  .settings-grid { grid-template-rows: repeat(2, max-content); align-content: start; }
+  .settings-grid > .panel { min-height: max-content; }
   .presenter-row { grid-template-columns: 1fr 1fr; }
   .model-picker { grid-template-columns: 1fr; }
 }
