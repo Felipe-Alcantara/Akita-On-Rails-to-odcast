@@ -899,6 +899,7 @@ async function loadSettings() {
 
     if (keys.environment.available) {
       const row = document.createElement("li");
+      row.className = "key-row";
       const detail = makeElement("div", "row-main");
       detail.appendChild(makeElement("span", "row-title", "OPENROUTER_API_KEY"));
       detail.appendChild(makeElement("span", "muted mono",
@@ -919,6 +920,7 @@ async function loadSettings() {
     }
     for (const key of keys.keys) {
       const row = document.createElement("li");
+      row.className = "key-row";
       const detail = makeElement("div", "row-main");
       detail.appendChild(makeElement("span", "row-title", `#${key.priority} · ${key.name}`));
       detail.appendChild(makeElement("span", "muted mono", key.masked));

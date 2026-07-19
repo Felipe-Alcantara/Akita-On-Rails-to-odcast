@@ -999,4 +999,6 @@ automática e deixando a decisão para a revisão individual no modal.
 **Inspeção responsiva:** em 600 px e 380 px, controles de música, ações empilhadas, alertas e
 player individual permaneceram utilizáveis. A inspeção revelou e corrigiu um estado apenas visual:
 ao reabrir o modal depois de ouvir um chunk, o rótulo antigo de reprodução agora volta para a
-instrução neutra junto com o player vazio.
+instrução neutra junto com o player vazio. A mesma inspeção encontrou nomes de chaves comprimidos
+pelos controles da fila em 380 px; os cartões agora reservam a primeira linha inteira para
+prioridade, nome e valor mascarado, deixando selo e ações na linha seguinte.

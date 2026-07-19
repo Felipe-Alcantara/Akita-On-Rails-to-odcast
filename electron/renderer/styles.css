@@ -561,6 +561,8 @@ pre {
   .presenter-row { grid-template-columns: 1fr; }
   .presenter-row button { width: 100%; }
   .generation-options { grid-template-columns: 1fr; }
+  .key-row { align-items: flex-start; }
+  .key-row .row-main { flex: 1 0 100%; width: 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
