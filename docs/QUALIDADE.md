@@ -60,6 +60,9 @@ precedência; a bridge testa seleção e verificação sem devolver o segredo; o
 allowlist dos comandos e a presença das ações de registrar, usar, trocar e verificar. Status,
 banner e log também testam o rótulo da chave efetiva e a mensagem de `402` diferencia saldo global
 do limite individual, sem persistir o segredo.
+Ordem e fallback também são contratos: o cofre migra arquivos antigos, persiste a fila e troca a
+prioridade ativa; bridge/Electron expõem reordenação; o pipeline prova avanço tanto em `402` quanto
+em `403`, para chamadas de texto e TTS, sem repetir uma chave pelo mesmo valor.
 
 A leitura fiel também tem três fronteiras: funções puras provam recomposição exata e lotes
 limitados; a importação preserva espaços e quebras nas bordas; o pipeline prova que respostas do

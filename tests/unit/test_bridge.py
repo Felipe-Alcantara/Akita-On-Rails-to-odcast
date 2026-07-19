@@ -194,6 +194,7 @@ class KeyManagementContractTest(unittest.TestCase):
         self.assertEqual(result["count"], 1)
         self.assertEqual(result["effective_source"], "trabalho")
         self.assertTrue(result["keys"][0]["in_use"])
+        self.assertEqual(result["keys"][0]["priority"], 1)
 
     @patch("audiofy.providers.openrouter.check_api_key_value")
     @patch("audiofy.config.key_store")
@@ -238,6 +239,13 @@ class KeyManagementContractTest(unittest.TestCase):
     def test_nao_seleciona_ambiente_sem_chave_disponivel(self, _source):
         with self.assertRaisesRegex(RuntimeError, "Nenhuma OPENROUTER_API_KEY"):
             bridge._cmd_use_environment_key()
+
+    @patch("audiofy.config.key_store")
+    def test_reordena_fila_nomeada(self, key_store):
+        result = bridge._cmd_move_named_key("reserva", "up")
+
+        key_store.return_value.move.assert_called_once_with("reserva", "up")
+        self.assertEqual(result, {"moved": "reserva", "direction": "up"})
 
 
 class ChatHistoryContractTest(unittest.TestCase):

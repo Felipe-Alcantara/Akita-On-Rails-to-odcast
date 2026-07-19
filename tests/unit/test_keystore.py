@@ -59,6 +59,28 @@ class KeyStoreTest(unittest.TestCase):
         self.assertTrue(self.store.prefers_named())
         self.assertEqual(len(self.store.list_keys()), 2)
 
+    def test_ordem_de_fallback_persiste_e_pode_ser_reorganizada(self):
+        self.store.add("primeira", FAKE_KEY)
+        self.store.add("segunda", FAKE_KEY.replace("abc", "xyz"))
+        self.store.add("terceira", FAKE_KEY.replace("abc", "rst"))
+
+        self.store.move("terceira", "up")
+        reloaded = KeyStore(self.store.path)
+
+        self.assertEqual(
+            [key.name for key in reloaded.list_keys()], ["primeira", "terceira", "segunda"]
+        )
+
+    def test_mover_prioridade_um_troca_chave_ativa_quando_fila_nomeada(self):
+        self.store.add("primeira", FAKE_KEY)
+        self.store.add("segunda", FAKE_KEY.replace("abc", "xyz"))
+        self.store.set_active("primeira")
+
+        self.store.move("segunda", "up")
+
+        self.assertEqual(self.store.active_name(), "segunda")
+        self.assertEqual([key.name for key in self.store.list_keys()], ["segunda", "primeira"])
+
     def test_selecao_explicita_supera_chave_do_ambiente(self):
         self.store.add("pessoal", FAKE_KEY)
         os.environ["OPENROUTER_API_KEY"] = "sk-or-v1-prioridade-do-ambiente-000000"
@@ -128,6 +150,7 @@ class KeyStoreTest(unittest.TestCase):
 
         self.assertFalse(reloaded.prefers_named())
         self.assertEqual(reloaded.resolve(), "sk-or-v1-prioridade-do-ambiente-000000")
+        self.assertEqual([key.name for key in reloaded.list_keys()], ["pessoal"])
 
 
 if __name__ == "__main__":

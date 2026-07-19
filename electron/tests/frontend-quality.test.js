@@ -44,6 +44,8 @@ test("gerenciamento permite registrar, usar, trocar e verificar chaves", () => {
   assert.match(renderer, /\["keys-use-environment"\]/);
   assert.match(renderer, /\["keys-check", key\.name\]/);
   assert.match(renderer, /\["keys-check-environment"\]/);
+  assert.match(renderer, /\["keys-move", key\.name, "up"\]/);
+  assert.match(renderer, /#\$\{key\.priority\}/);
   assert.match(styles, /\.settings-grid\s*\{[^}]*grid-template-rows:\s*repeat\(2, max-content\)/s);
   assert.match(styles, /#tab-content\s*\{[^}]*grid-template-rows:\s*minmax\(280px, 45vh\)/s);
 });

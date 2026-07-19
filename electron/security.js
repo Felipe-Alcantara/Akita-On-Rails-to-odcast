@@ -16,6 +16,7 @@ const COMMAND_ARITY = Object.freeze({
   "keys-add": [2, 2], "keys-activate": [2, 2], "keys-use": [2, 2],
   "keys-use-environment": [1, 1], "keys-check": [2, 2],
   "keys-check-environment": [1, 1], "keys-remove": [2, 2],
+  "keys-move": [3, 3],
   "balance": [1, 1], "profiles-list": [1, 1], "profiles-activate": [2, 2],
   "profiles-save": [1, 1], "profiles-remove": [2, 2], "models-list": [1, 2],
   "setup-check": [1, 1], "setup-install": [1, 1],

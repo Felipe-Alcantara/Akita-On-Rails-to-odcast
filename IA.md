@@ -936,3 +936,20 @@ formatos de áudio dentro da pasta de segmentos; o DOM usa `textContent`.
 
 **Validação parcial:** 51 testes Python focados e 25 testes Electron passaram. A auditoria completa
 dos episódios existentes e a inspeção responsiva serão registradas no commit de dados verificados.
+
+---
+
+## 2026-07-19 — Fila ordenada e fallback por saldo/limite
+
+**Problema:** o cofre armazenava várias chaves, mas a ordem secundária vinha da ordenação alfabética
+e a interface não permitia definir uma sequência. O TTS avançava apenas em `403` por limite mensal;
+um `402` encerrava a geração mesmo quando havia outra chave cadastrada com saldo.
+
+**Decisão:** `keys.json` ganhou `order`, migrado sem quebrar cofres existentes. **Usar** move a chave
+para prioridade 1; setas alteram a fila e, no modo nomeado, a primeira é a efetiva. As candidatas
+são deduplicadas pelo valor secreto e tentadas nessa ordem. `402` e `403` por limite avançam tanto
+nas etapas OpenRouter de texto quanto no TTS, registrando somente o nome seguro no status/log.
+
+**Validação:** 76 testes Python focados e 25 testes Electron passaram, incluindo migração,
+persistência da ordem, reordenação, contrato IPC e fallback simulado em `402`/`403`. Nenhuma chave
+real foi lida pelos testes e nenhuma chamada paga foi executada.

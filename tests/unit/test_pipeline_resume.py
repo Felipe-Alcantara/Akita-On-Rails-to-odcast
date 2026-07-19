@@ -14,6 +14,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 from audiofy.media import media_duration_seconds  # noqa: E402
 from audiofy.pipeline import (  # noqa: E402
     _assemble,
+    _chat_with_key_fallback,
     _concat_line,
     _prepare_verbatim_turns,
     _synthesize_turns,
@@ -222,6 +223,48 @@ class ResumableSynthesisTest(unittest.TestCase):
         manifest = json.loads((self.directory / "segments.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["segments"]["001_ana.wav"]["key_label"], "disponivel")
         self.assertEqual(GenerationTracker.load(self.directory)["key_source"], "disponivel")
+
+    @patch("audiofy.pipeline.api_key_candidates")
+    @patch("audiofy.pipeline.openrouter.generation_cost_usd", return_value=0.01)
+    @patch("audiofy.pipeline.openrouter.text_to_speech")
+    def test_creditos_402_tambem_avancam_na_fila(
+        self, text_to_speech, _generation_cost, candidates
+    ):
+        first, second = _settings(), _settings()
+        first.api_key = "sk-or-sem-saldo"
+        second.api_key = "sk-or-reserva"
+        candidates.return_value = [("primeira", first), ("reserva", second)]
+        text_to_speech.side_effect = [
+            OpenRouterError("Insufficient credits", status_code=402),
+            SpeechResult(b"\x00\x00" * 300, "gen-reserva"),
+        ]
+
+        _synthesize_turns(
+            first,
+            self.directory,
+            [{"speaker": "ana", "text": "usa a reserva"}],
+            self.tracker,
+        )
+
+        self.assertEqual(text_to_speech.call_count, 2)
+        self.assertEqual(GenerationTracker.load(self.directory)["key_source"], "reserva")
+
+    @patch("audiofy.pipeline.api_key_candidates")
+    @patch("audiofy.pipeline.openrouter.chat_json")
+    def test_texto_openrouter_tambem_avanca_na_fila(self, chat_json, candidates):
+        first, second = _settings(), _settings()
+        candidates.return_value = [("primeira", first), ("reserva", second)]
+        expected = SimpleNamespace(data={"ok": True}, cost_usd=0.01)
+        chat_json.side_effect = [
+            OpenRouterError("Insufficient credits", status_code=402),
+            expected,
+        ]
+
+        result = _chat_with_key_fallback(first, "vendor/model", "sistema", "prompt", self.tracker)
+
+        self.assertIs(result, expected)
+        self.assertEqual(chat_json.call_count, 2)
+        self.assertEqual(GenerationTracker.load(self.directory)["key_source"], "reserva")
 
     def test_abort_interrompe_espera_antes_do_proximo_retry(self):
         self.tracker.stage("tts", total=2, current=1)

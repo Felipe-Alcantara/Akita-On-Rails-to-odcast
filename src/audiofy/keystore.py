@@ -56,12 +56,16 @@ def validate_name(name: str) -> str:
 class KeyStore:
     def __init__(self, path: Path) -> None:
         self.path = path
-        self._data: dict = {"active": None, "source": "environment", "keys": {}}
+        self._data: dict = {"active": None, "source": "environment", "keys": {}, "order": []}
         if path.is_file():
             loaded = json.loads(path.read_text(encoding="utf-8"))
             self._data.update(loaded)
         if self._data.get("source") not in {"environment", "named"}:
             self._data["source"] = "environment"
+        known = self._data.get("keys", {})
+        stored_order = self._data.get("order", [])
+        self._data["order"] = [name for name in stored_order if name in known]
+        self._data["order"].extend(name for name in known if name not in self._data["order"])
 
     def _flush(self) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
@@ -75,14 +79,18 @@ class KeyStore:
         """Adiciona (ou sobrescreve) uma chave; a primeira vira a ativa."""
         name, key = validate_name(name), validate_api_key(key)
         self._data["keys"][name] = key
+        if name not in self._data["order"]:
+            self._data["order"].append(name)
         if self._data["active"] is None:
             self._data["active"] = name
         self._flush()
 
     def remove(self, name: str) -> None:
         self._data["keys"].pop(name, None)
+        if name in self._data["order"]:
+            self._data["order"].remove(name)
         if self._data["active"] == name:
-            remaining = sorted(self._data["keys"])
+            remaining = self._data["order"]
             self._data["active"] = remaining[0] if remaining else None
             if not remaining:
                 self._data["source"] = "environment"
@@ -94,6 +102,25 @@ class KeyStore:
             raise LookupError(f"Chave '{name}' não existe no cofre.")
         self._data["active"] = name
         self._data["source"] = "named"
+        self._data["order"].remove(name)
+        self._data["order"].insert(0, name)
+        self._flush()
+
+    def move(self, name: str, direction: str) -> None:
+        """Move uma chave na fila de fallback e mantém a prioridade 1 como ativa."""
+        if name not in self._data["keys"]:
+            raise LookupError(f"Chave '{name}' não existe no cofre.")
+        if direction not in {"up", "down"}:
+            raise ValueError("A direção precisa ser 'up' ou 'down'.")
+        index = self._data["order"].index(name)
+        target = index + (-1 if direction == "up" else 1)
+        if 0 <= target < len(self._data["order"]):
+            self._data["order"][index], self._data["order"][target] = (
+                self._data["order"][target],
+                self._data["order"][index],
+            )
+        if self._data.get("source") == "named" and self._data["order"]:
+            self._data["active"] = self._data["order"][0]
         self._flush()
 
     def use_environment(self) -> None:
@@ -104,7 +131,7 @@ class KeyStore:
     # ── Consulta ─────────────────────────────────────────────────────────
 
     def list_keys(self) -> list[NamedKey]:
-        return [NamedKey(name, key) for name, key in sorted(self._data["keys"].items())]
+        return [NamedKey(name, self._data["keys"][name]) for name in self._data["order"]]
 
     def get(self, name: str) -> NamedKey:
         try:

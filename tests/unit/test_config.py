@@ -4,6 +4,7 @@ import os
 import sys
 import tempfile
 import unittest
+from dataclasses import dataclass
 from pathlib import Path
 from unittest.mock import Mock, patch
 
@@ -56,15 +57,20 @@ class DotenvEnvironmentTest(unittest.TestCase):
             self.assertEqual(result[config.DOTENV_PROVENANCE_ENV], "OPENROUTER_API_KEY")
 
     def test_origem_distingue_dotenv_de_shell(self):
+        store = Mock()
+        store.prefers_named.return_value = False
+        store.active_name.return_value = None
         with (
             patch.dict(os.environ, {"OPENROUTER_API_KEY": "chave"}, clear=True),
             patch.object(config, "DOTENV_LOADED_KEYS", frozenset({"OPENROUTER_API_KEY"})),
+            patch.object(config, "key_store", return_value=store),
         ):
             self.assertEqual(config.api_key_source(), ".env")
 
         with (
             patch.dict(os.environ, {"OPENROUTER_API_KEY": "chave"}, clear=True),
             patch.object(config, "DOTENV_LOADED_KEYS", frozenset()),
+            patch.object(config, "key_store", return_value=store),
         ):
             self.assertEqual(config.api_key_source(), "ambiente")
 
@@ -78,6 +84,29 @@ class DotenvEnvironmentTest(unittest.TestCase):
             patch.object(config, "key_store", return_value=store),
         ):
             self.assertEqual(config.api_key_source(), "trabalho")
+
+    def test_candidatas_respeitam_ordem_do_cofre_depois_da_atual(self):
+        @dataclass
+        class FakeSettings:
+            api_key: str
+
+        named = [
+            Mock(name="primeira", key="chave-1"),
+            Mock(name="segunda", key="chave-2"),
+        ]
+        named[0].name = "primeira"
+        named[1].name = "segunda"
+        store = Mock()
+        store.list_keys.return_value = named
+        with (
+            patch.object(config, "key_store", return_value=store),
+            patch.object(config, "_dotenv_values", return_value={}),
+        ):
+            candidates = config.api_key_candidates(FakeSettings("chave-atual"), "ativa")
+
+        self.assertEqual(
+            [label for label, _settings in candidates], ["ativa", "primeira", "segunda"]
+        )
 
 
 if __name__ == "__main__":

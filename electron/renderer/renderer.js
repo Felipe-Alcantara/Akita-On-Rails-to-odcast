@@ -831,7 +831,8 @@ async function loadSettings() {
     list.replaceChildren();
     const plural = keys.count === 1 ? "chave cadastrada" : "chaves cadastradas";
     $("keys-summary").textContent =
-      `${keys.count} ${plural} · em uso: ${keys.effective_source || "nenhuma"}`;
+      `${keys.count} ${plural} · fila na ordem exibida · em uso: ` +
+      `${keys.effective_source || "nenhuma"}`;
 
     const appendVerificationButton = (row, command) => {
       const status = makeElement("span", "muted small");
@@ -873,7 +874,7 @@ async function loadSettings() {
     for (const key of keys.keys) {
       const row = document.createElement("li");
       const detail = makeElement("div", "row-main");
-      detail.appendChild(makeElement("span", "row-title", key.name));
+      detail.appendChild(makeElement("span", "row-title", `#${key.priority} · ${key.name}`));
       detail.appendChild(makeElement("span", "muted mono", key.masked));
       row.appendChild(detail);
       if (key.in_use) row.appendChild(makeElement("span", "badge ok", "em uso"));
@@ -884,6 +885,18 @@ async function loadSettings() {
         row.appendChild(use);
       }
       appendVerificationButton(row, ["keys-check", key.name]);
+      const up = makeElement("button", "ghost", "↑");
+      up.title = `Aumentar prioridade de ${key.name}`;
+      up.setAttribute("aria-label", up.title);
+      up.disabled = key.priority === 1;
+      up.onclick = () => bridge(["keys-move", key.name, "up"]).then(loadSettings);
+      row.appendChild(up);
+      const down = makeElement("button", "ghost", "↓");
+      down.title = `Diminuir prioridade de ${key.name}`;
+      down.setAttribute("aria-label", down.title);
+      down.disabled = key.priority === keys.count;
+      down.onclick = () => bridge(["keys-move", key.name, "down"]).then(loadSettings);
+      row.appendChild(down);
       const remove = document.createElement("button");
       remove.textContent = "🗑️";
       remove.className = "ghost";

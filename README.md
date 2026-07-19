@@ -308,7 +308,8 @@ Padrões portados do [Openia](https://github.com/Felipe-Alcantara/Openia):
   consulta **limite, restante e uso mensal da própria chave**, sem confundir com o saldo global da
   conta. Cadastrar ou apenas destacar uma chave não troca a execução: use a ação **Usar** e confira
   o selo **em uso** ou a faixa **Chave efetiva**. O Electron relê valores originados no `.env` a
-  cada operação.
+  cada operação. As chaves nomeadas formam uma fila explícita `#1`, `#2`, `#3`…, reordenável por
+  setas: a primeira é usada inicialmente e as seguintes são reservas automáticas.
 - **Perfis** — presets nomeados de modelos + apresentadores. Embutidos: `padrao` (qualidade),
   `economico` (tudo no modelo barato), `narrador-unico` (adaptação solo), `assinatura`
   (Claude Code) e `assinatura-codex` (Codex CLI). Crie e edite os seus pelo menu ou pelo app;
@@ -358,9 +359,10 @@ TTS). O menu **Catálogo TTS/vozes** lista os modelos de áudio disponíveis no 
 - **TTS**: a resposta binária traz `X-Generation-Id`; o pipeline consulta `/generation` e soma o
   **custo faturado de cada fala**, sem misturar o uso das outras chaves. Se o metadado remoto não
   estiver disponível, usa a tabela do modelo e marca explicitamente o total como aproximado.
-- Se uma fala receber `403` por limite mensal, o pipeline tenta automaticamente a chave do `.env`
-  e as chaves nomeadas do cofre antes de falhar; o rótulo da alternativa usada fica registrado no
-  manifesto, sem qualquer segredo.
+- Se uma chamada OpenRouter de texto ou voz receber `402` por créditos/saldo ou `403` por limite
+  mensal, o pipeline avança automaticamente pela fila (`.env` quando disponível e chaves nomeadas na
+  ordem exibida) antes de falhar; o rótulo da alternativa usada fica registrado, sem qualquer
+  segredo.
 - O `status.json`, o banner e o log registram somente o rótulo seguro da chave em tentativa. Em
   `402`, a interface orienta conferir tanto o saldo global quanto o limite individual dessa chave.
 - O custo aparece na barra de progresso, no `status.json`, no app desktop, no Status do menu e

@@ -18,6 +18,8 @@ test("bridge aceita somente comandos públicos conhecidos", () => {
     ["keys-use-environment"]);
   assert.deepEqual(validateBridgeRequest(["keys-check", "trabalho"]),
     ["keys-check", "trabalho"]);
+  assert.deepEqual(validateBridgeRequest(["keys-move", "reserva", "up"]),
+    ["keys-move", "reserva", "up"]);
   assert.deepEqual(validateBridgeRequest(
     ["generate", "custom", "livro", "--mode=verbatim", "--voice=Sulafat"]
   ), ["generate", "custom", "livro", "--mode=verbatim", "--voice=Sulafat"]);

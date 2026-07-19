@@ -464,10 +464,11 @@ def _cmd_keys_list() -> dict:
             {
                 "name": named.name,
                 "masked": named.masked,
+                "priority": priority,
                 "selected": named.name == active_name,
                 "in_use": named.name == active_name and named_in_use,
             }
-            for named in store.list_keys()
+            for priority, named in enumerate(store.list_keys(), start=1)
         ],
     }
 
@@ -508,6 +509,13 @@ def _cmd_use_environment_key() -> dict:
         raise RuntimeError("Nenhuma OPENROUTER_API_KEY disponível no ambiente ou .env.")
     key_store().use_environment()
     return {"active": source}
+
+
+def _cmd_move_named_key(name: str, direction: str) -> dict:
+    from .config import key_store
+
+    key_store().move(name, direction)
+    return {"moved": name, "direction": direction}
 
 
 def _cmd_models_list(force_refresh: bool = False) -> dict:
@@ -664,6 +672,8 @@ def main() -> None:
             result = _cmd_use_named_key(rest[0])
         elif command == "keys-use-environment":
             result = _cmd_use_environment_key()
+        elif command == "keys-move" and len(rest) >= 2:
+            result = _cmd_move_named_key(rest[0], rest[1])
         elif command == "keys-check" and rest:
             result = _cmd_check_named_key(rest[0])
         elif command == "keys-check-environment":

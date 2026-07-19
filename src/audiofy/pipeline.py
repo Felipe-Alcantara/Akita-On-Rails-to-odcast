@@ -117,7 +117,7 @@ def _run(
             result = subscription_provider.chat_json(settings.text_provider, system, prompt)
             print(f"    [{settings.text_provider}] via assinatura — custo US$ 0,00")
         else:
-            result = openrouter.chat_json(settings, model, system, prompt)
+            result = _chat_with_key_fallback(settings, model, system, prompt, tracker)
             print(
                 f"    [{model}] {result.prompt_tokens}/{result.completion_tokens} tokens, "
                 f"US$ {result.cost_usd:.4f}"
@@ -372,9 +372,35 @@ def _wait_for_retry(delay_seconds: float, tracker: GenerationTracker) -> None:
         remaining -= step
 
 
-def _is_key_limit_error(error: openrouter.OpenRouterError) -> bool:
+def _is_key_exhaustion_error(error: openrouter.OpenRouterError) -> bool:
     message = str(error).lower()
-    return error.status_code == 403 and "limit" in message
+    return error.status_code == 402 or (error.status_code == 403 and "limit" in message)
+
+
+def _chat_with_key_fallback(
+    settings: Settings,
+    model: str,
+    system: str,
+    prompt: str,
+    tracker: GenerationTracker,
+) -> openrouter.ChatResult:
+    current_label = tracker.key_source or "chave atual"
+    candidates = api_key_candidates(settings, current_label=current_label) or [
+        (current_label, settings)
+    ]
+    for key_index, (key_label, candidate) in enumerate(candidates):
+        tracker.using_key(key_label)
+        try:
+            return openrouter.chat_json(candidate, model, system, prompt)
+        except openrouter.OpenRouterError as error:
+            if _is_key_exhaustion_error(error) and key_index + 1 < len(candidates):
+                print(
+                    f"    ↪ {key_label} sem limite/saldo; tentando {candidates[key_index + 1][0]}.",
+                    flush=True,
+                )
+                continue
+            raise
+    raise RuntimeError("Nenhuma chave OpenRouter disponível para a chamada de texto.")
 
 
 @dataclass(frozen=True)
@@ -418,7 +444,7 @@ def _synthesize_with_retry(
                 return _SynthesisResult(speech, candidate, key_label)
             except openrouter.OpenRouterError as error:
                 last_error = error
-                if _is_key_limit_error(error) and key_index + 1 < len(candidates):
+                if _is_key_exhaustion_error(error) and key_index + 1 < len(candidates):
                     next_label = candidates[key_index + 1][0]
                     print(
                         f"\n   ↪ Limite da {key_label}; tentando {next_label} "
