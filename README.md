@@ -335,9 +335,26 @@ Padrões portados do [Openia](https://github.com/Felipe-Alcantara/Openia):
   o selo **em uso** ou a faixa **Chave efetiva**. O Electron relê valores originados no `.env` a
   cada operação. As chaves nomeadas formam uma fila explícita `#1`, `#2`, `#3`…, reordenável por
   setas: a primeira é usada inicialmente e as seguintes são reservas automáticas.
-- **Perfis** — presets nomeados de modelos + apresentadores. Embutidos: `padrao` (qualidade),
-  `economico` (tudo no modelo barato), `narrador-unico` (adaptação solo), `assinatura`
-  (Claude Code) e `assinatura-codex` (Codex CLI). Crie e edite os seus pelo menu ou pelo app;
+- **Perfis** — presets nomeados de modelos + apresentadores. Treze embutidos cobrem podcast
+  (2, 3 ou 4 vozes), narração solo e variantes de custo/provedor:
+
+  | Perfil | Formato | Diferencial |
+  |---|---|---|
+  | `padrao` | podcast 2 vozes | Gemini Pro + Flash — equilíbrio diário |
+  | `economico` | podcast 2 vozes | Flash em tudo — rascunhos e testes |
+  | `premium-claude` | podcast 2 vozes | roteiro via Claude Sonnet (Anthropic) |
+  | `podcast-trio` | podcast 3 vozes | curioso, animado e analítico — Gemini Pro |
+  | `podcast-trio-economico` | podcast 3 vozes | mesmo trio, Flash em tudo |
+  | `podcast-mesa-redonda` | debate 4 vozes | mediador + três debatedores — Gemini Pro |
+  | `narrador-unico` | narração solo | Sulafat calorosa — estilo audiolivro |
+  | `narrador-economico` | narração solo | Sulafat calorosa, Flash em tudo |
+  | `narrador-premium` | narração solo | Orus envolvente, Pro em texto e auditoria |
+  | `narrador-assinatura` | narração solo | Sulafat calorosa via assinatura Claude Code |
+  | `assinatura` | podcast 2 vozes | assinatura Claude Code |
+  | `assinatura-codex` | podcast 2 vozes | assinatura Codex (OpenAI) |
+  | `assinatura-gemini` | podcast 2 vozes | assinatura Gemini CLI (Google) |
+
+  Crie e edite os seus pelo menu ou pelo app;
   variáveis `AUDIOFY_*` continuam tendo prioridade sobre o perfil ativo.
 - **Escolha de modelo em dois passos** — empresa → modelo, com preço por milhão de tokens em
   cada linha, vindo da API ao vivo com cache local de 24h.
@@ -353,8 +370,9 @@ instalada na máquina, sob a assinatura do usuário, em vez da API:
 | `gemini-cli` | Google |
 | `codex` | OpenAI |
 
-Ative com o perfil embutido `assinatura` (Claude Code), `assinatura-codex` (OpenAI Codex) ou
-com `AUDIOFY_TEXT_PROVIDER=claude-code`. O TTS continua
+Ative com um perfil de assinatura — `assinatura` (Claude Code), `assinatura-codex` (OpenAI Codex),
+`assinatura-gemini` (Google) ou `narrador-assinatura` (solo) — ou defina
+`AUDIOFY_TEXT_PROVIDER=claude-code`. O TTS continua
 via API (assinaturas não expõem TTS programável) — o custo do episódio cai para só a voz
 (~US$ 0,39 no Gemini TTS; centavos em modelos alternativos). O caminho de custo **totalmente
 zero** é o modo NotebookLM (menu "Exportar p/ NotebookLM"): o Audiofy prepara a fonte e as

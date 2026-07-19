@@ -29,48 +29,174 @@ class Profile:
     text_provider: str = "openrouter"
 
 
+_TTS = "google/gemini-3.1-flash-tts-preview"
+_PRO = "google/gemini-2.5-pro"
+_FLASH = "google/gemini-2.5-flash"
+
+_TRIO_SPEC = (
+    "apresentador_a:Kore:curioso, "
+    "apresentador_b:Puck:animado, "
+    "apresentador_c:Gacrux:analítico"
+)
+_MESA_SPEC = (
+    "mediador:Kore:neutro, "
+    "debatedor_a:Puck:animado, "
+    "debatedor_b:Gacrux:ponderado, "
+    "debatedor_c:Sadachbia:provocador"
+)
+
 BUILTIN_PROFILES: list[Profile] = [
+    # ── Podcast · 2 apresentadores ───────────────────────────────────────
     Profile(
         name="padrao",
-        text_model="google/gemini-2.5-pro",
-        audit_model="google/gemini-2.5-flash",
-        tts_model="google/gemini-3.1-flash-tts-preview",
+        text_model=_PRO,
+        audit_model=_FLASH,
+        tts_model=_TTS,
         presenters_spec=DEFAULT_SPEC,
-        description="Qualidade no roteiro, auditoria econômica, dois apresentadores",
+        description=(
+            "Dois apresentadores (curioso e didático) com roteiro Gemini Pro "
+            "e auditoria Flash — equilíbrio diário entre qualidade e custo"
+        ),
     ),
     Profile(
         name="economico",
-        text_model="google/gemini-2.5-flash",
-        audit_model="google/gemini-2.5-flash",
-        tts_model="google/gemini-3.1-flash-tts-preview",
+        text_model=_FLASH,
+        audit_model=_FLASH,
+        tts_model=_TTS,
         presenters_spec=DEFAULT_SPEC,
-        description="Tudo no modelo mais barato — bom para experimentar",
+        description=(
+            "Dois apresentadores no modelo mais barato (Flash para tudo) "
+            "— ideal para rascunhos e testes rápidos"
+        ),
     ),
     Profile(
-        name="narrador-unico",
-        text_model="google/gemini-2.5-pro",
-        audit_model="google/gemini-2.5-flash",
-        tts_model="google/gemini-3.1-flash-tts-preview",
-        presenters_spec="narrador:Sulafat:caloroso",
-        description="Narração solo, estilo audiolivro",
+        name="premium-claude",
+        text_model="anthropic/claude-sonnet-4.6",
+        audit_model=_FLASH,
+        tts_model=_TTS,
+        presenters_spec=DEFAULT_SPEC,
+        description=(
+            "Dois apresentadores com roteiro via Claude Sonnet "
+            "— variação de estilo frente ao Gemini, auditoria econômica"
+        ),
     ),
+    # ── Podcast · 3 apresentadores ───────────────────────────────────────
+    Profile(
+        name="podcast-trio",
+        text_model=_PRO,
+        audit_model=_FLASH,
+        tts_model=_TTS,
+        presenters_spec=_TRIO_SPEC,
+        description=(
+            "Três vozes contrastantes (curioso, animado, analítico) "
+            "com roteiro Gemini Pro — dinâmica rica de conversa"
+        ),
+    ),
+    Profile(
+        name="podcast-trio-economico",
+        text_model=_FLASH,
+        audit_model=_FLASH,
+        tts_model=_TTS,
+        presenters_spec=_TRIO_SPEC,
+        description=(
+            "Três vozes contrastantes no modelo mais barato (Flash para tudo) "
+            "— trio econômico para rascunhos"
+        ),
+    ),
+    # ── Podcast · 4 apresentadores ───────────────────────────────────────
+    Profile(
+        name="podcast-mesa-redonda",
+        text_model=_PRO,
+        audit_model=_FLASH,
+        tts_model=_TTS,
+        presenters_spec=_MESA_SPEC,
+        description=(
+            "Mediador neutro e três debatedores (animado, ponderado, provocador) "
+            "— formato de debate com roteiro Gemini Pro"
+        ),
+    ),
+    # ── Narração solo ────────────────────────────────────────────────────
+    Profile(
+        name="narrador-unico",
+        text_model=_PRO,
+        audit_model=_FLASH,
+        tts_model=_TTS,
+        presenters_spec="narrador:Sulafat:caloroso",
+        description=(
+            "Voz solo calorosa (Sulafat) com roteiro Gemini Pro "
+            "— estilo audiolivro, auditoria econômica"
+        ),
+    ),
+    Profile(
+        name="narrador-economico",
+        text_model=_FLASH,
+        audit_model=_FLASH,
+        tts_model=_TTS,
+        presenters_spec="narrador:Sulafat:caloroso",
+        description=(
+            "Voz solo calorosa (Sulafat) no modelo mais barato (Flash para tudo) "
+            "— teste rápido de narração"
+        ),
+    ),
+    Profile(
+        name="narrador-premium",
+        text_model=_PRO,
+        audit_model=_PRO,
+        tts_model=_TTS,
+        presenters_spec="narrador:Orus:envolvente",
+        description=(
+            "Voz solo envolvente (Orus) com Gemini Pro em roteiro e auditoria "
+            "— máxima qualidade de texto"
+        ),
+    ),
+    Profile(
+        name="narrador-assinatura",
+        text_model="(assinatura)",
+        audit_model="(assinatura)",
+        tts_model=_TTS,
+        presenters_spec="narrador:Sulafat:caloroso",
+        description=(
+            "Voz solo calorosa (Sulafat) via assinatura Claude Code "
+            "— custo zero no texto, só TTS paga"
+        ),
+        text_provider="claude-code",
+    ),
+    # ── Assinaturas (texto por CLI, só TTS paga) ─────────────────────────
     Profile(
         name="assinatura",
         text_model="(assinatura)",
         audit_model="(assinatura)",
-        tts_model="google/gemini-3.1-flash-tts-preview",
+        tts_model=_TTS,
         presenters_spec=DEFAULT_SPEC,
-        description="Texto pela CLI de assinatura (custo zero); só o TTS paga API",
+        description=(
+            "Dois apresentadores via assinatura Claude Code "
+            "— custo zero no texto, só TTS paga"
+        ),
         text_provider="claude-code",
     ),
     Profile(
         name="assinatura-codex",
         text_model="(assinatura)",
         audit_model="(assinatura)",
-        tts_model="google/gemini-3.1-flash-tts-preview",
+        tts_model=_TTS,
         presenters_spec=DEFAULT_SPEC,
-        description="Texto pelo Codex CLI (assinatura OpenAI); só o TTS usa a API",
+        description=(
+            "Dois apresentadores via assinatura Codex (OpenAI) "
+            "— custo zero no texto, só TTS paga"
+        ),
         text_provider="codex",
+    ),
+    Profile(
+        name="assinatura-gemini",
+        text_model="(assinatura)",
+        audit_model="(assinatura)",
+        tts_model=_TTS,
+        presenters_spec=DEFAULT_SPEC,
+        description=(
+            "Dois apresentadores via assinatura Gemini CLI (Google) "
+            "— custo zero no texto, só TTS paga"
+        ),
+        text_provider="gemini-cli",
     ),
 ]
 

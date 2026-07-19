@@ -1064,3 +1064,33 @@ confirmaram leitura, quebra dos nomes longos, botões e rolagem utilizáveis.
 cobertura, 28 testes Electron, lint, formatação, whitespace, JSON, links e auditorias Python/Node
 sem vulnerabilidades conhecidas. `akita-articles` permanece identificado como dependência Git
 privada que não existe no índice do PyPI.
+
+---
+
+## 2026-07-19 — Catálogo expandido de perfis embutidos (5 → 13)
+
+**O que mudou:** oito novos perfis embutidos cobrem formatos e faixas de custo que antes exigiam
+criação manual: podcast com 3 vozes (`podcast-trio`, `podcast-trio-economico`), debate com 4 vozes
+(`podcast-mesa-redonda`), narração econômica (`narrador-economico`), narração premium com Pro em
+texto e auditoria (`narrador-premium`), narração via assinatura (`narrador-assinatura`), podcast
+com roteiro Claude Sonnet (`premium-claude`) e podcast via Gemini CLI (`assinatura-gemini`).
+Constantes `_TTS`, `_PRO` e `_FLASH` eliminam repetição dos IDs de modelo. As descrições seguem
+padrão uniforme: formato + voz + modelo/provedor + benefício.
+
+**Decisões:**
+
+- Vozes do trio escolhidas por contraste tímbrico: Kore (firme/curioso), Puck (animada/animado),
+  Gacrux (madura/analítico). Mesa-redonda adiciona Sadachbia (vivaz/provocador) como debatedor.
+- `narrador-premium` é o único perfil que usa Gemini Pro tanto para roteiro quanto para auditoria;
+  os demais mantêm auditoria no Flash para economizar.
+- `premium-claude` aponta `anthropic/claude-sonnet-4.6` via OpenRouter — o ID existe no cache
+  local e foi verificado.
+- Nomes existentes (`padrao`, `economico`, `narrador-unico`, `assinatura`, `assinatura-codex`)
+  preservados para não quebrar `profiles.json` de quem já usa.
+
+**Validação:** 247 testes Python (inclusive 8 novos para os perfis adicionados), 28 testes
+Electron, Ruff, `compileall`, `npm run check`, `npm audit` (0 vulnerabilidades) e
+`git diff --check` — tudo aprovado. README atualizado com a tabela completa dos 13 perfis.
+
+**Risco que sobrou:** os IDs de modelo apontam versões disponíveis hoje no OpenRouter; se um
+modelo for descontinuado, o perfil embutido falhará até que o ID seja atualizado no código.

@@ -44,6 +44,41 @@ class ProfileStoreTest(unittest.TestCase):
         self.store.set_active("assinatura-codex")
         self.assertEqual(self.store.active(), codex)
 
+    def test_perfil_gemini_cli_usa_assinatura_google(self):
+        gemini = self.store.get("assinatura-gemini")
+        self.assertEqual(gemini.text_provider, "gemini-cli")
+        self.assertEqual(gemini.text_model, "(assinatura)")
+
+    def test_narrador_economico_usa_flash_em_tudo(self):
+        eco = self.store.get("narrador-economico")
+        self.assertEqual(eco.text_model, eco.audit_model)
+        self.assertIn("flash", eco.text_model.lower())
+
+    def test_narrador_premium_usa_pro_em_tudo(self):
+        prem = self.store.get("narrador-premium")
+        self.assertIn("pro", prem.text_model.lower())
+        self.assertIn("pro", prem.audit_model.lower())
+
+    def test_podcast_trio_tem_tres_apresentadores(self):
+        from audiofy.presenters import parse_presenters
+        trio = self.store.get("podcast-trio")
+        self.assertEqual(len(parse_presenters(trio.presenters_spec)), 3)
+
+    def test_podcast_mesa_redonda_tem_quatro_apresentadores(self):
+        from audiofy.presenters import parse_presenters
+        mesa = self.store.get("podcast-mesa-redonda")
+        self.assertEqual(len(parse_presenters(mesa.presenters_spec)), 4)
+
+    def test_premium_claude_usa_anthropic(self):
+        claude = self.store.get("premium-claude")
+        self.assertTrue(claude.text_model.startswith("anthropic/"))
+
+    def test_narrador_assinatura_e_solo(self):
+        from audiofy.presenters import parse_presenters
+        solo = self.store.get("narrador-assinatura")
+        self.assertEqual(len(parse_presenters(solo.presenters_spec)), 1)
+        self.assertEqual(solo.text_provider, "claude-code")
+
     def test_criar_perfil_customizado(self):
         custom = Profile(
             name="meu",
