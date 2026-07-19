@@ -117,6 +117,39 @@ class GenerationLogTest(unittest.TestCase):
         self.assertEqual(result["text"], "")
         self.assertFalse(result["worker_alive"])
 
+
+class AudioChunksTest(unittest.TestCase):
+    @patch("audiofy.audio_audit.read_audio_audit")
+    def test_lista_chunks_com_achados_sem_conteudo_de_audio(self, read_audit):
+        read_audit.return_value = {
+            "audited_at": "2026-07-19T10:00:00-03:00",
+            "summary": {"segments": 1, "ok": 0, "warnings": 0, "critical": 1},
+            "segments": [
+                {
+                    "file": "001.wav",
+                    "duration_seconds": 10.0,
+                    "severity": "critical",
+                    "longest_silence_seconds": 6.0,
+                    "silence_ratio": 0.6,
+                    "silences": [],
+                }
+            ],
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            directory = Path(tmp)
+            segments = directory / "segments"
+            segments.mkdir()
+            (segments / "001.wav").write_bytes(b"audio")
+            (segments / "ignorar.txt").write_text("fora do contrato")
+            with patch("audiofy.bridge._episode_dir", return_value=directory):
+                result = bridge._cmd_audio_chunks("item")
+
+        self.assertEqual(len(result["chunks"]), 1)
+        self.assertEqual(result["chunks"][0]["severity"], "critical")
+        self.assertEqual(result["audit"]["critical"], 1)
+
+
+class CatalogContractTest(unittest.TestCase):
     @patch("audiofy.providers.openrouter.list_tts_models")
     @patch("audiofy.catalog.load_models")
     def test_catalogo_separa_texto_e_fala(self, load_models, list_tts_models):

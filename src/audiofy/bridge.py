@@ -12,6 +12,7 @@
     python3 -m audiofy.bridge run-generation <fonte> <item-id> [opções]  # uso interno
     python3 -m audiofy.bridge status [<item-id>]
     python3 -m audiofy.bridge generation-log <item-id>
+    python3 -m audiofy.bridge audio-chunks <item-id>
     python3 -m audiofy.bridge abort <item-id>
     python3 -m audiofy.bridge tts-catalog
     python3 -m audiofy.bridge setup-check|setup-install
@@ -54,6 +55,9 @@ def _episode_summary(directory: Path) -> dict:
     # ficar pendurado para sempre na interface.
     status = GenerationTracker.reconcile(directory) or {}
     completed_mp3 = directory / "episode.mp3"
+    from .audio_audit import read_audio_audit
+
+    audio_audit = read_audio_audit(directory)
     return {
         "dir": str(directory),
         "episode_id": status.get("episode_id", directory.name.replace("__", "/")),
@@ -69,6 +73,7 @@ def _episode_summary(directory: Path) -> dict:
         "generation_mode": status.get("generation_mode", "adaptation"),
         "narration_voice": status.get("narration_voice"),
         "key_source": status.get("key_source"),
+        "audio_audit": audio_audit.get("summary") if audio_audit else None,
         "updated_at": status.get("updated_at"),
         "mp3": (
             str(completed_mp3)
@@ -121,6 +126,42 @@ def _cmd_generation_log(item_id: str) -> dict:
         "truncated": bool(offset or line_truncated),
         "updated_at": path.stat().st_mtime,
         "worker_alive": worker_alive,
+    }
+
+
+def _cmd_audio_chunks(item_id: str) -> dict:
+    """Lista somente chunks confinados ao episódio e seus achados de auditoria."""
+    from .audio_audit import read_audio_audit
+
+    directory = _episode_dir(item_id)
+    segments_directory = directory / "segments"
+    audit = read_audio_audit(directory)
+    findings = {
+        segment.get("file"): segment
+        for segment in (audit or {}).get("segments", [])
+        if isinstance(segment, dict) and isinstance(segment.get("file"), str)
+    }
+    chunks = []
+    if segments_directory.is_dir():
+        for path in sorted(segments_directory.iterdir()):
+            if not path.is_file() or path.suffix.lower() not in {".wav", ".mp3", ".m4a", ".flac"}:
+                continue
+            finding = findings.get(path.name, {})
+            chunks.append(
+                {
+                    "file": path.name,
+                    "path": str(path),
+                    "duration_seconds": finding.get("duration_seconds"),
+                    "severity": finding.get("severity", "unknown"),
+                    "longest_silence_seconds": finding.get("longest_silence_seconds"),
+                    "silence_ratio": finding.get("silence_ratio"),
+                    "silences": finding.get("silences", []),
+                }
+            )
+    return {
+        "chunks": chunks,
+        "audit": audit.get("summary") if audit else None,
+        "audited_at": audit.get("audited_at") if audit else None,
     }
 
 
@@ -565,6 +606,8 @@ def main() -> None:
             result = _cmd_status(rest[0] if rest else None)
         elif command == "generation-log" and rest:
             result = _cmd_generation_log(rest[0])
+        elif command == "audio-chunks" and rest:
+            result = _cmd_audio_chunks(rest[0])
         elif command == "abort" and rest:
             result = _cmd_abort(rest[0])
         elif command == "tts-catalog":

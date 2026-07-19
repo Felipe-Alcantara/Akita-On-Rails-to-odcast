@@ -84,3 +84,15 @@ test("conteúdo mostra log vivo e atividade do worker sem HTML dinâmico", () =>
   assert.match(renderer, /configChip\("Chave efetiva"/);
   assert.match(styles, /#generation-log\s*\{[^}]*max-height:\s*230px/s);
 });
+
+test("modal permite auditar e ouvir chunks individualmente", () => {
+  const html = readRendererFile("index.html");
+  const renderer = readRendererFile("renderer.js");
+
+  assert.match(html, /<dialog id="chunk-modal"/);
+  assert.match(html, /id="chunk-player"[^>]*controls/);
+  assert.match(renderer, /\["audio-chunks", itemId\]/);
+  assert.match(renderer, /projectPathToFileUrl\(chunk\.path\)/);
+  assert.match(renderer, /chunk\.longest_silence_seconds/);
+  assert.doesNotMatch(renderer, /\.innerHTML\s*=/);
+});

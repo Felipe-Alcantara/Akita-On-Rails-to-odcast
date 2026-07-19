@@ -18,8 +18,10 @@ from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 
+from .audio_audit import audit_segments
 from .config import EPISODES_DIR, Settings, api_key_candidates, api_key_source
 from .estimates import EpisodeMetrics, estimate_tts_cost
+from .media import media_duration_seconds
 from .narration import (
     PROSODY_SYSTEM,
     fallback_direction,
@@ -195,10 +197,19 @@ def _run(
         if generation_mode == "verbatim"
         else "🎧 5/5 Montagem com ffmpeg…"
     )
+    tracker.stage("auditoria_audio", total=len(segments), current=0)
+    audio_audit = audit_segments(directory, segments, on_progress=tracker.advance)
+    audit_summary = audio_audit["summary"]
+    if audit_summary["critical"]:
+        print(
+            f"⚠ Auditoria encontrou {audit_summary['critical']} chunk(s) com silêncio crítico; "
+            "revise-os individualmente no app.",
+            flush=True,
+        )
     tracker.stage("montagem")
     tracker.checkpoint()
     final_path = _assemble(directory, segments, item)
-    duration_seconds = _media_duration_seconds(final_path)
+    duration_seconds = media_duration_seconds(final_path)
     EpisodeMetrics(
         source_words=item.words,
         script_words=sum(len(turn.get("text", "").split()) for turn in turns),
@@ -545,7 +556,7 @@ def _synthesize_turns(
         except Exception:
             temporary.unlink(missing_ok=True)
             raise
-        duration_seconds = _media_duration_seconds(segment)
+        duration_seconds = media_duration_seconds(segment)
         cost_exact = False
         segment_cost = 0.0
         if speech.generation_id:
@@ -573,7 +584,6 @@ def _synthesize_turns(
     return paths
 
 
-_FFPROBE_TIMEOUT = 120
 _FFMPEG_TIMEOUT = 1800
 
 
@@ -587,36 +597,6 @@ def _concat_line(path: Path) -> str:
     """
     text = path.resolve().as_posix().replace("'", r"'\''")
     return f"file '{text}'\n"
-
-
-def _media_duration_seconds(path: Path) -> float:
-    """Obtém duração real de WAV/MP3 usando as dependências do pipeline."""
-    if path.suffix.lower() == ".wav":
-        with wave.open(str(path), "rb") as audio:
-            framerate = audio.getframerate()
-            if framerate <= 0:
-                raise ValueError(f"WAV com taxa de amostragem inválida: {path.name}")
-            return audio.getnframes() / framerate
-    result = run_tool(
-        "ffprobe",
-        [
-            "-v",
-            "error",
-            "-show_entries",
-            "format=duration",
-            "-of",
-            "default=noprint_wrappers=1:nokey=1",
-            str(path),
-        ],
-        timeout=_FFPROBE_TIMEOUT,
-    )
-    raw = result.stdout.strip()
-    try:
-        return float(raw)
-    except ValueError as error:
-        raise ValueError(
-            f"ffprobe não retornou a duração de {path.name}: {raw[:100] or 'vazio'}"
-        ) from error
 
 
 def _assemble(directory: Path, segments: list[Path], item: ContentItem) -> Path:

@@ -114,6 +114,7 @@
             📓 NotebookLM</button>
           <button id="btn-abort" class="danger hidden">🛑 Abortar agora</button>
           <button id="btn-play" class="hidden">▶️ Ouvir</button>
+          <button id="btn-chunks" class="hidden">🧪 Revisar chunks</button>
           <button id="btn-folder" class="hidden">📂 Pasta</button>
         </div>
         <label class="check-option" id="force-option"
@@ -140,6 +141,21 @@
       </div>
     </section>
   </section>
+
+  <dialog id="chunk-modal" aria-labelledby="chunk-modal-title">
+    <div class="modal-header">
+      <div>
+        <h2 id="chunk-modal-title">Revisão dos chunks</h2>
+        <p id="chunk-audit-summary" class="muted small"></p>
+      </div>
+      <button id="btn-close-chunks" class="ghost" aria-label="Fechar revisão">✕</button>
+    </div>
+    <audio id="chunk-player" controls preload="metadata">
+      Seu navegador não suporta reprodução de áudio.
+    </audio>
+    <p id="chunk-now-playing" class="muted small">Escolha um chunk para ouvir.</p>
+    <ul id="chunk-list" class="chunk-list"></ul>
+  </dialog>
 
   <!-- ══ Episódios ══ -->
   <section id="tab-episodes" class="tab-page hidden" role="tabpanel"

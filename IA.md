@@ -916,3 +916,23 @@ o seletor, inclusive no diálogo que antecede o gasto.
 **Validação:** 36 testes Python focados e 24 testes Electron passaram. Nos dados reais, a
 adaptação passou a usar três episódios medidos; a leitura fiel usa o piloto compatível existente.
 Nenhuma chamada de rede ou geração paga foi feita.
+
+---
+
+## 2026-07-19 — Auditoria objetiva e revisão individual dos chunks
+
+**Problema reproduzido:** a escuta da leitura fiel indicou trechos de silêncio, mas o MP3 final não
+permitia localizar rapidamente a fala de origem. A medição dos 12 WAVs encontrou 18,765 segundos
+contínuos no fim de um chunk e 6,467 segundos em outro, confirmando que não era apenas impressão.
+
+**Decisão:** entre TTS e montagem, `audiofy.audio_audit` executa `silencedetect` em cada chunk e
+persiste `audio-audit.json` atomicamente. O limiar usa -45 dB por pelo menos 1,5 segundo; 2,5
+segundos geram aviso e 5 segundos ou 35% do chunk geram achado crítico. A auditoria é diagnóstica:
+não apaga áudio e não consome créditos para regenerar sem decisão humana.
+
+**Interface:** Conteúdo e Episódios ganharam **Revisar chunks**. O modal lista arquivos em ordem,
+duração, severidade, maior silêncio e player individual. A bridge entrega somente caminhos dos
+formatos de áudio dentro da pasta de segmentos; o DOM usa `textContent`.
+
+**Validação parcial:** 51 testes Python focados e 25 testes Electron passaram. A auditoria completa
+dos episódios existentes e a inspeção responsiva serão registradas no commit de dados verificados.

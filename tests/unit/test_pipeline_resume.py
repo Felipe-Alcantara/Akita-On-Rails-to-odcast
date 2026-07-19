@@ -11,10 +11,10 @@ from unittest.mock import Mock, patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
+from audiofy.media import media_duration_seconds  # noqa: E402
 from audiofy.pipeline import (  # noqa: E402
     _assemble,
     _concat_line,
-    _media_duration_seconds,
     _prepare_verbatim_turns,
     _synthesize_turns,
     _wait_for_retry,
@@ -349,18 +349,18 @@ class MediaDurationTest(unittest.TestCase):
                 audio.setframerate(24_000)
                 audio.writeframes(b"\x00\x00")
             # força framerate 0 relendo com patch do resultado
-            with patch("audiofy.pipeline.wave.open") as wave_open:
+            with patch("audiofy.media.wave.open") as wave_open:
                 handle = wave_open.return_value.__enter__.return_value
                 handle.getframerate.return_value = 0
                 handle.getnframes.return_value = 10
                 with self.assertRaisesRegex(ValueError, "taxa de amostragem"):
-                    _media_duration_seconds(path)
+                    media_duration_seconds(path)
 
-    @patch("audiofy.pipeline.run_tool")
+    @patch("audiofy.media.run_tool")
     def test_mp3_com_saida_nao_numerica_falha_claramente(self, run_tool):
         run_tool.return_value = SimpleNamespace(stdout="N/A\n")
         with self.assertRaisesRegex(ValueError, "duração"):
-            _media_duration_seconds(Path("episode.mp3"))
+            media_duration_seconds(Path("episode.mp3"))
 
 
 if __name__ == "__main__":

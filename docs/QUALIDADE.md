@@ -75,6 +75,11 @@ A observabilidade da geração testa cauda limitada do arquivo, sanitização de
 do PID vivo, allowlist IPC e renderização somente por `textContent`. A inspeção visual confirma
 que log, estado do worker e rolagem continuam operáveis em 600 px e 380 px.
 
+A auditoria de áudio testa o parser de `silencedetect`, limites de aviso/crítico, persistência
+atômica, contrato limitado da bridge e modal sem HTML dinâmico. A inspeção manual precisa abrir o
+modal, tocar chunks e manter lista/player utilizáveis em 600 px e 380 px. Alertas não removem
+artefatos nem disparam regeneração paga.
+
 Gerações reais com OpenRouter não rodam na CI porque consomem créditos e exigem segredo. Mudanças
 no pipeline devem usar mocks nos testes e, quando necessário, registrar no `IA.md` o smoke test
 real executado sem incluir conteúdo sensível ou chaves.

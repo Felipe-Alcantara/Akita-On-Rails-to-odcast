@@ -44,6 +44,63 @@ function playInApp(path, title) {
   player.play().catch(() => player.focus());
 }
 
+function chunkSeverityLabel(chunk) {
+  if (chunk.severity === "critical") return "silêncio crítico";
+  if (chunk.severity === "warning") return "revisar pausa";
+  if (chunk.severity === "ok") return "auditado";
+  return "sem auditoria";
+}
+
+async function openChunkReview(itemId, title) {
+  const result = await bridge(["audio-chunks", itemId]);
+  if (!result.ok) {
+    alert(result.error);
+    return;
+  }
+  const dialog = $("chunk-modal");
+  $("chunk-modal-title").textContent = `Revisão dos chunks · ${title}`;
+  const summary = result.audit;
+  $("chunk-audit-summary").textContent = summary
+    ? `${summary.segments} chunks · ${summary.critical} crítico(s) · ` +
+      `${summary.warnings} aviso(s)`
+    : "Ainda não há auditoria automática para este episódio.";
+  const list = $("chunk-list");
+  list.replaceChildren();
+  for (const [index, chunk] of result.chunks.entries()) {
+    const row = document.createElement("li");
+    row.className = `chunk-row severity-${chunk.severity}`;
+    const detail = makeElement("div", "row-main");
+    detail.appendChild(makeElement("span", "row-title", `${index + 1}. ${chunk.file}`));
+    const duration = Number.isFinite(chunk.duration_seconds)
+      ? `${chunk.duration_seconds.toFixed(1)}s` : "duração desconhecida";
+    const silence = Number.isFinite(chunk.longest_silence_seconds)
+      ? ` · maior silêncio ${chunk.longest_silence_seconds.toFixed(1)}s` : "";
+    detail.appendChild(makeElement(
+      "span", "muted small", `${duration} · ${chunkSeverityLabel(chunk)}${silence}`
+    ));
+    row.appendChild(detail);
+    const play = makeElement("button", "ghost", "▶️ ouvir");
+    play.onclick = () => {
+      const player = $("chunk-player");
+      player.src = projectPathToFileUrl(chunk.path);
+      player.load();
+      $("chunk-now-playing").textContent = `Tocando ${index + 1}. ${chunk.file}`;
+      player.play().catch(() => player.focus());
+    };
+    row.appendChild(play);
+    list.appendChild(row);
+  }
+  dialog.showModal();
+}
+
+function closeChunkReview() {
+  const player = $("chunk-player");
+  player.pause();
+  player.removeAttribute("src");
+  player.load();
+  $("chunk-modal").close();
+}
+
 let currentSource = "custom";
 let selectedItem = null;
 let pollTimer = null;
@@ -555,6 +612,7 @@ function renderSelectedStatus(episodes) {
   $("btn-generate").dataset.running = String(Boolean(running));
   updateGenerateButton();
   $("btn-play").classList.toggle("hidden", !done);
+  $("btn-chunks").classList.toggle("hidden", !status);
   $("btn-folder").classList.toggle("hidden", !status);
   const box = $("progress-box");
   box.classList.toggle("hidden", !feedback.visible);
@@ -567,6 +625,8 @@ function renderSelectedStatus(episodes) {
   $("cost-label").textContent = feedback.cost;
   $("btn-play").onclick = () => status && status.mp3
     && playInApp(status.mp3, selectedItem.title);
+  $("btn-chunks").onclick = () => status
+    && openChunkReview(selectedItem.item_id, selectedItem.title);
   $("btn-folder").onclick = () => status && openProjectPath(status.dir);
   void refreshGenerationLog(status);
   void maybeAutoResume(status);
@@ -648,6 +708,9 @@ function renderEpisodes(episodes) {
       play.onclick = () => playInApp(episode.mp3, episode.episode_id);
       row.appendChild(play);
     }
+    const chunks = makeElement("button", "ghost", "🧪 chunks");
+    chunks.onclick = () => openChunkReview(episode.episode_id, episode.episode_id);
+    row.appendChild(chunks);
     const folder = document.createElement("button");
     folder.textContent = "📂";
     folder.title = "Abrir pasta";
@@ -657,6 +720,12 @@ function renderEpisodes(episodes) {
     list.appendChild(row);
   }
 }
+
+$("btn-close-chunks").onclick = closeChunkReview;
+$("chunk-modal").addEventListener("cancel", (event) => {
+  event.preventDefault();
+  closeChunkReview();
+});
 
 // ── Configurações ─────────────────────────────────────────────────────────
 

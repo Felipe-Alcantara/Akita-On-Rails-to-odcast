@@ -193,6 +193,12 @@ cada áudio ao texto, modelo, voz e formato usados. A política pode ser ajustad
 `AUDIOFY_TTS_RETRY_ATTEMPTS`, `AUDIOFY_TTS_RETRY_BASE_SECONDS` e
 `AUDIOFY_TTS_RETRY_MAX_SECONDS`.
 
+Antes da montagem, todos os chunks passam por detecção objetiva de silêncio. O resultado fica em
+`audio-audit.json`, com duração, proporção silenciosa, maior pausa e intervalos exatos por arquivo.
+Pausas a partir de 5 segundos ou chunks com pelo menos 35% de silêncio recebem alerta crítico. O
+botão **Revisar chunks** abre um modal com os achados e permite ouvir cada arquivo separadamente;
+a auditoria aponta problemas, mas não altera nem descarta áudio automaticamente.
+
 ## 🧭 Guia rápido
 
 ### Para iniciantes
@@ -229,7 +235,7 @@ abas:
 - **📚 Conteúdo** — seletor e prontidão da fonte, busca, adicionar por URL ou texto colado,
   estimativa, podcast adaptado ou leitura fiel com escolha de narrador, log vivo e NotebookLM;
 - **🎧 Episódios** — todos os episódios com estado, progresso, custo, abortar, ouvir e abrir
-  pasta;
+  pasta, além da revisão individual de chunks e alertas de silêncio;
 - **⚙️ Configurações** — contador e origem efetiva das chaves, cadastro, troca, verificação
   individual, remoção e saldo em US$,
   criar/editar/ativar/remover perfis, escolha provedor + empresa + modelo com preços,

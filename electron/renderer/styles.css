@@ -374,6 +374,32 @@ ul { list-style: none; }
   overflow-wrap: anywhere;
 }
 
+dialog {
+  width: min(820px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  padding: 18px;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+dialog::backdrop { background: rgb(0 0 0 / 72%); }
+.modal-header { display: flex; justify-content: space-between; gap: 16px; align-items: start; }
+.modal-header h2 { margin-top: 0; }
+#chunk-player { width: 100%; }
+.chunk-list {
+  display: grid;
+  gap: 8px;
+  max-height: min(55vh, 520px);
+  padding: 0;
+  overflow: auto;
+  list-style: none;
+}
+.chunk-row { display: flex; align-items: center; gap: 10px; }
+.chunk-row .row-main { flex: 1; min-width: 0; }
+.severity-critical { border-color: var(--danger); background: rgb(127 29 29 / 20%); }
+.severity-warning { border-color: var(--warning); background: rgb(120 53 15 / 18%); }
+
 /* Chat */
 .chat-panel { display: flex; flex-direction: column; }
 .chat-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
