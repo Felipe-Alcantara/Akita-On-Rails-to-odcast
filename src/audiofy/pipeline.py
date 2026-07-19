@@ -254,6 +254,8 @@ def _run(
         cost_source=("generation_ids" if tracker.cost_exact else "model_pricing_fallback"),
         background_music=tracker.background_music,
         background_volume=tracker.background_volume,
+        title=item.title,
+        source_created_at=item.published_at,
     ).write(directory)
     _write_show_notes(
         directory,

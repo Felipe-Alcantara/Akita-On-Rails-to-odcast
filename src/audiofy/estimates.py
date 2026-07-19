@@ -56,6 +56,8 @@ class EpisodeMetrics:
     background_volume: float | None = None
     verified_at: str = ""
     verification_version: int = 0
+    title: str = ""
+    source_created_at: str = ""
 
     def write(self, directory: Path) -> Path:
         target = directory / "metrics.json"

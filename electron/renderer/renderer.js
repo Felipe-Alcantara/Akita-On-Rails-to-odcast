@@ -719,50 +719,143 @@ async function refreshGenerationLog(status) {
   if (panel.open && nearBottom) output.scrollTop = output.scrollHeight;
 }
 
+function formatEpisodeDate(value, includeTime = false) {
+  if (!value) return "não registrada";
+  const dateOnly = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+  if (dateOnly) return `${dateOnly[3]}/${dateOnly[2]}/${dateOnly[1]}`;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return String(value);
+  return new Intl.DateTimeFormat("pt-BR", includeTime
+    ? { dateStyle: "short", timeStyle: "short" }
+    : { dateStyle: "short" }).format(date);
+}
+
+function formatEpisodeDuration(seconds) {
+  if (!Number.isFinite(seconds) || seconds < 0) return "não medida";
+  const total = Math.round(seconds);
+  const hours = Math.floor(total / 3600);
+  const minutes = Math.floor((total % 3600) / 60);
+  const remainder = total % 60;
+  return hours ? `${hours}h ${minutes}min ${remainder}s` : `${minutes}min ${remainder}s`;
+}
+
+function formatFileSize(bytes) {
+  if (!Number.isFinite(bytes) || bytes < 0) return "não medido";
+  if (bytes < 1024) return `${bytes} B`;
+  const units = ["KiB", "MiB", "GiB"];
+  let value = bytes / 1024;
+  let unit = units[0];
+  for (let index = 1; value >= 1024 && index < units.length; index += 1) {
+    value /= 1024;
+    unit = units[index];
+  }
+  return `${value.toLocaleString("pt-BR", { maximumFractionDigits: 1 })} ${unit}`;
+}
+
+function episodeFact(label, value) {
+  const fact = makeElement("div", "episode-fact");
+  fact.appendChild(makeElement("dt", "", label));
+  fact.appendChild(makeElement("dd", "", value));
+  return fact;
+}
+
+function generationModeLabel(mode) {
+  return mode === "verbatim" ? "leitura fiel" : "podcast adaptado";
+}
+
 function renderEpisodes(episodes) {
   const list = $("episodes");
   list.replaceChildren();
+  const completed = episodes.filter((episode) => episode.mp3).length;
+  $("episodes-summary").textContent = episodes.length
+    ? `${completed} áudio(s) pronto(s) em ${episodes.length} registro(s), do mais recente ao mais antigo.`
+    : "Nenhum episódio gerado ainda.";
   if (!episodes.length) list.appendChild(makeElement("li", "muted", "Nenhum episódio ainda."));
   for (const episode of episodes) {
     const row = document.createElement("li");
+    row.className = "episode-card";
     const accuracy = episode.cost_exact ? "" : " aprox.";
     const cost = episode.cost_usd
-      ? ` · US$ ${episode.cost_usd.toFixed(4)}${accuracy}` : "";
+      ? `US$ ${episode.cost_usd.toFixed(4)}${accuracy}` : "custo não registrado";
     const progress = episode.state === "rodando" && episode.progress.total
       ? ` · ${episode.progress.current}/${episode.progress.total}` : "";
     const retry = episode.retry
       ? ` · retry ${episode.retry.attempt}/${episode.retry.max_attempts}` : "";
-    row.appendChild(makeElement("span", `state-${episode.state}`, "●"));
-    row.appendChild(makeElement("span", "episode-title", episode.episode_id));
-    row.appendChild(makeElement("span", "muted", `${episode.state}${progress}${retry}${cost}`));
+    row.appendChild(makeElement("span", `episode-state-dot state-${episode.state}`, "●"));
+
+    const body = makeElement("div", "episode-card-body");
+    const heading = makeElement("div", "episode-heading");
+    const identity = makeElement("div", "episode-identity");
+    identity.appendChild(makeElement("h3", "episode-title", episode.title || episode.episode_id));
+    identity.appendChild(makeElement("code", "episode-id", episode.episode_id));
+    heading.appendChild(identity);
+    heading.appendChild(makeElement(
+      "span", `badge episode-state state-${episode.state}`, `${episode.state}${progress}${retry}`
+    ));
+    body.appendChild(heading);
+
+    const facts = makeElement("dl", "episode-facts");
+    facts.appendChild(episodeFact(
+      "Criação do conteúdo", formatEpisodeDate(episode.source_created_at)
+    ));
+    facts.appendChild(episodeFact(
+      "Geração do áudio", formatEpisodeDate(episode.generated_at, true)
+    ));
+    facts.appendChild(episodeFact("Duração", formatEpisodeDuration(episode.duration_seconds)));
+    facts.appendChild(episodeFact(
+      "Arquivo", episode.file_name
+        ? `${episode.file_name} · ${formatFileSize(episode.file_size_bytes)}`
+        : "ainda não gerado"
+    ));
+    body.appendChild(facts);
+
+    const production = makeElement("p", "episode-production muted small");
+    const words = Number.isFinite(episode.source_words)
+      ? ` · ${episode.source_words.toLocaleString("pt-BR")} palavras de origem` : "";
+    const audit = episode.audio_audit
+      ? ` · auditoria: ${episode.audio_audit.critical} crítico(s), ` +
+        `${episode.audio_audit.warnings} aviso(s)`
+      : " · sem auditoria";
+    const profile = episode.profile_name ? ` · perfil ${episode.profile_name}` : "";
+    const music = episode.background_music ? ` · música ${episode.background_music}` : "";
+    production.textContent =
+      `${generationModeLabel(episode.generation_mode)} · ${cost}${profile}${words}${audit}${music}`;
+    if (episode.tts_model) production.title = `TTS: ${episode.tts_model}`;
+    body.appendChild(production);
+    row.appendChild(body);
+
     if (episode.state === "falhou" && episode.last_error) {
       row.title = friendlyGenerationError(episode.last_error, episode.key_source);
     }
+    const actions = makeElement("div", "episode-actions");
     if (episode.state === "rodando" && !episode.abort_requested_at) {
       const abortButton = document.createElement("button");
       abortButton.textContent = "🛑";
       abortButton.title = "Abortar";
       abortButton.setAttribute("aria-label", `Abortar ${episode.episode_id}`);
       abortButton.onclick = () => bridge(["abort", episode.episode_id]).then(refreshStatus);
-      row.appendChild(abortButton);
+      actions.appendChild(abortButton);
     }
     if (episode.mp3) {
       const play = document.createElement("button");
       play.textContent = "▶️";
       play.title = "Ouvir";
       play.setAttribute("aria-label", `Ouvir ${episode.episode_id}`);
-      play.onclick = () => playInApp(episode.mp3, episode.episode_id);
-      row.appendChild(play);
+      play.onclick = () => playInApp(episode.mp3, episode.title || episode.episode_id);
+      actions.appendChild(play);
     }
     const chunks = makeElement("button", "ghost", "🧪 chunks");
-    chunks.onclick = () => openChunkReview(episode.episode_id, episode.episode_id);
-    row.appendChild(chunks);
+    chunks.onclick = () => openChunkReview(
+      episode.episode_id, episode.title || episode.episode_id
+    );
+    actions.appendChild(chunks);
     const folder = document.createElement("button");
     folder.textContent = "📂";
     folder.title = "Abrir pasta";
     folder.setAttribute("aria-label", `Abrir pasta de ${episode.episode_id}`);
     folder.onclick = () => openProjectPath(episode.dir);
-    row.appendChild(folder);
+    actions.appendChild(folder);
+    row.appendChild(actions);
     list.appendChild(row);
   }
 }

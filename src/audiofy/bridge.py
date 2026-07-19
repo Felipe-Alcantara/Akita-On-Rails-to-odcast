@@ -28,6 +28,7 @@ import re
 import shutil
 import sys
 from dataclasses import asdict
+from datetime import datetime
 from pathlib import Path
 
 from .config import EPISODES_DIR, PROJECT_ROOT, STATE_DIR, Settings, api_key_source
@@ -62,33 +63,75 @@ def _episode_summary(directory: Path) -> dict:
     status = GenerationTracker.reconcile(directory) or {}
     completed_mp3 = directory / "episode.mp3"
     from .audio_audit import read_audio_audit
+    from .estimates import read_episode_metrics
 
     audio_audit = read_audio_audit(directory)
+    metrics = read_episode_metrics(directory)
+    metrics_data = asdict(metrics) if metrics else {}
+    episode_id = status.get("episode_id", directory.name.replace("__", "/"))
+    title = str(metrics_data.get("title") or "").strip()
+    notes = directory / "NOTES.md"
+    if not title and notes.is_file():
+        try:
+            first_line = notes.read_text(encoding="utf-8").splitlines()[0]
+            title = first_line.removeprefix("# ").strip()
+        except (IndexError, OSError, UnicodeError):
+            pass
+    title = title or episode_id
+    source_created_at = str(metrics_data.get("source_created_at") or "")
+    if not source_created_at:
+        created_match = re.match(r"^(\d{4}-\d{2}-\d{2})", episode_id)
+        source_created_at = created_match.group(1) if created_match else ""
+    file_stat = completed_mp3.stat() if completed_mp3.is_file() else None
+    file_updated_at = (
+        datetime.fromtimestamp(file_stat.st_mtime).astimezone().isoformat(timespec="seconds")
+        if file_stat
+        else None
+    )
+    state = status.get("state") or ("concluido" if file_stat else "desconhecido")
+    cost_usd = status.get("cost_usd")
+    if cost_usd is None or (not cost_usd and state == "concluido"):
+        cost_usd = metrics_data.get("cost_usd", 0.0)
+    cost_exact = (
+        status.get("cost_exact")
+        if "cost_exact" in status
+        else metrics_data.get("cost_exact", False)
+    )
     return {
         "dir": str(directory),
-        "episode_id": status.get("episode_id", directory.name.replace("__", "/")),
-        "state": status.get("state", "desconhecido"),
+        "episode_id": episode_id,
+        "title": title,
+        "state": state,
         "stage": status.get("stage", ""),
         "progress": status.get("progress", {}),
-        "cost_usd": status.get("cost_usd", 0.0),
-        "cost_exact": status.get("cost_exact", False),
+        "cost_usd": cost_usd,
+        "cost_exact": cost_exact,
         "retry": status.get("retry"),
         "abort_requested_at": status.get("abort_requested_at"),
         "last_error": status.get("last_error"),
         "resume_count": status.get("resume_count", 0),
-        "generation_mode": status.get("generation_mode", "adaptation"),
+        "generation_mode": status.get(
+            "generation_mode", metrics_data.get("generation_mode", "adaptation")
+        ),
         "narration_voice": status.get("narration_voice"),
         "key_source": status.get("key_source"),
         "background_music": status.get("background_music"),
         "background_music_cache": status.get("background_music_cache"),
         "background_volume": status.get("background_volume"),
         "audio_audit": audio_audit.get("summary") if audio_audit else None,
-        "updated_at": status.get("updated_at"),
-        "mp3": (
-            str(completed_mp3)
-            if status.get("state") == "concluido" and completed_mp3.is_file()
-            else None
-        ),
+        "source_created_at": source_created_at or None,
+        "generated_at": metrics_data.get("generated_at") or file_updated_at,
+        "file_updated_at": file_updated_at,
+        "file_name": completed_mp3.name if file_stat else None,
+        "file_size_bytes": file_stat.st_size if file_stat else None,
+        "duration_seconds": metrics_data.get("duration_seconds"),
+        "source_words": metrics_data.get("source_words"),
+        "script_words": metrics_data.get("script_words"),
+        "profile_name": metrics_data.get("profile_name"),
+        "tts_model": metrics_data.get("tts_model"),
+        "verified_at": metrics_data.get("verified_at") or None,
+        "updated_at": status.get("updated_at") or file_updated_at,
+        "mp3": (str(completed_mp3) if file_stat and status.get("state") != "rodando" else None),
     }
 
 
@@ -454,7 +497,7 @@ def _cmd_status(item_id: str | None) -> dict:
         return _episode_summary(_episode_dir(item_id))
     episodes = []
     if EPISODES_DIR.is_dir():
-        for directory in sorted(EPISODES_DIR.iterdir()):
+        for directory in sorted(EPISODES_DIR.iterdir(), reverse=True):
             if directory.is_dir():
                 episodes.append(_episode_summary(directory))
     running = [e for e in episodes if e["state"] == "rodando"]

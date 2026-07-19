@@ -116,3 +116,20 @@ test("música de fundo usa seletor nativo, volume limitado e confirma direitos",
   assert.match(renderer, /`--background-music=\$\{backgroundMusic\}`/);
   assert.match(renderer, /`--background-volume=\$\{volume \|\| 0\.08\}`/);
 });
+
+test("catálogo de episódios mostra datas, duração, arquivo e auditoria", () => {
+  const html = readRendererFile("index.html");
+  const renderer = readRendererFile("renderer.js");
+  const styles = readRendererFile("styles.css");
+
+  assert.match(html, /id="episodes-summary"/);
+  assert.match(renderer, /Criação do conteúdo/);
+  assert.match(renderer, /Geração do áudio/);
+  assert.match(renderer, /formatEpisodeDuration\(episode\.duration_seconds\)/);
+  assert.match(renderer, /formatFileSize\(episode\.file_size_bytes\)/);
+  assert.match(renderer, /episode\.audio_audit\.critical/);
+  assert.match(styles, /\.episode-facts\s*\{[^}]*grid-template-columns:/s);
+  assert.match(styles, /\.episode-actions\s*\{[^}]*display:\s*flex/s);
+  assert.match(styles, /\.player-dock audio\s*\{[^}]*flex:\s*0 0 auto/s);
+  assert.match(styles, /\.player-title\s*\{[^}]*flex:\s*0 0 auto/s);
+});

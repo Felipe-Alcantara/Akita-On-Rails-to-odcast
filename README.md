@@ -248,8 +248,10 @@ abas:
 - **📚 Conteúdo** — seletor e prontidão da fonte, busca, adicionar por URL ou texto colado,
   estimativa, podcast adaptado ou leitura fiel com escolha de narrador, música de fundo local,
   log vivo e NotebookLM;
-- **🎧 Episódios** — todos os episódios com estado, progresso, custo, abortar, ouvir e abrir
-  pasta, além da revisão individual de chunks e alertas de silêncio;
+- **🎧 Episódios** — catálogo do mais recente ao mais antigo com título, identificador,
+  data de criação do conteúdo, data/hora de geração, duração, nome e tamanho do MP3, formato,
+  perfil, palavras, custo e resumo da auditoria; mantém ações de abortar, ouvir, revisar chunks e
+  abrir pasta;
 - **⚙️ Configurações** — contador e origem efetiva das chaves, cadastro, troca, verificação
   individual, remoção e saldo em US$,
   criar/editar/ativar/remover perfis, escolha provedor + empresa + modelo com preços,

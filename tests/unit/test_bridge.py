@@ -10,7 +10,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
 from audiofy import bridge  # noqa: E402
 from audiofy.catalog import Model  # noqa: E402
-from audiofy.estimates import EpisodeEstimate  # noqa: E402
+from audiofy.estimates import EpisodeEstimate, EpisodeMetrics  # noqa: E402
 from audiofy.profiles import profile_from_payload  # noqa: E402
 from audiofy.sources.base import ContentItem  # noqa: E402
 
@@ -501,6 +501,34 @@ class ForcedGenerationTest(unittest.TestCase):
 
 
 class EpisodeSummaryTest(unittest.TestCase):
+    def test_episodio_legado_com_mp3_e_metricas_e_catalogado_completo(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            directory = Path(tmp) / "2026-01-02-livro"
+            directory.mkdir()
+            (directory / "episode.mp3").write_bytes(b"x" * 2_048)
+            (directory / "NOTES.md").write_text("# Meu livro\n", encoding="utf-8")
+            EpisodeMetrics(
+                source_words=1_000,
+                script_words=900,
+                duration_seconds=625.5,
+                cost_usd=0.75,
+                cost_exact=True,
+                tts_model="vendor/tts",
+                profile_name="narrador",
+                generated_at="2026-01-03T12:30:00-03:00",
+            ).write(directory)
+
+            summary = bridge._episode_summary(directory)
+
+        self.assertEqual(summary["state"], "concluido")
+        self.assertEqual(summary["title"], "Meu livro")
+        self.assertEqual(summary["source_created_at"], "2026-01-02")
+        self.assertEqual(summary["generated_at"], "2026-01-03T12:30:00-03:00")
+        self.assertEqual(summary["file_size_bytes"], 2_048)
+        self.assertEqual(summary["duration_seconds"], 625.5)
+        self.assertEqual(summary["cost_usd"], 0.75)
+        self.assertTrue(summary["mp3"].endswith("episode.mp3"))
+
     def test_status_expoe_retomada_sem_conteudo_da_fala(self):
         with tempfile.TemporaryDirectory() as tmp:
             directory = Path(tmp)

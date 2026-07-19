@@ -1008,3 +1008,30 @@ Python com 74% de cobertura, 27 testes Electron, whitespace, JSON, links e audit
 sem vulnerabilidades conhecidas. `akita-articles` é uma dependência Git privada ao PyPI e por isso
 foi explicitamente marcada pelo `pip-audit` como não auditável no índice. A mixagem também passou
 por smoke real com ffmpeg: uma trilha curta em loop produziu MP3 válido limitado à narração.
+
+---
+
+## 2026-07-19 — Catálogo completo de episódios gerados
+
+**Problema observado:** a aba Episódios dependia quase inteiramente de `status.json`, mostrava
+somente o identificador e estado/custo, e classificava o piloto legado como desconhecido apesar de
+existirem `episode.mp3` e `metrics.json` válidos.
+
+**Decisão de contrato:** `_episode_summary` combina status operacional, métricas, auditoria,
+`NOTES.md` e metadados reais do MP3. Um arquivo concluído sem status passa a ser reconhecido e
+reproduzido; durante uma montagem ativa o MP3 continua oculto para não expor uma versão parcial.
+Novas gerações também persistem título e data de criação do conteúdo em `metrics.json`, enquanto
+episódios antigos usam o título auditável de `NOTES.md` e a data do identificador como fallback.
+
+**Interface:** os registros agora aparecem do mais recente ao mais antigo em cartões com título,
+ID, criação do conteúdo, geração do áudio, duração, arquivo/tamanho, formato, custo, perfil,
+palavras e resumo dos achados de silêncio. Em telas estreitas, metadados e ações são empilhados.
+A inspeção em 380 px também corrigiu o `flex-basis` horizontal do player global que virava altura
+excessiva quando o componente mudava para coluna.
+
+**Validação:** o catálogo foi conferido com os quatro episódios locais, inclusive reprodução e
+metadados do piloto legado. A interface permaneceu legível e acionável em 600 px e 380 px.
+`python scripts/check_quality.py` aprovou 238 testes Python com 74% de cobertura, 28 testes
+Electron, lint, formatação, whitespace, JSON, links e auditorias Python/Node sem vulnerabilidades
+conhecidas; `akita-articles` continua explicitamente fora da auditoria do PyPI por ser dependência
+Git privada.
