@@ -281,21 +281,35 @@ async function selectItem(item, row) {
   $("detail-title").textContent = detail.title;
   $("detail-meta").textContent =
     `${detail.published_at} · ~${detail.words} palavras · ${detail.url || "texto local"}`;
-  if (detail.actual) {
-    const accuracy = detail.actual.cost_exact ? "confirmado pelo provedor" : "aproximado";
+  renderItemEstimate();
+  refreshStatus();
+}
+
+function selectedEstimate() {
+  if (!selectedItem) return null;
+  const mode = $("generation-mode").value;
+  return (selectedItem.estimates && selectedItem.estimates[mode]) || selectedItem.estimate;
+}
+
+function renderItemEstimate() {
+  if (!selectedItem) return;
+  const estimate = selectedEstimate();
+  const mode = $("generation-mode").value;
+  const actual = selectedItem.actual;
+  if (actual && (actual.generation_mode || "adaptation") === mode) {
+    const accuracy = actual.cost_exact ? "confirmado pelo provedor" : "aproximado";
     $("detail-estimate").textContent =
-      `Realizado: US$ ${detail.actual.cost_usd.toFixed(4)} (${accuracy}) · ` +
-      `${(detail.actual.duration_seconds / 60).toFixed(1)} min`;
+      `Realizado: US$ ${actual.cost_usd.toFixed(4)} (${accuracy}) · ` +
+      `${(actual.duration_seconds / 60).toFixed(1)} min`;
   } else {
-    const estimate = detail.estimate;
     const basis = estimate.sample_count
-      ? `${estimate.sample_count} episódio(s) medido(s)` : "piloto medido";
+      ? `${estimate.sample_count} episódio(s) de ${mode === "verbatim" ? "leitura fiel" : "adaptação"}`
+      : "piloto medido";
     $("detail-estimate").textContent =
       `Estimativa: ~US$ ${estimate.cost_usd.toFixed(2)} ` +
       `(faixa US$ ${estimate.cost_min_usd.toFixed(2)}–${estimate.cost_max_usd.toFixed(2)}) · ` +
       `~${estimate.duration_minutes.toFixed(1)} min · ${basis}`;
   }
-  refreshStatus();
 }
 
 $("btn-sync").onclick = async () => {
@@ -366,6 +380,7 @@ function updateGenerationMode() {
   $("force-label").textContent = verbatim
     ? "Replanejar interpretação e regenerar áudios"
     : "Regenerar cobertura, roteiro e auditoria";
+  renderItemEstimate();
   updateGenerateButton();
 }
 
@@ -441,15 +456,16 @@ $("btn-generate").onclick = async () => {
   const mode = $("generation-mode").value;
   const verbatim = mode === "verbatim";
   const voice = $("narration-voice").value;
+  const estimate = selectedEstimate();
   if (verbatim && !voice) {
     alert("Escolha a voz do narrador.");
     return;
   }
   const confirmed = confirm(
     `${verbatim ? "Gerar leitura fiel" : "Gerar episódio"} de "${selectedItem.title}"?\n\n` +
-    `Custo estimado: ~US$ ${selectedItem.estimated_cost_usd.toFixed(2)} ` +
-    `(faixa US$ ${selectedItem.estimate.cost_min_usd.toFixed(2)}–` +
-    `${selectedItem.estimate.cost_max_usd.toFixed(2)}) ` +
+    `Custo estimado: ~US$ ${estimate.cost_usd.toFixed(2)} ` +
+    `(faixa US$ ${estimate.cost_min_usd.toFixed(2)}–` +
+    `${estimate.cost_max_usd.toFixed(2)}) ` +
     `(consome créditos do OpenRouter).` +
     (verbatim
       ? `\n\nNarrador: ${voice}. O texto não será reescrito; somente a interpretação será planejada.`

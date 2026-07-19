@@ -898,3 +898,21 @@ sobre os artefatos da geração real, sem iniciar chamadas adicionais.
 **Risco que sobrou:** estar vivo não prova que um provedor remoto responderá; por isso o painel
 combina saúde do processo com idade da última linha. O abort ativo continua sendo a saída para
 uma chamada que permaneça tempo demais sem progresso.
+
+---
+
+## 2026-07-19 — Estimativas recalibradas por formato
+
+**Problema:** os quatro episódios concluídos tinham `metrics.json` coerentes com a duração real,
+mas a interface filtrava a amostra pelo perfil ativo. Como cada piloto usou um perfil diferente,
+o cálculo normalmente enxergava um único episódio ou voltava ao fallback, e a troca entre podcast
+e leitura fiel não recalculava a confirmação.
+
+**Decisão:** o formato passa a ser a fronteira empírica principal. A estimativa agrega todos os
+perfis com o mesmo TTS e formato, usando totais ponderados, mas nunca mistura adaptação e leitura
+fiel. A bridge entrega os dois cálculos e o Electron troca valor, faixa, duração e amostra ao mudar
+o seletor, inclusive no diálogo que antecede o gasto.
+
+**Validação:** 36 testes Python focados e 24 testes Electron passaram. Nos dados reais, a
+adaptação passou a usar três episódios medidos; a leitura fiel usa o piloto compatível existente.
+Nenhuma chamada de rede ou geração paga foi feita.

@@ -466,22 +466,39 @@ class ItemEstimateTest(unittest.TestCase):
         )
         settings.return_value.tts_model = "vendor/tts"
         settings.return_value.profile_name = "economico"
-        estimate_episode.return_value = EpisodeEstimate(
-            duration_minutes=20,
-            duration_min_minutes=18,
-            duration_max_minutes=22,
-            speaking_rate_wpm=150,
-            cost_usd=1.1,
-            cost_min_usd=0.8,
-            cost_max_usd=1.3,
-            sample_count=2,
-        )
+        estimate_episode.side_effect = [
+            EpisodeEstimate(
+                duration_minutes=20,
+                duration_min_minutes=18,
+                duration_max_minutes=22,
+                speaking_rate_wpm=150,
+                cost_usd=1.1,
+                cost_min_usd=0.8,
+                cost_max_usd=1.3,
+                sample_count=2,
+            ),
+            EpisodeEstimate(
+                duration_minutes=18,
+                duration_min_minutes=16,
+                duration_max_minutes=20,
+                speaking_rate_wpm=165,
+                cost_usd=0.9,
+                cost_min_usd=0.7,
+                cost_max_usd=1.1,
+                sample_count=1,
+            ),
+        ]
 
         result = bridge._cmd_item("custom", "item")
 
         self.assertEqual(result["estimated_cost_usd"], 1.1)
         self.assertEqual(result["estimate"]["sample_count"], 2)
         self.assertEqual(result["estimate"]["duration_minutes"], 20)
+        self.assertEqual(result["estimates"]["verbatim"]["sample_count"], 1)
+        self.assertEqual(
+            [call.kwargs["generation_mode"] for call in estimate_episode.call_args_list],
+            ["adaptation", "verbatim"],
+        )
 
 
 if __name__ == "__main__":

@@ -360,8 +360,10 @@ TTS). O menu **Catálogo TTS/vozes** lista os modelos de áudio disponíveis no 
 - O custo aparece na barra de progresso, no `status.json`, no app desktop, no Status do menu e
   fica registrado no `NOTES.md` do episódio.
 - **Estimativa adaptativa**: cada conclusão grava palavras da fonte/roteiro, duração, modelo,
-  perfil, custo e precisão em `metrics.json`. A previsão usa totais ponderados dos episódios do
-  mesmo TTS e perfil, e mostra valor central, faixa observada, duração e tamanho da amostra.
+  perfil, formato, custo e precisão em `metrics.json`. A previsão usa totais ponderados de todos os
+  episódios do mesmo TTS e formato, sem misturar podcast adaptado com leitura fiel, e mostra valor
+  central, faixa observada, duração e tamanho da amostra. Trocar o formato atualiza o cálculo antes
+  da confirmação.
   Sem histórico, o piloto real (2.155 palavras, 13min01s, US$ 0,624287) é apenas o fallback
   inicial. Data da geração e origem da medição também ficam preservadas.
 

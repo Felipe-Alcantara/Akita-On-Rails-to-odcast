@@ -146,11 +146,20 @@ def _cmd_item(source_key: str, item_id: str) -> dict:
 
     item = get_source(source_key).get_item(item_id)
     settings = Settings()
-    estimate = estimate_episode(item.words, settings.tts_model, profile_name=settings.profile_name)
+    estimates = {
+        mode: estimate_episode(
+            item.words,
+            settings.tts_model,
+            generation_mode=mode,
+        )
+        for mode in ("adaptation", "verbatim")
+    }
+    estimate = estimates["adaptation"]
     payload = asdict(item)
     payload.pop("text")  # o texto integral não interessa à interface
     payload["estimated_cost_usd"] = round(estimate.cost_usd, 2)
     payload["estimate"] = asdict(estimate)
+    payload["estimates"] = {mode: asdict(value) for mode, value in estimates.items()}
     metrics = read_episode_metrics(_episode_dir(item_id))
     payload["actual"] = asdict(metrics) if metrics else None
     return payload

@@ -79,6 +79,10 @@ Gerações reais com OpenRouter não rodam na CI porque consomem créditos e exi
 no pipeline devem usar mocks nos testes e, quando necessário, registrar no `IA.md` o smoke test
 real executado sem incluir conteúdo sensível ou chaves.
 
+As estimativas possuem regressão de estratificação: agregam todos os perfis do mesmo TTS e formato,
+mas nunca misturam adaptação com leitura fiel. A troca de formato no Electron precisa trocar também
+a amostra e o custo usados na confirmação.
+
 ## Dependências e atualização
 
 Dependências diretas ficam fixadas em `requirements.txt` e `electron/package-lock.json`.

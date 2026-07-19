@@ -73,7 +73,12 @@ def read_episode_metrics(directory: Path) -> EpisodeMetrics | None:
         return None
 
 
-def _load_samples(root: Path, tts_model: str, profile_name: str | None = None) -> list[dict]:
+def _load_samples(
+    root: Path,
+    tts_model: str,
+    profile_name: str | None = None,
+    generation_mode: str | None = None,
+) -> list[dict]:
     samples: list[dict] = []
     if not root.is_dir():
         return samples
@@ -86,11 +91,15 @@ def _load_samples(root: Path, tts_model: str, profile_name: str | None = None) -
         except (OSError, ValueError, TypeError, json.JSONDecodeError):
             continue
         same_profile = profile_name is None or data.get("profile_name") == profile_name
+        # Artefatos anteriores à leitura fiel não gravavam o campo; todos eram adaptação.
+        sample_mode = data.get("generation_mode", "adaptation")
+        same_mode = generation_mode is None or sample_mode == generation_mode
         if (
             words > 0
             and duration > 0
             and cost > 0
             and same_profile
+            and same_mode
             and math.isfinite(duration)
             and math.isfinite(cost)
             and data.get("tts_model") == tts_model
@@ -104,11 +113,17 @@ def estimate_episode(
     tts_model: str,
     episodes_root: Path = EPISODES_DIR,
     profile_name: str | None = None,
+    generation_mode: str | None = None,
 ) -> EpisodeEstimate:
-    """Calcula média ponderada do mesmo modelo e, quando informado, perfil."""
+    """Calcula média ponderada do mesmo modelo e histórico compatível.
+
+    A interface informa ``generation_mode`` e usa todos os perfis daquele formato. Isso evita
+    confundir a proporção texto/roteiro de podcasts com a leitura literal e não descarta episódios
+    reais só porque o preset mudou. ``profile_name`` permanece para integrações legadas.
+    """
     if source_words <= 0:
         raise ValueError("A estimativa exige uma contagem positiva de palavras.")
-    samples = _load_samples(episodes_root, tts_model, profile_name)
+    samples = _load_samples(episodes_root, tts_model, profile_name, generation_mode)
     if not samples:
         samples = [
             {

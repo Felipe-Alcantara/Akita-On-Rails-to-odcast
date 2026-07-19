@@ -79,6 +79,39 @@ class EpisodeEstimateTest(unittest.TestCase):
         self.assertEqual(estimate.sample_count, 1)
         self.assertEqual(estimate.cost_usd, 1.0)
 
+    def test_formato_usa_todos_os_perfis_compativeis_sem_misturar_leitura(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            samples = [
+                ("padrao", "adaptation", 0.4),
+                ("economico", "adaptation", 0.6),
+                ("narrador", "verbatim", 0.2),
+            ]
+            for profile, mode, cost in samples:
+                directory = root / profile
+                directory.mkdir()
+                (directory / "metrics.json").write_text(
+                    json.dumps(
+                        {
+                            "source_words": 1_000,
+                            "duration_seconds": 600,
+                            "cost_usd": cost,
+                            "tts_model": "google/tts",
+                            "profile_name": profile,
+                            "generation_mode": mode,
+                        }
+                    ),
+                    encoding="utf-8",
+                )
+
+            adaptation = estimate_episode(2_000, "google/tts", root, generation_mode="adaptation")
+            verbatim = estimate_episode(2_000, "google/tts", root, generation_mode="verbatim")
+
+        self.assertEqual(adaptation.sample_count, 2)
+        self.assertEqual(adaptation.cost_usd, 1.0)
+        self.assertEqual(verbatim.sample_count, 1)
+        self.assertEqual(verbatim.cost_usd, 0.4)
+
     def test_amostra_sem_custo_real_nao_distorce_a_media(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
