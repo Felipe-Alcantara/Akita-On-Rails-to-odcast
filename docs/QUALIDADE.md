@@ -57,7 +57,9 @@ no uso de `innerHTML`, no foco visível e na preferência por menos movimento. O
 
 O gerenciamento de chaves tem regressões em três fronteiras: o cofre testa persistência e
 precedência; a bridge testa seleção e verificação sem devolver o segredo; o Electron testa a
-allowlist dos comandos e a presença das ações de registrar, usar, trocar e verificar.
+allowlist dos comandos e a presença das ações de registrar, usar, trocar e verificar. Status,
+banner e log também testam o rótulo da chave efetiva e a mensagem de `402` diferencia saldo global
+do limite individual, sem persistir o segredo.
 
 A leitura fiel também tem três fronteiras: funções puras provam recomposição exata e lotes
 limitados; a importação preserva espaços e quebras nas bordas; o pipeline prova que respostas do
@@ -68,6 +70,10 @@ precisa exercitar os dois formatos em 600 px e 380 px.
 O cancelamento testa separadamente encerramento portátil da árvore do worker, transição
 imediata para `abortado`, fallback cooperativo quando o sistema nega o sinal, contrato da bridge
 e feedback de cancelamento pendente no Electron.
+
+A observabilidade da geração testa cauda limitada do arquivo, sanitização de segredos, detecção
+do PID vivo, allowlist IPC e renderização somente por `textContent`. A inspeção visual confirma
+que log, estado do worker e rolagem continuam operáveis em 600 px e 380 px.
 
 Gerações reais com OpenRouter não rodam na CI porque consomem créditos e exigem segredo. Mudanças
 no pipeline devem usar mocks nos testes e, quando necessário, registrar no `IA.md` o smoke test

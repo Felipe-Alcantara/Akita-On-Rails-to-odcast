@@ -227,7 +227,7 @@ abas:
 - **💬 Chat** — o assistente de pesquisa: qualquer tema, com ações executadas automaticamente
   (adicionar URL, buscar, gerar, exportar NotebookLM);
 - **📚 Conteúdo** — seletor e prontidão da fonte, busca, adicionar por URL ou texto colado,
-  estimativa, podcast adaptado ou leitura fiel com escolha de narrador e NotebookLM;
+  estimativa, podcast adaptado ou leitura fiel com escolha de narrador, log vivo e NotebookLM;
 - **🎧 Episódios** — todos os episódios com estado, progresso, custo, abortar, ouvir e abrir
   pasta;
 - **⚙️ Configurações** — contador e origem efetiva das chaves, cadastro, troca, verificação
@@ -237,10 +237,11 @@ abas:
 
 Um banner global alerta **sempre que qualquer geração estiver consumindo créditos**. Toda a
 lógica continua no backend Python. Uma faixa de configuração permanece visível em todas as abas
-e mostra o perfil, o provedor/modelo efetivo das etapas de texto e o modelo TTS — inclusive quando
-uma variável `AUDIOFY_*` está sobrescrevendo o perfil ativo. Para o Codex, o modelo global definido
-em `~/.codex/config.toml` também é identificado (somente esse campo é lido). A interface reorganiza
-navegação, cartões e formulários ao redimensionar a janela até sua largura mínima de 360 px.
+e mostra o perfil, o provedor/modelo efetivo das etapas de texto, o modelo TTS e a **chave
+efetivamente usada** — inclusive quando uma variável `AUDIOFY_*` está sobrescrevendo o perfil ativo.
+Para o Codex, o modelo global definido em `~/.codex/config.toml` também é identificado (somente esse
+campo é lido). A interface reorganiza navegação, cartões e formulários ao redimensionar a janela até
+sua largura mínima de 360 px.
 O cartão do conteúdo confirma imediatamente o início da geração e mantém falhas rápidas visíveis
 com etapa, checkpoint, custo e orientação segura — por exemplo, limite mensal ou chave recusada —
 em vez de parecer que o botão não respondeu.
@@ -299,7 +300,9 @@ Padrões portados do [Openia](https://github.com/Felipe-Alcantara/Openia):
   `.env`/ambiente. O ambiente continua sendo o padrão para CI e sessões temporárias; uma escolha
   explícita de chave nomeada permanece efetiva até outra origem ser selecionada. A verificação
   consulta **limite, restante e uso mensal da própria chave**, sem confundir com o saldo global da
-  conta. O Electron relê valores originados no `.env` a cada operação.
+  conta. Cadastrar ou apenas destacar uma chave não troca a execução: use a ação **Usar** e confira
+  o selo **em uso** ou a faixa **Chave efetiva**. O Electron relê valores originados no `.env` a
+  cada operação.
 - **Perfis** — presets nomeados de modelos + apresentadores. Embutidos: `padrao` (qualidade),
   `economico` (tudo no modelo barato), `narrador-unico` (adaptação solo), `assinatura`
   (Claude Code) e `assinatura-codex` (Codex CLI). Crie e edite os seus pelo menu ou pelo app;
@@ -352,6 +355,8 @@ TTS). O menu **Catálogo TTS/vozes** lista os modelos de áudio disponíveis no 
 - Se uma fala receber `403` por limite mensal, o pipeline tenta automaticamente a chave do `.env`
   e as chaves nomeadas do cofre antes de falhar; o rótulo da alternativa usada fica registrado no
   manifesto, sem qualquer segredo.
+- O `status.json`, o banner e o log registram somente o rótulo seguro da chave em tentativa. Em
+  `402`, a interface orienta conferir tanto o saldo global quanto o limite individual dessa chave.
 - O custo aparece na barra de progresso, no `status.json`, no app desktop, no Status do menu e
   fica registrado no `NOTES.md` do episódio.
 - **Estimativa adaptativa**: cada conclusão grava palavras da fonte/roteiro, duração, modelo,
@@ -365,6 +370,11 @@ créditos, inclusive a fala e a tentativa durante uma retomada automática. O ab
 ativamente o worker e seus subprocessos, inclusive durante TTS, CLI ou montagem, preservando
 segmentos e checkpoints concluídos. Se o sistema negar o encerramento, o arquivo `ABORT` continua
 como fallback cooperativo no primeiro checkpoint disponível.
+
+No cartão do conteúdo, **Log da geração** mostra as últimas 160 linhas, confirma se o worker
+continua vivo e informa há quanto tempo saiu a última mensagem. O backend lê no máximo 64 KiB,
+mascara padrões de chave e inicia novos workers sem buffer de stdout, mantendo o painel atualizável
+sem carregar logs inteiros nem esperar a conclusão de uma etapa.
 
 ## ✅ Qualidade e testes
 

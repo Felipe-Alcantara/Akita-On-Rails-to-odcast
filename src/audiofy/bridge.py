@@ -11,6 +11,7 @@
         [--mode=adaptation|verbatim] [--voice=<voz>]
     python3 -m audiofy.bridge run-generation <fonte> <item-id> [opções]  # uso interno
     python3 -m audiofy.bridge status [<item-id>]
+    python3 -m audiofy.bridge generation-log <item-id>
     python3 -m audiofy.bridge abort <item-id>
     python3 -m audiofy.bridge tts-catalog
     python3 -m audiofy.bridge setup-check|setup-install
@@ -19,13 +20,22 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 from dataclasses import asdict
 from pathlib import Path
 
-from .config import EPISODES_DIR, Settings
+from .config import EPISODES_DIR, Settings, api_key_source
 from .runtime.status import GenerationTracker
 from .sources import available_sources, get_source
+
+_MAX_GENERATION_LOG_BYTES = 64 * 1024
+_MAX_GENERATION_LOG_LINES = 160
+_LOG_SECRET_PATTERNS = (
+    re.compile(r"sk-or-v1-[A-Za-z0-9_-]+"),
+    re.compile(r"AIza[0-9A-Za-z_-]+"),
+    re.compile(r"(?i)(?:OPENROUTER_API_KEY\s*=\s*|Authorization:\s*Bearer\s+)\S+"),
+)
 
 
 def _emit(payload: dict) -> None:
@@ -58,12 +68,59 @@ def _episode_summary(directory: Path) -> dict:
         "resume_count": status.get("resume_count", 0),
         "generation_mode": status.get("generation_mode", "adaptation"),
         "narration_voice": status.get("narration_voice"),
+        "key_source": status.get("key_source"),
         "updated_at": status.get("updated_at"),
         "mp3": (
             str(completed_mp3)
             if status.get("state") == "concluido" and completed_mp3.is_file()
             else None
         ),
+    }
+
+
+def _sanitize_generation_log(text: str) -> str:
+    for pattern in _LOG_SECRET_PATTERNS:
+        text = pattern.sub("[SEGREDO PROTEGIDO]", text)
+    return text
+
+
+def _cmd_generation_log(item_id: str) -> dict:
+    """Retorna somente a cauda segura do log, sem carregar um arquivo ilimitado."""
+    directory = _episode_dir(item_id)
+    path = directory / "generation.log"
+    status = GenerationTracker.load(directory) or {}
+    pid = status.get("pid")
+    worker_alive = False
+    if status.get("state") == "rodando" and isinstance(pid, int):
+        from .runtime.process import pid_alive
+
+        worker_alive = pid_alive(pid)
+    if not path.is_file():
+        return {
+            "exists": False,
+            "text": "",
+            "truncated": False,
+            "updated_at": None,
+            "worker_alive": worker_alive,
+        }
+
+    size = path.stat().st_size
+    offset = max(0, size - _MAX_GENERATION_LOG_BYTES)
+    with path.open("rb") as source:
+        source.seek(offset)
+        raw = source.read(_MAX_GENERATION_LOG_BYTES)
+    if offset and b"\n" in raw:
+        raw = raw.partition(b"\n")[2]
+    decoded = raw.decode("utf-8", errors="replace")
+    lines = decoded.splitlines()
+    line_truncated = len(lines) > _MAX_GENERATION_LOG_LINES
+    text = "\n".join(lines[-_MAX_GENERATION_LOG_LINES:])
+    return {
+        "exists": True,
+        "text": _sanitize_generation_log(text),
+        "truncated": bool(offset or line_truncated),
+        "updated_at": path.stat().st_mtime,
+        "worker_alive": worker_alive,
     }
 
 
@@ -162,6 +219,7 @@ def _cmd_generate(
         resume=not force,
         generation_mode=generation_mode,
         narration_voice=narration_voice,
+        key_source=api_key_source(),
     )
     child_args = [
         sys.executable,
@@ -192,6 +250,8 @@ def _cmd_generate(
                     "PYTHONPATH": "src",
                     "PYTHONUTF8": "1",
                     "PYTHONIOENCODING": "utf-8",
+                    # Sem buffer para o painel de log acompanhar cada etapa em tempo real.
+                    "PYTHONUNBUFFERED": "1",
                 },
                 log_handle=log,
             )
@@ -494,6 +554,8 @@ def main() -> None:
             result = _cmd_run_generation(rest[0], rest[1], force, mode, voice)
         elif command == "status":
             result = _cmd_status(rest[0] if rest else None)
+        elif command == "generation-log" and rest:
+            result = _cmd_generation_log(rest[0])
         elif command == "abort" and rest:
             result = _cmd_abort(rest[0])
         elif command == "tts-catalog":

@@ -86,6 +86,37 @@ class CatalogFallbackTest(unittest.TestCase):
         self.assertIn("Kore", result["gemini_voices"])
         self.assertEqual(result["catalog_error"], "sem chave")
 
+
+class GenerationLogTest(unittest.TestCase):
+    def test_retorna_cauda_limitada_sanitizada_e_atividade_do_worker(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            directory = Path(tmp)
+            bridge.GenerationTracker(directory, "livro").stage("tts", total=12, current=4)
+            log = ("linha antiga\n" * 8_000) + "chave sk-or-v1-segredomuitolongo\nTrecho 5/12\n"
+            (directory / "generation.log").write_text(log, encoding="utf-8")
+            with (
+                patch("audiofy.bridge._episode_dir", return_value=directory),
+                patch("audiofy.runtime.process.pid_alive", return_value=True),
+            ):
+                result = bridge._cmd_generation_log("livro")
+
+        self.assertTrue(result["exists"])
+        self.assertTrue(result["worker_alive"])
+        self.assertTrue(result["truncated"])
+        self.assertIn("Trecho 5/12", result["text"])
+        self.assertNotIn("segredomuitolongo", result["text"])
+        self.assertIn("[SEGREDO PROTEGIDO]", result["text"])
+        self.assertLessEqual(len(result["text"].encode("utf-8")), 64 * 1024)
+
+    def test_log_ausente_retorna_estado_previsivel(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            with patch("audiofy.bridge._episode_dir", return_value=Path(tmp)):
+                result = bridge._cmd_generation_log("sem-log")
+
+        self.assertFalse(result["exists"])
+        self.assertEqual(result["text"], "")
+        self.assertFalse(result["worker_alive"])
+
     @patch("audiofy.providers.openrouter.list_tts_models")
     @patch("audiofy.catalog.load_models")
     def test_catalogo_separa_texto_e_fala(self, load_models, list_tts_models):
@@ -224,7 +255,8 @@ class ForcedGenerationTest(unittest.TestCase):
         self.assertEqual(generate_episode.call_args.kwargs["generation_mode"], "verbatim")
         self.assertEqual(result, {"mp3": "livro.mp3"})
 
-    def test_generate_inclui_force_no_subprocesso(self):
+    @patch("audiofy.bridge.api_key_source", return_value="ambiente")
+    def test_generate_inclui_force_no_subprocesso(self, _key_source):
         with tempfile.TemporaryDirectory() as tmp:
             directory = Path(tmp) / "episode"
             settings = Mock()
@@ -240,6 +272,7 @@ class ForcedGenerationTest(unittest.TestCase):
         self.assertIn("--force", popen.call_args.args[0])
         self.assertEqual(status["state"], "rodando")
         self.assertEqual(status["stage"], "iniciando")
+        self.assertEqual(status["key_source"], "ambiente")
 
     def test_generate_repassa_modo_e_voz_ao_subprocesso(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -294,6 +327,7 @@ class ForcedGenerationTest(unittest.TestCase):
             env = popen.call_args.kwargs["env"]
         self.assertEqual(env["PYTHONUTF8"], "1")
         self.assertEqual(env["PYTHONIOENCODING"], "utf-8")
+        self.assertEqual(env["PYTHONUNBUFFERED"], "1")
 
     def test_rodando_orfao_nao_bloqueia_nova_geracao(self):
         """Worker morto com status 'rodando' era o que travava toda regeneração."""

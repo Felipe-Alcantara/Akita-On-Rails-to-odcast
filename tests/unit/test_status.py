@@ -113,6 +113,19 @@ class GenerationTrackerTest(unittest.TestCase):
         self.tracker.advance(3)
         self.assertIsNone(self._read()["retry"])
 
+    def test_origem_da_chave_e_persistida_e_atualizada_sem_segredo(self):
+        tracker = GenerationTracker(
+            self.directory,
+            episode_id="ep-teste",
+            key_source="ambiente",
+        )
+        self.assertEqual(self._read()["key_source"], "ambiente")
+
+        tracker.using_key("trabalho")
+
+        self.assertEqual(self._read()["key_source"], "trabalho")
+        self.assertNotIn("sk-or-", self._read()["key_source"])
+
     def test_execucao_forcada_inicia_novo_custo(self):
         self.tracker.stage("tts", total=2)
         self.tracker.add_cost(0.35)
@@ -130,7 +143,7 @@ class GenerationTrackerTest(unittest.TestCase):
         self.tracker.add_cost(0.85)
         self.tracker.finish("falhou", error="erro anterior")
 
-        GenerationTracker.mark_starting(self.directory, "ep-teste")
+        GenerationTracker.mark_starting(self.directory, "ep-teste", key_source="ambiente")
         data = self._read()
 
         self.assertEqual(data["state"], "rodando")
@@ -138,6 +151,7 @@ class GenerationTrackerTest(unittest.TestCase):
         self.assertEqual(data["progress"], {"current": 66, "total": 92})
         self.assertEqual(data["cost_usd"], 0.85)
         self.assertIsNone(data["last_error"])
+        self.assertEqual(data["key_source"], "ambiente")
 
     def test_abort_pedido_durante_inicializacao_chega_ao_worker(self):
         self.tracker.finish("falhou")

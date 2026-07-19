@@ -128,6 +128,15 @@
           <p id="progress-label" class="muted"></p>
           <p id="cost-label" class="cost"></p>
         </div>
+        <details id="generation-log-panel" class="generation-log-panel hidden" open>
+          <summary>
+            <span>&#x1F9FE; Log da geração</span>
+            <span id="generation-log-health" class="small" aria-live="polite"></span>
+          </summary>
+          <p id="generation-log-meta" class="muted small"></p>
+          <pre id="generation-log" tabindex="0" role="log"
+            aria-label="Últimas linhas do log da geração"></pre>
+        </details>
       </div>
     </section>
   </section>

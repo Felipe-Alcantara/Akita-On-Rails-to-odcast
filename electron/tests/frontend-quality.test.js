@@ -67,3 +67,18 @@ test("abort diferencia encerramento imediato do fallback por checkpoint", () => 
   assert.match(renderer, /Geração abortada agora/);
   assert.match(renderer, /aguardando o primeiro checkpoint disponível/);
 });
+
+test("conteúdo mostra log vivo e atividade do worker sem HTML dinâmico", () => {
+  const html = readRendererFile("index.html");
+  const renderer = readRendererFile("renderer.js");
+  const styles = readRendererFile("styles.css");
+
+  assert.match(html, /id="generation-log-panel"/);
+  assert.match(html, /id="generation-log"[^>]*role="log"/s);
+  assert.match(renderer, /\["generation-log", itemId\]/);
+  assert.match(renderer, /result\.worker_alive/);
+  assert.match(renderer, /output\.textContent/);
+  assert.match(renderer, /chave efetiva:/);
+  assert.match(renderer, /configChip\("Chave efetiva"/);
+  assert.match(styles, /#generation-log\s*\{[^}]*max-height:\s*230px/s);
+});

@@ -18,7 +18,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 
-from .config import EPISODES_DIR, Settings, api_key_candidates
+from .config import EPISODES_DIR, Settings, api_key_candidates, api_key_source
 from .estimates import EpisodeMetrics, estimate_tts_cost
 from .narration import (
     PROSODY_SYSTEM,
@@ -78,6 +78,11 @@ def generate_episode(
         resume=not force,
         generation_mode=generation_mode,
         narration_voice=narration_voice,
+        key_source=(
+            previous.get("key_source")
+            if previous and previous.get("stage") == "iniciando"
+            else api_key_source()
+        ),
     )
     try:
         result = _run(settings, item, directory, tracker, force, generation_mode)
@@ -381,9 +386,15 @@ def _synthesize_with_retry(
         base_delay_seconds=settings.tts_retry_base_seconds,
         max_delay_seconds=settings.tts_retry_max_seconds,
     )
-    candidates = api_key_candidates(settings) or [("chave atual", settings)]
+    current_label = tracker.key_source or "chave atual"
+    candidates = api_key_candidates(settings, current_label=current_label) or [
+        (current_label, settings)
+    ]
     last_error: openrouter.OpenRouterError | None = None
     for key_index, (key_label, candidate) in enumerate(candidates):
+        # Publica a chave antes da chamada: o painel precisa mostrar qual limite
+        # está sendo consumido inclusive enquanto a requisição estiver pendente.
+        tracker.using_key(key_label)
         for attempt in range(1, policy.max_attempts + 1):
             tracker.checkpoint()
             try:

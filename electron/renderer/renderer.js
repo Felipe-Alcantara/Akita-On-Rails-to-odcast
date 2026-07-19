@@ -49,6 +49,7 @@ let selectedItem = null;
 let pollTimer = null;
 let sourcesByKey = new Map();
 let generationRequestPending = false;
+let generationLogRequest = 0;
 const automaticResumeAttempts = new Set();
 const AUTOMATIC_RESUME_RECHECK_MS = 60 * 1000;
 
@@ -511,7 +512,8 @@ async function refreshStatus() {
           ? ` · retomando fala ${e.retry.segment} (${e.retry.attempt}/${e.retry.max_attempts})`
           : "";
         const accuracy = e.cost_exact ? "" : " aprox.";
-        return `${e.episode_id} (US$ ${e.cost_usd.toFixed(3)}${accuracy}${retry})`;
+        const key = e.key_source ? ` · chave ${e.key_source}` : "";
+        return `${e.episode_id} (US$ ${e.cost_usd.toFixed(3)}${accuracy}${key}${retry})`;
       }).join(", ");
     banner.classList.remove("hidden");
   } else {
@@ -531,7 +533,9 @@ function renderSelectedStatus(episodes) {
   const done = status && status.mp3;
   const feedback = generationFeedback(status);
 
-  $("btn-abort").classList.toggle("hidden", !running || Boolean(status.abort_requested_at));
+  $("btn-abort").classList.toggle(
+    "hidden", !running || Boolean(status && status.abort_requested_at)
+  );
   $("btn-generate").dataset.running = String(Boolean(running));
   updateGenerateButton();
   $("btn-play").classList.toggle("hidden", !done);
@@ -548,7 +552,49 @@ function renderSelectedStatus(episodes) {
   $("btn-play").onclick = () => status && status.mp3
     && playInApp(status.mp3, selectedItem.title);
   $("btn-folder").onclick = () => status && openProjectPath(status.dir);
+  void refreshGenerationLog(status);
   void maybeAutoResume(status);
+}
+
+function elapsedLabel(timestamp) {
+  if (!timestamp) return "sem saída ainda";
+  const seconds = Math.max(0, Math.round(Date.now() / 1000 - Number(timestamp)));
+  if (seconds < 5) return "agora";
+  if (seconds < 60) return `há ${seconds}s`;
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) return `há ${minutes}min`;
+  return `há ${Math.floor(minutes / 60)}h`;
+}
+
+async function refreshGenerationLog(status) {
+  const panel = $("generation-log-panel");
+  if (!selectedItem || !status) {
+    generationLogRequest += 1;
+    panel.classList.add("hidden");
+    $("generation-log").textContent = "";
+    return;
+  }
+  const itemId = selectedItem.item_id;
+  const request = ++generationLogRequest;
+  const result = await bridge(["generation-log", itemId]);
+  if (request !== generationLogRequest || !selectedItem || selectedItem.item_id !== itemId) return;
+
+  panel.classList.remove("hidden");
+  const health = $("generation-log-health");
+  health.className = result.worker_alive ? "small state-rodando" : "small muted";
+  health.textContent = result.worker_alive ? "● worker ativo" : `● ${status.state}`;
+  const suffix = result.truncated ? " · exibindo somente as últimas linhas" : "";
+  const key = status.key_source ? ` · chave efetiva: ${status.key_source}` : "";
+  $("generation-log-meta").textContent = result.ok
+    ? `Última saída ${elapsedLabel(result.updated_at)}${key}${suffix}`
+    : "Não foi possível consultar o log.";
+
+  const output = $("generation-log");
+  const nearBottom = output.scrollHeight - output.scrollTop - output.clientHeight < 48;
+  output.textContent = result.ok && result.exists
+    ? (result.text || "Aguardando a primeira mensagem do worker…")
+    : (result.error || "O worker ainda não criou o arquivo de log.");
+  if (panel.open && nearBottom) output.scrollTop = output.scrollHeight;
 }
 
 function renderEpisodes(episodes) {
@@ -568,7 +614,7 @@ function renderEpisodes(episodes) {
     row.appendChild(makeElement("span", "episode-title", episode.episode_id));
     row.appendChild(makeElement("span", "muted", `${episode.state}${progress}${retry}${cost}`));
     if (episode.state === "falhou" && episode.last_error) {
-      row.title = friendlyGenerationError(episode.last_error);
+      row.title = friendlyGenerationError(episode.last_error, episode.key_source);
     }
     if (episode.state === "rodando" && !episode.abort_requested_at) {
       const abortButton = document.createElement("button");
@@ -631,6 +677,8 @@ function renderActiveConfig(info) {
   }
 
   strip.appendChild(configChip("TTS", `${info.tts_model}${info.has_key ? "" : " · sem chave"}`,
+    info.has_key ? "" : "warn"));
+  strip.appendChild(configChip("Chave efetiva", info.key_source || "nenhuma",
     info.has_key ? "" : "warn"));
 
   const voiceSelect = $("narration-voice");

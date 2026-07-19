@@ -33,6 +33,7 @@ class GenerationTracker:
         resume: bool = True,
         generation_mode: str = "adaptation",
         narration_voice: str | None = None,
+        key_source: str | None = None,
     ) -> None:
         self.directory = directory
         self.directory.mkdir(parents=True, exist_ok=True)
@@ -57,6 +58,7 @@ class GenerationTracker:
             "abort_requested_at": launch_status.get("abort_requested_at"),
             "generation_mode": generation_mode,
             "narration_voice": narration_voice,
+            "key_source": key_source if key_source is not None else launch_status.get("key_source"),
         }
         # O launcher já limpou aborts antigos. Um abort pedido enquanto o worker
         # iniciava precisa sobreviver até o primeiro checkpoint do processo filho.
@@ -105,6 +107,7 @@ class GenerationTracker:
         resume: bool = True,
         generation_mode: str = "adaptation",
         narration_voice: str | None = None,
+        key_source: str | None = None,
     ) -> None:
         """Publica o início antes de lançar o worker, fechando a janela sem feedback."""
         directory.mkdir(parents=True, exist_ok=True)
@@ -135,6 +138,7 @@ class GenerationTracker:
             "abort_requested_at": None,
             "generation_mode": generation_mode,
             "narration_voice": narration_voice,
+            "key_source": key_source,
         }
         (directory / cls.ABORT_FILE).unlink(missing_ok=True)
         cls._write(directory, data)
@@ -201,6 +205,12 @@ class GenerationTracker:
             self._data["cost_exact"] = False
             changed = True
         if changed:
+            self._flush()
+
+    def using_key(self, source: str) -> None:
+        """Registra somente o rótulo seguro da chave efetiva, nunca seu valor."""
+        if source and self._data.get("key_source") != source:
+            self._data["key_source"] = str(source)[:80]
             self._flush()
 
     def finish(self, state: str, error: str | None = None) -> None:
@@ -276,6 +286,10 @@ class GenerationTracker:
     @property
     def cost_exact(self) -> bool:
         return bool(self._data["cost_exact"])
+
+    @property
+    def key_source(self) -> str | None:
+        return self._data.get("key_source")
 
     @staticmethod
     def load(directory: Path) -> dict | None:

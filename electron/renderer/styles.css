@@ -342,6 +342,38 @@ ul { list-style: none; }
 
 .cost { margin-top: 7px; color: var(--ok); font-size: 18px; font-weight: 700; }
 
+.generation-log-panel {
+  margin-top: 12px;
+  padding: 11px 12px;
+  background: rgba(9, 9, 11, 0.78);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+}
+.generation-log-panel summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #e4e4e7;
+  cursor: pointer;
+  font-weight: 650;
+}
+.generation-log-panel summary::marker { color: var(--accent-soft); }
+#generation-log-meta { margin: 8px 0 6px; }
+#generation-log {
+  max-height: 230px;
+  overflow: auto;
+  margin: 0;
+  padding: 10px;
+  color: #d4d4d8;
+  background: #050507;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  font: 12px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
 /* Chat */
 .chat-panel { display: flex; flex-direction: column; }
 .chat-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }

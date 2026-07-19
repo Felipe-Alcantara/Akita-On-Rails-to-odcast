@@ -5,7 +5,7 @@ function isKeyLimitFailure(error) {
   return /Key limit exceeded|monthly limit/i.test(String(error || ""));
 }
 
-function friendlyGenerationError(error) {
+function friendlyGenerationError(error, keySource = "") {
   const detail = String(error || "");
   if (isKeyLimitFailure(detail)) {
     return "A chave usada naquela execução atingiu o limite mensal. A configuração atual " +
@@ -15,7 +15,9 @@ function friendlyGenerationError(error) {
     return "A chave do OpenRouter não foi aceita. Confira a chave configurada.";
   }
   if (/HTTP 402|insufficient.*credit|credit.*insufficient/i.test(detail)) {
-    return "A conta do OpenRouter está sem créditos suficientes.";
+    const source = keySource ? ` A geração usou a chave "${keySource}".` : "";
+    return "O OpenRouter recusou a chamada por saldo ou limite insuficiente." + source +
+      " Confira o saldo global e o limite da chave efetivamente usada.";
   }
   const sanitized = detail
     .replace(/https?:\/\/\S+/g, "")
@@ -60,7 +62,7 @@ function generationFeedback(status) {
   if (status.state === "falhou") {
     const stage = status.stage ? ` na etapa ${status.stage}` : "";
     const checkpoint = total ? ` após ${current}/${total}` : "";
-    const reason = friendlyGenerationError(status.last_error);
+    const reason = friendlyGenerationError(status.last_error, status.key_source);
     return {
       visible: true,
       tone: "error",

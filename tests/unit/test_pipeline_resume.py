@@ -221,6 +221,7 @@ class ResumableSynthesisTest(unittest.TestCase):
         self.assertEqual(text_to_speech.call_args_list[1].args[0].api_key, "sk-or-chave-disponivel")
         manifest = json.loads((self.directory / "segments.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["segments"]["001_ana.wav"]["key_label"], "disponivel")
+        self.assertEqual(GenerationTracker.load(self.directory)["key_source"], "disponivel")
 
     def test_abort_interrompe_espera_antes_do_proximo_retry(self):
         self.tracker.stage("tts", total=2, current=1)

@@ -127,7 +127,9 @@ def api_key_source() -> str | None:
     return environment_key_source() or store.active_name()
 
 
-def api_key_candidates(settings: Settings) -> list[tuple[str, Settings]]:
+def api_key_candidates(
+    settings: Settings, current_label: str = "chave atual"
+) -> list[tuple[str, Settings]]:
     """Retorna a configuração atual e alternativas sem expor os segredos.
 
     A alternativa do `.env` é importante quando o processo pai herdou uma chave
@@ -149,7 +151,7 @@ def api_key_candidates(settings: Settings) -> list[tuple[str, Settings]]:
                 candidate.api_key = key
         candidates.append((label, candidate))
 
-    add("chave atual", getattr(settings, "api_key", None))
+    add(current_label, getattr(settings, "api_key", None))
     add(".env", _dotenv_values(PROJECT_ROOT / ".env").get("OPENROUTER_API_KEY"))
     try:
         for named in key_store().list_keys():

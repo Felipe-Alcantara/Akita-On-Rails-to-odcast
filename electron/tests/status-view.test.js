@@ -22,6 +22,18 @@ test("traduz limite mensal da chave sem expor URL interna do provedor", () => {
   assert.doesNotMatch(message, /identificador/);
 });
 
+test("erro 402 identifica a chave efetiva e diferencia saldo de limite", () => {
+  const message = friendlyGenerationError(
+    "HTTP 402: Insufficient credits. Add more using https://openrouter.ai/settings/credits",
+    "ambiente"
+  );
+
+  assert.match(message, /saldo ou limite insuficiente/i);
+  assert.match(message, /chave "ambiente"/i);
+  assert.match(message, /saldo global/i);
+  assert.doesNotMatch(message, /https?:\/\//);
+});
+
 test("falha rápida permanece visível com checkpoint e ação recomendada", () => {
   const feedback = generationFeedback({
     state: "falhou",

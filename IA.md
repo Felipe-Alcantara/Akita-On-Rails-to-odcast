@@ -859,3 +859,42 @@ checkpoint.
 janela de corrida muito curta entre essa leitura e o encerramento. O processo atual/grupo do
 comando são explicitamente protegidos. Uma chamada remota já aceita pode gerar cobrança que o
 processo encerrado não consegue consultar depois.
+
+---
+
+## 2026-07-18 — Log vivo e saúde do worker no Electron
+
+**Problema observado:** o cartão mostrava apenas o último checkpoint concluído. Durante uma
+chamada TTS longa, `3/12` podia significar tanto “processando o quarto trecho” quanto “travou”.
+Na execução real investigada, o status ainda marcava quatro concluídos enquanto
+`generation.log` já registrava o início do quinto e o PID permanecia vivo; depois a geração
+continuou avançando até o provedor responder `HTTP 402` por créditos insuficientes, após oito
+trechos concluídos.
+
+**Decisão:** a bridge ganhou `generation-log <item-id>`, que lê somente os 64 KiB finais e devolve
+no máximo 160 linhas, mtime e saúde do PID. Padrões de chave OpenRouter/Google, header Bearer e
+atribuição de `OPENROUTER_API_KEY` são mascarados antes do IPC. Novos workers usam
+`PYTHONUNBUFFERED=1`, de modo que cada mensagem chegue ao arquivo imediatamente.
+
+**Interface:** o detalhe do conteúdo ganhou um painel aberto por padrão com cauda rolável,
+indicador **worker ativo**, idade da última saída e aviso quando a cauda foi truncada. A consulta
+acompanha o polling de dois segundos já usado pelo status; `aria-live` fica apenas no resumo de
+saúde para não reler todo o log a cada atualização.
+
+**Diagnóstico de chave:** as telas do OpenRouter mostravam saldo positivo na conta e na chave
+nomeada, embora a resposta fosse `402`. O log real esclareceu a sequência: a chave do ambiente
+atingiu seu limite, o fallback tentou a chave nomeada e foi ela que recebeu o `402`. Segundo o
+contrato do provedor, `402` significa insuficiência na conta ou na chave, mas a resposta não informa
+qual das duas; a interface não deve inventar uma causa mais específica.
+O status passa a persistir somente o rótulo da chave em tentativa e o atualiza antes de cada
+fallback. Faixa global, banner e log o exibem, e o erro orienta verificar saldo da conta e limite
+da chave. O diagnóstico não troca a configuração e a falha `402` não é retomada automaticamente.
+
+**Validação:** `scripts/check_quality.py` aprovou lint/formatação, 219 testes Python com 72% de
+cobertura, 24 testes Electron, auditorias de dependências Python/Node, whitespace, JSON e links.
+O painel, o rótulo da chave efetiva e a mensagem de falha foram inspecionados em 600 px e 380 px
+sobre os artefatos da geração real, sem iniciar chamadas adicionais.
+
+**Risco que sobrou:** estar vivo não prova que um provedor remoto responderá; por isso o painel
+combina saúde do processo com idade da última linha. O abort ativo continua sendo a saída para
+uma chamada que permaneça tempo demais sem progresso.
