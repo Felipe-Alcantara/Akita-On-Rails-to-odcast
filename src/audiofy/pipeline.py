@@ -128,6 +128,115 @@ def generate_episode(
         raise
 
 
+# ── Reparo seletivo de segmentos com silêncio problemático ────────────────
+
+
+def repair_episode(
+    settings: Settings,
+    item: ContentItem,
+    source_key: str = "conteudo",
+    generation_mode: str = "adaptation",
+    narration_voice: str | None = None,
+    background_music: Path | None = None,
+    background_volume: float = 0.08,
+) -> Path:
+    """Regenera somente os segmentos com silêncio problemático e remonta o MP3.
+
+    Usa o cache por fingerprint: segmentos bons permanecem intactos, apenas os WAVs
+    identificados pela auditoria como warning/critical são deletados e re-sintetizados.
+    """
+    from .audio_audit import read_audio_audit
+
+    directory = episode_dir(item.item_id)
+    audit = read_audio_audit(directory)
+    if not audit:
+        raise FileNotFoundError(
+            "Não há auditoria de áudio para este episódio. Gere-o primeiro."
+        )
+    bad_files = {
+        seg["file"]
+        for seg in audit.get("segments", [])
+        if seg.get("severity") in ("critical", "warning")
+    }
+    if not bad_files:
+        from .artifacts import resolve_final_audio
+
+        final = resolve_final_audio(directory)
+        if final:
+            return final
+        raise FileNotFoundError("Nenhum segmento com problema e nenhum áudio final encontrado.")
+
+    # Carregar turnos do roteiro salvo (funciona para adaptation e verbatim).
+    from .episode_verification import _turns
+
+    _detected_mode, turns = _turns(directory)
+    if not generation_mode:
+        generation_mode = _detected_mode
+
+    # Deletar WAVs problemáticos para que _synthesize_turns os regenere.
+    segments_dir = directory / "segments"
+    for filename in bad_files:
+        target = segments_dir / filename
+        target.unlink(missing_ok=True)
+
+    tracker = GenerationTracker(
+        directory,
+        episode_id=item.item_id,
+        resume=True,
+        generation_mode=generation_mode,
+        narration_voice=narration_voice,
+        key_source=api_key_source(),
+        background_music=(background_music.name if background_music else None),
+        background_volume=background_volume if background_music else None,
+    )
+    try:
+        print(f"🔧 Reparando {len(bad_files)} segmento(s) com silêncio problemático…")
+        tracker.stage("reparacao", total=len(turns), current=0)
+
+        segments = _synthesize_turns(
+            settings,
+            directory,
+            turns,
+            tracker,
+            trust_legacy_segments=False,
+            source_key=source_key,
+            item_id=item.item_id,
+            generation_mode=generation_mode,
+        )
+
+        tracker.stage("auditoria_audio", total=len(segments), current=0)
+        audio_audit_result = audit_segments(directory, segments, on_progress=tracker.advance)
+        summary = audio_audit_result["summary"]
+        if summary["critical"]:
+            print(
+                f"⚠ Após reparo ainda há {summary['critical']} chunk(s) com silêncio "
+                "crítico; a voz pode ter limitações nesse trecho.",
+                flush=True,
+            )
+
+        tracker.stage("montagem")
+        tracker.checkpoint()
+        final_path = _assemble(
+            directory,
+            segments,
+            item,
+            background_music,
+            background_volume,
+            background_music_name=(background_music.name if background_music else None),
+            source_key=source_key,
+            generation_mode=generation_mode,
+        )
+        print(f"\n✔ Episódio reparado: {final_path}")
+        print(f"💰 Custo total acumulado: US$ {tracker.cost_usd:.4f}")
+        tracker.finish("concluido")
+        return final_path
+    except Exception as error:
+        status = GenerationTracker.load(directory) or {}
+        if status.get("state") == "rodando":
+            tracker.finish("falhou", error=str(error))
+        raise
+
+
 def _run(
     settings: Settings,
     item: ContentItem,

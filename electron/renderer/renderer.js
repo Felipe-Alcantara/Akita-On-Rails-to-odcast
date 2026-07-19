@@ -65,6 +65,9 @@ async function openChunkReview(itemId, title) {
     ? `${summary.segments} chunks · ${summary.critical} crítico(s) · ` +
       `${summary.warnings} aviso(s)`
     : "Ainda não há auditoria automática para este episódio.";
+  $("chunk-audit-criteria").textContent =
+    "Critérios: ok (< 2,5 s) · aviso (\u2265 2,5 s) · " +
+    "cr\u00edtico (\u2265 5 s ou \u2265 35% do chunk em sil\u00eancio)";
   const list = $("chunk-list");
   list.replaceChildren();
   for (const [index, chunk] of result.chunks.entries()) {
@@ -626,6 +629,24 @@ $("btn-abort").onclick = async () => {
   refreshStatus();
 };
 
+$("btn-repair").onclick = async () => {
+  if (!selectedItem) return;
+  if (!confirm(
+    "Reparar epis\u00f3dio? Apenas os segmentos com sil\u00eancio problem\u00e1tico " +
+    "ser\u00e3o regenerados.\n\nIsso consome cr\u00e9ditos da API."
+  )) return;
+  showGenerationRequest("Solicitando reparo\u2026", "active");
+  const result = await bridge(["repair", selectedItem.source, selectedItem.item_id]);
+  if (!result.ok || !result.started) {
+    showGenerationRequest(result.reason || "Erro ao iniciar reparo", "error");
+    return;
+  }
+  showGenerationRequest(
+    `Reparando ${result.segments_to_repair} segmento(s) com problema\u2026`, "active"
+  );
+  refreshStatus();
+};
+
 async function refreshStatus() {
   const overview = await bridge(["status"]);
   if (!overview.ok) return;
@@ -667,15 +688,39 @@ function renderSelectedStatus(episodes) {
   $("btn-play").classList.toggle("hidden", !done);
   $("btn-chunks").classList.toggle("hidden", !status);
   $("btn-folder").classList.toggle("hidden", !status);
-  const box = $("progress-box");
-  box.classList.toggle("hidden", !feedback.visible);
-  box.classList.remove("active", "error", "warning");
-  if (feedback.tone) box.classList.add(feedback.tone);
 
-  $("progress-fill").style.width = `${feedback.percent}%`;
-  $("progress-track").setAttribute("aria-valuenow", String(feedback.percent));
-  $("progress-label").textContent = feedback.label;
-  $("cost-label").textContent = feedback.cost;
+  // Botão Reparar: visível quando concluído com problemas de auditoria e não rodando.
+  const auditProblems = status && status.audio_audit &&
+    (status.audio_audit.critical > 0 || status.audio_audit.warnings > 0);
+  $("btn-repair").classList.toggle("hidden", !auditProblems || running);
+
+  const box = $("progress-box");
+  // Mostra warning pós-geração quando há problemas de auditoria.
+  const showAuditWarning = !running && auditProblems && status.state === "concluido";
+  const showBox = feedback.visible || showAuditWarning;
+  box.classList.toggle("hidden", !showBox);
+  box.classList.remove("active", "error", "warning");
+  if (showAuditWarning && !feedback.visible) {
+    box.classList.add("warning");
+    const total = status.audio_audit.critical + status.audio_audit.warnings;
+    $("progress-fill").style.width = "100%";
+    $("progress-track").setAttribute("aria-valuenow", "100");
+    $("progress-label").textContent = "";
+    $("progress-label").appendChild(makeElement("span", "spinner"));
+    $("progress-label").appendChild(document.createTextNode(
+      ` Auditoria detectou ${total} segmento(s) com ` +
+      `sil\u00eancio problem\u00e1tico \u2014 use \ud83d\udd27 Reparar`
+    ));
+    $("cost-label").textContent = "";
+  } else if (feedback.visible) {
+    if (feedback.tone) box.classList.add(feedback.tone);
+    $("progress-fill").style.width = `${feedback.percent}%`;
+    $("progress-track").setAttribute("aria-valuenow", String(feedback.percent));
+    $("progress-label").textContent = "";
+    if (running) $("progress-label").appendChild(makeElement("span", "spinner"));
+    $("progress-label").appendChild(document.createTextNode(feedback.label));
+    $("cost-label").textContent = feedback.cost;
+  }
   $("btn-play").onclick = () => status && status.mp3
     && playInApp(status.mp3, selectedItem.title);
   $("btn-chunks").onclick = () => status

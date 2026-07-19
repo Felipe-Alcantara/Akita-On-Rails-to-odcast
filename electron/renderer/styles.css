@@ -390,6 +390,31 @@ ul { list-style: none; }
   transition: width 400ms ease;
 }
 
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.generation-status.active #progress-fill {
+  background: linear-gradient(90deg, #7e22ce, #c084fc, #7e22ce);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
 .cost { margin-top: 7px; color: var(--ok); font-size: 18px; font-weight: 700; }
 
 .generation-log-panel {

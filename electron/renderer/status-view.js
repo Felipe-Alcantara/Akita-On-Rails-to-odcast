@@ -51,11 +51,16 @@ function generationFeedback(status) {
         `${status.retry.attempt}/${status.retry.max_attempts}`
       : "";
     const resuming = Number(status.resume_count) > 0;
-    const label = status.stage === "iniciando"
-      ? (resuming
+    let label;
+    if (status.stage === "iniciando") {
+      label = resuming
         ? `Iniciando a retomada — checkpoint ${count}.`
-        : `Iniciando a geração — ${count}.`)
-      : `Etapa: ${status.stage || "iniciando"} — ${count}${retry}`;
+        : `Iniciando a geração — ${count}.`;
+    } else if (status.stage === "reparacao") {
+      label = `Reparando ${count} — regenerando segmentos com problema${retry}`;
+    } else {
+      label = `Etapa: ${status.stage || "iniciando"} — ${count}${retry}`;
+    }
     return { visible: true, tone: "active", percent, label, cost };
   }
 

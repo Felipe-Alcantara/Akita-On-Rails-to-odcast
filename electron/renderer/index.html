@@ -131,6 +131,8 @@
           <button id="btn-abort" class="danger hidden">🛑 Abortar agora</button>
           <button id="btn-play" class="hidden">▶️ Ouvir</button>
           <button id="btn-chunks" class="hidden">🧪 Revisar chunks</button>
+          <button id="btn-repair" class="ghost hidden"
+            title="Regenerar apenas segmentos com silêncio problemático">🔧 Reparar</button>
           <button id="btn-folder" class="hidden">📂 Pasta</button>
         </div>
         <label class="check-option" id="force-option"
@@ -163,6 +165,7 @@
       <div>
         <h2 id="chunk-modal-title">Revisão dos chunks</h2>
         <p id="chunk-audit-summary" class="muted small"></p>
+        <p id="chunk-audit-criteria" class="muted small"></p>
       </div>
       <button id="btn-close-chunks" class="ghost" aria-label="Fechar revisão">✕</button>
     </div>

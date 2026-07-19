@@ -11,6 +11,8 @@
         [--mode=adaptation|verbatim] [--voice=<voz>]
         [--background-music=<arquivo>] [--background-volume=0.01..0.25]
     python3 -m audiofy.bridge run-generation <fonte> <item-id> [opções]  # uso interno
+    python3 -m audiofy.bridge repair <fonte> <item-id>
+    python3 -m audiofy.bridge run-repair <fonte> <item-id> [opções]     # uso interno
     python3 -m audiofy.bridge status [<item-id>]
     python3 -m audiofy.bridge generation-log <item-id>
     python3 -m audiofy.bridge audio-chunks <item-id>
@@ -517,6 +519,131 @@ def _cmd_run_generation(
     return {"mp3": str(final)}
 
 
+def _cmd_repair(source_key: str, item_id: str) -> dict:
+    """Regenera somente segmentos com silêncio problemático (lançador de worker)."""
+    from .audio_audit import read_audio_audit
+
+    directory = _episode_dir(item_id)
+    status = GenerationTracker.reconcile(directory)
+    if status and status.get("state") == "rodando":
+        return {"started": False, "reason": "geração já em andamento"}
+
+    audit = read_audio_audit(directory)
+    if not audit:
+        return {"started": False, "reason": "nenhuma auditoria encontrada — gere o episódio primeiro"}
+    bad_count = sum(
+        1
+        for seg in audit.get("segments", [])
+        if seg.get("severity") in ("critical", "warning")
+    )
+    if bad_count == 0:
+        return {"started": False, "reason": "nenhum segmento com problema detectado"}
+
+    Settings().require_api_key()
+
+    generation_mode = (status or {}).get("generation_mode", "adaptation")
+    narration_voice = (status or {}).get("narration_voice")
+    background_cache = (status or {}).get("background_music_cache")
+    background_volume = (status or {}).get("background_volume") or 0.08
+
+    GenerationTracker.mark_starting(
+        directory,
+        item_id,
+        resume=True,
+        generation_mode=generation_mode,
+        narration_voice=narration_voice,
+        key_source=api_key_source(),
+        background_music=(status or {}).get("background_music"),
+        background_music_cache=background_cache,
+        background_volume=background_volume,
+    )
+
+    child_args = [
+        sys.executable,
+        "-m",
+        "audiofy.bridge",
+        "run-repair",
+        source_key,
+        item_id,
+    ]
+    if background_cache:
+        child_args.append(f"--background-music={background_cache}")
+        child_args.append(f"--background-volume={background_volume}")
+    from .runtime.process import launch_detached
+
+    try:
+        with (directory / "generation.log").open("a", encoding="utf-8") as log:
+            launch_detached(
+                child_args,
+                cwd=Path(__file__).resolve().parents[2],
+                env={
+                    **os.environ,
+                    "PYTHONPATH": "src",
+                    "PYTHONUTF8": "1",
+                    "PYTHONIOENCODING": "utf-8",
+                    "PYTHONUNBUFFERED": "1",
+                },
+                log_handle=log,
+            )
+    except OSError as error:
+        detail = f"Não foi possível iniciar o worker de reparo: {error}"
+        GenerationTracker.mark_launch_failed(directory, detail)
+        raise RuntimeError(detail) from error
+    return {
+        "started": True,
+        "segments_to_repair": bad_count,
+        "generation_mode": generation_mode,
+        "dir": str(directory),
+    }
+
+
+def _cmd_run_repair(
+    source_key: str,
+    item_id: str,
+    background_music: str | None = None,
+    background_volume: float = 0.08,
+) -> dict:
+    """Worker de reparo — roda em processo filho."""
+    from .pipeline import repair_episode
+
+    try:
+        settings = Settings()
+        previous = GenerationTracker.load(_episode_dir(item_id)) or {}
+        generation_mode = previous.get("generation_mode", "adaptation")
+        narration_voice = previous.get("narration_voice")
+        if generation_mode == "verbatim" and narration_voice:
+            from dataclasses import replace
+
+            from .presenters import Presenter
+            from .providers.openrouter import GEMINI_VOICES
+
+            settings = replace(
+                settings,
+                presenters=[
+                    Presenter("narrador", narration_voice, GEMINI_VOICES.get(narration_voice, ""))
+                ],
+            )
+        item = get_source(source_key).get_item(item_id)
+        final = repair_episode(
+            settings,
+            item,
+            source_key=source_key,
+            generation_mode=generation_mode,
+            narration_voice=narration_voice,
+            background_music=(
+                _cached_background_path(background_music) if background_music else None
+            ),
+            background_volume=_background_volume(background_volume),
+        )
+    except Exception as error:
+        directory = _episode_dir(item_id)
+        status = GenerationTracker.load(directory) or {}
+        if status.get("state") == "rodando":
+            GenerationTracker.mark_launch_failed(directory, str(error))
+        raise
+    return {"mp3": str(final)}
+
+
 def _cmd_status(item_id: str | None) -> dict:
     if item_id:
         return _episode_summary(_episode_dir(item_id))
@@ -767,6 +894,11 @@ def main() -> None:
             result = _cmd_status(rest[0] if rest else None)
         elif command == "generation-log" and rest:
             result = _cmd_generation_log(rest[0])
+        elif command == "repair" and len(rest) >= 2:
+            result = _cmd_repair(rest[0], rest[1])
+        elif command == "run-repair" and len(rest) >= 2:
+            _, _, _, music, volume = _generation_options(rest[2:])
+            result = _cmd_run_repair(rest[0], rest[1], music, volume)
         elif command == "audio-chunks" and rest:
             result = _cmd_audio_chunks(rest[0])
         elif command == "abort" and rest:
