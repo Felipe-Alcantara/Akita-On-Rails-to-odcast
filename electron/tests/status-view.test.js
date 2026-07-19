@@ -69,6 +69,21 @@ test("estado de inicialização aparece antes do primeiro segmento", () => {
   assert.doesNotMatch(feedback.cost, /aproximado/i);
 });
 
+test("pedido de abort pendente aparece como cancelamento em andamento", () => {
+  const feedback = generationFeedback({
+    state: "rodando",
+    stage: "tts",
+    abort_requested_at: Date.now() / 1000,
+    progress: { current: 1, total: 12 },
+    cost_usd: 0.1,
+    cost_exact: true,
+  });
+
+  assert.equal(feedback.visible, true);
+  assert.equal(feedback.tone, "warning");
+  assert.match(feedback.label, /cancelamento solicitado/i);
+});
+
 test("geração nova não é anunciada como retomada", () => {
   const fresh = generationFeedback({
     state: "rodando",

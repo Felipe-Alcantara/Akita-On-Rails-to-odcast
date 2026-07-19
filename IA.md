@@ -827,3 +827,35 @@ nenhuma chamada paga de planejamento ou voz foi disparada.
 **Risco que sobrou:** modelos TTS em preview podem variar a voz ou interpretar imperfeitamente a
 direção. Segmentos curtos reduzem, mas não eliminam, essa limitação do provedor. Uma auditoria
 pós-áudio por STT continua futura; antes de publicar uma obra longa, ainda é preciso ouvi-la.
+
+---
+
+## 2026-07-18 — Abort ativo durante chamadas bloqueantes
+
+**Problema reproduzido:** o botão criava corretamente o arquivo `ABORT`, mas o worker só o lia
+entre etapas/segmentos. Em uma geração real, o pedido permaneceu pendente durante uma chamada TTS
+com timeout de 300 segundos; a execução levou cerca de 145 segundos para alcançar o checkpoint e
+parar. Nesse intervalo, a chamada em voo foi concluída e contabilizada.
+
+**Decisão:** a bridge e a TUI agora pedem o marcador cooperativo e também encerram ativamente a
+árvore do PID registrado. No POSIX, o worker desanexado possui grupo próprio e recebe
+`SIGTERM`, seguido de `SIGKILL` apenas se necessário; no Windows, `taskkill /T /F` encerra worker
+e filhos. O próprio processo do comando nunca pode ser alvo. Se PID ou permissão estiverem
+indisponíveis, ou se a linha de comando não comprovar que o PID é o worker do mesmo episódio, o
+marcador continua aguardando o primeiro checkpoint e a interface mostra esse estado sem afirmar
+falsamente que terminou.
+
+**Auditoria de custo:** ao interromper uma chamada ativa, `cost_exact` passa a falso. Fechar a
+conexão impede chamadas seguintes, mas não garante que o provedor cancele uma requisição já
+recebida ou deixe de cobrá-la. Segmentos e manifestos concluídos permanecem retomáveis.
+
+**Validação:** `scripts/check_quality.py` aprovou lint/formatação, 216 testes Python com 72% de
+cobertura, 22 testes Electron, auditorias de dependências Python/Node, whitespace, JSON e links.
+A interface permaneceu íntegra em 600 px e 380 px. Um smoke local com worker desanexado e
+bloqueado por 60 segundos foi abortado em 0,064 segundo, terminando em `abortado` sem esperar o
+checkpoint.
+
+**Risco que sobrou:** a identidade é conferida imediatamente antes do sinal, mas ainda existe uma
+janela de corrida muito curta entre essa leitura e o encerramento. O processo atual/grupo do
+comando são explicitamente protegidos. Uma chamada remota já aceita pode gerar cobrança que o
+processo encerrado não consegue consultar depois.

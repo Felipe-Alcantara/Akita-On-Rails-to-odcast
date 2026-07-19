@@ -10,13 +10,18 @@ sobretudo no Windows:
   estar no PATH; chamar pelo nome cru gera ``FileNotFoundError`` sem contexto.
 - **Rodar com limite de tempo.** Sem ``timeout`` um subprocesso que trava
   (ffmpeg à espera de entrada, rede parada) pendura a geração inteira.
+- **Encerrar a árvore do worker.** Um abort precisa interromper também TTS, CLI
+  de assinatura ou ffmpeg que estejam bloqueando o próximo checkpoint.
 """
 
 from __future__ import annotations
 
+import os
 import shutil
+import signal
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 
@@ -50,8 +55,6 @@ def pid_alive(pid: int) -> bool:
             return exit_code.value == STILL_ACTIVE
         finally:
             kernel32.CloseHandle(handle)
-    import os
-
     try:
         os.kill(pid, 0)
     except ProcessLookupError:
@@ -59,6 +62,107 @@ def pid_alive(pid: int) -> bool:
     except PermissionError:
         return True
     return True
+
+
+def _wait_until_stopped(pid: int, timeout: float) -> bool:
+    deadline = time.monotonic() + max(0.0, timeout)
+    alive = pid_alive(pid)
+    while alive and time.monotonic() < deadline:
+        time.sleep(0.05)
+        alive = pid_alive(pid)
+    return not alive
+
+
+def process_command(pid: int) -> str | None:
+    """Lê a linha de comando de um PID para confirmar sua identidade antes do sinal."""
+    if not isinstance(pid, int) or pid <= 0:
+        return None
+    try:
+        proc_command = Path(f"/proc/{pid}/cmdline")
+        if proc_command.is_file():
+            raw = proc_command.read_bytes().replace(b"\0", b" ").decode("utf-8", errors="replace")
+            return " ".join(raw.split())
+        if sys.platform == "win32":
+            powershell = shutil.which("powershell") or shutil.which("pwsh")
+            if not powershell:
+                return None
+            completed = subprocess.run(
+                [
+                    powershell,
+                    "-NoProfile",
+                    "-NonInteractive",
+                    "-Command",
+                    f"(Get-CimInstance Win32_Process -Filter 'ProcessId = {pid}').CommandLine",
+                ],
+                capture_output=True,
+                text=True,
+                timeout=5,
+                check=False,
+                creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+            )
+        else:
+            completed = subprocess.run(
+                ["ps", "-p", str(pid), "-o", "command="],
+                capture_output=True,
+                text=True,
+                timeout=5,
+                check=False,
+            )
+        command = " ".join(completed.stdout.split())
+        return command or None
+    except (OSError, subprocess.SubprocessError):
+        return None
+
+
+def terminate_process(
+    pid: int,
+    grace_seconds: float = 2.0,
+    expected_fragments: tuple[str, ...] = (),
+) -> bool:
+    """Encerra um worker desanexado e seus filhos sem atingir o processo atual.
+
+    Retorna ``True`` quando o PID já terminou ou foi encerrado. No POSIX o worker
+    abre uma sessão própria, então o grupo inclui um eventual ffmpeg. No Windows,
+    ``taskkill /T`` oferece a mesma semântica para a árvore de processos.
+    """
+    if not isinstance(pid, int) or pid <= 0 or pid == os.getpid():
+        return False
+    if not pid_alive(pid):
+        return True
+    if expected_fragments:
+        command = process_command(pid)
+        if command is None or not all(fragment in command for fragment in expected_fragments):
+            return False
+    try:
+        if sys.platform == "win32":
+            completed = subprocess.run(
+                ["taskkill", "/PID", str(pid), "/T", "/F"],
+                capture_output=True,
+                text=True,
+                timeout=10,
+                check=False,
+                creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+            )
+            if completed.returncode and pid_alive(pid):
+                return False
+        else:
+            process_group = os.getpgid(pid)
+            owns_group = process_group == pid and process_group != os.getpgrp()
+            if owns_group:
+                os.killpg(process_group, signal.SIGTERM)
+            else:
+                os.kill(pid, signal.SIGTERM)
+            if _wait_until_stopped(pid, grace_seconds):
+                return True
+            if owns_group:
+                os.killpg(process_group, signal.SIGKILL)
+            else:
+                os.kill(pid, signal.SIGKILL)
+    except ProcessLookupError:
+        return True
+    except (OSError, subprocess.SubprocessError):
+        return not pid_alive(pid)
+    return _wait_until_stopped(pid, 1.0)
 
 
 def detached_flags() -> dict:

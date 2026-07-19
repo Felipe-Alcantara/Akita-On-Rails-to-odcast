@@ -492,7 +492,9 @@ $("btn-abort").onclick = async () => {
   if (!selectedItem) return;
   const result = await bridge(["abort", selectedItem.item_id]);
   if (result.ok && result.aborted) {
-    alert("Abort solicitado — a geração para no próximo segmento.");
+    alert(result.stopped
+      ? "Geração abortada agora. O checkpoint foi preservado."
+      : "Abort registrado; aguardando o primeiro checkpoint disponível.");
   }
   refreshStatus();
 };
@@ -529,7 +531,7 @@ function renderSelectedStatus(episodes) {
   const done = status && status.mp3;
   const feedback = generationFeedback(status);
 
-  $("btn-abort").classList.toggle("hidden", !running);
+  $("btn-abort").classList.toggle("hidden", !running || Boolean(status.abort_requested_at));
   $("btn-generate").dataset.running = String(Boolean(running));
   updateGenerateButton();
   $("btn-play").classList.toggle("hidden", !done);
@@ -568,7 +570,7 @@ function renderEpisodes(episodes) {
     if (episode.state === "falhou" && episode.last_error) {
       row.title = friendlyGenerationError(episode.last_error);
     }
-    if (episode.state === "rodando") {
+    if (episode.state === "rodando" && !episode.abort_requested_at) {
       const abortButton = document.createElement("button");
       abortButton.textContent = "🛑";
       abortButton.title = "Abortar";

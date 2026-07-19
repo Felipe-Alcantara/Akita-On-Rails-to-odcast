@@ -150,6 +150,35 @@ class GenerationTrackerTest(unittest.TestCase):
 
         self.assertEqual(self._read()["state"], "abortado")
 
+    def test_abort_ativo_encerra_worker_e_marca_estado_final(self):
+        self.tracker.stage("tts", total=5, current=2)
+
+        with patch("audiofy.runtime.process.terminate_process", return_value=True) as terminate:
+            accepted, stopped = GenerationTracker.abort_running(self.directory)
+
+        self.assertTrue(accepted)
+        self.assertTrue(stopped)
+        terminate.assert_called_once_with(
+            self._read()["pid"],
+            expected_fragments=("audiofy.bridge", "run-generation", "ep-teste"),
+        )
+        self.assertEqual(self._read()["state"], "abortado")
+        self.assertFalse(self._read()["cost_exact"])
+        self.assertFalse((self.directory / "ABORT").exists())
+
+    def test_abort_mantem_fallback_cooperativo_se_worker_nao_pode_ser_encerrado(self):
+        self.tracker.stage("tts", total=5, current=2)
+
+        with patch("audiofy.runtime.process.terminate_process", return_value=False):
+            accepted, stopped = GenerationTracker.abort_running(self.directory)
+
+        data = self._read()
+        self.assertTrue(accepted)
+        self.assertFalse(stopped)
+        self.assertEqual(data["state"], "rodando")
+        self.assertIsNotNone(data["abort_requested_at"])
+        self.assertTrue((self.directory / "ABORT").is_file())
+
 
 class ReconcileTest(unittest.TestCase):
     """Um 'rodando' cujo worker morreu não pode ficar pendurado na interface."""

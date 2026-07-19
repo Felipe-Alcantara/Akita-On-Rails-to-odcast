@@ -361,8 +361,10 @@ TTS). O menu **Catálogo TTS/vozes** lista os modelos de áudio disponíveis no 
   inicial. Data da geração e origem da medição também ficam preservadas.
 
 O Status (CLI e app) sempre deixa explícito se algo está rodando em segundo plano gastando
-créditos, inclusive a fala e a tentativa durante uma retomada automática. O abort continua
-responsivo durante a espera e para a geração no próximo checkpoint, sem corromper artefatos.
+créditos, inclusive a fala e a tentativa durante uma retomada automática. O abort encerra
+ativamente o worker e seus subprocessos, inclusive durante TTS, CLI ou montagem, preservando
+segmentos e checkpoints concluídos. Se o sistema negar o encerramento, o arquivo `ABORT` continua
+como fallback cooperativo no primeiro checkpoint disponível.
 
 ## ✅ Qualidade e testes
 
@@ -421,7 +423,8 @@ Responsividade foi verificada em 600 px e 380 px, incluindo os controles da leit
 - IDs usados em arquivos, nomes de sessão, perfis e ações propostas pelo modelo são validados na
   fronteira antes de persistir ou executar.
 - Operações destrutivas exigem confirmação; gerações iniciadas pelo chat podem ser automáticas,
-  mas exibem estimativa e banner global de custo. O abort é cooperativo e preserva os artefatos.
+  mas exibem estimativa e banner global de custo. O abort ativo preserva os artefatos concluídos;
+  como uma requisição já entregue ao provedor ainda pode ser cobrada, o custo passa a aproximado.
 - O Electron usa CSP, sandbox, navegação bloqueada, allowlist de IPC e confinamento de caminhos.
 
 Reporte vulnerabilidades pelo processo privado descrito em [SECURITY.md](SECURITY.md), sem abrir

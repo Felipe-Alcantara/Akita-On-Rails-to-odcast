@@ -325,6 +325,25 @@ class ForcedGenerationTest(unittest.TestCase):
         self.assertTrue(result["started"])
         popen.assert_called_once()
 
+    def test_abort_encerra_worker_ativo_e_informa_a_interface(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            directory = Path(tmp) / "episode"
+            bridge.GenerationTracker(directory, "item").stage("tts", total=5, current=2)
+            with (
+                patch("audiofy.bridge._episode_dir", return_value=directory),
+                patch.object(
+                    bridge.GenerationTracker,
+                    "abort_running",
+                    return_value=(True, True),
+                ) as abort_running,
+            ):
+                result = bridge._cmd_abort("item")
+
+        self.assertTrue(result["aborted"])
+        self.assertTrue(result["stopped"])
+        self.assertIn("checkpoint", result["note"])
+        abort_running.assert_called_once_with(directory)
+
     def test_falha_fora_do_pipeline_marca_status_falhou(self):
         """Erro antes do generate_episode (fonte, settings) não pode ficar mudo."""
         with tempfile.TemporaryDirectory() as tmp:

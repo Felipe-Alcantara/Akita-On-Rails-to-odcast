@@ -670,8 +670,13 @@ def do_abort(selector: str) -> None:
     if not status or status.get("state") != "rodando":
         _warn("Nenhuma geração rodando para este item.")
         return
-    GenerationTracker.request_abort(directory)
-    _ok("Abort solicitado — efetiva no próximo segmento (nada é corrompido).")
+    accepted, stopped = GenerationTracker.abort_running(directory)
+    if not accepted:
+        _warn("A geração terminou antes do pedido de abort.")
+    elif stopped:
+        _ok("Geração abortada agora. O checkpoint e os artefatos concluídos foram preservados.")
+    else:
+        _warn("Abort registrado; aguardando o primeiro checkpoint disponível.")
 
 
 def do_switch_source() -> None:
@@ -927,7 +932,7 @@ def menu() -> None:
                 ),
                 ("🚀 Gerar em segundo plano — libera o terminal", "generate-bg"),
                 ("👀 Acompanhar geração — veja progresso e custo", "watch"),
-                ("🛑 Abortar geração — para no próximo segmento", "abort"),
+                ("🛑 Abortar geração agora — preserva o checkpoint", "abort"),
                 ("📓 Exportar para NotebookLM — prepara pacote de custo zero", "notebooklm"),
                 ("⚙️ Configurar — ajuste chaves, perfis, modelos e vozes", "configure"),
                 ("🔄 Sincronizar fonte — atualiza o conteúdo disponível", "sync"),

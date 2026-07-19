@@ -35,6 +35,15 @@ function generationFeedback(status) {
   const cost = `💰 US$ ${(Number(status.cost_usd) || 0).toFixed(4)}${accuracy} até agora`;
 
   if (status.state === "rodando") {
+    if (status.abort_requested_at) {
+      return {
+        visible: true,
+        tone: "warning",
+        percent,
+        label: `Cancelamento solicitado — interrompendo a geração após ${count}.`,
+        cost,
+      };
+    }
     const retry = status.retry
       ? ` · retomando fala ${status.retry.segment}, tentativa ` +
         `${status.retry.attempt}/${status.retry.max_attempts}`

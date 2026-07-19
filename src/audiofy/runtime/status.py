@@ -4,9 +4,9 @@ Escreve `status.json` na pasta do episódio a cada mudança, para que CLI, app
 Electron ou qualquer processo externo acompanhem em tempo real: etapa atual,
 progresso, custo acumulado em US$ e estado (rodando/concluído/abortado/falhou).
 
-O cancelamento é cooperativo: criar um arquivo `ABORT` na pasta do episódio faz
-o pipeline parar no próximo checkpoint (entre segmentos/etapas), sem corromper
-artefatos já salvos.
+O cancelamento encerra ativamente o worker quando há PID e mantém um fallback
+cooperativo: o arquivo `ABORT` faz o pipeline parar no próximo checkpoint sem
+corromper artefatos já salvos.
 """
 
 from __future__ import annotations
@@ -54,6 +54,7 @@ class GenerationTracker:
             "resume_count": int(previous.get("resume_count", 0) or 0) + bool(previous),
             "retry": None,
             "last_error": None,
+            "abort_requested_at": launch_status.get("abort_requested_at"),
             "generation_mode": generation_mode,
             "narration_voice": narration_voice,
         }
@@ -131,6 +132,7 @@ class GenerationTracker:
             "resume_count": int(previous.get("resume_count", 0) or 0),
             "retry": None,
             "last_error": None,
+            "abort_requested_at": None,
             "generation_mode": generation_mode,
             "narration_voice": narration_voice,
         }
@@ -205,6 +207,7 @@ class GenerationTracker:
         """Estado final: 'concluido', 'abortado' ou 'falhou'."""
         self._data["state"] = state
         self._data["retry"] = None
+        self._data["abort_requested_at"] = None
         if error:
             self._data["last_error"] = str(error)[:300]
         self._flush()
@@ -222,6 +225,47 @@ class GenerationTracker:
     def request_abort(directory: Path) -> None:
         """Pede o cancelamento de uma geração em andamento (outro processo)."""
         (directory / GenerationTracker.ABORT_FILE).touch()
+        data = GenerationTracker.load(directory)
+        if data and data.get("state") == "rodando":
+            data["abort_requested_at"] = time.time()
+            GenerationTracker._write(directory, data)
+
+    @classmethod
+    def abort_running(cls, directory: Path) -> tuple[bool, bool]:
+        """Pede o abort e encerra ativamente o worker quando seu PID está disponível.
+
+        O arquivo ``ABORT`` permanece como fallback para a janela de inicialização
+        ou para um processo que o sistema não permita encerrar.
+        """
+        data = cls.load(directory)
+        if not data or data.get("state") != "rodando":
+            return False, False
+        cls.request_abort(directory)
+        pid = data.get("pid")
+        stopped = False
+        if isinstance(pid, int) and pid > 0:
+            from .process import terminate_process
+
+            stopped = terminate_process(
+                pid,
+                expected_fragments=("audiofy.bridge", "run-generation", str(data["episode_id"])),
+            )
+        if stopped:
+            latest = cls.load(directory) or data
+            latest.update(
+                {
+                    "state": "abortado",
+                    "retry": None,
+                    "last_error": None,
+                    "abort_requested_at": None,
+                    # A conexão local foi interrompida, mas o provedor pode concluir
+                    # e cobrar uma requisição que já estava em voo.
+                    "cost_exact": False,
+                }
+            )
+            (directory / cls.ABORT_FILE).unlink(missing_ok=True)
+            cls._write(directory, latest)
+        return True, stopped
 
     # ── Leitura externa ──────────────────────────────────────────────────
 

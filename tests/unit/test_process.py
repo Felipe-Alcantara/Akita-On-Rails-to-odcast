@@ -14,8 +14,10 @@ from audiofy.runtime.process import (  # noqa: E402
     detached_flags,
     launch_detached,
     pid_alive,
+    process_command,
     resolve_tool,
     run_tool,
+    terminate_process,
 )
 
 
@@ -93,6 +95,66 @@ class PidAliveTest(unittest.TestCase):
         self.assertFalse(pid_alive(0))
         self.assertFalse(pid_alive(-1))
         self.assertFalse(pid_alive(None))
+
+
+class TerminateProcessTest(unittest.TestCase):
+    def test_posix_encerra_o_grupo_do_worker_e_confirma(self):
+        with (
+            patch.object(process.sys, "platform", "linux"),
+            patch.object(process.os, "getpid", return_value=10),
+            patch.object(process.os, "getpgid", return_value=20),
+            patch.object(process.os, "getpgrp", return_value=10),
+            patch.object(process, "pid_alive", side_effect=[True, False]),
+            patch.object(process.os, "killpg") as kill_group,
+        ):
+            self.assertTrue(terminate_process(20, grace_seconds=0))
+        kill_group.assert_called_once_with(20, process.signal.SIGTERM)
+
+    def test_nunca_encerra_o_proprio_processo(self):
+        with (
+            patch.object(process.os, "getpid", return_value=20),
+            patch.object(process.os, "kill") as kill,
+        ):
+            self.assertFalse(terminate_process(20))
+        kill.assert_not_called()
+
+    def test_pid_que_ja_terminou_e_considerado_cancelado(self):
+        with (
+            patch.object(process.os, "getpid", return_value=10),
+            patch.object(process, "pid_alive", return_value=False),
+            patch.object(process.os, "kill") as kill,
+        ):
+            self.assertTrue(terminate_process(20))
+        kill.assert_not_called()
+
+    def test_windows_encerra_a_arvore_com_taskkill(self):
+        completed = subprocess.CompletedProcess([], 0, "", "")
+        with (
+            patch.object(process.sys, "platform", "win32"),
+            patch.object(process.os, "getpid", return_value=10),
+            patch.object(process, "pid_alive", side_effect=[True, False]),
+            patch.object(process.subprocess, "run", return_value=completed) as run,
+        ):
+            self.assertTrue(terminate_process(20))
+        self.assertEqual(run.call_args.args[0], ["taskkill", "/PID", "20", "/T", "/F"])
+
+    def test_recusa_pid_cujo_comando_nao_e_o_worker_esperado(self):
+        with (
+            patch.object(process.os, "getpid", return_value=10),
+            patch.object(process, "pid_alive", return_value=True),
+            patch.object(process, "process_command", return_value="python outro-programa"),
+            patch.object(process.os, "kill") as kill,
+        ):
+            stopped = terminate_process(20, expected_fragments=("audiofy.bridge", "episodio"))
+        self.assertFalse(stopped)
+        kill.assert_not_called()
+
+    def test_le_comando_do_processo_atual(self):
+        import os
+
+        command = process_command(os.getpid())
+        self.assertIsNotNone(command)
+        self.assertIn("python", command.lower())
 
 
 class LaunchDetachedTest(unittest.TestCase):

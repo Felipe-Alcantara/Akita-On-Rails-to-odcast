@@ -53,6 +53,7 @@ def _episode_summary(directory: Path) -> dict:
         "cost_usd": status.get("cost_usd", 0.0),
         "cost_exact": status.get("cost_exact", False),
         "retry": status.get("retry"),
+        "abort_requested_at": status.get("abort_requested_at"),
         "last_error": status.get("last_error"),
         "resume_count": status.get("resume_count", 0),
         "generation_mode": status.get("generation_mode", "adaptation"),
@@ -270,8 +271,20 @@ def _cmd_abort(item_id: str) -> dict:
     status = GenerationTracker.load(directory)
     if not status or status.get("state") != "rodando":
         return {"aborted": False, "reason": "nenhuma geração rodando para este item"}
-    GenerationTracker.request_abort(directory)
-    return {"aborted": True, "note": "abort é cooperativo; efetiva no próximo segmento"}
+    accepted, stopped = GenerationTracker.abort_running(directory)
+    return {
+        "aborted": accepted,
+        "stopped": stopped,
+        "note": (
+            "worker encerrado; o checkpoint foi preservado"
+            if stopped
+            else (
+                "pedido registrado; aguardando o primeiro checkpoint disponível"
+                if accepted
+                else "a geração terminou antes do pedido de abort"
+            )
+        ),
+    }
 
 
 def _cmd_settings_info() -> dict:

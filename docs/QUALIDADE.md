@@ -65,6 +65,10 @@ planejador nunca substituem o texto e que o cache é retomável; bridge/Electron
 ausência de teto para texto colado e controles responsivos. A inspeção manual da aba Conteúdo
 precisa exercitar os dois formatos em 600 px e 380 px.
 
+O cancelamento testa separadamente encerramento portátil da árvore do worker, transição
+imediata para `abortado`, fallback cooperativo quando o sistema nega o sinal, contrato da bridge
+e feedback de cancelamento pendente no Electron.
+
 Gerações reais com OpenRouter não rodam na CI porque consomem créditos e exigem segredo. Mudanças
 no pipeline devem usar mocks nos testes e, quando necessário, registrar no `IA.md` o smoke test
 real executado sem incluir conteúdo sensível ou chaves.

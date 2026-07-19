@@ -59,3 +59,11 @@ test("leitura fiel permite escolher um narrador sem enviar texto reescrito", () 
   assert.match(renderer, /`--voice=\$\{selectedVoice\}`/);
   assert.match(renderer, /O texto não será reescrito/);
 });
+
+test("abort diferencia encerramento imediato do fallback por checkpoint", () => {
+  const renderer = readRendererFile("renderer.js");
+
+  assert.match(renderer, /result\.stopped/);
+  assert.match(renderer, /Geração abortada agora/);
+  assert.match(renderer, /aguardando o primeiro checkpoint disponível/);
+});
