@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "verified_at": "2026-07-19T00:43:26-03:00",
+  "episode": "2026-07-18-cereja-rougue",
+  "checks": {
+    "source_words": {
+      "status": "verificado",
+      "metrics_words": 4780,
+      "source_words": 4780,
+      "matches": true
+    },
+    "script_words": {
+      "metrics_words": 4780,
+      "measured_words": 4780,
+      "matches": true
+    },
+    "duration": {
+      "metrics_seconds": 2127.192,
+      "measured_seconds": 2127.192,
+      "difference_seconds": 0.0
+    },
+    "cost": {
+      "usd": 1.1525,
+      "exact": false,
+      "source": "model_pricing_fallback",
+      "status": "preservado"
+    },
+    "generation_mode": {
+      "metrics_mode": "verbatim",
+      "artifact_mode": "verbatim",
+      "matches": true
+    },
+    "audio": {
+      "segments": 12,
+      "ok": 9,
+      "warnings": 1,
+      "critical": 2
+    }
+  }
+}

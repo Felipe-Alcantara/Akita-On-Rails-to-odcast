@@ -1,0 +1,382 @@
+{
+  "version": 1,
+  "audited_at": "2026-07-19T00:43:26-03:00",
+  "policy": {
+    "threshold_db": -45,
+    "minimum_silence_seconds": 1.5,
+    "warning_silence_seconds": 2.5,
+    "critical_silence_seconds": 5.0,
+    "critical_silence_ratio": 0.35
+  },
+  "summary": {
+    "segments": 12,
+    "ok": 9,
+    "warnings": 1,
+    "critical": 2
+  },
+  "segments": [
+    {
+      "file": "001_narrador.wav",
+      "duration_seconds": 179.56,
+      "silence_seconds": 13.599,
+      "silence_ratio": 0.0757,
+      "longest_silence_seconds": 3.252,
+      "severity": "warning",
+      "silences": [
+        {
+          "start_seconds": 160.715,
+          "end_seconds": 162.266,
+          "duration_seconds": 1.551
+        },
+        {
+          "start_seconds": 162.286,
+          "end_seconds": 165.0,
+          "duration_seconds": 2.714
+        },
+        {
+          "start_seconds": 168.772,
+          "end_seconds": 172.024,
+          "duration_seconds": 3.252
+        },
+        {
+          "start_seconds": 173.469,
+          "end_seconds": 176.435,
+          "duration_seconds": 2.966
+        },
+        {
+          "start_seconds": 176.444,
+          "end_seconds": 179.56,
+          "duration_seconds": 3.116
+        }
+      ]
+    },
+    {
+      "file": "002_narrador.wav",
+      "duration_seconds": 177.08,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "003_narrador.wav",
+      "duration_seconds": 182.4,
+      "silence_seconds": 1.513,
+      "silence_ratio": 0.0083,
+      "longest_silence_seconds": 1.513,
+      "severity": "ok",
+      "silences": [
+        {
+          "start_seconds": 91.463,
+          "end_seconds": 92.976,
+          "duration_seconds": 1.513
+        }
+      ]
+    },
+    {
+      "file": "004_narrador.wav",
+      "duration_seconds": 188.04,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "005_narrador.wav",
+      "duration_seconds": 185.96,
+      "silence_seconds": 8.421,
+      "silence_ratio": 0.0453,
+      "longest_silence_seconds": 1.725,
+      "severity": "ok",
+      "silences": [
+        {
+          "start_seconds": 145.884,
+          "end_seconds": 147.574,
+          "duration_seconds": 1.69
+        },
+        {
+          "start_seconds": 164.283,
+          "end_seconds": 165.949,
+          "duration_seconds": 1.666
+        },
+        {
+          "start_seconds": 170.889,
+          "end_seconds": 172.614,
+          "duration_seconds": 1.725
+        },
+        {
+          "start_seconds": 177.314,
+          "end_seconds": 179.026,
+          "duration_seconds": 1.712
+        },
+        {
+          "start_seconds": 182.093,
+          "end_seconds": 183.721,
+          "duration_seconds": 1.628
+        }
+      ]
+    },
+    {
+      "file": "006_narrador.wav",
+      "duration_seconds": 188.36,
+      "silence_seconds": 32.559,
+      "silence_ratio": 0.1729,
+      "longest_silence_seconds": 18.765,
+      "severity": "critical",
+      "silences": [
+        {
+          "start_seconds": 64.473,
+          "end_seconds": 66.271,
+          "duration_seconds": 1.798
+        },
+        {
+          "start_seconds": 69.444,
+          "end_seconds": 71.258,
+          "duration_seconds": 1.815
+        },
+        {
+          "start_seconds": 79.917,
+          "end_seconds": 81.618,
+          "duration_seconds": 1.701
+        },
+        {
+          "start_seconds": 114.27,
+          "end_seconds": 115.796,
+          "duration_seconds": 1.526
+        },
+        {
+          "start_seconds": 120.896,
+          "end_seconds": 122.812,
+          "duration_seconds": 1.916
+        },
+        {
+          "start_seconds": 126.427,
+          "end_seconds": 128.148,
+          "duration_seconds": 1.721
+        },
+        {
+          "start_seconds": 133.128,
+          "end_seconds": 134.827,
+          "duration_seconds": 1.699
+        },
+        {
+          "start_seconds": 138.148,
+          "end_seconds": 139.766,
+          "duration_seconds": 1.618
+        },
+        {
+          "start_seconds": 169.595,
+          "end_seconds": 188.36,
+          "duration_seconds": 18.765
+        }
+      ]
+    },
+    {
+      "file": "007_narrador.wav",
+      "duration_seconds": 152.88,
+      "silence_seconds": 12.736,
+      "silence_ratio": 0.0833,
+      "longest_silence_seconds": 2.424,
+      "severity": "ok",
+      "silences": [
+        {
+          "start_seconds": 51.084,
+          "end_seconds": 52.705,
+          "duration_seconds": 1.622
+        },
+        {
+          "start_seconds": 63.573,
+          "end_seconds": 65.384,
+          "duration_seconds": 1.811
+        },
+        {
+          "start_seconds": 80.955,
+          "end_seconds": 82.546,
+          "duration_seconds": 1.59
+        },
+        {
+          "start_seconds": 103.158,
+          "end_seconds": 104.679,
+          "duration_seconds": 1.521
+        },
+        {
+          "start_seconds": 114.178,
+          "end_seconds": 115.766,
+          "duration_seconds": 1.588
+        },
+        {
+          "start_seconds": 144.48,
+          "end_seconds": 146.904,
+          "duration_seconds": 2.424
+        },
+        {
+          "start_seconds": 148.607,
+          "end_seconds": 150.787,
+          "duration_seconds": 2.18
+        }
+      ]
+    },
+    {
+      "file": "008_narrador.wav",
+      "duration_seconds": 186.04,
+      "silence_seconds": 17.379,
+      "silence_ratio": 0.0934,
+      "longest_silence_seconds": 1.951,
+      "severity": "ok",
+      "silences": [
+        {
+          "start_seconds": 117.042,
+          "end_seconds": 118.653,
+          "duration_seconds": 1.611
+        },
+        {
+          "start_seconds": 131.806,
+          "end_seconds": 133.412,
+          "duration_seconds": 1.606
+        },
+        {
+          "start_seconds": 134.793,
+          "end_seconds": 136.654,
+          "duration_seconds": 1.861
+        },
+        {
+          "start_seconds": 142.304,
+          "end_seconds": 143.904,
+          "duration_seconds": 1.6
+        },
+        {
+          "start_seconds": 145.597,
+          "end_seconds": 147.216,
+          "duration_seconds": 1.619
+        },
+        {
+          "start_seconds": 152.451,
+          "end_seconds": 154.374,
+          "duration_seconds": 1.923
+        },
+        {
+          "start_seconds": 155.607,
+          "end_seconds": 157.289,
+          "duration_seconds": 1.681
+        },
+        {
+          "start_seconds": 158.022,
+          "end_seconds": 159.783,
+          "duration_seconds": 1.76
+        },
+        {
+          "start_seconds": 175.743,
+          "end_seconds": 177.51,
+          "duration_seconds": 1.767
+        },
+        {
+          "start_seconds": 182.879,
+          "end_seconds": 184.83,
+          "duration_seconds": 1.951
+        }
+      ]
+    },
+    {
+      "file": "009_narrador.wav",
+      "duration_seconds": 178.52,
+      "silence_seconds": 1.808,
+      "silence_ratio": 0.0101,
+      "longest_silence_seconds": 1.808,
+      "severity": "ok",
+      "silences": [
+        {
+          "start_seconds": 77.818,
+          "end_seconds": 79.626,
+          "duration_seconds": 1.808
+        }
+      ]
+    },
+    {
+      "file": "010_narrador.wav",
+      "duration_seconds": 190.36,
+      "silence_seconds": 11.803,
+      "silence_ratio": 0.062,
+      "longest_silence_seconds": 1.914,
+      "severity": "ok",
+      "silences": [
+        {
+          "start_seconds": 44.879,
+          "end_seconds": 46.513,
+          "duration_seconds": 1.634
+        },
+        {
+          "start_seconds": 62.05,
+          "end_seconds": 63.964,
+          "duration_seconds": 1.914
+        },
+        {
+          "start_seconds": 67.186,
+          "end_seconds": 68.743,
+          "duration_seconds": 1.558
+        },
+        {
+          "start_seconds": 78.941,
+          "end_seconds": 80.701,
+          "duration_seconds": 1.76
+        },
+        {
+          "start_seconds": 127.707,
+          "end_seconds": 129.313,
+          "duration_seconds": 1.606
+        },
+        {
+          "start_seconds": 152.957,
+          "end_seconds": 154.566,
+          "duration_seconds": 1.609
+        },
+        {
+          "start_seconds": 180.929,
+          "end_seconds": 182.652,
+          "duration_seconds": 1.722
+        }
+      ]
+    },
+    {
+      "file": "011_narrador.wav",
+      "duration_seconds": 168.04,
+      "silence_seconds": 6.467,
+      "silence_ratio": 0.0385,
+      "longest_silence_seconds": 6.467,
+      "severity": "critical",
+      "silences": [
+        {
+          "start_seconds": 161.573,
+          "end_seconds": 168.04,
+          "duration_seconds": 6.467
+        }
+      ]
+    },
+    {
+      "file": "012_narrador.wav",
+      "duration_seconds": 149.92,
+      "silence_seconds": 4.879,
+      "silence_ratio": 0.0325,
+      "longest_silence_seconds": 1.756,
+      "severity": "ok",
+      "silences": [
+        {
+          "start_seconds": 31.252,
+          "end_seconds": 32.796,
+          "duration_seconds": 1.544
+        },
+        {
+          "start_seconds": 97.514,
+          "end_seconds": 99.093,
+          "duration_seconds": 1.579
+        },
+        {
+          "start_seconds": 127.752,
+          "end_seconds": 129.508,
+          "duration_seconds": 1.756
+        }
+      ]
+    }
+  ]
+}

@@ -6,6 +6,11 @@
   "cost_exact": false,
   "tts_model": "google/gemini-3.1-flash-tts-preview",
   "profile_name": "assinatura-codex",
+  "generation_mode": "adaptation",
   "generated_at": "2026-07-17T09:20:59-03:00",
-  "cost_source": "model_pricing_fallback"
+  "cost_source": "model_pricing_fallback",
+  "background_music": null,
+  "background_volume": null,
+  "verified_at": "2026-07-19T00:43:21-03:00",
+  "verification_version": 1
 }

@@ -54,6 +54,8 @@ class EpisodeMetrics:
     cost_source: str = "generation_ids"
     background_music: str | None = None
     background_volume: float | None = None
+    verified_at: str = ""
+    verification_version: int = 0
 
     def write(self, directory: Path) -> Path:
         target = directory / "metrics.json"

@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "verified_at": "2026-07-19T00:43:21-03:00",
+  "episode": "2026-07-17-o-valor-de-terminar",
+  "checks": {
+    "source_words": {
+      "status": "indisponivel",
+      "metrics_words": 686,
+      "source_words": null,
+      "matches": null
+    },
+    "script_words": {
+      "metrics_words": 871,
+      "measured_words": 871,
+      "matches": true
+    },
+    "duration": {
+      "metrics_seconds": 401.88,
+      "measured_seconds": 401.88,
+      "difference_seconds": 0.0
+    },
+    "cost": {
+      "usd": 0.202696,
+      "exact": false,
+      "source": "model_pricing_fallback",
+      "status": "preservado"
+    },
+    "generation_mode": {
+      "metrics_mode": "adaptation",
+      "artifact_mode": "adaptation",
+      "matches": true
+    },
+    "audio": {
+      "segments": 25,
+      "ok": 25,
+      "warnings": 0,
+      "critical": 0
+    }
+  }
+}

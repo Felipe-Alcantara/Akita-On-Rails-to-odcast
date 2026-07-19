@@ -1,0 +1,847 @@
+{
+  "version": 1,
+  "audited_at": "2026-07-19T00:43:17-03:00",
+  "policy": {
+    "threshold_db": -45,
+    "minimum_silence_seconds": 1.5,
+    "warning_silence_seconds": 2.5,
+    "critical_silence_seconds": 5.0,
+    "critical_silence_ratio": 0.35
+  },
+  "summary": {
+    "segments": 92,
+    "ok": 92,
+    "warnings": 0,
+    "critical": 0
+  },
+  "segments": [
+    {
+      "file": "001_apresentador_a.wav",
+      "duration_seconds": 19.24,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "002_apresentador_b.wav",
+      "duration_seconds": 19.76,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "003_apresentador_a.wav",
+      "duration_seconds": 14.76,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "004_apresentador_b.wav",
+      "duration_seconds": 19.4,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "005_apresentador_a.wav",
+      "duration_seconds": 13.92,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "006_apresentador_b.wav",
+      "duration_seconds": 13.4,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "007_apresentador_a.wav",
+      "duration_seconds": 6.8,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "008_apresentador_b.wav",
+      "duration_seconds": 23.84,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "009_apresentador_a.wav",
+      "duration_seconds": 6.36,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "010_apresentador_b.wav",
+      "duration_seconds": 18.92,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "011_apresentador_a.wav",
+      "duration_seconds": 7.68,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "012_apresentador_b.wav",
+      "duration_seconds": 17.48,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "013_apresentador_a.wav",
+      "duration_seconds": 6.24,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "014_apresentador_b.wav",
+      "duration_seconds": 19.32,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "015_apresentador_a.wav",
+      "duration_seconds": 3.92,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "016_apresentador_b.wav",
+      "duration_seconds": 17.36,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "017_apresentador_a.wav",
+      "duration_seconds": 9.4,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "018_apresentador_b.wav",
+      "duration_seconds": 27.68,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "019_apresentador_a.wav",
+      "duration_seconds": 7.28,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "020_apresentador_b.wav",
+      "duration_seconds": 19.52,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "021_apresentador_a.wav",
+      "duration_seconds": 6.72,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "022_apresentador_b.wav",
+      "duration_seconds": 18.88,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "023_apresentador_a.wav",
+      "duration_seconds": 8.12,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "024_apresentador_b.wav",
+      "duration_seconds": 16.32,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "025_apresentador_a.wav",
+      "duration_seconds": 7.64,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "026_apresentador_b.wav",
+      "duration_seconds": 17.4,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "027_apresentador_a.wav",
+      "duration_seconds": 6.64,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "028_apresentador_b.wav",
+      "duration_seconds": 23.84,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "029_apresentador_a.wav",
+      "duration_seconds": 4.28,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "030_apresentador_b.wav",
+      "duration_seconds": 29.0,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "031_apresentador_a.wav",
+      "duration_seconds": 5.4,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "032_apresentador_b.wav",
+      "duration_seconds": 15.84,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "033_apresentador_a.wav",
+      "duration_seconds": 4.72,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "034_apresentador_b.wav",
+      "duration_seconds": 18.68,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "035_apresentador_a.wav",
+      "duration_seconds": 12.72,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "036_apresentador_b.wav",
+      "duration_seconds": 20.6,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "037_apresentador_a.wav",
+      "duration_seconds": 4.6,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "038_apresentador_b.wav",
+      "duration_seconds": 20.92,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "039_apresentador_a.wav",
+      "duration_seconds": 5.0,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "040_apresentador_b.wav",
+      "duration_seconds": 11.56,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "041_apresentador_a.wav",
+      "duration_seconds": 4.28,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "042_apresentador_b.wav",
+      "duration_seconds": 22.2,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "043_apresentador_a.wav",
+      "duration_seconds": 5.08,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "044_apresentador_b.wav",
+      "duration_seconds": 11.52,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "045_apresentador_a.wav",
+      "duration_seconds": 3.48,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "046_apresentador_b.wav",
+      "duration_seconds": 26.08,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "047_apresentador_a.wav",
+      "duration_seconds": 6.6,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "048_apresentador_b.wav",
+      "duration_seconds": 22.0,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "049_apresentador_a.wav",
+      "duration_seconds": 3.52,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "050_apresentador_b.wav",
+      "duration_seconds": 7.68,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "051_apresentador_a.wav",
+      "duration_seconds": 6.28,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "052_apresentador_b.wav",
+      "duration_seconds": 23.88,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "053_apresentador_a.wav",
+      "duration_seconds": 8.4,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "054_apresentador_b.wav",
+      "duration_seconds": 19.4,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "055_apresentador_a.wav",
+      "duration_seconds": 5.6,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "056_apresentador_b.wav",
+      "duration_seconds": 11.0,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "057_apresentador_a.wav",
+      "duration_seconds": 3.16,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "058_apresentador_b.wav",
+      "duration_seconds": 12.96,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "059_apresentador_a.wav",
+      "duration_seconds": 6.0,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "060_apresentador_b.wav",
+      "duration_seconds": 17.6,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "061_apresentador_a.wav",
+      "duration_seconds": 5.64,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "062_apresentador_b.wav",
+      "duration_seconds": 17.56,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "063_apresentador_a.wav",
+      "duration_seconds": 3.0,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "064_apresentador_b.wav",
+      "duration_seconds": 17.16,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "065_apresentador_a.wav",
+      "duration_seconds": 4.64,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "066_apresentador_b.wav",
+      "duration_seconds": 16.16,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "067_apresentador_a.wav",
+      "duration_seconds": 9.2,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "068_apresentador_b.wav",
+      "duration_seconds": 21.16,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "069_apresentador_a.wav",
+      "duration_seconds": 6.96,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "070_apresentador_b.wav",
+      "duration_seconds": 24.12,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "071_apresentador_a.wav",
+      "duration_seconds": 6.92,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "072_apresentador_b.wav",
+      "duration_seconds": 25.28,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "073_apresentador_a.wav",
+      "duration_seconds": 6.24,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "074_apresentador_b.wav",
+      "duration_seconds": 14.28,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "075_apresentador_a.wav",
+      "duration_seconds": 4.76,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "076_apresentador_b.wav",
+      "duration_seconds": 11.56,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "077_apresentador_a.wav",
+      "duration_seconds": 5.56,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "078_apresentador_b.wav",
+      "duration_seconds": 22.88,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "079_apresentador_a.wav",
+      "duration_seconds": 7.04,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "080_apresentador_b.wav",
+      "duration_seconds": 22.44,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "081_apresentador_a.wav",
+      "duration_seconds": 6.52,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "082_apresentador_b.wav",
+      "duration_seconds": 25.04,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "083_apresentador_a.wav",
+      "duration_seconds": 9.32,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "084_apresentador_b.wav",
+      "duration_seconds": 8.88,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "085_apresentador_a.wav",
+      "duration_seconds": 6.08,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "086_apresentador_b.wav",
+      "duration_seconds": 20.08,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "087_apresentador_a.wav",
+      "duration_seconds": 4.92,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "088_apresentador_b.wav",
+      "duration_seconds": 19.16,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "089_apresentador_a.wav",
+      "duration_seconds": 6.08,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "090_apresentador_b.wav",
+      "duration_seconds": 16.08,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "091_apresentador_a.wav",
+      "duration_seconds": 14.68,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "092_apresentador_b.wav",
+      "duration_seconds": 25.2,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    }
+  ]
+}

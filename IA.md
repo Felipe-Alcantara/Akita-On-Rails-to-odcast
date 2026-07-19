@@ -972,3 +972,26 @@ não geram novo custo TTS. `mix.json` registra nome original, hash, volume e reg
 limitados no comando `generate`; o renderer não recebe acesso genérico ao sistema de arquivos.
 79 testes Python focados e 27 testes Electron passaram. A validação integral e a inspeção em
 600 px/380 px serão registradas ao fim da entrega.
+
+---
+
+## 2026-07-19 — Recalibração e auditoria do histórico completo
+
+**Escopo:** `scripts/recalculate_episode_data.py` percorreu localmente os quatro episódios
+concluídos e 170 chunks, sem consultar rede ou provedor. Para cada episódio, a rotina mede o MP3
+com ffprobe, conta palavras diretamente no roteiro persistido, compara a fonte quando ela ainda
+está disponível, executa a política de silêncio e grava `verification.json`. Custos são preservados
+com exatidão/procedência declarada, em vez de serem inventados a partir de manifestos antigos
+incompletos.
+
+**Resultado:** durações e palavras de roteiro coincidiram nos quatro episódios. As fontes dos dois
+artigos e de *Cereja Rougue* também coincidiram; a fonte original de *O valor de terminar* não está
+mais em `data/inbox/`, portanto seus 686 termos foram preservados e marcados como indisponíveis
+para confronto. Os três episódios de adaptação tiveram 158/158 chunks sem alerta. Em *Cereja
+Rougue*, 9/12 ficaram OK, `001_narrador.wav` recebeu aviso, e `006_narrador.wav`/`011_narrador.wav`
+foram críticos por silêncios finais de 18,765 s e 6,467 s.
+
+**Cálculos resultantes para 4.780 palavras:** adaptação usa três amostras e estima US$ 1,7190
+(faixa US$ 1,3847–2,0550), 33,73 min; leitura fiel usa uma amostra e estima US$ 1,1525 (faixa
+US$ 0,9220–1,3830), 35,45 min. A auditoria não regenerou os chunks problemáticos, evitando cobrança
+automática e deixando a decisão para a revisão individual no modal.

@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "verified_at": "2026-07-19T00:43:01-03:00",
+  "episode": "2026-07-08__fable-5-analisar-codigo-tiktok-clash-of-kings-govbr-fingerprint",
+  "checks": {
+    "source_words": {
+      "status": "verificado",
+      "metrics_words": 2155,
+      "source_words": 2155,
+      "matches": true
+    },
+    "script_words": {
+      "metrics_words": 1860,
+      "measured_words": 1860,
+      "matches": true
+    },
+    "duration": {
+      "metrics_seconds": 781.704,
+      "measured_seconds": 781.704,
+      "difference_seconds": 0.0
+    },
+    "cost": {
+      "usd": 0.624287,
+      "exact": true,
+      "source": "key_daily_total",
+      "status": "preservado"
+    },
+    "generation_mode": {
+      "metrics_mode": "adaptation",
+      "artifact_mode": "adaptation",
+      "matches": true
+    },
+    "audio": {
+      "segments": 41,
+      "ok": 41,
+      "warnings": 0,
+      "critical": 0
+    }
+  }
+}

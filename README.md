@@ -200,6 +200,12 @@ Pausas a partir de 5 segundos ou chunks com pelo menos 35% de silêncio recebem 
 botão **Revisar chunks** abre um modal com os achados e permite ouvir cada arquivo separadamente;
 a auditoria aponta problemas, mas não altera nem descarta áudio automaticamente.
 
+Para rever todo o histórico sem rede nem novos créditos, rode
+`python3 scripts/recalculate_episode_data.py`. O comando mede novamente o MP3 final, recompõe a
+contagem do roteiro, resolve a fonte local quando ela ainda existe, audita todos os chunks e grava
+`verification.json`. Custos antigos são preservados com sua procedência, pois um manifesto parcial
+não permite recriar com segurança cobranças históricas.
+
 No desktop, **Escolher música de fundo** abre o seletor nativo e permite regular a faixa entre
 1% e 25% (8% por padrão). O arquivo é validado e copiado para o cache privado `.audiofy/music`;
 somente nome, hash e volume entram nos artefatos do episódio. O ffmpeg repete a faixa até o fim da

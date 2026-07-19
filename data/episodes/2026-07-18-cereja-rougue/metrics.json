@@ -8,5 +8,9 @@
   "profile_name": "narrador-unico",
   "generation_mode": "verbatim",
   "generated_at": "2026-07-18T22:38:31-03:00",
-  "cost_source": "model_pricing_fallback"
+  "cost_source": "model_pricing_fallback",
+  "background_music": null,
+  "background_volume": null,
+  "verified_at": "2026-07-19T00:43:26-03:00",
+  "verification_version": 1
 }
