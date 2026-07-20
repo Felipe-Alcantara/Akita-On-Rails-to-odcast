@@ -50,6 +50,13 @@
       </div>
       <div id="chat-messages" role="log" aria-live="polite"
         aria-label="Histórico da conversa"></div>
+      <div class="chat-mode-bar" role="radiogroup" aria-label="Modo do chat">
+        <button class="chat-mode active" data-mode="" title="Conversa livre">💬 Livre</button>
+        <button class="chat-mode" data-mode="pesquisa" title="Pesquisa um tema e adiciona como conteúdo">🔍 Pesquisar</button>
+        <button class="chat-mode" data-mode="podcast" title="Pesquisa e já gera um episódio adaptado">🎙️ Podcast</button>
+        <button class="chat-mode" data-mode="narracao" title="Pesquisa e já gera uma leitura fiel">📖 Narração</button>
+        <button class="chat-mode" data-mode="url" title="Adiciona uma URL como conteúdo">🔗 URL</button>
+      </div>
       <div class="chat-input">
         <textarea id="chat-text" rows="2"
           aria-label="Mensagem para o assistente"

@@ -8,7 +8,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
-from audiofy.chat import ChatSession, parse_actions  # noqa: E402
+from audiofy.chat import ChatSession, _fix_json_newlines, parse_actions  # noqa: E402
 
 
 class ParseActionsTest(unittest.TestCase):
@@ -64,6 +64,34 @@ class ParseActionsTest(unittest.TestCase):
         _, actions = parse_actions(reply)
         self.assertEqual(actions, [])
 
+    def test_newlines_literais_dentro_de_string_json(self):
+        reply = (
+            "Pronto.\n\n```acao\n"
+            '{"tipo": "adicionar_texto", "titulo": "Art", "texto": "P1.\n\nP2.\n\nP3."}\n```'
+        )
+        _, actions = parse_actions(reply)
+        self.assertEqual(len(actions), 1)
+        self.assertIn("\n", actions[0]["texto"])
+
+    def test_fix_json_newlines_preserva_json_valido(self):
+        valid = '{"tipo": "buscar", "fonte": "akita", "termos": "ia"}'
+        self.assertEqual(json.loads(_fix_json_newlines(valid)), json.loads(valid))
+
+    def test_fix_json_newlines_preserva_escaped_newlines(self):
+        raw = r'{"texto": "A\nB"}'
+        result = json.loads(_fix_json_newlines(raw))
+        self.assertEqual(result["texto"], "A\nB")
+
+    def test_fix_json_newlines_corrige_newlines_literais(self):
+        raw = '{"texto": "A\nB"}'
+        result = json.loads(_fix_json_newlines(raw))
+        self.assertEqual(result["texto"], "A\nB")
+
+    def test_fix_json_newlines_preserva_aspas_escapadas(self):
+        raw = r'{"texto": "disse \"olá\""}'
+        result = json.loads(_fix_json_newlines(raw))
+        self.assertEqual(result["texto"], 'disse "olá"')
+
 
 class ChatSessionTest(unittest.TestCase):
     def setUp(self):
@@ -110,6 +138,37 @@ class ChatSessionTest(unittest.TestCase):
             session.send("", None, call_provider=self._fake_provider("não chamado"))
         with self.assertRaises(ValueError):
             session.send("x" * 50_001, None, call_provider=self._fake_provider("não chamado"))
+
+    def test_historico_nao_contem_blocos_acao_crus(self):
+        reply = (
+            "Achei.\n\n```acao\n"
+            '{"tipo": "adicionar_url", "url": "https://ex.com"}\n```'
+        )
+        session = ChatSession("t", chat_dir=self.chat_dir)
+        session.send("Busca", None, call_provider=self._fake_provider(reply))
+        stored = session.messages[-1]["content"]
+        self.assertNotIn("```acao", stored)
+        self.assertEqual(stored, "Achei.")
+
+    def test_prefixo_de_modo_e_removido_do_historico(self):
+        session = ChatSession("t", chat_dir=self.chat_dir)
+        session.send(
+            "[MODO PESQUISA] inteligência artificial",
+            None,
+            call_provider=self._fake_provider("Pesquisei."),
+        )
+        stored = session.messages[-2]["content"]
+        self.assertEqual(stored, "inteligência artificial")
+        self.assertNotIn("[MODO", stored)
+
+    def test_contexto_trunca_respostas_longas(self):
+        long_reply = "A" * 2000
+        session = ChatSession("t", chat_dir=self.chat_dir)
+        session.send("Oi", None, call_provider=self._fake_provider(long_reply))
+        transcript = session._transcript()
+        self.assertIn("[…]", transcript)
+        # O texto original de 2000 chars não deve aparecer inteiro no contexto
+        self.assertLess(len(transcript), 1500)
 
 
 if __name__ == "__main__":

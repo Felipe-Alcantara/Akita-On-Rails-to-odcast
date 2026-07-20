@@ -496,6 +496,19 @@ dialog::backdrop { background: rgb(0 0 0 / 72%); }
 .msg.assistant { align-self: flex-start; background: rgba(24, 24, 27, 0.9); border: 1px solid var(--border); }
 .msg.system { align-self: center; color: var(--muted); background: transparent; border: 1px dashed var(--border); font-size: 12px; }
 .action-chip { align-self: flex-start; color: #fde68a; border-color: rgba(250, 204, 21, 0.34); }
+.chat-mode-bar { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+.chat-mode {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.chat-mode:hover { border-color: var(--accent); color: var(--fg); }
+.chat-mode.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 .chat-input { display: flex; align-items: flex-end; gap: 9px; margin-top: 12px; }
 .chat-input textarea { min-width: 0; flex: 1; }
 
@@ -647,6 +660,8 @@ pre {
   .panel { padding: 12px; }
   .chat-toolbar, .chat-input { align-items: stretch; flex-direction: column; }
   .chat-toolbar button, .chat-input button { width: 100%; }
+  .chat-mode-bar { gap: 4px; }
+  .chat-mode { font-size: 11px; padding: 3px 8px; }
   .msg { max-width: 96%; }
   .toolbar > *, .actions > *, .form-row > * { flex: 1 1 100%; }
   .presenter-row { grid-template-columns: 1fr; }

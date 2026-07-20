@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
 import time
 from collections.abc import Callable
 from pathlib import Path
@@ -80,12 +81,48 @@ def _valid_action(data: object) -> bool:
     )
 
 
+def _fix_json_newlines(raw: str) -> str:
+    """Escapa newlines literais dentro de strings JSON.
+
+    LLMs frequentemente colocam quebras de linha reais dentro de valores JSON
+    (ex.: ``"texto": "Parágrafo 1.\\n\\nParágrafo 2."`` com \\n literal em vez
+    de ``\\\\n``). Isso gera JSON inválido — ``json.loads`` falha. Este helper
+    percorre o texto e, dentro de strings delimitadas por aspas, substitui ``\\n``
+    e ``\\r`` por suas sequências de escape.
+    """
+    result: list[str] = []
+    in_string = False
+    escaped = False
+    for char in raw:
+        if escaped:
+            result.append(char)
+            escaped = False
+            continue
+        if char == "\\":
+            result.append(char)
+            escaped = True
+            continue
+        if char == '"':
+            in_string = not in_string
+            result.append(char)
+            continue
+        if in_string:
+            if char == "\n":
+                result.append("\\n")
+                continue
+            if char == "\r":
+                result.append("\\r")
+                continue
+        result.append(char)
+    return "".join(result)
+
+
 def parse_actions(reply: str) -> tuple[str, list[dict]]:
     """Separa o texto da resposta e as ações estruturadas."""
     actions = []
     for block in re.findall(r"```acao\s*\n(.*?)\n\s*```", reply, re.DOTALL):
         try:
-            data = json.loads(block)
+            data = json.loads(_fix_json_newlines(block))
             if _valid_action(data):
                 actions.append(data)
         except json.JSONDecodeError:
@@ -112,11 +149,27 @@ class ChatSession:
         self.messages = []
         self._flush()
 
+    @staticmethod
+    def _clean_for_context(content: str, role: str) -> str:
+        """Prepara uma mensagem do histórico para reutilização como contexto.
+
+        - Remove blocos ```acao (JSON já executado, não serve como contexto).
+        - Trunca respostas do assistente muito longas (conteúdo pesquisado pode
+          ter 8000+ chars e esgota o contexto da LLM na próxima rodada).
+        """
+        _MAX_CONTEXT_CHARS = 800
+        cleaned = re.sub(r"```acao\s*\n.*?\n\s*```", "", content, flags=re.DOTALL).strip()
+        if role == "assistant" and len(cleaned) > _MAX_CONTEXT_CHARS:
+            cleaned = cleaned[:_MAX_CONTEXT_CHARS] + " […]"
+        return cleaned
+
     def _transcript(self) -> str:
         lines = []
         for message in self.messages[-20:]:  # janela de contexto do histórico
             speaker = "Usuário" if message["role"] == "user" else "Assistente"
-            lines.append(f"{speaker}: {message['content']}")
+            content = self._clean_for_context(message["content"], message["role"])
+            if content:
+                lines.append(f"{speaker}: {content}")
         return "\n\n".join(lines)
 
     def send(
@@ -136,10 +189,17 @@ class ChatSession:
         )
         caller = call_provider or _default_provider
         reply = caller(SYSTEM_PROMPT, user_prompt, settings)
-        self.messages.append({"role": "user", "content": message, "at": time.time()})
-        self.messages.append({"role": "assistant", "content": reply, "at": time.time()})
+        text, actions = parse_actions(reply)
+        # Salva o texto limpo (sem blocos de ação crus) — os blocos JSON já
+        # foram extraídos para ``actions`` e não servem como contexto.
+        stored_text = text or reply
+        # Remove prefixos de modo (ex.: "[MODO PESQUISA] …") da mensagem salva
+        # — são instruções internas que não devem poluir o histórico visível.
+        stored_message = re.sub(r"^\[MODO \w+\]\s*", "", message)
+        self.messages.append({"role": "user", "content": stored_message, "at": time.time()})
+        self.messages.append({"role": "assistant", "content": stored_text, "at": time.time()})
         self._flush()
-        return parse_actions(reply)
+        return text, actions
 
 
 def _default_provider(system: str, user: str, settings: Settings) -> str:
@@ -155,6 +215,10 @@ def _default_provider(system: str, user: str, settings: Settings) -> str:
             command, stdin = [cli.binary, *cli.chat_args], f"{system}\n\n{user}"
         try:
             result = run_cli(command, stdin)
+        except subprocess.TimeoutExpired as error:
+            raise RuntimeError(
+                f"{cli.name} excedeu o tempo limite de resposta."
+            ) from error
         except OSError as error:
             raise RuntimeError(
                 f"Não foi possível executar a CLI '{cli.binary}' ({cli.name}): {error}"

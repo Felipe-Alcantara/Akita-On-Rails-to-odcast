@@ -159,17 +159,29 @@ tabButtons.forEach((button, index) => {
 
 // ── Chat ──────────────────────────────────────────────────────────────────
 
+const _ACTION_LABELS = {
+  adicionar_texto: "Adicionar conteúdo",
+  adicionar_url: "Adicionar URL",
+  buscar: "Buscar conteúdo",
+  gerar: "Gerar episódio",
+  exportar_notebooklm: "Exportar NotebookLM",
+};
+
 function addChatMessage(role, text, actions = []) {
   const box = $("chat-messages");
-  const message = document.createElement("div");
-  message.className = `msg ${role}`;
-  message.textContent = text;
-  box.appendChild(message);
+  // Não cria balão vazio — acontece quando a LLM retorna só ações sem texto.
+  if (text) {
+    const message = document.createElement("div");
+    message.className = `msg ${role}`;
+    message.textContent = text;
+    box.appendChild(message);
+  }
   const pending = [];
   for (const action of actions) {
     const button = document.createElement("button");
     button.className = "action-chip";
-    button.textContent = `⚡ ${action.descricao || action.tipo}`;
+    const label = action.descricao || _ACTION_LABELS[action.tipo] || action.tipo;
+    button.textContent = `⚡ ${label}`;
     button.onclick = () => runAction(action, button);
     box.appendChild(button);
     pending.push({ action, button });
@@ -230,17 +242,56 @@ async function runAction(action, button) {
   }
 }
 
+// ── Modos do chat ────────────────────────────────────────────────────────
+let chatMode = "";
+const _MODE_PREFIXES = {
+  pesquisa:
+    "[MODO PESQUISA] Pesquise o tema abaixo na web, escreva um texto completo e " +
+    "substancial com suas palavras e adicione-o aos conteúdos via ação " +
+    "adicionar_texto. Não pergunte nada, entregue direto.\n\n",
+  podcast:
+    "[MODO PODCAST] Pesquise o tema abaixo, escreva um texto completo e adicione " +
+    "via adicionar_texto. Depois, gere o episódio em modo adaptation via ação " +
+    "gerar. Não peça confirmação, execute tudo.\n\n",
+  narracao:
+    "[MODO NARRAÇÃO] Pesquise o tema abaixo, escreva um texto completo e adicione " +
+    "via adicionar_texto. Depois, gere o episódio em modo verbatim via ação " +
+    "gerar. Não peça confirmação, execute tudo.\n\n",
+  url:
+    "[MODO URL] O texto abaixo contém uma ou mais URLs. Adicione cada uma como " +
+    "conteúdo via ação adicionar_url. Não pergunte nada.\n\n",
+};
+const _MODE_PLACEHOLDERS = {
+  "": "Ex.: pesquise bons artigos sobre computação quântica para virar episódio…",
+  pesquisa: "Digite o tema para pesquisar e adicionar como conteúdo…",
+  podcast: "Digite o tema — será pesquisado e gerado como podcast adaptado…",
+  narracao: "Digite o tema — será pesquisado e gerado como leitura fiel…",
+  url: "Cole a URL para adicionar como conteúdo…",
+};
+
+for (const btn of document.querySelectorAll(".chat-mode")) {
+  btn.onclick = () => {
+    document.querySelector(".chat-mode.active")?.classList.remove("active");
+    btn.classList.add("active");
+    chatMode = btn.dataset.mode;
+    $("chat-text").placeholder = _MODE_PLACEHOLDERS[chatMode] || _MODE_PLACEHOLDERS[""];
+    $("chat-text").focus();
+  };
+}
+
 async function sendChat() {
   const text = $("chat-text").value.trim();
   if (!text) return;
   $("chat-text").value = "";
   addChatMessage("user", text);
+  const prefix = _MODE_PREFIXES[chatMode] || "";
+  const fullMessage = prefix + text;
   const thinking = document.createElement("div");
   thinking.className = "msg assistant muted";
   thinking.textContent = "… pesquisando";
   $("chat-messages").appendChild(thinking);
   $("chat-send").disabled = true;
-  const result = await bridge(["chat", "principal"], text);
+  const result = await bridge(["chat", "principal"], fullMessage);
   thinking.remove();
   $("chat-send").disabled = false;
   if (result.ok) {

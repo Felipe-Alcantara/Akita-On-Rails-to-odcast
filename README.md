@@ -253,8 +253,9 @@ npm start --prefix electron
 (ou opção "Abrir app desktop" no menu). O app tem **paridade completa com a CLI**, em quatro
 abas:
 
-- **💬 Chat** — o assistente de pesquisa: qualquer tema, com ações executadas automaticamente
-  (adicionar URL, buscar, gerar, exportar NotebookLM);
+- **💬 Chat** — o assistente de pesquisa: qualquer tema, com modos dedicados (Livre, Pesquisar,
+  Podcast, Narração, URL) que orientam a IA a agir sem pedir confirmação, e ações executadas
+  automaticamente (adicionar URL/texto, buscar, gerar, exportar NotebookLM);
 - **📚 Conteúdo** — seletor e prontidão da fonte, busca, adicionar por URL ou texto colado,
   estimativa, podcast adaptado ou leitura fiel com escolha de narrador, música de fundo local,
   log vivo e NotebookLM;

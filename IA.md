@@ -1182,3 +1182,40 @@ chamadas afetadas.
 **Risco que sobrou:** episódios que já tinham `status.json` com `episode_id` sem sufixo de
 idioma continuam dependendo do perfil ativo para localizar o diretório quando não recebem
 `--language=` (caso de chamadas legadas pela CLI ou automações antigas).
+
+---
+
+## 2026-07-20 — Correções do chat e modos de operação
+
+**O que mudou:** o chat de pesquisa apresentava três problemas funcionais e ganhou modos
+dedicados para reduzir perguntas esclarecedoras da IA:
+
+- **JSON com newlines literais** (`_fix_json_newlines`): LLMs colocam quebras de linha
+  reais dentro de valores JSON; `json.loads` falhava e a ação era ignorada silenciosamente.
+  O parser agora escapa `\n`/`\r` literais dentro de strings JSON antes do decode,
+  preservando newlines já escapadas e aspas escapadas.
+- **Contexto poluído**: blocos ```acao (JSON já executado) e textos longos de pesquisa
+  ficavam no histórico e esgotavam a janela de contexto na rodada seguinte.
+  `ChatSession._clean_for_context` remove os blocos e trunca respostas do assistente a
+  800 caracteres. O texto salvo no histórico já não contém blocos de ação crus.
+- **Timeout de CLI**: a `_default_provider` agora captura `subprocess.TimeoutExpired`
+  com mensagem clara em vez de propagar a exceção crua.
+- **Modos de chat** (Livre, Pesquisar, Podcast, Narração, URL): barra de botões na
+  interface que prefixa a mensagem com instruções claras (ex.: `[MODO PESQUISA] Pesquise
+  o tema abaixo…`), orientando a IA a agir diretamente sem pedir confirmação. O prefixo
+  é removido do histórico salvo para não poluir o contexto das rodadas seguintes.
+
+**Decisões:** o prefixo de modo é tratado como instrução interna — transparente para o
+modelo na chamada atual, mas removido do histórico persistido. Cada modo tem um placeholder
+descritivo no campo de texto. O modo URL envia a URL diretamente para `adicionar_url` sem
+passar pelo LLM, evitando custo e latência.
+
+**Validação:** 261 testes Python e 29 testes Electron verdes; Ruff, `compileall`,
+`npm run check` (ESLint + syntax + tests), `npm audit` (0 vulnerabilidades) e
+`git diff --check` — tudo aprovado. 8 testes novos cobrem `_fix_json_newlines` (JSON
+válido, newlines escapadas, newlines literais, aspas escapadas), remoção de blocos ação do
+histórico, truncamento de contexto e remoção do prefixo de modo.
+
+**Risco que sobrou:** os prefixos de modo dependem de o modelo seguir a instrução em texto;
+modelos menos capazes podem ignorar a diretriz e continuar perguntando. O modo URL não
+valida a URL antes de enviá-la à bridge.
