@@ -435,10 +435,16 @@ $("btn-add-text").onclick = async () => {
 function updateGenerateButton() {
   const button = $("btn-generate");
   const running = button.dataset.running === "true";
+  const done = button.dataset.done === "true";
   button.disabled = generationRequestPending || running;
   const verbatim = $("generation-mode").value === "verbatim";
-  button.textContent = generationRequestPending
-    ? "⏳ Iniciando…" : (verbatim ? "📖 Gerar leitura fiel" : "🎙️ Gerar episódio");
+  if (generationRequestPending) {
+    button.textContent = "⏳ Iniciando…";
+  } else if (done) {
+    button.textContent = verbatim ? "📖 Re-gerar leitura fiel" : "🔄 Re-gerar episódio";
+  } else {
+    button.textContent = verbatim ? "📖 Gerar leitura fiel" : "🎙️ Gerar episódio";
+  }
 }
 
 function updateGenerationMode() {
@@ -476,6 +482,7 @@ function generationArgs(
 }
 
 $("generation-mode").onchange = updateGenerationMode;
+$("generation-language").onchange = () => refreshStatus();
 
 function clearBackgroundMusic() {
   backgroundMusicPath = null;
@@ -678,7 +685,10 @@ async function refreshStatus() {
 }
 
 function renderSelectedStatus(episodes) {
-  const status = episodes.find((e) => e.episode_id === selectedItem.item_id);
+  const lang = $("generation-language").value;
+  const status = episodes.find(
+    (e) => e.episode_id === selectedItem.item_id && (e.language || "pt-BR") === lang
+  );
   const running = status && status.state === "rodando";
   const done = status && status.mp3;
   const feedback = generationFeedback(status);
@@ -687,6 +697,7 @@ function renderSelectedStatus(episodes) {
     "hidden", !running || Boolean(status && status.abort_requested_at)
   );
   $("btn-generate").dataset.running = String(Boolean(running));
+  $("btn-generate").dataset.done = String(Boolean(done));
   updateGenerateButton();
   $("btn-play").classList.toggle("hidden", !done);
   $("btn-chunks").classList.toggle("hidden", !status);

@@ -141,6 +141,7 @@ def _episode_summary(directory: Path) -> dict:
         "verified_at": metrics_data.get("verified_at") or None,
         "updated_at": status.get("updated_at") or file_updated_at,
         "mp3": (str(completed_mp3) if completed_mp3 and status.get("state") != "rodando" else None),
+        "language": "en" if directory.name.endswith("__en") else "pt-BR",
     }
 
 
