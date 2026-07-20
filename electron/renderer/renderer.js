@@ -51,8 +51,10 @@ function chunkSeverityLabel(chunk) {
   return "sem auditoria";
 }
 
-async function openChunkReview(itemId, title) {
-  const result = await bridge(["audio-chunks", itemId]);
+async function openChunkReview(itemId, title, language) {
+  const args = ["audio-chunks", itemId];
+  if (language) args.push(`--language=${language}`);
+  const result = await bridge(args);
   if (!result.ok) {
     alert(result.error);
     return;
@@ -630,7 +632,10 @@ $("btn-notebooklm").onclick = async () => {
 
 $("btn-abort").onclick = async () => {
   if (!selectedItem) return;
-  const result = await bridge(["abort", selectedItem.item_id]);
+  const abortLang = $("generation-language").value;
+  const abortArgs = ["abort", selectedItem.item_id];
+  if (abortLang) abortArgs.push(`--language=${abortLang}`);
+  const result = await bridge(abortArgs);
   if (result.ok && result.aborted) {
     alert(result.stopped
       ? "Geração abortada agora. O checkpoint foi preservado."
@@ -646,7 +651,10 @@ $("btn-repair").onclick = async () => {
     "ser\u00e3o regenerados.\n\nIsso consome cr\u00e9ditos da API."
   )) return;
   showGenerationRequest("Solicitando reparo\u2026", "active");
-  const result = await bridge(["repair", selectedItem.source, selectedItem.item_id]);
+  const lang = $("generation-language").value;
+  const repairArgs = ["repair", selectedItem.source, selectedItem.item_id];
+  if (lang) repairArgs.push(`--language=${lang}`);
+  const result = await bridge(repairArgs);
   if (!result.ok || !result.started) {
     showGenerationRequest(result.reason || "Erro ao iniciar reparo", "error");
     return;
@@ -738,7 +746,7 @@ function renderSelectedStatus(episodes) {
   $("btn-play").onclick = () => status && status.mp3
     && playInApp(status.mp3, selectedItem.title);
   $("btn-chunks").onclick = () => status
-    && openChunkReview(selectedItem.item_id, selectedItem.title);
+    && openChunkReview(selectedItem.item_id, selectedItem.title, lang);
   $("btn-folder").onclick = () => status && openProjectPath(status.dir);
   void refreshGenerationLog(status);
   void maybeAutoResume(status);
@@ -763,8 +771,11 @@ async function refreshGenerationLog(status) {
     return;
   }
   const itemId = selectedItem.item_id;
+  const lang = $("generation-language").value;
   const request = ++generationLogRequest;
-  const result = await bridge(["generation-log", itemId]);
+  const logArgs = ["generation-log", itemId];
+  if (lang) logArgs.push(`--language=${lang}`);
+  const result = await bridge(logArgs);
   if (request !== generationLogRequest || !selectedItem || selectedItem.item_id !== itemId) return;
 
   panel.classList.remove("hidden");
@@ -907,7 +918,11 @@ function renderEpisodes(episodes) {
       abortButton.textContent = "🛑";
       abortButton.title = "Abortar";
       abortButton.setAttribute("aria-label", `Abortar ${episode.episode_id}`);
-      abortButton.onclick = () => bridge(["abort", episode.episode_id]).then(refreshStatus);
+      abortButton.onclick = () => {
+        const args = ["abort", episode.episode_id];
+        if (episode.language) args.push(`--language=${episode.language}`);
+        bridge(args).then(refreshStatus);
+      };
       actions.appendChild(abortButton);
     }
     if (episode.mp3) {
@@ -920,7 +935,7 @@ function renderEpisodes(episodes) {
     }
     const chunks = makeElement("button", "ghost", "🧪 chunks");
     chunks.onclick = () => openChunkReview(
-      episode.episode_id, episode.title || episode.episode_id
+      episode.episode_id, episode.title || episode.episode_id, episode.language
     );
     actions.appendChild(chunks);
     const folder = document.createElement("button");

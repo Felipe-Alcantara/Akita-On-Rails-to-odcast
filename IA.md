@@ -1160,3 +1160,25 @@ apenas na mensagem ao usuário e no auto-resume.
 **Risco que sobrou:** o auto-resume consulta a chave efetiva a cada minuto; se o usuário
 recarregar créditos mas a consulta `/key` do OpenRouter ainda devolver indisponível por cache,
 a retomada atrasa até a próxima checagem.
+
+---
+
+## 2026-07-20 — Idioma propagado para chunks, log, abort e reparo
+
+**O que mudou:** o botão "Revisar chunks" e os comandos `generation-log`, `abort` e `repair`
+usavam `_episode_dir(item_id)` sem passar o idioma selecionado na interface. Quando o episódio
+era em inglês (diretório `<id>__en`) mas o perfil ativo tinha `language=pt-BR`, a bridge
+procurava no diretório errado — sem `__en`. Resultado: chunks não encontrados, log vazio, abort
+e reparo no episódio errado ou inexistente.
+
+Corrigido de ponta a ponta: `_cmd_audio_chunks`, `_cmd_generation_log`, `_cmd_abort`,
+`_cmd_repair` e `_cmd_run_repair` agora aceitam `language` explícito. O renderer passa
+`--language=` do seletor (aba Conteúdo) ou de `episode.language` (aba Episódios) em todas as
+chamadas afetadas.
+
+**Validação:** 253 testes Python, 29 testes Electron, Ruff, `compileall`, ESLint,
+`npm audit` (0 vulnerabilidades) e `git diff --check` — tudo aprovado.
+
+**Risco que sobrou:** episódios que já tinham `status.json` com `episode_id` sem sufixo de
+idioma continuam dependendo do perfil ativo para localizar o diretório quando não recebem
+`--language=` (caso de chamadas legadas pela CLI ou automações antigas).

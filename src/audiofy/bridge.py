@@ -151,9 +151,9 @@ def _sanitize_generation_log(text: str) -> str:
     return text
 
 
-def _cmd_generation_log(item_id: str) -> dict:
+def _cmd_generation_log(item_id: str, language: str = "") -> dict:
     """Retorna somente a cauda segura do log, sem carregar um arquivo ilimitado."""
-    directory = _episode_dir(item_id)
+    directory = _episode_dir(item_id, language)
     path = directory / "generation.log"
     status = GenerationTracker.load(directory) or {}
     pid = status.get("pid")
@@ -191,11 +191,11 @@ def _cmd_generation_log(item_id: str) -> dict:
     }
 
 
-def _cmd_audio_chunks(item_id: str) -> dict:
+def _cmd_audio_chunks(item_id: str, language: str = "") -> dict:
     """Lista somente chunks confinados ao episódio e seus achados de auditoria."""
     from .audio_audit import read_audio_audit
 
-    directory = _episode_dir(item_id)
+    directory = _episode_dir(item_id, language)
     segments_directory = directory / "segments"
     audit = read_audio_audit(directory)
     manifest = {}
@@ -535,11 +535,11 @@ def _cmd_run_generation(
     return {"mp3": str(final)}
 
 
-def _cmd_repair(source_key: str, item_id: str) -> dict:
+def _cmd_repair(source_key: str, item_id: str, language: str = "") -> dict:
     """Regenera somente segmentos com silêncio problemático (lançador de worker)."""
     from .audio_audit import read_audio_audit
 
-    directory = _episode_dir(item_id)
+    directory = _episode_dir(item_id, language)
     status = GenerationTracker.reconcile(directory)
     if status and status.get("state") == "rodando":
         return {"started": False, "reason": "geração já em andamento"}
@@ -582,6 +582,8 @@ def _cmd_repair(source_key: str, item_id: str) -> dict:
         source_key,
         item_id,
     ]
+    if language:
+        child_args.append(f"--language={language}")
     if background_cache:
         child_args.append(f"--background-music={background_cache}")
         child_args.append(f"--background-volume={background_volume}")
@@ -618,13 +620,18 @@ def _cmd_run_repair(
     item_id: str,
     background_music: str | None = None,
     background_volume: float = 0.08,
+    language: str = "",
 ) -> dict:
     """Worker de reparo — roda em processo filho."""
     from .pipeline import repair_episode
 
     try:
         settings = Settings()
-        previous = GenerationTracker.load(_episode_dir(item_id)) or {}
+        if language:
+            from dataclasses import replace as _replace
+
+            settings = _replace(settings, language=language)
+        previous = GenerationTracker.load(_episode_dir(item_id, language)) or {}
         generation_mode = previous.get("generation_mode", "adaptation")
         narration_voice = previous.get("narration_voice")
         if generation_mode == "verbatim" and narration_voice:
@@ -652,7 +659,7 @@ def _cmd_run_repair(
             background_volume=_background_volume(background_volume),
         )
     except Exception as error:
-        directory = _episode_dir(item_id)
+        directory = _episode_dir(item_id, language)
         status = GenerationTracker.load(directory) or {}
         if status.get("state") == "rodando":
             GenerationTracker.mark_launch_failed(directory, str(error))
@@ -672,8 +679,8 @@ def _cmd_status(item_id: str | None) -> dict:
     return {"episodes": episodes, "running": running, "anything_running": bool(running)}
 
 
-def _cmd_abort(item_id: str) -> dict:
-    directory = _episode_dir(item_id)
+def _cmd_abort(item_id: str, language: str = "") -> dict:
+    directory = _episode_dir(item_id, language)
     status = GenerationTracker.load(directory)
     if not status or status.get("state") != "rodando":
         return {"aborted": False, "reason": "nenhuma geração rodando para este item"}
@@ -911,16 +918,29 @@ def main() -> None:
         elif command == "status":
             result = _cmd_status(rest[0] if rest else None)
         elif command == "generation-log" and rest:
-            result = _cmd_generation_log(rest[0])
+            log_lang = ""
+            for arg in rest[1:]:
+                if arg.startswith("--language="):
+                    log_lang = arg.split("=", 1)[1]
+            result = _cmd_generation_log(rest[0], log_lang)
         elif command == "repair" and len(rest) >= 2:
-            result = _cmd_repair(rest[0], rest[1])
+            _, _, _, music, volume, repair_lang = _generation_options(rest[2:])
+            result = _cmd_repair(rest[0], rest[1], repair_lang)
         elif command == "run-repair" and len(rest) >= 2:
-            _, _, _, music, volume, _ = _generation_options(rest[2:])
-            result = _cmd_run_repair(rest[0], rest[1], music, volume)
+            _, _, _, music, volume, repair_lang = _generation_options(rest[2:])
+            result = _cmd_run_repair(rest[0], rest[1], music, volume, repair_lang)
         elif command == "audio-chunks" and rest:
-            result = _cmd_audio_chunks(rest[0])
+            lang = ""
+            for arg in rest[1:]:
+                if arg.startswith("--language="):
+                    lang = arg.split("=", 1)[1]
+            result = _cmd_audio_chunks(rest[0], lang)
         elif command == "abort" and rest:
-            result = _cmd_abort(rest[0])
+            abort_lang = ""
+            for arg in rest[1:]:
+                if arg.startswith("--language="):
+                    abort_lang = arg.split("=", 1)[1]
+            result = _cmd_abort(rest[0], abort_lang)
         elif command == "tts-catalog":
             result = _cmd_tts_catalog()
         elif command == "notebooklm" and len(rest) >= 2:
