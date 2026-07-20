@@ -34,8 +34,10 @@ class Profile:
 _TTS = "google/gemini-3.1-flash-tts-preview"
 _PRO = "google/gemini-2.5-pro"
 _FLASH = "google/gemini-2.5-flash"
+_OPUS = "anthropic/claude-opus-4"
 _SONNET = "anthropic/claude-sonnet-4.6"
 _HAIKU = "anthropic/claude-haiku-4.5"
+_GPT_SOL = "openai/gpt-sol"
 _GPT4O = "openai/gpt-4o"
 _GPT4O_MINI = "openai/gpt-4o-mini"
 
@@ -277,57 +279,57 @@ BUILTIN_PROFILES: list[Profile] = [
     # ╚══════════════════════════════════════════════════════════════════════╝
     Profile(
         name="claude-duo",
-        text_model=_SONNET,
+        text_model=_OPUS,
         audit_model=_FLASH,
         tts_model=_TTS,
         presenters_spec=DEFAULT_SPEC,
         description=(
-            "Dois apresentadores com Claude Sonnet e auditoria Gemini Flash "
-            "— estilo diferenciado, custo moderado"
+            "Dois apresentadores com Claude Opus e auditoria Gemini Flash "
+            "— máxima qualidade Anthropic"
         ),
     ),
     Profile(
         name="claude-duo-economico",
-        text_model=_HAIKU,
+        text_model=_SONNET,
         audit_model=_FLASH,
         tts_model=_TTS,
         presenters_spec=DEFAULT_SPEC,
         description=(
-            "Dois apresentadores com Claude Haiku "
-            "— rápido e econômico"
+            "Dois apresentadores com Claude Sonnet "
+            "— custo moderado com estilo Anthropic"
         ),
     ),
     Profile(
         name="claude-trio",
-        text_model=_SONNET,
+        text_model=_OPUS,
         audit_model=_FLASH,
         tts_model=_TTS,
         presenters_spec=_TRIO_SPEC,
         description=(
-            "Três vozes (curioso, animado, analítico) com Claude Sonnet "
-            "— trio com estilo Anthropic"
+            "Três vozes (curioso, animado, analítico) com Claude Opus "
+            "— trio com máxima qualidade Anthropic"
         ),
     ),
     Profile(
         name="claude-mesa-redonda",
-        text_model=_SONNET,
+        text_model=_OPUS,
         audit_model=_FLASH,
         tts_model=_TTS,
         presenters_spec=_MESA_SPEC,
         description=(
-            "Mediador + três debatedores com Claude Sonnet "
-            "— debate estilo Anthropic"
+            "Mediador + três debatedores com Claude Opus "
+            "— debate com máxima qualidade Anthropic"
         ),
     ),
     Profile(
         name="claude-narrador",
-        text_model=_SONNET,
+        text_model=_OPUS,
         audit_model=_FLASH,
         tts_model=_TTS,
         presenters_spec="narrador:Sulafat:caloroso",
         description=(
-            "Voz solo calorosa (Sulafat) com Claude Sonnet "
-            "— narração refinada"
+            "Voz solo calorosa (Sulafat) com Claude Opus "
+            "— narração premium Anthropic"
         ),
     ),
     # ╔══════════════════════════════════════════════════════════════════════╗
@@ -335,57 +337,57 @@ BUILTIN_PROFILES: list[Profile] = [
     # ╚══════════════════════════════════════════════════════════════════════╝
     Profile(
         name="openai-duo",
-        text_model=_GPT4O,
+        text_model=_GPT_SOL,
         audit_model=_FLASH,
         tts_model=_TTS,
         presenters_spec=DEFAULT_SPEC,
         description=(
-            "Dois apresentadores com GPT-4o e auditoria Gemini Flash "
-            "— estilo OpenAI, custo moderado"
+            "Dois apresentadores com GPT SOL e auditoria Gemini Flash "
+            "— máxima qualidade OpenAI"
         ),
     ),
     Profile(
         name="openai-duo-economico",
-        text_model=_GPT4O_MINI,
+        text_model=_GPT4O,
         audit_model=_FLASH,
         tts_model=_TTS,
         presenters_spec=DEFAULT_SPEC,
         description=(
-            "Dois apresentadores com GPT-4o Mini "
-            "— econômico com estilo OpenAI"
+            "Dois apresentadores com GPT-4o "
+            "— custo moderado com estilo OpenAI"
         ),
     ),
     Profile(
         name="openai-trio",
-        text_model=_GPT4O,
+        text_model=_GPT_SOL,
         audit_model=_FLASH,
         tts_model=_TTS,
         presenters_spec=_TRIO_SPEC,
         description=(
-            "Três vozes (curioso, animado, analítico) com GPT-4o "
-            "— trio com estilo OpenAI"
+            "Três vozes (curioso, animado, analítico) com GPT SOL "
+            "— trio com máxima qualidade OpenAI"
         ),
     ),
     Profile(
         name="openai-mesa-redonda",
-        text_model=_GPT4O,
+        text_model=_GPT_SOL,
         audit_model=_FLASH,
         tts_model=_TTS,
         presenters_spec=_MESA_SPEC,
         description=(
-            "Mediador + três debatedores com GPT-4o "
-            "— debate estilo OpenAI"
+            "Mediador + três debatedores com GPT SOL "
+            "— debate com máxima qualidade OpenAI"
         ),
     ),
     Profile(
         name="openai-narrador",
-        text_model=_GPT4O,
+        text_model=_GPT_SOL,
         audit_model=_FLASH,
         tts_model=_TTS,
         presenters_spec="narrador:Sulafat:caloroso",
         description=(
-            "Voz solo calorosa (Sulafat) com GPT-4o "
-            "— narração estilo OpenAI"
+            "Voz solo calorosa (Sulafat) com GPT SOL "
+            "— narração premium OpenAI"
         ),
     ),
 ]
