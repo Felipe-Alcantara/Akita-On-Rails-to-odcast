@@ -5,19 +5,27 @@ function isKeyLimitFailure(error) {
   return /Key limit exceeded|monthly limit/i.test(String(error || ""));
 }
 
+function isInsufficientCredits(error) {
+  return /HTTP 402|insufficient.*credit|credit.*insufficient/i.test(String(error || ""));
+}
+
+function isExhaustionFailure(error) {
+  return isKeyLimitFailure(error) || isInsufficientCredits(error);
+}
+
 function friendlyGenerationError(error, keySource = "") {
   const detail = String(error || "");
+  if (isInsufficientCredits(detail)) {
+    const source = keySource ? ` A geração usou a chave "${keySource}".` : "";
+    return "O saldo da conta no OpenRouter acabou." + source +
+      " Recarregue créditos em openrouter.ai/settings/credits e o Audiofy retoma automaticamente.";
+  }
   if (isKeyLimitFailure(detail)) {
     return "A chave usada naquela execução atingiu o limite mensal. A configuração atual " +
       "pode já ser outra; o Audiofy retoma automaticamente quando ela está disponível.";
   }
   if (/HTTP 401|unauthorized|invalid.*key/i.test(detail)) {
     return "A chave do OpenRouter não foi aceita. Confira a chave configurada.";
-  }
-  if (/HTTP 402|insufficient.*credit|credit.*insufficient/i.test(detail)) {
-    const source = keySource ? ` A geração usou a chave "${keySource}".` : "";
-    return "O OpenRouter recusou a chamada por saldo ou limite insuficiente." + source +
-      " Confira o saldo global e o limite da chave efetivamente usada.";
   }
   const sanitized = detail
     .replace(/https?:\/\/\S+/g, "")
@@ -93,13 +101,14 @@ function generationFeedback(status) {
 
 function canAutoResumeKeyLimit(status, keyCheck) {
   return Boolean(
-    status && status.state === "falhou" && isKeyLimitFailure(status.last_error)
+    status && status.state === "falhou" && isExhaustionFailure(status.last_error)
     && keyCheck && keyCheck.ok && keyCheck.valid
   );
 }
 
 const statusView = {
-  canAutoResumeKeyLimit, friendlyGenerationError, generationFeedback, isKeyLimitFailure,
+  canAutoResumeKeyLimit, friendlyGenerationError, generationFeedback,
+  isExhaustionFailure, isInsufficientCredits, isKeyLimitFailure,
 };
 if (typeof module !== "undefined" && module.exports) module.exports = statusView;
 if (typeof window !== "undefined") window.audiofyStatusView = statusView;

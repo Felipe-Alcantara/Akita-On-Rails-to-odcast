@@ -17,6 +17,7 @@ from audiofy.pipeline import (  # noqa: E402
     _assemble,
     _chat_with_key_fallback,
     _concat_line,
+    _exhaustion_label,
     _prepare_verbatim_turns,
     _synthesize_turns,
     _wait_for_retry,
@@ -277,6 +278,12 @@ class ResumableSynthesisTest(unittest.TestCase):
         self.assertIs(result, expected)
         self.assertEqual(chat_json.call_count, 2)
         self.assertEqual(GenerationTracker.load(self.directory)["key_source"], "reserva")
+
+    def test_exhaustion_label_diferencia_402_de_403(self):
+        err_402 = OpenRouterError("Insufficient credits", status_code=402)
+        err_403 = OpenRouterError("Key limit exceeded", status_code=403)
+        self.assertIn("saldo", _exhaustion_label(err_402))
+        self.assertIn("limite", _exhaustion_label(err_403))
 
     def test_abort_interrompe_espera_antes_do_proximo_retry(self):
         self.tracker.stage("tts", total=2, current=1)

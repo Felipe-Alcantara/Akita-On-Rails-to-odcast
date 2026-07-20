@@ -1131,3 +1131,32 @@ tabela dos 30 perfis, seção de idioma e referências de perfis corrigidas.
 **Risco que sobrou:** a troca de idioma não traduz o conteúdo-fonte automaticamente — a
 tradução fica a cargo do modelo durante o roteiro, e a qualidade depende da capacidade do
 modelo escolhido. IDs de modelo (Opus, GPT SOL) dependem do catálogo vivo do OpenRouter.
+
+---
+
+## 2026-07-20 — Erro de saldo da conta diferenciado do limite de chave
+
+**O que mudou:** a geração real em inglês falhou na primeira fala TTS com HTTP 402
+("Insufficient credits") e o app tratou como "saldo ou limite insuficiente" genérico, sem
+orientar a recarregar créditos. O auto-resume só funcionava para 403 (limite de chave), não
+para 402 (saldo da conta). Corrigido em backend e frontend:
+
+- **Backend** (`pipeline._exhaustion_label`): nova função diferencia 402 ("sem saldo na conta")
+  de 403 ("sem limite"). Os logs de fallback agora informam a causa correta.
+- **Frontend** (`status-view.js`): mensagem 402 agora diz "O saldo da conta no OpenRouter acabou.
+  Recarregue créditos em openrouter.ai/settings/credits e o Audiofy retoma automaticamente."
+  A mensagem 403 permanece inalterada.
+- **Auto-resume** (`canAutoResumeKeyLimit`): agora cobre tanto 402 quanto 403. Ao recarregar
+  créditos, o Audiofy retoma a geração do checkpoint sem precisar clicar em nada.
+
+**Decisões:** 402 é verificado antes de 403 no `friendlyGenerationError` porque uma resposta
+com "Insufficient credits" e status 402 deve orientar recarga de saldo, não troca de chave.
+O fallback entre chaves no pipeline continua tratando ambos como exaustão — a distinção é
+apenas na mensagem ao usuário e no auto-resume.
+
+**Validação:** 253 testes Python, 29 testes Electron (novo: retoma automática após 402), Ruff,
+`compileall`, ESLint, `npm audit` (0 vulnerabilidades) e `git diff --check` — tudo aprovado.
+
+**Risco que sobrou:** o auto-resume consulta a chave efetiva a cada minuto; se o usuário
+recarregar créditos mas a consulta `/key` do OpenRouter ainda devolver indisponível por cache,
+a retomada atrasa até a próxima checagem.

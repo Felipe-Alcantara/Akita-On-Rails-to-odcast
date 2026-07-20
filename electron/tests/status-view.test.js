@@ -8,6 +8,7 @@ const vm = require("node:vm");
 
 const {
   canAutoResumeKeyLimit, friendlyGenerationError, generationFeedback,
+  isExhaustionFailure, isInsufficientCredits,
 } = require("../renderer/status-view");
 
 test("traduz limite mensal da chave sem expor URL interna do provedor", () => {
@@ -22,15 +23,16 @@ test("traduz limite mensal da chave sem expor URL interna do provedor", () => {
   assert.doesNotMatch(message, /identificador/);
 });
 
-test("erro 402 identifica a chave efetiva e diferencia saldo de limite", () => {
+test("erro 402 orienta recarregar créditos e identifica a chave", () => {
   const message = friendlyGenerationError(
     "HTTP 402: Insufficient credits. Add more using https://openrouter.ai/settings/credits",
     "ambiente"
   );
 
-  assert.match(message, /saldo ou limite insuficiente/i);
+  assert.match(message, /saldo da conta.*acabou/i);
   assert.match(message, /chave "ambiente"/i);
-  assert.match(message, /saldo global/i);
+  assert.match(message, /recarregue créditos/i);
+  assert.match(message, /retoma automaticamente/i);
   assert.doesNotMatch(message, /https?:\/\//);
 });
 
@@ -64,6 +66,18 @@ test("retoma limite antigo somente quando a chave atual tem saldo", () => {
     { ...status, last_error: "HTTP 401: unauthorized" },
     { ok: true, valid: true }
   ), false);
+});
+
+test("retoma automaticamente após recarregar créditos (402)", () => {
+  const status = {
+    state: "falhou",
+    last_error: "HTTP 402: Insufficient credits.",
+  };
+
+  assert.equal(canAutoResumeKeyLimit(status, { ok: true, valid: true }), true);
+  assert.equal(canAutoResumeKeyLimit(status, { ok: true, valid: false }), false);
+  assert.equal(isInsufficientCredits(status.last_error), true);
+  assert.equal(isExhaustionFailure(status.last_error), true);
 });
 
 test("estado de inicialização aparece antes do primeiro segmento", () => {

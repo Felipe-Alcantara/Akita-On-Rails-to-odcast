@@ -275,10 +275,10 @@ Para o Codex, o modelo global definido em `~/.codex/config.toml` também é iden
 campo é lido). A interface reorganiza navegação, cartões e formulários ao redimensionar a janela até
 sua largura mínima de 360 px.
 O cartão do conteúdo confirma imediatamente o início da geração e mantém falhas rápidas visíveis
-com etapa, checkpoint, custo e orientação segura — por exemplo, limite mensal ou chave recusada —
-em vez de parecer que o botão não respondeu.
-Falhas antigas por limite são identificadas como históricas: ao abrir novamente o conteúdo, o app
-valida a chave efetiva e retoma automaticamente do checkpoint quando houver limite disponível,
+com etapa, checkpoint, custo e orientação segura — saldo da conta esgotado, limite mensal da
+chave ou chave recusada — em vez de parecer que o botão não respondeu.
+Falhas por saldo ou limite são identificadas como históricas: ao abrir novamente o conteúdo, o
+app valida a chave efetiva e retoma automaticamente do checkpoint quando houver saldo disponível,
 rechecando a configuração a cada minuto enquanto a tela permanecer aberta.
 O app fala com o backend pela bridge JSON
 (`python3 -m audiofy.bridge`), a mesma interface disponível para qualquer automação.
@@ -459,7 +459,9 @@ TTS). O menu **Catálogo TTS/vozes** lista os modelos de áudio disponíveis no 
   ordem exibida) antes de falhar; o rótulo da alternativa usada fica registrado, sem qualquer
   segredo.
 - O `status.json`, o banner e o log registram somente o rótulo seguro da chave em tentativa. Em
-  `402`, a interface orienta conferir tanto o saldo global quanto o limite individual dessa chave.
+  `402` (saldo da conta acabou), a interface orienta recarregar créditos; em `403` (limite mensal
+  da chave), orienta aumentar o limite ou trocar a chave. O Audiofy retoma automaticamente em
+  ambos os casos ao detectar que a chave voltou a ter saldo.
 - O custo aparece na barra de progresso, no `status.json`, no app desktop, no Status do menu e
   fica registrado no `NOTES.md` do episódio.
 - **Estimativa adaptativa**: cada conclusão grava palavras da fonte/roteiro, duração, modelo,

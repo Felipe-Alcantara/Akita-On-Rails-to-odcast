@@ -556,6 +556,12 @@ def _is_key_exhaustion_error(error: openrouter.OpenRouterError) -> bool:
     return error.status_code == 402 or (error.status_code == 403 and "limit" in message)
 
 
+def _exhaustion_label(error: openrouter.OpenRouterError) -> str:
+    if error.status_code == 402:
+        return "sem saldo na conta"
+    return "sem limite"
+
+
 def _chat_with_key_fallback(
     settings: Settings,
     model: str,
@@ -573,8 +579,9 @@ def _chat_with_key_fallback(
             return openrouter.chat_json(candidate, model, system, prompt)
         except openrouter.OpenRouterError as error:
             if _is_key_exhaustion_error(error) and key_index + 1 < len(candidates):
+                reason = _exhaustion_label(error)
                 print(
-                    f"    ↪ {key_label} sem limite/saldo; tentando {candidates[key_index + 1][0]}.",
+                    f"    ↪ {key_label} {reason}; tentando {candidates[key_index + 1][0]}.",
                     flush=True,
                 )
                 continue
@@ -625,8 +632,9 @@ def _synthesize_with_retry(
                 last_error = error
                 if _is_key_exhaustion_error(error) and key_index + 1 < len(candidates):
                     next_label = candidates[key_index + 1][0]
+                    reason = _exhaustion_label(error)
                     print(
-                        f"\n   ↪ Limite da {key_label}; tentando {next_label} "
+                        f"\n   ↪ {key_label} {reason}; tentando {next_label} "
                         f"na fala {segment_number}.",
                         flush=True,
                     )
