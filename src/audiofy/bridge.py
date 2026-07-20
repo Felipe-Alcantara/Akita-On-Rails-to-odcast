@@ -53,11 +53,14 @@ def _emit(payload: dict) -> None:
     print(json.dumps(payload, ensure_ascii=False))
 
 
-def _episode_dir(item_id: str) -> Path:
+def _episode_dir(item_id: str, language: str = "") -> Path:
     # Import tardio: o setup precisa funcionar mesmo se ``requests`` ainda faltar.
     from .pipeline import episode_dir
 
-    return episode_dir(item_id)
+    if not language:
+        from .config import profile_store
+        language = profile_store().active().language
+    return episode_dir(item_id, language)
 
 
 def _episode_summary(directory: Path) -> dict:
@@ -349,12 +352,13 @@ def _background_volume(value: str | float) -> float:
 
 def _generation_options(
     arguments: list[str],
-) -> tuple[bool, str, str | None, str | None, float]:
+) -> tuple[bool, str, str | None, str | None, float, str]:
     force = False
     generation_mode = "adaptation"
     narration_voice = None
     background_music = None
     background_volume = 0.08
+    language = "pt-BR"
     for argument in arguments:
         if argument == "--force":
             force = True
@@ -366,10 +370,14 @@ def _generation_options(
             background_music = argument.partition("=")[2]
         elif argument.startswith("--background-volume="):
             background_volume = _background_volume(argument.partition("=")[2])
+        elif argument.startswith("--language="):
+            language = argument.partition("=")[2]
+            if language not in ("pt-BR", "en"):
+                raise ValueError(f"Idioma desconhecido: {language}")
         else:
             raise ValueError(f"Opção de geração desconhecida: {argument}")
     mode, voice = _validate_generation_options(generation_mode, narration_voice)
-    return force, mode, voice, background_music, background_volume
+    return force, mode, voice, background_music, background_volume, language
 
 
 def _cmd_generate(
@@ -380,6 +388,7 @@ def _cmd_generate(
     narration_voice: str | None = None,
     background_music: str | None = None,
     background_volume: float = 0.08,
+    language: str = "pt-BR",
 ) -> dict:
     generation_mode, narration_voice = _validate_generation_options(
         generation_mode, narration_voice
@@ -389,7 +398,7 @@ def _cmd_generate(
     background_name = None
     if background_music:
         background_cache, background_name = _cache_background_music(background_music)
-    directory = _episode_dir(item_id)
+    directory = _episode_dir(item_id, language)
     # reconcile: um "rodando" órfão (worker morto) não pode bloquear a nova
     # geração — era isso que fazia todo clique responder "já em andamento".
     status = GenerationTracker.reconcile(directory)
@@ -432,6 +441,8 @@ def _cmd_generate(
     if background_cache:
         child_args.append(f"--background-music={background_cache}")
         child_args.append(f"--background-volume={background_volume}")
+    if language != "pt-BR":
+        child_args.append(f"--language={language}")
     from .runtime.process import launch_detached
 
     try:
@@ -475,6 +486,7 @@ def _cmd_run_generation(
     narration_voice: str | None = None,
     background_music: str | None = None,
     background_volume: float = 0.08,
+    language: str = "pt-BR",
 ) -> dict:
     generation_mode, narration_voice = _validate_generation_options(
         generation_mode, narration_voice
@@ -483,6 +495,9 @@ def _cmd_run_generation(
 
     try:
         settings = Settings()
+        if language != "pt-BR":
+            from dataclasses import replace as _replace_lang
+            settings = _replace_lang(settings, language=language)
         if generation_mode == "verbatim":
             from dataclasses import replace
 
@@ -708,6 +723,7 @@ def _cmd_settings_info() -> dict:
             {"speaker": p.speaker, "voice": p.voice, "style": p.style} for p in settings.presenters
         ],
         "gemini_voices": GEMINI_VOICES,
+        "language": settings.language,
         "has_key": bool(settings.api_key),
         "key_source": api_key_source(),
         "overrides": overrides,
@@ -885,11 +901,12 @@ def main() -> None:
         elif command == "item" and len(rest) >= 2:
             result = _cmd_item(rest[0], rest[1])
         elif command == "generate" and len(rest) >= 2:
-            force, mode, voice, music, volume = _generation_options(rest[2:])
-            result = _cmd_generate(rest[0], rest[1], force, mode, voice, music, volume)
+            force, mode, voice, music, volume, lang = _generation_options(rest[2:])
+            result = _cmd_generate(rest[0], rest[1], force, mode, voice, music, volume, lang)
         elif command == "run-generation" and len(rest) >= 2:
-            force, mode, voice, music, volume = _generation_options(rest[2:])
-            result = _cmd_run_generation(rest[0], rest[1], force, mode, voice, music, volume)
+            force, mode, voice, music, volume, lang = _generation_options(rest[2:])
+            result = _cmd_run_generation(
+                rest[0], rest[1], force, mode, voice, music, volume, lang)
         elif command == "status":
             result = _cmd_status(rest[0] if rest else None)
         elif command == "generation-log" and rest:
@@ -897,7 +914,7 @@ def main() -> None:
         elif command == "repair" and len(rest) >= 2:
             result = _cmd_repair(rest[0], rest[1])
         elif command == "run-repair" and len(rest) >= 2:
-            _, _, _, music, volume = _generation_options(rest[2:])
+            _, _, _, music, volume, _ = _generation_options(rest[2:])
             result = _cmd_run_repair(rest[0], rest[1], music, volume)
         elif command == "audio-chunks" and rest:
             result = _cmd_audio_chunks(rest[0])
@@ -909,7 +926,9 @@ def main() -> None:
             from .export import export_notebooklm_pack
 
             item = get_source(rest[0]).get_item(rest[1])
-            result = {"pack": str(export_notebooklm_pack(item, rest[0]))}
+            from .config import profile_store as _ps
+            result = {"pack": str(export_notebooklm_pack(
+                item, rest[0], _ps().active().language))}
         elif command == "add-url" and rest:
             from .sources.custom import CustomSource
 

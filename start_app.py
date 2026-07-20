@@ -628,7 +628,8 @@ def do_watch(selector: str) -> None:
     from audiofy.pipeline import episode_dir
 
     item_id = _resolve_item_id(selector) or selector
-    directory = episode_dir(item_id)
+    from audiofy.config import Settings as _S
+    directory = episode_dir(item_id, _S().language)
     print(
         f"{DIM}Acompanhando {item_id} — Ctrl+C sai do acompanhamento (NÃO aborta a geração).{RESET}"
     )
@@ -676,7 +677,8 @@ def do_abort(selector: str) -> None:
     from audiofy.pipeline import episode_dir
 
     item_id = _resolve_item_id(selector) or selector
-    directory = episode_dir(item_id)
+    from audiofy.config import Settings as _S
+    directory = episode_dir(item_id, _S().language)
     status = GenerationTracker.load(directory)
     if not status or status.get("state") != "rodando":
         _warn("Nenhuma geração rodando para este item.")
@@ -754,7 +756,7 @@ def _run_chat_action(action: dict) -> None:
         from audiofy.export import export_notebooklm_pack
 
         item = get_source(action.get("fonte", SOURCE_KEY)).get_item(action.get("item_id", ""))
-        _ok(f"Pacote NotebookLM: {export_notebooklm_pack(item, SOURCE_KEY)}")
+        _ok(f"Pacote NotebookLM: {export_notebooklm_pack(item, SOURCE_KEY, Settings().language)}")
     else:
         _warn(f"Ação desconhecida: {kind}")
 
@@ -809,7 +811,7 @@ def do_notebooklm(selector: str) -> None:
     from audiofy.export import export_notebooklm_pack
 
     item = get_source(SOURCE_KEY).get_item(item_id)
-    pack = export_notebooklm_pack(item, SOURCE_KEY)
+    pack = export_notebooklm_pack(item, SOURCE_KEY, Settings().language)
     _ok(f"Pacote pronto em {pack}")
     print(
         f"  {DIM}Abra o instrucoes.md dessa pasta e envie o arquivo "

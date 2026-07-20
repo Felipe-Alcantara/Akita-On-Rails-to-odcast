@@ -27,6 +27,8 @@ class Profile:
     # Provedor das etapas de texto: "openrouter" (API, custo por token) ou uma
     # CLI de assinatura ("claude-code", "gemini-cli", "codex") com custo zero.
     text_provider: str = "openrouter"
+    # Idioma do episódio gerado: "pt-BR" ou "en".
+    language: str = "pt-BR"
 
 
 _TTS = "google/gemini-3.1-flash-tts-preview"
@@ -427,6 +429,9 @@ def profile_from_payload(payload: dict[str, Any]) -> Profile:
     description = str(payload.get("description", "")).strip()
     if len(description) > 300:
         raise ValueError("A descrição pode ter no máximo 300 caracteres.")
+    language = str(payload.get("language", "pt-BR")).strip() or "pt-BR"
+    if language not in ("pt-BR", "en"):
+        raise ValueError("Idioma deve ser 'pt-BR' ou 'en'.")
     return Profile(
         name=name,
         text_model=text_model,
@@ -435,6 +440,7 @@ def profile_from_payload(payload: dict[str, Any]) -> Profile:
         presenters_spec=presenters_spec,
         description=description,
         text_provider=provider,
+        language=language,
     )
 
 

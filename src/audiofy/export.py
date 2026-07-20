@@ -28,7 +28,7 @@ Google AI Plus ≈ 6/dia; AI Pro tem limites maiores.
 
 ## Foco sugerido para o Audio Overview
 
-> Cubra o conteúdo INTEGRALMENTE, em português brasileiro: todas as teses,
+> Cubra o conteúdo INTEGRALMENTE, em {language_label}: todas as teses,
 > argumentos, exemplos, números, ressalvas e conclusões do autor — não apenas
 > um resumo. Não invente fatos nem atribua ao autor o que ele não disse.
 > Explique trechos de código pela finalidade, sem soletrar sintaxe.
@@ -43,14 +43,16 @@ use o pipeline normal do Audiofy. Este modo é o caminho rápido e barato.
 """
 
 
-def export_notebooklm_pack(item: ContentItem, source_key: str = "conteudo") -> Path:
+def export_notebooklm_pack(item: ContentItem, source_key: str = "conteudo",
+                           language: str = "pt-BR") -> Path:
     """Escreve o pacote NotebookLM na pasta do episódio e retorna o caminho."""
-    pack_dir = episode_dir(item.item_id) / "notebooklm"
+    pack_dir = episode_dir(item.item_id, language) / "notebooklm"
     pack_dir.mkdir(parents=True, exist_ok=True)
     source_file = source_document_filename(source_key, item.item_id)
     final_audio_file = (
         f"{artifact_prefix(source_key, item.item_id, 'notebooklm')}__audio-completo.mp3"
     )
+    language_label = "English" if language == "en" else "português brasileiro"
     (pack_dir / source_file).write_text(
         f"# {item.title}\n\nFonte: {item.url}\n\n---\n\n{item.text}\n",
         encoding="utf-8",
@@ -60,6 +62,7 @@ def export_notebooklm_pack(item: ContentItem, source_key: str = "conteudo") -> P
             attribution=item.attribution,
             source_file=source_file,
             final_audio_file=final_audio_file,
+            language_label=language_label,
         ),
         encoding="utf-8",
     )

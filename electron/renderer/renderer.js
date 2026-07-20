@@ -458,10 +458,12 @@ function updateGenerationMode() {
 function generationArgs(
   source,
   itemId,
-  { force = false, mode = null, voice = null, backgroundMusic = null, volume = null } = {}
+  { force = false, mode = null, voice = null, backgroundMusic = null, volume = null,
+    language = null } = {}
 ) {
   const selectedMode = mode || $("generation-mode").value;
   const selectedVoice = voice || $("narration-voice").value;
+  const selectedLang = language || $("generation-language").value;
   const args = ["generate", source, itemId, `--mode=${selectedMode}`];
   if (selectedMode === "verbatim") args.push(`--voice=${selectedVoice}`);
   if (force) args.push("--force");
@@ -469,6 +471,7 @@ function generationArgs(
     args.push(`--background-music=${backgroundMusic}`);
     args.push(`--background-volume=${volume || 0.08}`);
   }
+  if (selectedLang !== "pt-BR") args.push(`--language=${selectedLang}`);
   return args;
 }
 
@@ -964,6 +967,11 @@ function renderActiveConfig(info) {
     info.has_key ? "" : "warn"));
   strip.appendChild(configChip("Chave efetiva", info.key_source || "nenhuma",
     info.has_key ? "" : "warn"));
+  const langLabel = info.language === "en" ? "English" : "Português";
+  strip.appendChild(configChip("Idioma", langLabel));
+
+  // Sincroniza o seletor de idioma com o perfil ativo
+  $("generation-language").value = info.language || "pt-BR";
 
   const voiceSelect = $("narration-voice");
   const previousVoice = voiceSelect.value;

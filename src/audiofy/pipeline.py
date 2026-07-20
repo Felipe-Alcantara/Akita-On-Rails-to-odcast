@@ -30,15 +30,15 @@ from .config import EPISODES_DIR, Settings, api_key_candidates, api_key_source
 from .estimates import EpisodeMetrics, estimate_tts_cost
 from .media import media_duration_seconds
 from .narration import (
-    PROSODY_SYSTEM,
     fallback_direction,
     parse_prosody_plan,
     prosody_batches,
     prosody_prompt,
+    prosody_system,
     split_verbatim_text,
     tts_direction,
 )
-from .prompts import AUDIT_PROMPT, COVERAGE_PROMPT, SYSTEM_PROMPT, script_prompt
+from .prompts import audit_prompt, coverage_prompt, script_prompt, system_prompt
 from .providers import openrouter
 from .runtime.process import run_tool
 from .runtime.retry import RetryPolicy
@@ -46,8 +46,11 @@ from .runtime.status import GenerationTracker
 from .sources.base import ContentItem
 
 
-def episode_dir(item_id: str) -> Path:
-    return EPISODES_DIR / item_id.replace("/", "__")
+def episode_dir(item_id: str, language: str = "pt-BR") -> Path:
+    base = item_id.replace("/", "__")
+    if language != "pt-BR":
+        base = f"{base}__{language}"
+    return EPISODES_DIR / base
 
 
 def _save_json(path: Path, data: object) -> None:
@@ -77,7 +80,7 @@ def generate_episode(
         raise ValueError(f"Modo de geração desconhecido: {generation_mode}")
     if generation_mode == "verbatim" and len(settings.presenters) != 1:
         raise ValueError("A leitura fiel exige exatamente um narrador.")
-    directory = episode_dir(item.item_id)
+    directory = episode_dir(item.item_id, settings.language)
     previous = GenerationTracker.load(directory)
     if previous and (
         previous.get("generation_mode", "adaptation") != generation_mode
@@ -147,7 +150,7 @@ def repair_episode(
     """
     from .audio_audit import read_audio_audit
 
-    directory = episode_dir(item.item_id)
+    directory = episode_dir(item.item_id, settings.language)
     audit = read_audio_audit(directory)
     if not audit:
         raise FileNotFoundError(
@@ -254,7 +257,11 @@ def _run(
 
     subscription = settings.text_provider not in ("", "openrouter")
 
-    def _chat_request(model: str, prompt: str, system: str = SYSTEM_PROMPT) -> dict:
+    lang = settings.language
+    _sys = system_prompt(lang)
+
+    def _chat_request(model: str, prompt: str, system: str = "") -> dict:
+        system = system or _sys
         if subscription:
             from .providers import subscription as subscription_provider
 
@@ -287,7 +294,7 @@ def _run(
             directory,
             tracker,
             force,
-            lambda prompt: _chat_request(settings.audit_model, prompt, PROSODY_SYSTEM),
+            lambda prompt: _chat_request(settings.audit_model, prompt, prosody_system(lang)),
         )
         print(f"   {len(turns)} trechos; texto original preservado integralmente.")
         print("🎙️  2/3 Síntese da leitura fiel…")
@@ -297,7 +304,7 @@ def _run(
             "cobertura",
             directory / "coverage.json",
             settings.audit_model,
-            COVERAGE_PROMPT.format(content=item.text),
+            coverage_prompt(lang).format(content=item.text),
         )
         print(f"   {len(coverage.get('items', []))} itens de cobertura.")
 
@@ -306,7 +313,7 @@ def _run(
             "roteiro",
             directory / "script.json",
             settings.text_model,
-            script_prompt(settings.presenters, item.attribution).format(
+            script_prompt(settings.presenters, item.attribution, lang).format(
                 content=item.text,
                 matrix=json.dumps(coverage, ensure_ascii=False),
             ),
@@ -319,7 +326,7 @@ def _run(
             "auditoria",
             directory / "audit.json",
             settings.audit_model,
-            AUDIT_PROMPT.format(
+            audit_prompt(lang).format(
                 content=item.text,
                 matrix=json.dumps(coverage, ensure_ascii=False),
                 script=json.dumps(script, ensure_ascii=False),
@@ -453,7 +460,7 @@ def _prepare_verbatim_turns(
                 "turn_id": f"N{chunk.index:05d}",
                 "speaker": narrator.speaker,
                 "text": chunk.text,
-                "instructions": tts_direction(direction, narrator.style),
+                "instructions": tts_direction(direction, narrator.style, settings.language),
             }
         )
     if "".join(turn["text"] for turn in turns) != item.text:
@@ -712,9 +719,11 @@ def _synthesize_turns(
             not isinstance(supplied_instructions, str) or len(supplied_instructions) > 2_000
         ):
             raise ValueError(f"Instrução de interpretação inválida no turno {index}.")
-        instructions = supplied_instructions or (
-            f"Fala natural de podcast em português brasileiro{style}."
-        )
+        if settings.language == "en":
+            default_instructions = f"Natural podcast speech in English{style}."
+        else:
+            default_instructions = f"Fala natural de podcast em português brasileiro{style}."
+        instructions = supplied_instructions or default_instructions
         fingerprint = _segment_fingerprint(
             settings,
             turn["text"],

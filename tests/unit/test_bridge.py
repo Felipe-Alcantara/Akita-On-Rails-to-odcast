@@ -288,7 +288,7 @@ class ForcedGenerationTest(unittest.TestCase):
     def test_opcoes_da_leitura_fiel_exigem_voz_conhecida(self):
         self.assertEqual(
             bridge._generation_options(["--mode=verbatim", "--voice=Sulafat", "--force"]),
-            (True, "verbatim", "Sulafat", None, 0.08),
+            (True, "verbatim", "Sulafat", None, 0.08, "pt-BR"),
         )
         with self.assertRaisesRegex(ValueError, "voz de narrador"):
             bridge._generation_options(["--mode=verbatim"])
@@ -325,7 +325,7 @@ class ForcedGenerationTest(unittest.TestCase):
             bridge._generation_options(
                 ["--background-music=/tmp/trilha.mp3", "--background-volume=0.12"]
             ),
-            (False, "adaptation", None, "/tmp/trilha.mp3", 0.12),
+            (False, "adaptation", None, "/tmp/trilha.mp3", 0.12, "pt-BR"),
         )
         with self.assertRaisesRegex(ValueError, "1% e 25%"):
             bridge._generation_options(["--background-volume=0.5"])

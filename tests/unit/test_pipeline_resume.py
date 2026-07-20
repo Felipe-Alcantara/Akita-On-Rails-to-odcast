@@ -35,6 +35,7 @@ def _settings(max_attempts: int = 3) -> SimpleNamespace:
         tts_retry_attempts=max_attempts,
         tts_retry_base_seconds=0,
         tts_retry_max_seconds=0,
+        language="pt-BR",
     )
 
 
