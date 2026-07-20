@@ -449,7 +449,7 @@ ul { list-style: none; }
   overflow-wrap: anywhere;
 }
 
-dialog {
+dialog[open] {
   display: flex;
   flex-direction: column;
   width: min(820px, calc(100vw - 32px));
