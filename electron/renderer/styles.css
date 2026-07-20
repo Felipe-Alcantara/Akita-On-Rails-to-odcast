@@ -450,9 +450,12 @@ ul { list-style: none; }
 }
 
 dialog {
+  display: flex;
+  flex-direction: column;
   width: min(820px, calc(100vw - 32px));
   max-height: calc(100vh - 32px);
   padding: 18px;
+  overflow: hidden;
   color: var(--text);
   background: var(--panel);
   border: 1px solid var(--border);
@@ -461,13 +464,13 @@ dialog {
 dialog::backdrop { background: rgb(0 0 0 / 72%); }
 .modal-header { display: flex; justify-content: space-between; gap: 16px; align-items: start; }
 .modal-header h2 { margin-top: 0; }
-#chunk-player { width: 100%; }
+#chunk-player { width: 100%; flex-shrink: 0; }
 .chunk-list {
   display: grid;
   gap: 8px;
-  max-height: min(55vh, 520px);
+  min-height: 0;
   padding: 0;
-  overflow: auto;
+  overflow-y: auto;
   list-style: none;
 }
 .chunk-row { display: flex; align-items: center; gap: 10px; }
