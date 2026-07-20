@@ -1,0 +1,209 @@
+
+📄 LLM Benchmark: Devo usar o que tem nota maior? (2026-07-19)
+   Pasta do episódio: /home/felipe/Programação/Github/Repositórios/Audiofy-Content-AI/data/episodes/2026-07-19__llm-benchmark-devo-usar-o-que-tem-nota-maior__en
+🧠 1/5 Matriz de cobertura…
+    [claude-code] via assinatura — custo US$ 0,00
+   47 itens de cobertura.
+✍️  2/5 Roteiro…
+    [claude-code] via assinatura — custo US$ 0,00
+   63 turnos para 2 apresentador(es).
+✅ 3/5 Auditoria do roteiro…
+    [claude-code] via assinatura — custo US$ 0,00
+   Cobertura crítica e importante completa. ✔
+   ⚠ Afirmação sem base no conteúdo: T063: 'stop being a fan of a model and start being a fan of your own testing process' — this specific formulation does n
+   ⚠ Afirmação sem base no conteúdo: T041: 'It's almost like they each have their own architectural taste' — the original does not attribute 'taste' or perso
+🎙️  4/5 Síntese de áudio por turno…
+   [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 1/63 (1%) apresentador_a (Kore) US$ 0.000
+
+   ↪ Limite da Chave Audio Teste; tentando Minha chave de emergencia na fala 1.
+   [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 2/63 (3%) apresentador_b (Puck) US$ 0.010
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 2.
+   [█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 3/63 (4%) apresentador_a (Kore) US$ 0.024
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 3.
+   [█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 4/63 (6%) apresentador_b (Puck) US$ 0.038
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 4.
+   [██░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 5/63 (7%) apresentador_a (Kore) US$ 0.058
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 5.
+   [██░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 6/63 (9%) apresentador_b (Puck) US$ 0.060
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 6.
+   [███░░░░░░░░░░░░░░░░░░░░░░░░░░░] 7/63 (11%) apresentador_a (Kore) US$ 0.075
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 7.
+   [███░░░░░░░░░░░░░░░░░░░░░░░░░░░] 8/63 (12%) apresentador_b (Puck) US$ 0.080
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 8.
+   [████░░░░░░░░░░░░░░░░░░░░░░░░░░] 9/63 (14%) apresentador_a (Kore) US$ 0.093
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 9.
+   [████░░░░░░░░░░░░░░░░░░░░░░░░░░] 10/63 (15%) apresentador_b (Puck) US$ 0.097
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 10.
+   [█████░░░░░░░░░░░░░░░░░░░░░░░░░] 11/63 (17%) apresentador_a (Kore) US$ 0.113
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 11.
+   [█████░░░░░░░░░░░░░░░░░░░░░░░░░] 12/63 (19%) apresentador_b (Puck) US$ 0.119
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 12.
+   [██████░░░░░░░░░░░░░░░░░░░░░░░░] 13/63 (20%) apresentador_a (Kore) US$ 0.132
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 13.
+   [██████░░░░░░░░░░░░░░░░░░░░░░░░] 14/63 (22%) apresentador_b (Puck) US$ 0.135
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 14.
+   [███████░░░░░░░░░░░░░░░░░░░░░░░] 15/63 (23%) apresentador_a (Kore) US$ 0.151
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 15.
+   [███████░░░░░░░░░░░░░░░░░░░░░░░] 16/63 (25%) apresentador_b (Puck) US$ 0.154
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 16.
+   [████████░░░░░░░░░░░░░░░░░░░░░░] 17/63 (26%) apresentador_a (Kore) US$ 0.177
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 17.
+   [████████░░░░░░░░░░░░░░░░░░░░░░] 18/63 (28%) apresentador_b (Puck) US$ 0.182
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 18.
+   [█████████░░░░░░░░░░░░░░░░░░░░░] 19/63 (30%) apresentador_a (Kore) US$ 0.194
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 19.
+   [█████████░░░░░░░░░░░░░░░░░░░░░] 20/63 (31%) apresentador_b (Puck) US$ 0.197
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 20.
+   [██████████░░░░░░░░░░░░░░░░░░░░] 21/63 (33%) apresentador_a (Kore) US$ 0.213
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 21.
+   [██████████░░░░░░░░░░░░░░░░░░░░] 22/63 (34%) apresentador_b (Puck) US$ 0.216
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 22.
+   [██████████░░░░░░░░░░░░░░░░░░░░] 23/63 (36%) apresentador_a (Kore) US$ 0.233
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 23.
+   [███████████░░░░░░░░░░░░░░░░░░░] 24/63 (38%) apresentador_b (Puck) US$ 0.237
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 24.
+   [███████████░░░░░░░░░░░░░░░░░░░] 25/63 (39%) apresentador_a (Kore) US$ 0.246
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 25.
+   [████████████░░░░░░░░░░░░░░░░░░] 26/63 (41%) apresentador_b (Puck) US$ 0.252
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 26.
+   [████████████░░░░░░░░░░░░░░░░░░] 27/63 (42%) apresentador_a (Kore) US$ 0.263
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 27.
+   [█████████████░░░░░░░░░░░░░░░░░] 28/63 (44%) apresentador_b (Puck) US$ 0.265
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 28.
+   [█████████████░░░░░░░░░░░░░░░░░] 29/63 (46%) apresentador_a (Kore) US$ 0.277
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 29.
+   [██████████████░░░░░░░░░░░░░░░░] 30/63 (47%) apresentador_b (Puck) US$ 0.280
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 30.
+   [██████████████░░░░░░░░░░░░░░░░] 31/63 (49%) apresentador_a (Kore) US$ 0.296
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 31.
+   [███████████████░░░░░░░░░░░░░░░] 32/63 (50%) apresentador_b (Puck) US$ 0.302
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 32.
+   [███████████████░░░░░░░░░░░░░░░] 33/63 (52%) apresentador_a (Kore) US$ 0.318
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 33.
+   [████████████████░░░░░░░░░░░░░░] 34/63 (53%) apresentador_b (Puck) US$ 0.322
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 34.
+   [████████████████░░░░░░░░░░░░░░] 35/63 (55%) apresentador_a (Kore) US$ 0.340
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 35.
+   [█████████████████░░░░░░░░░░░░░] 36/63 (57%) apresentador_b (Puck) US$ 0.351
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 36.
+   [█████████████████░░░░░░░░░░░░░] 37/63 (58%) apresentador_a (Kore) US$ 0.361
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 37.
+   [██████████████████░░░░░░░░░░░░] 38/63 (60%) apresentador_b (Puck) US$ 0.362
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 38.
+   [██████████████████░░░░░░░░░░░░] 39/63 (61%) apresentador_a (Kore) US$ 0.372
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 39.
+   [███████████████████░░░░░░░░░░░] 40/63 (63%) apresentador_b (Puck) US$ 0.374
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 40.
+   [███████████████████░░░░░░░░░░░] 41/63 (65%) apresentador_a (Kore) US$ 0.387
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 41.
+   [████████████████████░░░░░░░░░░] 42/63 (66%) apresentador_b (Puck) US$ 0.391
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 42.
+   [████████████████████░░░░░░░░░░] 43/63 (68%) apresentador_a (Kore) US$ 0.407
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 43.
+   [████████████████████░░░░░░░░░░] 44/63 (69%) apresentador_b (Puck) US$ 0.410
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 44.
+   [█████████████████████░░░░░░░░░] 45/63 (71%) apresentador_a (Kore) US$ 0.424
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 45.
+   [█████████████████████░░░░░░░░░] 46/63 (73%) apresentador_b (Puck) US$ 0.427
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 46.
+   [██████████████████████░░░░░░░░] 47/63 (74%) apresentador_a (Kore) US$ 0.444
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 47.
+   [██████████████████████░░░░░░░░] 48/63 (76%) apresentador_b (Puck) US$ 0.450
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 48.
+   [███████████████████████░░░░░░░] 49/63 (77%) apresentador_a (Kore) US$ 0.468
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 49.
+   [███████████████████████░░░░░░░] 50/63 (79%) apresentador_b (Puck) US$ 0.472
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 50.
+   [████████████████████████░░░░░░] 51/63 (80%) apresentador_a (Kore) US$ 0.486
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 51.
+   [████████████████████████░░░░░░] 52/63 (82%) apresentador_b (Puck) US$ 0.492
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 52.
+   [█████████████████████████░░░░░] 53/63 (84%) apresentador_a (Kore) US$ 0.506
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 53.
+   [█████████████████████████░░░░░] 54/63 (85%) apresentador_b (Puck) US$ 0.510
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 54.
+   [██████████████████████████░░░░] 55/63 (87%) apresentador_a (Kore) US$ 0.532
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 55.
+   [██████████████████████████░░░░] 56/63 (88%) apresentador_b (Puck) US$ 0.537
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 56.
+   [███████████████████████████░░░] 57/63 (90%) apresentador_a (Kore) US$ 0.554
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 57.
+   [███████████████████████████░░░] 58/63 (92%) apresentador_b (Puck) US$ 0.556
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 58.
+   [████████████████████████████░░] 59/63 (93%) apresentador_a (Kore) US$ 0.571
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 59.
+   [████████████████████████████░░] 60/63 (95%) apresentador_b (Puck) US$ 0.573
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 60.
+   [█████████████████████████████░] 61/63 (96%) apresentador_a (Kore) US$ 0.584
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 61.
+   [█████████████████████████████░] 62/63 (98%) apresentador_b (Puck) US$ 0.587
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 62.
+   [██████████████████████████████] 63/63 (100%) apresentador_a (Kore) US$ 0.598
+
+   ↪ Limite da Minha chave de emergencia; tentando Minha chave de emergencia na fala 63.
+🎧 5/5 Montagem com ffmpeg…
+
+✔ Episódio gerado: /home/felipe/Programação/Github/Repositórios/Audiofy-Content-AI/data/episodes/2026-07-19__llm-benchmark-devo-usar-o-que-tem-nota-maior__en/fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__audio-completo.mp3
+💰 Custo total registrado: US$ 0.6232
+{"ok": true, "mp3": "/home/felipe/Programação/Github/Repositórios/Audiofy-Content-AI/data/episodes/2026-07-19__llm-benchmark-devo-usar-o-que-tem-nota-maior__en/fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__audio-completo.mp3"}

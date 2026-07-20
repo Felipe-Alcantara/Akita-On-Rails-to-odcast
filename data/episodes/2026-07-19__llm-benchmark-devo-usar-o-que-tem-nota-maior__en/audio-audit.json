@@ -1,0 +1,586 @@
+{
+  "version": 1,
+  "audited_at": "2026-07-20T04:09:02-03:00",
+  "policy": {
+    "threshold_db": -45,
+    "minimum_silence_seconds": 1.5,
+    "warning_silence_seconds": 2.5,
+    "critical_silence_seconds": 5.0,
+    "critical_silence_ratio": 0.35
+  },
+  "summary": {
+    "segments": 63,
+    "ok": 63,
+    "warnings": 0,
+    "critical": 0
+  },
+  "segments": [
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-001-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 18.96,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-002-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 29.32,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-003-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 28.08,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-004-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 37.96,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-005-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 5.4,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-006-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 29.0,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-007-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 10.04,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-008-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 25.4,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-009-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 9.24,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-010-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 29.76,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-011-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 13.8,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-012-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 25.04,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-013-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 6.6,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-014-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 29.96,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-015-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 7.84,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-016-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 45.6,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-017-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 10.04,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-018-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 23.68,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-019-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 5.12,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-020-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 32.28,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-021-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 5.68,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-022-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 34.08,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-023-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 7.0,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-024-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 18.72,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-025-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 10.4,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-026-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 23.48,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-027-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 4.12,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-028-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 22.72,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-029-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 6.48,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-030-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 30.88,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-031-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 12.04,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-032-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 31.96,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-033-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 8.32,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-034-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 35.32,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-035-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 10.84,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-036-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 21.28,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-037-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 2.04,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-038-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 18.56,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-039-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 3.76,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-040-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 25.8,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-041-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 7.84,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-042-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 33.28,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-043-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 6.36,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-044-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 25.88,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-045-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 7.0,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-046-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 33.64,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-047-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 11.48,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-048-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 35.32,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-049-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 9.68,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-050-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 26.04,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-051-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 12.6,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-052-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 27.64,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-053-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 8.0,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-054-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 44.6,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-055-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 9.68,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-056-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 32.4,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-057-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 5.36,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-058-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 28.52,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-059-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 3.8,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-060-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 23.04,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-061-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 4.8,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-062-de-063__voz-apresentador-b.wav",
+      "duration_seconds": 23.36,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-063-de-063__voz-apresentador-a.wav",
+      "duration_seconds": 49.12,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    }
+  ]
+}

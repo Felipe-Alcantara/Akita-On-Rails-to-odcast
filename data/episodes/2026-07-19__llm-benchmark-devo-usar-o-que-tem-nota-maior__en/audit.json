@@ -1,0 +1,243 @@
+{
+  "results": [
+    {
+      "coverage_id": "C001",
+      "status": "complete",
+      "notes": "Covered in T002-T003 with the sorting explanation, the 'world championship' metaphor, and the qualifier about specific test/run/prompt/rubric."
+    },
+    {
+      "coverage_id": "C002",
+      "status": "complete",
+      "notes": "Covered in T004 with the MRI metaphor, the distinction between evaluating the artifact vs. the model, and the impossibility of testing all combinations."
+    },
+    {
+      "coverage_id": "C003",
+      "status": "complete",
+      "notes": "T006 lists all components: Rails 8, RubyLLM, Hotwire, Tailwind, tests, CI, Dockerfile, Compose, documentation."
+    },
+    {
+      "coverage_id": "C004",
+      "status": "complete",
+      "notes": "T006 lists all eight dimensions accurately."
+    },
+    {
+      "coverage_id": "C005",
+      "status": "complete",
+      "notes": "T008 reproduces the full formula with all eight variables and the 'law of nature' caveat."
+    },
+    {
+      "coverage_id": "C006",
+      "status": "complete",
+      "notes": "T010 covers non-determinism, same prompt not guaranteeing same outputs, and additional variables like terminal outputs, compaction, and provider alias updates."
+    },
+    {
+      "coverage_id": "C007",
+      "status": "complete",
+      "notes": "T011 mentions Opus 4.7 with same prompt producing Tier 1 to Tier 3 spread across harnesses."
+    },
+    {
+      "coverage_id": "C008",
+      "status": "complete",
+      "notes": "T012 reproduces both runs: 94/24min and 93/18min, different projects and defects."
+    },
+    {
+      "coverage_id": "C009",
+      "status": "complete",
+      "notes": "T014 covers DeepSeek V4 Pro 69→89 and Kimi K2.7 86→68 with correct harness details."
+    },
+    {
+      "coverage_id": "C010",
+      "status": "complete",
+      "notes": "T014 includes the caveats about snapshots/endpoints and the 'entire package' conclusion."
+    },
+    {
+      "coverage_id": "C011",
+      "status": "complete",
+      "notes": "T018 covers the ballpark argument, insufficient sampling, and the 2.1% intelligence point."
+    },
+    {
+      "coverage_id": "C012",
+      "status": "complete",
+      "notes": "T016 lists all seven entries with scores, times, and costs matching the original."
+    },
+    {
+      "coverage_id": "C013",
+      "status": "complete",
+      "notes": "T020 covers ceiling effect, greenfield scope, saturation, and specific examples of point-deciding choices."
+    },
+    {
+      "coverage_id": "C014",
+      "status": "complete",
+      "notes": "T022 defines Tier A (deploy as-is or short patch) and Tier C (broken core, major rework)."
+    },
+    {
+      "coverage_id": "C015",
+      "status": "complete",
+      "notes": "T024 covers 'choose the group first' and 'invented precision' phrasing."
+    },
+    {
+      "coverage_id": "C016",
+      "status": "complete",
+      "notes": "T026 covers correct RubyLLM integration, real-signature test doubles, multi-worker safe session cookies, and error path coverage."
+    },
+    {
+      "coverage_id": "C017",
+      "status": "complete",
+      "notes": "T028 covers cookie cap missing (4KB risk) and no API key preflight, plus the two-point deduction."
+    },
+    {
+      "coverage_id": "C018",
+      "status": "complete",
+      "notes": "T030 covers singleton persistence, restart loss, multi-worker failure, and the one-point cost."
+    },
+    {
+      "coverage_id": "C019",
+      "status": "complete",
+      "notes": "T030 includes the blind cross-audit observation about Rails.cache potentially flipping the order."
+    },
+    {
+      "coverage_id": "C020",
+      "status": "complete",
+      "notes": "T032 gives all three models' token counts and per-million pricing accurately."
+    },
+    {
+      "coverage_id": "C021",
+      "status": "complete",
+      "notes": "T032 states 15% fewer billable tokens and faster completion for 4.8 vs 4.7."
+    },
+    {
+      "coverage_id": "C022",
+      "status": "partial",
+      "notes": "T034 mentions Anthropic describing 4.8 as efficiency-focused but does not explicitly state Anthropic 'maintained the price and highlighted tool calling efficiency' as distinct claims."
+    },
+    {
+      "coverage_id": "C023",
+      "status": "complete",
+      "notes": "T034 covers Fable costing double per token without buying a better project, and 'too much model for this test.'"
+    },
+    {
+      "coverage_id": "C024",
+      "status": "complete",
+      "notes": "T034 covers the plateau hypothesis: Opus hit plateau at 4.7, 4.8 refined efficiency, Fable went to another tier the test couldn't extract."
+    },
+    {
+      "coverage_id": "C025",
+      "status": "complete",
+      "notes": "T034 includes the caveat that this is a hypothesis, not insider knowledge about Anthropic's training."
+    },
+    {
+      "coverage_id": "C026",
+      "status": "complete",
+      "notes": "T036 covers API key preflight, error differentiation, cache with TTL/cap, form object separation, and Dockerfile penalty."
+    },
+    {
+      "coverage_id": "C027",
+      "status": "complete",
+      "notes": "T038 covers dev Dockerfile, no error path tests, no cookie byte limit, and drop to 85."
+    },
+    {
+      "coverage_id": "C028",
+      "status": "complete",
+      "notes": "T040 covers Docker multi-stage non-root, 99.2% coverage, missing system prompt, hidden field history, reload loss and tamper risk."
+    },
+    {
+      "coverage_id": "C029",
+      "status": "complete",
+      "notes": "T042 gives all three GPT models' token counts and costs accurately."
+    },
+    {
+      "coverage_id": "C030",
+      "status": "complete",
+      "notes": "T044 provides the per-token pricing for 5.4 ($2.50/$15) and 5.5/5.6 ($5/$30)."
+    },
+    {
+      "coverage_id": "C031",
+      "status": "complete",
+      "notes": "T042 states ~23% faster and nearly half the tokens from 5.4 to 5.6."
+    },
+    {
+      "coverage_id": "C032",
+      "status": "complete",
+      "notes": "T046 covers GPT 5.4 as the quality plateau jump, 5.5/5.6 refining efficiency."
+    },
+    {
+      "coverage_id": "C033",
+      "status": "complete",
+      "notes": "T046 includes the caveat that he can't prove OpenAI's intent and labels it as his guess."
+    },
+    {
+      "coverage_id": "C034",
+      "status": "complete",
+      "notes": "T048 covers the auditor as a variable with the key line: model didn't change, project didn't change, audit improved."
+    },
+    {
+      "coverage_id": "C035",
+      "status": "complete",
+      "notes": "T048 covers GPT 5.5 dropping from 96 to 85 and GPT 5.4 from 97 to 95."
+    },
+    {
+      "coverage_id": "C036",
+      "status": "complete",
+      "notes": "T050 covers auditing RubyLLM APIs from memory, marking valid APIs as hallucinations, and redoing the ranking."
+    },
+    {
+      "coverage_id": "C037",
+      "status": "complete",
+      "notes": "T052 covers qualitative decisions squeezed into a number, blind spots, bad weightings, and misinterpretations."
+    },
+    {
+      "coverage_id": "C038",
+      "status": "complete",
+      "notes": "T052 covers publishing prompt/code/logs/criteria/corrections and suspicion of graph-only publications."
+    },
+    {
+      "coverage_id": "C039",
+      "status": "complete",
+      "notes": "T054 covers all three uses: eliminate bad groups, find candidate cluster, read specific defects."
+    },
+    {
+      "coverage_id": "C040",
+      "status": "complete",
+      "notes": "T056 covers running your own test, swapping the prompt, multiple runs, blind review, measuring time/cost/human work."
+    },
+    {
+      "coverage_id": "C041",
+      "status": "complete",
+      "notes": "T056 includes the Java monolith vs. Rails greenfield comparison."
+    },
+    {
+      "coverage_id": "C042",
+      "status": "complete",
+      "notes": "T058 covers no absolute best LLM, task-dependency, and listing SWE-bench, Terminal-Bench, etc."
+    },
+    {
+      "coverage_id": "C043",
+      "status": "complete",
+      "notes": "T060 covers clusters not podium, 90+ ballpark, Tier A vs C, and choosing by harness/subscription/time/defect."
+    },
+    {
+      "coverage_id": "C044",
+      "status": "complete",
+      "notes": "T062 covers don't trust benchmarks/influencers/me, define constraints, write methodology, run candidates, bring data."
+    },
+    {
+      "coverage_id": "C045",
+      "status": "complete",
+      "notes": "T054 covers irrelevance of cookie/Docker deductions vs. decisiveness of multi-turn/deploy deductions."
+    },
+    {
+      "coverage_id": "C046",
+      "status": "absent",
+      "notes": "The script never mentions that the benchmark is open source or that Part 3 established the canonical methodology. T063 mentions the article title but not the benchmark's origin story."
+    },
+    {
+      "coverage_id": "C047",
+      "status": "complete",
+      "notes": "T012 covers one-point difference as noise within the same model, supporting the insufficient-rodadas argument."
+    }
+  ],
+  "unsupported_claims": [
+    "T063: 'stop being a fan of a model and start being a fan of your own testing process' — this specific formulation does not appear in the original content; the original says to define constraints, write methodology, and bring data, but never frames it as 'being a fan of your testing process'",
+    "T041: 'It's almost like they each have their own architectural taste' — the original does not attribute 'taste' or personality to models; this is an editorialized characterization by the script presenter"
+  ]
+}

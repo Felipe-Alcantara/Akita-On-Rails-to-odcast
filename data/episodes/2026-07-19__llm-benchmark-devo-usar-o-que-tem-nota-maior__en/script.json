@@ -1,0 +1,462 @@
+{
+  "turns": [
+    {
+      "turn_id": "T001",
+      "speaker": "apresentador_a",
+      "text": "Welcome back, everyone! Today we're diving into a really provocative article called \"LLM Benchmark: Should I Use the One With the Highest Score?\" by Fabio Akita, published on AkitaOnRails.com. And I love this one because it tackles a question I think we've all had when we look at those big leaderboard tables.",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T002",
+      "speaker": "apresentador_b",
+      "text": "Yeah, and Akita starts with this scenario that I think every single person in the AI community has experienced. Someone opens his benchmark table, sees the rankings, and immediately asks: \"So Opus 4.7 is better than Opus 4.8 and Fable 5?\" Or \"GPT 5.4 is better than 5.5 and 5.6?\" And his answer is simply: no. It means the table was sorted by a column called score. That's it.",
+      "coverage_ids": [
+        "C001"
+      ]
+    },
+    {
+      "turn_id": "T003",
+      "speaker": "apresentador_a",
+      "text": "That's such a simple point but it's so easy to miss! We see a ranked list and our brains immediately turn it into a competition, right? Like a world championship of intelligence. But Akita is very clear: the model at the top didn't beat all the others at everything. It generated the artifact that received the highest score in that specific test, that specific run, with that specific prompt and rubric.",
+      "coverage_ids": [
+        "C001"
+      ]
+    },
+    {
+      "turn_id": "T004",
+      "speaker": "apresentador_b",
+      "text": "Exactly. And this leads to what I think is the most important conceptual distinction in the whole article: the score belongs to the project, not to the model as a whole. He puts it really well — the model doesn't go into an MRI machine that measures how much intelligence is inside. It receives a prompt, uses tools, writes a project, and stops. The score is an evaluation of that project, that artifact. To truly classify an LLM's full capability, you'd have to test every possible problem, in every language, with every prompt and context combination. Which is obviously impossible.",
+      "coverage_ids": [
+        "C002"
+      ]
+    },
+    {
+      "turn_id": "T005",
+      "speaker": "apresentador_a",
+      "text": "So what exactly is the benchmark testing then? What's the actual task?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T006",
+      "speaker": "apresentador_b",
+      "text": "Every model gets the same job: autonomously build a small chat application in Rails 8 using RubyLLM, Hotwire, Tailwind, with tests, CI tools, a Dockerfile, Docker Compose, and documentation. Then Akita evaluates the result across eight dimensions: completeness, correctness of the RubyLLM API usage, test quality, error handling, persistence, Hotwire integration, architecture, and production readiness.",
+      "coverage_ids": [
+        "C003",
+        "C004"
+      ]
+    },
+    {
+      "turn_id": "T007",
+      "speaker": "apresentador_a",
+      "text": "Eight dimensions — that's pretty thorough. But even with all that, Akita argues the final result is a function of way more than just the model, right?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T008",
+      "speaker": "apresentador_b",
+      "text": "Right, he lays out this formula: result equals model plus prompt plus harness plus context plus tools plus snapshot plus execution plus audit. So the model is just one variable among many. The table is sorted by score because a table without order is hard to read, but that ordering doesn't transform a sample into a law of nature.",
+      "coverage_ids": [
+        "C005"
+      ]
+    },
+    {
+      "turn_id": "T009",
+      "speaker": "apresentador_a",
+      "text": "And then there's the whole non-determinism issue, which I find fascinating. These models don't produce the same output twice, do they?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T010",
+      "speaker": "apresentador_b",
+      "text": "Not at all. LLMs are not deterministic. The same prompt doesn't guarantee the same tokens, the same architecture decisions, or the same sequence of tool calls. In a coding agent setup, you also have terminal outputs, response times, accumulated context, compaction, and harness behavior all adding variability. And if the provider updates a model alias between one Monday and the next, that's yet another variable changing without you touching anything.",
+      "coverage_ids": [
+        "C006"
+      ]
+    },
+    {
+      "turn_id": "T011",
+      "speaker": "apresentador_a",
+      "text": "He has some wild examples of this. Like the same Opus 4.7 with the same prompt produced results scattered between Tier 1 and Tier 3 depending on the harness. That's a huge spread!",
+      "coverage_ids": [
+        "C007"
+      ]
+    },
+    {
+      "turn_id": "T012",
+      "speaker": "apresentador_b",
+      "text": "Huge. And there's a cleaner recent example. Fable 5 was run again after its re-release using the same model ID on OpenRouter. First run: 94 points in 24 minutes. Second run: 93 points in 18 minutes. Different projects, different defects, different cost. One point of score difference is noise even within what's technically the same model.",
+      "coverage_ids": [
+        "C008",
+        "C047"
+      ]
+    },
+    {
+      "turn_id": "T013",
+      "speaker": "apresentador_a",
+      "text": "And it's not just the model that varies — the harness can completely change the outcome too, right?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T014",
+      "speaker": "apresentador_b",
+      "text": "Absolutely. DeepSeek V4 Pro scored 69 with a DNF on OpenCode but reached 89 via DeepClaude. Kimi K2.7 scored 86 via OpenCode on OpenRouter and about 68 in an informal run through the Kimi Code CLI. Akita is careful to note there are caveats about snapshots and endpoints in both cases, because you can never perfectly isolate just the model. An agent benchmark measures the entire package.",
+      "coverage_ids": [
+        "C009",
+        "C010"
+      ]
+    },
+    {
+      "turn_id": "T015",
+      "speaker": "apresentador_a",
+      "text": "OK so let's get to the juicy part — the actual scores at the top. What does the leaderboard look like?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T016",
+      "speaker": "apresentador_b",
+      "text": "So the top of the current benchmark looks like this: Claude Opus 4.7 at 97 points, 18 minutes, about 7 dollars. GPT 5.4 xHigh at 95, 22 minutes, about 16 dollars. Claude Opus 4.8 also at 95, 17 minutes, about 6.40. Then Fable 5 at 94, 24 minutes, about 11.20. Fable 5 re-release at 93, 18 minutes, about 8.30. Gemini 3.5 Flash at 93, 18 minutes, only about 3.55. And GPT 5.6 Sol xHigh at 92, 17 minutes, roughly 8.70 equivalent in API pricing.",
+      "coverage_ids": [
+        "C012"
+      ]
+    },
+    {
+      "turn_id": "T017",
+      "speaker": "apresentador_a",
+      "text": "So you've got this spread from 92 to 97 at the top. But Akita says we should read all of that as basically the same group?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T018",
+      "speaker": "apresentador_b",
+      "text": "That's his core argument. Everything above 90 is in the same ballpark. There's not enough sampling to say that 97 is 2.1 percent more intelligent than 95, let alone that it would be better at a database migration, a Rust refactor, or debugging a race condition. He's very firm on this: those few points of difference don't constitute a meaningful hierarchy.",
+      "coverage_ids": [
+        "C011"
+      ]
+    },
+    {
+      "turn_id": "T019",
+      "speaker": "apresentador_a",
+      "text": "And he mentions a ceiling effect too, which makes a lot of sense when you think about it.",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T020",
+      "speaker": "apresentador_b",
+      "text": "Right. The benchmark app is real and has plenty of annoying details, but it's still a small greenfield Rails project with a closed scope. The best models have already saturated the task. So the order at the top ends up being decided by very specific choices: an API key guard here, where conversation history is persisted, a cookie cap there, a missing error test, a development Dockerfile instead of a production one. Those details matter for the project, but they don't prove a universal hierarchy between models.",
+      "coverage_ids": [
+        "C013"
+      ]
+    },
+    {
+      "turn_id": "T021",
+      "speaker": "apresentador_a",
+      "text": "So what about the gap between the top tier and the lower tiers? Does that tell us more?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T022",
+      "speaker": "apresentador_b",
+      "text": "Much more, actually. Akita's rubric defines Tier A as something you could deploy as-is or with a short patch. Tier C has broken core functionality or needs a major rework. He says he can't tell you whether a 97-scoring model is truly better than a 93 for any future task, but he can absolutely tell you that the group delivering correct RubyLLM integration, useful tests, and a production-ready Docker image is in a completely different category from the group that invents APIs and tests its own broken mocks.",
+      "coverage_ids": [
+        "C014"
+      ]
+    },
+    {
+      "turn_id": "T023",
+      "speaker": "apresentador_a",
+      "text": "That's such a practical way to think about it. Pick your tier first, then worry about the details within that tier.",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T024",
+      "speaker": "apresentador_b",
+      "text": "Exactly his recommendation. First choose the group. Then discuss cost, speed, subscription plans, harness compatibility, and personal usage preferences. Fighting over the exact position within the 90-plus cluster is, in his words, invented precision.",
+      "coverage_ids": [
+        "C015"
+      ]
+    },
+    {
+      "turn_id": "T025",
+      "speaker": "apresentador_a",
+      "text": "OK, but I know people are going to want the details. So why specifically does Opus 4.7 sit above 4.8 and Fable?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T026",
+      "speaker": "apresentador_b",
+      "text": "It comes down to very specific project decisions. Opus 4.7 got 97 because the RubyLLM integration was correct, the test doubles mimicked real method signatures, the persistence used session cookies that are multi-worker safe, and error paths were covered. In the current audit, there was no major concrete defect left to deduct points for.",
+      "coverage_ids": [
+        "C016"
+      ]
+    },
+    {
+      "turn_id": "T027",
+      "speaker": "apresentador_a",
+      "text": "And 4.8? What cost it those two points?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T028",
+      "speaker": "apresentador_b",
+      "text": "Opus 4.8 also wrote an excellent project — real Rails validation, Docker, Compose, OpenRouter calls, and it even finished a minute faster. But it lost two points because the chat history stored in the cookie had no cap, risking hitting the 4 kilobyte cookie size limit, and it didn't do an explicit preflight check of the API key.",
+      "coverage_ids": [
+        "C017"
+      ]
+    },
+    {
+      "turn_id": "T029",
+      "speaker": "apresentador_a",
+      "text": "And Fable 5 actually fixed those two issues but introduced a different problem?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T030",
+      "speaker": "apresentador_b",
+      "text": "Exactly. Fable 5 fixed the cookie cap and the API key preflight. But in return, it chose to persist conversation history in a singleton within the process. That means the conversation disappears on restart and doesn't work properly with multiple workers. That architectural decision cost it the point that placed it below 4.8. And here's the kicker — the blind cross-audit noted that if Fable had just swapped its store for Rails.cache, it probably would have flipped the order.",
+      "coverage_ids": [
+        "C018",
+        "C019"
+      ]
+    },
+    {
+      "turn_id": "T031",
+      "speaker": "apresentador_a",
+      "text": "So we're literally talking about one design decision — the storage backend — determining who's quote-unquote \"better.\" That really drives home how fragile these rankings are.",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T032",
+      "speaker": "apresentador_b",
+      "text": "It does. And the efficiency data tells yet another story. Opus 4.7 used 9.78 million tokens at 5 dollars input and 25 dollars output per million. Opus 4.8 used 8.28 million tokens at the same rate — that's 15 percent fewer billable tokens and it finished faster. Fable 5 used only 6.03 million tokens but at double the price: 10 dollars input and 50 dollars output per million.",
+      "coverage_ids": [
+        "C020",
+        "C021"
+      ]
+    },
+    {
+      "turn_id": "T033",
+      "speaker": "apresentador_a",
+      "text": "So Fable uses fewer tokens but costs more per token. Did that extra cost buy a better result?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T034",
+      "speaker": "apresentador_b",
+      "text": "Not in this case. And Akita is candid about his interpretation: Fable costs double per token and, for this particular problem, didn't buy a better project. He thinks it might be too much model for this test. His personal read is that Opus hit the plateau of this benchmark at version 4.7. Version 4.8 refined efficiency and behavior. Fable went to a different tier of capability and price, but this test couldn't extract that difference. He's careful to label this as a hypothesis based on results, not insider knowledge about Anthropic's training process.",
+      "coverage_ids": [
+        "C022",
+        "C023",
+        "C024",
+        "C025"
+      ]
+    },
+    {
+      "turn_id": "T035",
+      "speaker": "apresentador_a",
+      "text": "I appreciate that intellectual honesty. Now what about the GPT family? Same question — why does 5.4 appear above the newer versions?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T036",
+      "speaker": "apresentador_b",
+      "text": "Again, different design decisions in the generated projects. GPT 5.4 did an API key preflight, differentiated configuration errors from provider errors, used cache with TTL and a message cap, and separated form objects from the domain. It lost points only because the Dockerfile was a development image running as root.",
+      "coverage_ids": [
+        "C026"
+      ]
+    },
+    {
+      "turn_id": "T037",
+      "speaker": "apresentador_a",
+      "text": "And 5.5?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T038",
+      "speaker": "apresentador_b",
+      "text": "GPT 5.5 got the integration and multi-turn right, but it repeated the development Dockerfile problem, didn't test any error paths, and left the cookie with no byte limit. It dropped to 85 in the re-audit. That's a significant drop and actually pushed it out of the top cluster entirely.",
+      "coverage_ids": [
+        "C027"
+      ]
+    },
+    {
+      "turn_id": "T039",
+      "speaker": "apresentador_a",
+      "text": "And 5.6 Sol bounced back?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T040",
+      "speaker": "apresentador_b",
+      "text": "It did. GPT 5.6 Sol came back to 92 with much better defensive engineering, a proper multi-stage non-root Docker build, and 99.2 percent test coverage. But it shipped without a system prompt and loaded the chat history in a hidden HTML field on the client side. The rubric penalizes that because the conversation is lost on page reload and the data could be tampered with by the user.",
+      "coverage_ids": [
+        "C028"
+      ]
+    },
+    {
+      "turn_id": "T041",
+      "speaker": "apresentador_a",
+      "text": "Every single one of these models made a different trade-off. It's almost like they each have their own architectural taste.",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T042",
+      "speaker": "apresentador_b",
+      "text": "That's a great way to put it. And the efficiency numbers are really interesting here too. GPT 5.4 used 7.64 million tokens and cost about 16 dollars. GPT 5.5 used 4.9 million at about 10 dollars. And GPT 5.6 Sol used only 3.92 million at roughly 8.70 in API equivalent. So from 5.4 to 5.6, the run got about 23 percent faster and consumed nearly half the tokens.",
+      "coverage_ids": [
+        "C029",
+        "C031"
+      ]
+    },
+    {
+      "turn_id": "T043",
+      "speaker": "apresentador_a",
+      "text": "Wait, but don't the newer models cost more per token? How did they end up cheaper overall?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T044",
+      "speaker": "apresentador_b",
+      "text": "Great catch. GPT 5.4 is priced at 2.50 input and 15 dollars output per million tokens, while both 5.5 and 5.6 Sol cost 5 dollars input and 30 dollars output. So the per-token price literally doubled, but the total cost went down because the newer models were so much more efficient with their token usage. They accomplished the task with far fewer tokens.",
+      "coverage_ids": [
+        "C030"
+      ]
+    },
+    {
+      "turn_id": "T045",
+      "speaker": "apresentador_a",
+      "text": "So Akita's take is that 5.4 was the big leap and the later versions refined efficiency?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T046",
+      "speaker": "apresentador_b",
+      "text": "That's his intuition, yes. He feels GPT 5.4 was the jump that put the family on the quality plateau for this test, and 5.5 and 5.6 focused heavily on efficiency — using less context and finishing faster without leaving the same general ballpark of capability. But he's very upfront: he can't prove OpenAI trained those versions with that specific goal. The data shows the behavior of three runs. Saying it was a deliberate product strategy is, in his own words, his guess.",
+      "coverage_ids": [
+        "C032",
+        "C033"
+      ]
+    },
+    {
+      "turn_id": "T047",
+      "speaker": "apresentador_a",
+      "text": "I love that he labels his interpretations so clearly. Now here's a part of the article that I think is really brave — he talks about bugs in his own audit process.",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T048",
+      "speaker": "apresentador_b",
+      "text": "This is crucial and honestly refreshing. He points out that the auditor — himself — is yet another variable. GPT 5.5 originally received a score of 96. Then the cross-audit against 5.6 found problems that had been overlooked. He went back, re-read the code, confirmed the defects, and the score dropped to 85. In the same review, GPT 5.4 dropped from 97 to 95 because of the development Dockerfile issue. The model didn't change. The project didn't change. The audit improved.",
+      "coverage_ids": [
+        "C034",
+        "C035"
+      ]
+    },
+    {
+      "turn_id": "T049",
+      "speaker": "apresentador_a",
+      "text": "An eleven-point drop! That's not a minor correction — that moved 5.5 from the top tier to a completely different group.",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T050",
+      "speaker": "apresentador_b",
+      "text": "Exactly. And it gets even more humbling. In the first version of the benchmark, Akita had marked valid RubyLLM APIs as hallucinations because he was auditing from memory instead of actually reading the gem's source code. When he went and checked the actual source, he had to redo a large portion of the ranking. He documents all of this in his earlier posts because, as he puts it, hiding the error would be worse than making it.",
+      "coverage_ids": [
+        "C036"
+      ]
+    },
+    {
+      "turn_id": "T051",
+      "speaker": "apresentador_a",
+      "text": "So the score isn't just a function of the model and the project — it's also a function of how carefully the human reviewer looked at things. That's another reason not to treat these numbers as gospel.",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T052",
+      "speaker": "apresentador_b",
+      "text": "Precisely. A rubric takes a bunch of qualitative decisions and squeezes them into a single number. It can have blind spots, bad weightings, and misinterpretations. Akita's argument is that a serious benchmark publishes everything — the prompt, the generated code, the logs, the criteria, and the corrections — so that someone else can challenge it. And he says: be even more suspicious when someone publishes only the graph.",
+      "coverage_ids": [
+        "C037",
+        "C038"
+      ]
+    },
+    {
+      "turn_id": "T053",
+      "speaker": "apresentador_a",
+      "text": "So after all this deconstruction, how does Akita actually use his own benchmark? Because he clearly still finds it valuable.",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T054",
+      "speaker": "apresentador_b",
+      "text": "He uses it for three things. First, to eliminate clearly bad groups. Tier C and D fail at fundamental things in this workload, so he won't spend a week betting on them for autonomous coding. Second, to find the cluster of candidates. Above 90, he considers all of them strong, and then he chooses based on marginal cost from his subscription, speed, harness availability, and daily work behavior. And third — and I think this is the most underappreciated one — he reads the specific defects, not just the score. If your system doesn't use cookies or Docker, some of this benchmark's deductions are completely irrelevant to you. But if you need multi-turn chat and deployment, those same deductions become decisive.",
+      "coverage_ids": [
+        "C039",
+        "C045"
+      ]
+    },
+    {
+      "turn_id": "T055",
+      "speaker": "apresentador_a",
+      "text": "That last point is so practical. The defects matter more than the number, because whether a defect matters depends entirely on your use case.",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T056",
+      "speaker": "apresentador_b",
+      "text": "Absolutely. And if the decision involves real money or production risk, Akita's advice is direct: run your own test. He says take his benchmark repository, swap the prompt for something that resembles your actual workload, run the models more than once, and do blind review. Measure time, cost, and how much human work is still needed afterward. A team maintaining a fifteen-year-old Java monolith needs a completely different benchmark than someone building a greenfield Rails prototype.",
+      "coverage_ids": [
+        "C040",
+        "C041"
+      ]
+    },
+    {
+      "turn_id": "T057",
+      "speaker": "apresentador_a",
+      "text": "And no single benchmark can crown \"the best LLM\" anyway, can it?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T058",
+      "speaker": "apresentador_b",
+      "text": "No, and Akita is categorical about this. There is no \"best LLM\" in absolute terms because that object doesn't exist without specifying the task. SWE-bench, Terminal-Bench, his Rails app, human preference arenas — each one tests a slice and ignores the rest. They're useful for locating groups and eliminating bad options. None of them can produce a universal winner.",
+      "coverage_ids": [
+        "C042"
+      ]
+    },
+    {
+      "turn_id": "T059",
+      "speaker": "apresentador_a",
+      "text": "So to wrap this up — what's his final takeaway?",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T060",
+      "speaker": "apresentador_b",
+      "text": "His conclusion is beautifully simple. Read the top of the ranking as clusters, not as a podium. The 90-plus group is in the same ballpark. Tier A is clearly more reliable than Tier C for this type of coding work. Within the good group, choose based on your harness, your subscription, your time constraints, and which defect you're willing to fix yourself.",
+      "coverage_ids": [
+        "C043"
+      ]
+    },
+    {
+      "turn_id": "T061",
+      "speaker": "apresentador_a",
+      "text": "And then he ends with something that I think everyone needs to hear.",
+      "coverage_ids": []
+    },
+    {
+      "turn_id": "T062",
+      "speaker": "apresentador_b",
+      "text": "He does. He says: don't trust benchmarks. Don't trust influencers. Don't trust me. If you truly need to know which model is best for your case, define your constraints, write your methodology, run all the candidates, and bring data. Other people's opinions are useful for choosing what to test first. The technical decision remains yours.",
+      "coverage_ids": [
+        "C044"
+      ]
+    },
+    {
+      "turn_id": "T063",
+      "speaker": "apresentador_a",
+      "text": "What a way to close. This has been a deep dive into Fabio Akita's analysis of LLM benchmarks and I think the big lesson is: stop being a fan of a model and start being a fan of your own testing process. This episode was based on the article \"LLM Benchmark: Devo usar o que tem nota maior?\", by Fabio Akita, published on AkitaOnRails.com at akitaonrails.com/2026/07/19/llm-benchmark-devo-usar-o-que-tem-nota-maior, under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 license. This adaptation is also distributed under CC BY-NC-SA 4.0. Thanks for listening, everyone!",
+      "coverage_ids": []
+    }
+  ]
+}

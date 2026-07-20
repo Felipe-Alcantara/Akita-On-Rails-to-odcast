@@ -1,0 +1,333 @@
+{
+  "items": [
+    {
+      "id": "C001",
+      "kind": "argument",
+      "criticality": "critical",
+      "statement": "A tabela do benchmark é ordenada por uma coluna chamada score; transformar essa ordem de apresentação num campeonato mundial de inteligência é um erro.",
+      "evidence": "Ranking precisa de uma ordem pra ser legível. O erro é transformar essa ordem de apresentação num campeonato mundial de inteligência."
+    },
+    {
+      "id": "C002",
+      "kind": "argument",
+      "criticality": "critical",
+      "statement": "A nota do benchmark avalia o projeto gerado, não a capacidade total do modelo; o sujeito da avaliação é o artefato, não o LLM.",
+      "evidence": "Repara no sujeito da frase: eu avalio o resultado. O modelo não entra numa máquina de ressonância magnética que descobre quanto de 'inteligência' tem lá dentro."
+    },
+    {
+      "id": "C003",
+      "kind": "fact",
+      "criticality": "important",
+      "statement": "O benchmark consiste em construir autonomamente um app de chat em Rails 8 usando RubyLLM, Hotwire, Tailwind, testes, CI, Dockerfile, Compose e documentação, avaliado em oito dimensões.",
+      "evidence": "construir autonomamente um app pequeno de chat em Rails 8, usando RubyLLM, Hotwire, Tailwind, testes, ferramentas de CI, Dockerfile, Compose e documentação. Depois eu avalio o resultado em oito dimensões"
+    },
+    {
+      "id": "C004",
+      "kind": "fact",
+      "criticality": "important",
+      "statement": "As oito dimensões de avaliação são: completude, correção da API do RubyLLM, qualidade dos testes, tratamento de erros, persistência, Hotwire, arquitetura e prontidão para produção.",
+      "evidence": "completude, correção da API do RubyLLM, qualidade dos testes, tratamento de erros, persistência, Hotwire, arquitetura e prontidão pra produção"
+    },
+    {
+      "id": "C005",
+      "kind": "argument",
+      "criticality": "critical",
+      "statement": "O resultado do benchmark é função de múltiplas variáveis (modelo, prompt, harness, contexto, tools, snapshot, execução e auditoria), não apenas do modelo.",
+      "evidence": "resultado = modelo + prompt + harness + contexto + tools + snapshot + execução + auditoria"
+    },
+    {
+      "id": "C006",
+      "kind": "argument",
+      "criticality": "critical",
+      "statement": "LLMs não são determinísticos; o mesmo modelo com o mesmo prompt pode produzir resultados diferentes em execuções distintas.",
+      "evidence": "LLMs não são determinísticas. Mesmo prompt não garante os mesmos tokens, as mesmas decisões de arquitetura ou a mesma sequência de tool calls."
+    },
+    {
+      "id": "C007",
+      "kind": "example",
+      "criticality": "important",
+      "statement": "O mesmo Opus 4.7, com o mesmo prompt, produziu resultados espalhados entre Tier 1 e Tier 3 em harnesses diferentes na Parte 2 do benchmark.",
+      "evidence": "o mesmo Opus 4.7, com o mesmo prompt, produziu resultados espalhados entre Tier 1 e Tier 3 em harnesses diferentes"
+    },
+    {
+      "id": "C008",
+      "kind": "example",
+      "criticality": "important",
+      "statement": "Fable 5 fez 94 pontos em 24 minutos na primeira execução e 93 em 18 minutos na segunda, com projetos e defeitos diferentes.",
+      "evidence": "A primeira execução fez 94 pontos em 24 minutos. A segunda fez 93 em 18 minutos. Projetos diferentes, defeitos diferentes, custo diferente."
+    },
+    {
+      "id": "C009",
+      "kind": "example",
+      "criticality": "important",
+      "statement": "DeepSeek V4 Pro fez 69 com DNF no OpenCode e 89 via DeepClaude; Kimi K2.7 fez 86 via OpenCode/OpenRouter e cerca de 68 pelo Kimi Code CLI.",
+      "evidence": "O DeepSeek V4 Pro ficou em 69 com DNF no OpenCode e chegou a 89 via DeepClaude. Kimi K2.7 fez 86 via OpenCode/OpenRouter e cerca de 68 numa rodada informal pelo Kimi Code CLI."
+    },
+    {
+      "id": "C010",
+      "kind": "caveat",
+      "criticality": "important",
+      "statement": "Benchmark de agente mede o pacote inteiro (modelo + harness + endpoint), nunca conseguindo isolar perfeitamente só o modelo.",
+      "evidence": "Há ressalvas de snapshot e endpoint nos dois casos, justamente porque nunca conseguimos isolar perfeitamente só o modelo. Benchmark de agente mede o pacote inteiro."
+    },
+    {
+      "id": "C011",
+      "kind": "argument",
+      "criticality": "critical",
+      "statement": "Tudo acima de 90 pontos deve ser lido como um mesmo cluster; não há amostragem suficiente para afirmar que diferenças de poucos pontos representam superioridade real.",
+      "evidence": "Pra mim, tudo aí está no mesmo ballpark. Não existe amostragem suficiente pra dizer que 97 é 2,1% 'mais inteligente' que 95"
+    },
+    {
+      "id": "C012",
+      "kind": "number",
+      "criticality": "important",
+      "statement": "Claude Opus 4.7 obteve 97 pontos, 18 min, ~$7; GPT 5.4 xHigh 95 pontos, 22 min, ~$16; Claude Opus 4.8 95 pontos, 17 min, ~$6,40; Fable 5 94 pontos, 24 min, ~$11,20; Fable 5 re-release 93/18 min/~$8,30; Gemini 3.5 Flash 93/18 min/~$3,55; GPT 5.6 Sol xHigh 92/17 min/~$8,70 equivalente.",
+      "evidence": "Claude Opus 4.7 | 97 | 18 min | ~$7,00 ... GPT 5.6 Sol xHigh | 92 | 17 min | créditos (~$8,70 equivalente em API)"
+    },
+    {
+      "id": "C013",
+      "kind": "argument",
+      "criticality": "important",
+      "statement": "Existe efeito de teto: o app do benchmark é um projeto Rails greenfield pequeno e os melhores modelos já saturaram a tarefa, então a ordem do topo é decidida por escolhas pontuais.",
+      "evidence": "Há também efeito de teto. O app do benchmark é real e tem bastante detalhe chato, mas continua sendo um projeto Rails greenfield pequeno, com escopo fechado. Os melhores modelos já saturaram a tarefa."
+    },
+    {
+      "id": "C014",
+      "kind": "fact",
+      "criticality": "important",
+      "statement": "A rubrica define Tier A como algo que sobe como está ou exige patch curto; Tier C tem core quebrado ou precisa de rework grande.",
+      "evidence": "A rubrica define Tier A como algo que sobe como está ou exige um patch curto. Tier C tem core quebrado ou precisa de rework grande."
+    },
+    {
+      "id": "C015",
+      "kind": "argument",
+      "criticality": "critical",
+      "statement": "Primeiro deve-se escolher o grupo (tier), depois discutir custo, velocidade, assinatura e harness; brigar pela posição exata dentro do cluster dos 90 é precisão inventada.",
+      "evidence": "Primeiro escolha o grupo. Depois discuta custo, velocidade, assinatura, harness e preferência de uso. Brigar pela posição exata dentro do cluster dos 90 é precisão inventada."
+    },
+    {
+      "id": "C016",
+      "kind": "fact",
+      "criticality": "important",
+      "statement": "Opus 4.7 ficou em 97 porque a integração RubyLLM estava correta, doubles de teste imitavam assinaturas reais, persistência em session cookie era multi-worker safe e caminhos de erro cobertos.",
+      "evidence": "A integração RubyLLM estava correta, os doubles de teste imitavam as assinaturas reais, a persistência em session cookie era multi-worker safe e os caminhos de erro estavam cobertos."
+    },
+    {
+      "id": "C017",
+      "kind": "fact",
+      "criticality": "important",
+      "statement": "Opus 4.8 perdeu 2 pontos porque o histórico no cookie não tinha cap (risco de bater 4 KB) e não fazia preflight explícito da API key.",
+      "evidence": "Perdeu dois pontos porque o histórico no cookie não tinha cap e podia bater no limite de 4 KB, além de não fazer preflight explícito da API key."
+    },
+    {
+      "id": "C018",
+      "kind": "fact",
+      "criticality": "important",
+      "statement": "Fable 5 corrigiu os dois problemas do 4.8 mas escolheu persistência num singleton dentro do processo, que não sobrevive a restart nem funciona com múltiplos workers, custando o ponto abaixo do 4.8.",
+      "evidence": "escolheu persistência num singleton dentro do processo. A conversa some num restart e não funciona direito com múltiplos workers. Essa decisão custou o ponto que o deixou abaixo do 4.8."
+    },
+    {
+      "id": "C019",
+      "kind": "fact",
+      "criticality": "contextual",
+      "statement": "O cross-audit cego observou que trocar o store do Fable 5 por Rails.cache provavelmente inverteria a ordem entre Fable e 4.8.",
+      "evidence": "O próprio cross-audit cego observou que trocar o store por Rails.cache provavelmente inverteria a ordem."
+    },
+    {
+      "id": "C020",
+      "kind": "number",
+      "criticality": "important",
+      "statement": "Opus 4.7 usou 9,78M tokens a $5/$25 por milhão; Opus 4.8 usou 8,28M tokens (mesma tarifa); Fable 5 usou 6,03M tokens a $10/$50 por milhão.",
+      "evidence": "Opus 4.7 | 97 | 18m12s | 9,78M | $5 / $25 por milhão | Opus 4.8 | 95 | 16m48s | 8,28M ... Fable 5 | 94 | 24m19s | 6,03M | $10 / $50 por milhão"
+    },
+    {
+      "id": "C021",
+      "kind": "fact",
+      "criticality": "important",
+      "statement": "Opus 4.8 usou 15% menos tokens faturáveis e acabou mais rápido que o 4.7, com a mesma tarifa.",
+      "evidence": "o 4.8 usou 15% menos tokens faturáveis e acabou mais rápido"
+    },
+    {
+      "id": "C022",
+      "kind": "fact",
+      "criticality": "contextual",
+      "statement": "A Anthropic descreveu o Opus 4.8 como melhoria modesta sobre o 4.7, manteve o preço e destacou eficiência de tool calling.",
+      "evidence": "A própria Anthropic descreveu o Opus 4.8 como uma melhoria modesta sobre o 4.7, manteve o preço e destacou eficiência de tool calling."
+    },
+    {
+      "id": "C023",
+      "kind": "opinion",
+      "criticality": "important",
+      "statement": "O autor acredita que Fable custa o dobro por token e, neste problema, não comprou um projeto melhor; pode ser modelo demais para a prova.",
+      "evidence": "Fable custa o dobro por token e, nesse problema, não comprou um projeto melhor. Isso só diz que esse app pequeno não exigiu o tipo de capacidade extra que a Anthropic vende no Fable. Pode ser modelo demais pra prova."
+    },
+    {
+      "id": "C024",
+      "kind": "opinion",
+      "criticality": "important",
+      "statement": "O autor acredita que o Opus chegou ao platô desse benchmark no 4.7; o 4.8 refinou eficiência e o Fable foi para outra faixa de capacidade que o teste não conseguiu extrair.",
+      "evidence": "Minha leitura pessoal é que o Opus chegou ao platô desse benchmark no 4.7. O 4.8 refinou eficiência e comportamento. Fable foi pra outra faixa de capacidade e preço, mas o teste não conseguiu extrair essa diferença."
+    },
+    {
+      "id": "C025",
+      "kind": "caveat",
+      "criticality": "important",
+      "statement": "O autor reconhece que essa leitura é hipótese a partir dos resultados, não conhecimento sobre o treinamento interno da Anthropic.",
+      "evidence": "É uma hipótese a partir dos resultados, não conhecimento sobre o treinamento interno da Anthropic."
+    },
+    {
+      "id": "C026",
+      "kind": "fact",
+      "criticality": "important",
+      "statement": "GPT 5.4 fez preflight de API key, diferenciou erro de configuração de erro do provider, usou cache com TTL e cap, e separou form object do domínio; perdeu pontos pelo Dockerfile de desenvolvimento rodando como root.",
+      "evidence": "O GPT 5.4 fez preflight de API key, diferenciou erro de configuração de erro do provider, usou cache com TTL e cap de mensagens e separou form object do domínio. Perdeu pontos porque o Dockerfile era uma imagem de desenvolvimento rodando como root."
+    },
+    {
+      "id": "C027",
+      "kind": "fact",
+      "criticality": "important",
+      "statement": "GPT 5.5 repetiu Dockerfile de desenvolvimento, não testou caminhos de erro e deixou cookie sem limite de bytes, caindo para 85 na reauditoria.",
+      "evidence": "repetiu o Dockerfile de desenvolvimento, não testou nenhum caminho de erro e deixou o cookie sem limite de bytes. Caiu pra 85 na reauditoria."
+    },
+    {
+      "id": "C028",
+      "kind": "fact",
+      "criticality": "important",
+      "statement": "GPT 5.6 Sol voltou a 92 com Docker multi-stage non-root e 99,2% de cobertura, mas ficou sem system prompt e carregou histórico num hidden field do cliente, descontado por perda no reload e risco de adulteração.",
+      "evidence": "GPT 5.6 Sol voltou a 92 com engenharia defensiva muito melhor, Docker multi-stage non-root e 99,2% de cobertura. Ficou sem system prompt e carregou o histórico num hidden field do cliente."
+    },
+    {
+      "id": "C029",
+      "kind": "number",
+      "criticality": "important",
+      "statement": "GPT 5.4 xHigh: 95/22 min/7,64M tokens/~$16; GPT 5.5 xHigh: 85/18 min/4,90M/~$10; GPT 5.6 Sol xHigh: 92/17 min/3,92M/~$8,70 equivalente.",
+      "evidence": "GPT 5.4 xHigh | 95 | 22 min | 7,64M | ~$16 ... GPT 5.6 Sol xHigh | 92 | 17 min | 3,92M | créditos (~$8,70 equivalente em API)"
+    },
+    {
+      "id": "C030",
+      "kind": "number",
+      "criticality": "contextual",
+      "statement": "GPT 5.4 custa $2,50/$15 por milhão de tokens; GPT 5.5 e 5.6 Sol custam $5/$30 por milhão.",
+      "evidence": "GPT 5.4 custa $2,50/$15 por milhão, enquanto GPT 5.5 e GPT 5.6 Sol custam $5/$30"
+    },
+    {
+      "id": "C031",
+      "kind": "fact",
+      "criticality": "important",
+      "statement": "Do GPT 5.4 ao 5.6, o run ficou cerca de 23% mais rápido e consumiu quase metade dos tokens; mesmo com tarifa unitária o dobro, os runs posteriores custaram menos.",
+      "evidence": "Do 5.4 pro 5.6, o run ficou uns 23% mais rápido e consumiu quase metade dos tokens."
+    },
+    {
+      "id": "C032",
+      "kind": "opinion",
+      "criticality": "important",
+      "statement": "O autor sente que GPT 5.4 foi o salto que colocou a família no platô de qualidade deste teste; 5.5 e 5.6 trabalharam eficiência sem sair do mesmo ballpark de capacidade.",
+      "evidence": "o GPT 5.4 foi o salto que colocou a família no platô de qualidade deste teste. 5.5 e 5.6 parecem ter trabalhado bastante eficiência"
+    },
+    {
+      "id": "C033",
+      "kind": "caveat",
+      "criticality": "important",
+      "statement": "O autor admite que não pode provar que a OpenAI treinou essas versões com esse objetivo; dizer que foi estratégia de produto é chute dele.",
+      "evidence": "eu não tenho como provar que a OpenAI treinou essas versões com esse objetivo. O dado mostra o comportamento dos três runs. Dizer que isso foi estratégia de produto já é chute meu."
+    },
+    {
+      "id": "C034",
+      "kind": "argument",
+      "criticality": "critical",
+      "statement": "A própria auditoria tem bugs e é uma variável que afeta os scores: mudanças na auditoria alteraram notas sem que modelos ou projetos mudassem.",
+      "evidence": "O modelo não mudou. O projeto não mudou. A auditoria melhorou."
+    },
+    {
+      "id": "C035",
+      "kind": "example",
+      "criticality": "important",
+      "statement": "GPT 5.5 originalmente recebeu 96 e caiu para 85 após cross-audit encontrar problemas; GPT 5.4 caiu de 97 para 95 pelo Dockerfile de desenvolvimento.",
+      "evidence": "O GPT 5.5 originalmente recebeu 96. Depois o cross-audit contra o 5.6 encontrou problemas que tinham passado batido ... a nota caiu pra 85. Na mesma revisão, o 5.4 caiu de 97 pra 95"
+    },
+    {
+      "id": "C036",
+      "kind": "example",
+      "criticality": "important",
+      "statement": "Na primeira versão do benchmark, o autor marcou APIs válidas do RubyLLM como alucinação porque auditava de memória; ao ler o source da gem, teve que refazer boa parte do ranking.",
+      "evidence": "eu também marquei APIs válidas do RubyLLM como alucinação porque estava auditando de memória. Quando fui ler o source da gem, tive que refazer boa parte do ranking."
+    },
+    {
+      "id": "C037",
+      "kind": "argument",
+      "criticality": "important",
+      "statement": "Uma rubrica espreme decisões qualitativas num número e pode ter ponto cego, peso ruim e interpretação errada; score não deve ser tratado como constante física.",
+      "evidence": "Uma rubrica pega um monte de decisões qualitativas e espreme tudo num número. Pode ter ponto cego, peso ruim e interpretação errada."
+    },
+    {
+      "id": "C038",
+      "kind": "argument",
+      "criticality": "important",
+      "statement": "Um benchmark sério deve publicar prompt, código gerado, logs, critérios e correções para permitir contestação; desconfiar quando alguém publica só o gráfico.",
+      "evidence": "Um benchmark sério publica prompt, código gerado, logs, critérios e correções pra que outra pessoa consiga contestar. Desconfie ainda mais quando alguém publica só o gráfico."
+    },
+    {
+      "id": "C039",
+      "kind": "fact",
+      "criticality": "important",
+      "statement": "O autor usa ranking para três finalidades: descartar grupos claramente ruins (Tier C/D), encontrar o cluster de candidatos (acima de 90), e ler os defeitos específicos em vez de apenas a nota.",
+      "evidence": "Eu uso ranking pra três coisas: 1. Descartar grupos claramente ruins. ... 2. Encontrar o cluster de candidatos. ... 3. Ler os defeitos, não só a nota."
+    },
+    {
+      "id": "C040",
+      "kind": "argument",
+      "criticality": "important",
+      "statement": "Se a decisão vale dinheiro ou risco de produção, deve-se rodar o próprio teste com prompt adaptado ao workload real, executar múltiplas vezes e fazer revisão cega.",
+      "evidence": "Se a decisão vale dinheiro ou risco de produção, rode o seu teste. Pegue o repositório do benchmark, troque o prompt por um trabalho parecido com o seu, execute os modelos mais de uma vez e faça revisão cega."
+    },
+    {
+      "id": "C041",
+      "kind": "argument",
+      "criticality": "important",
+      "statement": "Um time com monolito Java de quinze anos precisa de benchmark diferente de alguém fazendo protótipo Rails greenfield.",
+      "evidence": "Um time que mantém um monolito Java de quinze anos precisa de um benchmark diferente de alguém fazendo protótipo Rails greenfield."
+    },
+    {
+      "id": "C042",
+      "kind": "argument",
+      "criticality": "critical",
+      "statement": "Não existe 'o melhor LLM' em termos absolutos porque esse objeto não existe sem especificar a tarefa; cada benchmark testa uma parte e ignora o resto.",
+      "evidence": "Nenhum consegue cuspir 'o melhor LLM' em termos absolutos porque esse objeto nem existe sem especificar a tarefa."
+    },
+    {
+      "id": "C043",
+      "kind": "conclusion",
+      "criticality": "critical",
+      "statement": "O topo do ranking deve ser lido como clusters, não como pódio; o grupo 90+ está no mesmo ballpark; dentro do grupo bom, escolher por harness, assinatura, limite de tempo e defeito que se aceita corrigir.",
+      "evidence": "leia o topo como clusters, não como pódio. O grupo 90+ está no mesmo ballpark. ... Dentro do grupo bom, escolha pelo seu harness, sua assinatura, seu limite de tempo e o defeito que você aceita corrigir."
+    },
+    {
+      "id": "C044",
+      "kind": "conclusion",
+      "criticality": "critical",
+      "statement": "Não se deve confiar em benchmark, influencer ou no próprio autor; quem precisa saber qual o melhor modelo deve definir restrições, escrever metodologia, rodar todos e trazer dados; a decisão técnica é de quem a toma.",
+      "evidence": "não confie em benchmark. Não confie em influencer. Não confie em mim. ... defina suas restrições, escreva sua metodologia, rode todos e traga dados. ... A decisão técnica continua sendo sua."
+    },
+    {
+      "id": "C045",
+      "kind": "caveat",
+      "criticality": "contextual",
+      "statement": "Diferenças de deduções do benchmark podem ser irrelevantes ou decisivas dependendo do sistema do leitor: quem não usa cookie nem Docker não é afetado pelas mesmas penalizações.",
+      "evidence": "Se meu sistema não usa cookie nem Docker, algumas deduções deste benchmark são irrelevantes. Se eu preciso de multi-turn e deploy, passam a ser decisivas."
+    },
+    {
+      "id": "C046",
+      "kind": "fact",
+      "criticality": "contextual",
+      "statement": "O benchmark é open source e sua metodologia atual foi estabelecida na Parte 3 do artigo original, que virou a referência canônica.",
+      "evidence": "ganhou a metodologia atual na Parte 3, que virou a referência canônica"
+    },
+    {
+      "id": "C047",
+      "kind": "caveat",
+      "criticality": "important",
+      "statement": "Benchmark de uma ou três rodadas não basta para afirmar qualidade absoluta de um modelo; um ponto de score é ruído até dentro do mesmo modelo.",
+      "evidence": "benchmark de uma ou três rodadas não bastava pra afirmar qualidade absoluta. Continua não bastando. ... Um ponto de score é ruído até dentro do 'mesmo' modelo."
+    }
+  ]
+}

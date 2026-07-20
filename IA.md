@@ -1094,3 +1094,40 @@ Electron, Ruff, `compileall`, `npm run check`, `npm audit` (0 vulnerabilidades) 
 
 **Risco que sobrou:** os IDs de modelo apontam versões disponíveis hoje no OpenRouter; se um
 modelo for descontinuado, o perfil embutido falhará até que o ID seja atualizado no código.
+
+---
+
+## 2026-07-20 — Perfis expandidos, idioma, reparo e re-geração
+
+**O que mudou:** seis commits entregaram funcionalidades complementares ao catálogo e à interface:
+
+- **Reparo seletivo** (`pipeline.repair_episode`, bridge `repair`/`run-repair`): identifica
+  segmentos com silêncio problemático via `audio-audit.json`, deleta apenas os WAVs afetados,
+  regenera com cache dos bons e remonta o MP3. A UI mostra warning pós-geração e botão 🔧 Reparar.
+  Spinner e shimmer animam etapas ativas.
+- **Catálogo de perfis 13 → 30**: organizado por provedor em abas no app (Claude Code, Codex,
+  Gemini CLI, Gemini, Claude, OpenAI). Assinaturas (texto grátis) aparecem antes dos perfis API.
+  Claude prioriza Opus; OpenAI prioriza GPT SOL.
+- **Idioma do episódio** (pt-BR / en): prompts convertidos de constantes para funções
+  parametrizadas (`system_prompt(lang)`, `coverage_prompt(lang)`, etc.) com compatibilidade
+  retroativa. Episódios em inglês ficam em `<item>__en`. O seletor na aba Conteúdo recalcula
+  status e estimativa ao trocar.
+- **Botão Re-gerar**: quando já existe episódio no idioma selecionado, o botão muda de
+  "Gerar episódio" para "Re-gerar episódio", com status sensível ao idioma.
+
+**Decisões:**
+
+- Categorias de aba derivadas de `text_provider` + prefixo do modelo — sem campo extra no schema.
+- `language` adicionado ao `Profile` e `Settings`; o worker recebe `--language=` via child_args.
+- Funções de prompt mantêm constantes como alias padrão (`SYSTEM_PROMPT = system_prompt("pt-BR")`)
+  para não quebrar imports existentes.
+- Reparo reutiliza `_synthesize_turns()` (cache por fingerprint), `audit_segments()` e
+  `_assemble()` do pipeline; não inventa fluxo paralelo.
+
+**Validação:** 252 testes Python, 28 testes Electron, Ruff, `compileall`, `npm run check`,
+`npm audit` (0 vulnerabilidades) e `git diff --check` — tudo aprovado. README atualizado com
+tabela dos 30 perfis, seção de idioma e referências de perfis corrigidas.
+
+**Risco que sobrou:** a troca de idioma não traduz o conteúdo-fonte automaticamente — a
+tradução fica a cargo do modelo durante o roteiro, e a qualidade depende da capacidade do
+modelo escolhido. IDs de modelo (Opus, GPT SOL) dependem do catálogo vivo do OpenRouter.

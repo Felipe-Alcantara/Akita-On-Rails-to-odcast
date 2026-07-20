@@ -1,0 +1,22 @@
+{
+  "source_words": 2335,
+  "script_words": 2923,
+  "duration_seconds": 1226.064,
+  "cost_usd": 0.623212,
+  "cost_exact": false,
+  "tts_model": "google/gemini-3.1-flash-tts-preview",
+  "profile_name": "claude-code-duo",
+  "generation_mode": "adaptation",
+  "generated_at": "2026-07-20T04:10:36-03:00",
+  "cost_source": "model_pricing_fallback",
+  "background_music": null,
+  "background_volume": null,
+  "verified_at": "",
+  "verification_version": 0,
+  "title": "LLM Benchmark: Devo usar o que tem nota maior?",
+  "source_created_at": "2026-07-19",
+  "source_key": "akita",
+  "source_file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__fonte-original-completa.md",
+  "final_audio_file": "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__audio-completo.mp3",
+  "artifact_schema_version": 2
+}
