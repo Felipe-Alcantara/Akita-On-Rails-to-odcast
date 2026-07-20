@@ -1116,45 +1116,90 @@ async function loadSettings() {
   if (profiles.ok) {
     const list = $("profiles-list");
     list.replaceChildren();
+
+    const categoryOf = (p) => {
+      if (p.text_provider === "claude-code") return "Claude Code";
+      if (p.text_provider === "codex") return "Codex";
+      if (p.text_provider === "gemini-cli") return "Gemini CLI";
+      if (p.text_model.startsWith("anthropic/")) return "Claude API";
+      if (p.text_model.startsWith("openai/")) return "OpenAI API";
+      return "Gemini API";
+    };
+
+    const grouped = new Map();
     for (const profile of profiles.profiles) {
-      const row = document.createElement("li");
-      const active = profile.name === profiles.active;
-      const provider = profile.text_provider === "openrouter"
-        ? "API" : `assinatura ${profile.text_provider}`;
-      const detail = makeElement("div", "row-main");
-      detail.appendChild(makeElement("span", "row-title", profile.name));
-      if (profile.description) {
-        detail.appendChild(makeElement("span", "muted small", profile.description));
-      }
-      detail.appendChild(makeElement("span", "muted small",
-        `texto: ${provider} · tts: ${profile.tts_model} · ${profile.presenters_spec}`));
-      row.appendChild(detail);
-      if (active) row.appendChild(makeElement("span", "badge ok", "ativo"));
-      if (!active) {
-        const activate = document.createElement("button");
-        activate.textContent = "ativar";
-        activate.className = "ghost";
-        activate.onclick = () =>
-          bridge(["profiles-activate", profile.name]).then(loadSettings);
-        row.appendChild(activate);
-      }
-      const edit = makeElement("button", "ghost", "editar");
-      edit.onclick = () => openProfileForm(profile);
-      row.appendChild(edit);
-      if (profile.custom) {
-        const remove = document.createElement("button");
-        remove.textContent = "🗑️";
-        remove.className = "ghost";
-        remove.setAttribute("aria-label", `Remover perfil ${profile.name}`);
-        remove.onclick = () => {
-          if (confirm(`Remover o perfil "${profile.name}"?`)) {
-            bridge(["profiles-remove", profile.name]).then(loadSettings);
-          }
-        };
-        row.appendChild(remove);
-      }
-      list.appendChild(row);
+      const cat = profile.custom ? "Personalizados" : categoryOf(profile);
+      if (!grouped.has(cat)) grouped.set(cat, []);
+      grouped.get(cat).push(profile);
     }
+
+    const tabBar = $("profile-tabs");
+    tabBar.replaceChildren();
+    let firstTab = null;
+
+    const showCategory = (category) => {
+      list.replaceChildren();
+      for (const btn of tabBar.querySelectorAll("button")) {
+        btn.classList.toggle("active", btn.dataset.cat === category);
+      }
+      const items = grouped.get(category) || [];
+      for (const profile of items) {
+        const row = document.createElement("li");
+        const active = profile.name === profiles.active;
+        const provider = profile.text_provider === "openrouter"
+          ? "API" : `assinatura ${profile.text_provider}`;
+        const detail = makeElement("div", "row-main");
+        detail.appendChild(makeElement("span", "row-title", profile.name));
+        if (profile.description) {
+          detail.appendChild(makeElement("span", "muted small", profile.description));
+        }
+        detail.appendChild(makeElement("span", "muted small",
+          `texto: ${provider} · tts: ${profile.tts_model} · ${profile.presenters_spec}`));
+        row.appendChild(detail);
+        if (active) row.appendChild(makeElement("span", "badge ok", "ativo"));
+        if (!active) {
+          const activate = document.createElement("button");
+          activate.textContent = "ativar";
+          activate.className = "ghost";
+          activate.onclick = () =>
+            bridge(["profiles-activate", profile.name]).then(loadSettings);
+          row.appendChild(activate);
+        }
+        const edit = makeElement("button", "ghost", "editar");
+        edit.onclick = () => openProfileForm(profile);
+        row.appendChild(edit);
+        if (profile.custom) {
+          const remove = document.createElement("button");
+          remove.textContent = "🗑️";
+          remove.className = "ghost";
+          remove.setAttribute("aria-label", `Remover perfil ${profile.name}`);
+          remove.onclick = () => {
+            if (confirm(`Remover o perfil "${profile.name}"?`)) {
+              bridge(["profiles-remove", profile.name]).then(loadSettings);
+            }
+          };
+          row.appendChild(remove);
+        }
+        list.appendChild(row);
+      }
+    };
+
+    // Aba que contém o perfil ativo aparece primeiro
+    const activeCat = categoryOf(
+      profiles.profiles.find((p) => p.name === profiles.active) || profiles.profiles[0]
+    );
+
+    for (const category of grouped.keys()) {
+      const btn = document.createElement("button");
+      btn.textContent = category;
+      btn.dataset.cat = category;
+      btn.setAttribute("role", "tab");
+      btn.onclick = () => showCategory(category);
+      tabBar.appendChild(btn);
+      if (!firstTab) firstTab = category;
+    }
+
+    showCategory(activeCat || firstTab);
   }
 
   const info = await loadActiveConfig();

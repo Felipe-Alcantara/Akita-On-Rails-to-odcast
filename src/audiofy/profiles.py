@@ -32,6 +32,10 @@ class Profile:
 _TTS = "google/gemini-3.1-flash-tts-preview"
 _PRO = "google/gemini-2.5-pro"
 _FLASH = "google/gemini-2.5-flash"
+_SONNET = "anthropic/claude-sonnet-4.6"
+_HAIKU = "anthropic/claude-haiku-4.5"
+_GPT4O = "openai/gpt-4o"
+_GPT4O_MINI = "openai/gpt-4o-mini"
 
 _TRIO_SPEC = (
     "apresentador_a:Kore:curioso, "
@@ -46,124 +50,218 @@ _MESA_SPEC = (
 )
 
 BUILTIN_PROFILES: list[Profile] = [
-    # ── Podcast · 2 apresentadores ───────────────────────────────────────
+    # ╔══════════════════════════════════════════════════════════════════════╗
+    # ║  Gemini — modelos Google via OpenRouter API                        ║
+    # ╚══════════════════════════════════════════════════════════════════════╝
     Profile(
-        name="padrao",
+        name="gemini-duo",
         text_model=_PRO,
         audit_model=_FLASH,
         tts_model=_TTS,
         presenters_spec=DEFAULT_SPEC,
         description=(
-            "Dois apresentadores (curioso e didático) com roteiro Gemini Pro "
-            "e auditoria Flash — equilíbrio diário entre qualidade e custo"
+            "Dois apresentadores com roteiro Gemini Pro e auditoria Flash "
+            "— equilíbrio diário entre qualidade e custo"
         ),
     ),
     Profile(
-        name="economico",
+        name="gemini-duo-economico",
         text_model=_FLASH,
         audit_model=_FLASH,
         tts_model=_TTS,
         presenters_spec=DEFAULT_SPEC,
         description=(
-            "Dois apresentadores no modelo mais barato (Flash para tudo) "
+            "Dois apresentadores no Gemini Flash para tudo "
             "— ideal para rascunhos e testes rápidos"
         ),
     ),
     Profile(
-        name="premium-claude",
-        text_model="anthropic/claude-sonnet-4.6",
-        audit_model=_FLASH,
-        tts_model=_TTS,
-        presenters_spec=DEFAULT_SPEC,
-        description=(
-            "Dois apresentadores com roteiro via Claude Sonnet "
-            "— variação de estilo frente ao Gemini, auditoria econômica"
-        ),
-    ),
-    # ── Podcast · 3 apresentadores ───────────────────────────────────────
-    Profile(
-        name="podcast-trio",
+        name="gemini-trio",
         text_model=_PRO,
         audit_model=_FLASH,
         tts_model=_TTS,
         presenters_spec=_TRIO_SPEC,
         description=(
-            "Três vozes contrastantes (curioso, animado, analítico) "
-            "com roteiro Gemini Pro — dinâmica rica de conversa"
+            "Três vozes (curioso, animado, analítico) com Gemini Pro "
+            "— dinâmica rica de conversa"
         ),
     ),
     Profile(
-        name="podcast-trio-economico",
+        name="gemini-trio-economico",
         text_model=_FLASH,
         audit_model=_FLASH,
         tts_model=_TTS,
         presenters_spec=_TRIO_SPEC,
         description=(
-            "Três vozes contrastantes no modelo mais barato (Flash para tudo) "
+            "Três vozes no Gemini Flash "
             "— trio econômico para rascunhos"
         ),
     ),
-    # ── Podcast · 4 apresentadores ───────────────────────────────────────
     Profile(
-        name="podcast-mesa-redonda",
+        name="gemini-mesa-redonda",
         text_model=_PRO,
         audit_model=_FLASH,
         tts_model=_TTS,
         presenters_spec=_MESA_SPEC,
         description=(
-            "Mediador neutro e três debatedores (animado, ponderado, provocador) "
-            "— formato de debate com roteiro Gemini Pro"
+            "Mediador + três debatedores com Gemini Pro "
+            "— formato de debate com quatro vozes"
         ),
     ),
-    # ── Narração solo ────────────────────────────────────────────────────
     Profile(
-        name="narrador-unico",
+        name="gemini-narrador",
         text_model=_PRO,
         audit_model=_FLASH,
         tts_model=_TTS,
         presenters_spec="narrador:Sulafat:caloroso",
         description=(
-            "Voz solo calorosa (Sulafat) com roteiro Gemini Pro "
-            "— estilo audiolivro, auditoria econômica"
+            "Voz solo calorosa (Sulafat) com Gemini Pro "
+            "— estilo audiolivro"
         ),
     ),
     Profile(
-        name="narrador-economico",
+        name="gemini-narrador-economico",
         text_model=_FLASH,
         audit_model=_FLASH,
         tts_model=_TTS,
         presenters_spec="narrador:Sulafat:caloroso",
         description=(
-            "Voz solo calorosa (Sulafat) no modelo mais barato (Flash para tudo) "
-            "— teste rápido de narração"
+            "Voz solo (Sulafat) no Gemini Flash "
+            "— narração barata para testes"
         ),
     ),
     Profile(
-        name="narrador-premium",
+        name="gemini-narrador-premium",
         text_model=_PRO,
         audit_model=_PRO,
         tts_model=_TTS,
         presenters_spec="narrador:Orus:envolvente",
         description=(
-            "Voz solo envolvente (Orus) com Gemini Pro em roteiro e auditoria "
+            "Voz envolvente (Orus) com Gemini Pro em roteiro e auditoria "
             "— máxima qualidade de texto"
         ),
     ),
+    # ╔══════════════════════════════════════════════════════════════════════╗
+    # ║  Claude — modelos Anthropic via OpenRouter API                     ║
+    # ╚══════════════════════════════════════════════════════════════════════╝
     Profile(
-        name="narrador-assinatura",
-        text_model="(assinatura)",
-        audit_model="(assinatura)",
+        name="claude-duo",
+        text_model=_SONNET,
+        audit_model=_FLASH,
+        tts_model=_TTS,
+        presenters_spec=DEFAULT_SPEC,
+        description=(
+            "Dois apresentadores com Claude Sonnet e auditoria Gemini Flash "
+            "— estilo diferenciado, custo moderado"
+        ),
+    ),
+    Profile(
+        name="claude-duo-economico",
+        text_model=_HAIKU,
+        audit_model=_FLASH,
+        tts_model=_TTS,
+        presenters_spec=DEFAULT_SPEC,
+        description=(
+            "Dois apresentadores com Claude Haiku "
+            "— rápido e econômico"
+        ),
+    ),
+    Profile(
+        name="claude-trio",
+        text_model=_SONNET,
+        audit_model=_FLASH,
+        tts_model=_TTS,
+        presenters_spec=_TRIO_SPEC,
+        description=(
+            "Três vozes (curioso, animado, analítico) com Claude Sonnet "
+            "— trio com estilo Anthropic"
+        ),
+    ),
+    Profile(
+        name="claude-mesa-redonda",
+        text_model=_SONNET,
+        audit_model=_FLASH,
+        tts_model=_TTS,
+        presenters_spec=_MESA_SPEC,
+        description=(
+            "Mediador + três debatedores com Claude Sonnet "
+            "— debate estilo Anthropic"
+        ),
+    ),
+    Profile(
+        name="claude-narrador",
+        text_model=_SONNET,
+        audit_model=_FLASH,
         tts_model=_TTS,
         presenters_spec="narrador:Sulafat:caloroso",
         description=(
-            "Voz solo calorosa (Sulafat) via assinatura Claude Code "
-            "— custo zero no texto, só TTS paga"
+            "Voz solo calorosa (Sulafat) com Claude Sonnet "
+            "— narração refinada"
         ),
-        text_provider="claude-code",
     ),
-    # ── Assinaturas (texto por CLI, só TTS paga) ─────────────────────────
+    # ╔══════════════════════════════════════════════════════════════════════╗
+    # ║  OpenAI — modelos OpenAI via OpenRouter API                        ║
+    # ╚══════════════════════════════════════════════════════════════════════╝
     Profile(
-        name="assinatura",
+        name="openai-duo",
+        text_model=_GPT4O,
+        audit_model=_FLASH,
+        tts_model=_TTS,
+        presenters_spec=DEFAULT_SPEC,
+        description=(
+            "Dois apresentadores com GPT-4o e auditoria Gemini Flash "
+            "— estilo OpenAI, custo moderado"
+        ),
+    ),
+    Profile(
+        name="openai-duo-economico",
+        text_model=_GPT4O_MINI,
+        audit_model=_FLASH,
+        tts_model=_TTS,
+        presenters_spec=DEFAULT_SPEC,
+        description=(
+            "Dois apresentadores com GPT-4o Mini "
+            "— econômico com estilo OpenAI"
+        ),
+    ),
+    Profile(
+        name="openai-trio",
+        text_model=_GPT4O,
+        audit_model=_FLASH,
+        tts_model=_TTS,
+        presenters_spec=_TRIO_SPEC,
+        description=(
+            "Três vozes (curioso, animado, analítico) com GPT-4o "
+            "— trio com estilo OpenAI"
+        ),
+    ),
+    Profile(
+        name="openai-mesa-redonda",
+        text_model=_GPT4O,
+        audit_model=_FLASH,
+        tts_model=_TTS,
+        presenters_spec=_MESA_SPEC,
+        description=(
+            "Mediador + três debatedores com GPT-4o "
+            "— debate estilo OpenAI"
+        ),
+    ),
+    Profile(
+        name="openai-narrador",
+        text_model=_GPT4O,
+        audit_model=_FLASH,
+        tts_model=_TTS,
+        presenters_spec="narrador:Sulafat:caloroso",
+        description=(
+            "Voz solo calorosa (Sulafat) com GPT-4o "
+            "— narração estilo OpenAI"
+        ),
+    ),
+    # ╔══════════════════════════════════════════════════════════════════════╗
+    # ║  Assinatura Claude Code — texto grátis via CLI, só TTS paga        ║
+    # ╚══════════════════════════════════════════════════════════════════════╝
+    Profile(
+        name="claude-code-duo",
         text_model="(assinatura)",
         audit_model="(assinatura)",
         tts_model=_TTS,
@@ -175,7 +273,46 @@ BUILTIN_PROFILES: list[Profile] = [
         text_provider="claude-code",
     ),
     Profile(
-        name="assinatura-codex",
+        name="claude-code-trio",
+        text_model="(assinatura)",
+        audit_model="(assinatura)",
+        tts_model=_TTS,
+        presenters_spec=_TRIO_SPEC,
+        description=(
+            "Três vozes via assinatura Claude Code "
+            "— trio sem custo de texto"
+        ),
+        text_provider="claude-code",
+    ),
+    Profile(
+        name="claude-code-mesa-redonda",
+        text_model="(assinatura)",
+        audit_model="(assinatura)",
+        tts_model=_TTS,
+        presenters_spec=_MESA_SPEC,
+        description=(
+            "Mediador + três debatedores via assinatura Claude Code "
+            "— debate sem custo de texto"
+        ),
+        text_provider="claude-code",
+    ),
+    Profile(
+        name="claude-code-narrador",
+        text_model="(assinatura)",
+        audit_model="(assinatura)",
+        tts_model=_TTS,
+        presenters_spec="narrador:Sulafat:caloroso",
+        description=(
+            "Voz solo calorosa (Sulafat) via assinatura Claude Code "
+            "— narração sem custo de texto"
+        ),
+        text_provider="claude-code",
+    ),
+    # ╔══════════════════════════════════════════════════════════════════════╗
+    # ║  Assinatura Codex — texto grátis via CLI OpenAI, só TTS paga       ║
+    # ╚══════════════════════════════════════════════════════════════════════╝
+    Profile(
+        name="codex-duo",
         text_model="(assinatura)",
         audit_model="(assinatura)",
         tts_model=_TTS,
@@ -187,14 +324,65 @@ BUILTIN_PROFILES: list[Profile] = [
         text_provider="codex",
     ),
     Profile(
-        name="assinatura-gemini",
+        name="codex-trio",
+        text_model="(assinatura)",
+        audit_model="(assinatura)",
+        tts_model=_TTS,
+        presenters_spec=_TRIO_SPEC,
+        description=(
+            "Três vozes via assinatura Codex "
+            "— trio sem custo de texto"
+        ),
+        text_provider="codex",
+    ),
+    Profile(
+        name="codex-narrador",
+        text_model="(assinatura)",
+        audit_model="(assinatura)",
+        tts_model=_TTS,
+        presenters_spec="narrador:Sulafat:caloroso",
+        description=(
+            "Voz solo calorosa (Sulafat) via assinatura Codex "
+            "— narração sem custo de texto"
+        ),
+        text_provider="codex",
+    ),
+    # ╔══════════════════════════════════════════════════════════════════════╗
+    # ║  Assinatura Gemini CLI — texto grátis via CLI Google, só TTS paga  ║
+    # ╚══════════════════════════════════════════════════════════════════════╝
+    Profile(
+        name="gemini-cli-duo",
         text_model="(assinatura)",
         audit_model="(assinatura)",
         tts_model=_TTS,
         presenters_spec=DEFAULT_SPEC,
         description=(
-            "Dois apresentadores via assinatura Gemini CLI (Google) "
+            "Dois apresentadores via assinatura Gemini CLI "
             "— custo zero no texto, só TTS paga"
+        ),
+        text_provider="gemini-cli",
+    ),
+    Profile(
+        name="gemini-cli-trio",
+        text_model="(assinatura)",
+        audit_model="(assinatura)",
+        tts_model=_TTS,
+        presenters_spec=_TRIO_SPEC,
+        description=(
+            "Três vozes via assinatura Gemini CLI "
+            "— trio sem custo de texto"
+        ),
+        text_provider="gemini-cli",
+    ),
+    Profile(
+        name="gemini-cli-narrador",
+        text_model="(assinatura)",
+        audit_model="(assinatura)",
+        tts_model=_TTS,
+        presenters_spec="narrador:Sulafat:caloroso",
+        description=(
+            "Voz solo calorosa (Sulafat) via assinatura Gemini CLI "
+            "— narração sem custo de texto"
         ),
         text_provider="gemini-cli",
     ),
@@ -254,10 +442,10 @@ class ProfileStore:
     def __init__(self, path: Path) -> None:
         self.path = path
         self._custom: dict[str, Profile] = {}
-        self._active: str = "padrao"
+        self._active: str = "gemini-duo"
         if path.is_file():
             data = json.loads(path.read_text(encoding="utf-8"))
-            self._active = data.get("active", "padrao")
+            self._active = data.get("active", "gemini-duo")
             self._custom = {
                 name: Profile(**fields) for name, fields in data.get("profiles", {}).items()
             }
@@ -297,7 +485,7 @@ class ProfileStore:
         try:
             return self.get(self._active)
         except LookupError:
-            return self.get("padrao")
+            return self.get("gemini-duo")
 
     # ── Operações ────────────────────────────────────────────────────────
 
@@ -317,5 +505,5 @@ class ProfileStore:
             raise ValueError(f"O perfil embutido '{name}' não pode ser removido.")
         self._custom.pop(name, None)
         if self._active == name:
-            self._active = "padrao"
+            self._active = "gemini-duo"
         self._flush()

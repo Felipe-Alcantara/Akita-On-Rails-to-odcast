@@ -540,6 +540,33 @@ pre {
   white-space: pre-wrap;
 }
 
+.profile-tab-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 10px;
+  padding: 4px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+}
+.profile-tab-bar button {
+  min-height: 28px;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  border-radius: 7px;
+  border: 1px solid transparent;
+  color: var(--muted);
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.profile-tab-bar button:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+.profile-tab-bar button.active {
+  color: var(--text);
+  background: rgba(168, 85, 247, 0.15);
+  border-color: rgba(168, 85, 247, 0.3);
+}
+
 .profile-form {
   display: flex;
   flex-direction: column;

@@ -89,7 +89,7 @@ class ProfileCompatTest(unittest.TestCase):
     def test_perfil_assinatura_embutido(self):
         from audiofy.profiles import BUILTIN_PROFILES
 
-        assinatura = next(p for p in BUILTIN_PROFILES if p.name == "assinatura")
+        assinatura = next(p for p in BUILTIN_PROFILES if p.name == "claude-code-duo")
         self.assertNotEqual(assinatura.text_provider, "openrouter")
 
 

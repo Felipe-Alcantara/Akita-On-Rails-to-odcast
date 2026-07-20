@@ -58,7 +58,7 @@ class EpisodeEstimateTest(unittest.TestCase):
     def test_perfil_diferente_nao_entra_na_media(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            for profile, cost in (("economico", 0.5), ("padrao", 1.5)):
+            for profile, cost in (("gemini-duo-economico", 0.5), ("gemini-duo", 1.5)):
                 directory = root / profile
                 directory.mkdir()
                 (directory / "metrics.json").write_text(
@@ -74,7 +74,7 @@ class EpisodeEstimateTest(unittest.TestCase):
                     encoding="utf-8",
                 )
 
-            estimate = estimate_episode(2_000, "google/tts", root, profile_name="economico")
+            estimate = estimate_episode(2_000, "google/tts", root, profile_name="gemini-duo-economico")
 
         self.assertEqual(estimate.sample_count, 1)
         self.assertEqual(estimate.cost_usd, 1.0)
@@ -83,8 +83,8 @@ class EpisodeEstimateTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             samples = [
-                ("padrao", "adaptation", 0.4),
-                ("economico", "adaptation", 0.6),
+                ("gemini-duo", "adaptation", 0.4),
+                ("gemini-duo-economico", "adaptation", 0.6),
                 ("narrador", "verbatim", 0.2),
             ]
             for profile, mode, cost in samples:

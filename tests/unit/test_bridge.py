@@ -601,7 +601,7 @@ class ItemEstimateTest(unittest.TestCase):
             text="conteúdo",
         )
         settings.return_value.tts_model = "vendor/tts"
-        settings.return_value.profile_name = "economico"
+        settings.return_value.profile_name = "gemini-duo-economico"
         estimate_episode.side_effect = [
             EpisodeEstimate(
                 duration_minutes=20,

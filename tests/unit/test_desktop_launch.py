@@ -155,7 +155,7 @@ class MainMenuQualityTest(unittest.TestCase):
     def test_status_consulta_o_ambiente_real(self):
         settings = SimpleNamespace(
             api_key="chave-configurada",
-            profile_name="padrao",
+            profile_name="gemini-duo",
             text_provider="openrouter",
             text_model="modelo-texto",
             audit_model="modelo-auditoria",
