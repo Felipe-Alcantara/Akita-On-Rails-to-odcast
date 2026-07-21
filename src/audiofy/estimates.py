@@ -118,6 +118,35 @@ def _load_samples(
     return samples
 
 
+# Faixa mínima quando não há histórico suficiente nem entre os modos do TTS:
+# um piloto isolado ainda merece uma incerteza declarada, não uma falsa precisão.
+_DEFAULT_DURATION_SPREAD = 0.15
+_DEFAULT_COST_SPREAD = 0.20
+
+
+def _historical_spread(root: Path, tts_model: str) -> tuple[float, float]:
+    """Dispersão relativa de taxa de fala e custo no histórico completo do TTS.
+
+    Ignora o modo de geração de propósito: a variabilidade da voz e do preço por
+    palavra atravessa os formatos, então todos os episódios do mesmo TTS ajudam a
+    dimensionar a incerteza de uma estimativa que só tem uma amostra do modo.
+    """
+    samples = _load_samples(root, tts_model)
+    if len(samples) < 2:
+        return _DEFAULT_DURATION_SPREAD, _DEFAULT_COST_SPREAD
+    rates = [sample["words"] / (sample["duration"] / 60) for sample in samples]
+    costs = [sample["cost"] / sample["words"] for sample in samples]
+
+    def half_range(values: list[float]) -> float:
+        middle = (max(values) + min(values)) / 2
+        return (max(values) - min(values)) / (2 * middle) if middle > 0 else 0.0
+
+    return (
+        max(half_range(rates), _DEFAULT_DURATION_SPREAD),
+        max(half_range(costs), _DEFAULT_COST_SPREAD),
+    )
+
+
 def estimate_episode(
     source_words: int,
     tts_model: str,
@@ -159,9 +188,16 @@ def estimate_episode(
     duration_max = source_words / min(sample_rates)
     cost_min = source_words * min(cost_rates)
     cost_max = source_words * max(cost_rates)
-    if len(samples) == 1:
-        duration_min, duration_max = duration * 0.85, duration * 1.15
-        cost_min, cost_max = cost * 0.80, cost * 1.20
+    if len(samples) < 2:
+        # Uma amostra só não revela variância. Em vez de chutar ±15%, usamos a
+        # dispersão real já observada no histórico do mesmo TTS (qualquer modo):
+        # a duração depende sobretudo da voz, que é compartilhada entre os modos.
+        duration_spread, cost_spread = _historical_spread(episodes_root, tts_model)
+        duration_min, duration_max = (
+            duration * (1 - duration_spread),
+            duration * (1 + duration_spread),
+        )
+        cost_min, cost_max = cost * (1 - cost_spread), cost * (1 + cost_spread)
 
     return EpisodeEstimate(
         duration_minutes=duration,

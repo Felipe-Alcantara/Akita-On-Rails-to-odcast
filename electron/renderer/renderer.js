@@ -442,8 +442,10 @@ function renderItemEstimate() {
       `Realizado: US$ ${actual.cost_usd.toFixed(4)} (${accuracy}) · ` +
       `${(actual.duration_seconds / 60).toFixed(1)} min`;
   } else {
-    const basis = estimate.sample_count
-      ? `${estimate.sample_count} episódio(s) de ${generationModeLabel(mode)}`
+    const count = estimate.sample_count;
+    const basis = count
+      ? `${count} episódio(s) de ${generationModeLabel(mode)}` +
+        (count < 2 ? " · faixa pela variância do histórico do TTS" : "")
       : "piloto medido";
     $("detail-estimate").textContent =
       `Estimativa: ~US$ ${estimate.cost_usd.toFixed(2)} ` +

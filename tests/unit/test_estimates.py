@@ -136,6 +136,52 @@ class EpisodeEstimateTest(unittest.TestCase):
         self.assertEqual(estimate.sample_count, 0)
         self.assertAlmostEqual(estimate.cost_usd, 0.624287)
 
+    def _write(self, directory, *, words, seconds, cost, mode="adaptation"):
+        directory.mkdir()
+        (directory / "metrics.json").write_text(
+            json.dumps(
+                {
+                    "source_words": words,
+                    "duration_seconds": seconds,
+                    "cost_usd": cost,
+                    "tts_model": "google/tts",
+                    "generation_mode": mode,
+                }
+            ),
+            encoding="utf-8",
+        )
+
+    def test_modo_com_uma_amostra_usa_a_variancia_real_do_tts(self):
+        # reflexive tem 1 amostra; adaptation tem duas bem diferentes. A faixa do
+        # reflexive deve refletir essa dispersão real, não um ±15% arbitrário.
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write(root / "a1", words=1_000, seconds=600, cost=0.40, mode="adaptation")
+            self._write(root / "a2", words=1_000, seconds=300, cost=1.20, mode="adaptation")
+            self._write(root / "r1", words=1_000, seconds=600, cost=0.80, mode="reflexive")
+
+            reflexive = estimate_episode(2_000, "google/tts", root, generation_mode="reflexive")
+
+        self.assertEqual(reflexive.sample_count, 1)
+        # A dispersão de custo do histórico (0.40 vs 1.20 por 1000 palavras) é ampla,
+        # então a faixa passa bem dos ±20% fixos anteriores.
+        spread = (reflexive.cost_max_usd - reflexive.cost_min_usd) / (2 * reflexive.cost_usd)
+        self.assertGreater(spread, 0.20)
+
+    def test_sem_historico_do_tts_cai_para_a_faixa_padrao(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write(root / "r1", words=1_000, seconds=600, cost=0.80, mode="reflexive")
+
+            reflexive = estimate_episode(2_000, "google/tts", root, generation_mode="reflexive")
+
+        self.assertEqual(reflexive.sample_count, 1)
+        self.assertAlmostEqual(reflexive.cost_min_usd, reflexive.cost_usd * 0.80, places=4)
+        self.assertAlmostEqual(reflexive.cost_max_usd, reflexive.cost_usd * 1.20, places=4)
+        self.assertAlmostEqual(
+            reflexive.duration_min_minutes, reflexive.duration_minutes * 0.85, places=4
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
