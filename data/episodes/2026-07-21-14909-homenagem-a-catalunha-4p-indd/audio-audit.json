@@ -1,0 +1,432 @@
+{
+  "version": 1,
+  "audited_at": "2026-07-21T11:40:41-03:00",
+  "policy": {
+    "threshold_db": -45,
+    "minimum_silence_seconds": 1.5,
+    "warning_silence_seconds": 2.5,
+    "critical_silence_seconds": 5.0,
+    "critical_silence_ratio": 0.35
+  },
+  "summary": {
+    "segments": 44,
+    "ok": 44,
+    "warnings": 0,
+    "critical": 0
+  },
+  "segments": [
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-001-de-046__voz-narrador.wav",
+      "duration_seconds": 22.6,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-002-de-046__voz-narrador.wav",
+      "duration_seconds": 16.36,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-003-de-046__voz-narrador.wav",
+      "duration_seconds": 134.04,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-004-de-046__voz-narrador.wav",
+      "duration_seconds": 20.2,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-005-de-046__voz-narrador.wav",
+      "duration_seconds": 27.36,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-006-de-046__voz-narrador.wav",
+      "duration_seconds": 15.12,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-007-de-046__voz-narrador.wav",
+      "duration_seconds": 213.0,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-008-de-046__voz-narrador.wav",
+      "duration_seconds": 16.44,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-009-de-046__voz-narrador.wav",
+      "duration_seconds": 17.88,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-010-de-046__voz-narrador.wav",
+      "duration_seconds": 18.4,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-011-de-046__voz-narrador.wav",
+      "duration_seconds": 36.04,
+      "silence_seconds": 2.043,
+      "silence_ratio": 0.0567,
+      "longest_silence_seconds": 2.043,
+      "severity": "ok",
+      "silences": [
+        {
+          "start_seconds": 22.746,
+          "end_seconds": 24.789,
+          "duration_seconds": 2.043
+        }
+      ]
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-012-de-046__voz-narrador.wav",
+      "duration_seconds": 14.12,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-013-de-046__voz-narrador.wav",
+      "duration_seconds": 28.48,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-014-de-046__voz-narrador.wav",
+      "duration_seconds": 16.56,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-016-de-046__voz-narrador.wav",
+      "duration_seconds": 9.88,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-017-de-046__voz-narrador.wav",
+      "duration_seconds": 28.24,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-018-de-046__voz-narrador.wav",
+      "duration_seconds": 12.96,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-020-de-046__voz-narrador.wav",
+      "duration_seconds": 12.0,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-021-de-046__voz-narrador.wav",
+      "duration_seconds": 78.56,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-022-de-046__voz-narrador.wav",
+      "duration_seconds": 14.44,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-023-de-046__voz-narrador.wav",
+      "duration_seconds": 140.08,
+      "silence_seconds": 3.383,
+      "silence_ratio": 0.0242,
+      "longest_silence_seconds": 1.784,
+      "severity": "ok",
+      "silences": [
+        {
+          "start_seconds": 109.074,
+          "end_seconds": 110.673,
+          "duration_seconds": 1.599
+        },
+        {
+          "start_seconds": 122.08,
+          "end_seconds": 123.864,
+          "duration_seconds": 1.784
+        }
+      ]
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-024-de-046__voz-narrador.wav",
+      "duration_seconds": 14.92,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-025-de-046__voz-narrador.wav",
+      "duration_seconds": 131.44,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-026-de-046__voz-narrador.wav",
+      "duration_seconds": 17.88,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-027-de-046__voz-narrador.wav",
+      "duration_seconds": 124.56,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-028-de-046__voz-narrador.wav",
+      "duration_seconds": 16.48,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-029-de-046__voz-narrador.wav",
+      "duration_seconds": 134.44,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-030-de-046__voz-narrador.wav",
+      "duration_seconds": 14.96,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-031-de-046__voz-narrador.wav",
+      "duration_seconds": 123.64,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-032-de-046__voz-narrador.wav",
+      "duration_seconds": 14.32,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-033-de-046__voz-narrador.wav",
+      "duration_seconds": 119.96,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-034-de-046__voz-narrador.wav",
+      "duration_seconds": 13.28,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-035-de-046__voz-narrador.wav",
+      "duration_seconds": 124.0,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-036-de-046__voz-narrador.wav",
+      "duration_seconds": 13.6,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-037-de-046__voz-narrador.wav",
+      "duration_seconds": 117.48,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-038-de-046__voz-narrador.wav",
+      "duration_seconds": 13.44,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-039-de-046__voz-narrador.wav",
+      "duration_seconds": 121.28,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-040-de-046__voz-narrador.wav",
+      "duration_seconds": 14.28,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-041-de-046__voz-narrador.wav",
+      "duration_seconds": 123.68,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-042-de-046__voz-narrador.wav",
+      "duration_seconds": 12.56,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-043-de-046__voz-narrador.wav",
+      "duration_seconds": 129.56,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-044-de-046__voz-narrador.wav",
+      "duration_seconds": 12.24,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-045-de-046__voz-narrador.wav",
+      "duration_seconds": 117.44,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-21-14909-homenagem-a-catalunha-4p-indd__modo-reflexive__chunk-046-de-046__voz-narrador.wav",
+      "duration_seconds": 13.68,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    }
+  ]
+}

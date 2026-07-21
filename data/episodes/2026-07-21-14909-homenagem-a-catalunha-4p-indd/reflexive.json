@@ -1,0 +1,470 @@
+{
+  "version": 1,
+  "source_sha256": "3444b6d130359180cf4259dd3ff5584201bd0a6b155e7a557d279d7485bfdfe8",
+  "prosody": {
+    "1:e88b4ccf5af1ff627b88455fdb21676dac2c3227591e74b9fb35c17f46d4925e": {
+      "direction": "Tom solene e contido. Pronunciar o título com gravidade, como quem anuncia uma obra de peso. Pausa longa após 'Catalunha'. Ignorar dados editoriais técnicos (código, data). Ritmo lento, reverente."
+    },
+    "2:fbdbd14ff3e463c4b7e136649a1bef997a736a13e3579d7987658a4e2b08db41": {
+      "direction": "Tom neutro, informativo, ritmo constante e fluido. Ler cada título e autor como item de catálogo, sem dramatização. Breve pausa entre cada entrada. Leveza mecânica, como locução de índice. Sem ênfase emocional."
+    },
+    "3:4cb26d0f5210eaa7609b0462680733ae927cb9502441aea8fd2749cc4714f8ee": {
+      "direction": "Solenidade de folha de rosto. 'George Orwell' com peso e autoridade. Pausa antes de 'Homenagem à Catalunha', que deve soar grave e épico. Nomes do tradutor e posfaciadores em tom informativo, mais leve."
+    },
+    "4:67c72f20cbe16cda44c17018e9397abc5b0472d6b65cf51b5d950da381cd21a6": {
+      "direction": "Tom técnico-administrativo, leitura fluida e sem emoção. Ritmo moderado, sem pausas dramáticas. Dados editoriais, ISBN, catalogação: tudo seco e funcional. Reduzir intensidade ao mínimo. Clareza acima de tudo."
+    },
+    "5:ae6bea59bc6252d436f8ee0d25e222dabd1e540e21e83cb10e22f3264fa73b93": {
+      "direction": "Tom bíblico, pausado e sentencioso. Primeiro versículo com advertência grave. Pausa significativa entre os dois versículos. Segundo versículo com inflexão irônica e sábia. Finalizar 'Provérbios 26:4-5' em tom baixo, quase sussurrado."
+    },
+    "6:c4a5d7db941f0d1e02db2eb4dc867ecf426e34a36c00dda3c8d4406c5820005b": {
+      "direction": "Tom descritivo de legenda documental. Ritmo calmo, quase jornalístico. Ao mencionar Orwell, leve destaque respeitoso. 'Trabalhadores à vitória!' com energia contida, como quem cita um cartaz, sem gritar. Pausas entre legendas."
+    },
+    "7:43a469811cefcbc0bc76a19afa957e879cd39e25d851864088b4844107e2027e": {
+      "direction": "Mesmo registro documental do trecho anterior. Tom suave ao mencionar Eileen. Leve intimidade ao descrever a posição de Orwell. Ritmo tranquilo, contemplativo, como quem descreve uma fotografia antiga com carinho."
+    },
+    "8:ddfbfc34bc894e631789618cdb51f258e104dfef6e2e6000572dd3a98eb1b45d": {
+      "direction": "Página em branco. Silêncio. Pausa de transição de dois segundos, marcando passagem para o corpo do livro."
+    },
+    "9:244ec156bd8784eca50cf897490ca2565bb4369575e1a742380635e19db8e9ff": {
+      "direction": "Tom organizacional, claro e direto. Ler cada item do sumário com ritmo uniforme, pausa breve entre entradas. Números de página em tom discreto. Sem dramatização. Leve antecipação ao anunciar o título principal."
+    },
+    "10:f8999542d4943e75f1440a408d4acd61075eb816f852fa42addd3f5bd0e1d96e": {
+      "direction": "Página em branco. Silêncio breve, pausa de respiração antes do início do primeiro capítulo. Momento de preparação."
+    },
+    "11:c62365b193818dbe1699fe1dcb5fb3ca046f4baf5db5e8223f72ec338bea60dc": {
+      "direction": "Abertura memorável. Tom introspectivo e evocativo. Ritmo pausado, como quem revisita uma lembrança vívida. Construir tensão ao descrever o italiano: fascínio, admiração crua. 'Capaz de cometer um assassinato e jogar sua vida fora por um amigo' — intensidade contida, gravidade. Reverência ao descrever a expressão do miliciano."
+    },
+    "12:97a3fcec16323f49b942ae87e57fcff2e75861025f72d168ace14f27ccc14df6": {
+      "direction": "Diálogos curtos ('Italiano?', 'No, inglés') em tom direto, seco, viril — sem suavizar. Após o aperto de mão, tom lírico e melancólico. Velocidade reduz ao refletir sobre a conexão efêmera. 'Nunca mais o vi' com peso de perda serena. Transição para memória coletiva com tom épico e sombrio."
+    },
+    "13:ea568ddca250b7e0935e924a9a25085b12e44df7367dd1fc2b69116d1a5415ca": {
+      "direction": "Crescendo de deslumbramento. Narrar a Barcelona revolucionária com entusiasmo contido que vai se expandindo. Enumerações (bandeiras, igrejas, lojas) em ritmo acelerado, quase febril. 'Camarada' e 'Salud!' com calor fraternal. Tom de quem testemunha algo inédito e grandioso."
+    },
+    "14:3fd20927e461500dbec84d0fedb5279ff0a61cd6c062c187b8624b11478ceaa2": {
+      "direction": "Tom que oscila entre maravilhamento e realismo sombrio. Ao descrever escassez (carne, leite, pão), ritmo desacelera, gravidade aumenta. 'Crença na revolução e no futuro' — breve luminosidade esperançosa. Barbeiros anarquistas e prostitutas: ternura irônica, quase comovida."
+    },
+    "15:d61da123c9a28191d5ba130c4ea40a77d1fbe109a9348a5d1ec0233cfd9a170e": {
+      "direction": "Ternura com leve ironia ao descrever milicianos comprando canções. Tom caloroso, humano. Transição para a caserna: ritmo mais marcial, descritivo. 'Seção', 'centúria', 'coluna' — cadência didática. Toques de clarim e futebol: nostalgia sensorial, leveza momentânea."
+    },
+    "16:0c506df00186c155f6ca38659ff43d330afcd9c62e3a9826ffa89fcc0da456e0": {
+      "direction": "Tom de crônica vívida do cotidiano militar. Humor sutil ao descrever o caos e o porrón ('comadres de vidro'). Indignação breve ao mencionar desperdício de pão. Ritmo narrativo fluido, com variações: ironia leve, desconforto, observação aguçada. Encerrar com resignação divertida."
+    },
+    "17:b5d4aebc7f613066f973bb5fa29b73993bbf617ff0897176d5fe9f572563500f": {
+      "direction": "Tom descritivo-irônico ao detalhar o 'multiforme'; saborear o humor das roupas díspares. Ritmo de enumeração leve, quase divertido. Grave e lento em 'Odeio pensar no que os milicianos passaram'. Pausa longa antes de 'Uma frase que dá calafrios'. Citar o dirigente com sobriedade oficial. Retomar leveza cômica em 'instrução'."
+    },
+    "18:5620f8007a30c78e0c7e3cbbcf90ddf0a3ce7ae5d758343b5a8764def4a59998": {
+      "direction": "Ritmo ágil no caos dos recrutas. Diálogo do tenente em voz indignada, quase ofendida: 'O que é isso? Señor!' — crescendo de espanto, depois fraternidade calorosa em 'camaradas'. Tom de frustração contida ao descrever treino inútil. Acelerar na enumeração de exercícios fúteis. Gravidade seca ao constatar que não aprendiam a atirar."
+    },
+    "19:d43df0429f1a6f58282b6d222de7ba74dc7a67f37999ac54e07756e0004dd454": {
+      "direction": "Início sóbrio na escassez de armas. Transição para tom mais leve e panorâmico nos jardins — cadência descritiva, quase pictórica. Humor autodepreciativo no espanhol atroz do narrador. Citar as falas em espanhol com sotaque esforçado e simpático. Insistência cômica em 'quiero aprender ametralladora'."
+    },
+    "20:8df8d67ec052cfd571de78cc06dcef5db6d22b0f263086738b1922f7fbd1e054": {
+      "direction": "Espanhol do narrador com esforço cômico e carinhoso. 'Mañana' sempre com ironia afável. Pausa e tom resignado em 'esse mañana nunca chegou'. Aquecimento genuíno ao falar da hospitalidade — ritmo mais lento, voz calorosa. Tom equilibrado, honesto, ao admitir falhas da milícia. Gravidade breve nos meninos de quinze anos."
+    },
+    "21:cae68946f485430ce172027ca1e67b831bc25b92060b785efab702465fd0be3e": {
+      "direction": "Voz afetuosa e admirada ao elogiar a generosidade espanhola — ritmo amplo, pausado. Citar 'Más valientes que nosotros' com entusiasmo franco e viril. Pausa reflexiva antes de 'Um inglês teria preferido…' — ironia seca, britânica. Transição para tom de exasperação contida no final, prenunciando frustração."
+    },
+    "22:e84dd5e2853e60ec0e450b2c58cf298ee71f870534c0613b0ea9dc788c3ebddd": {
+      "direction": "Exasperação cômica crescente com a impontualidade — 'mañana' como refrão irônico. Ritmo acelerado e caótico na partida repentina. Ternura delicada ao descrever a jovem espanhola — voz mais suave, pausas contemplativas. Frase final sobre o bebê concebido atrás de barricada: pausa antes, entrega seca e contida, sem sentimentalismo."
+    },
+    "23:1967907c278ab55ace4e8e3b2eb07dd074f60a3247364d93ba0d9da0279ffce7": {
+      "direction": "Tom cinematográfico, evocativo: voz grave e cadenciada na cena das tochas. Crescendo épico na marcha pelas Ramblas — bandeiras, música, multidão. Pausa nostálgica em 'como tudo aquilo parecia tão natural'. Quebra cômica brusca na salsicha que 'provocava diarreia' — entrega seca, deadpan. Encerrar em ritmo lento, arrastado como o trem."
+    }
+  },
+  "commentary": {
+    "1:e88b4ccf5af1ff627b88455fdb21676dac2c3227591e74b9fb35c17f46d4925e": {
+      "commentary": "A folha de rosto já carrega peso: o código InDesign e a data de 2021 indicam uma reedição cuidadosa, quase oitenta anos depois de Orwell pisar na Catalunha. O livro continua encontrando leitores novos."
+    },
+    "2:fbdbd14ff3e463c4b7e136649a1bef997a736a13e3579d7987658a4e2b08db41": {
+      "commentary": "Essa coleção é um verdadeiro cânone do jornalismo literário reunido num só catálogo. De Capote a Kapuściński, de Gay Talese a Joel Silveira — o fato de Orwell aparecer aqui ao lado desses nomes reforça que 'Homenagem' é tanto reportagem visceral quanto literatura."
+    },
+    "3:4cb26d0f5210eaa7609b0462680733ae927cb9502441aea8fd2749cc4714f8ee": {
+      "commentary": "Hitchens e Trilling como posfaciadores é uma escolha que enquadra Orwell entre a polêmica política e a crítica literária canônica — dois leitores de gerações diferentes que encontraram no livro coisas bem distintas."
+    },
+    "4:67c72f20cbe16cda44c17018e9397abc5b0472d6b65cf51b5d950da381cd21a6": {
+      "commentary": "A ficha catalográfica revela que esta é a primeira edição pela Companhia das Letras, de 2021. Curioso que um relato de 1938 sobre a Guerra Civil Espanhola tenha demorado tanto para ganhar esse selo editorial no Brasil."
+    },
+    "5:ae6bea59bc6252d436f8ee0d25e222dabd1e540e21e83cb10e22f3264fa73b93": {
+      "commentary": "Epígrafe genial: Provérbios 26:4-5, dois versículos que se contradizem deliberadamente. Orwell abre o livro com um paradoxo bíblico sobre como lidar com a insensatez — prenúncio perfeito das contradições políticas que vai narrar."
+    },
+    "6:c4a5d7db941f0d1e02db2eb4dc867ecf426e34a36c00dda3c8d4406c5820005b": {
+      "commentary": "Orwell descrito apenas como 'o homem alto que se destaca no final da fila' — identificado pelo corpo, não pelo nome. Naquele momento ele era só mais um voluntário estrangeiro, a fama viria depois."
+    },
+    "7:43a469811cefcbc0bc76a19afa957e879cd39e25d851864088b4844107e2027e": {
+      "commentary": "Eileen Blair raramente recebe o destaque que merece nessa história. Ela foi ao front de Aragón, correu os mesmos riscos, e aqui aparece sentada enquanto Orwell está literalmente na sombra dela — uma inversão involuntária e reveladora."
+    },
+    "8:ddfbfc34bc894e631789618cdb51f258e104dfef6e2e6000572dd3a98eb1b45d": {
+      "commentary": "Página em branco — o silêncio editorial que separa as imagens documentais do texto. Uma pausa antes de Orwell tomar a palavra."
+    },
+    "9:244ec156bd8784eca50cf897490ca2565bb4369575e1a742380635e19db8e9ff": {
+      "commentary": "Sumário enxuto: o relato ocupa a maior parte do livro, e os dois posfácios juntos mal passam de trinta páginas. A obra fala por si; Hitchens e Trilling apenas complementam."
+    },
+    "10:f8999542d4943e75f1440a408d4acd61075eb816f852fa42addd3f5bd0e1d96e": {
+      "commentary": "Outra página em branco antes do capítulo 1. A diagramação respeita o ritmo clássico do livro impresso — dar ao leitor um instante de preparação antes da imersão."
+    },
+    "11:c62365b193818dbe1699fe1dcb5fb3ca046f4baf5db5e8223f72ec338bea60dc": {
+      "commentary": "Orwell abre com um rosto, não com uma tese. O miliciano italiano que não sabe ler um mapa mas transmite 'candor e ferocidade' — é o retrato de uma revolução feita por gente comum, não por estrategistas."
+    },
+    "12:97a3fcec16323f49b942ae87e57fcff2e75861025f72d168ace14f27ccc14df6": {
+      "commentary": "'Tais contatos eram muito comuns na Espanha.' — Orwell transforma um aperto de mão em meditação sobre intimidade entre desconhecidos. Ele já sabia que a guerra tornaria essas conexões fugazes irrepetíveis."
+    },
+    "13:ea568ddca250b7e0935e924a9a25085b12e44df7367dd1fc2b69116d1a5415ca": {
+      "commentary": "Barcelona coletivizada: engraxates com caixas vermelhas e pretas, gerentes de hotel que recusam gorjetas, alto-falantes berrando canções nas Ramblas. Orwell registra a revolução pelos detalhes sensoriais do cotidiano, não pela ideologia."
+    },
+    "14:3fd20927e461500dbec84d0fedb5279ff0a61cd6c062c187b8624b11478ceaa2": {
+      "commentary": "A lucidez retroativa é cortante: 'não me dei conta de que boa parte dos burgueses estavam apenas amoitados'. Orwell admite sua própria ingenuidade sem cinismo, e isso dá ao relato uma honestidade rara."
+    },
+    "15:d61da123c9a28191d5ba130c4ea40a77d1fbe109a9348a5d1ec0233cfd9a170e": {
+      "commentary": "Milicianos iletrados comprando letras de canções revolucionárias e aprendendo a cantá-las ali mesmo — Orwell capta o momento exato em que propaganda vira crença genuína, sem ironizar nem romantizar."
+    },
+    "16:0c506df00186c155f6ca38659ff43d330afcd9c62e3a9826ffa89fcc0da456e0": {
+      "commentary": "O desperdício de pão no quartel enquanto civis faziam fila por horas é o tipo de contradição que Orwell nunca deixa passar. Ele já está mapeando as falhas internas da revolução antes mesmo de chegar ao front."
+    },
+    "17:b5d4aebc7f613066f973bb5fa29b73993bbf617ff0897176d5fe9f572563500f": {
+      "commentary": "O termo 'multiforme' é genial — Orwell transforma a precariedade material numa piada linguística que revela, sem sentimentalismo, como a revolução se vestia com o que tinha à mão."
+    },
+    "18:5620f8007a30c78e0c7e3cbbcf90ddf0a3ce7ae5d758343b5a8764def4a59998": {
+      "commentary": "O tenente que se ofende ao ser chamado de 'Señor' enquanto tenta ensinar ordem militar é a contradição viva: igualdade radical e hierarquia funcional colidindo no mesmo homem."
+    },
+    "19:d43df0429f1a6f58282b6d222de7ba74dc7a67f37999ac54e07756e0004dd454": {
+      "commentary": "Há algo quase surreal em pelotões marchando sem uma única arma entre canteiros de flores — a guerra ensaiada como teatro, enquanto o front real esperava sem paciência."
+    },
+    "20:8df8d67ec052cfd571de78cc06dcef5db6d22b0f263086738b1922f7fbd1e054": {
+      "commentary": "O 'mañana' eterno da metralhadora é cômico e angustiante ao mesmo tempo — Orwell querendo desesperadamente aprender a sobreviver, e o sistema respondendo com sorrisos e promessas."
+    },
+    "21:cae68946f485430ce172027ca1e67b831bc25b92060b785efab702465fd0be3e": {
+      "commentary": "Aquele 'Más valientes que nosotros' dito sem rancor é o detalhe que Orwell guarda como prova de caráter — uma franqueza que ele sabe ser impensável na cultura inglesa."
+    },
+    "22:e84dd5e2853e60ec0e450b2c58cf298ee71f870534c0613b0ea9dc788c3ebddd": {
+      "commentary": "Orwell admira em teoria o desapego espanhol ao relógio, mas confessa que não consegue se livrar da neurose setentrional — é honesto sobre seus próprios limites culturais."
+    },
+    "23:1967907c278ab55ace4e8e3b2eb07dd074f60a3247364d93ba0d9da0279ffce7": {
+      "commentary": "A salsicha vermelha que 'tinha gosto de sabão e provocava diarreia' é o contraponto perfeito à cena heroica das Ramblas — Orwell nunca deixa a épica sem seu lastro de corpo e desconforto."
+    }
+  },
+  "turns": [
+    {
+      "turn_id": "R00001",
+      "speaker": "narrador",
+      "text": "homenagem à catalunha\n14909-Homenagem à Catalunha (4P).indd   1 15/02/21   15:07",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Perfil geral do narrador: firme. Direção deste trecho: Tom solene e contido. Pronunciar o título com gravidade, como quem anuncia uma obra de peso. Pausa longa após 'Catalunha'. Ignorar dados editoriais técnicos (código, data). Ritmo lento, reverente.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00002",
+      "speaker": "narrador",
+      "text": "A folha de rosto já carrega peso: o código InDesign e a data de 2021 indicam uma reedição cuidadosa, quase oitenta anos depois de Orwell pisar na Catalunha. O livro continua encontrando leitores novos.",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    },
+    {
+      "turn_id": "R00003",
+      "speaker": "narrador",
+      "text": "Coleção Jornalismo Literário — Coordenação de Matinas Suzuki Jr.\n41 inícios falsos, Janet Malcolm\nA sangue frio, Truman Capote\nAnatomia de um julgamento, Janet Malcolm\nA árvore de Gernika, G. L. Steer\nBerlim, Joseph Roth\nChico Mendes: Crime e castigo, Zuenir V entura\nDentro da floresta, David Remnick\nElogiemos os homens ilustres, James Rufus Agee e Walker Evans\nEsqueleto na lagoa verde, Antonio Callado\nFama e anonimato, Gay Talese\nA feijoada que derrubou o governo, Joel Silveira\nFilme, Lillian Ross\nHiroshima, John Hersey\nHonra teu pai, Gay Talese\nO imperador, Ryszard Kapu´sci ´nski\nO livro das vidas, org. Matinas Suzuki Jr.\nO livro dos insultos de H. L. Mencken, seleção, tradução e posfácio de Ruy Castro\nA milésima segunda noite da avenida Paulista, Joel Silveira\nA mulher do próximo, Gay Talese\nNa pior em Paris e Londres, George Orwell\nOperação Massacre, Rodolfo Walsh\nParalelo 10, Eliza Griswold\nRadical Chique e o Novo Jornalismo, T om Wolfe\nO reino e o poder, Gay Talese\nO segredo de Joe Gould, Joseph Mitchell\nStasilândia, Anna Funder\nO super‑homem vai ao supermercado, Norman Mailer\nTempos instáveis, org. Fernando de Barros e Silva\nA vida como performance, Kenneth Tynan\nVida de escritor, Gay Talese\nA vida secreta da guerra, Peter Beaumont\nO voyeur, Gay Talese\nVultos da República, org. Humberto Werneck\nO xá dos xás, Ryszard Kapuściński\n14909-Homenagem à Catalunha (4P).indd   2 15/02/21   15:07",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Perfil geral do narrador: firme. Direção deste trecho: Tom neutro, informativo, ritmo constante e fluido. Ler cada título e autor como item de catálogo, sem dramatização. Breve pausa entre cada entrada. Leveza mecânica, como locução de índice. Sem ênfase emocional.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00004",
+      "speaker": "narrador",
+      "text": "Essa coleção é um verdadeiro cânone do jornalismo literário reunido num só catálogo. De Capote a Kapuściński, de Gay Talese a Joel Silveira — o fato de Orwell aparecer aqui ao lado desses nomes reforça que 'Homenagem' é tanto reportagem visceral quanto literatura.",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    },
+    {
+      "turn_id": "R00005",
+      "speaker": "narrador",
+      "text": "george orwell\nHomenagem\nà Catalunha\nTradução\nClaudio Alves Marcondes\nPosfácios\nChristopher Hitchens\ne Lionel Trilling\n14909-Homenagem à Catalunha (4P).indd   3 15/02/21   15:07",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Perfil geral do narrador: firme. Direção deste trecho: Solenidade de folha de rosto. 'George Orwell' com peso e autoridade. Pausa antes de 'Homenagem à Catalunha', que deve soar grave e épico. Nomes do tradutor e posfaciadores em tom informativo, mais leve.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00006",
+      "speaker": "narrador",
+      "text": "Hitchens e Trilling como posfaciadores é uma escolha que enquadra Orwell entre a polêmica política e a crítica literária canônica — dois leitores de gerações diferentes que encontraram no livro coisas bem distintas.",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    },
+    {
+      "turn_id": "R00007",
+      "speaker": "narrador",
+      "text": "Copyright do posfácio © 2001 by Christopher Hitchens\nPublicado mediante acordo com o autor, aos cuidados da Baror International, inc.,\nArmonk, Nova Y ork, usa.\nCopyright do posfácio © 1952 by Lionel Trilling\nGrafia atualizada segundo o Acordo Ortográfico da Língua Portuguesa de 1990,\nque entrou em vigor no Brasil em 2009.\nTítulo original\nHomage to Catalonia\nCapa\nAlceu Chiesorin Nunes\nImagens de quarta capa\npp. 6 e 7 (acima): World History Archive/ Alamy/ Fotoarena\np. 7 (abaixo): Orwell Archive, ucl, Special Collections\nPreparação\nJulia Passos\nRevisão\nCarmen T. S. Costa\nFernando Nuno\nDados Internacionais de Catalogação na Publicação (cip)\n(Câmara Brasileira do Livro, sp, Brasil)\nOrwell, George, 1903-1950.\nHomenagem à Catalunha / George Orwell ; tradução Claudio\nAlves Marcondes ; posfácios Christopher Hitchens e Lionel Trilling.\n— 1\na ed. — São Paulo : Companhia das Letras, 2021.\nTítulo original: Homage to Catalonia.\nisbn 978-65-5921-019-0\n1. Catalunha (Espanha) – História – Século xx 2. Espanha –\nHistória – Narrativas pessoais britânicas – Guerra civil, 1936-1939\n3. Espanha – Política e governo – 1931-1939 4. Orwell, George, 1903-\n-1950 – Viagens – Espanha – Catalunha i . Hitchens, Christopher.\nii. Trilling, Lionel. iii. Título.\n20-52731 cdd-946.081\nÍndice para catálogo sistemático:\n1. Espanha : História : Guerra Civil, 1936-1939 :\nNarrativas pessoais  946.081\nCibele Maria Dias – Bibliotecária – crb‑8/9427\n[2021]\nT odos os direi tos desta edi ção reser va dos à\neditora schwarcz s.a.\nRua Ban dei ra Pau lis ta, 702, cj. 32\n04532‑002 — São Paulo — sp\nT ele fo ne: (11) 3707‑3500\nwww.com pa nhia das le tras.com.br\nwww.blogdacompanhia.com.br\nfacebook.com/companhiadasletras\ninstagram.com/companhiadasletras\ntwitter.com/cialetras\n14909-Homenagem à Catalunha (4P).indd   4 15/02/21   15:07",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Perfil geral do narrador: firme. Direção deste trecho: Tom técnico-administrativo, leitura fluida e sem emoção. Ritmo moderado, sem pausas dramáticas. Dados editoriais, ISBN, catalogação: tudo seco e funcional. Reduzir intensidade ao mínimo. Clareza acima de tudo.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00008",
+      "speaker": "narrador",
+      "text": "A ficha catalográfica revela que esta é a primeira edição pela Companhia das Letras, de 2021. Curioso que um relato de 1938 sobre a Guerra Civil Espanhola tenha demorado tanto para ganhar esse selo editorial no Brasil.",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    },
+    {
+      "turn_id": "R00009",
+      "speaker": "narrador",
+      "text": "Não respondas ao insensato conforme a insensatez dele,\npara não te igualares a ele.\nResponde ao insensato conforme a insensatez dele,\npara que ele não se creia sábio aos próprios olhos.\nProvérbios 26:4‑5\n14909-Homenagem à Catalunha (4P).indd   5 15/02/21   15:07",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Perfil geral do narrador: firme. Direção deste trecho: Tom bíblico, pausado e sentencioso. Primeiro versículo com advertência grave. Pausa significativa entre os dois versículos. Segundo versículo com inflexão irônica e sábia. Finalizar 'Provérbios 26:4-5' em tom baixo, quase sussurrado.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00010",
+      "speaker": "narrador",
+      "text": "Epígrafe genial: Provérbios 26:4-5, dois versículos que se contradizem deliberadamente. Orwell abre o livro com um paradoxo bíblico sobre como lidar com a insensatez — prenúncio perfeito das contradições políticas que vai narrar.",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    },
+    {
+      "turn_id": "R00011",
+      "speaker": "narrador",
+      "text": "Colunas da milícia socialista do Poum, em Barcelona, 1936.\nOrwell é o homem alto que se destaca no final da fila.\n“Trabalhadores à vitória!”\nPôster do Partido Obrero\nde Unificación Marxista\n(Poum) conclama suas\nhostes para a luta, 1935.\n14909-Homenagem à Catalunha (4P).indd   6 15/02/21   15:07",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Perfil geral do narrador: firme. Direção deste trecho: Tom descritivo de legenda documental. Ritmo calmo, quase jornalístico. Ao mencionar Orwell, leve destaque respeitoso. 'Trabalhadores à vitória!' com energia contida, como quem cita um cartaz, sem gritar. Pausas entre legendas.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00012",
+      "speaker": "narrador",
+      "text": "Orwell descrito apenas como 'o homem alto que se destaca no final da fila' — identificado pelo corpo, não pelo nome. Naquele momento ele era só mais um voluntário estrangeiro, a fama viria depois.",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    },
+    {
+      "turn_id": "R00013",
+      "speaker": "narrador",
+      "text": "Membros do Poum\nmarcham em\nBarcelona, 1936.\nEileen Maud Blair, esposa de Orwell, sentada à direita, visita o front de Aragón, 1937.\nOrwell é o que está de pé logo atrás dela.\n14909-Homenagem à Catalunha (4P).indd   7 15/02/21   15:07",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Perfil geral do narrador: firme. Direção deste trecho: Mesmo registro documental do trecho anterior. Tom suave ao mencionar Eileen. Leve intimidade ao descrever a posição de Orwell. Ritmo tranquilo, contemplativo, como quem descreve uma fotografia antiga com carinho.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00014",
+      "speaker": "narrador",
+      "text": "Eileen Blair raramente recebe o destaque que merece nessa história. Ela foi ao front de Aragón, correu os mesmos riscos, e aqui aparece sentada enquanto Orwell está literalmente na sombra dela — uma inversão involuntária e reveladora.",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    },
+    {
+      "turn_id": "R00015",
+      "speaker": "narrador",
+      "text": "14909-Homenagem à Catalunha (4P).indd   8 15/02/21   15:07",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Perfil geral do narrador: firme. Direção deste trecho: Página em branco. Silêncio. Pausa de transição de dois segundos, marcando passagem para o corpo do livro.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00016",
+      "speaker": "narrador",
+      "text": "Página em branco — o silêncio editorial que separa as imagens documentais do texto. Uma pausa antes de Orwell tomar a palavra.",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    },
+    {
+      "turn_id": "R00017",
+      "speaker": "narrador",
+      "text": "Sumário\nhomenagem à catalunha  ...................................................... 11\nPosfácio à edição inglesa (2001) — Christopher Hitchens  ...... 273\nGeorge Orwell e a política da verdade — Lionel Trilling  ........ 287\n14909-Homenagem à Catalunha (4P).indd   9 15/02/21   15:07",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Perfil geral do narrador: firme. Direção deste trecho: Tom organizacional, claro e direto. Ler cada item do sumário com ritmo uniforme, pausa breve entre entradas. Números de página em tom discreto. Sem dramatização. Leve antecipação ao anunciar o título principal.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00018",
+      "speaker": "narrador",
+      "text": "Sumário enxuto: o relato ocupa a maior parte do livro, e os dois posfácios juntos mal passam de trinta páginas. A obra fala por si; Hitchens e Trilling apenas complementam.",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    },
+    {
+      "turn_id": "R00019",
+      "speaker": "narrador",
+      "text": "14909-Homenagem à Catalunha (4P).indd   10 15/02/21   15:07",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Perfil geral do narrador: firme. Direção deste trecho: Página em branco. Silêncio breve, pausa de respiração antes do início do primeiro capítulo. Momento de preparação.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00020",
+      "speaker": "narrador",
+      "text": "Outra página em branco antes do capítulo 1. A diagramação respeita o ritmo clássico do livro impresso — dar ao leitor um instante de preparação antes da imersão.",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    },
+    {
+      "turn_id": "R00021",
+      "speaker": "narrador",
+      "text": "11\n1.\nEm Barcelona, na caserna Lênin, um dia antes de me juntar\nà milícia, vi um miliciano italiano de pé junto à mesa dos oficiais.\nEra um sujeito de aspecto rude, com 25 ou 26 anos, cabelo\nruivo‑alaranjado e ombros largos. A aba do boné de couro estava\nenterrada com força sobre um dos seus olhos. Ele estava de perfil\npara mim, o queixo encostado no peito, fitando desconcertado o\nmapa que um dos oficiais havia aberto sobre a mesa. Algo em sua\nexpressão me comoveu profundamente. Era o rosto de um ho‑\nmem capaz de cometer um assassinato e jogar sua vida fora por\num amigo — o tipo de rosto que se espera de um anarquista,\nembora o mais provável é que fosse comunista. Havia nele ao\nmesmo tempo candor e ferocidade, e também a patética reverên‑\ncia que os iletrados têm por aqueles que julgam ser seus superio‑\nres. Era óbvio que não entendia absolutamente nada do mapa; e\nestava claro que considerava a leitura de mapas uma estupenda\nfaçanha intelectual. Mal consigo explicar isso, mas poucas vezes\nconheci alguém — um homem, quero dizer — com quem tenha\nsimpatizado de modo tão imediato. Enquanto conversavam em\n14909-Homenagem à Catalunha (4P).indd   11 15/02/21   15:07",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Perfil geral do narrador: firme. Direção deste trecho: Abertura memorável. Tom introspectivo e evocativo. Ritmo pausado, como quem revisita uma lembrança vívida. Construir tensão ao descrever o italiano: fascínio, admiração crua. 'Capaz de cometer um assassinato e jogar sua vida fora por um amigo' — intensidade contida, gravidade. Reverência ao descrever a expressão do miliciano.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00022",
+      "speaker": "narrador",
+      "text": "Orwell abre com um rosto, não com uma tese. O miliciano italiano que não sabe ler um mapa mas transmite 'candor e ferocidade' — é o retrato de uma revolução feita por gente comum, não por estrategistas.",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    },
+    {
+      "turn_id": "R00023",
+      "speaker": "narrador",
+      "text": "12\ntorno da mesa, um comentário revelou que eu era estrangeiro. O\nitaliano ergueu a cabeça e perguntou de pronto:\n“Italiano?”\nRespondi num espanhol precário: “No, inglés. Y tú?”\n“Italiano.”\nAo sairmos, ele avançou pela sala e apertou a minha mão\ncom muita força. Curioso, a afeição que se pode sentir por um\nestranho! Era como se o espírito dele e o meu tivessem por um\nmomento transposto o golfo da língua e da tradição para se en‑\ncontrarem na mais plena intimidade. Queria que gostasse de mim\ntanto quanto eu gostara dele. Mas também sabia que, para reter\nessa impressão inicial, seria preciso que não o reencontrasse; e\nnem carece dizer que nunca mais o vi depois. Tais contatos eram\nmuito comuns na Espanha.\nMenciono esse miliciano italiano porque ele ficou vivida‑\nmente marcado em minha lembrança. Com seu uniforme surra‑\ndo e o rosto feroz e patético, ele exemplifica para mim a atmosfera\nespecial daquela época. Está mesclado a todas as recordações que\ntenho desse período da guerra — as bandeiras vermelhas em Bar‑\ncelona, os trens lúgubres repletos de soldados maltrapilhos se ar‑\nrastando até o front, os vilarejos cinzentos devastados pela guerra\nna retaguarda da linha, as enlameadas e gélidas trincheiras nas\nmontanhas.\nIsso foi no final de dezembro de 1936, menos de sete meses\natrás, e ainda assim é uma época já recuada numa enorme dis‑\ntância. Acontecimentos posteriores a relegaram ao esquecimento\nmui to mais completamente do que o fizeram com 1935 ou, até\nmesmo, 1905. Eu viera à Espanha com a ideia vaga de escrever ar‑\ntigos jornalísticos, mas quase de imediato me alistei na milícia,\nporque naquele momento e naquela atmosfera isso parecia o mais\napropriado a fazer. Na prática, os anarquistas continuavam a con‑\ntrolar a Catalunha, e a revolução continuava a todo o vapor. Para\n14909-Homenagem à Catalunha (4P).indd   12 15/02/21   15:07",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Perfil geral do narrador: firme. Direção deste trecho: Diálogos curtos ('Italiano?', 'No, inglés') em tom direto, seco, viril — sem suavizar. Após o aperto de mão, tom lírico e melancólico. Velocidade reduz ao refletir sobre a conexão efêmera. 'Nunca mais o vi' com peso de perda serena. Transição para memória coletiva com tom épico e sombrio.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00024",
+      "speaker": "narrador",
+      "text": "'Tais contatos eram muito comuns na Espanha.' — Orwell transforma um aperto de mão em meditação sobre intimidade entre desconhecidos. Ele já sabia que a guerra tornaria essas conexões fugazes irrepetíveis.",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    },
+    {
+      "turn_id": "R00025",
+      "speaker": "narrador",
+      "text": "13\naqueles que estavam ali desde o início, provavelmente parecia,\nmesmo em dezembro ou em janeiro, que o ímpeto revolucionário\nestava se esgotando; no entanto, para um recém‑chegado da In‑\nglaterra, Barcelona tinha um aspecto assombroso e arrebatador.\nPela primeira vez, eu me via numa cidade onde a classe trabalha‑\ndora assumira as rédeas. Quase todos os prédios mais importan‑\ntes haviam sido tomados pelos trabalhadores e estavam adorna‑\ndos com bandeiras vermelhas, ou com as bandeiras rubro‑negras\ndos anarquistas; todos os muros estavam pichados com a foice e o\nmartelo e com as iniciais dos partidos revolucionários; a maioria\ndas igrejas havia sido saqueada e suas imagens, queimadas. Aqui e\nali igrejas eram sistematicamente demolidas por grupos de traba‑\nlhadores. T odas as lojas e todos os cafés exibiam um aviso dizendo\nque haviam sido coletivizados; até mesmo os engraxates tinham\nsido coletivizados e as suas caixas, pintadas de vermelho e de pre‑\nto. Garçons e atendentes de lojas o olhavam nos olhos e o trata‑\nvam de igual para igual. Os tratamentos servis e mesmo os ceri‑\nmoniosos haviam temporariamente desaparecido. Ninguém dizia\nmais “Señor” ou “Don” , ou mesmo “Usted” , todos se chamavam de\n“Camarada” e “Tú” , e diziam “Salud!” , em vez de “Buenos días”.\nUma das primeiras experiências que tive, ao tentar dar gorjeta a\num ascensorista, foi ouvir um sermão do gerente do hotel. Não\nexistiam mais carros particulares, todos haviam sido requisitados;\ne todos os bondes e táxis, bem como grande parte dos outros\nmeios de transporte, estavam pintados de vermelho e de preto.\nCartazes revolucionários estavam por todos os lados, flamejando\nnos muros com vermelhos e azuis vívidos, que faziam os poucos\nanúncios remanescentes parecerem manchados de lama. Descen‑\ndo as Ramblas, a larga artéria central da cidade onde multidões\ncirculavam sem parar de uma ponta a outra, os alto‑falantes ber‑\nravam canções revolucionárias ao longo do dia e noite adentro. E\no aspecto da multidão era o mais curioso de tudo. Na aparência,\n14909-Homenagem à Catalunha (4P).indd   13 15/02/21   15:07",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Perfil geral do narrador: firme. Direção deste trecho: Crescendo de deslumbramento. Narrar a Barcelona revolucionária com entusiasmo contido que vai se expandindo. Enumerações (bandeiras, igrejas, lojas) em ritmo acelerado, quase febril. 'Camarada' e 'Salud!' com calor fraternal. Tom de quem testemunha algo inédito e grandioso.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00026",
+      "speaker": "narrador",
+      "text": "Barcelona coletivizada: engraxates com caixas vermelhas e pretas, gerentes de hotel que recusam gorjetas, alto-falantes berrando canções nas Ramblas. Orwell registra a revolução pelos detalhes sensoriais do cotidiano, não pela ideologia.",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    },
+    {
+      "turn_id": "R00027",
+      "speaker": "narrador",
+      "text": "14\nera uma cidade na qual as classes abastadas tinham praticamente\ndeixado de existir. Exceto por algumas mulheres e alguns estran‑\ngeiros, não havia mais gente “bem‑vestida” . Quase todo mundo\nusava trajes grosseiros de trabalhadores ou macacões azuis, ou\nentão uma variante do uniforme das milícias. Tudo isso era curio‑\nso e comovente. Muito escapava à minha compreensão, mas reco‑\nnheci de pronto que se tratava de uma situação pela qual valia a\npena lutar. Também acreditei que as coisas eram como pareciam\nser, que se tratava mesmo de um Estado dos trabalhadores, e que\ntoda a burguesia havia escapulido, ou sido morta, ou passado vo‑\nluntariamente para o lado dos trabalhadores; não me dei conta de\nque boa parte dos burgueses abastados estavam apenas amoitados\ne temporariamente se fazendo passar por proletários.\nMesclado a isso tudo havia algo da atmosfera maligna da\nguerra. A cidade exibia um aspecto desolado e sujo, as vias e os\nedifícios estavam malcuidados; as ruas, pouco iluminadas à noite\npor medo de ataques aéreos; as lojas, quase sempre em mau esta‑\ndo e semivazias. A carne era insuficiente e o leite quase impossível\nde se obter, faltava carvão, açúcar e gasolina, e havia uma escassez\nmuito grande de pão. Mesmo nessa época, as filas para conseguir\npão muitas vezes se estendiam por centenas de metros. Porém, até\nonde se percebia, as pessoas estavam contentes e esperançosas.\nNão havia desemprego, e o custo de vida era ainda muito baixo;\nraras eram as pessoas claramente miseráveis e, além dos ciganos,\nninguém mendigava. Acima de tudo, havia uma crença na revo‑\nlução e no futuro, a sensação de adentrar de súbito uma era de\nigualdade e liberdade. Os seres humanos procuravam se compor‑\ntar como seres humanos, e não como engrenagens na máquina\ncapitalista. Nas barbearias, avisos anarquistas (os barbeiros eram\nquase todos anarquistas) explicavam solenemente que eles não\neram mais escravos. Nas ruas, cartazes coloridos conclamavam as\nprostitutas a abandonarem a prostituição. Para qualquer um vin‑\n14909-Homenagem à Catalunha (4P).indd   14 15/02/21   15:07",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Perfil geral do narrador: firme. Direção deste trecho: Tom que oscila entre maravilhamento e realismo sombrio. Ao descrever escassez (carne, leite, pão), ritmo desacelera, gravidade aumenta. 'Crença na revolução e no futuro' — breve luminosidade esperançosa. Barbeiros anarquistas e prostitutas: ternura irônica, quase comovida.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00028",
+      "speaker": "narrador",
+      "text": "A lucidez retroativa é cortante: 'não me dei conta de que boa parte dos burgueses estavam apenas amoitados'. Orwell admite sua própria ingenuidade sem cinismo, e isso dá ao relato uma honestidade rara.",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    },
+    {
+      "turn_id": "R00029",
+      "speaker": "narrador",
+      "text": "15\ndo da civilização insensível e desdenhosa das raças anglófonas\nhavia algo de patético na literalidade com que esses espanhóis\nidealistas repetiam as frases gastas da revolução. Na época, as\nmais ingênuas canções revolucionárias, todas exaltando a frater ‑\nnidade proletária e execrando a perversidade de Mussolini, eram\nvendidas nas ruas por centavos. Inúmeras vezes vi um miliciano\niletrado comprando uma dessas canções, lendo com dificuldade a\nletra e, logo em seguida, assim que pegava o jeito da coisa, passan‑\ndo a cantá‑la no tom apropriado.\nPassei todo esse tempo na caserna Lênin, sendo treinado de\nmodo ostensivo para a frente de batalha. Ao me alistar na milícia,\ndisseram que seria enviado ao front no dia seguinte, mas na ver ‑\ndade tive de esperar pela formação de uma nova centuria. As mi‑\nlícias de trabalhadores, reunidas às pressas pelos sindicatos no\ncomeço da guerra, ainda não tinham sido organizadas como um\nexército regular. As unidades de comando tinham a “seção” , com\ncerca de trinta homens; a “centúria” , com uma centena; e a “colu‑\nna” , que, na prática, reunia qualquer quantidade maior de comba‑\ntentes. A caserna Lênin era um conjunto de edifícios de alvenaria\nesplêndidos com uma escola de equitação e pátios calçados enor‑\nmes; tinha sido um quartel de cavalaria e fora tomado nos com‑\nbates de julho. A minha centúria estava alojada num dos estábu‑\nlos, sob manjedouras de pedra onde ainda se liam os nomes da\ncavalaria. Os cavalos haviam sido requisitados e enviados ao\nfront, mas o lugar ainda fedia a urina de cavalo e aveia apodreci‑\nda. Passei cerca de uma semana na caserna. Lembro sobretudo da\ncatinga equina, dos toques trêmulos de clarim (todos os cornetei‑\nros eram amadores — a primeira vez que ouvi os toques de cla‑\nrim espanhóis foi vindo do outro lado das linhas fascistas), os\ntap‑tap‑tap dos pregos das botas no pátio, as longas marchas ma‑\ntinais ao sol de inverno, os confusos jogos de futebol, com cin‑\nquenta de cada lado, no cascalho da escola de equitação. Havia\n14909-Homenagem à Catalunha (4P).indd   15 15/02/21   15:07",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Perfil geral do narrador: firme. Direção deste trecho: Ternura com leve ironia ao descrever milicianos comprando canções. Tom caloroso, humano. Transição para a caserna: ritmo mais marcial, descritivo. 'Seção', 'centúria', 'coluna' — cadência didática. Toques de clarim e futebol: nostalgia sensorial, leveza momentânea.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00030",
+      "speaker": "narrador",
+      "text": "Milicianos iletrados comprando letras de canções revolucionárias e aprendendo a cantá-las ali mesmo — Orwell capta o momento exato em que propaganda vira crença genuína, sem ironizar nem romantizar.",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    },
+    {
+      "turn_id": "R00031",
+      "speaker": "narrador",
+      "text": "16\ntalvez mil homens na caserna, e por volta de duas dezenas de mu‑\nlheres, além das esposas dos milicianos que se incumbiam de co‑\nzinhar. Ainda existiam mulheres servindo na milícia, mas não\nmuitas. Nas primeiras batalhas, elas tinham lutado ao lado dos\nhomens sem qualquer problema. É algo que parece natural em\ntempos de revolução. No entanto, as ideias começavam a mudar.\nOs milicianos tinham de ser mantidos fora da escola de equitação\nquando as mulheres treinavam, pois costumavam zombar delas e\ndesencorajá‑las. Poucos meses antes, ninguém veria nada de cô‑\nmico numa mulher empunhando uma arma.\nO quartel inteiro estava no estado de imundície e de caos ao\nqual a milícia reduzia todos os edifícios que ocupava, e que pare‑\ncia ser um dos subprodutos da revolução. Em cada canto se topa‑\nva com pilhas de móveis destroçados, selas quebradas, capacetes\nde latão da cavalaria, bainhas de sabre vazias e comida estragada.\nHavia um espantoso desperdício de alimento, sobretudo de pão.\nSomente na minha caserna, um cesto cheio de pão era descartado\na cada refeição — algo vergonhoso diante de tanta escassez em\nmeio à população civil. Comíamos em mesas compridas sobre ca‑\nvaletes, em marmitas de lata sempre engorduradas, e bebíamos de\numa coisa medonha chamada porrón. Um porrón é um tipo de gar‑\nrafa de vidro com bico afilado, do qual jorra um fino jato de vi‑\nnho sempre que é inclinada; como dá para beber sem tocar o bico\ncom os lábios, pode ser passado de mão em mão. Eu protestei e\npedi um copo normal assim que vi um porrón sendo usado. Para\nmim, essas garrafas pareciam demais com comadres de vidro, so‑\nbretudo quando estavam cheias de vinho branco.\nPouco a pouco, começaram a fornecer uniformes aos recru‑\ntas e, como estávamos na Espanha, tudo era distribuído de forma\npicada, e portanto nunca se sabia com certeza quem havia recebi‑\ndo o quê, e muito daquilo que mais necessitávamos, como cin‑\nturões e cartucheiras, só foi liberado no último instante, quando\n14909-Homenagem à Catalunha (4P).indd   16 15/02/21   15:07",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Perfil geral do narrador: firme. Direção deste trecho: Tom de crônica vívida do cotidiano militar. Humor sutil ao descrever o caos e o porrón ('comadres de vidro'). Indignação breve ao mencionar desperdício de pão. Ritmo narrativo fluido, com variações: ironia leve, desconforto, observação aguçada. Encerrar com resignação divertida.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00032",
+      "speaker": "narrador",
+      "text": "O desperdício de pão no quartel enquanto civis faziam fila por horas é o tipo de contradição que Orwell nunca deixa passar. Ele já está mapeando as falhas internas da revolução antes mesmo de chegar ao front.",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    },
+    {
+      "turn_id": "R00033",
+      "speaker": "narrador",
+      "text": "17\no trem já estava a postos para nos conduzir até o front. Falei em\n“uniforme” da milícia, o que provavelmente vai causar uma im‑\npressão errada. Não era bem um uniforme. Talvez fosse mais\napropriado chamá‑lo de “multiforme” . As roupas de todos se‑\nguiam o mesmo plano geral, mas nunca eram exatamente iguais\numas às outras. Quase todo mundo no exército usava culotes de\nalgodão grosso canelado, mas acabava aí a uniformidade. Alguns\nusavam grevas ou polainas caneladas, outros recorriam a pernei‑\nras de couro ou botas de cano alto. T odos vestiam jaquetas com\nzíper, algumas de couro, outras de lã, e nas cores mais variadas.\nOs tipos de bonés e boinas eram tão numerosos quanto os usuá‑\nrios. Era comum adornar a parte dianteira do boné com uma in‑\nsígnia de partido, e além disso quase todo homem levava no pes‑\ncoço um lenço vermelho, ou vermelho e negro. Uma coluna de\nmilicianos era uma turba de aparência extraordinária. Mas as\nroupas tinham de ser distribuídas à medida que ficavam prontas\nnessa ou naquela fábrica e, considerando as circunstâncias, até\nque não eram tão ruins. T odavia, as camisas e as meias eram de\num algodão deplorável, que de pouco serviam contra o frio.\nOdeio pensar no que os milicianos passaram nos primeiros me‑\nses, quando nada havia sido organizado. Lembro de me deparar\ncom um jornal, de apenas cerca de dois meses antes, no qual um\ndos dirigentes do Poum, após visitar a frente de combate, afirma‑\nva que tentaria ver se conseguia que “todo miliciano tivesse uma\ncoberta” . Uma frase que dá calafrios a qualquer um que já dormiu\nnuma trincheira.\nNo meu segundo dia na caserna, teve início algo que era co‑\nmicamente chamado de “instrução” . No começo ocorreram cenas\nde caos tremendas. Os recrutas eram na sua maioria jovens de\ndezesseis ou dezessete anos das vielas pobres de Barcelona, toma‑\ndos de ardor revolucionário, mas ignorando por completo o sig‑\nnificado da guerra. Era impossível até mesmo conseguir que se\n14909-Homenagem à Catalunha (4P).indd   17 15/02/21   15:07",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Perfil geral do narrador: firme. Direção deste trecho: Tom descritivo-irônico ao detalhar o 'multiforme'; saborear o humor das roupas díspares. Ritmo de enumeração leve, quase divertido. Grave e lento em 'Odeio pensar no que os milicianos passaram'. Pausa longa antes de 'Uma frase que dá calafrios'. Citar o dirigente com sobriedade oficial. Retomar leveza cômica em 'instrução'.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00034",
+      "speaker": "narrador",
+      "text": "O termo 'multiforme' é genial — Orwell transforma a precariedade material numa piada linguística que revela, sem sentimentalismo, como a revolução se vestia com o que tinha à mão.",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    },
+    {
+      "turn_id": "R00035",
+      "speaker": "narrador",
+      "text": "18\nmantivessem em formação. A disciplina era inexistente; quando\ndiscordava de uma ordem, o sujeito saía da formação e discutia\nacaloradamente com o oficial. O tenente que nos instruía havia\nsido antes oficial do Exército regular, e ainda mantinha a aparên‑\ncia, com sua postura elegante e seu uniforme impecável. Curiosa‑\nmente, era um socialista sincero e ardoroso. Ainda mais do que os\npróprios recrutas, ele insistia na completa igualdade social entre\ntodos os postos. Lembro de sua dolorosa surpresa quando um\nrecruta ignorante o chamou de “Señor” . “O que é isso? Señor!\nQuem está me chamando de Señor? Não somos todos camara‑\ndas?” Duvido que isso tenha tornado sua tarefa mais fácil. Entre‑\ntanto, os recrutas rudes não recebiam nenhum treinamento mili‑\ntar que lhes seria de alguma serventia. Disseram‑me que os\nestrangeiros não eram obrigados a participar da “instrução” (os\nespanhóis, logo vi, tinham uma crença patética de que todos os\nestrangeiros sabiam mais do que eles a respeito de assuntos mili‑\ntares), mas claro que me apresentei com os outros. Estava ansioso\npara aprender a usar uma metralhadora, uma arma que nunca\ntivera oportunidade de manusear. Para minha decepção, descobri\nque não nos ensinariam nada sobre o uso de armas. A chamada\n“instrução” era apenas o mais antiquado e estúpido exercício de\nmarcha; volver à direita, volver à esquerda, meia‑volta, marcha\nem coluna de três, e todo o resto dessa baboseira inútil que eu\naprendera aos quinze anos. Era uma forma extraordinária de trei‑\nnar um exército para a guerrilha. É óbvio que, quando se dispõe\nde apenas alguns dias para treinar um soldado, o que se deve fazer\né ensiná‑lo aquilo de que vai precisar mais; como se proteger, co‑\nmo avançar em campo aberto, como montar guarda e erguer um\nparapeito — e, sobretudo, como usar as armas. No entanto, essa\nhorda de jovens impacientes, que seriam jogados na linha de\nfrente dali a poucos dias, nem sequer aprendiam a atirar com um\nfuzil ou a puxar o pino de uma granada. Na época não me dei\n14909-Homenagem à Catalunha (4P).indd   18 15/02/21   15:07",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Perfil geral do narrador: firme. Direção deste trecho: Ritmo ágil no caos dos recrutas. Diálogo do tenente em voz indignada, quase ofendida: 'O que é isso? Señor!' — crescendo de espanto, depois fraternidade calorosa em 'camaradas'. Tom de frustração contida ao descrever treino inútil. Acelerar na enumeração de exercícios fúteis. Gravidade seca ao constatar que não aprendiam a atirar.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00036",
+      "speaker": "narrador",
+      "text": "O tenente que se ofende ao ser chamado de 'Señor' enquanto tenta ensinar ordem militar é a contradição viva: igualdade radical e hierarquia funcional colidindo no mesmo homem.",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    },
+    {
+      "turn_id": "R00037",
+      "speaker": "narrador",
+      "text": "19\nconta de que isso se devia ao fato de não existirem armas dispo‑\nníveis. Na milícia do Poum, a escassez de fuzis era tão grave que\nas novas tropas recém‑chegadas ao front tinham de ficar com as\narmas de quem iriam substituir na linha. Acredito que, em toda a\ncaserna Lênin, os únicos fuzis existentes eram os usados pelas\nsentinelas.\nApós alguns dias, embora ainda pudéssemos ser chamados\nde turba por qualquer critério normal, fomos considerados aptos\na ser vistos em público e, pelas manhãs, nos faziam marchar nos\njardins públicos que ficavam na colina atrás da Plaza de España.\nAli era o campo de treinamento das milícias dos partidos, bem\ncomo dos Carabineros e dos primeiros contingentes do recém‑\n‑criado Exército Popular. Do alto dos jardins, o espetáculo era\nestranho e alentador. Por todos os caminhos e aleias, em meio aos\nbem‑ordenados canteiros floridos, pelotões e companhias de ho‑\nmens marchavam com rigidez de um lado para outro, estufando\no peito e tentando desesperadamente parecer soldados. Ninguém\ncarregava arma e nenhum vestia o uniforme completo, ainda que\nna maioria deles o traje das milícias repontasse aqui e ali. O pro‑\ncedimento era quase sempre o mesmo. Durante três horas, nós\nnos pavoneávamos de um lado ao outro (o passo de marcha espa‑\nnhol é bem curto e acelerado), e aí fazíamos uma pausa, rompen‑\ndo a formação e afluindo sedentos até uma pequena mercearia\nque, a meio caminho do topo da colina, vira crescer de forma\nextraordinária as vendas de vinho barato. T odo mundo era muito\namistoso comigo. Por ser inglês, eu despertava a curiosidade de‑\nles, e os oficiais Carabineros me tinham em alta conta e me paga‑\nvam bebidas. Enquanto isso, sempre que conseguia ficar a sós\ncom o nosso tenente, eu suplicava que me ensinassem a usar uma\nmetralhadora. Costumava tirar do bolso meu dicionário Hugo e\no importunava num espanhol atroz:\n14909-Homenagem à Catalunha (4P).indd   19 15/02/21   15:07",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Perfil geral do narrador: firme. Direção deste trecho: Início sóbrio na escassez de armas. Transição para tom mais leve e panorâmico nos jardins — cadência descritiva, quase pictórica. Humor autodepreciativo no espanhol atroz do narrador. Citar as falas em espanhol com sotaque esforçado e simpático. Insistência cômica em 'quiero aprender ametralladora'.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00038",
+      "speaker": "narrador",
+      "text": "Há algo quase surreal em pelotões marchando sem uma única arma entre canteiros de flores — a guerra ensaiada como teatro, enquanto o front real esperava sem paciência.",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    },
+    {
+      "turn_id": "R00039",
+      "speaker": "narrador",
+      "text": "20\n“Yo sé manejar fusil. No sé manejar ametralladora. Quiero\naprender ametralladora. Quándo vamos aprender ametralladora?”\nSempre me respondia com um sorriso constrangido e a pro‑\nmessa de que mañana haveria treinamento com metralhadora.\nNem é preciso dizer que esse mañana nunca chegou. Vários dias\nse passaram e os recrutas aprenderam a marchar compassada‑\nmente e a ficar em posição de sentido com alguma elegância, mas,\nse sabiam algo, era apenas de que lado do fuzil saíam as balas.\nCerto dia, ao passar por nós quando descansávamos, um Carabi‑\nnero armado permitiu que examinássemos o seu fuzil. Ali ficou\nevidente que, em todo o destacamento, exceto eu, ninguém fazia\nideia de como carregar o fuzil, quanto mais mirar e disparar.\nDurante esse tempo eu enfrentava as costumeiras dificulda‑\ndes com o idioma espanhol. Além de mim, havia apenas um in‑\nglês no quartel, e ninguém, nem mesmo entre os oficiais, falava\numa palavra de francês. E as coisas ainda ficavam mais difíceis\npara mim porque meus companheiros em geral conversavam em\ncatalão entre si. A única maneira de me fazer entender era sempre\ntrazer comigo um pequeno dicionário, que sacava do bolso nos\nmomentos de crise. Mas eu preferiria ser estrangeiro na Espanha\ndo que na maioria dos países. Como é fácil fazer amigos na Espa‑\nnha! Depois de um ou dois dias, duas dezenas de milicianos já me\nchamavam por meu nome de batismo, me davam dicas e me en‑\nchiam de hospitalidade. Não estou escrevendo um livro de propa‑\nganda e não quero idealizar a milícia do Poum. T odo o sistema de\nmilícias tinha falhas graves, e os próprios milicianos formavam\num grupo mesclado, pois nessa altura começava a diminuir o re‑\ncrutamento voluntário, e muitos dos melhores homens já esta‑\nvam no front ou haviam morrido. Entre nós havia sempre uma\ncerta porcentagem completamente inútil. Jovens de quinze anos\neram trazidos pelos pais para se alistarem, evidentemente por\ncausa das dez pesetas diárias que os milicianos ganhavam de sol‑\n14909-Homenagem à Catalunha (4P).indd   20 15/02/21   15:07",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Perfil geral do narrador: firme. Direção deste trecho: Espanhol do narrador com esforço cômico e carinhoso. 'Mañana' sempre com ironia afável. Pausa e tom resignado em 'esse mañana nunca chegou'. Aquecimento genuíno ao falar da hospitalidade — ritmo mais lento, voz calorosa. Tom equilibrado, honesto, ao admitir falhas da milícia. Gravidade breve nos meninos de quinze anos.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00040",
+      "speaker": "narrador",
+      "text": "O 'mañana' eterno da metralhadora é cômico e angustiante ao mesmo tempo — Orwell querendo desesperadamente aprender a sobreviver, e o sistema respondendo com sorrisos e promessas.",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    },
+    {
+      "turn_id": "R00041",
+      "speaker": "narrador",
+      "text": "21\ndo; e também por causa do pão que a milícia recebia em abun‑\ndância, e que podia ser contrabandeado para casa e entregue aos\npais. No entanto, desafio qualquer um que, como eu, tenha sido\nposto no meio da classe trabalhadora espanhola — talvez devesse\ndizer classe trabalhadora catalã, pois, além de alguns aragoneses e\nandaluzes, conheci apenas catalães — a não ficar impressionado\ncom a decência essencial e, sobretudo, com a franqueza e a gene‑\nrosidade deles. A generosidade de um espanhol, na acepção corri‑\nqueira do termo, por vezes chega a ser constrangedora. Quando\nvocê lhe pede um cigarro, ele o obriga a ficar com o maço inteiro.\nE, para além disso, há a generosidade num sentido mais profundo,\numa efetiva grandeza de espírito, com a qual me deparei inúmeras\nvezes nas circunstâncias menos auspiciosas. Alguns dos jornalis‑\ntas e outros estrangeiros que viajaram pela Espanha durante a\nguerra afirmaram que, em segredo, os espanhóis se ressentiam\namargamente da ajuda externa. Só posso dizer que nunca obser‑\nvei nada desse tipo. Lembro de que, poucos dias antes de deixar a\ncaserna, um grupo de milicianos retornou do front em licença.\nEstavam conversando animadamente sobre suas experiências e\nfalavam com admiração sobre alguns combatentes franceses que\nhaviam conhecido em Huesca. Os franceses eram muito corajo‑\nsos, comentaram, acrescentando com veemência: “Más valientes\nque nosotros” . Claro que coloquei isso em dúvida, e aí eles explica‑\nram que os franceses sabiam mais da arte da guerra — estavam\nmais familiarizados com granadas, metralhadoras e coisas assim.\nAinda assim era um comentário revelador. Um inglês teria prefe‑\nrido que lhe cortassem a mão a dizer algo desse tipo.\nT odos os estrangeiros que serviram na milícia passaram as\nprimeiras semanas aprendendo a apreciar os espanhóis, e ficando\nexasperados com algumas das suas características. Na linha de\nfrente, esse tipo de exasperação por vezes chegou a me provocar\nacessos de fúria. Os espanhóis são bons em muitas coisas, mas\n14909-Homenagem à Catalunha (4P).indd   21 15/02/21   15:07",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Perfil geral do narrador: firme. Direção deste trecho: Voz afetuosa e admirada ao elogiar a generosidade espanhola — ritmo amplo, pausado. Citar 'Más valientes que nosotros' com entusiasmo franco e viril. Pausa reflexiva antes de 'Um inglês teria preferido…' — ironia seca, britânica. Transição para tom de exasperação contida no final, prenunciando frustração.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00042",
+      "speaker": "narrador",
+      "text": "Aquele 'Más valientes que nosotros' dito sem rancor é o detalhe que Orwell guarda como prova de caráter — uma franqueza que ele sabe ser impensável na cultura inglesa.",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    },
+    {
+      "turn_id": "R00043",
+      "speaker": "narrador",
+      "text": "22\nnão em fazer guerra. Sem exceção, todos os estrangeiros ficam\nestarrecidos com a ineficiência deles, sobretudo com a enlouque‑\ncedora impontualidade. A única palavra em espanhol que ne‑\nnhum estrangeiro deixa de aprender é mañana. Sempre que pos‑\nsível, as tarefas de hoje são adiadas para mañana. Isso é algo tão\nnotório, que os próprios espanhóis fazem piada a respeito. Nada\nna Espanha, desde uma refeição até uma batalha, jamais ocorre\nna hora prevista. Como regra geral, as coisas costumam acontecer\ntarde demais, mas de vez em quando — só para que ninguém\npossa confiar nos atrasos — também ocorrem antes do previsto.\nUm trem cuja partida está marcada para as oito sai em geral entre\nnove e dez, mas talvez uma vez por semana, devido a um capricho\ndo condutor, o trem parte às 7h30. Esse tipo de coisa pode ser um\ntanto difícil. Em teoria, até que admiro os espanhóis por não\ncompartilharem a nossa neurose setentrional com o tempo, mas,\ndesgraçadamente, não consigo me livrar dela.\nDepois de incessantes rumores, mañanas e atrasos, de repen‑\nte recebemos ordens para seguir para o front dali a duas horas,\nmesmo sem termos grande parte do equipamento. Houve então\num tumulto enorme diante do armazém da intendência; no final,\ndiversos milicianos tiveram de partir sem o equipamento com‑\npleto. As casernas logo se encheram de mulheres que pareciam ter\nbrotado do chão e se puseram a ajudar os seus companheiros a\nenrolar as cobertas e arrumar as mochilas. Foi um tanto humi‑\nlhante, mas, para ajeitar a minha nova cartucheira de couro, tive\nde recorrer a uma jovem espanhola, casada com Williams, o ou‑\ntro miliciano inglês. Era uma criatura meiga, de olhos escuros e\nmuito feminina, com um jeito de que nascera para balançar um\nberço, mas que na realidade participara valorosamente nos con‑\nfrontos de rua de julho. Agora ela carregava um bebê, nascido\napenas dez meses depois da eclosão do conflito, e talvez concebi‑\ndo atrás de uma barricada.\n14909-Homenagem à Catalunha (4P).indd   22 15/02/21   15:07",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Perfil geral do narrador: firme. Direção deste trecho: Exasperação cômica crescente com a impontualidade — 'mañana' como refrão irônico. Ritmo acelerado e caótico na partida repentina. Ternura delicada ao descrever a jovem espanhola — voz mais suave, pausas contemplativas. Frase final sobre o bebê concebido atrás de barricada: pausa antes, entrega seca e contida, sem sentimentalismo.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00044",
+      "speaker": "narrador",
+      "text": "Orwell admira em teoria o desapego espanhol ao relógio, mas confessa que não consegue se livrar da neurose setentrional — é honesto sobre seus próprios limites culturais.",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    },
+    {
+      "turn_id": "R00045",
+      "speaker": "narrador",
+      "text": "23\nCom a partida do trem prevista para as oito, só por volta das\noito e dez os oficiais esgotados e suados conseguiram nos reunir\nno pátio central do quartel. T enho uma lembrança bem nítida da\ncena iluminada por tochas, as fileiras cerradas de milicianos com\nmochilas nas costas e mantas enroladas e presas sobre os ombros,\ncomo bandoleiros; os gritos e o estrépito das botas e das marmi‑\ntas de lata; e então soou um tremendo e por fim bem‑sucedido\nassobio para que se fizesse silêncio; em seguida, uma espécie de\ncomissário político ficou de pé sob uma enorme bandeira verme‑\nlha tremulante e fez um discurso em catalão. Enfim, nos fizeram\nmarchar até a estação, pelo trajeto mais longo, de cinco ou seis\nquilômetros, de modo a nos exibir para toda a cidade. Nas Ram‑\nblas, ordenaram que parássemos enquanto uma banda requisita‑\nda tocava uma ou outra música revolucionária. Mais uma vez, a\nparafernália do herói conquistador — gritos e entusiasmo, ban‑\ndeiras vermelhas e bandeiras rubro‑negras por todos os lados,\nmultidões amistosas se comprimindo nas calçadas para nos ve‑\nrem, mulheres acenando das janelas. Como tudo aquilo parecia\ntão natural, e o quão remoto e improvável parece hoje! O trem\nficou tão lotado que mal havia espaço nos corredores, para não\nfalar nos assentos. No último instante, a mulher de Williams sur‑\ngiu correndo na plataforma e nos deu uma garrafa de vinho e\ndois palmos de uma salsicha de cor vermelho‑vivo, que tinha gos‑\nto de sabão e provocava diarreia. O trem se arrastou para fora da\nCatalunha e seguiu rumo ao planalto de Aragão em sua velocida‑\nde normal de tempo de guerra, um pouco menos que vinte qui‑\nlômetros por hora.\n14909-Homenagem à Catalunha (4P).indd   23 15/02/21   15:07",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Perfil geral do narrador: firme. Direção deste trecho: Tom cinematográfico, evocativo: voz grave e cadenciada na cena das tochas. Crescendo épico na marcha pelas Ramblas — bandeiras, música, multidão. Pausa nostálgica em 'como tudo aquilo parecia tão natural'. Quebra cômica brusca na salsicha que 'provocava diarreia' — entrega seca, deadpan. Encerrar em ritmo lento, arrastado como o trem.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00046",
+      "speaker": "narrador",
+      "text": "A salsicha vermelha que 'tinha gosto de sabão e provocava diarreia' é o contraponto perfeito à cena heroica das Ramblas — Orwell nunca deixa a épica sem seu lastro de corpo e desconforto.",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    }
+  ]
+}
