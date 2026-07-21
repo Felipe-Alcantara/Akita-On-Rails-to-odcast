@@ -31,10 +31,12 @@ from .estimates import EpisodeMetrics, estimate_tts_cost
 from .media import media_duration_seconds
 from .narration import (
     MAX_TTS_CHARS,
+    commentary_direction,
     fallback_commentary,
     fallback_direction,
     parse_prosody_plan,
     parse_reflexive_commentary,
+    podcast_direction,
     prosody_batches,
     prosody_prompt,
     prosody_system,
@@ -632,18 +634,7 @@ def _prepare_reflexive_turns(
         if is_last_chunk_of_para:
             para_text = paragraphs[para_id - 1]
             commentary = commentary_cache[_para_key(para_id, para_text)]["commentary"]
-            if lang == "en":
-                commentary_instructions = (
-                    "Natural, reflective speech in English — "
-                    "as if sharing a brief thought after reading the passage aloud."
-                    + (f" Narrator profile: {narrator.style}." if narrator.style else "")
-                )
-            else:
-                commentary_instructions = (
-                    "Fala natural e reflexiva em português brasileiro — "
-                    "como se compartilhasse um breve pensamento após ler o trecho em voz alta."
-                    + (f" Perfil do narrador: {narrator.style}." if narrator.style else "")
-                )
+            commentary_instructions = commentary_direction(narrator.style, lang)
             turns.append(
                 {
                     "turn_id": f"R{len(turns) + 1:05d}",
@@ -927,17 +918,14 @@ def _synthesize_turns(
             legacy_entry = entries.pop(legacy_segment.name, None)
             if isinstance(legacy_entry, dict):
                 entries[segment.name] = legacy_entry
-        style = f", tom {presenter.style}" if presenter.style else ""
         supplied_instructions = turn.get("instructions")
         if supplied_instructions is not None and (
             not isinstance(supplied_instructions, str) or len(supplied_instructions) > 2_000
         ):
             raise ValueError(f"Instrução de interpretação inválida no turno {index}.")
-        if settings.language == "en":
-            default_instructions = f"Natural podcast speech in English{style}."
-        else:
-            default_instructions = f"Fala natural de podcast em português brasileiro{style}."
-        instructions = supplied_instructions or default_instructions
+        instructions = supplied_instructions or podcast_direction(
+            presenter.style, settings.language
+        )
         fingerprint = _segment_fingerprint(
             settings,
             turn["text"],

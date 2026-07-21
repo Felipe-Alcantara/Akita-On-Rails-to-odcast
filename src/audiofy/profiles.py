@@ -14,6 +14,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
+from .languages import DEFAULT_LANGUAGE, is_supported, supported_codes
 from .presenters import DEFAULT_SPEC, parse_presenters
 
 
@@ -468,9 +469,10 @@ def profile_from_payload(payload: dict[str, Any]) -> Profile:
     description = str(payload.get("description", "")).strip()
     if len(description) > 300:
         raise ValueError("A descrição pode ter no máximo 300 caracteres.")
-    language = str(payload.get("language", "pt-BR")).strip() or "pt-BR"
-    if language not in ("pt-BR", "en"):
-        raise ValueError("Idioma deve ser 'pt-BR' ou 'en'.")
+    language = str(payload.get("language", DEFAULT_LANGUAGE)).strip() or DEFAULT_LANGUAGE
+    if not is_supported(language):
+        supported = "', '".join(supported_codes())
+        raise ValueError(f"Idioma deve ser um de: '{supported}'.")
     return Profile(
         name=name,
         text_model=text_model,

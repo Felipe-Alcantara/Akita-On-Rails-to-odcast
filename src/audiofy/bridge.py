@@ -374,8 +374,10 @@ def _generation_options(
         elif argument.startswith("--background-volume="):
             background_volume = _background_volume(argument.partition("=")[2])
         elif argument.startswith("--language="):
+            from .languages import is_supported
+
             language = argument.partition("=")[2]
-            if language not in ("pt-BR", "en"):
+            if not is_supported(language):
                 raise ValueError(f"Idioma desconhecido: {language}")
         else:
             raise ValueError(f"Opção de geração desconhecida: {argument}")
@@ -709,6 +711,7 @@ def _cmd_settings_info() -> dict:
     import os
 
     from .config import api_key_source
+    from .languages import LANGUAGES
     from .providers.openrouter import GEMINI_VOICES
     from .providers.subscription import SUBSCRIPTION_CLIS, configured_model
 
@@ -741,6 +744,9 @@ def _cmd_settings_info() -> dict:
         ],
         "gemini_voices": GEMINI_VOICES,
         "language": settings.language,
+        # Registro único de idiomas: a interface pode montar o seletor a partir daqui
+        # em vez de manter os <option> fixos no HTML.
+        "languages": [{"code": lang.code, "label": lang.ui_label} for lang in LANGUAGES.values()],
         "has_key": bool(settings.api_key),
         "key_source": api_key_source(),
         "overrides": overrides,

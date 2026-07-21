@@ -13,6 +13,7 @@ import json
 from pathlib import Path
 
 from .artifacts import artifact_prefix, source_document_filename
+from .languages import prompt_label
 from .pipeline import episode_dir
 from .sources.base import ContentItem
 
@@ -102,7 +103,7 @@ def export_notebooklm_pack(
     final_audio_file = (
         f"{artifact_prefix(source_key, item.item_id, 'notebooklm')}__audio-completo.mp3"
     )
-    language_label = "English" if language == "en" else "português brasileiro"
+    language_label = prompt_label(language)
     (pack_dir / source_file).write_text(
         f"# {item.title}\n\nFonte: {item.url}\n\n---\n\n{item.text}\n",
         encoding="utf-8",

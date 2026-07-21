@@ -319,6 +319,12 @@ são emitidos no idioma selecionado. Episódios em inglês ficam em um diretóri
 (`<item>__en`), permitindo ter as duas versões do mesmo conteúdo — mesmo que a fonte esteja em
 português. O botão muda para **Re-gerar** quando já existe um episódio no idioma selecionado.
 
+Os idiomas suportados vivem num registro único em `src/audiofy/languages.py`. Para adicionar um
+idioma, acrescente uma entrada em `LANGUAGES` (código, rótulo de prompt e rótulo de interface) e
+os textos correspondentes nos dicionários por idioma de `prompts.py` e `narration.py`. O código
+de orquestração consulta o registro, então nenhuma outra parte do pipeline precisa mudar — ideia
+aberta a quem quiser contribuir com novos idiomas.
+
 ## 🧩 Fontes de conteúdo
 
 Uma fonte implementa o contrato `ContentSource` (`sync`, `list_items`, `search`, `get_item`)

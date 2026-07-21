@@ -229,6 +229,14 @@ class SettingsInfoTest(unittest.TestCase):
             self.assertTrue(cli["model_suggestions"], cli["key"])
             self.assertTrue(cli["supports_model"], cli["key"])
 
+    def test_expoe_os_idiomas_do_registro_para_a_interface(self):
+        result = bridge._cmd_settings_info()
+        codes = [lang["code"] for lang in result["languages"]]
+        self.assertIn("pt-BR", codes)
+        self.assertIn("en", codes)
+        for lang in result["languages"]:
+            self.assertTrue(lang["label"])
+
 
 class KeyManagementContractTest(unittest.TestCase):
     @patch("audiofy.config.api_key_source", return_value="trabalho")
