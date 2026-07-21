@@ -1509,3 +1509,43 @@ essenciais formatados.
 episódios daquele modelo; um TTS estreante ainda cai no ±15%/±20% padrão. A qualidade do guia
 de cobertura depende da matriz que o pipeline extraiu — se o `coverage.json` for pobre, o guia
 herda isso.
+
+---
+
+## 2026-07-21 — Idiomas viram um registro modular (refatoração, branch)
+
+**O que mudou:** os idiomas estavam codificados em `if language == "en"` espalhados por 7
+arquivos (~45 pontos), no estilo que o guia de qualidade chama de "sinal de refatoração":
+adicionar um idioma exigiria caçar cada `if` em prompts, narração, bridge e perfis. Agora há um
+registro único, `languages.py`, com uma entrada por idioma (código estável + rótulo de prompt +
+rótulo de interface). Cada texto que varia por idioma virou um dicionário indexado pelo código,
+e o código de orquestração consulta o registro em vez de ramificar.
+
+Adicionar um idioma passou a ser local: uma entrada em `LANGUAGES` mais os textos nos
+dicionários de `prompts.py` e `narration.py`. Um teste prova isso registrando "es" em runtime
+e verificando que ele fica suportado e válido no perfil sem tocar em nenhum módulo de texto.
+
+**Decisões:**
+
+- **Refatoração pura, comportamento preservado byte a byte.** Antes de aprovar, comparei a
+  saída de todas as funções migradas (system/coverage/script/audit/prosody/reflexive/tts) entre
+  o `main` e a branch, nos dois idiomas, solo e duo: zero divergências.
+- **Foi em branch (`refactor/registro-de-idiomas`),** não direto no `main`, porque a política de
+  git reserva branch para refatoração significativa que mexe em muitos arquivos — este é o caso.
+- **`get_language`/`normalize` caem no padrão para código desconhecido em vez de levantar.** Um
+  artefato antigo ou integração com um código inesperado não deve derrubar a geração; o
+  `reflexive_prompt` antigo já se comportava assim, e o registro generaliza isso.
+- **Um bug pré-existente foi preservado, não corrigido, e registrado.** A direção padrão de
+  podcast anexa `, tom X` mesmo em inglês (o rótulo do tom não era traduzido). Corrigir mudaria
+  a saída, o que não cabe numa refatoração que promete preservar comportamento; fica anotado em
+  `podcast_direction` como melhoria à parte, boa para quem quiser contribuir.
+
+**Validação:** `scripts/check_quality.py` aprovado; 344 testes Python (9 novos do registro,
+incluindo o fallback e a prova de que registrar um idioma é local) e 31 Electron verdes.
+Comparação byte a byte old-vs-new sem divergências. README ganhou o passo a passo de como
+adicionar um idioma.
+
+**Risco que sobrou:** a interface ainda lista os dois idiomas manualmente no HTML
+(`<option>` fixos); um idioma novo no registro apareceria no backend mas não no seletor até o
+HTML ser atualizado — expor `supported_codes()` para a UI montar o seletor é o próximo passo
+natural, deixado como contribuição.
