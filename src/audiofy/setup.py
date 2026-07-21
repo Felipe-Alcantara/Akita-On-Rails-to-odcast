@@ -12,7 +12,16 @@ from pathlib import Path
 from .config import PROJECT_ROOT, Settings
 from .providers.subscription import SUBSCRIPTION_CLIS
 
-_PYTHON_MODULES = ("requests", "questionary", "rich", "akita-articles")
+_PYTHON_MODULES = (
+    "requests",
+    "questionary",
+    "rich",
+    "akita-articles",
+    "pypdf",
+    "python-docx",
+    "ebooklib",
+    "pytesseract",
+)
 _TUI_PACKAGES = ("questionary==2.1.1", "rich==15.0.0")
 
 
@@ -86,6 +95,41 @@ def inspect_setup() -> list[SetupCheck]:
             importlib.util.find_spec("akita_articles") is not None,
             True,
             "pode ser instalado automaticamente",
+        ),
+        SetupCheck(
+            "pypdf",
+            "Leitor de PDF (pypdf)",
+            importlib.util.find_spec("pypdf") is not None,
+            False,
+            "opcional; extrai texto de PDFs enviados como arquivo",
+        ),
+        SetupCheck(
+            "python-docx",
+            "Leitor de DOCX (python-docx)",
+            importlib.util.find_spec("docx") is not None,
+            False,
+            "opcional; extrai texto de documentos Word",
+        ),
+        SetupCheck(
+            "ebooklib",
+            "Leitor de EPUB (ebooklib)",
+            importlib.util.find_spec("ebooklib") is not None,
+            False,
+            "opcional; extrai texto de ebooks EPUB",
+        ),
+        SetupCheck(
+            "pytesseract",
+            "Ponte de OCR (pytesseract)",
+            importlib.util.find_spec("pytesseract") is not None,
+            False,
+            "opcional; conecta o Python ao Tesseract",
+        ),
+        SetupCheck(
+            "tesseract",
+            "OCR local (Tesseract)",
+            bool(shutil.which("tesseract")),
+            False,
+            "opcional; lê texto de imagens e PDFs escaneados sem custo de IA",
         ),
         SetupCheck(
             "openrouter-key",
@@ -182,16 +226,29 @@ _SYSTEM_MANAGERS = [
     ("pacman", ["sudo", "-n", "pacman", "-S", "--noconfirm"]),
 ]
 
-_WINGET_IDS = {"git": "Git.Git", "ffmpeg": "Gyan.FFmpeg"}
+_WINGET_IDS = {
+    "git": "Git.Git",
+    "ffmpeg": "Gyan.FFmpeg",
+    "tesseract": "UB-Mannheim.TesseractOCR",
+}
+# O Tesseract muda de nome entre distribuições; apt/dnf também têm o pacote
+# de idioma português separado, essencial para OCR de conteúdo em pt-BR.
+_SYSTEM_PACKAGES = {
+    ("apt-get", "tesseract"): ["tesseract-ocr", "tesseract-ocr-por"],
+    ("dnf", "tesseract"): ["tesseract", "tesseract-langpack-por"],
+}
 
 
 def _install_system(tool: str) -> dict:
-    """Instala uma ferramenta de sistema (git/ffmpeg) pelo gerenciador disponível."""
+    """Instala uma ferramenta de sistema (git/ffmpeg/tesseract) pelo gerenciador disponível."""
     for manager, base in _SYSTEM_MANAGERS:
         if not shutil.which(manager):
             continue
-        package = _WINGET_IDS.get(tool, tool) if manager == "winget" else tool
-        ok, detail = _run([*base, package])
+        if manager == "winget":
+            packages = [_WINGET_IDS.get(tool, tool)]
+        else:
+            packages = _SYSTEM_PACKAGES.get((manager, tool), [tool])
+        ok, detail = _run([*base, *packages])
         if ok and not shutil.which(tool) and manager == "winget":
             detail = "instalado; reinicie o app para atualizar o PATH"
         return {"name": tool, "ok": ok, "detail": f"via {manager}: {detail}"}
@@ -209,7 +266,7 @@ def apply_setup() -> dict:
     actions: list[dict] = []
 
     # git primeiro: o akita-articles é instalado via ``git+https://``.
-    for tool in ("git", "ffmpeg"):
+    for tool in ("git", "ffmpeg", "tesseract"):
         if tool in before and not before[tool].ok:
             actions.append(_install_system(tool))
 
