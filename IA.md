@@ -1219,3 +1219,249 @@ histórico, truncamento de contexto e remoção do prefixo de modo.
 **Risco que sobrou:** os prefixos de modo dependem de o modelo seguir a instrução em texto;
 modelos menos capazes podem ignorar a diretriz e continuar perguntando. O modo URL não
 valida a URL antes de enviá-la à bridge.
+
+---
+
+## 2026-07-21 — Leitura reflexiva, redesign da aba Conteúdo e envio de arquivos
+
+**O que mudou:** três frentes numa mesma sessão.
+
+- **Modo de geração `reflexive`** (terceira opção ao lado de `adaptation` e `verbatim`):
+  lê o texto original parágrafo a parágrafo sem reescrevê-lo e intercala, ao fim de cada
+  parágrafo, um comentário curto (1–2 frases, teto de 400 caracteres) que contextualiza ou
+  reflete sobre o trecho. O planejamento vive em `reflexive.json` (prosódia + comentários,
+  ambos com cache por hash), e os turnos carregam `kind: verbatim|commentary` para separar
+  o que é texto do autor do que é fala gerada. Seis perfis novos (`*-leitor-reflexivo`).
+- **Redesign da aba Conteúdo**: cabeçalho da fonte com badge de estado (pronta/requer sync),
+  área "Adicionar conteúdo" convertida em `<details>` recolhível, lista de itens em cards com
+  título em destaque e data subordinada, contador de itens e estado vazio contextual
+  (distingue "sem itens" de "sem resultado da busca").
+- **Envio de arquivos** (`add-file` na bridge + `file_extraction.py`): PDF, DOCX, EPUB,
+  TXT/MD e imagens. A extração roda por bibliotecas locais (pypdf, python-docx, ebooklib) e,
+  para material escaneado, por OCR local (Tesseract, opcional, verificado no Diagnóstico).
+
+**Decisões:**
+
+- **A IA nunca extrai texto de arquivo automaticamente.** A ordem é biblioteca → OCR local →
+  e só então uma pergunta explícita ao usuário. Um livro ou dezenas de páginas escaneadas
+  custariam caro e seriam lentos via modelo; quando o caminho local falha, a UI explica o
+  motivo, avisa do custo e oferece as alternativas gratuitas (instalar o OCR ou colar o texto).
+  Ao aceitar, a instrução é apenas preparada no chat — o envio continua sendo do usuário.
+- **PDF sem camada de texto é detectado por densidade** (`< 20 caracteres por página`), não
+  por metadado: PDFs escaneados frequentemente declaram fontes que não correspondem a texto
+  extraível, e a heurística evita ingerir lixo silenciosamente.
+- **UTF-16 só é tentado quando há BOM.** Sem essa guarda, qualquer arquivo latin-1 de bytes
+  pares "decodificava" em ideogramas sem erro e vencia o encoding correto (bug encontrado
+  pelos testes durante esta sessão).
+- **Tesseract entrou no diagnóstico como opcional**, com nome de pacote por gerenciador
+  (`tesseract-ocr` + `tesseract-ocr-por` no apt, `tesseract-langpack-por` no dnf) — o pacote
+  de idioma português é separado e essencial para OCR de conteúdo em pt-BR.
+
+**Validação:** `scripts/check_quality.py` aprovado por completo — 291 testes Python
+(30 novos em `test_file_extraction.py`, cobrindo TXT/DOCX/EPUB/PDF/imagem, os caminhos de
+fallback e a seleção de idioma do OCR) e 29 Electron verdes; Ruff lint e format, cobertura
+em 70% (mínimo do projeto), `pip_audit` e `npm audit` sem vulnerabilidades, `git diff --check`
+limpo. `file_extraction.py` ficou com 87% de cobertura.
+
+**Risco que sobrou:** o app Electron não pôde ser aberto neste ambiente (sandbox sem display
+funcional), então a aba Conteúdo redesenhada e o fluxo de envio de arquivos foram validados
+por preview estático com o CSS de produção e por teste da bridge em linha de comando — falta
+conferência visual na máquina do usuário. O OCR foi exercitado apenas com mocks, porque o
+binário Tesseract não está instalado aqui; o caminho real de PDF escaneado segue não testado
+ponta a ponta. O modo reflexivo dobra aproximadamente o número de chamadas TTS em relação à
+leitura fiel (um segmento extra por parágrafo), o que encarece episódios longos.
+
+---
+
+## 2026-07-21 — Escolha de modelo também nas assinaturas
+
+**O que mudou:** os perfis com provedor de assinatura (Claude Code, Gemini CLI, Codex)
+ficavam presos ao "modelo padrão da CLI" — só o OpenRouter permitia escolher. Agora o perfil
+tem um campo `subscription_model` que vira `--model <nome>` na invocação da CLI, valendo tanto
+para as etapas do pipeline quanto para o chat de pesquisa. Vazio mantém o comportamento
+anterior (a CLI decide). A interface mostra sugestões por CLI via `<datalist>`, mas aceita
+qualquer nome digitado.
+
+**Decisões:**
+
+- **Campo livre com sugestões, não lista fechada.** Cada CLI evolui seu catálogo sem avisar o
+  Audiofy; uma lista fixa ficaria desatualizada e impediria modelos novos. As sugestões
+  (`opus`/`sonnet`/`haiku`, `gemini-2.5-pro`/`flash`, `gpt-sol`/`o3`) são atalhos, não limites.
+- **Validação estrita porque o valor vira argumento de processo:** aceita apenas
+  `[A-Za-z0-9][A-Za-z0-9._:-]*` até 100 caracteres. Isso barra tanto injeção de flags
+  (`--dangerously-skip-permissions`, `-opus`) quanto separação de argumentos e encadeamento
+  de comandos. O campo é descartado quando o provedor é OpenRouter.
+- **`command()` passou a montar o comando também para CLIs sem args headless.** O Gemini lê
+  system e prompt juntos por stdin e antes recebia `[cli.binary]` cru nos dois chamadores
+  (`chat_json` e `_default_provider`), o que deixaria a flag de modelo de fora justamente nele.
+- **Precedência explícita:** modelo do perfil > modelo configurado na própria CLI (hoje
+  detectado só no Codex, via `config.toml`) > padrão. O `settings-info` expõe
+  `profile_subscription_model` para a interface marcar "(perfil)" quando a escolha é do Audiofy.
+
+**Validação:** `scripts/check_quality.py` aprovado; 303 testes Python (12 novos cobrindo a
+construção do comando nas três CLIs, o repasse em `chat_json` e `_default_provider`, a
+validação hostil do campo e a persistência) e 29 Electron verdes. Além dos testes, o fluxo foi
+exercitado de ponta a ponta: perfil salvo com `subscription_model: haiku`, ativado, e uma
+chamada real ao Claude Code retornou JSON válido com custo US$ 0 — confirmando que a flag
+chega à CLI e é aceita. As três CLIs tiveram o suporte a `--model` verificado no `--help`.
+
+**Risco que sobrou:** nomes de modelo não são validados contra o catálogo real da CLI; um nome
+inexistente só falha no momento da geração, com a mensagem de erro vinda da própria CLI (o
+Codex, por exemplo, responde 400 dizendo que o modelo não é suportado na conta). A interface
+não foi conferida visualmente porque o Electron não abre neste ambiente.
+
+---
+
+## 2026-07-21 — Rodapé de PDF derrubava a geração inteira
+
+**O que mudou:** uma geração real (livro "Homenagem à Catalunha", PDF de 23 páginas) morreu
+três vezes seguidas na fala 15, sempre depois de esgotar as 5 tentativas e já ter pago 14
+segmentos de TTS. Duas correções independentes, em camadas diferentes.
+
+- **Extração de PDF remove cabeçalhos e rodapés repetidos** (`_strip_running_headers`): o
+  rodapé do InDesign (`14909-Homenagem à Catalunha (4P).indd 8 15/02/21 15:07`) aparecia nas
+  23 páginas. A página 8 tinha *só* isso, e virou um trecho de leitura composto apenas de
+  ruído de diagramação.
+- **O pipeline tolera trechos que o TTS não pronuncia:** quando a resposta vem vazia depois de
+  esgotar as tentativas, a fala é pulada com aviso e o episódio segue, em vez de perder todo o
+  áudio já sintetizado. Se nenhuma fala gerar áudio, aí sim erra explicitamente.
+
+**Decisões:**
+
+- **A causa raiz foi isolada empiricamente, não adivinhada.** Chamando a API com variações do
+  texto, o que quebra é o token `.indd`: `'14909-Homenagem à Catalunha (4P).indd 8 15/02/21'`
+  retorna vazio, e o mesmo texto sem `.indd` sintetiza normalmente (660 KB). O modelo trata a
+  string como nome de arquivo e não vocaliza. Uma primeira heurística — exigir 3+ letras — foi
+  escrita e **descartada** ao ser testada contra o turno real, que tem 24 letras e mesmo assim
+  falha. `is_speakable` ficou no código para o caso genuíno (numeração e símbolos soltos), mas
+  não é o que resolve este bug.
+- **Detecção de rodapé por repetição, não por padrão conhecido.** Rodapés variam por editora;
+  casar `.indd` resolveria só este PDF. A regra é: linhas nas bordas da página que se repetem
+  em pelo menos um terço das páginas, comparadas com os números normalizados (`8` → `#`) para
+  casar numeração de página.
+- **Três guardas contra remover conteúdo**, todas motivadas por testes que falharam durante a
+  implementação: a janela de borda nunca cobre a página inteira (senão o miolo de páginas
+  curtas some); linhas acima de 90 caracteres são ignoradas; e linhas terminadas em pontuação
+  de frase também. Sem a última, uma abertura padronizada de capítulo seria apagada.
+- **Só o erro de áudio vazio é tolerado.** Qualquer outro erro do provedor continua derrubando
+  a geração — silenciar falhas de rede ou de crédito esconderia problemas reais.
+
+**Validação:** `scripts/check_quality.py` aprovado; 317 testes Python (14 novos) e 29 Electron
+verdes. A correção foi verificada contra o texto real preservado em `data/episodes/`: os 23
+rodapés saem, a página 8 fica vazia, e Orwell (9x), Barcelona (5x), Poum (6x), Eileen e Aragón
+continuam no texto — 4,7% de caracteres removidos, só ruído. Os testes de resiliência do
+pipeline cobrem trecho pulado, erro diferente que ainda derruba, e nenhum áudio gerado.
+
+**Risco que sobrou:** a detecção de rodapé é heurística e pode errar nos dois sentidos —
+deixar passar rodapés em documentos de poucas páginas (o mínimo é 4) ou, em teoria, remover
+uma linha curta de conteúdo que se repita nas bordas sem pontuação final. O episódio de teste
+não foi regerado (a chave estava sem créditos e o PDF original não está mais no disco), então
+a correção ponta a ponta na interface segue por confirmar.
+
+---
+
+## 2026-07-21 — Voz do narrador mudava sozinha no seletor
+
+**O que mudou:** um episódio foi gerado com a voz Orus enquanto o perfil ativo
+(`claude-code-leitor-reflexivo`) especifica `narrador:Sulafat`. O usuário relatou ter
+selecionado outra voz sem querer — e o app não oferecia nenhuma barreira nem sinal disso.
+
+Duas causas somadas, ambas corrigidas:
+
+- **A roda do mouse sobre um `<select>` troca a opção no Chromium.** Passar o cursor sobre o
+  combo enquanto se rola a página basta para mudar a voz. Agora `wheel` é bloqueado em
+  narrador, formato e idioma — os três campos que alteram custo e áudio final.
+- **O valor alterado virava o novo padrão e se perpetuava.** `renderActiveConfig` roda a cada
+  refresh e repopula o combo usando `previousVoice || profileVoice`; qualquer valor presente
+  no campo vencia o perfil, indefinidamente. Agora só uma escolha deliberada (evento `change`)
+  sobrepõe o perfil, e a divergência aparece como aviso clicável que restaura a voz do perfil.
+
+**Decisões:**
+
+- **Bloquear `wheel` em vez de só avisar.** Num campo que define a voz do episódio inteiro e
+  consome crédito, mudança silenciosa por rolagem é acidente esperando acontecer; o ganho de
+  poder rolar o valor com a roda não compensa.
+- **O aviso mostra a voz do perfil e volta em um clique**, em vez de forçar o perfil de volta
+  automaticamente — trocar a voz pontualmente continua sendo legítimo, só não pode ser mudo.
+
+**Validação:** `scripts/check_quality.py` aprovado; 317 testes Python e 30 Electron verdes
+(1 novo cobrindo o bloqueio de `wheel` nos três campos, a precedência do perfil sobre o valor
+não intencional e a presença do aviso de divergência).
+
+**Risco que sobrou:** a proteção é do renderer, não do backend — uma chamada direta à bridge
+com `--voice=` continua aceitando qualquer voz do catálogo, o que é correto para automações.
+A interface não foi conferida visualmente porque o Electron não abre neste ambiente.
+
+---
+
+## 2026-07-21 — Configuração da geração travada durante a síntese
+
+**O que mudou:** durante uma geração em andamento, só o botão "Gerar" ficava desabilitado —
+narrador, formato, idioma, música de fundo e volume continuavam editáveis. Trocar qualquer um
+deles no meio não afeta os segmentos já sintetizados, então o episódio sairia com duas
+configurações misturadas, sem nenhum aviso. Agora esses campos ficam desabilitados enquanto
+`state == "rodando"`, com uma faixa explicando que é preciso abortar e gerar de novo.
+
+**Decisões:**
+
+- **Travar em vez de avisar depois.** O caso é irreversível na prática: quando a divergência
+  aparecesse no áudio final, o crédito já teria sido gasto nos dois formatos.
+- **A trava é liberada explicitamente quando não há item selecionado.** `renderSelectedStatus`
+  só roda com `selectedItem`; sem essa saída, desselecionar o item durante a geração deixaria
+  os campos presos até o próximo clique em um item.
+- **Complementa a correção anterior do mesmo dia** (roda do mouse trocando a voz em silêncio):
+  aquela evita a mudança acidental antes de gerar, esta impede a mudança — acidental ou
+  deliberada — depois que a síntese começou.
+
+**Validação:** `scripts/check_quality.py` aprovado; 317 testes Python e 31 Electron verdes
+(1 novo cobrindo a função de trava, o repasse do estado `rodando`, a liberação sem item
+selecionado e a presença da faixa explicativa). A geração real em curso passou de 38/46 com
+a correção anterior ativa, pulando os 2 trechos que o TTS não pronuncia.
+
+**Risco que sobrou:** a trava vale para a interface; a bridge continua aceitando outra voz ou
+formato numa chamada direta, o que é correto para automações mas significa que a garantia não
+é do backend. Não houve conferência visual (o Electron não abre neste ambiente).
+
+---
+
+## 2026-07-21 — Auditoria contra o Guia Mínimo de Qualidade
+
+**O que mudou:** varredura do repositório inteiro contra os 12 padrões obrigatórios do
+`GUIA_MINIMO_QUALIDADE.md`. A régua automatizada (`scripts/check_quality.py`) já cobria lint,
+formatação, testes, cobertura, auditoria de dependências e validação de JSON/links. Esta
+entrada registra o que a régua **não** cobre e foi verificado por inspeção.
+
+**Conforme:** menu de entrada (`start_app.py` com Iniciar/Instalar/Configurar/Status);
+segredos fora do Git (`.env` e `.audiofy/` ignorados, chaves em teste são fixtures óbvias);
+responsabilidades separadas por módulo (fontes, provedores, pipeline, runtime, bridge);
+dependências pinadas com lockfile e auditoria limpa; README enquadra trabalho futuro como
+convite a contribuição; `IA.md` preservado como linha do tempo.
+
+**Corrigido nesta entrada:**
+
+- **`export.py` estava com 0% de cobertura** — é lógica de negócio (escreve o pacote
+  NotebookLM e formata o contrato de instruções), não código visual, então o item 7 exige
+  teste. Sete testes cobrem a escrita dos dois arquivos, a preservação do texto integral e da
+  atribuição, o aviso de que o NotebookLM não garante cobertura integral, a separação por
+  idioma (sem isso, gerar o mesmo item em pt-BR e en sobrescreveria o pacote) e a
+  reexportação idempotente. Cobertura do módulo: 0% → 100%.
+
+**Riscos conhecidos e aceitos (decisão do mantenedor):**
+
+- **`data/episodes/` é versionado e o repositório é público.** São 238 arquivos de áudio
+  (~350 MB, com o `.git` em ~295 MB) e o texto integral das fontes, incluindo obras de
+  terceiros — os próprios artefatos carregam o aviso "Verifique os direitos do conteúdo
+  original antes de publicar". O versionamento é intencional: os episódios servem de exemplo
+  auditável do pipeline. Fica registrado como risco conhecido de direitos autorais e de peso
+  do repositório, não como pendência a corrigir. Quem for publicar um fork deve revisar essa
+  pasta antes.
+- **Cobertura de `bridge.py` (55%) e `pipeline.py` (60%)** fica abaixo da média do projeto.
+  São os módulos de orquestração, com muitos caminhos que dependem de rede, processo externo
+  ou ffmpeg; o total do projeto (72%) permanece acima do mínimo de 70%. Ampliar a cobertura
+  desses dois é uma boa contribuição para quem quiser fortalecer a régua.
+
+**Validação:** `scripts/check_quality.py` aprovado por completo — 324 testes Python e 31
+Electron verdes, lint e formatação limpos, cobertura 72%, `pip-audit` e `npm audit` sem
+vulnerabilidades, JSONs válidos e links internos íntegros. A geração real que motivou as
+correções anteriores (livro em PDF, modo reflexivo) concluiu com sucesso: MP3 final gerado,
+US$ 1,65, com os 2 trechos impronunciáveis pulados em vez de derrubarem o episódio.
