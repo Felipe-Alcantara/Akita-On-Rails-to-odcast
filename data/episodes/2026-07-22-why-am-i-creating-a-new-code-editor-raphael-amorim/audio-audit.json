@@ -1,0 +1,271 @@
+{
+  "version": 1,
+  "audited_at": "2026-07-22T10:50:39-03:00",
+  "policy": {
+    "threshold_db": -45,
+    "minimum_silence_seconds": 1.5,
+    "warning_silence_seconds": 2.5,
+    "critical_silence_seconds": 5.0,
+    "critical_silence_ratio": 0.35
+  },
+  "summary": {
+    "segments": 28,
+    "ok": 28,
+    "warnings": 0,
+    "critical": 0
+  },
+  "segments": [
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-001-de-028__voz-narrador.wav",
+      "duration_seconds": 17.48,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-002-de-028__voz-narrador.wav",
+      "duration_seconds": 17.6,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-003-de-028__voz-narrador.wav",
+      "duration_seconds": 13.68,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-004-de-028__voz-narrador.wav",
+      "duration_seconds": 7.84,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-005-de-028__voz-narrador.wav",
+      "duration_seconds": 21.04,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-006-de-028__voz-narrador.wav",
+      "duration_seconds": 12.2,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-007-de-028__voz-narrador.wav",
+      "duration_seconds": 15.44,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-008-de-028__voz-narrador.wav",
+      "duration_seconds": 15.96,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-009-de-028__voz-narrador.wav",
+      "duration_seconds": 24.08,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-010-de-028__voz-narrador.wav",
+      "duration_seconds": 24.0,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-011-de-028__voz-narrador.wav",
+      "duration_seconds": 21.72,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-012-de-028__voz-narrador.wav",
+      "duration_seconds": 22.0,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-013-de-028__voz-narrador.wav",
+      "duration_seconds": 8.6,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-014-de-028__voz-narrador.wav",
+      "duration_seconds": 17.48,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-015-de-028__voz-narrador.wav",
+      "duration_seconds": 13.8,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-016-de-028__voz-narrador.wav",
+      "duration_seconds": 8.72,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-017-de-028__voz-narrador.wav",
+      "duration_seconds": 13.6,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-018-de-028__voz-narrador.wav",
+      "duration_seconds": 17.84,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-019-de-028__voz-narrador.wav",
+      "duration_seconds": 33.2,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-020-de-028__voz-narrador.wav",
+      "duration_seconds": 12.4,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-021-de-028__voz-narrador.wav",
+      "duration_seconds": 12.68,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-022-de-028__voz-narrador.wav",
+      "duration_seconds": 5.04,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-023-de-028__voz-narrador.wav",
+      "duration_seconds": 8.32,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-024-de-028__voz-narrador.wav",
+      "duration_seconds": 11.6,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-025-de-028__voz-narrador.wav",
+      "duration_seconds": 17.6,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-026-de-028__voz-narrador.wav",
+      "duration_seconds": 11.48,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-027-de-028__voz-narrador.wav",
+      "duration_seconds": 6.36,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    },
+    {
+      "file": "fonte-custom__episodio-2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim__modo-reflexive__chunk-028-de-028__voz-narrador.wav",
+      "duration_seconds": 29.08,
+      "silence_seconds": 0,
+      "silence_ratio": 0.0,
+      "longest_silence_seconds": 0.0,
+      "severity": "ok",
+      "silences": []
+    }
+  ]
+}

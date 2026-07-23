@@ -1,0 +1,25 @@
+{
+  "episode_id": "2026-07-22-why-am-i-creating-a-new-code-editor-raphael-amorim",
+  "pid": 92360,
+  "state": "concluido",
+  "stage": "montagem",
+  "progress": {
+    "current": 0,
+    "total": 0
+  },
+  "cost_usd": 0.220856,
+  "cost_exact": false,
+  "started_at": 1784727640.3133783,
+  "run_started_at": 1784727640.3133783,
+  "updated_at": 1784728268.1089575,
+  "resume_count": 0,
+  "retry": null,
+  "last_error": null,
+  "abort_requested_at": null,
+  "generation_mode": "reflexive",
+  "narration_voice": "Orus",
+  "key_source": "Chave Audio Teste",
+  "background_music": null,
+  "background_music_cache": null,
+  "background_volume": null
+}

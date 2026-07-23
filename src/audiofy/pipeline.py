@@ -14,7 +14,7 @@ import sys
 import time
 import wave
 from collections.abc import Callable
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import datetime
 from pathlib import Path
 
@@ -28,12 +28,15 @@ from .artifacts import (
 from .audio_audit import audit_segments
 from .config import EPISODES_DIR, Settings, api_key_candidates, api_key_source
 from .estimates import EpisodeMetrics, estimate_tts_cost
+from .languages import detect_language, prompt_label
 from .media import media_duration_seconds
 from .narration import (
     MAX_TTS_CHARS,
     commentary_direction,
     fallback_commentary,
     fallback_direction,
+    intro_direction,
+    intro_text,
     parse_prosody_plan,
     parse_reflexive_commentary,
     podcast_direction,
@@ -250,6 +253,93 @@ def repair_episode(
         raise
 
 
+def _translate_if_needed(
+    item: ContentItem,
+    target_lang: str,
+    directory: Path,
+    force: bool,
+    chat_request: Callable,
+    settings: Settings,
+    tracker: GenerationTracker,
+) -> ContentItem:
+    """Traduz o texto do item quando o idioma detectado difere do configurado.
+
+    A tradução é cacheada em ``translation.json`` — regenerações reutilizam o
+    resultado enquanto o texto-fonte não mudar.
+    """
+    text_lang = detect_language(item.text)
+    if text_lang == target_lang:
+        return item
+
+    target_label = prompt_label(target_lang)
+    path = directory / "translation.json"
+    source_digest = hashlib.sha256(item.text.encode("utf-8")).hexdigest()
+    cached = None if force else _load_json(path)
+    if (
+        isinstance(cached, dict)
+        and cached.get("source_sha256") == source_digest
+        and cached.get("target_lang") == target_lang
+        and isinstance(cached.get("translated_text"), str)
+    ):
+        print(f"   Tradução cacheada ({text_lang} → {target_lang}).")
+        return replace(item, text=cached["translated_text"])
+
+    tracker.stage("tradução")
+    tracker.checkpoint()
+    system = (
+        f"Você é um tradutor profissional para {target_label}. "
+        "Traduza o texto preservando fielmente o conteúdo, tom e estrutura de parágrafos. "
+        "Mantenha todas as quebras de parágrafo (\\n\\n). "
+        "Não adicione, omita, resuma nem comente — apenas traduza. "
+        'Retorne JSON: {"text": "texto traduzido aqui"}.'
+    )
+    translated_text = ""
+    # Traduz em blocos para respeitar limites de contexto do modelo.
+    paragraphs = item.text.split("\n\n")
+    _TRANSLATION_BATCH_CHARS = 8_000
+    batches: list[list[str]] = []
+    current_batch: list[str] = []
+    current_size = 0
+    for para in paragraphs:
+        if current_batch and current_size + len(para) > _TRANSLATION_BATCH_CHARS:
+            batches.append(current_batch)
+            current_batch, current_size = [], 0
+        current_batch.append(para)
+        current_size += len(para)
+    if current_batch:
+        batches.append(current_batch)
+
+    translated_parts: list[str] = []
+    for batch_index, batch in enumerate(batches, 1):
+        tracker.checkpoint()
+        batch_text = "\n\n".join(batch)
+        result = chat_request(settings.audit_model, batch_text, system)
+        if isinstance(result, dict) and isinstance(result.get("text"), str):
+            translated_parts.append(result["text"])
+        elif isinstance(result, dict):
+            raw = next((v for v in result.values() if isinstance(v, str) and len(v) > 20), "")
+            translated_parts.append(raw)
+        else:
+            raise ValueError("O modelo não retornou a tradução no formato esperado.")
+        print(f"    Tradução lote {batch_index}/{len(batches)}")
+
+    translated_text = "\n\n".join(translated_parts)
+    if len(translated_text) < len(item.text) * 0.3:
+        raise ValueError(
+            f"A tradução produziu texto muito curto ({len(translated_text)} chars "
+            f"vs. {len(item.text)} do original). Verifique o modelo."
+        )
+
+    _save_json(path, {
+        "source_sha256": source_digest,
+        "source_lang": text_lang,
+        "target_lang": target_lang,
+        "translated_text": translated_text,
+    })
+    print(f"   Traduzido {text_lang} → {target_lang} ({len(paragraphs)} parágrafos).")
+    return replace(item, text=translated_text)
+
+
 def _run(
     settings: Settings,
     item: ContentItem,
@@ -298,6 +388,10 @@ def _run(
         data = _chat_request(model, prompt)
         _save_json(path, data)
         return data
+
+    # ── Tradução automática quando o idioma do texto ≠ idioma configurado ───
+    if generation_mode in ("verbatim", "reflexive"):
+        item = _translate_if_needed(item, lang, directory, force, _chat_request, settings, tracker)
 
     if generation_mode == "verbatim":
         print("🎭 1/3 Planejamento de interpretação em lotes…")
@@ -480,7 +574,16 @@ def _prepare_verbatim_turns(
         tracker.advance(completed)
 
     narrator = settings.presenters[0]
-    turns = []
+    lang = settings.language
+    turns: list[dict] = [
+        {
+            "turn_id": "N00000",
+            "speaker": narrator.speaker,
+            "text": intro_text(item.title, "verbatim", lang),
+            "instructions": intro_direction(lang),
+            "kind": "intro",
+        },
+    ]
     for chunk in chunks:
         direction = entries[cache_key(chunk.index, chunk.text)]["direction"]
         turns.append(
@@ -488,10 +591,10 @@ def _prepare_verbatim_turns(
                 "turn_id": f"N{chunk.index:05d}",
                 "speaker": narrator.speaker,
                 "text": chunk.text,
-                "instructions": tts_direction(direction, narrator.style, settings.language),
+                "instructions": tts_direction(direction, narrator.style, lang),
             }
         )
-    if "".join(turn["text"] for turn in turns) != item.text:
+    if "".join(t["text"] for t in turns if t.get("kind") != "intro") != item.text:
         raise AssertionError("O planejamento de interpretação alterou o texto original.")
     _save_json(
         directory / "narration-script.json",
@@ -509,10 +612,30 @@ def _prepare_reflexive_turns(
     analyze_prosody: Callable[[str], dict],
     analyze_reflexive: Callable[[str], dict],
 ) -> list[dict]:
-    """Lê cada parágrafo verbatim e intercala um breve comentário reflexivo após cada um."""
+    """Lê cada parágrafo verbatim e intercala um breve comentário reflexivo após blocos."""
     paragraphs = split_into_paragraphs(item.text)
     if not paragraphs:
         raise ValueError("O texto não contém parágrafos para a leitura reflexiva.")
+
+    # ── Agrupa parágrafos curtos em blocos de comentário ────────────────
+    # Evita que o comentarista interrompa entre parágrafos muito curtos
+    # (diálogos, listas, formatação de PDF); reflexões aparecem apenas
+    # após blocos com conteúdo narrativo suficiente.
+    _MIN_COMMENTARY_BLOCK_CHARS = 1500
+    para_to_block: dict[int, int] = {}
+    block_texts: dict[int, str] = {}
+    block_id = 1
+    block_chars = 0
+    for para_id, para in enumerate(paragraphs, 1):
+        para_to_block[para_id] = block_id
+        if block_id not in block_texts:
+            block_texts[block_id] = para
+        else:
+            block_texts[block_id] += "\n\n" + para
+        block_chars += len(para)
+        if block_chars >= _MIN_COMMENTARY_BLOCK_CHARS:
+            block_id += 1
+            block_chars = 0
 
     # Divide parágrafos longos em sub-chunks para o limite do TTS.
     # Cada parágrafo lógico tem um id; sub-chunks compartilham o mesmo para-id.
@@ -543,9 +666,9 @@ def _prepare_reflexive_turns(
         digest = hashlib.sha256(text.encode("utf-8")).hexdigest()
         return f"{para_id}:{digest}"
 
-    def _para_key(para_id: int, text: str) -> str:
+    def _block_key(block_id: int, text: str) -> str:
         digest = hashlib.sha256(text.encode("utf-8")).hexdigest()
-        return f"{para_id}:{digest}"
+        return f"{block_id}:{digest}"
 
     # ── 1. Planejamento de prosódia para os chunks verbatim ──────────────────
     from .narration import NarrationChunk
@@ -577,37 +700,37 @@ def _prepare_reflexive_turns(
         _save_json(path, loaded)
         tracker.advance(completed)
 
-    # ── 2. Geração de comentários reflexivos por parágrafo ───────────────────
-    unique_paras = list(
+    # ── 2. Geração de comentários reflexivos por bloco ─────────────────────
+    unique_blocks = list(
         dict.fromkeys(
-            (para_id, para)
-            for para_id, para in [(pid, paragraphs[pid - 1]) for pid, _ in para_chunks]
+            (para_to_block[pid], block_texts[para_to_block[pid]])
+            for pid, _ in para_chunks
         )
     )
     cached_commentary = {
-        para_id
-        for para_id, para_text in unique_paras
-        if isinstance(commentary_cache.get(_para_key(para_id, para_text)), dict)
-        and isinstance(commentary_cache[_para_key(para_id, para_text)].get("commentary"), str)
+        bid
+        for bid, btext in unique_blocks
+        if isinstance(commentary_cache.get(_block_key(bid, btext)), dict)
+        and isinstance(commentary_cache[_block_key(bid, btext)].get("commentary"), str)
     }
-    missing_commentary = [(pid, text) for pid, text in unique_paras if pid not in cached_commentary]
+    missing_commentary = [(bid, text) for bid, text in unique_blocks if bid not in cached_commentary]
     tracker.stage(
         "geração de comentários reflexivos",
-        total=len(unique_paras),
+        total=len(unique_blocks),
         current=len(cached_commentary),
     )
     completed = len(cached_commentary)
     for batch in reflexive_batches(missing_commentary):
         tracker.checkpoint()
-        batch_ids = {pid for pid, _ in batch}
+        batch_ids = {bid for bid, _ in batch}
         generated = parse_reflexive_commentary(
             analyze_reflexive(reflexive_prompt(batch, settings.language)),
             batch_ids,
         )
-        for para_id, para_text in batch:
-            key = _para_key(para_id, para_text)
+        for bid, btext in batch:
+            key = _block_key(bid, btext)
             commentary_cache[key] = {
-                "commentary": generated.get(para_id) or fallback_commentary(settings.language)
+                "commentary": generated.get(bid) or fallback_commentary(settings.language)
             }
         completed += len(batch)
         _save_json(path, loaded)
@@ -616,7 +739,15 @@ def _prepare_reflexive_turns(
     # ── 3. Montagem dos turnos ───────────────────────────────────────────────
     narrator = settings.presenters[0]
     lang = settings.language
-    turns: list[dict] = []
+    turns: list[dict] = [
+        {
+            "turn_id": "R00000",
+            "speaker": narrator.speaker,
+            "text": intro_text(item.title, "reflexive", lang),
+            "instructions": intro_direction(lang),
+            "kind": "intro",
+        },
+    ]
 
     for i, (para_id, chunk_text) in enumerate(para_chunks):
         direction = prosody_cache[_chunk_key(para_id, chunk_text)]["direction"]
@@ -629,11 +760,16 @@ def _prepare_reflexive_turns(
                 "kind": "verbatim",
             }
         )
-        # Adiciona o comentário somente ao final do último chunk de cada parágrafo.
-        is_last_chunk_of_para = i == len(para_chunks) - 1 or para_chunks[i + 1][0] != para_id
-        if is_last_chunk_of_para:
-            para_text = paragraphs[para_id - 1]
-            commentary = commentary_cache[_para_key(para_id, para_text)]["commentary"]
+        # Adiciona o comentário somente ao final do último chunk de cada bloco,
+        # não de cada parágrafo — evita interrupções entre parágrafos curtos.
+        bid = para_to_block[para_id]
+        is_last_chunk_of_block = (
+            i == len(para_chunks) - 1
+            or para_to_block[para_chunks[i + 1][0]] != bid
+        )
+        if is_last_chunk_of_block:
+            btext = block_texts[bid]
+            commentary = commentary_cache[_block_key(bid, btext)]["commentary"]
             commentary_instructions = commentary_direction(narrator.style, lang)
             turns.append(
                 {

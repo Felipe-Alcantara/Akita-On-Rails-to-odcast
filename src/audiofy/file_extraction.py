@@ -65,7 +65,18 @@ def _ocr_languages() -> str:
 def _normalize(text: str) -> str:
     text = text.replace("\r\n", "\n").replace("\r", "\n")
     text = re.sub(r"[ \t]+\n", "\n", text)
+    # Rodapé de diagramação InDesign ("...arquivo.indd   11 15/02/21   15:07").
+    text = re.sub(
+        r"^.*\.indd\s+\d+\s+\d{2}/\d{2}/\d{2}\s+\d{2}:\d{2}\s*$",
+        "",
+        text,
+        flags=re.MULTILINE,
+    )
+    # Palavras partidas entre páginas pelo hifenizador (‑ U+2011 + quebra de linha).
+    text = re.sub(r"\u2011\n", "", text)
     text = re.sub(r"\n{3,}", "\n\n", text)
+    # Números de página soltos entre parágrafos ("...texto\n\n42\nMais texto...").
+    text = re.sub(r"(?<=\n\n)\d{1,4}\n", "", text)
     return text.strip()
 
 
