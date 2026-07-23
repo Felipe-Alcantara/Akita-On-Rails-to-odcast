@@ -494,6 +494,22 @@ continua vivo e informa há quanto tempo saiu a última mensagem. O backend lê 
 mascara padrões de chave e inicia novos workers sem buffer de stdout, mantendo o painel atualizável
 sem carregar logs inteiros nem esperar a conclusão de uma etapa.
 
+### Análise de custos historicizada
+
+O módulo **`cost_analytics`** coleta estatísticas de todos os episódios gerados, fornecendo:
+
+```bash
+python3 start_app.py costs
+```
+
+Relatório inclui:
+- **Agregação**: episódios, duração total, palavras, custo total
+- **Custo por dimensão**: modelo TTS, perfil de configuração, semana (ISO 8601)
+- **Percentis**: duração em 50%, 75%, 90%; mediana de custo/minuto
+- **Estimativas**: custo projetado para 10min/30min/1h e 1k/5k palavras
+
+Dados carregados de `metrics.json` de cada episódio (ausentes ou corrompidos são ignorados).
+
 ## ✅ Qualidade e testes
 
 Prepare o ambiente de desenvolvimento uma vez:
