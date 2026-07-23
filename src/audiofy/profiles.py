@@ -38,6 +38,7 @@ class Profile:
 
 
 _TTS = "google/gemini-3.1-flash-tts-preview"
+_TTS_KOKORO = "hexgrad/kokoro-82m"
 _PRO = "google/gemini-2.5-pro"
 _FLASH = "google/gemini-2.5-flash"
 _OPUS = "anthropic/claude-opus-4"
@@ -55,6 +56,13 @@ _MESA_SPEC = (
     "debatedor_a:Puck:animado, "
     "debatedor_b:Gacrux:ponderado, "
     "debatedor_c:Sadachbia:provocador"
+)
+
+# Apresentadores com vozes Kokoro (português brasileiro).
+_KOKORO_DUO_SPEC = "apresentador_a:pf_dora:curiosa, apresentador_b:pm_alex:didático"
+_KOKORO_TRIO_SPEC = (
+    "apresentador_a:pf_dora:curiosa, apresentador_b:pm_alex:didático, "
+    "apresentador_c:pm_santa:animado"
 )
 
 BUILTIN_PROFILES: list[Profile] = [
@@ -412,6 +420,90 @@ BUILTIN_PROFILES: list[Profile] = [
         presenters_spec="narrador:Sulafat:reflexivo e envolvente",
         description=(
             "Leitura reflexiva com GPT SOL — lê o texto integralmente e comenta cada parágrafo"
+        ),
+    ),
+    # ╔══════════════════════════════════════════════════════════════════════╗
+    # ║  Ultra-econômico — TTS Kokoro 82M (~85× mais barato que Gemini)    ║
+    # ╚══════════════════════════════════════════════════════════════════════╝
+    Profile(
+        name="claude-code-duo-ultra",
+        text_model="(assinatura)",
+        audit_model="(assinatura)",
+        tts_model=_TTS_KOKORO,
+        presenters_spec=_KOKORO_DUO_SPEC,
+        description=(
+            "Dois apresentadores via assinatura Claude Code com TTS Kokoro "
+            "— custo mínimo absoluto (texto grátis + TTS ultra-barato)"
+        ),
+        text_provider="claude-code",
+    ),
+    Profile(
+        name="claude-code-trio-ultra",
+        text_model="(assinatura)",
+        audit_model="(assinatura)",
+        tts_model=_TTS_KOKORO,
+        presenters_spec=_KOKORO_TRIO_SPEC,
+        description=("Três vozes via assinatura Claude Code com TTS Kokoro — trio ultra-econômico"),
+        text_provider="claude-code",
+    ),
+    Profile(
+        name="claude-code-narrador-ultra",
+        text_model="(assinatura)",
+        audit_model="(assinatura)",
+        tts_model=_TTS_KOKORO,
+        presenters_spec="narrador:pm_alex:caloroso",
+        description=(
+            "Voz solo (pm_alex) via assinatura Claude Code com TTS Kokoro "
+            "— narração com custo mínimo"
+        ),
+        text_provider="claude-code",
+    ),
+    Profile(
+        name="claude-code-leitor-reflexivo-ultra",
+        text_model="(assinatura)",
+        audit_model="(assinatura)",
+        tts_model=_TTS_KOKORO,
+        presenters_spec="narrador:pm_alex:reflexivo e envolvente",
+        description=(
+            "Leitura reflexiva via assinatura Claude Code com TTS Kokoro "
+            "— leitura comentada com custo mínimo"
+        ),
+        text_provider="claude-code",
+    ),
+    Profile(
+        name="gemini-duo-ultra",
+        text_model=_FLASH,
+        audit_model=_FLASH,
+        tts_model=_TTS_KOKORO,
+        presenters_spec=_KOKORO_DUO_SPEC,
+        description=("Dois apresentadores com Gemini Flash e TTS Kokoro — custo mínimo via API"),
+    ),
+    Profile(
+        name="gemini-trio-ultra",
+        text_model=_FLASH,
+        audit_model=_FLASH,
+        tts_model=_TTS_KOKORO,
+        presenters_spec=_KOKORO_TRIO_SPEC,
+        description=("Três vozes com Gemini Flash e TTS Kokoro — trio ultra-econômico via API"),
+    ),
+    Profile(
+        name="gemini-narrador-ultra",
+        text_model=_FLASH,
+        audit_model=_FLASH,
+        tts_model=_TTS_KOKORO,
+        presenters_spec="narrador:pm_alex:caloroso",
+        description=(
+            "Voz solo (pm_alex) com Gemini Flash e TTS Kokoro — narração ultra-barata via API"
+        ),
+    ),
+    Profile(
+        name="gemini-leitor-reflexivo-ultra",
+        text_model=_FLASH,
+        audit_model=_FLASH,
+        tts_model=_TTS_KOKORO,
+        presenters_spec="narrador:pm_alex:reflexivo e envolvente",
+        description=(
+            "Leitura reflexiva com Gemini Flash e TTS Kokoro — leitura comentada ultra-barata via API"
         ),
     ),
 ]

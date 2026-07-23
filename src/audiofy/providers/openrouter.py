@@ -62,6 +62,41 @@ GEMINI_VOICES: dict[str, str] = {
     "Sulafat": "calorosa",
 }
 
+# Vozes do Kokoro 82M (modelo leve e ultra-econômico).
+# Subconjunto curado: PT-BR completo + EN americano; o modelo tem 54 vozes
+# no total, mas o catálogo aqui inclui as mais úteis para o projeto.
+KOKORO_VOICES: dict[str, str] = {
+    # PT-BR
+    "pf_dora": "feminina (pt-BR)",
+    "pm_alex": "masculina (pt-BR)",
+    "pm_santa": "masculina festiva (pt-BR)",
+    # EN — americano (femininas)
+    "af_heart": "brilhante (en)",
+    "af_alloy": "neutra (en)",
+    "af_aoede": "leve (en)",
+    "af_bella": "suave (en)",
+    "af_jessica": "clara (en)",
+    "af_kore": "firme (en)",
+    "af_nicole": "macia (en)",
+    "af_nova": "animada (en)",
+    "af_river": "tranquila (en)",
+    "af_sarah": "calorosa (en)",
+    "af_sky": "jovem (en)",
+    # EN — americano (masculinas)
+    "am_adam": "firme (en)",
+    "am_echo": "ressonante (en)",
+    "am_eric": "clara (en)",
+    "am_fenrir": "empolgada (en)",
+    "am_liam": "madura (en)",
+    "am_michael": "neutra (en)",
+    "am_onyx": "profunda (en)",
+    "am_puck": "animada (en)",
+    # EN — britânico
+    "bf_emma": "suave (en-GB)",
+    "bm_daniel": "clara (en-GB)",
+    "bm_george": "madura (en-GB)",
+}
+
 
 class OpenRouterError(RuntimeError):
     """Falha controlada da integração, classificada para retry seguro."""

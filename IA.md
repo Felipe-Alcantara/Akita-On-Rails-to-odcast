@@ -1667,3 +1667,42 @@ caminho, que antes recusava, passou a aceitar o diretório real do episódio.
 **Risco que sobrou:** o terceiro teste revelou que um `stdout` com `reconfigure` não-chamável
 levantava `TypeError` e derrubaria a resposta inteira; a exceção passou a ser tratada aqui e no
 `start_app.py`, que usa a mesma técnica.
+
+## 2026-07-23 — Catálogo unificado de vozes, perfis ultra-econômicos e UI contextual
+
+**O que mudou:** a configuração de perfis estava confusa e travada em vozes Gemini. Agora o
+sistema suporta todos os 12 modelos TTS do OpenRouter com catálogo dinâmico de vozes,
+classificação por tiers de custo/qualidade, e interface contextual por aba.
+
+**Backend:**
+- Novo módulo `src/audiofy/voices.py` centraliza `TTS_VOICE_CATALOGS` (modelo → vozes) e
+  `TTS_TIERS` (modelo → tier/custo efetivo por milhão de caracteres). Quatro tiers:
+  ultra-econômico (Kokoro, ~$0.62/M), econômico ($7/M), padrão ($15-30/M), premium ($48-100/M).
+- `KOKORO_VOICES` expandido de 3 para 24 vozes (PT-BR + EN-US + EN-GB).
+- Validação de vozes no bridge removeu bloqueio hard-coded em `GEMINI_VOICES` — qualquer voz
+  não-vazia é aceita (a API do OpenRouter valida).
+- Três comandos bridge (`models-list`, `settings-info`, `tts-catalog`) enviam `voice_catalogs`
+  e `tts_tiers` ao frontend.
+- 8 perfis ultra-econômicos builtin combinam texto por assinatura (grátis) + Kokoro TTS.
+
+**Frontend Electron:**
+- Formulário de perfil pré-seleciona provedor baseado na aba ativa (Claude Code → claude-code).
+- Vozes dos apresentadores mudam dinamicamente ao trocar o modelo TTS: catálogo com vozes →
+  dropdown; catálogo vazio → input de texto livre.
+- Badge colorido com tier e custo efetivo aparece ao lado do seletor de modelo TTS.
+- Catálogo TTS mostra vozes agrupadas por modelo com tier e custo.
+
+**TUI `start_app.py`:**
+- `do_catalog()` mostra vozes de todos os modelos (não só Gemini) com tiers.
+- Seleção de voz verbatim usa catálogo do TTS ativo em vez de `GEMINI_VOICES` fixo.
+
+**Decisão:** o catálogo fica no Python (`voices.py`) e viaja ao frontend via bridge, evitando
+duplicação. Modelos sem catálogo conhecido usam dict vazio — o frontend oferece input de texto
+livre em vez de bloquear. O Kokoro tem qualidade ruim para uso comercial, mas viável para uso
+interno/prototipagem a custo desprezível.
+
+**Validação:** 365 testes passaram (1 falha pré-existente em `test_setup.py` por Tesseract
+local, sem relação). Ruff check + format + compileall aprovados.
+
+**Risco que sobrou:** modelos TTS sem catálogo (Orpheus, Zonos, etc.) aceitam qualquer string
+como voz — um erro de digitação só será detectado na hora da síntese pela API do OpenRouter.

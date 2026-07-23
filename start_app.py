@@ -542,22 +542,28 @@ def do_generate(
         from dataclasses import replace
 
         from audiofy.presenters import Presenter
-        from audiofy.providers.openrouter import GEMINI_VOICES
+        from audiofy.voices import TTS_VOICE_CATALOGS, voice_style
 
+        catalog = TTS_VOICE_CATALOGS.get(settings.tts_model, {})
         if narration_voice is None:
-            narration_voice = _tui().choose(
-                "Escolha o narrador:",
-                [(f"{voice} — {style}", voice) for voice, style in GEMINI_VOICES.items()],
-                default=(
-                    settings.presenters[0].voice if len(settings.presenters) == 1 else "Sulafat"
-                ),
-            )
-        if narration_voice not in GEMINI_VOICES:
-            _fail("Escolha uma voz de narrador disponível no catálogo Gemini.")
+            if catalog:
+                narration_voice = _tui().choose(
+                    "Escolha o narrador:",
+                    [(f"{voice} — {style}", voice) for voice, style in catalog.items()],
+                    default=(
+                        settings.presenters[0].voice
+                        if len(settings.presenters) == 1
+                        else next(iter(catalog), "Sulafat")
+                    ),
+                )
+            else:
+                narration_voice = input("Nome da voz para narração: ").strip()
+        if not narration_voice:
+            _fail("Informe um nome de voz para narração.")
             return
         settings = replace(
             settings,
-            presenters=[Presenter("narrador", narration_voice, GEMINI_VOICES[narration_voice])],
+            presenters=[Presenter("narrador", narration_voice, voice_style(narration_voice))],
         )
     try:
         settings.require_api_key()
@@ -849,8 +855,9 @@ def do_notebooklm(selector: str) -> None:
 
 
 def do_catalog() -> None:
-    """Lista modelos TTS do OpenRouter e as vozes do Gemini para configurar."""
-    from audiofy.providers.openrouter import GEMINI_VOICES, list_tts_models
+    """Lista modelos TTS do OpenRouter e as vozes disponíveis por modelo."""
+    from audiofy.providers.openrouter import list_tts_models
+    from audiofy.voices import TTS_TIERS, TTS_VOICE_CATALOGS
 
     settings = Settings()
     try:
@@ -861,9 +868,17 @@ def do_catalog() -> None:
             print(f"  {model['id']}  {DIM}{model['name']}{RESET}")
     except RuntimeError as error:
         _warn(f"Sem chave para consultar modelos ao vivo ({error}).")
-    print(f"\n{BOLD}Vozes do Gemini TTS (use em AUDIOFY_PRESENTERS):{RESET}")
-    for voice, style in GEMINI_VOICES.items():
-        print(f"  {voice:<16} {DIM}{style}{RESET}")
+    print(f"\n{BOLD}Vozes por modelo TTS (use em AUDIOFY_PRESENTERS):{RESET}")
+    for model_id, voices in TTS_VOICE_CATALOGS.items():
+        tier = TTS_TIERS.get(model_id, {})
+        label = tier.get("label", "")
+        cost = tier.get("effective_cost_per_m_chars", "?")
+        print(f"\n  {BOLD}{model_id}{RESET}  {DIM}[{label} — US$ {cost}/M]{RESET}")
+        if voices:
+            for voice, style in voices.items():
+                print(f"    {voice:<20} {DIM}{style}{RESET}")
+        else:
+            print(f"    {DIM}(voz livre — digite o nome ao configurar){RESET}")
     print(f'\n{DIM}Exemplo: AUDIOFY_PRESENTERS="ana:Kore:animada, beto:Puck:cético"{RESET}')
 
 

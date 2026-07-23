@@ -25,6 +25,14 @@ _TTS_TOKEN_PRICING = {
         "output_per_million": 20.0,
         "audio_tokens_per_second": 25.0,
     },
+    # Kokoro cobra por caractere ($0.62/M), sem custo de saída. O fator 4
+    # compensa a divisão ``len / 4`` em estimate_tts_cost, resultando no
+    # custo correto por caractere.
+    "hexgrad/kokoro-82m": {
+        "input_per_million": 2.48,
+        "output_per_million": 0.0,
+        "audio_tokens_per_second": 0.0,
+    },
 }
 
 

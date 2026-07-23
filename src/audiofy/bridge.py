@@ -303,10 +303,8 @@ def _validate_generation_options(
         raise ValueError(f"Modo de geração desconhecido: {generation_mode}")
     if generation_mode == "adaptation":
         return generation_mode, None
-    from .providers.openrouter import GEMINI_VOICES
-
-    if narration_voice not in GEMINI_VOICES:
-        raise ValueError("Escolha uma voz de narrador disponível no catálogo Gemini.")
+    if not narration_voice or not narration_voice.strip():
+        raise ValueError("Escolha uma voz de narrador.")
     return generation_mode, narration_voice
 
 
@@ -514,12 +512,12 @@ def _cmd_run_generation(
             from dataclasses import replace
 
             from .presenters import Presenter
-            from .providers.openrouter import GEMINI_VOICES
+            from .voices import voice_style
 
             settings = replace(
                 settings,
                 presenters=[
-                    Presenter("narrador", narration_voice or "", GEMINI_VOICES[narration_voice])
+                    Presenter("narrador", narration_voice or "", voice_style(narration_voice or ""))
                 ],
             )
         item = get_source(source_key).get_item(item_id)
@@ -650,13 +648,11 @@ def _cmd_run_repair(
             from dataclasses import replace
 
             from .presenters import Presenter
-            from .providers.openrouter import GEMINI_VOICES
+            from .voices import voice_style
 
             settings = replace(
                 settings,
-                presenters=[
-                    Presenter("narrador", narration_voice, GEMINI_VOICES.get(narration_voice, ""))
-                ],
+                presenters=[Presenter("narrador", narration_voice, voice_style(narration_voice))],
             )
         item = get_source(source_key).get_item(item_id)
         final = repair_episode(
@@ -720,6 +716,7 @@ def _cmd_settings_info() -> dict:
     from .languages import LANGUAGES
     from .providers.openrouter import GEMINI_VOICES
     from .providers.subscription import SUBSCRIPTION_CLIS, configured_model
+    from .voices import TTS_TIERS, TTS_VOICE_CATALOGS
 
     settings = Settings()
     overrides = [
@@ -749,6 +746,8 @@ def _cmd_settings_info() -> dict:
             {"speaker": p.speaker, "voice": p.voice, "style": p.style} for p in settings.presenters
         ],
         "gemini_voices": GEMINI_VOICES,
+        "voice_catalogs": TTS_VOICE_CATALOGS,
+        "tts_tiers": TTS_TIERS,
         "language": settings.language,
         # Registro único de idiomas: a interface pode montar o seletor a partir daqui
         # em vez de manter os <option> fixos no HTML.
@@ -849,6 +848,7 @@ def _cmd_models_list(force_refresh: bool = False) -> dict:
     """Modelos de texto e de TTS com preços, para os seletores da interface."""
     from .catalog import load_models
     from .providers.openrouter import GEMINI_VOICES, list_tts_models
+    from .voices import TTS_TIERS, TTS_VOICE_CATALOGS
 
     try:
         models = load_models(Settings(), force_refresh)
@@ -889,6 +889,8 @@ def _cmd_models_list(force_refresh: bool = False) -> dict:
         "text_models": [payload(model) for model in models if "text" in model.output_modalities],
         "tts_models": tts_models,
         "gemini_voices": GEMINI_VOICES,
+        "voice_catalogs": TTS_VOICE_CATALOGS,
+        "tts_tiers": TTS_TIERS,
         "catalog_error": " | ".join(dict.fromkeys(errors)) if errors else None,
     }
 
@@ -901,6 +903,7 @@ def _cmd_setup_check() -> dict:
 
 def _cmd_tts_catalog() -> dict:
     from .providers.openrouter import GEMINI_VOICES, list_tts_models
+    from .voices import TTS_TIERS, TTS_VOICE_CATALOGS
 
     try:
         models = list_tts_models(Settings())
@@ -911,6 +914,8 @@ def _cmd_tts_catalog() -> dict:
     return {
         "models": models,
         "gemini_voices": GEMINI_VOICES,
+        "voice_catalogs": TTS_VOICE_CATALOGS,
+        "tts_tiers": TTS_TIERS,
         "catalog_error": error,
     }
 

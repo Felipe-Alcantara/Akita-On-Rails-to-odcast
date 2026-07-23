@@ -1133,8 +1133,9 @@ $("chunk-modal").addEventListener("cancel", (event) => {
 
 // ── Configurações ─────────────────────────────────────────────────────────
 
-let modelsCatalog = null; // {text_models, tts_models, gemini_voices}
+let modelsCatalog = null; // {text_models, tts_models, gemini_voices, voice_catalogs, tts_tiers}
 let settingsInfo = null;
+let activeProfileCategory = null;
 
 function configChip(label, value, className = "") {
   const chip = makeElement("span", `config-chip ${className}`.trim());
@@ -1179,11 +1180,22 @@ function renderActiveConfig(info) {
   const voiceSelect = $("narration-voice");
   const previousVoice = voiceSelect.value;
   voiceSelect.replaceChildren();
-  for (const [voice, style] of Object.entries(info.gemini_voices || {})) {
-    const option = document.createElement("option");
-    option.value = voice;
-    option.textContent = `${voice} · ${style}`;
-    voiceSelect.appendChild(option);
+  const activeCatalog = (info.voice_catalogs && info.voice_catalogs[info.tts_model])
+    || info.gemini_voices || {};
+  const catalogEntries = Object.entries(activeCatalog);
+  if (catalogEntries.length) {
+    for (const [voice, style] of catalogEntries) {
+      const option = document.createElement("option");
+      option.value = voice;
+      option.textContent = `${voice} · ${style}`;
+      voiceSelect.appendChild(option);
+    }
+  } else {
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = "Sem catálogo — configure pelo perfil";
+    placeholder.disabled = true;
+    voiceSelect.appendChild(placeholder);
   }
   const profileVoice = info.presenters.length === 1 ? info.presenters[0].voice : "";
   // Só uma escolha deliberada do usuário sobrepõe a voz do perfil. Sem isso, um
@@ -1400,6 +1412,7 @@ async function loadSettings() {
     let firstTab = null;
 
     const showCategory = (category) => {
+      activeProfileCategory = category;
       list.replaceChildren();
       for (const btn of tabBar.querySelectorAll("button")) {
         btn.classList.toggle("active", btn.dataset.cat === category);
@@ -1553,11 +1566,21 @@ $("btn-load-catalog").onclick = async () => {
   const models = result.models.length
     ? result.models.map((model) => model.id).join("\n")
     : "Nenhum modelo carregado.";
-  const voices = Object.entries(result.gemini_voices)
-    .map(([voice, style]) => `${voice} (${style})`).join(", ");
   const warning = result.catalog_error ? `Aviso: ${result.catalog_error}\n\n` : "";
+  let voicesText = "";
+  for (const [modelId, voices] of Object.entries(result.voice_catalogs || {})) {
+    const entries = Object.entries(voices);
+    const tier = (result.tts_tiers && result.tts_tiers[modelId]) || {};
+    const tierLabel = tier.label ? ` [${tier.label} — US$ ${tier.effective_cost_per_m_chars}/M]` : "";
+    voicesText += `\n${modelId}${tierLabel}:\n`;
+    if (entries.length) {
+      voicesText += entries.map(([v, s]) => `  ${v} (${s})`).join("\n") + "\n";
+    } else {
+      voicesText += "  (voz livre — digite o nome ao configurar)\n";
+    }
+  }
   $("catalog-box").textContent =
-    `${warning}Modelos TTS:\n${models}\n\nVozes Gemini:\n${voices}`;
+    `${warning}Modelos TTS:\n${models}\n\nVozes por modelo:${voicesText}`;
 };
 
 // ── Editor de perfil ──────────────────────────────────────────────────────
@@ -1611,33 +1634,50 @@ function configureModelPicker(vendorSelect, modelSelect, models, current) {
   renderModels(current);
 }
 
+function currentVoiceCatalog() {
+  const ttsModel = $("pf-tts-model") && $("pf-tts-model").value;
+  if (!ttsModel || !modelsCatalog || !modelsCatalog.voice_catalogs) return null;
+  return modelsCatalog.voice_catalogs[ttsModel] || null;
+}
+
 function addPresenterRow(speaker = "", voice = "Kore", style = "") {
-  const voices = modelsCatalog ? Object.entries(modelsCatalog.gemini_voices) : [];
+  const catalog = currentVoiceCatalog();
+  const voices = catalog ? Object.entries(catalog) : [];
   const row = document.createElement("div");
   row.className = "presenter-row";
   const speakerInput = makeElement("input", "pf-speaker");
   speakerInput.type = "text";
   speakerInput.placeholder = "nome";
   speakerInput.value = speaker;
-  const voiceSelect = makeElement("select", "pf-voice");
-  if (voice && !voices.some(([name]) => name === voice)) {
-    const option = document.createElement("option");
-    option.value = voice;
-    option.textContent = `${voice} (configuração atual)`;
-    voiceSelect.appendChild(option);
+
+  let voiceElement;
+  if (voices.length) {
+    voiceElement = makeElement("select", "pf-voice");
+    if (voice && !voices.some(([name]) => name === voice)) {
+      const option = document.createElement("option");
+      option.value = voice;
+      option.textContent = `${voice} (configuração atual)`;
+      voiceElement.appendChild(option);
+    }
+    for (const [name, tone] of voices) {
+      const option = document.createElement("option");
+      option.value = name;
+      option.textContent = `${name} (${tone})`;
+      voiceElement.appendChild(option);
+    }
+    voiceElement.value = voice;
+  } else {
+    voiceElement = makeElement("input", "pf-voice");
+    voiceElement.type = "text";
+    voiceElement.placeholder = "nome da voz";
+    voiceElement.value = voice || "";
   }
-  for (const [name, tone] of voices) {
-    const option = document.createElement("option");
-    option.value = name;
-    option.textContent = `${name} (${tone})`;
-    voiceSelect.appendChild(option);
-  }
-  voiceSelect.value = voice;
+
   const styleInput = makeElement("input", "pf-style");
   styleInput.type = "text";
   styleInput.placeholder = "tom (opcional)";
   styleInput.value = style;
-  row.append(speakerInput, voiceSelect, styleInput);
+  row.append(speakerInput, voiceElement, styleInput);
   const remove = document.createElement("button");
   remove.type = "button";
   remove.textContent = "✕";
@@ -1648,6 +1688,33 @@ function addPresenterRow(speaker = "", voice = "Kore", style = "") {
   $("pf-presenters").appendChild(row);
 }
 
+function refreshPresenterVoices() {
+  const rows = [...document.querySelectorAll(".presenter-row")];
+  const current = rows.map((row) => ({
+    speaker: row.querySelector(".pf-speaker").value,
+    voice: row.querySelector(".pf-voice").value,
+    style: row.querySelector(".pf-style").value,
+  }));
+  $("pf-presenters").replaceChildren();
+  for (const p of current) {
+    addPresenterRow(p.speaker, p.voice, p.style);
+  }
+}
+
+function renderTtsTierInfo() {
+  const el = $("pf-tts-tier-info");
+  if (!el) return;
+  const ttsModel = $("pf-tts-model") && $("pf-tts-model").value;
+  const tier = modelsCatalog && modelsCatalog.tts_tiers && modelsCatalog.tts_tiers[ttsModel];
+  if (!tier) {
+    el.textContent = "";
+    el.className = "pf-tier-badge hidden";
+    return;
+  }
+  el.textContent = `${tier.label} — US$ ${tier.effective_cost_per_m_chars}/M caracteres`;
+  el.className = `pf-tier-badge tier-${tier.tier}`;
+}
+
 function presentersFromSpec(spec) {
   return spec.split(",").map((chunk) => {
     const [speaker = "", voice = "Kore", style = ""] = chunk.trim().split(":");
@@ -1655,7 +1722,7 @@ function presentersFromSpec(spec) {
   }).filter((presenter) => presenter.speaker && presenter.voice);
 }
 
-async function openProfileForm(profile = null) {
+async function openProfileForm(profile = null, tabCategory = null) {
   $("pf-error").textContent = "";
   $("profile-form").classList.remove("hidden");
   $("btn-profile-new").disabled = true;
@@ -1711,7 +1778,16 @@ async function openProfileForm(profile = null) {
       : "";
   }
   const base = profile || settingsInfo || {};
-  providerSelect.value = base.text_provider || "openrouter";
+  if (profile) {
+    providerSelect.value = base.text_provider || "openrouter";
+  } else if (tabCategory) {
+    const providerMap = {
+      "Claude Code": "claude-code", "Codex": "codex", "Gemini CLI": "gemini-cli",
+    };
+    providerSelect.value = providerMap[tabCategory] || "openrouter";
+  } else {
+    providerSelect.value = base.text_provider || "openrouter";
+  }
   $("pf-subscription-model").value = profile
     ? profile.subscription_model || ""
     : (settingsInfo && settingsInfo.profile_subscription_model) || "";
@@ -1722,6 +1798,19 @@ async function openProfileForm(profile = null) {
     modelsCatalog.text_models, base.audit_model);
   configureModelPicker($("pf-tts-vendor"), $("pf-tts-model"),
     modelsCatalog.tts_models, base.tts_model);
+
+  // Ao trocar vendor ou modelo TTS, atualizar vozes dos apresentadores e badge de tier
+  const origTtsVendorChange = $("pf-tts-vendor").onchange;
+  $("pf-tts-vendor").onchange = () => {
+    if (origTtsVendorChange) origTtsVendorChange();
+    refreshPresenterVoices();
+    renderTtsTierInfo();
+  };
+  $("pf-tts-model").addEventListener("change", () => {
+    refreshPresenterVoices();
+    renderTtsTierInfo();
+  });
+  renderTtsTierInfo();
 
   $("pf-presenters").replaceChildren();
   const presenters = profile
@@ -1740,7 +1829,7 @@ function closeProfileForm() {
   $("pf-name").readOnly = false;
 }
 
-$("btn-profile-new").onclick = () => openProfileForm();
+$("btn-profile-new").onclick = () => openProfileForm(null, activeProfileCategory);
 $("pf-cancel").onclick = closeProfileForm;
 $("pf-add-presenter").onclick = () => addPresenterRow();
 
