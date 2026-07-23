@@ -1749,3 +1749,30 @@ salva continua visível como configuração atual para preservar perfis existent
 **Qualidade:** a descoberta do Tesseract passou a priorizar PATH, instalação conhecida do
 sistema e só então a cópia privada do Audiofy. Isso evita que uma cópia local esconda uma
 instalação válida fora do PATH e elimina a falha intermitente do teste em ambientes preparados.
+
+## 2026-07-23 — Módulo de análise de custos de geração
+
+**O que mudou:** novo módulo `src/audiofy/cost_analytics.py` que coleta métricas de todos os
+episódios gerados (custo, duração, data) e fornece:
+  - estatísticas agregadas: total gerado (horas, custo, palavras);
+  - análise por dimensão: custo por modelo TTS, por perfil, por semana;
+  - percentis de duração (50%, 75%, 90%) e mediana de custo/minuto;
+  - estimativas para próximas gerações: custo por 10min/30min/1h e por 1k/5k palavras.
+
+A CLI `python3 start_app.py costs` exibe relatório formatado no terminal.
+
+**Decisões:**
+  - Carrega apenas `metrics.json` de episódios válidos (ignora ausentes ou corrompidos).
+  - Usa `datetime.fromisoformat` para parsing de timestamps (sem dependência extra).
+  - Properties com cache implícito em properties de `CostAnalytics` (cálculos leves).
+  - Estimativa de duração lê `generated_at` e `verified_at` para computar tempo real.
+  - Formatação com caracteres Unicode (bordas, emoji) resgata o suporte já testado em
+    `_supports_unicode()` da porta de entrada.
+
+**Validação:** 37 testes unitários (100% cobertura) cobrem métricas individuais, agregação,
+carregamento de arquivos, manejo de dados ausentes/corrompidos e formatação. Ruff aprovado.
+Teste manual com 10 episódios reais confirma valores acurados (custo total, duração, modelo).
+
+**Risco que sobrou:** se `metrics.json` for omitido durante a geração de um episódio, aquele
+episódio não aparecerá na análise. O código trata o JSON faltante como ignora silenciosamente,
+consistente com a robustez do pipeline; alertas deveriam vir da telemetria de geração.

@@ -3,7 +3,7 @@
 
 Uso:
     python3 start_app.py             # menu interativo (recomendado)
-    python3 start_app.py list|sync|status|setup|catalog|chat|keys|profiles
+    python3 start_app.py list|sync|status|setup|catalog|chat|keys|profiles|costs
     python3 start_app.py search <termos>
     python3 start_app.py add-url <url>
     python3 start_app.py generate <item-id | número da listagem> [--bg]
@@ -11,6 +11,7 @@ Uso:
     python3 start_app.py watch <item-id>
     python3 start_app.py abort <item-id>
     python3 start_app.py notebooklm <item-id>
+    python3 start_app.py costs [--estimate <duração-minutos>] [--words <número>]
 """
 
 from __future__ import annotations
@@ -970,6 +971,20 @@ def do_desktop() -> None:
     _ok("App desktop iniciado em outra janela.")
 
 
+def do_costs() -> None:
+    """Exibe análise de custos de geração de conteúdo."""
+    from audiofy.cost_analytics import CostAnalytics, format_analytics_report, load_episode_metrics
+
+    print()
+    metrics = load_episode_metrics(EPISODES_DIR)
+    if not metrics:
+        _warn("Nenhum episódio gerado encontrado.")
+        return
+
+    analytics = CostAnalytics(episodes=metrics)
+    print(format_analytics_report(analytics))
+
+
 def menu() -> None:
     while True:
         running = _running_generations()
@@ -1060,6 +1075,8 @@ def menu() -> None:
             _safe_call(do_setup)
         elif choice == "desktop":
             _safe_call(do_desktop)
+        elif choice == "costs":
+            _safe_call(do_costs)
         elif choice in ("exit", None):
             if _running_generations():
                 _warn("Atenção: ainda há geração em segundo plano consumindo créditos.")
@@ -1079,6 +1096,7 @@ def main() -> None:
         "catalog": do_catalog,
         "keys": do_keys,
         "profiles": do_profiles,
+        "costs": do_costs,
     }
     if not args:
         try:
