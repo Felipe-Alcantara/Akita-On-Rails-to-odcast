@@ -24,6 +24,7 @@
 
 from __future__ import annotations
 
+import contextlib
 import hashlib
 import json
 import os
@@ -51,6 +52,11 @@ _MAX_BACKGROUND_AUDIO_BYTES = 500 * 1024 * 1024
 
 
 def _emit(payload: dict) -> None:
+    # A resposta carrega acentos e caminhos do projeto. No Windows o stdout
+    # herda cp1252 e corromperia esses caracteres, fazendo o app rejeitar
+    # caminhos válidos; UTF-8 mantém o JSON fiel para qualquer chamador.
+    with contextlib.suppress(AttributeError, OSError, TypeError, ValueError):
+        sys.stdout.reconfigure(encoding="utf-8")
     print(json.dumps(payload, ensure_ascii=False))
 
 

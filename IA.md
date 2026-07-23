@@ -1635,3 +1635,35 @@ bem-sucedida e a emissão das três mensagens de status.
 
 **Risco que sobrou:** em consoles muito antigos as marcas ASCII perdem o apelo visual, mas
 preservam a informação. A cor ANSI é mantida nos dois casos.
+
+---
+
+## 2026-07-23 — Caminhos acentuados eram rejeitados ao abrir a pasta do episódio
+
+**O que mudou:** a ponte JSON passou a garantir UTF-8 na própria emissão (`_emit`), e o Electron
+passou a exportar `PYTHONIOENCODING=utf-8` para a bridge e a decodificar o `stdout` do backend
+explicitamente como UTF-8.
+
+**Sintoma:** clicar em "📂 Abrir pasta" respondia "O app só pode abrir arquivos dentro do
+projeto", mesmo com o episódio existindo dentro do projeto.
+
+**Causa:** o Python herdava o encoding do console (cp1252 no Windows) e devolvia o campo `dir`
+com os acentos corrompidos — `Programa��o` no lugar de `Programação`. A guarda de
+segurança do Electron comparava essa string com a raiz correta do projeto, o `startsWith` falhava
+e o caminho era classificado como externo. A validação estava certa; a entrada é que chegava
+corrompida. Só afeta projetos cujo caminho absoluto tem caracteres fora do ASCII.
+
+**Decisão:** a correção fica dos dois lados da fronteira. A bridge não deve depender de quem a
+chama definir variáveis de ambiente, então `_emit` ajusta o stdout sozinho; e o Electron fixa o
+encoding na leitura, o que também reagrupa caracteres multibyte partidos entre dois chunks do
+stream. O projeto já aplicava esse mesmo padrão ao worker de geração (`PYTHONUTF8`/
+`PYTHONIOENCODING`), então a mudança estende uma solução existente em vez de criar outra.
+
+**Validação:** `scripts/check_quality.py` aprovado. Três testes Python cobrem caminho acentuado
+preservado, console cp1252 migrado para UTF-8 e saída sem `reconfigure` disponível; um teste
+Electron garante o `PYTHONIOENCODING` no ambiente da bridge. Verificação manual: a validação de
+caminho, que antes recusava, passou a aceitar o diretório real do episódio.
+
+**Risco que sobrou:** o terceiro teste revelou que um `stdout` com `reconfigure` não-chamável
+levantava `TypeError` e derrubaria a resposta inteira; a exceção passou a ser tratada aqui e no
+`start_app.py`, que usa a mesma técnica.

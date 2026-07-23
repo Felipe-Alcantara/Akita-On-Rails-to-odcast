@@ -50,6 +50,10 @@ function bridge(args, stdinData) {
       }
       return next.slice(0, MAX_OUTPUT_LENGTH);
     };
+    // Decodifica como UTF-8 e reagrupa caracteres multibyte partidos entre
+    // dois chunks; o padrão do Node quebraria acentos em caminhos e títulos.
+    child.stdout.setEncoding("utf8");
+    child.stderr.setEncoding("utf8");
     child.stdout.on("data", (chunk) => { stdout = append(stdout, chunk); });
     child.stderr.on("data", (chunk) => { stderr = append(stderr, chunk); });
     child.on("error", (error) => {

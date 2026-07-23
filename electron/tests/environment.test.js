@@ -41,3 +41,11 @@ test("bridge ignora nomes inválidos na marca de procedência", () => {
   assert.equal(environment["../TOKEN"], "preservado");
   assert.equal(environment["CHAVE COM ESPAÇO"], "preservada");
 });
+
+test("bridge força UTF-8 para não corromper acentos em caminhos", () => {
+  const environment = buildBridgeEnvironment({ PATH: "/usr/bin" });
+
+  // Sem isso o Python usa o encoding do console (cp1252 no Windows) e devolve
+  // caminhos corrompidos, que o app rejeita por não casarem com a raiz.
+  assert.equal(environment.PYTHONIOENCODING, "utf-8");
+});

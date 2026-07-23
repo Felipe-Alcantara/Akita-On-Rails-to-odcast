@@ -59,7 +59,7 @@ def _supports_unicode() -> bool:
         return True
     # Consoles legados do Windows usam cp1252, que não codifica os símbolos.
     # Migrar para UTF-8 preserva o visual; se não der, o texto vira ASCII.
-    with contextlib.suppress(AttributeError, OSError, ValueError):
+    with contextlib.suppress(AttributeError, OSError, TypeError, ValueError):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
         return encodes(sys.stdout)
     return False

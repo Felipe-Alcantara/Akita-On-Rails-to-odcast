@@ -4,6 +4,8 @@ import json
 import sys
 import tempfile
 import unittest
+from contextlib import redirect_stdout
+from io import StringIO
 from pathlib import Path
 from unittest.mock import Mock, patch
 
@@ -685,6 +687,47 @@ class ItemEstimateTest(unittest.TestCase):
             [call.kwargs["generation_mode"] for call in estimate_episode.call_args_list],
             ["adaptation", "verbatim", "reflexive"],
         )
+
+
+class EmissaoJsonTest(unittest.TestCase):
+    """Regressão: acentos corrompidos faziam o app rejeitar caminhos válidos."""
+
+    def test_caminho_acentuado_sobrevive_a_emissao(self):
+        payload = {"ok": True, "dir": r"H:\Programação\Repositórios\Audiofy\data"}
+        saida = StringIO()
+
+        with redirect_stdout(saida):
+            bridge._emit(payload)
+
+        self.assertEqual(json.loads(saida.getvalue()), payload)
+
+    def test_console_legado_nao_corrompe_a_resposta(self):
+        # Simula o stdout cp1252 do Windows, que motivou a correção.
+        class ConsoleLegado(StringIO):
+            encoding = "cp1252"
+
+            def reconfigure(self, **kwargs):
+                self.encoding = kwargs.get("encoding", self.encoding)
+
+        console = ConsoleLegado()
+        payload = {"titulo": "Homenagem à Catalunha", "dir": r"C:\Programação"}
+
+        with patch.object(bridge.sys, "stdout", console):
+            bridge._emit(payload)
+
+        self.assertEqual(console.encoding, "utf-8")
+        self.assertEqual(json.loads(console.getvalue()), payload)
+
+    def test_stdout_sem_reconfigure_ainda_emite(self):
+        # Saída redirecionada para pipe/arquivo pode não expor reconfigure.
+        class SaidaSimples(StringIO):
+            reconfigure = None
+
+        saida = SaidaSimples()
+        with patch.object(bridge.sys, "stdout", saida):
+            bridge._emit({"ok": True})
+
+        self.assertEqual(json.loads(saida.getvalue()), {"ok": True})
 
 
 if __name__ == "__main__":
