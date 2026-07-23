@@ -56,3 +56,41 @@ def prompt_label(code: str) -> str:
 def normalize(code: str) -> str:
     """Reduz qualquer código ao de um idioma suportado (o padrão como último recurso)."""
     return code if is_supported(code) else DEFAULT_LANGUAGE
+
+
+# ── Detecção simples de idioma por palavras funcionais ──────────────────────
+
+_FUNCTION_WORDS: dict[str, set[str]] = {
+    "pt-BR": {
+        "de", "do", "da", "dos", "das", "que", "um", "uma", "os", "as",
+        "no", "na", "nos", "nas", "em", "com", "para", "por", "se", "não",
+        "mais", "mas", "ou", "como", "este", "esta", "esse", "essa", "pelo",
+    },
+    "en": {
+        "the", "of", "and", "to", "in", "is", "it", "that", "was", "for",
+        "on", "are", "with", "they", "be", "at", "have", "this", "from",
+        "not", "but", "what", "which", "would", "can", "an", "will", "my",
+    },
+}
+
+
+def detect_language(text: str) -> str:
+    """Estima o idioma do texto por frequência de palavras funcionais.
+
+    Retorna o código do idioma registrado com maior pontuação, ou o padrão
+    quando a amostra é inconclusiva (menos de 30 palavras ou empate).
+    """
+    import re
+
+    words = re.findall(r"[a-záàâãéêíóôõúüçñ]+", text.lower())
+    if len(words) < 30:
+        return DEFAULT_LANGUAGE
+    sample = words[:500]
+    scores = {
+        code: sum(1 for w in sample if w in fw)
+        for code, fw in _FUNCTION_WORDS.items()
+    }
+    best = max(scores, key=scores.get)  # type: ignore[arg-type]
+    if scores[best] < len(sample) * 0.05:
+        return DEFAULT_LANGUAGE
+    return best

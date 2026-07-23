@@ -37,6 +37,40 @@ class NormalizacaoTest(unittest.TestCase):
     def test_remove_espacos_antes_da_quebra_e_nas_bordas(self):
         self.assertEqual(_normalize("  linha   \n  outra  "), "linha\n  outra")
 
+    def test_remove_rodape_indesign(self):
+        text = (
+            "Texto da página onze.\n"
+            "14909-Homenagem à Catalunha (4P).indd   11 15/02/21   15:07\n\n"
+            "12\n"
+            "Texto da página doze.\n"
+            "14909-Homenagem à Catalunha (4P).indd   12 15/02/21   15:07"
+        )
+        result = _normalize(text)
+        self.assertNotIn(".indd", result)
+        self.assertNotIn("15:07", result)
+        self.assertIn("Texto da página onze.", result)
+        self.assertIn("Texto da página doze.", result)
+
+    def test_rejunta_palavras_com_hifen_de_diagramacao(self):
+        # U+2011 (NON-BREAKING HYPHEN) + \n = palavra partida entre páginas.
+        self.assertIn("homem", _normalize("ho\u2011\nmem capaz"))
+        self.assertNotIn("\u2011", _normalize("ho\u2011\nmem capaz"))
+        # Hífens compostos sem quebra de linha são preservados.
+        self.assertIn("ruivo\u2011alaranjado", _normalize("ruivo\u2011alaranjado"))
+
+    def test_remove_numeros_de_pagina_soltos_entre_paragrafos(self):
+        text = "Fim da página.\n\n42\nInício da próxima."
+        result = _normalize(text)
+        self.assertNotIn("\n42\n", result)
+        self.assertIn("Fim da página.", result)
+        self.assertIn("Início da próxima.", result)
+
+    def test_preserva_numeros_que_nao_sao_pagina(self):
+        # Número como parte de uma linha mais longa não é removido.
+        self.assertIn("42 soldados", _normalize("Havia\n\n42 soldados no pátio."))
+        # Número no meio do texto não é removido.
+        self.assertIn("São 42", _normalize("São 42\nno total."))
+
     def test_titulo_derivado_do_nome_troca_separadores_por_espaco(self):
         self.assertEqual(_title_from_path(Path("/tmp/meu_livro-final.pdf")), "meu livro final")
 

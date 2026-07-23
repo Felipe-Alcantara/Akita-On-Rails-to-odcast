@@ -1,0 +1,287 @@
+{
+  "version": 1,
+  "source_sha256": "db7d415bdd0841239fbde4618e865b0cead4e97a74e5ca76a2f31983083dacac",
+  "prosody": {
+    "1:6f3ed60867e3cd77c20911965005f854b713d345c6ec6f98669dfa735ecb66dd": {
+      "direction": "Tom caloroso e sincero, ritmo moderado. Pausa breve após a data. Gratidão genuína sem ser piegas; leve vulnerabilidade ao mencionar 'ainda não esteja pronto'. Intensidade média-baixa, como quem abre o coração com humildade."
+    },
+    "2:d1e85fdee06e65a92fb8f982b020ef8542b38bd9b930ed5fb1d0c0484ba77658": {
+      "direction": "Tom aberto e desarmado, ritmo tranquilo. Leve ênfase em 'minha visão pessoal'. Pausa antes de 'não existe verdade universal' — entregue com convicção serena, não autoritária. Convida o ouvinte a pensar junto."
+    },
+    "3:0cc3a053dd89bb3ffc2ee4659d80d1cc9a4cb413d619a78d5226e48d21db954e": {
+      "direction": "Pergunta retórica provocativa. Ritmo mais lento, tom levemente desafiador. Pausar antes de 'demais de tudo'. Intensidade crescente até o fim da frase, como quem planta uma semente de inquietação."
+    },
+    "4:cb7134d21735ff5c59639df15460106ad54264b260e5e8487a15bd02a2d80c80": {
+      "direction": "Início generoso e rápido, como quem reconhece méritos com entusiasmo. Acelerar na enumeração. Tom elogioso mas que já carrega um 'porém' implícito. Leve ironia sutil em 'basicamente conseguem fazer tudo'."
+    },
+    "5:23318e3b2328059b15b849d091be9146283b3c53ded94788dbf0808777e62ec5": {
+      "direction": "Tom reflexivo, ritmo desacelerado. Pausa pensativa após 'faltando algo'. A frase final repete o mote do trecho 3 — entregá-la com peso de conclusão, como uma tese que se revela. Ênfase em 'menos de edição de código'."
+    },
+    "6:c94ced0e8982dd42ed6dcc7d3efde94fc002960e81c763ca5ef51fd4039e654b": {
+      "direction": "Determinação contida, tom de manifesto pessoal. Ritmo firme e constante. Ênfase em 'voltar à base' e 'inovação'. Intensidade média-alta, como quem declara propósito sem arrogância."
+    },
+    "7:bcdb15ff80c2d3cd84baf7a3dfccacec3cb7977c2052c1a2149bd705b841da3b": {
+      "direction": "Tom conversacional e curioso, como quem pensa em voz alta. Ritmo leve. Pausas naturais entre as frases. Transmitir a ideia de que a resposta não é óbvia, sem dramatizar."
+    },
+    "8:756d8f9c79816152fa2ace2bdbff31211273ce2a81343b2c99ba3087b505efd7": {
+      "direction": "Tom ilustrativo, como quem conta um caso. Ritmo fluido na enumeração de exemplos. Leve variação ao alternar 'algumas sim, algumas não'. Manter leveza — é um parêntese explicativo, não um argumento tenso."
+    },
+    "9:2027b9c78c32e1c8de642402cc1559fcd5bdfc56da3a5f7374c711beb574c5d2": {
+      "direction": "Energia crescente na enumeração dos editores — ritmo acelerado, quase lúdico. Pausa e tom divertido no parêntese 'sério, seria muito longa'. Transmitir a paixão de quem conhece bem o universo que descreve."
+    },
+    "10:aed695b254935357f791710e52690fda3d6c97a8be649f12fddb546f9f7eaeb8": {
+      "direction": "Tom ponderado e humilde, ritmo pausado. Ênfase suave em 'bastante pessoal'. Frase final com leve contraste — 'gosto popular' versus 'inovadoras'. Sabedoria calma, sem pretensão."
+    },
+    "11:885fba5baecbbb578f83c7fc9b995fc52f5878b3caa2840f69af001baeaf0f5f": {
+      "direction": "Transição leve, tom de convite. Ritmo moderado com uma breve pausa antes de 'posso contar'. Sensação de quem abre uma porta — animação contida, preparando o ouvinte para uma lista."
+    },
+    "12:03ee8013f15989f94c582bf9e486dc9d9a333513acb33ac4afed0267d6ccd686": {
+      "direction": "Tom visionário e apaixonado. Ritmo firme. Ênfase em 'sem exigir uma longa curva de aprendizado'. Pausar entre as ideias. Intensidade média-alta — é uma convicção forte apresentada com clareza."
+    },
+    "13:a1833dde397d1f78c8b2c9f2d9b7ac4dea43e422dd05b5b68759e033705e4dac": {
+      "direction": "Entusiasmo contido com suspense proposital. Tom animado ao descrever a dualidade GUI/terminal. Desacelerar e baixar levemente o tom em 'não quero estragar os detalhes' — sorriso na voz, provocação amigável."
+    },
+    "14:ce82eeee46e2677163f4b9173913867f39b1418f777701e9d16a55a842416bd6": {
+      "direction": "Conciso e assertivo, ritmo direto. Leve humor seco na metáfora do instrumento musical. Ênfase em 'curta e eficaz'. Tom pragmático — frase rápida com impacto."
+    },
+    "15:d2068a7316015cc5d84ad57851147d9ed837757446f2047e46c55576dbb1d80b": {
+      "direction": "Tom curioso e exploratório, ritmo moderado. Transmitir fascínio genuíno pela pesquisa. Leve pausa reflexiva em 'ainda há muito a resolver' — honestidade sem frustração, como quem abraça o desafio."
+    },
+    "16:745d08bf712e7a409fbe4f7e2e7f31a9e4572efeb115987779b3f3a27add8018": {
+      "direction": "Entusiasmo crescente que o próprio narrador reconhece. Ritmo acelerando até o parêntese final. Em 'risos', soltar uma risada breve e natural, quebrando a formalidade. Tom de quem se diverte com a própria empolgação."
+    },
+    "17:09e90c89afe33157ffeafc0efc6d1d5b9bb4e015ac90089895f85cb88eb23cff": {
+      "direction": "Tom descontraído, ritmo relaxado. Leve ênfase em 'MUITO' — intensidade momentânea. Sensação de quem segura informação de propósito, mas sem arrogância. Encerramento suave do bloco de funcionalidades."
+    },
+    "18:a2259a3562b47e85e867895ac85adddd12c6861b8377ff29725ab1c1e1527023": {
+      "direction": "Tom engajado e dinâmico, ritmo moderado. Transmitir a energia de quem está imerso no processo. Pausa breve antes de 'ainda tem muita coisa acontecendo' — entregue com satisfação contida."
+    },
+    "19:316c977ad145aa063d0d1646c6191f40e473a5514336c94f262f98047a8cc964": {
+      "direction": "Revelação calma mas impactante. Ritmo mais lento, tom confiante. Pausar antes da frase — é um momento de peso. Intensidade controlada, como quem mostra uma carta na manga sem alarde."
+    },
+    "20:870c126f0b93051db5cb3703cb6f8be3925207a2f678a8121a673d72f29eb2ee": {
+      "direction": "Tom técnico e enumerativo, ritmo constante e claro. Ler as siglas com naturalidade e precisão. Sem emoção excessiva — é informação pura. Pausas breves entre cada plataforma para clareza."
+    },
+    "21:4c9ff5e81a9b4471bbd039a93830ea2c36098d7a2002f8fedc309c7ed55e26da": {
+      "direction": "Tom firme e levemente seco, ritmo direto. Não é hostil, mas estabelece um limite claro. Leve desapego proposital em 'interpretem como quiserem'. Intensidade baixa — é um recuo consciente."
+    },
+    "22:b8d358cbe59870c49f5e1e85d923365aa036d0479e6e7808daad1e5c7ff3b296": {
+      "direction": "Tom pessoal e caloroso ao mencionar paternidade. Ritmo mais lento, vulnerável. Leve cansaço positivo — orgulho misturado com reconhecimento do desafio. Pausa breve entre vida pessoal e trabalho."
+    },
+    "23:543f6a7ce895044268fd3c61cf0165012e4fa82acef94786fdea4c4ddc2cd6e9": {
+      "direction": "Tom acolhedor de despedida, ritmo desacelerado. Sorriso na voz. Leve nostalgia antecipada em 'vou guardá-las para o futuro' — promessa gentil. Intensidade suave, encerrando com proximidade."
+    },
+    "24:fc4126e98de885bee35eaf291517b5f32ea71b4c1efece9b77a1027c0e38c0f8": {
+      "direction": "Tom breve e amigável, ritmo direto. Energia leve de chamada à ação sem pressão. Naturalidade ao citar as plataformas. Encerrar com simpatia — ponto final descontraído."
+    }
+  },
+  "commentary": {
+    "1:c64de36288178361a4e87d1db701da0c5fcad18f6473618ad3755986b3238410": {
+      "commentary": "Raphael Amorim é o criador do Rio Terminal, emulador de terminal escrito em Rust com renderização via GPU que ganhou tração no open-source. A menção ao Arc é oportuna: o navegador da The Browser Company polarizou opiniões em 2024, e pouco depois a própria empresa pivotou para outro produto — ilustrando bem como 'inovação' é um alvo móvel."
+    },
+    "2:e587be34b0a5dbb700fc0fd5893754f7f296cd7c62eb26a4bbd468fb72abbd35": {
+      "commentary": "A lista de editores que ele cita é uma aula condensada de história: do VI (1976, Bill Joy, em um terminal ADM-3A cujo teclado originou o hjkl) ao Atom (2014, GitHub, que encerrou em 2022 após ser eclipsado pelo VS Code). A ideia de um editor que se adapta ao ritmo de digitação do usuário remete a pesquisas em HCI sobre modelagem de keystroke dynamics, área mais associada a biometria do que a edito"
+    },
+    "3:fef64aa39167698155032dcb5beab220d292defc5f6d02733528ec5da706fd08": {
+      "commentary": "O suporte simultâneo a OpenGL, Vulkan, DX11/DX12 e Metal revela ambição de renderização nativa por GPU em cada plataforma — caminho que o Zed (lançado em 2024 por ex-criadores do Atom) também seguiu com Metal/Vulkan via GPUI. Raphael menciona ser pai de primeira viagem enquanto mantém o Rio e prototipa o editor: contexto humano que explica o ritmo deliberado do projeto."
+    }
+  },
+  "turns": [
+    {
+      "turn_id": "R00000",
+      "speaker": "narrador",
+      "text": "Você está ouvindo Why am I creating a new code editor? — Raphael Amorim. Esta é uma leitura reflexiva, gerada por inteligência artificial com o Audiofy Content AI — além da leitura na íntegra, você vai ouvir breves comentários ao longo do áudio.",
+      "instructions": "Fala introdutória calorosa e acolhedora em português brasileiro, como uma apresentação de audiobook.",
+      "kind": "intro"
+    },
+    {
+      "turn_id": "R00002",
+      "speaker": "narrador",
+      "text": "13 Nov • 2024 Antes de mais nada, gostaria de agradecer por todo o investimento financeiro que já recebi neste projeto. Mesmo que ainda não esteja pronto para o público, eu realmente aprecio a confiança e o apoio que muitos de vocês depositaram em mim.",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Leia datas e quantidades com pronúncia natural; para identificadores como ISBN, números de série ou códigos, mencione o rótulo sem soletrar cada dígito. Perfil geral do narrador: firme. Direção deste trecho: Tom caloroso e sincero, ritmo moderado. Pausa breve após a data. Gratidão genuína sem ser piegas; leve vulnerabilidade ao mencionar 'ainda não esteja pronto'. Intensidade média-baixa, como quem abre o coração com humildade.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00003",
+      "speaker": "narrador",
+      "text": "Em segundo lugar, muito do que vocês vão ler neste artigo é a minha visão pessoal. Vocês são livres (e encorajados) a discordar; não existe verdade universal ou palavras escritas em pedra.",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Leia datas e quantidades com pronúncia natural; para identificadores como ISBN, números de série ou códigos, mencione o rótulo sem soletrar cada dígito. Perfil geral do narrador: firme. Direção deste trecho: Tom aberto e desarmado, ritmo tranquilo. Leve ênfase em 'minha visão pessoal'. Pausa antes de 'não existe verdade universal' — entregue com convicção serena, não autoritária. Convida o ouvinte a pensar junto.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00004",
+      "speaker": "narrador",
+      "text": "Você já pensou que muitos editores de código ultimamente se tornaram demais de tudo e menos de edição de código?",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Leia datas e quantidades com pronúncia natural; para identificadores como ISBN, números de série ou códigos, mencione o rótulo sem soletrar cada dígito. Perfil geral do narrador: firme. Direção deste trecho: Pergunta retórica provocativa. Ritmo mais lento, tom levemente desafiador. Pausar antes de 'demais de tudo'. Intensidade crescente até o fim da frase, como quem planta uma semente de inquietação.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00005",
+      "speaker": "narrador",
+      "text": "A maioria dos editores de código existentes são ótimos softwares: rápidos, configuráveis, com suporte a IA, plugins, temas, contêm terminais embutidos, visualizações de árvore de arquivos e etcétera. Eu não posso reclamar do que eles não conseguem fazer, eles basicamente conseguem fazer tudo o que você precisaria!",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Leia datas e quantidades com pronúncia natural; para identificadores como ISBN, números de série ou códigos, mencione o rótulo sem soletrar cada dígito. Perfil geral do narrador: firme. Direção deste trecho: Início generoso e rápido, como quem reconhece méritos com entusiasmo. Acelerar na enumeração. Tom elogioso mas que já carrega um 'porém' implícito. Leve ironia sutil em 'basicamente conseguem fazer tudo'.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00006",
+      "speaker": "narrador",
+      "text": "O que me fez pensar, por que eu sinto que está faltando algo sempre que uso qualquer um deles? Bem, é porque eles são \"demais de tudo e menos de edição de código\".",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Leia datas e quantidades com pronúncia natural; para identificadores como ISBN, números de série ou códigos, mencione o rótulo sem soletrar cada dígito. Perfil geral do narrador: firme. Direção deste trecho: Tom reflexivo, ritmo desacelerado. Pausa pensativa após 'faltando algo'. A frase final repete o mote do trecho 3 — entregá-la com peso de conclusão, como uma tese que se revela. Ênfase em 'menos de edição de código'.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00007",
+      "speaker": "narrador",
+      "text": "O editor no qual estou trabalhando é a minha tentativa pessoal de voltar à base do que um editor de código deveria fazer bem: editar código. Para alcançar isso no estado atual dos editores, é necessário buscar inovação.",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Leia datas e quantidades com pronúncia natural; para identificadores como ISBN, números de série ou códigos, mencione o rótulo sem soletrar cada dígito. Perfil geral do narrador: firme. Direção deste trecho: Determinação contida, tom de manifesto pessoal. Ritmo firme e constante. Ênfase em 'voltar à base' e 'inovação'. Intensidade média-alta, como quem declara propósito sem arrogância.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00008",
+      "speaker": "narrador",
+      "text": "Essa é na verdade uma pergunta muito boa. Você pode pesquisar no Google, e ainda assim encontraria diferentes tipos de respostas. Se você também pesquisar em fóruns de tecnologia, encontraria que cada pessoa tem sua própria percepção de inovação.",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Leia datas e quantidades com pronúncia natural; para identificadores como ISBN, números de série ou códigos, mencione o rótulo sem soletrar cada dígito. Perfil geral do narrador: firme. Direção deste trecho: Tom conversacional e curioso, como quem pensa em voz alta. Ritmo leve. Pausas naturais entre as frases. Transmitir a ideia de que a resposta não é óbvia, sem dramatizar.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00009",
+      "speaker": "narrador",
+      "text": "Por exemplo, vamos pular para o universo dos navegadores: Muitas pessoas considerariam o navegador Arc como uma experiência de usuário inovadora, mas algumas não. Então você poderia encontrar pessoas que considerariam uma melhoria de performance do Firefox baseada em uma nova arquitetura como um exemplo de inovação, mas também teria pessoas que discordariam.",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Leia datas e quantidades com pronúncia natural; para identificadores como ISBN, números de série ou códigos, mencione o rótulo sem soletrar cada dígito. Perfil geral do narrador: firme. Direção deste trecho: Tom ilustrativo, como quem conta um caso. Ritmo fluido na enumeração de exemplos. Leve variação ao alternar 'algumas sim, algumas não'. Manter leveza — é um parêntese explicativo, não um argumento tenso.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00010",
+      "speaker": "narrador",
+      "text": "Raphael Amorim é o criador do Rio Terminal, emulador de terminal escrito em Rust com renderização via GPU que ganhou tração no open-source. A menção ao Arc é oportuna: o navegador da The Browser Company polarizou opiniões em 2024, e pouco depois a própria empresa pivotou para outro produto — ilustrando bem como 'inovação' é um alvo móvel.",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    },
+    {
+      "turn_id": "R00011",
+      "speaker": "narrador",
+      "text": "No universo dos editores, você pode de fato criar uma longa (sério, seria muito longa) discussão sobre quais funcionalidades são inovadoras no Elvis, VI, Emacs, LSE, DreamWeaver, Atom, Sublime Text, Notepad, Brackets, Kile e tantos outros.",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Leia datas e quantidades com pronúncia natural; para identificadores como ISBN, números de série ou códigos, mencione o rótulo sem soletrar cada dígito. Perfil geral do narrador: firme. Direção deste trecho: Energia crescente na enumeração dos editores — ritmo acelerado, quase lúdico. Pausa e tom divertido no parêntese 'sério, seria muito longa'. Transmitir a paixão de quem conhece bem o universo que descreve.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00012",
+      "speaker": "narrador",
+      "text": "Na minha humilde opinião, eu diria que inovação é algo bastante pessoal, e depende muito de qual tipo de bagagem, personalidade e gosto que você tem. Existem muitas coisas que são construídas com base em gosto popular ou comum, mas que não seriam necessariamente inovadoras.",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Leia datas e quantidades com pronúncia natural; para identificadores como ISBN, números de série ou códigos, mencione o rótulo sem soletrar cada dígito. Perfil geral do narrador: firme. Direção deste trecho: Tom ponderado e humilde, ritmo pausado. Ênfase suave em 'bastante pessoal'. Frase final com leve contraste — 'gosto popular' versus 'inovadoras'. Sabedoria calma, sem pretensão.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00013",
+      "speaker": "narrador",
+      "text": "Então, se a percepção de inovação é pessoal, posso contar alguns dos meus objetivos no editor de texto no qual estou trabalhando.",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Leia datas e quantidades com pronúncia natural; para identificadores como ISBN, números de série ou códigos, mencione o rótulo sem soletrar cada dígito. Perfil geral do narrador: firme. Direção deste trecho: Transição leve, tom de convite. Ritmo moderado com uma breve pausa antes de 'posso contar'. Sensação de quem abre uma porta — animação contida, preparando o ouvinte para uma lista.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00014",
+      "speaker": "narrador",
+      "text": "• Reinventar editores livres de mouse, um editor de texto deveria ser capaz de entregar o máximo sem exigir uma longa curva de aprendizado, na verdade, deveria servir desde um programador até um não-programador sem precisar de alguns dias para se adaptar.",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Leia datas e quantidades com pronúncia natural; para identificadores como ISBN, números de série ou códigos, mencione o rótulo sem soletrar cada dígito. Perfil geral do narrador: firme. Direção deste trecho: Tom visionário e apaixonado. Ritmo firme. Ênfase em 'sem exigir uma longa curva de aprendizado'. Pausar entre as ideias. Intensidade média-alta — é uma convicção forte apresentada com clareza.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00015",
+      "speaker": "narrador",
+      "text": "• Híbrido, ele pode ser usado em GUI e/ou terminal, você poderá usar o editor em qualquer contexto que quiser. Eu adoraria compartilhar e mostrar mais sobre isso, mas não quero estragar os detalhes.",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Leia datas e quantidades com pronúncia natural; para identificadores como ISBN, números de série ou códigos, mencione o rótulo sem soletrar cada dígito. Perfil geral do narrador: firme. Direção deste trecho: Entusiasmo contido com suspense proposital. Tom animado ao descrever a dualidade GUI/terminal. Desacelerar e baixar levemente o tom em 'não quero estragar os detalhes' — sorriso na voz, provocação amigável.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00016",
+      "speaker": "narrador",
+      "text": "• Movimentação baseada em teclado não deveria parecer que você está tocando um instrumento, mas sim ser curta e eficaz.",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Leia datas e quantidades com pronúncia natural; para identificadores como ISBN, números de série ou códigos, mencione o rótulo sem soletrar cada dígito. Perfil geral do narrador: firme. Direção deste trecho: Conciso e assertivo, ritmo direto. Leve humor seco na metáfora do instrumento musical. Ênfase em 'curta e eficaz'. Tom pragmático — frase rápida com impacto.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00017",
+      "speaker": "narrador",
+      "text": "• Um editor que pode realmente se ajustar ao seu jeito de digitar e se autoajustar para aumentar a velocidade de digitação. Tenho trabalhado ultimamente com pesquisadores nisso, e ainda há muito a resolver.",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Leia datas e quantidades com pronúncia natural; para identificadores como ISBN, números de série ou códigos, mencione o rótulo sem soletrar cada dígito. Perfil geral do narrador: firme. Direção deste trecho: Tom curioso e exploratório, ritmo moderado. Transmitir fascínio genuíno pela pesquisa. Leve pausa reflexiva em 'ainda há muito a resolver' — honestidade sem frustração, como quem abraça o desafio.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00018",
+      "speaker": "narrador",
+      "text": "• Interface plug and play, você deveria ser capaz de não apenas configurar um editor para parecer seu, mas realmente torná-lo seu. Essa funcionalidade é um pouco complexa de explicar em um único tópico, e eu definitivamente me empolguei demais ao adicioná-la (risos).",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Leia datas e quantidades com pronúncia natural; para identificadores como ISBN, números de série ou códigos, mencione o rótulo sem soletrar cada dígito. Perfil geral do narrador: firme. Direção deste trecho: Entusiasmo crescente que o próprio narrador reconhece. Ritmo acelerando até o parêntese final. Em 'risos', soltar uma risada breve e natural, quebrando a formalidade. Tom de quem se diverte com a própria empolgação.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00019",
+      "speaker": "narrador",
+      "text": "A lista de editores que ele cita é uma aula condensada de história: do VI (1976, Bill Joy, em um terminal ADM-3A cujo teclado originou o hjkl) ao Atom (2014, GitHub, que encerrou em 2022 após ser eclipsado pelo VS Code). A ideia de um editor que se adapta ao ritmo de digitação do usuário remete a pesquisas em HCI sobre modelagem de keystroke dynamics, área mais associada a biometria do que a edito",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    },
+    {
+      "turn_id": "R00020",
+      "speaker": "narrador",
+      "text": "Existem mais objetivos e funcionalidades, mas acho que está tudo bem não mencionar tudo, não quero escrever para guardar nada já que MUITO trabalho e ideias ainda estão em desenvolvimento.",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Leia datas e quantidades com pronúncia natural; para identificadores como ISBN, números de série ou códigos, mencione o rótulo sem soletrar cada dígito. Perfil geral do narrador: firme. Direção deste trecho: Tom descontraído, ritmo relaxado. Leve ênfase em 'MUITO' — intensidade momentânea. Sensação de quem segura informação de propósito, mas sem arrogância. Encerramento suave do bloco de funcionalidades.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00021",
+      "speaker": "narrador",
+      "text": "Ultimamente, meu trabalho tem sido entrevistar e sentar com diferentes personas de programadores e não-programadores e coletar ideias e feedbacks. Então, sim, ainda tem muita coisa acontecendo.",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Leia datas e quantidades com pronúncia natural; para identificadores como ISBN, números de série ou códigos, mencione o rótulo sem soletrar cada dígito. Perfil geral do narrador: firme. Direção deste trecho: Tom engajado e dinâmico, ritmo moderado. Transmitir a energia de quem está imerso no processo. Pausa breve antes de 'ainda tem muita coisa acontecendo' — entregue com satisfação contida.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00022",
+      "speaker": "narrador",
+      "text": "Esse editor de texto já existe e o protótipo é multiplataforma.",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Leia datas e quantidades com pronúncia natural; para identificadores como ISBN, números de série ou códigos, mencione o rótulo sem soletrar cada dígito. Perfil geral do narrador: firme. Direção deste trecho: Revelação calma mas impactante. Ritmo mais lento, tom confiante. Pausar antes da frase — é um momento de peso. Intensidade controlada, como quem mostra uma carta na manga sem alarde.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00023",
+      "speaker": "narrador",
+      "text": "• OpenGL/Vulkan no Linux, OpenGL/DX12/DX11 no Windows, Metal no macOS.",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Leia datas e quantidades com pronúncia natural; para identificadores como ISBN, números de série ou códigos, mencione o rótulo sem soletrar cada dígito. Perfil geral do narrador: firme. Direção deste trecho: Tom técnico e enumerativo, ritmo constante e claro. Ler as siglas com naturalidade e precisão. Sem emoção excessiva — é informação pura. Pausas breves entre cada plataforma para clareza.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00024",
+      "speaker": "narrador",
+      "text": "Eu não vou falar sobre o \"porquê\" de nada disso. Estou apenas apresentando a stack tecnológica como ela é para as pessoas que estão interessadas. Interpretem como quiserem.",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Leia datas e quantidades com pronúncia natural; para identificadores como ISBN, números de série ou códigos, mencione o rótulo sem soletrar cada dígito. Perfil geral do narrador: firme. Direção deste trecho: Tom firme e levemente seco, ritmo direto. Não é hostil, mas estabelece um limite claro. Leve desapego proposital em 'interpretem como quiserem'. Intensidade baixa — é um recuo consciente.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00025",
+      "speaker": "narrador",
+      "text": "Este ano tem sido bastante agitado para mim como pai de primeira viagem, e o pouco tempo que tive foi para trabalhar no terminal Rio e criar o protótipo do editor. Como mencionado antes, a etapa atual tem sido iterar nas personas e continuar estabilizando o editor.",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Leia datas e quantidades com pronúncia natural; para identificadores como ISBN, números de série ou códigos, mencione o rótulo sem soletrar cada dígito. Perfil geral do narrador: firme. Direção deste trecho: Tom pessoal e caloroso ao mencionar paternidade. Ritmo mais lento, vulnerável. Leve cansaço positivo — orgulho misturado com reconhecimento do desafio. Pausa breve entre vida pessoal e trabalho.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00026",
+      "speaker": "narrador",
+      "text": "Espero que vocês tenham achado essa conversa interessante. Dado que é a nossa primeira vez conversando, havia tantas outras coisas que eu poderia ter abordado, mas vou guardá-las para o futuro.",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Leia datas e quantidades com pronúncia natural; para identificadores como ISBN, números de série ou códigos, mencione o rótulo sem soletrar cada dígito. Perfil geral do narrador: firme. Direção deste trecho: Tom acolhedor de despedida, ritmo desacelerado. Sorriso na voz. Leve nostalgia antecipada em 'vou guardá-las para o futuro' — promessa gentil. Intensidade suave, encerrando com proximidade.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00027",
+      "speaker": "narrador",
+      "text": "Se você quiser se manter atualizado, me siga no Twitter, Bsky ou Mastodon.",
+      "instructions": "Sintetize fala em português brasileiro. Leia exclusivamente o texto do campo de entrada, na ordem exata, sem acrescentar, omitir, resumir ou corrigir palavras. Não leia estas instruções nem notas de direção em voz alta. Leia datas e quantidades com pronúncia natural; para identificadores como ISBN, números de série ou códigos, mencione o rótulo sem soletrar cada dígito. Perfil geral do narrador: firme. Direção deste trecho: Tom breve e amigável, ritmo direto. Energia leve de chamada à ação sem pressão. Naturalidade ao citar as plataformas. Encerrar com simpatia — ponto final descontraído.",
+      "kind": "verbatim"
+    },
+    {
+      "turn_id": "R00028",
+      "speaker": "narrador",
+      "text": "O suporte simultâneo a OpenGL, Vulkan, DX11/DX12 e Metal revela ambição de renderização nativa por GPU em cada plataforma — caminho que o Zed (lançado em 2024 por ex-criadores do Atom) também seguiu com Metal/Vulkan via GPUI. Raphael menciona ser pai de primeira viagem enquanto mantém o Rio e prototipa o editor: contexto humano que explica o ritmo deliberado do projeto.",
+      "instructions": "Fala natural e reflexiva em português brasileiro — como se compartilhasse um breve pensamento após ler o trecho em voz alta. Perfil do narrador: firme.",
+      "kind": "commentary"
+    }
+  ]
+}

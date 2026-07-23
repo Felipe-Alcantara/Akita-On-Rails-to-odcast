@@ -9,6 +9,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 from audiofy.languages import (  # noqa: E402
     DEFAULT_LANGUAGE,
     LANGUAGES,
+    detect_language,
     get_language,
     is_supported,
     normalize,
@@ -46,6 +47,34 @@ class LanguageRegistryTest(unittest.TestCase):
         for code in supported_codes():
             self.assertTrue(is_supported(code))
         self.assertFalse(is_supported("xx-YY"))
+
+
+class DetectLanguageTest(unittest.TestCase):
+    def test_detecta_texto_em_ingles(self):
+        text = (
+            "The editor that I am working on is my personal attempt to get back "
+            "to the foundation of what a code editor should do well. Most of the "
+            "existent code editors are a great piece of software with fast and "
+            "configurable themes and plugins that can do everything you would "
+            "ever need in your daily workflow and development environment."
+        )
+        self.assertEqual(detect_language(text), "en")
+
+    def test_detecta_texto_em_portugues(self):
+        text = (
+            "O editor que estou desenvolvendo é minha tentativa pessoal de voltar "
+            "ao fundamento do que um editor de código deveria fazer bem. A maioria "
+            "dos editores existentes são um ótimo software com temas rápidos e "
+            "configuráveis e plugins que podem fazer tudo o que você precisaria "
+            "no seu fluxo de trabalho diário e ambiente de desenvolvimento."
+        )
+        self.assertEqual(detect_language(text), "pt-BR")
+
+    def test_texto_curto_retorna_padrao(self):
+        self.assertEqual(detect_language("Hello world"), DEFAULT_LANGUAGE)
+
+    def test_texto_vazio_retorna_padrao(self):
+        self.assertEqual(detect_language(""), DEFAULT_LANGUAGE)
 
 
 class AddingLanguageIsOnePlaceTest(unittest.TestCase):

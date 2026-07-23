@@ -365,7 +365,7 @@ class AtomicAssemblyTest(unittest.TestCase):
 class VerbatimPreparationTest(unittest.TestCase):
     def test_planeja_em_lotes_preserva_texto_e_reaproveita_cache(self):
         text = ("Capítulo um. O perigo aumentava lentamente...\n\n" * 150) + "Fim."
-        item = SimpleNamespace(text=text)
+        item = SimpleNamespace(text=text, title="Livro de Teste")
         analyzer = Mock(
             return_value={
                 "segments": [
@@ -387,7 +387,7 @@ class VerbatimPreparationTest(unittest.TestCase):
             )
 
             script = json.loads((directory / "narration-script.json").read_text(encoding="utf-8"))
-        self.assertEqual("".join(turn["text"] for turn in turns), text)
+        self.assertEqual("".join(t["text"] for t in turns if t.get("kind") != "intro"), text)
         self.assertEqual(cached_turns, turns)
         self.assertEqual(script["mode"], "verbatim")
         self.assertNotIn("reescrito", str(turns))
