@@ -879,6 +879,9 @@ def _cmd_models_list(force_refresh: bool = False) -> dict:
                     "price_line": (f"US$ {prompt:.2f}/M entrada · US$ {completion:.2f}/M saída"),
                 }
             )
+            supported_voices = model.get("supported_voices") or []
+            if supported_voices:
+                TTS_VOICE_CATALOGS[model_id] = dict.fromkeys(supported_voices, "")
     except Exception as exception:
         tts_models = [
             payload(model) for model in models if {"audio", "speech"} & set(model.output_modalities)

@@ -1706,3 +1706,46 @@ local, sem relação). Ruff check + format + compileall aprovados.
 
 **Risco que sobrou:** modelos TTS sem catálogo (Orpheus, Zonos, etc.) aceitam qualquer string
 como voz — um erro de digitação só será detectado na hora da síntese pela API do OpenRouter.
+
+## 2026-07-23 — Abas de perfis passaram a fixar a família de texto
+
+**O que mudou:** as abas de perfis apenas pré-selecionavam o provedor e ainda permitiam trocar
+Claude Code por OpenRouter ou outra família. Agora cada aba fixa sua família de texto ao criar e
+editar perfis: Claude Code, Codex e Gemini CLI usam exclusivamente suas respectivas assinaturas;
+Claude API, OpenAI API e Gemini API usam OpenRouter. A aba Personalizados continua permitindo
+combinações livres de texto.
+
+**Decisão:** o bloqueio fica no editor do Electron, com o backend continuando a validar o
+provedor recebido. O modelo TTS permanece independente e editável em qualquer aba.
+
+**Validação:** lint, testes Electron e verificação de qualidade devem cobrir que a opção de
+provedor é filtrada e desabilitada quando uma categoria fixa abre o formulário.
+
+## 2026-07-23 — Esforço alto explícito nas CLIs compatíveis
+
+**O que mudou:** as chamadas do Claude Code agora incluem `--effort high` e as chamadas do
+Codex incluem `-c model_reasoning_effort="high"`. Assim o Audiofy não depende da configuração
+global da sessão para esses dois provedores.
+
+**Limite:** o Gemini CLI não oferece uma flag universal equivalente de esforço alto; sua
+configuração nativa permanece intacta para evitar enviar um argumento incompatível.
+
+## 2026-07-23 — Seletor TTS consolidado por tier
+
+**O que mudou:** o formulário de perfil deixou de separar empresa e modelo para TTS. Agora há
+uma única lista com todos os modelos de voz retornados pelo OpenRouter, agrupados em ultra-
+econômico, econômico, padrão, premium e uma área de modelos ainda sem classificação. Cada
+opção mostra o custo efetivo por milhão de caracteres e o preço informado pelo catálogo.
+
+**Decisão:** a empresa continua presente no ID técnico do modelo, mas não é mais uma etapa de
+escolha do usuário. Isso reduz a exploração combinatória e orienta a seleção pelo objetivo de
+uso, mantendo a atualização dinâmica do catálogo do OpenRouter.
+
+**Complemento:** o catálogo TTS agora aproveita `supported_voices` retornado pelo OpenRouter.
+Quando um modelo não informa vozes, o editor não oferece mais um input livre para o usuário
+adivinhar IDs; exibe uma opção desabilitada indicando que não há vozes catalogadas. Uma voz já
+salva continua visível como configuração atual para preservar perfis existentes.
+
+**Qualidade:** a descoberta do Tesseract passou a priorizar PATH, instalação conhecida do
+sistema e só então a cópia privada do Audiofy. Isso evita que uma cópia local esconda uma
+instalação válida fora do PATH e elimina a falha intermitente do teste em ambientes preparados.

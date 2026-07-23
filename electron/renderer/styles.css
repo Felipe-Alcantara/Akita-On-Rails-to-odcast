@@ -714,6 +714,7 @@ pre {
 }
 #pf-api-models { display: grid; gap: 12px; }
 .model-picker { display: grid; grid-template-columns: minmax(130px, 0.72fr) minmax(220px, 1.28fr); gap: 9px; }
+.tts-model-picker { display: block; }
 #pf-presenters { display: flex; flex-direction: column; gap: 8px; }
 .presenter-row { display: grid; grid-template-columns: minmax(100px, 0.8fr) minmax(150px, 1.2fr) minmax(120px, 1fr) auto; gap: 8px; }
 .pf-tier-badge { display: inline-block; padding: 3px 10px; border-radius: 8px; font-size: 12px; font-weight: 600; }

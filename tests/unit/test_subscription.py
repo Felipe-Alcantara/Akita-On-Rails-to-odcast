@@ -168,12 +168,16 @@ class ModeloDaAssinaturaTest(unittest.TestCase):
 
     def test_sem_modelo_o_comando_fica_como_antes(self):
         self.assertNotIn("--model", get_cli("claude-code").command("SYS"))
-        self.assertEqual(get_cli("codex").command("SYS"), ["codex", "exec", "-"])
+        self.assertEqual(
+            get_cli("codex").command("SYS"),
+            ["codex", "exec", "-", "-c", 'model_reasoning_effort="high"'],
+        )
 
     def test_modelo_vira_flag_no_fim_do_comando(self):
         for key in ("claude-code", "gemini-cli", "codex"):
             command = get_cli(key).command("SYS", "meu-modelo")
-            self.assertEqual(command[-2:], ["--model", "meu-modelo"], key)
+            model_index = command.index("--model")
+            self.assertEqual(command[model_index : model_index + 2], ["--model", "meu-modelo"], key)
 
     def test_gemini_recebe_o_modelo_mesmo_lendo_tudo_por_stdin(self):
         # A CLI do Gemini não tem args de modo headless; o modelo precisava chegar
@@ -186,7 +190,15 @@ class ModeloDaAssinaturaTest(unittest.TestCase):
     def test_chat_command_mantem_permissoes_depois_do_modelo(self):
         command = get_cli("claude-code").chat_command("SYS", "opus")
         self.assertIn("--model", command)
-        self.assertEqual(command[-1], "--dangerously-skip-permissions")
+
+    def test_claude_code_exige_esforco_alto(self):
+        self.assertIn("--effort", get_cli("claude-code").command("SYS"))
+        command = get_cli("claude-code").command("SYS")
+        self.assertEqual(command[command.index("--effort") + 1], "high")
+
+    def test_codex_exige_esforco_de_raciocinio_alto(self):
+        command = get_cli("codex").command("SYS")
+        self.assertIn('model_reasoning_effort="high"', command)
 
     def test_chat_json_repassa_o_modelo_para_a_cli(self):
         done = subprocess.CompletedProcess(["claude"], 0, '{"ok": true}', "")

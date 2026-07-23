@@ -293,18 +293,18 @@ def _private_tesseract_binaries() -> tuple[Path, ...]:
 
 
 def tesseract_command() -> str | None:
-    """Encontra o Tesseract no PATH, nos locais padrão do SO ou na cópia privada."""
+    """Encontra o Tesseract no PATH, instalado pelo SO ou na cópia privada."""
     system = shutil.which("tesseract")
     if system:
         return system
-    for candidate in _private_tesseract_binaries():
-        if candidate.is_file():
-            return str(candidate)
     known = _TESSERACT_KNOWN_PATHS.get(sys.platform, _TESSERACT_UNIX_PATHS)
     for raw in known:
         path = Path(raw).expanduser()
         if path.is_file():
             return str(path)
+    for candidate in _private_tesseract_binaries():
+        if candidate.is_file():
+            return str(candidate)
     return None
 
 

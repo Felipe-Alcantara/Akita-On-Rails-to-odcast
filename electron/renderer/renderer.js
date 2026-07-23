@@ -602,7 +602,9 @@ function updateGenerateButton() {
 function updateGenerationMode() {
   const mode = $("generation-mode").value;
   const needsNarrator = mode === "verbatim" || mode === "reflexive";
-  $("narration-voice-label").classList.toggle("hidden", !needsNarrator);
+  const profileVoice = settingsInfo && settingsInfo.presenters.length === 1
+    ? settingsInfo.presenters[0].voice : "";
+  $("narration-voice-label").classList.toggle("hidden", !needsNarrator || Boolean(profileVoice));
   $("generation-mode-note").textContent = mode === "verbatim"
     ? "O texto falado é preservado integralmente. A IA planeja apenas ritmo, pausas, " +
       "emoção e tensão em lotes retomáveis."
@@ -1180,32 +1182,36 @@ function renderActiveConfig(info) {
   const voiceSelect = $("narration-voice");
   const previousVoice = voiceSelect.value;
   voiceSelect.replaceChildren();
-  const activeCatalog = (info.voice_catalogs && info.voice_catalogs[info.tts_model])
-    || info.gemini_voices || {};
+  const activeCatalog = (info.voice_catalogs && info.voice_catalogs[info.tts_model]) || {};
   const catalogEntries = Object.entries(activeCatalog);
   if (catalogEntries.length) {
     for (const [voice, style] of catalogEntries) {
       const option = document.createElement("option");
       option.value = voice;
-      option.textContent = `${voice} · ${style}`;
+      const cleanStyle = style && voiceToneLabel(style);
+      option.textContent = cleanStyle
+        ? `${voiceLabel(voice, info.tts_model)} · ${cleanStyle}`
+        : voiceLabel(voice, info.tts_model);
       voiceSelect.appendChild(option);
     }
   } else {
     const placeholder = document.createElement("option");
     placeholder.value = "";
-    placeholder.textContent = "Sem catálogo — configure pelo perfil";
+    placeholder.textContent = "Nenhuma voz catalogada para este modelo";
     placeholder.disabled = true;
     voiceSelect.appendChild(placeholder);
   }
+  voiceSelect.dataset.catalogUnavailable = catalogEntries.length ? "false" : "true";
+  voiceSelect.disabled = !catalogEntries.length;
   const profileVoice = info.presenters.length === 1 ? info.presenters[0].voice : "";
   // Só uma escolha deliberada do usuário sobrepõe a voz do perfil. Sem isso, um
   // valor mudado sem querer (roda do mouse sobre o combo) virava o "preferido" e
   // se perpetuava a cada refresh, gerando o episódio com outra voz em silêncio.
   const preferred = (voiceTouchedByUser && previousVoice) || profileVoice || "Sulafat";
-  if ([...voiceSelect.options].some((option) => option.value === preferred)) {
-    voiceSelect.value = preferred;
-  }
+  voiceSelect.value = [...voiceSelect.options].some((option) => option.value === preferred)
+    ? preferred : (catalogEntries[0] ? catalogEntries[0][0] : "");
   markVoiceMatchesProfile(profileVoice);
+  updateGenerationMode();
 }
 
 // A roda do mouse sobre um <select> troca a opção no Chromium sem o usuário
@@ -1241,7 +1247,7 @@ for (const id of GENERATION_OPTION_IDS) {
 // quiser outra configuração precisa abortar e gerar de novo.
 function lockGenerationOptions(running) {
   for (const id of [...GENERATION_OPTION_IDS, "generate-force"]) {
-    $(id).disabled = running;
+    $(id).disabled = running || $(id).dataset.catalogUnavailable === "true";
   }
   $("btn-background-music").disabled = running;
   $("btn-clear-background-music").disabled = running;
@@ -1443,7 +1449,7 @@ async function loadSettings() {
           row.appendChild(activate);
         }
         const edit = makeElement("button", "ghost", "editar");
-        edit.onclick = () => openProfileForm(profile);
+        edit.onclick = () => openProfileForm(profile, category);
         row.appendChild(edit);
         if (profile.custom) {
           const remove = document.createElement("button");
@@ -1634,14 +1640,103 @@ function configureModelPicker(vendorSelect, modelSelect, models, current) {
   renderModels(current);
 }
 
+function configureTtsPicker(modelSelect, models, tiers, current) {
+  const tierOrder = ["ultra-economico", "economico", "padrao", "premium"];
+  const tierLabels = {
+    "ultra-economico": "Ultra-econômico — prototipagem e alto volume",
+    economico: "Econômico — bom custo para uso recorrente",
+    padrao: "Padrão — equilíbrio entre qualidade e custo",
+    premium: "Premium — máxima qualidade, maior custo",
+    unknown: "Sem classificação — confira antes de usar",
+  };
+  const grouped = new Map(tierOrder.map((tier) => [tier, []]));
+  grouped.set("unknown", []);
+  for (const model of models) {
+    const tier = (tiers && tiers[model.id] && tiers[model.id].tier) || "unknown";
+    (grouped.get(tier) || grouped.get("unknown")).push(model);
+  }
+  modelSelect.replaceChildren();
+  for (const [tier, entries] of grouped) {
+    if (!entries.length) continue;
+    const group = document.createElement("optgroup");
+    group.label = tierLabels[tier] || tier;
+    for (const model of entries.sort((a, b) => a.id.localeCompare(b.id))) {
+      const option = document.createElement("option");
+      option.value = model.id;
+      const tierInfo = tiers && tiers[model.id];
+      const cost = tierInfo
+        ? ` · US$ ${tierInfo.effective_cost_per_m_chars}/M caracteres`
+        : "";
+      option.textContent = `${model.id}${cost} · ${model.price_line}`;
+      group.appendChild(option);
+    }
+    modelSelect.appendChild(group);
+  }
+  if (current && !models.some((model) => model.id === current)) {
+    const currentOption = document.createElement("option");
+    currentOption.value = current;
+    currentOption.textContent = `${current} — configuração atual`;
+    modelSelect.insertBefore(currentOption, modelSelect.firstChild);
+  }
+  if (current) modelSelect.value = current;
+}
+
 function currentVoiceCatalog() {
   const ttsModel = $("pf-tts-model") && $("pf-tts-model").value;
   if (!ttsModel || !modelsCatalog || !modelsCatalog.voice_catalogs) return null;
   return modelsCatalog.voice_catalogs[ttsModel] || null;
 }
 
+function voiceLabel(voice, ttsModel) {
+  const kokoroLanguages = {
+    a: "inglês — EUA",
+    b: "inglês — Reino Unido",
+    e: "espanhol",
+    f: "francês",
+    h: "hindi",
+    i: "italiano",
+    j: "japonês",
+    p: "português — Brasil",
+    z: "chinês",
+  };
+  const kokoroCode = voice.match(/^([a-z])([fm])[_-]/i);
+  const kokoroLanguage = kokoroCode && kokoroLanguages[kokoroCode[1].toLowerCase()];
+  let label = voice.replace(/[_-]+/g, " ").trim();
+  const languageNames = {
+    en: "inglês",
+    "en us": "inglês (EUA)",
+    "en gb": "inglês (Reino Unido)",
+    "pt br": "português (Brasil)",
+    es: "espanhol",
+    fr: "francês",
+    de: "alemão",
+    it: "italiano",
+    ja: "japonês",
+    ko: "coreano",
+    zh: "chinês",
+  };
+  const modelSlug = (ttsModel || "").split("/").pop();
+  if (modelSlug) {
+    const prefix = modelSlug.replace(/[-_]+/g, " ").toLowerCase();
+    const normalized = label.toLowerCase();
+    if (normalized.startsWith(`${prefix} `)) label = label.slice(prefix.length + 1);
+  }
+  const languageMatch = label.match(/\s+(en us|en gb|pt br|en|es|fr|de|it|ja|ko|zh)$/i);
+  const language = languageMatch && languageNames[languageMatch[1].toLowerCase()];
+  if (languageMatch) label = label.slice(0, -languageMatch[0].length).trim();
+  if (kokoroCode) label = label.slice(2).trim();
+  label = label.replace(/\b\w/g, (character) => character.toUpperCase());
+  const nativeLanguage = kokoroLanguage || language;
+  return nativeLanguage ? `${label || voice} (${nativeLanguage})` : (label || voice);
+}
+
+function voiceToneLabel(tone) {
+  return tone.replace(/\s*\((?:pt-br|en|en-gb)\)\s*$/i, "").trim();
+}
+
 function addPresenterRow(speaker = "", voice = "Kore", style = "") {
   const catalog = currentVoiceCatalog();
+  const ttsModel = $("pf-tts-model") && $("pf-tts-model").value;
   const voices = catalog ? Object.entries(catalog) : [];
   const row = document.createElement("div");
   row.className = "presenter-row";
@@ -1653,24 +1748,25 @@ function addPresenterRow(speaker = "", voice = "Kore", style = "") {
   let voiceElement;
   if (voices.length) {
     voiceElement = makeElement("select", "pf-voice");
-    if (voice && !voices.some(([name]) => name === voice)) {
-      const option = document.createElement("option");
-      option.value = voice;
-      option.textContent = `${voice} (configuração atual)`;
-      voiceElement.appendChild(option);
-    }
     for (const [name, tone] of voices) {
       const option = document.createElement("option");
       option.value = name;
-      option.textContent = `${name} (${tone})`;
+      const cleanTone = tone && voiceToneLabel(tone);
+      option.textContent = cleanTone
+        ? `${voiceLabel(name, ttsModel)} · ${cleanTone}`
+        : voiceLabel(name, ttsModel);
       voiceElement.appendChild(option);
     }
-    voiceElement.value = voice;
+    voiceElement.value = voices.some(([name]) => name === voice) ? voice : voices[0][0];
   } else {
-    voiceElement = makeElement("input", "pf-voice");
-    voiceElement.type = "text";
-    voiceElement.placeholder = "nome da voz";
-    voiceElement.value = voice || "";
+    voiceElement = makeElement("select", "pf-voice");
+    const unavailable = document.createElement("option");
+    unavailable.value = "";
+    unavailable.textContent = "Nenhuma voz catalogada para este modelo";
+    unavailable.disabled = true;
+    unavailable.selected = true;
+    voiceElement.appendChild(unavailable);
+    voiceElement.disabled = true;
   }
 
   const styleInput = makeElement("input", "pf-style");
@@ -1732,19 +1828,38 @@ async function openProfileForm(profile = null, tabCategory = null) {
   $("pf-description").value = profile ? profile.description : "";
 
   const providerSelect = $("pf-provider");
+  const providerMap = {
+    "Claude Code": "claude-code",
+    Codex: "codex",
+    "Gemini CLI": "gemini-cli",
+    "Claude API": "openrouter",
+    "OpenAI API": "openrouter",
+    "Gemini API": "openrouter",
+  };
+  // Uma aba representa uma família de texto. Perfis builtin não podem ser
+  // transformados em outra família durante a edição; "Personalizados" é o
+  // espaço explícito para combinações livres.
+  const lockedProvider = providerMap[tabCategory]
+    || (profile && !profile.custom ? profile.text_provider : null);
+  $("pf-provider-field").classList.toggle("hidden", Boolean(lockedProvider));
   providerSelect.replaceChildren();
-  const openrouter = document.createElement("option");
-  openrouter.value = "openrouter";
-  openrouter.textContent = "OpenRouter (API, custo por token)";
-  providerSelect.appendChild(openrouter);
-  for (const cli of settingsInfo ? settingsInfo.subscription_clis : []) {
+  const providerOptions = [{
+    key: "openrouter",
+    label: "OpenRouter (API, custo por token)",
+  }, ...(settingsInfo ? settingsInfo.subscription_clis : []).map((cli) => ({
+    key: cli.key,
+    label: `${cli.name} — custo US$ 0` + (cli.available ? "" : " (não instalada)"),
+    disabled: !cli.available,
+  }))];
+  for (const item of providerOptions.filter((option) =>
+    !lockedProvider || option.key === lockedProvider)) {
     const option = document.createElement("option");
-    option.value = cli.key;
-    option.textContent = `${cli.name} — custo US$ 0` +
-      (cli.available ? "" : " (não instalada)");
-    option.disabled = !cli.available;
+    option.value = item.key;
+    option.textContent = item.label;
+    option.disabled = item.disabled || false;
     providerSelect.appendChild(option);
   }
+  providerSelect.disabled = Boolean(lockedProvider);
   const applyProviderVisibility = () => {
     const isOpenRouter = providerSelect.value === "openrouter";
     $("pf-api-models").classList.toggle("hidden", !isOpenRouter);
@@ -1752,16 +1867,22 @@ async function openProfileForm(profile = null, tabCategory = null) {
       .find((item) => item.key === providerSelect.value);
     const canPickModel = Boolean(cli && cli.supports_model);
     $("pf-subscription-model-label").classList.toggle("hidden", isOpenRouter || !canPickModel);
-    const options = $("pf-subscription-model-options");
+    const options = $("pf-subscription-model");
     options.replaceChildren();
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = cli && cli.configured_model
+      ? `Modelo padrão da CLI (${cli.configured_model})`
+      : "Modelo padrão da CLI";
+    options.appendChild(defaultOption);
     for (const suggestion of (cli && cli.model_suggestions) || []) {
       const option = document.createElement("option");
       option.value = suggestion;
       options.appendChild(option);
     }
-    $("pf-subscription-model").placeholder = cli && cli.configured_model
-      ? `vazio = ${cli.configured_model} (configurado na CLI)`
-      : "vazio = modelo padrão da CLI";
+    for (const option of options.options) {
+      if (option.value) option.textContent = option.value;
+    }
   };
   providerSelect.onchange = applyProviderVisibility;
 
@@ -1778,13 +1899,10 @@ async function openProfileForm(profile = null, tabCategory = null) {
       : "";
   }
   const base = profile || settingsInfo || {};
-  if (profile) {
+  if (lockedProvider) {
+    providerSelect.value = lockedProvider;
+  } else if (profile) {
     providerSelect.value = base.text_provider || "openrouter";
-  } else if (tabCategory) {
-    const providerMap = {
-      "Claude Code": "claude-code", "Codex": "codex", "Gemini CLI": "gemini-cli",
-    };
-    providerSelect.value = providerMap[tabCategory] || "openrouter";
   } else {
     providerSelect.value = base.text_provider || "openrouter";
   }
@@ -1796,20 +1914,14 @@ async function openProfileForm(profile = null, tabCategory = null) {
     modelsCatalog.text_models, base.text_model);
   configureModelPicker($("pf-audit-vendor"), $("pf-audit-model"),
     modelsCatalog.text_models, base.audit_model);
-  configureModelPicker($("pf-tts-vendor"), $("pf-tts-model"),
-    modelsCatalog.tts_models, base.tts_model);
+  configureTtsPicker($("pf-tts-model"), modelsCatalog.tts_models,
+    modelsCatalog.tts_tiers, base.tts_model);
 
-  // Ao trocar vendor ou modelo TTS, atualizar vozes dos apresentadores e badge de tier
-  const origTtsVendorChange = $("pf-tts-vendor").onchange;
-  $("pf-tts-vendor").onchange = () => {
-    if (origTtsVendorChange) origTtsVendorChange();
+  // Ao trocar o modelo TTS, atualizar vozes dos apresentadores e badge de tier
+  $("pf-tts-model").onchange = () => {
     refreshPresenterVoices();
     renderTtsTierInfo();
   };
-  $("pf-tts-model").addEventListener("change", () => {
-    refreshPresenterVoices();
-    renderTtsTierInfo();
-  });
   renderTtsTierInfo();
 
   $("pf-presenters").replaceChildren();

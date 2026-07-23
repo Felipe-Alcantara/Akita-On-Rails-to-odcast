@@ -129,7 +129,15 @@ SUBSCRIPTION_CLIS: list[SubscriptionCli] = [
         key="claude-code",
         name="Claude Code (assinatura Anthropic)",
         binary="claude",
-        args=("-p", "--output-format", "text", "--append-system-prompt", "{system}"),
+        args=(
+            "-p",
+            "--output-format",
+            "text",
+            "--effort",
+            "high",
+            "--append-system-prompt",
+            "{system}",
+        ),
         chat_args=("--dangerously-skip-permissions",),
         model_suggestions=("opus", "sonnet", "haiku"),
     ),
@@ -145,7 +153,12 @@ SUBSCRIPTION_CLIS: list[SubscriptionCli] = [
         key="codex",
         name="Codex CLI (assinatura OpenAI)",
         binary="codex",
-        args=("exec", "-"),  # já é não interativo; roda em sandbox sem aprovações
+        args=(
+            "exec",
+            "-",
+            "-c",
+            'model_reasoning_effort="high"',
+        ),  # não interativo; esforço alto e sandbox padrão do Codex
         model_suggestions=("gpt-sol", "o3", "gpt-4o"),
     ),
 ]

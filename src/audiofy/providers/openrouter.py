@@ -351,7 +351,7 @@ def check_api_key_value(api_key: str) -> tuple[bool, str]:
     return check_api_key(Settings(api_key=api_key))
 
 
-def list_tts_models(settings: Settings) -> list[dict[str, str]]:
+def list_tts_models(settings: Settings) -> list[dict[str, Any]]:
     """Modelos com saída de áudio disponíveis no catálogo do OpenRouter."""
     # O catálogo distingue modelos que sintetizam fala (``speech``) de modelos
     # multimodais/musicais que apenas declaram saída ``audio``.
@@ -365,6 +365,7 @@ def list_tts_models(settings: Settings) -> list[dict[str, str]]:
                 "name": model.get("name", ""),
                 "prompt_price": pricing.get("prompt", ""),
                 "completion_price": pricing.get("completion", ""),
+                "supported_voices": model.get("supported_voices") or [],
             }
         )
     return sorted(models, key=lambda m: m["id"])

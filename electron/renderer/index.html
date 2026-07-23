@@ -285,16 +285,13 @@
           <label>Descrição curta
             <input id="pf-description" type="text" placeholder="ex.: barato para testes" />
           </label>
-          <label>Provedor das etapas de texto
+          <label id="pf-provider-field">Provedor das etapas de texto
             <select id="pf-provider"></select>
           </label>
           <label id="pf-subscription-model-label" class="hidden">Modelo da assinatura
-            <input id="pf-subscription-model" type="text" list="pf-subscription-model-options"
-              placeholder="vazio = modelo padrão da CLI"
-              aria-describedby="pf-subscription-model-hint" />
-            <datalist id="pf-subscription-model-options"></datalist>
+            <select id="pf-subscription-model" aria-describedby="pf-subscription-model-hint"></select>
             <span id="pf-subscription-model-hint" class="muted small">
-              Escolha uma sugestão ou digite o nome exato aceito pela CLI.</span>
+              O modelo padrão da CLI é usado quando nenhuma opção específica é escolhida.</span>
           </label>
           <div id="pf-api-models">
             <div class="model-picker">
@@ -314,10 +311,7 @@
               </label>
             </div>
           </div>
-          <div class="model-picker">
-            <label>Empresa do TTS
-              <select id="pf-tts-vendor"></select>
-            </label>
+          <div class="tts-model-picker">
             <label>Modelo TTS (voz)
               <select id="pf-tts-model"></select>
             </label>

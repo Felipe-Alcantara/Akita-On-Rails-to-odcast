@@ -26,6 +26,72 @@ test("renderer não usa innerHTML para manipular a interface", () => {
   assert.doesNotMatch(renderer, /\.innerHTML\s*=/);
 });
 
+test("abas de perfil fixam a família do modelo de texto", () => {
+  const renderer = readRendererFile("renderer.js");
+
+  assert.match(renderer, /"Claude Code": "claude-code"/);
+  assert.match(renderer, /"Claude API": "openrouter"/);
+  assert.match(renderer, /const lockedProvider = providerMap\[tabCategory\]/);
+  assert.match(renderer, /pf-provider-field.*classList\.toggle\("hidden", Boolean\(lockedProvider\)\)/);
+  assert.match(renderer, /providerSelect\.disabled = Boolean\(lockedProvider\)/);
+  assert.match(renderer, /openProfileForm\(profile, category\)/);
+});
+
+test("TTS oferece uma lista única agrupada por tiers", () => {
+  const html = readRendererFile("index.html");
+  const renderer = readRendererFile("renderer.js");
+
+  assert.doesNotMatch(html, /id="pf-tts-vendor"/);
+  assert.match(renderer, /function configureTtsPicker\(/);
+  assert.match(renderer, /modelsCatalog\.tts_tiers/);
+  assert.match(renderer, /Ultra-econômico — prototipagem/);
+});
+
+test("modelo TTS sem catálogo não pede uma voz inventada", () => {
+  const renderer = readRendererFile("renderer.js");
+
+  assert.match(renderer, /Nenhuma voz catalogada para este modelo/);
+  assert.match(renderer, /voiceElement\.disabled = true/);
+  assert.doesNotMatch(renderer, /voiceElement\.type = "text"/);
+});
+
+test("vozes mostram nomes normalizados sem origem do catálogo", () => {
+  const renderer = readRendererFile("renderer.js");
+
+  assert.match(renderer, /function voiceLabel\(voice, ttsModel\)/);
+  assert.match(renderer, /replace\(\/\[_-\]\+\/g, " "\)/);
+  assert.match(renderer, /languageNames =/);
+  assert.match(renderer, /inglês \(EUA\)/);
+  assert.match(renderer, /kokoroLanguages =/);
+  assert.match(renderer, /português — Brasil/);
+  assert.match(renderer, /function voiceToneLabel\(tone\)/);
+  assert.match(renderer, /character\.toUpperCase\(\)/);
+  assert.doesNotMatch(renderer, /voz informada pelo OpenRouter/);
+});
+
+test("trocar o TTS descarta voz que não pertence ao novo catálogo", () => {
+  const renderer = readRendererFile("renderer.js");
+
+  assert.match(renderer, /voices\.some\(\(\[name\]\) => name === voice\) \? voice : voices\[0\]\[0\]/);
+  assert.doesNotMatch(renderer, /configuração atual.*voiceLabel/);
+});
+
+test("leitura fiel usa o catálogo e os nomes normalizados do TTS ativo", () => {
+  const renderer = readRendererFile("renderer.js");
+
+  assert.match(renderer, /info\.voice_catalogs\[info\.tts_model\]/);
+  assert.match(renderer, /voiceLabel\(voice, info\.tts_model\)/);
+  assert.match(renderer, /Nenhuma voz catalogada para este modelo/);
+});
+
+test("voz do perfil único não é perguntada novamente na geração", () => {
+  const renderer = readRendererFile("renderer.js");
+
+  assert.match(renderer, /settingsInfo\.presenters\.length === 1/);
+  assert.match(renderer, /!needsNarrator \|\| Boolean\(profileVoice\)/);
+  assert.match(renderer, /updateGenerationMode\(\);/);
+});
+
 test("estilos preservam foco visível e preferência por menos movimento", () => {
   const styles = readRendererFile("styles.css");
 
