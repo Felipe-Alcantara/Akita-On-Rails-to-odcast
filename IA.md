@@ -1828,3 +1828,61 @@ em primeiro, como esperado. Suíte completa (424 testes) e `ruff check` passam s
 **Risco que sobrou:** nenhum renomeio de pasta foi feito (a task original cogitava incluir hora no
 nome); a correção resolve via metadado do sistema de arquivos (`ctime`), que é suficiente e não
 exige migração de dados existentes.
+
+## 2026-07-24 — Voz/tom por segmento e acompanhamento sincronizado da leitura
+
+**O que mudou:**
+- `_synthesize_turns` (`src/audiofy/pipeline.py`) agora grava `voice`, `style` e `text` em cada
+  entrada de `segments.json`, tanto no caminho de síntese nova quanto no de reaproveitamento de
+  segmento já existente (retomada). Antes, só `speaker` (o id abstrato do apresentador) era
+  persistido; a voz/tom reais só existiam em memória durante a geração, resolvidas contra o
+  perfil ativo naquele momento — se o perfil fosse editado depois, a informação se perdia.
+- `_cmd_audio_chunks` (`src/audiofy/bridge.py`) passa a incluir `voice`, `style`, `text` por
+  chunk, além de `start_seconds`/`end_seconds` (nova função `_add_cumulative_timing`): soma
+  `duration_seconds` de `audio-audit.json` na ordem de `chunk_index`, assumindo concatenação
+  direta sem silêncio extra (mesma premissa de `segments.txt`/ffmpeg na montagem final). Se
+  algum chunk não tiver duração auditada, a janela fica `None` para todos — uma soma parcial
+  daria posições erradas no player.
+- `_episode_summary` ganhou `presenters`: lista deduplicada (por `speaker`, na ordem de
+  `chunk_index`) de `{speaker, voice, style}` lida de `segments.json`, usada para exibir vozes no
+  card do episódio sem chamada bridge adicional.
+- Front-end (`electron/renderer/`): card do episódio agora mostra as vozes/tons dos
+  apresentadores na linha de produção; novo botão "📖 acompanhar" abre um modal teleprompter
+  (`#teleprompter-modal`) com o texto completo por trecho, destacando (via `timeupdate` do
+  player nativo) qual trecho está tocando agora e scroll automático. Comentários do modo
+  `reflexive` (`kind: "commentary"`, texto gerado pela IA, não pertence à fonte original) são
+  estilizados em itálico com rótulo "comentário do narrador" em vez de tentar casar com a fonte.
+
+**Motivo:** pedido do usuário para ver informação de cada voz na aba Episódios e uma função de
+acompanhar a leitura com a fonte sempre na tela. Investigação prévia (agente Explore) confirmou
+que não existe nenhum timestamp por palavra/frase no projeto — só duração por chunk bruto em
+`audio-audit.json`. Sincronização real (forced alignment) exigiria processamento pesado fora de
+escopo; a granularidade de chunk (frase/parágrafo) é o teto viável sem novas dependências.
+
+**Retroatividade:** script pontual (não versionado, rodado uma vez) cruzou `chunk_index` de
+`segments.json` com os `turns` de `script.json`/`narration-script.json`/`reflexive.json` dos 10
+episódios já existentes para preencher `text` em todos, e tentou resolver `voice`/`style` via
+`profile_name` salvo em `metrics.json` contra `ProfileStore` (builtin + `.audiofy/profiles.json`).
+6 de 10 episódios recuperaram voz/tom; 4 não puderam (3 usavam nomes de perfil que não existem
+mais — `padrao`, `economico`, `assinatura-codex` — e 1 tinha perfil com `speaker` incompatível
+porque o perfil foi editado depois da geração, `reset de leitura ultraeconomico`). Nos 4
+irrecuperáveis, só `text` foi preenchido; `voice`/`style` ficam ausentes (a UI mostra só o
+`speaker` id nesses casos), evitando gravar dado plausível-mas-errado.
+
+**Validação:** TDD — testes escritos antes da implementação em ambos os arquivos Python
+(`tests/unit/test_pipeline_resume.py`: 2 novos casos cobrindo gravação e preservação de
+voice/style/text; `tests/unit/test_bridge.py`: 4 novos casos cobrindo janela temporal acumulada,
+ausência de auditoria, e o resumo de `presenters`). Suíte Python completa (430 testes), `ruff
+check` e `ruff format --check` (só nos arquivos tocados) limpos. Suíte Electron completa (41
+testes) e `eslint --max-warnings=0` limpos.
+
+**Risco que sobrou:** a sincronização é por chunk (frase/parágrafo), não por palavra — não é
+karaokê palavra-a-palavra. A premissa de concatenação direta sem silêncio entre chunks não foi
+validada byte a byte contra a etapa de montagem do MP3 (`_assemble`); se `ffmpeg concat` algum dia
+passar a inserir padding, a janela temporal ficaria levemente dessincronizada. Episódios sem
+`audio-audit.json` completo (ou com algum chunk sem duração auditada) não têm highlight
+automático — o modal ainda mostra o texto, só sem destaque sincronizado. O arquivo de
+retroatividade não foi versionado (script pontual de dados, não ferramenta reutilizável) — se
+novos episódios legados precisarem do mesmo tratamento, a lógica de cruzamento
+`chunk_index`↔`turns` documentada acima deve ser reaplicada.
+exige migração de dados existentes.
