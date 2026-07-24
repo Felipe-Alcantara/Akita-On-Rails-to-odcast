@@ -11,7 +11,8 @@
       "generation_id": "gen-tts-1784822212-YI7fxq8wWanVZ3imMlRM",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00020832,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Você está ouvindo Introdução a linguagem de programação Python. Esta é uma leitura reflexiva, gerada por inteligência artificial com o Audiofy Content AI — além da leitura na íntegra, você vai ouvir breves comentários ao longo do áudio."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-002-de-225__voz-narrador.wav": {
       "fingerprint": "1fed89df38c031c952a5b0860eb38dfb0518b5db56eb70b4bab3e47aff5a67b6",
@@ -23,7 +24,8 @@
       "generation_id": "gen-tts-1784822223-uD3XuwIbCKEGKvLwP3LR",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00042594,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "PROJETO PILOTO\nIntrodução a linguagem\nde programação Python\nEm quatro capítulos"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-003-de-225__voz-narrador.wav": {
       "fingerprint": "616f06dd9bc5e57cc1e4b342492e9c73a86261d6af232c9d427c4ff593e47b09",
@@ -35,7 +37,8 @@
       "generation_id": "gen-tts-1784822231-U8H8d4hIb17xWdSWPwzv",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00039618,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "André Ricardo Prazeres Rodrigues\n1/8/2019"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-004-de-225__voz-narrador.wav": {
       "fingerprint": "0408546255688ad36f96ae98c43d81b96f324bcf42be728dbdb248708862a437",
@@ -47,7 +50,8 @@
       "generation_id": "gen-tts-1784822237-qL5CitrTrQw9vfXjYR6c",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00036208,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "XXX"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-005-de-225__voz-narrador.wav": {
       "fingerprint": "4b625c8b22024007553566953a19fe033fd40b9602af735e1ae3773a8e9a683a",
@@ -59,7 +63,8 @@
       "generation_id": "gen-tts-1784822245-xwExoKNpuf5JPmphbkT2",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00049166,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Metas\nReconhecer a informática como ferramenta para novas estratégias d e aprendizagem,\ncapaz de contribuir de forma significativa para o processo de construção do conhecimento\nnas diversas áreas."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-006-de-225__voz-narrador.wav": {
       "fingerprint": "30125df412666628afd102543a3c1a8cc72b084475cc652c31c1bee3e89fdc82",
@@ -71,7 +76,8 @@
       "generation_id": "gen-tts-1784822253-ZkOYWhnIkVowd4f7rTqV",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00051956,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Objetivos\nCompreender as funções básicas dos principais produtos de automação da\nmicroinformática, tais como sistemas operacionais, interfaces gráficas, bancos de dados,\nplanilhas de cálculos, linguagem HTML e redes de computadores."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-007-de-225__voz-narrador.wav": {
       "fingerprint": "0f564c1e2d5b898f5abb8cc0b137c99d5cedf36e2670b1f90389d3089e79e87e",
@@ -83,7 +89,8 @@
       "generation_id": "gen-tts-1784822261-lKRKw05HLnS6zF6gcFnN",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00186372,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Sumário\nCapítulo 1 O Python ..................................................................................................... 4\n1.1. A história do Python .......................................................................................... 4\n1.2. Instalação e configuração ................................................................................... 5\n1.2.1. Instalação .................................................................................................... 5\n1.2.2. Utilizando o IDLE (Integraded DeveLopment Enviromente) .................... 5\n1.3. Entrada/Saída de dados .................................................................................... 10\n1.3.1. Input() ....................................................................................................... 10\n1.3.2. print() ........................................................................................................ 10\n1.4. Variáveis ............................................................ Erro! Indicador não definido.\n1.4.1. Operadores lógicos ................................................................................... 11\n1.4.2. Tipagem dinâmica .................................................................................... 11\n1.4.3. Strings ....................................................................................................... 12\n1.4.4. Listas ......................................................................................................... 12\n1.4.5. Tuplas ....................................................................................................... 13\n1.4.6. Dicionários................................................................................................ 13\nCapítulo 2 Estrutura de dados .................................................................................... 14\n2.1. Teste (if...elif...else...) ...................................................................................... 14\n2.2. Loop (while...).................................................................................................. 15\n2.3. Varredura (for...) .............................................................................................. 15\n2.4. Controle de fluxo (pass, break, continue) ........................................................ 16\n2.5. Tratamento de erro (try...except...) "
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-008-de-225__voz-narrador.wav": {
       "fingerprint": "c62605d2c774838455fd57aa2622cd6163f5e6c5fdd436a979a4f62e6e609c10",
@@ -95,7 +102,8 @@
       "generation_id": "gen-tts-1784822278-IFgt9fVFC8FHcRFgu0nf",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00119536,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": ".................................................................. 17\n2.6. Funções ............................................................................................................ 19\n2.6.1. A palavra reservada def .......................................................................... 19\n2.6.2. Funções prontas (math) ............................................................................ 19\n2.6.3. O módulo do sistema (os) ......................................................................... 20\nCapítulo 3 Orientação a objetos ................................................................................. 21\n3.1. Classe ............................................................................................................... 21\n3.2. Atributos e métodos ......................................................................................... 21\n3.3. O método especial __init__ (construtor).......................................................... 22\n3.4. Encapsulamento/herança.................................................................................. 23\n3.5. Pilha em Python (stack) ................................................................................... 24\n3.6. Fila em Python (Queue) ................................................................................... 25"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-009-de-225__voz-narrador.wav": {
       "fingerprint": "521899d40f2ac79c71b12161f7544d3c52ecefd1004eafa93a5038ac2d360d85",
@@ -107,7 +115,8 @@
       "generation_id": "gen-tts-1784822293-vCokgCUa5gFaY4oSJLII",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00025978,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Como projeto piloto datado de 2019, este material registra um momento em que Python já era central no ensino introdutório, mas ainda convivia com referências ao Python 2.7. O percurso anunciado vai da alfabetização digital à programação orientada a objetos."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-010-de-225__voz-narrador.wav": {
       "fingerprint": "c9f2ef24f5efcb60c5f4ad1a9da02dacf04d6539a75cf4b837df99ebba560453",
@@ -119,7 +128,8 @@
       "generation_id": "gen-tts-1784822303-eFqexVtCqyd3PmwJRQNj",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0006386,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Capítulo 4 Conexão ao banco de dados...................................................................... 27\n4.1. Objeto CRUD em Banco de Dados com python ............................................. 27\n4.2. Acesso ao banco de dados SQL ....................................................................... 27\n4.3. Aplicação do CRUD ........................................................................................ 28"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-011-de-225__voz-narrador.wav": {
       "fingerprint": "099f14ce07956aed054465e1168917a892c7e074613dc810beb0c0000f4ccc30",
@@ -131,7 +141,8 @@
       "generation_id": "gen-tts-1784822311-slrz0aWaNRxTTYGVJ16y",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00042718,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Capítulo 1\nO Python\nO propósito deste capítulo é apresentar a criação do Python..."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-012-de-225__voz-narrador.wav": {
       "fingerprint": "e1721b821374d975441139621173684733a7e2b968c36c35cc1126bc2b9111ee",
@@ -143,7 +154,8 @@
       "generation_id": "gen-tts-1784822319-1UX9Em3hQzEfi7tvGDRr",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00045446,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "1.1. A história do Python\nAntes de falar da linguagem python, vamos passar um pouco da visão de seu criador\nGuido Van Rossum."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-013-de-225__voz-narrador.wav": {
       "fingerprint": "cadd82e5cb3e03812eef650e33a8005bd2287ccbe70858feb0bb757455f6ae86",
@@ -155,7 +167,8 @@
       "generation_id": "gen-tts-1784822327-HP229pTh733lqBaZtcX5",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00065844,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Rossum trabalhou com a linguagem ABC no Centro de Matemática e Ciência da\ncomputação, conhecido como CWI , no final de 1982 em Amisterdan . Este instituto de\npesquisa era famoso pela invenção da linguagem Algol 68. Com aproximadamente 5 anos\no projeto ABC não deu certo e ele foi para grupo Amoeba, que era um sistema distribuído\nde microkernel, liderado por Sape Mullender. Em 1991, foi para um grupo de multimídia\ndo CWI liderado por Dick Bulterman."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-014-de-225__voz-narrador.wav": {
       "fingerprint": "f6dd46b3fca0c5fae9cddcc2409a6a59a52f47792abc053252495d85e8b12dd4",
@@ -167,7 +180,8 @@
       "generation_id": "gen-tts-1784822336-VK2TNwhKFhOVDspSELQa",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00050592,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "“Python é um produto direto da minha experiência no CWI. ...ABC me deu a inspiração\ncrucial para Python, Amoeba a motivação imediata e o grupo de multimídia fomentou seu\ncrescimento” (Rossum, 2009)."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-015-de-225__voz-narrador.wav": {
       "fingerprint": "b461534b27b6c59ae15bcff6b44c11da7ba416e0834086fad77b426dc310a84c",
@@ -179,7 +193,8 @@
       "generation_id": "gen-tts-1784822343-yNbVrxbZWc8zUhlOB5mP",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00078864,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "“Minha motivação para a criação de Python foi a percepção da necessidade de uma\nlinguagem de alto nível no projeto Amoeba. Percebi que o desenvolvimento de utilitários\npara administração de sistema em C estava tomando muito tempo. E fazê -los no shell\nBourne não funcionaria por diversas razões. O mais importante foi que, sendo um sistema\ndistribuído de microkernel, as operações primitivas do Amoeba eram bem diferentes (e\nrefinadas) que as operações primitivas disponíveis no shell Bourne. Portanto, havia\nnecessidade de uma linguagem que \"preencheria o vazio entre C e o shell\". Por um tempo\nlongo, esse foi o principal lema de Python” (Rossum, 2009)."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-016-de-225__voz-narrador.wav": {
       "fingerprint": "e5b69f15a307b164a82449cf96ff3c95a5f21f4250f8ef4006b8d1b59119e19f",
@@ -191,7 +206,8 @@
       "generation_id": "gen-tts-1784822351-S3mHYzcogH6oqtmqjqL4",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0002666,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "A origem do Python está ligada a uma necessidade prática: criar ferramentas de sistema mais expressivas que scripts de shell, sem a complexidade de C. Essa vocação pragmática ajuda a explicar por que a linguagem se tornou tão presente em automação, ciência e educação."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-017-de-225__voz-narrador.wav": {
       "fingerprint": "5ced0dac5b9059127caf25260240df349ba51d6c96937c6995bddeb5cfa6e0ad",
@@ -203,7 +219,8 @@
       "generation_id": "gen-tts-1784822361-lvo08VJQkuexrarpGEmP",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00050778,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Então, Rossum influenciado pelas linguagens de programação Algol 60, Pascal, Algol 68\ne ABC resolveu projetar uma linguagem que abarcaria todo que gostou, principalmente\nda ABC e consertar alguns problemas que percebia."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-018-de-225__voz-narrador.wav": {
       "fingerprint": "0c0bbe13c2a4efb733f2c73459f83e2bb58ed85a15efa916eb0d6a4e7228f568",
@@ -215,7 +232,8 @@
       "generation_id": "gen-tts-1784822368-F90pXYS3P941ra0fNGox",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00050778,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "O nome Python surgiu por conta do grupo de comédia favorito “Monty Python’s Flying\nCircus”. Seguindo uma tradição do grupo que trabalhou (Amoeba no CWI) de nomear\nlinguagens com nomes de programas de TV."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-019-de-225__voz-narrador.wav": {
       "fingerprint": "d0f88c2ae7c7b9cd01c7b671859e8d4a43e34078a76eeb2f18df8cccad9343a9",
@@ -227,7 +245,8 @@
       "generation_id": "gen-tts-1784822374-W8XblQQEbkpMf6YKZFwk",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00056544,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "“Por muitos anos eu resisti à tentação de associas a linguagem com cobras. Finalmente\ndesisti quando O'Reilly queria colocar uma cobra na capa de seu primeiro livro de Python\n\"Programming Python\". Era tradição da O'Reilly usar imagens de animais e, se dever ia\nser um animal, que fosse uma cobra” (Rossum, 2009)."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-020-de-225__voz-narrador.wav": {
       "fingerprint": "2cb2b72bcc8186f8922cb44e1dc4fd43417e9ee8d9878854b104e15fcc1976b8",
@@ -239,7 +258,8 @@
       "generation_id": "gen-tts-1784822382-DFpppuKh0GprV8Nn8yGJ",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.000744,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Em 20 de fevereiro de 1991,  Python foi liberado, sob uma licença que era quase uma\ncópia exata da licença MIT usada pelo projeto X11 na época, para o mundo pela primeira\nvez pelos grupos de notícias. Em março de 1993 o grupo comp.lang.python  foi criado\ncom meu encorajamento, mas sem meu envolvimento direto. No verão de 1994, o grupo\nestava agitado com uma discussão entitulada \"Se Guido fosse atingido por um ônibus?\"\nsobre a dependência da crescente comunidade de Python em relação às  minhas\ncontribuições pessoais. Em novembro de 1994, Rossun fez seu primeiro workshop de\nPython."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-021-de-225__voz-narrador.wav": {
       "fingerprint": "c580d121f05ef316876744017246ce97ed45e4495e214e3ede38f81be07a5686",
@@ -251,7 +271,8 @@
       "generation_id": "gen-tts-1784822391-Z69tbwjb4fXRc3a4eysO",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00041168,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Porque estudar?\nCódigo livre\nAlto nível\nTipagem dinâmica"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-022-de-225__voz-narrador.wav": {
       "fingerprint": "1d6962da30aedf8df0132c1f8601c60ddb0f02a9a10084c6112f18c013fdc69d",
@@ -263,7 +284,8 @@
       "generation_id": "gen-tts-1784822404-aRPQVm9oOip8Qy446MPE",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00041974,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Orientado a objetos\nMultiplataforma\nDocumentação\nMercado de trabalho"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-023-de-225__voz-narrador.wav": {
       "fingerprint": "b9e0044175b6f37cd091e8b51e6ced493b87fea6b7af65afb2aebc9baff6f98e",
@@ -275,7 +297,8 @@
       "generation_id": "gen-tts-1784822418-etvO8XkukySGzDRbDDNm",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00061876,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "1.2. Instalação e configuração\nPara obter o Python, entre no site: python.org\nPara o curso a dotou-se como base as apostilas  “Módulo A – Bem vindo ao Python” e\n“Módulo B – Python orientado a objetos”. Estas apostilas se encontram no site:\npython.org.br na seção “Interessante”. Após clicar neste link, vá para a seção\ndocumentação Python (formato para impressão). Baixe os módulos A e B."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-024-de-225__voz-narrador.wav": {
       "fingerprint": "597e11e111ae22f37e5dcf4cb2ba48edcc2d87888ed36527bceb507770c7e28a",
@@ -287,7 +310,8 @@
       "generation_id": "gen-tts-1784822432-sADI0FxH10X02GyH9FGe",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00028892,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "O lançamento público ocorreu em 1991, quando distribuir software livre pela Usenet ajudava a formar comunidades técnicas muito antes das plataformas atuais. A famosa pergunta sobre “se Guido fosse atingido por um ônibus” antecipou um debate hoje comum: como evitar que projetos dependam de uma só pessoa."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-025-de-225__voz-narrador.wav": {
       "fingerprint": "a1d16d2230431c7c97a567d0d6eacf4086f493f137464a9460205e4073efc275",
@@ -299,7 +323,8 @@
       "generation_id": "gen-tts-1784822442-WQXCcJjef867ZnMl0t9X",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00058528,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "1.2.1. Instalação\nO Windows instala o Python por padrão no drive c:\\ (raiz) na pasta Python27.\n1.2.2. Utilizando o IDLE (Integraded DeveLopment Enviromente)\nNo menu de instalação do Python (versão 2.7) e clique no link “IDLE (Python GUI)”,\ngeralmente está em INICIAR->PROGRAMAS->PYTHON27->IDLE. Abrirá uma janela\nconforme a figura A."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-026-de-225__voz-narrador.wav": {
       "fingerprint": "7df67cdb7e5b65919d523247f3e9394f59762a9b926bb6c17a3f7b757789f465",
@@ -311,7 +336,8 @@
       "generation_id": "gen-tts-1784822453-gEJvt1rfGYbQxRY5kAC3",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00040796,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Falarei hoje da IDE que vem junto com o Python, o IDLE."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-027-de-225__voz-narrador.wav": {
       "fingerprint": "34511f282113c9e2656bc15df414c88522ee70ecd65ceb36406a96ec7dfb270d",
@@ -323,7 +349,8 @@
       "generation_id": "gen-tts-1784822468-UcITiZr8KR8BJygXp1J9",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0004495,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "IDLE vem da palavra Integrated DeveLopment Environment, e segundo o Wikipedia, é\numa alusão ao Eric Idle, um dos membros fundadores."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-028-de-225__voz-narrador.wav": {
       "fingerprint": "887863afbaf1d3b68903c6802b60b8e429ccbfe58c24d052a4225c921bab8640",
@@ -335,7 +362,8 @@
       "generation_id": "gen-tts-1784822480-ymuyDFQuM5Y9Y3ytMqFY",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00048918,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Esta IDE tem uma interface simples, leve e limpa, justamente para os inciantes na\nprogramação, mas os programadores avançados também encontram nele o que precisam\nem uma IDE."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-029-de-225__voz-narrador.wav": {
       "fingerprint": "4eaa6dbfc052789679cbb3690ebda598b7f39211415da81ef771926b1ade024a",
@@ -347,7 +375,8 @@
       "generation_id": "gen-tts-1784822500-PMkkno50Rj0cM2JOyNNr",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00053816,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Os recursos desta IDE vem desde Multi -Janela (podendo abrir vária janelas de\nprogramação) com múltiplos \"desfazer\" (cada janela tem seu histórico), colorização dos\ncomandos Python, e outras várias capacidades como identação, chamadas e\nautocomplemento"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-030-de-225__voz-narrador.wav": {
       "fingerprint": "51ef93f49e400a6ae67100bea1ac129d40f0e4a3eefe14c40b5ba4bcd7ffaa0e",
@@ -359,7 +388,8 @@
       "generation_id": "gen-tts-1784822527-fzZw0VYpGkxp9EHbxQ70",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00047802,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "O IDLE executa o código Python em um processo separado, que é reiniciado a cada\nRUN(F5) iniciado no editor. Garantindo que o reinicio do shell não interfira no editor ou\nIDLE."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-031-de-225__voz-narrador.wav": {
       "fingerprint": "b8d914efbb2a60d6f18e6a8fd00bb0858a90b80e7285f2fe896a537c9ecddcc9",
@@ -371,7 +401,8 @@
       "generation_id": "gen-tts-1784822554-yxZEYkV6asgsfBCLp4Tz",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00049786,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "A IDE contem um debugger com passos, breakpoints persistentes e pilhas de chamadas\nvisíveis.\nAqui também podemos configurar a fonte de texto, cores, opções de inicializações e\natalhos."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-032-de-225__voz-narrador.wav": {
       "fingerprint": "942eccac609d93ec521f5e7e012bbdec7e9e5c94864ff036a72c3907a40c8da7",
@@ -383,7 +414,8 @@
       "generation_id": "gen-tts-1784822579-jWyx7D3mdMtaopHndiOK",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0004619,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "O IDLE é feito 100 % em Python, usando a ferramenta GUI Tkinter (Tk/Tcl) e em\nmultiplataforma, funciona tanto em Unix, Mac e Windows."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-033-de-225__voz-narrador.wav": {
       "fingerprint": "4eced8da2b985bed95eada79d5c60231b251546e17bc0b6359ee02196caa6a31",
@@ -395,7 +427,8 @@
       "generation_id": "gen-tts-1784822608-wJrllHSwlBmFOyaGUPtY",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00037014,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "1 - Menu"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-034-de-225__voz-narrador.wav": {
       "fingerprint": "c40f2b315a4a03348b394cbd319509a7b3e17ce652572ae93066f253eb31db8a",
@@ -407,7 +440,8 @@
       "generation_id": "gen-tts-1784822643-Gf4tql49JeeNKLTNFtQG",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00037696,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "1.1 - File Menu"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-035-de-225__voz-narrador.wav": {
       "fingerprint": "0f8181e1a3d0ac384e010f2bac2707f6665906a876ff31d1c9d097871e42ec11",
@@ -419,7 +453,8 @@
       "generation_id": "gen-tts-1784822684-SrMhRGwafmja8fAqFphL",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00088536,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "New Window - Cria uma nova janela de edição.\nOpen... - Abre um arquivo existente\nOpen Module... - Abre um modulo existente (busque sys.path)\nClass Browser - Mostra as classes e os métodos no arquivo atual\nPath Browser  - Mostra os diretórios sys.path, módulos, classes e métodos.\nSave - Salva o conteúdo da janela atual associada a uma extensão(Quando o conteúdo\nnão está salva, aparece o \"*\" ao lado do titulo)\nSave As... - Save o conteúdo da janela atual em um novo arquivo, podendo alterar a\nextensão.\nSave Copy As... - Salva o conteúdo da janela atual em um novo arquivo sem alterar a\nextensão do arquivo.\nClose - Fecha a janela atual (questiona se quer salvar quando o conteúdo não estiver\nsalvo).\nExit - Fecha todas as janelas e sai do IDLE (questiona se quer salvar quando o conteúdo\nnão estiver salvo)."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-036-de-225__voz-narrador.wav": {
       "fingerprint": "e900c48ac191fbff6669ea0f63c1412d9c3a9ff7689e73b61079d350290d16a1",
@@ -431,7 +466,8 @@
       "generation_id": "gen-tts-1784822712-AyXTStaemxYNxYrOYbjH",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00026784,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "O IDLE é uma curiosa peça de metalinguagem: seu nome homenageia Eric Idle, do Monty Python, e a própria ferramenta foi escrita em Python. Sua simplicidade revela uma escolha pedagógica importante: reduzir o atrito inicial para que o estudante se concentre no raciocínio."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-037-de-225__voz-narrador.wav": {
       "fingerprint": "790ee8081530dd0d6f03b14b2a114dc32db584f210f925a2d38ab305882da537",
@@ -443,7 +479,8 @@
       "generation_id": "gen-tts-1784822737-3VewOXWBu4eRdEvnEKYs",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00037138,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "1.2 - Edit Menu"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-038-de-225__voz-narrador.wav": {
       "fingerprint": "ef18ef579f5db6d99c9943910321ebb60ba85d1e4bf416daaf5abf931434a4ae",
@@ -455,7 +492,8 @@
       "generation_id": "gen-tts-1784822768-dzW1CFzRreCpvwyZvng2",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00118172,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Undo - Desfaz a ultima alteração na janela atual.\nRedo - Refaz a ultima alteração na janela atual.\nCut - Recorta trechos selecionados para o clipboard.\nCopy - Copia trechos selecionados para o clipboard.\nPaste - Cola o trecho armazenado no clipboard na janela.\nSelect All - Seleciona todo o conteúdo da janela. (Similar aoCtrl+A)\nFind...  - Abre a caixa de pesquisa com várias opções.\nFind Again - Repete a ultima busca.\nFind Selection - Procura por uma string em uma seleção.\nFind in Files... - Abre uma caixa de pesquisa para aquivos.\nReplace... - Abre uma caixa de pesquisa e substituição.\nGo To Line - Mostra a linha desejada.\nIndent Region - Desloca a linha selecionada em 4 espaços para a direita.\nDedent Region - Desloca a linha selecionada em 4 espaços para a esquerda.\nComment out Region - Insere ## no inicio das linhas selecionadas.\nUncomment Region - Remove o # ou ## das linhas selecionadas.\nTabify Region - Espaço entre as abas.\nUntabify Region - Coloca todas as abas no numero certo de espaço.\nExpand Word - Expande a palavra que você digitou para encontrar outra palavra; repetir\npara ter uma expansão diferente.\nFormat Paragraph - Reformo paragrafo na linha em branco selecionada.\nImport Module - Importa ou recarrega o módulo atual.\nRun Script - Executa um arquivo no  __main__."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-039-de-225__voz-narrador.wav": {
       "fingerprint": "fbc4b7fdb395ac8226102616314f6babfbbbaaff03edf170596b935e671284e4",
@@ -467,7 +505,8 @@
       "generation_id": "gen-tts-1784822804-LXPnk5kbg4zp1ynVYq6R",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0003751,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "1.3 - Windows Menu"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-040-de-225__voz-narrador.wav": {
       "fingerprint": "d35f9438fac32f8e49c3d17d55fef8c7c961dfaf2b42ce94626c637d15fe3814",
@@ -479,7 +518,8 @@
       "generation_id": "gen-tts-1784822832-8Jslsf6Ogrp6YOhjzs3G",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0004495,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Zoom Height - Alterna a janela entre o tamanho normal (24x80) e o máximo.\nO restante deste menu são os mesmo de todas as janelas."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-041-de-225__voz-narrador.wav": {
       "fingerprint": "89eee44efc4718c3aa0cc37548600a328766ed597e6038f76fe290ad213c32d6",
@@ -491,7 +531,8 @@
       "generation_id": "gen-tts-1784822863-reVJy6ssvDjWjQCYVamj",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00039928,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "1.4 - Debug Menu (Na janela Python Shell somente)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-042-de-225__voz-narrador.wav": {
       "fingerprint": "ed4c7a324401f19d9747f90ceb473df498bd54ea73c99d9364de916bf94aeb79",
@@ -503,7 +544,8 @@
       "generation_id": "gen-tts-1784822892-qwNWfkH51EqLVhoE9DNd",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00025854,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Menus como “Undo”, “Find” e “Run Script” parecem banais, mas representam a transformação do editor em laboratório de experimentação. Em ambientes de aprendizagem, poder testar, errar e desfazer rapidamente é quase tão importante quanto conhecer a sintaxe."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-043-de-225__voz-narrador.wav": {
       "fingerprint": "654caff69c7707aa1946e34e7f35426546d7f7fb07f7aaa609b08330dc79ecd9",
@@ -515,7 +557,8 @@
       "generation_id": "gen-tts-1784822920-V31OGsdDpKrAw3Q82lnS",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0005518,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Go To File/Line - Verifica um ponto de um arquivo e um numero da linha, abre o arquivo,\ne a mostra.\nOpen Stack View - Mostra a pilha da ultima exceção.\nDebugger Toggle - Roda os comandos do Shell sob o debugger.\nJIT Stack View Toggle - Abre o visualizador de pilha no rastreador."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-044-de-225__voz-narrador.wav": {
       "fingerprint": "1a7987e8e2dcbc82138ba93ea90f43c8740df14a307a809be03d20d9c106a395",
@@ -527,7 +570,8 @@
       "generation_id": "gen-tts-1784822943-NT1B0170yCgwsIZBS1Gv",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0005673,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "2 - Edições Básicas e Navegação\n* Backspace deleta o caractere para a da direita; Del da esquerda\n* Page Up/Page Down e as Setas para se movimentar\n* Home/End vai para o inicio/fim da linha\n*C-Home/C-End para inicio/fim do arquivo\n* Alguns atalhos Emacs podem também funcionar, incluindo C -B,C-P,C-A, C-E, C-D,\nC-D."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-045-de-225__voz-narrador.wav": {
       "fingerprint": "eceb212c03e74bfab6c3df63a1d1d41a42c61edd1c5e11600d04fe70354aeea5",
@@ -539,7 +583,8 @@
       "generation_id": "gen-tts-1784822968-oolLvR01e3zSAhURLi1H",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0004836,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "2.1 - Indentação Automática\nApos uma declaração de bloco -aberto, o proxima linha terá 4 espaços. Apos, certas\npalavras (Break,Return e etc.) a linha é retornada 4 espaços."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-046-de-225__voz-narrador.wav": {
       "fingerprint": "fc9eaa40fc7e8233918c4ac9e5818d501b79de5af943e9ff55252f1b07d4b7d4",
@@ -551,7 +596,8 @@
       "generation_id": "gen-tts-1784822996-88jqdowZ5UsJYIIpvfBN",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00038874,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "2.2 - Python Shell Window"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-047-de-225__voz-narrador.wav": {
       "fingerprint": "e7dc6eeb15ea3a528b013158c312f661846fc4ac818d20b479f300163a9314e7",
@@ -563,7 +609,8 @@
       "generation_id": "gen-tts-1784823022-xYVXKhA32X0ikWr8dkyB",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0005673,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "C-C - Interrompe a execução do comando\nC-D - Envia o arquivo final; fecha a janela se digitado no prompt\nAlt-P - Refaz o ultimo comando com as mesmas características\nAlt-N - Retenta o próximo.\nReturn - Enquanto estiver num comando anterior, retenta este comando.\nAlt-/ - Expande a palavra, muito usado aqui."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-048-de-225__voz-narrador.wav": {
       "fingerprint": "99ada526f662a96766fefcd9474acd72384e2a301e5b8402703df57240cc4074",
@@ -575,7 +622,8 @@
       "generation_id": "gen-tts-1784823043-AXbxgXi5JoYzVeBNHW4q",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00037758,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "3 - Cores das Sintaxes"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-049-de-225__voz-narrador.wav": {
       "fingerprint": "d617b6e641070e40e5ed269612fb87340118081112475495117b7a8cca820b1b",
@@ -587,7 +635,8 @@
       "generation_id": "gen-tts-1784823063-ALwkkLG071yLSgXF0gkN",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00048112,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "A coloração é aplicada em uma \"linha\"no background, mas pode ocasionar de o texto não\nobter cor.\nPara alterar as cores, edite o trecho \"colors\" na seção dentro do \"config.txt\""
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-050-de-225__voz-narrador.wav": {
       "fingerprint": "f3ed4c73852aee3fe9735aa227df8328c87165d212c69286833c60771fea79d5",
@@ -599,7 +648,8 @@
       "generation_id": "gen-tts-1784823077-sB2I0696vPNqU3CJE5wJ",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00042656,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Sintaxes Python, Cores:\n* Keywords\n       Alaranjado\n* Strings\n       Verde\n* Comentários"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-051-de-225__voz-narrador.wav": {
       "fingerprint": "5c7fb4a5fdbc934d125be32aed07ec0db643c0dafaa52bc4b472738a3ecaad8d",
@@ -611,7 +661,8 @@
       "generation_id": "gen-tts-1784823093-HtmcQZHUHwyCLcuL820R",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00039184,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Vermelho\n* Definições\n        Azul"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-052-de-225__voz-narrador.wav": {
       "fingerprint": "4f06c77bebbd017e93a3003dabb9c1e2a8219f0954497ee607a6b3e6f82b2ad9",
@@ -623,7 +674,8 @@
       "generation_id": "gen-tts-1784823107-FMK9JMJ7szP0sQWsrLZl",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00037324,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Cores do Shell"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-053-de-225__voz-narrador.wav": {
       "fingerprint": "02b207f66813575afae9de2a324b58c716e5aed71187186039498783c73af010",
@@ -635,7 +687,8 @@
       "generation_id": "gen-tts-1784823113-uwYY862H6zYWJn5bI5rR",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00044516,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "* Saída do Console\n        Marrom\n* Stdout\n        Azul\n* Stderr\n        Verde Escuro\n* Stdin\n        Preto\n4 - Inicio"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-054-de-225__voz-narrador.wav": {
       "fingerprint": "79add3e02e568e735c18f9c7c8e4996eea57c2bc6c5fcb46f58ecc581975562f",
@@ -647,7 +700,8 @@
       "generation_id": "gen-tts-1784823129-HPwssrXtntqhwo0SFDst",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00027838,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "A presença de um depurador com pilha de chamadas aproxima o iniciante de uma prática profissional: investigar o caminho que levou ao erro, em vez de apenas tentar adivinhar a correção. Essa mudança de atitude é uma das passagens decisivas entre escrever comandos e compreender programas."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-055-de-225__voz-narrador.wav": {
       "fingerprint": "4b2c58309548f5b90a10d4c506a2a151d570e53fa8b36d083146be89994680d7",
@@ -659,7 +713,8 @@
       "generation_id": "gen-tts-1784823144-2VFCmxkpQtMJWaWRsFsF",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00068572,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Quando inicializado com a opção \" -s\", O IDLE executara o arquivo referenciado pela\nvariável  de ambiente IDLESTARTUP ou PYTHONSTARTUP. Idle primeiramente\ncheca pelo \"IDLESTARTUP\"; se estiver presente o arquivo referenciado rodará. Caso\nnão estiver presente, o idle procura pelo \"PYTHONSTARTUP\". Arquivos referenciados\npelas variáveis ambiente são postos para armazenar as funções que são usadas\nfrequentemente no shell idle, ou para executar uma demonstração ou um modulo muito\nusado."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-056-de-225__voz-narrador.wav": {
       "fingerprint": "3086de5c5c9a081964bced1b6c51737b46617dd1d6127409b0130d1bbc703c1b",
@@ -671,7 +726,8 @@
       "generation_id": "gen-tts-1784823159-gtyeKHI3MpZlCJn9C9mi",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0005239,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Em adição, o modulo \"tk\"só carrega um arquivo de inicialização quando o encontra. Note\nque o arquivo Tk é carregado incondicionalmente. Este arquivo adicional é o \".Idle.py\" e\né visto para os usuários no diretório raiz do usuário."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-057-de-225__voz-narrador.wav": {
       "fingerprint": "85e56711d04bf48f10813a09ddaa26cdbc0b15ed8b951ed33fbb5c85d018c035",
@@ -683,7 +739,8 @@
       "generation_id": "gen-tts-1784823176-OJPxR9d4CeyrtQClyEvO",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00038192,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "4.1 - Comandos de uso"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-058-de-225__voz-narrador.wav": {
       "fingerprint": "900af0d45937eb1ee182a27624710ab96bf282e22672b9ff0422dc9c26808da9",
@@ -695,7 +752,8 @@
       "generation_id": "gen-tts-1784823190-Pxer8zixvYqjok2nAy9c",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00040176,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "idle.py [ -c comando ] [-d] [-e] [-s] [-t titulo] [argumento] ..."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-059-de-225__voz-narrador.wav": {
       "fingerprint": "8fd0c779ad4e4d024f38124dc2f66e032c80a25369b154b61f458797eeef9836",
@@ -707,7 +765,8 @@
       "generation_id": "gen-tts-1784823205-eR9sZRB24HkHBDGBE4zv",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00052824,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "-c comando : Executa \"comando\"\n-d                : Ativa Debugger\n-e                : Modo Edit; Argumentos são arquivos para ser editados\n-s                : Roda $IDLESTARTUP ou $PYTHONSTARTUP primeiros\n-t titulo : Define o titulo da janela"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-060-de-225__voz-narrador.wav": {
       "fingerprint": "a2d09ee972ae5d790afa0689fa5c4963e1810bd052c47e0d24fae96066a7d2e4",
@@ -719,7 +778,8 @@
       "generation_id": "gen-tts-1784823220-2hhVvnTbIEkU7cNJLqEP",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00042408,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Por hoje foi explicado o IDLE. Caso este post contenha algum erro, não deixe de\ncomunicar."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-061-de-225__voz-narrador.wav": {
       "fingerprint": "fdf6faf381e34f641a41708abc42ba5fb2fe2fd72322ebee3f52209a2b5936ee",
@@ -731,7 +791,8 @@
       "generation_id": "gen-tts-1784823231-2VmseR80VVpqyy9sxodx",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00038874,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "O menu File é o principal item deste IDLE."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-062-de-225__voz-narrador.wav": {
       "fingerprint": "b202bf05f0121b5de5b246381e49e276bdce3138b4e15473278bb20bb1621072",
@@ -743,7 +804,8 @@
       "generation_id": "gen-tts-1784823244-BSeQoN03lPZGlPHfQj3h",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0004433,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "1.3. Entrada/Saída de dados\n1.3.1. Input()\nComando de entrada de dados.\nSintaxe:\n>>> input([prompt])"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-063-de-225__voz-narrador.wav": {
       "fingerprint": "7c3eb3006a76c11d578bc2e81d4667d254d6726cd0aa65f9ed21777aa4a92d56",
@@ -755,7 +817,8 @@
       "generation_id": "gen-tts-1784823260-Q2O6u6Hx9k8xaEbCtKKa",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00044454,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Retorna sempre uma string.\nExemplo 1:\n>>> x = input(“Entre um valor: ”)\nEntre com um valor:"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-064-de-225__voz-narrador.wav": {
       "fingerprint": "e625d0de7c519a21ae6d8949159b7cc0251769ea52fe3343b5a0f2a996a25019",
@@ -767,7 +830,8 @@
       "generation_id": "gen-tts-1784823283-qJlADP07aYNqRp2kd6QQ",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00039618,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "No IDLE ficaria conforme a figura X"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-065-de-225__voz-narrador.wav": {
       "fingerprint": "20ebf0ebaa4e6a6cf80d7a98906ddfc07e336099a2e301fe0f8ac8068dde2b4e",
@@ -779,7 +843,8 @@
       "generation_id": "gen-tts-1784823298-ZMtgxoDjhUiiKDobtzep",
       "key_label": "Chave Audio Teste",
       "cost_usd": 1.364e-05,
-      "cost_exact": true
+      "cost_exact": true,
+      "text": "Figura X: Python Shell"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-066-de-225__voz-narrador.wav": {
       "fingerprint": "0a7c4c10297cce0d139a958cd552442b17026b46e71356e0b1edd6ea202b5cd2",
@@ -791,7 +856,8 @@
       "generation_id": "gen-tts-1784823312-VWq6nzpND4S9S81O0CTV",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00042904,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Na versão Python 3.x o comando seria:\n>>> x = Input(“Entre com um valor: ”)\nEntre com um valor:"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-067-de-225__voz-narrador.wav": {
       "fingerprint": "c613e177ac3e5b59e1445daf667c81c9346dd9a5d68ac65e3b3f106683e25357",
@@ -803,7 +869,8 @@
       "generation_id": "gen-tts-1784823323-0plMKFRLsB6QjJStGqQj",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00018972,
-      "cost_exact": true
+      "cost_exact": true,
+      "text": "Esta seção preserva marcas da transição entre Python 2 e Python 3, especialmente na descrição de input(), e por isso também funciona como documento histórico do ensino da linguagem. O primeiro contato com entrada e saída costuma ser memorável: é quando o programa deixa de ser monólogo e começa a dialogar."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-068-de-225__voz-narrador.wav": {
       "fingerprint": "848a64eeabfa790233f75905c5f4cd907ace1f247db62f398735651b88f7678f",
@@ -815,7 +882,8 @@
       "generation_id": "gen-tts-1784823344-ZbqWg1rWIdPdo7iRIcrI",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00037386,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "1.3.2. print()"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-069-de-225__voz-narrador.wav": {
       "fingerprint": "8ecdf5b8d8b39cd22b71c18bca5ee840f5b02b1ccebdc9d7149886902f3b119f",
@@ -827,7 +895,8 @@
       "generation_id": "gen-tts-1784823357-t28KJLM6YgedvkYNzgwl",
       "key_label": "Chave Audio Teste",
       "cost_usd": 3.162e-05,
-      "cost_exact": true
+      "cost_exact": true,
+      "text": "Comando de saída de dados.\nSintaxe:\nprint([prompt])"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-070-de-225__voz-narrador.wav": {
       "fingerprint": "7c6001790db38e5152acc2768873734e8fcf1800b9a6c37521bd9f7d4feec98e",
@@ -839,7 +908,8 @@
       "generation_id": "gen-tts-1784823366-4u0Im0DBj5oHnbzYgzsq",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00039742,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo 2:\n>>> print(“Olá mundo!”)\nOlá mundo!"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-071-de-225__voz-narrador.wav": {
       "fingerprint": "ed886b752660983c2b1895346f96d658cb140996316ea1de321dbeede7095c48",
@@ -851,7 +921,8 @@
       "generation_id": "gen-tts-1784823375-XiIOvSWr08mwQtE77Usk",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00058838,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "1.4. Estrutura de dados\n[definir o conceito de estrutura de controle]\n1.4.1. Operadores lógicos\n>>> a = 1\n>>> b = 2\n>>> a == b # igualdade\nFalse\n>>> a!= b # diferença\nTrue\n>>> a > b # maior que\nFalse\n>>> a < b # menor que\nTrue\n>>> 2*a > b #\nFalse\n>>> 2**3 # exponenciação\n8\n>>> 2**(3+6)\n512\n>>> 7 % 2 # resto da divisão\n1"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-072-de-225__voz-narrador.wav": {
       "fingerprint": "84321bc86fac48fe4b6d318f0af6205622f7b495f35dc5d3c22a2bdfa4782320",
@@ -863,7 +934,8 @@
       "generation_id": "gen-tts-1784823389-g4vMjHpK02YumwzlHdgd",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00050654,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "1.4.2. Tipagem dinâmica\n>>> v = 1\n>>> type(v)\n<type ‘int’>\n>>> v = 4.\n>>> type(v)\n<type ‘float’>\n>>> v = “Boa tarde”\n>>> type(v)\n<type ‘str’>\n>>> v = []\n>>> type(v)\n<type ‘list’>\n>>> v = ()"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-073-de-225__voz-narrador.wav": {
       "fingerprint": "ab3fc9da6703db64e2887b763289cfe751800ccf51e08c1b2c4248679733a338",
@@ -875,7 +947,8 @@
       "generation_id": "gen-tts-1784823398-OS5HV13HeUGe8Roz5k2D",
       "key_label": "Chave Audio Teste",
       "cost_usd": 3.906e-05,
-      "cost_exact": true
+      "cost_exact": true,
+      "text": ">>> type(v)\n<type ‘tuple’>\n>>> v = {}\n>>> type(v)\n<type ‘dict’>"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-074-de-225__voz-narrador.wav": {
       "fingerprint": "7f535e9d2370fa9cb027337a95361b24a52e52d284ba4968f89f11c136e1e631",
@@ -887,7 +960,8 @@
       "generation_id": "gen-tts-1784823409-QB2RcWA72Umj3NC9CeJU",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00064542,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "1.4.3. Strings\nPag. 7-9\ncapitalize() # inicia a primeira letra da palavra como maiúscula.\nisdigit() # retorna verdadeiro ou falso se a variável é um número.\nsplit() # divide o texto em palavras no formato de lista.\nupper() # transforma o texto em caixa alta.\nreplace() # troca o caráter desejado por outro.\ncount() # conta quantos caracteres tem dentro da variável string\nstartswith() # verifica a inicial da variável string."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-075-de-225__voz-narrador.wav": {
       "fingerprint": "027d21addfc29fd344e6e9dd89c9d0607a4a226d207f0c1b3429112b8df277ee",
@@ -899,7 +973,8 @@
       "generation_id": "gen-tts-1784823421-HYttKQHTb02gsE2KPbkE",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00043524,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Formatadores de saída de string (interpolação) com o operador “%”.\nSintaxe:\nprint(“texto %s” % (variável))"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-076-de-225__voz-narrador.wav": {
       "fingerprint": "220c1d138eca74a5ada577709e93470bdc5e8e1c02de81951cbafcc77a2e82b1",
@@ -911,7 +986,8 @@
       "generation_id": "gen-tts-1784823435-F5o4S4wcuKqJCnxQU7Cb",
       "key_label": "Chave Audio Teste",
       "cost_usd": 4.898e-05,
-      "cost_exact": true
+      "cost_exact": true,
+      "text": "Exemplo 3:\n>>> v = 50\n>>> n = “André”\n>>> print(“Você ganhou %d de %s” % (v,n))"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-077-de-225__voz-narrador.wav": {
       "fingerprint": "b1ac9b2b717941d9cb64306ba65d870a47d899229b74795f0f993f2cc481832d",
@@ -923,7 +999,8 @@
       "generation_id": "gen-tts-1784823448-mMfSiW6VKeHb0isdQy67",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00046004,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Símbolos de interpolação\n%s – texto\n%d – inteiro\n%f – real\n%o – octal\n%x – hexadecimal\n%e – real exponencial\n%% – sinal de porcentagem"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-078-de-225__voz-narrador.wav": {
       "fingerprint": "7c9f293f8205f4a37bdbce941f4f4b56cfdf3dd5d53b40bb813bd7d3a2c41666",
@@ -935,7 +1012,8 @@
       "generation_id": "gen-tts-1784823458-2VgbPXy3gSm4uHgHlkNP",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00014384,
-      "cost_exact": true
+      "cost_exact": true,
+      "text": "1.4.4. Listas\nSão elementos entre colchetes separados por vírgula.\nOperações com listas\nlst = [] # lista vazia\nlst[i] = 3 # substitui um elemento\nlst[i:j] = 5 #substitui um grupo de elementos\ndel [i:j] # remove um grupo de elementos"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-079-de-225__voz-narrador.wav": {
       "fingerprint": "32cb17e699bfd5a41263fdb4b3c89203d3baa3373b98b08bbe68d004981a64ca",
@@ -947,7 +1025,8 @@
       "generation_id": "gen-tts-1784823468-YYjuAfBxjDf1kmjx9mcq",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0002759,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Os exemplos reúnem operações fundamentais que reaparecem em quase todo programa, enquanto a interpolação com % lembra uma fase anterior ao f-strings e ao método format(). Comparar essas formas ao longo do tempo mostra como a linguagem evoluiu sem abandonar seus conceitos essenciais."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-080-de-225__voz-narrador.wav": {
       "fingerprint": "cc45dcff962b3b578e335cfd79aa0a9ec499a9cbb1c600897f677c245de267cf",
@@ -959,7 +1038,8 @@
       "generation_id": "gen-tts-1784823486-tUIyyjKtVbMIHokT0QDw",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0005983,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "lst.append(“a”) # adiciona um elemento\nlst.extend([1,2,3]) # adiciona uma lista\nlst.index(3) # retorna o número índice do elemento\nlst.insert(i,x) # insere um elemento na posição x\nlst.pop() # retire o último elemento\nlst.remove(x) # um elemento\nlst.reserve() # organiza a lista em ordem decrescente\nlst.sort() # organiza a lista em ordem crescente"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-081-de-225__voz-narrador.wav": {
       "fingerprint": "706991a1207659e73a9b7b0d5baef57b90d6f680e069f8207afec706717f94fa",
@@ -971,7 +1051,8 @@
       "generation_id": "gen-tts-1784823502-8xTziFipVCAxa4aMEACm",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00037882,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "1.4.5. Tuplas"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-082-de-225__voz-narrador.wav": {
       "fingerprint": "09853640b214e1f162484399df7000f556446664c320c5bef25db166bfd11209",
@@ -983,7 +1064,8 @@
       "generation_id": "gen-tts-1784823511-i1rwt1mi6iFm34xyECuT",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.000434,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "1.4.6. Dicionários\nSão um conjunto de objetos (chave: valor), separados por vírgula entre chaves {}."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-083-de-225__voz-narrador.wav": {
       "fingerprint": "a7c4430de2dada64f8e6f260cd2e4026141864eca0338a7b0b0dc79a8192fa33",
@@ -995,7 +1077,8 @@
       "generation_id": "gen-tts-1784823523-UlUIAHSZqGf9N8GFROBq",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00039122,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo 4:\n{‘andré’: 39,}"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-084-de-225__voz-narrador.wav": {
       "fingerprint": "d5f62cf0a14a7e5c19993d5270161758f02035dccdc0092f7271a35e65b2b89a",
@@ -1007,7 +1090,8 @@
       "generation_id": "gen-tts-1784823534-YjV5DulsD3wSmdkZRmzC",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0006758,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Operações com dicionários\na = {‘nome’:’André’, ‘idade’: 39}\nlen(a) # número de elementos\na[‘nome’] # valor de nome\na[‘nome’] = ‘Pedro’ # atribui um valor (Pedro) para chave “nome”\ndel a[‘nome’] # deleta a chave e seu valor\na.clear() # apaga todos os elementos\na.copy() # retorna uma cópia do dicionário\na.items() # retorna uma lista de tuplas (chave,valor) de todos os elementos\na.keys() # retorna uma lista de todas as chaves\na.values() # retorna uma lista de todos os valores"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-085-de-225__voz-narrador.wav": {
       "fingerprint": "766efbf6f5c433d8f1ee3f1632182a6d8de2d514c41b4de231bbb61ff5bfc4a1",
@@ -1019,7 +1103,8 @@
       "generation_id": "gen-tts-1784823540-hhC9xfFvOK3CRkZFqd13",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00056978,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Capítulo 2\nEstrutura de controle\n2.1. Teste (if...elif...else...)\nÉ uma estrutura que executa determinados blocos de comandos na dependência de sua\ncondição (expressão) ser verdadeira.\nSintaxe:\nIf (expressão):\n Bloco comando\n[elif (expressão):\n Bloco de comando\nElse:\n Bloco de comando]"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-086-de-225__voz-narrador.wav": {
       "fingerprint": "786850d6e7cf941d42fd1b2e47027769d0ef3976cbd925e238203ccc6bff0a11",
@@ -1031,7 +1116,8 @@
       "generation_id": "gen-tts-1784823549-DhCeJ6PtAixQOlssgjyC",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00045384,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo 5:\n>>> a = 1\n>>> if a== 1:\n print(“É o número um”)\nelse:\n print(“não é o número um”)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-087-de-225__voz-narrador.wav": {
       "fingerprint": "5b2f23af8aa2d97499bd30d41f2c6c0d16b00a1a60dc290846ca1b5804702507",
@@ -1043,7 +1129,8 @@
       "generation_id": "gen-tts-1784823556-SXNyiCV9WjsHJYKh1yCa",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0004743,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo 6:\n>>> a = input(“Entre com um número”)\n>>> if int(a) % 2 == 0:\n print(“Número par”)\nelse:\n print(“número ímpar”)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-088-de-225__voz-narrador.wav": {
       "fingerprint": "b4f0869f6cf4b4575e679bd75cabd5534aa574e11e2844048a45b5af25c08b85",
@@ -1055,7 +1142,8 @@
       "generation_id": "gen-tts-1784823564-Kc2Mbvle7FNjCGqjkj70",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00053506,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Vamos agora passar a usar o editor de texto do IDLE.\nExemplo 7:\nusuário = [“andré”,”joão”,”maria”]\nusername = input\nif username in usuário:\n print(“acesso permitido”)\nelse:\n print(“acesso negado”)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-089-de-225__voz-narrador.wav": {
       "fingerprint": "c06a9a2ae7d583b2ecd49482cdff92858e686824cacf1251775866885a352acf",
@@ -1067,7 +1155,8 @@
       "generation_id": "gen-tts-1784823572-zelEa3r5BCMPgLNuBrR9",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00026846,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Este trecho registra uma fase mais introdutória da pedagogia em Python, quando listas e dicionários eram apresentados como fundamentos quase universais. A menção ao IDLE e à sintaxe antiga revela um material provavelmente produzido na transição entre Python 2 e Python 3."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-090-de-225__voz-narrador.wav": {
       "fingerprint": "7a3e5061b79fd938744fb2e630246faf22d33f2b6aeda4f8ef142495ab891102",
@@ -1079,7 +1168,8 @@
       "generation_id": "gen-tts-1784823580-8b32kLnKXxrKszXIupNR",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00054126,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo 8:\na = input(“Que horas são? ”)\nif a < 10:\n print(“Bom dia!”)\nelif a < 12:\n print(“Hora de almoçar!”)\nelif a < 18:\n print(“Boa tarde!”)\nelif a < 22:\n print(“Boa noite!”)\nelse:\n print(“Vá dormir!”)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-091-de-225__voz-narrador.wav": {
       "fingerprint": "7a39590e01a2feb7d5d1139dbe834e8ad30bf2658bed1f20cbbd8529b2cf0f6c",
@@ -1091,7 +1181,8 @@
       "generation_id": "gen-tts-1784823587-qtufqyz3BOuhjS3GFsLm",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00038068,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exercícios:"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-092-de-225__voz-narrador.wav": {
       "fingerprint": "04709b29b56b0ad374c12f00d5e483c58a1f15117266bf590a0c9720ebf6ea54",
@@ -1103,7 +1194,8 @@
       "generation_id": "gen-tts-1784823604-yUXPtwP1pETvKFl40ldO",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00052638,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "2.2. Loop (while...)\nÉ uma estrutura de repetição que executa um bloco de comando enquanto a condição\n(expressão) for verdadeira.\nSintaxe:\nwhile (expressão):\n Bloco de comando\n[else:\n Bloco de comando]"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-093-de-225__voz-narrador.wav": {
       "fingerprint": "d6d5bb0bc398136271dfe2d6d158a7c65cd4790e24fcf1ae4fbe07ee1eceb501",
@@ -1115,7 +1207,8 @@
       "generation_id": "gen-tts-1784823617-tRqY70tFxpKKDiwQkW2e",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0004185,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo 9:\na = 0\nwhile a < 10:\nprint(a)\na = a + 1 # a += 1"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-094-de-225__voz-narrador.wav": {
       "fingerprint": "31e4aab56bef74d2926e7c442b7e9550e04436c8ea193095cfd006f2646c5d4a",
@@ -1127,7 +1220,8 @@
       "generation_id": "gen-tts-1784823626-WAynvky4k9IUHX7OAE9W",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.000434,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo 10:\nb = 1\nwhile b < 5:\n print(“%i dólares valem %.2f reais” % (b, b*2.50))"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-095-de-225__voz-narrador.wav": {
       "fingerprint": "bd77c3ee8d9e039a80874fe5f4e7a7398dc1516de9c6ea569aa0e832e8ad5639",
@@ -1139,7 +1233,8 @@
       "generation_id": "gen-tts-1784823634-ujxJcQ5bChpCxBMoeiXD",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00037696,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exercícios"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-096-de-225__voz-narrador.wav": {
       "fingerprint": "672c6dc21c62ac0af6935f0954cd8765b1234f9922329b9bc272c449ce81a5b0",
@@ -1151,7 +1246,8 @@
       "generation_id": "gen-tts-1784823643-XIePhB8Q3LQnqEEDBWLc",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0004681,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "2.3. Varredura (for...)\nÉ uma estrutura de varredura de objetos sequenciáve is (range(), string, lista, tupla,\ndicionário etc.)."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-097-de-225__voz-narrador.wav": {
       "fingerprint": "9b662cb07cdad66bef2b1cc42b386ea10ac8c6395a29da4c74a15705559c7ec4",
@@ -1163,7 +1259,8 @@
       "generation_id": "gen-tts-1784823655-Z76oRIUfZULTfkVpbsbo",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00043772,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Sintaxe:\nfor variável in sequência:\n Bloco de comando\n[else:\n Bloco de comando]"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-098-de-225__voz-narrador.wav": {
       "fingerprint": "89a6a0257b2b8266130195312c588747921564c6594f528059e85ac6195b4e87",
@@ -1175,7 +1272,8 @@
       "generation_id": "gen-tts-1784823672-iIEu4Xd5wNwkhCR7zM1m",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00037758,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo1:\nfor i in range(3):\n print(i)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-099-de-225__voz-narrador.wav": {
       "fingerprint": "e61a9dffffe670839963a5be34c8c06df7fe7d9918e0d8201822a6894abb638f",
@@ -1187,7 +1285,8 @@
       "generation_id": "gen-tts-1784823701-PFvD6lMb5DYHvAJMEDAE",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00040796,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo2:\na = “Curso de Python”\nfor i in a:\n print(i)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-100-de-225__voz-narrador.wav": {
       "fingerprint": "4e846ded3577ca998f266b0f3efd13fb3a0b5c97daa2f1d38d6b8fa9103f587c",
@@ -1199,7 +1298,8 @@
       "generation_id": "gen-tts-1784823734-6CPIyDLFjyW0yAYDA3tu",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00040734,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo3:\na = [3, 10, 4]\nfor i in a:\n print(i)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-101-de-225__voz-narrador.wav": {
       "fingerprint": "92c47e3f8a1d6db80c6c2081b625605d469663e81973918a5b74a24c0b05938f",
@@ -1211,7 +1311,8 @@
       "generation_id": "gen-tts-1784823765-9e6XWcOQDIiEQKkdLiZc",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00040858,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo4:\na = (“João”, “Pedro”, “Lucas”)\nfor i in a:\n print(i)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-102-de-225__voz-narrador.wav": {
       "fingerprint": "155a8d3e334137cf4ebd5649a4115fa646757c294d401084142c45244ab840a9",
@@ -1223,7 +1324,8 @@
       "generation_id": "gen-tts-1784823791-R3FL4YJT1DxKHzmGDt3L",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00045322,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo5:\norcamento = {“luz”:150, “água”:60, “telefone”:108}\nfor z in orcamento:\n print(“%s custa R$ %.2f” % (z, orcamento[z]))"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-103-de-225__voz-narrador.wav": {
       "fingerprint": "f15be7045a8dea7cb88472c843cff582eeb5db1b34380e8bd30b2891bb1f86c6",
@@ -1235,7 +1337,8 @@
       "generation_id": "gen-tts-1784823807-QPfVQR8K6mjtFGCrtQPt",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00046748,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo6:\nmatriz = ((1, 0, 0), (0, 1, 0), (0, 0, 1))\nfor i in range(len(matriz)):\n print(“\\n”)\n for j in range(len(matriz)):\n  print(matriz[i][j]),"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-104-de-225__voz-narrador.wav": {
       "fingerprint": "06f0ab502938b7ba4d66a3c7f2e302fa3edee124d6672a0dc07dfc42dc9a0398",
@@ -1247,7 +1350,8 @@
       "generation_id": "gen-tts-1784823817-yfWJVl8rrnlSSRQ1ZQ78",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0004495,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "2.4. Controle de fluxo (pass, break, continue)\nPass – define um bloco de comando vazio.\nSintaxe:\nz = 0"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-105-de-225__voz-narrador.wav": {
       "fingerprint": "d258e31e4794c67ef4c63a0524bec00646e9eccad635bdda2c6a7ff16eba3c94",
@@ -1259,7 +1363,8 @@
       "generation_id": "gen-tts-1784823824-ZqbCjB5GxsIAy4HwSstD",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00048546,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "if z == 1:\n pass\nbreak – termina o loop imediatamente, usado somente nas estruturas while e for.\nSintaxe:\na = 0\nwhile a < 10:\n a += 1\nif a == 5:\n  break\n print(a)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-106-de-225__voz-narrador.wav": {
       "fingerprint": "0e6a2b51700388b85e93ea1d01daa203e635fb1b1658696777733fd8265f6011",
@@ -1271,7 +1376,8 @@
       "generation_id": "gen-tts-1784823833-YpKrrdxQPfXK06xTlC6l",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00026598,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "A progressão de condicionais para laços acompanha uma estratégia clássica de ensino: primeiro decidir, depois repetir e percorrer. O exemplo das mensagens conforme o horário também mostra como exercícios simples transformam lógica abstrata em situações reconhecíveis."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-107-de-225__voz-narrador.wav": {
       "fingerprint": "3989794ffac64758400217ae1d40d66c934ad5fdd4f3d699c34e409df67a8218",
@@ -1283,7 +1389,8 @@
       "generation_id": "gen-tts-1784823843-xZRCvG6FcvqYIzzUpsVJ",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00050344,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Continue – volta ao início do bloco de comando e continua a próxima interação, usado\nsomente nas estruturas while e for.\na = 0\nb = 0\nwhile a < 10:\n a += 1\n if b >= 5:\n  Continue\n b += 1\nprint(a, b)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-108-de-225__voz-narrador.wav": {
       "fingerprint": "54e921067cf3bacedcfda74f255f4f5f70f2783207d226bae8fb63b53f25ac71",
@@ -1295,7 +1402,8 @@
       "generation_id": "gen-tts-1784823863-Fi4hSeV0s7Izdqm7GeHk",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00050902,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exercícios:\nE1 – Construa um programa que receba uma palavra. Se esta palavra tiver até 5 caracteres\napresente somente as vogais, caso contrário apresente as consoantes.\nE2 – d"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-109-de-225__voz-narrador.wav": {
       "fingerprint": "aa026729b6c2de0f36b9daa77f54f0fea6d14ad4bf084f9c704ffe40c6a68722",
@@ -1307,7 +1415,8 @@
       "generation_id": "gen-tts-1784823877-aZb1kZZsmU4nqbfjQyEw",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00047988,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "2.5. Tratamento de erro (try...except...)\nÉ uma estrutura usada para capturar exceções.\nSintaxe:\nTry:\n Bloco de comandos\nExcept:\n Bloco de comandos"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-110-de-225__voz-narrador.wav": {
       "fingerprint": "23c2010b7365e38cd09def8449ca3d63973255f252d8deeabe46013b9836003d",
@@ -1319,7 +1428,8 @@
       "generation_id": "gen-tts-1784823892-KgLbP8YlS4kurNhV5f9B",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00043338,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo 11:\nlst = []\nfor i in range(3):\n lst.append(int(input(“Digite um valor: ”)))"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-111-de-225__voz-narrador.wav": {
       "fingerprint": "6ea809e7ef49f7c0fa1c5d474d0b5347d6c2732a12d0ffe7099410e845344ff4",
@@ -1331,7 +1441,8 @@
       "generation_id": "gen-tts-1784823899-cZCJWUHJGMBXvuwCSvue",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.000496,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo 12:\n# coding=cp1252\nlst = []\nfor i in range(3):\n while True:\n  try:\n   lst.append(int(input(“Digite um valor: ”)))\n   break\n  except:\n   print(“Digite um número!!!”)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-112-de-225__voz-narrador.wav": {
       "fingerprint": "790993fef319485ea85681552c1c932abf428cb639ad16ae0883979af5dcc5e3",
@@ -1343,7 +1454,8 @@
       "generation_id": "gen-tts-1784823908-Fbm6u70hE0192YFdl46N",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00060326,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo 13:\n# coding=1252\nproduto = [“pão”, “leite”, “carne”]\nsoma = contador = 0\nwhile contador < len(produto):\n try:\n  c = float(input(“Entre com o valor do(a) %s: ” %\nproduto[contador]))\n  soma = soma + c\n  contador = contador + 1\n except:\n  print(“Entre somente com um valor!”)\nprint(“O valor de sua compra foi %s” % soma)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-113-de-225__voz-narrador.wav": {
       "fingerprint": "49ab94afcd96a0bbb66605d3868384a01f86e763a9301d98ffd0d2772d70dc33",
@@ -1355,7 +1467,8 @@
       "generation_id": "gen-tts-1784823917-n14XtqdHIviS7foN5ZjQ",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00042594,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Lista compreensiva\nNome = [“Pedro”,”João”,”Lucas”]\nFor i in nome:\n Print(i)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-114-de-225__voz-narrador.wav": {
       "fingerprint": "9bb5690033a1e95604c48222fe9227eab7dd49ecd4a96151942eae16d3a98020",
@@ -1367,7 +1480,8 @@
       "generation_id": "gen-tts-1784823924-9q64HcwW2qrsrd39FKDo",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0004216,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Juntar = []\nValores = [1, 3, 4, 8]\nFor i in valores:\n Juntar.append(i*3)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-115-de-225__voz-narrador.wav": {
       "fingerprint": "da07629d64f175dfbdf1eb7c271579e31fd780d6d9234597e6fcecd0bf1836e7",
@@ -1379,7 +1493,8 @@
       "generation_id": "gen-tts-1784823931-79n38BRfQcnR2w5XsdzJ",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0003844,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo:\n[i*3 for i in valores]"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-116-de-225__voz-narrador.wav": {
       "fingerprint": "0f051abaf5347d607690be42e39d93d5a67025d984544914ce2aa37659d47ef6",
@@ -1391,7 +1506,8 @@
       "generation_id": "gen-tts-1784823938-vucoQDJGkHaTgOGowvcD",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00039432,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "2.6. Funções\nO que é função?"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-117-de-225__voz-narrador.wav": {
       "fingerprint": "ec962b9ee1608ca1ac401c60dd69a5fe858b4d03fa6f16c5cf2254f3c153b164",
@@ -1403,7 +1519,8 @@
       "generation_id": "gen-tts-1784823946-4IIljmun2YJ4vVGxTQQt",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00042966,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "2.6.1. A palavra reservada def\nSintaxe:\ndef nomeFunção([argumentos]):\n Bloco de comando"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-118-de-225__voz-narrador.wav": {
       "fingerprint": "179ecb313d9dc253acd27205415345bec930a0e000ee02855447feb69c9657d3",
@@ -1415,7 +1532,8 @@
       "generation_id": "gen-tts-1784823958-w0MEg28n4f5VYZyO8CtP",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00041478,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo:\n>>> def iNome(n):\n  print(n)\n  return n # retorna o valor de n"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-119-de-225__voz-narrador.wav": {
       "fingerprint": "b9418a5d8ac74c47eea511a10199e33fa91afd47f1ddd6c1e628f2ac1e3fcded",
@@ -1427,7 +1545,8 @@
       "generation_id": "gen-tts-1784823976-74WdNdoVW0MACGIA9JUT",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00040176,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": ">>> nome = iNome(“André”)\nAndré\n>>> nome\nAndré"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-120-de-225__voz-narrador.wav": {
       "fingerprint": "5107a6b23de08e230de43d890a005c0df425c8954e6934e4e33572539424e2f7",
@@ -1439,7 +1558,8 @@
       "generation_id": "gen-tts-1784823993-mon4JGK1vsh1GjKVx5mS",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00026412,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Aqui aparece uma ideia central da programação robusta: erros de entrada fazem parte do mundo real e precisam ser tratados sem interromper tudo. A compreensão de listas, por sua vez, antecipa o estilo mais conciso que se tornou uma das marcas expressivas de Python."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-121-de-225__voz-narrador.wav": {
       "fingerprint": "40e083df20a735a25bc96b1eecb45a7a3cf682c772ff58967a0d2a0fa45856d3",
@@ -1451,7 +1571,8 @@
       "generation_id": "gen-tts-1784824007-x6i0t0NTb9Ij0q2Ea8LG",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00041664,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "A variável “nome” receberá o retorno da função iNome."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-122-de-225__voz-narrador.wav": {
       "fingerprint": "4097a62e8b162095ce54de87d7c48b40fb4127ffc00a2894809a083076ca6b57",
@@ -1463,7 +1584,8 @@
       "generation_id": "gen-tts-1784824018-NS7H7dhDDNPCyaNMpwpx",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00041664,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo:\nimport math\ndef hipotenusa(a, b):\n h = math.sqrt(a**2 + b**2)\n return h"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-123-de-225__voz-narrador.wav": {
       "fingerprint": "072ced5c994173c67e610987eca137faedb99c14cc923d2afbc372f358c2723c",
@@ -1475,7 +1597,8 @@
       "generation_id": "gen-tts-1784824028-R7rVH7oFUOCiUsWkguQX",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0004278,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo:\nn = [[2, 2], [2,3], [3,2]]\nfor a, b in n:\n print(a, b)\n hipotenusa(a, b)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-124-de-225__voz-narrador.wav": {
       "fingerprint": "79d1de623c8bc8ac21c1d9d8a37ffc535b8eb4dfa029a91469f31c95229e2c9b",
@@ -1487,7 +1610,8 @@
       "generation_id": "gen-tts-1784824038-uRLxWwigZBYHPF04A54q",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00039804,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Lista compreensiva\n[hipotenusa(a, b) for a, b in n]"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-125-de-225__voz-narrador.wav": {
       "fingerprint": "248abfe83f60e0fb93d6f21bd0ee91759bd09a35a4bb3826e33f5dc5cab6bdf9",
@@ -1499,7 +1623,8 @@
       "generation_id": "gen-tts-1784824050-pHlxGrIlsyQdyLLlvcLA",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00060884,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "2.6.2. Funções prontas (math)\nO módulo matemático (math) apresenta um conjunto de funções:\nmath.sqrt(n) – retorna a raiz quadrada.\nmath.cos(n) – retorna o cosseno do número em radiano.\nmath.sin(n) – retorna o seno do número em radiano.\nmath.tan(n) – retorna a tangente do número em radiano.\nmath.radians(n) – converte ângulo(grau) para radiano."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-126-de-225__voz-narrador.wav": {
       "fingerprint": "1c8b430099450d4a4f7920c7c417e50210cf569ece3c419f6c2db435a8a1f887",
@@ -1511,7 +1636,8 @@
       "generation_id": "gen-tts-1784824061-pwUU2fnTMg9bjUMFCNeq",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00040672,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "math.hypot(x, y) – retorna a hipotenusa.\nmath.pi – retorna o PI(3,1416...)."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-127-de-225__voz-narrador.wav": {
       "fingerprint": "93f3b4e3b10cfc8c8625145d0687b4a14690badecd3af3d2fd7bb6d4dd7163c4",
@@ -1523,7 +1649,8 @@
       "generation_id": "gen-tts-1784824069-nLh0CDkVlgY66Wco7ui9",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00048174,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exercício\n1 – Calcule e exiba a área do círculo (A = pi*r2) de qualquer raio que for digitado.\n2 – Calcule o volume do cilindro de raio 6 cm e altura 5 cm (V = pi*r2*h)."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-128-de-225__voz-narrador.wav": {
       "fingerprint": "4c6284d091aa25f5c6c7dd9fc38d8bde7efcf07d498e70582558110c5431002f",
@@ -1535,7 +1662,8 @@
       "generation_id": "gen-tts-1784824077-aDk26QGhRcfBxQBwXXiy",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00037634,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "2.6.3. O módulo do sistema (os)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-129-de-225__voz-narrador.wav": {
       "fingerprint": "72008bd007d2ae197d3ca4e18dd337a8488fde219fa17184ffb6fd3e2a68f8f0",
@@ -1547,7 +1675,8 @@
       "generation_id": "gen-tts-1784824083-2i5RlSebv8eP9XhHLwhZ",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0004309,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Capítulo 3\nOrientação a objetos\n3.1. Classe\nSintaxe:\nClass NomeClasse(object):\n Pass"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-130-de-225__voz-narrador.wav": {
       "fingerprint": "d9e9b78de7c61c216dfc802b0c929e22134f4f3367bac998010371a9204419ed",
@@ -1559,7 +1688,8 @@
       "generation_id": "gen-tts-1784824092-DGmxiMo4oswMlR9uySk7",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00040424,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo:\n>>> class Cachorro(object):\n  pass"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-131-de-225__voz-narrador.wav": {
       "fingerprint": "cb0b9613b016622dfcbdaa3664cbe4d87566d13d199757009b923cba92e76a1e",
@@ -1571,7 +1701,8 @@
       "generation_id": "gen-tts-1784824100-aKWhsPg8TXYEXsU4n3ar",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00041168,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Para instanciar uma classe basta iniciá-la em uma variável.\nExemplo:\n>>> c = Cachorro()"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-132-de-225__voz-narrador.wav": {
       "fingerprint": "a4c36ab99f83f7cf7ebb9fb00892a8509bb5c38792f51ec0cc21114a96f628ec",
@@ -1583,7 +1714,8 @@
       "generation_id": "gen-tts-1784824107-XZmBHM4XWj5fJubFXp3N",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00045694,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Cada instância tem um número que o identifica, para saber digite o comando:\n>>> id(c) # número inteiro (hex) que identifica o objeto"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-133-de-225__voz-narrador.wav": {
       "fingerprint": "0015b9ce4bfef07f4d1d41c54b756f908aba893e44cc2e3a24817374e171cc26",
@@ -1595,7 +1727,8 @@
       "generation_id": "gen-tts-1784824118-Tl1IOHUWenc72uDVLnCT",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0004247,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "3.2. Atributos e métodos\nOs atributos são objetos inerentes à classe, ou seja, as variáveis."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-134-de-225__voz-narrador.wav": {
       "fingerprint": "84413ebbd4c4aa99025e3adefe9b1b67a9f74d01fd8b6d1ef63d16887c6dee03",
@@ -1607,7 +1740,8 @@
       "generation_id": "gen-tts-1784824130-LgmeSrZa2Rn2Tpi1ULtT",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0004154,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo:\nclass Cachorro(object):\n alimento = “carne”\n habitat = “doméstico”\n nome = “Rex”"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-135-de-225__voz-narrador.wav": {
       "fingerprint": "f5a13896c7fa56043f4e708481cc16daad9af7831fded4eb62899ff3c515df2e",
@@ -1619,7 +1753,8 @@
       "generation_id": "gen-tts-1784824142-SbjimKVIYwQ4v2OFTPV5",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00044578,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": ">>> from cachorro import Cachorro\n>>> c = Cachorro()\n>>> c.alimento\ncarne\n>>> c.habitat\ndoméstico\n>>> c.nome\nRex"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-136-de-225__voz-narrador.wav": {
       "fingerprint": "fa6cf2420f7804dbf98df01a4b85018f4fb1b73b23213401d72337fe3dda225d",
@@ -1631,7 +1766,8 @@
       "generation_id": "gen-tts-1784824152-RwLZKkRKg9pjxUgb0Auc",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00027032,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "A função da hipotenusa conecta matemática escolar a reutilização de código, um dos motivos pelos quais Python se tornou tão popular em educação científica. A passagem seguinte para classes marca uma mudança de escala: organizar não apenas cálculos, mas modelos de entidades."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-137-de-225__voz-narrador.wav": {
       "fingerprint": "97c0433e8de637545ee35eb093214ef1cf6381e8d763468551323c91f610b7cd",
@@ -1643,7 +1779,8 @@
       "generation_id": "gen-tts-1784824160-fLOLyWofbs2umzfql1Ux",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0004185,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Os métodos são funções que interagem com os atributos dentro da classe."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-138-de-225__voz-narrador.wav": {
       "fingerprint": "b1699ace77e5d5b082dbbac6514da281e9c6efa084e74d903dd201158ebd1756",
@@ -1655,7 +1792,8 @@
       "generation_id": "gen-tts-1784824168-e4ZphpeLsLGgn0cPdIN5",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0004805,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo:\nclass Circulo(object):\n raio = 25,4\n def calculaArea(self):\n  self.area = 3,14*(self.raio**2)\n def calculaVolume(self, altura):\n  self.volume = 3,14*(self.raio**2)*altura"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-139-de-225__voz-narrador.wav": {
       "fingerprint": "70b0568f924ba435de649851d3c35aceb24abca42284714dd602dd6817064a4c",
@@ -1667,7 +1805,8 @@
       "generation_id": "gen-tts-1784824175-Xwk6122giXKY4MOX68oH",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00050902,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "O self não é uma palavra reservada, é  um primeiro argumento, é uma maneira de\nreferenciar a própria instância.\nExemplo:\n>>> C1 = Circulo()\n>>> C1.raio\n25,4\n>>> C1.area # erro\n>>> C1.calculaArea()\n>>> C1.area"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-140-de-225__voz-narrador.wav": {
       "fingerprint": "3c34784480219f02b56fb1c03cb72bdb4cf0ec6132da03f05e90d37419e05375",
@@ -1679,7 +1818,8 @@
       "generation_id": "gen-tts-1784824184-1VDCCbc9GO6E1uwZRI1I",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00043648,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "3.3. O método especial __init__ (construtor)\nUtilizado para definir atributos e métodos no momento em que a classe for criada"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-141-de-225__voz-narrador.wav": {
       "fingerprint": "08fb56b6d48315245eae2fd78e228b294cec8d46e93c3541b2e9cf61818df985",
@@ -1691,7 +1831,8 @@
       "generation_id": "gen-tts-1784824191-Xud4Jg23hj8kDCJGtUoj",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00042842,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Sintaxe:\nclass NomeClasse(objects):\n atributos\n def __init__(self, [argumentos]):\n  Bloco de comandos"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-142-de-225__voz-narrador.wav": {
       "fingerprint": "7206cb4fb66adccd6d84006d80dc9eda72898931ce0857a57d96ab0c8da2cf3f",
@@ -1703,7 +1844,8 @@
       "generation_id": "gen-tts-1784824197-teB6peIero2dIDEyFAwm",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00044516,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo:\nclass Cachorro(objects):\n alimento = “carne”\n habitat = “doméstico”\n def __init__(self, nome):\n  self.nome = nome"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-143-de-225__voz-narrador.wav": {
       "fingerprint": "5091d2b67768c6f822213e5473f7cf195eb77151a576fdf4ce10ae846a5f1e97",
@@ -1715,7 +1857,8 @@
       "generation_id": "gen-tts-1784824206-0TzseSo5e3WUNK146B3q",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0004216,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo:\n>>> c = Cachorro(“Bob”) # ou c = Cachorro(nome=”Bob”)\n>>> c.alimento\ncarne\n>>> c.habitat"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-144-de-225__voz-narrador.wav": {
       "fingerprint": "459a6f221c3ca743bc0de50c058c9e1995b69d2ce0c7d7ec6440920f9c34c149",
@@ -1727,7 +1870,8 @@
       "generation_id": "gen-tts-1784824213-HFiMjjROpCEzw2EkrHKz",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.000372,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "domestico\n>>> c.nome\nBob"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-145-de-225__voz-narrador.wav": {
       "fingerprint": "7f7793c69ed908366e7c28497e313f2f0423f34610e3eddee0660d095f455c8d",
@@ -1739,7 +1883,8 @@
       "generation_id": "gen-tts-1784824222-UgeWvgKZLDIXLQoJOMyn",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00046872,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exercício:\nAlterar a classe Cachorro para Animais de modo que possamos no momento da instância\nda classe definir o tipo de animal e suas características"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-146-de-225__voz-narrador.wav": {
       "fingerprint": "6c2eaa4b398c67d6d75205b17d70d12bba3841727434a7f42d9295b5288aec0e",
@@ -1751,7 +1896,8 @@
       "generation_id": "gen-tts-1784824231-8nyeqBjGoqQ97vciHuip",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00052142,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Documentando o arquivo python.\nclass Teste(objects):\n ””” Este é um teste de apresentação do atributo especial\n__doc__.”””\n def complemento(self):\n  ””” Pode -se apresentá -lo com o comando help\ntambém!”””\n  print(“help(classe)”)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-147-de-225__voz-narrador.wav": {
       "fingerprint": "f3d6a86954c96b2dd2b04dd7080d457925706d6f0e24407e6f77facb7b5975b0",
@@ -1763,7 +1909,8 @@
       "generation_id": "gen-tts-1784824240-F9H2szr1yBC2XdkDi3M2",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0004433,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo:\n>>> help(Teste)\n>>> print(Teste.__doc__)\n>>> print(Teste().__doc__)\n>>> print(Teste().complemento.__doc__)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-148-de-225__voz-narrador.wav": {
       "fingerprint": "a44da8e6f7dd03c36addd18c9d2669cd9024240885625afd7347452c83dff9c4",
@@ -1775,7 +1922,8 @@
       "generation_id": "gen-tts-1784824248-KW8rg67pNJkqe5m9ZCoi",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00041912,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "3.4. Encapsulamento/herança\nclass A(objects):\n a = 1 #atributo público\n __b = 2 #atributo privado"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-149-de-225__voz-narrador.wav": {
       "fingerprint": "fe4f3db173d911ae922d265d00f25a968fb55f50e50d0884ca8446e6cf1d979e",
@@ -1787,7 +1935,8 @@
       "generation_id": "gen-tts-1784824258-gg13Web11AqdvRBaIlib",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0002697,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "O exemplo do cachorro é um recurso didático recorrente porque torna visível a diferença entre classe e instância por meio de algo concreto. Já o uso de __doc__ aproxima o estudante de uma prática profissional importante: fazer o próprio código explicar como deve ser usado."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-150-de-225__voz-narrador.wav": {
       "fingerprint": "304f9bd113a2bbb743acda14b756e05382393c3e772c0f78027b7afa7eb780ff",
@@ -1799,7 +1948,8 @@
       "generation_id": "gen-tts-1784824268-KDADBGWgxqUgsB3nOq0i",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00048608,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "class B(A):\n __c = 3 # atributo privado a B\n def __init__(self):\n  print(self.a)\n  print(self.__c)\n def __nome(self):\n  print(self.__c)\n def pNome(self):\n  return self.__nome()"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-151-de-225__voz-narrador.wav": {
       "fingerprint": "806271c2fe290acbd953090e1861785dffbaca5947ffe590aa4933dbe0dd15f0",
@@ -1811,7 +1961,8 @@
       "generation_id": "gen-tts-1784824276-0jvEDo1CYbYLRTGhRssL",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00037944,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exemplo:\n>>> a = A()\n>>> print(a.a)\n1"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-152-de-225__voz-narrador.wav": {
       "fingerprint": "5c04ce106626066d2059e1f5ce9049f8e4381b9e43555f95f5739a8e641a0f45",
@@ -1823,7 +1974,8 @@
       "generation_id": "gen-tts-1784824283-4EUXagBdAB140N1N3qLn",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00051274,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": ">>> b = B()\n1\n3\n>>> print(b.__b) # erro, __b é privado de A\n>>> print(b.__c) # erro, __c é privado de B só chamado pela\nclasse\n>>> print(b.__nome()) # erro, método privado de B\n>>> print(b.pNome())"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-153-de-225__voz-narrador.wav": {
       "fingerprint": "3b8234116038a714db42c9740c3a68e57f215a6b5b4b639dc8fe32c97601dbb4",
@@ -1835,7 +1987,8 @@
       "generation_id": "gen-tts-1784824289-Vti2vD8hkhkb3eO8bUKt",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00040424,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "3.5. Pilha em Python (stack)\nEstrutura chamada LIFO (Last In – First Out)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-154-de-225__voz-narrador.wav": {
       "fingerprint": "d255ad7673e1ec7f37a7f5278c4f5e5c8fae319928e2b5a9b5ff06a4b3b0d16b",
@@ -1847,7 +2000,8 @@
       "generation_id": "gen-tts-1784824296-fRHS06H9vHOgMqo6u5k1",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0004681,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Operações básicas:\n* TOP – acessa o elemento posicionado no topo da pilha;\n* PUSH – insere um elemento no topo da lista;\n* POP – remove o elemento do topo da lista."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-155-de-225__voz-narrador.wav": {
       "fingerprint": "2ac0d3f99a8d31f0cf61867cd6c1fc1154a7a83414db32e73cf3a75072b14745",
@@ -1859,7 +2013,8 @@
       "generation_id": "gen-tts-1784824320-CrBfre4qoGmeQjLcRi73",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00034844,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Elementos"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-156-de-225__voz-narrador.wav": {
       "fingerprint": "bc34b09f703a34a1c809bfcc9418f49ff566adba1a517a4a4f53de8cb61fe680",
@@ -1871,7 +2026,8 @@
       "generation_id": "gen-tts-1784824333-38VmuCDDfPnBnq13ZerF",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00034286,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "FIGURA"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-157-de-225__voz-narrador.wav": {
       "fingerprint": "768b8dbad13e928ea47fbb880ff1f0da67d499e088a0845e9c075a774b32bc6f",
@@ -1883,7 +2039,8 @@
       "generation_id": "gen-tts-1784824343-cuYfaHfmYSKqVte8XSdQ",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00047616,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Arquivo pilha.py que contém a classe Stack.\nclass Stack(objetct):\n ””” Método de inicialização que cria uma lista vazia\nquando instanciada. ”””\n def __init__(self):\n  self.__pilha = []"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-158-de-225__voz-narrador.wav": {
       "fingerprint": "8b896339968c1d6e83e76d0c00a04b77198e73a05686e38700530da514991e7a",
@@ -1895,7 +2052,8 @@
       "generation_id": "gen-tts-1784824353-z4Vt00l01Ybr6FxDP8VO",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0004433,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "””” Método que insere um objeto ao final da pilha.”””\n def pushObj(self, obj):\n  self.__pilha.append(obj)\n  print(self.__pilha)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-159-de-225__voz-narrador.wav": {
       "fingerprint": "5ff7078d8b22e790984a99fb47eb6b85457e3f0f18091ec8fc5208ecc3053158",
@@ -1907,7 +2065,8 @@
       "generation_id": "gen-tts-1784824360-IGKe9Lu34P6PqkXwgFSK",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00048174,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "””” Método que retorna e remove o último elemento da\npilha. ”””\n def popObj(self):\n  if (self.__pilha != []):\n   return self.__pilha.pop()\n  else:\n   print(“Pilha vazia!!!”)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-160-de-225__voz-narrador.wav": {
       "fingerprint": "5bf086d8b92d7a51838ecbb7177e6d29ba0ab9833c6fda64af445e794c6c48fd",
@@ -1919,7 +2078,8 @@
       "generation_id": "gen-tts-1784824366-fXJNdAiZb3Zf8aLqIeKP",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00039618,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "””” Método que mostra a pilha. ”””\n def showObj(self):\n  print(self.__pilha)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-161-de-225__voz-narrador.wav": {
       "fingerprint": "8e1c9554eb32a66d902eea7c14d0eb0e3aa4231a6d34e65557d87b9696d42ca0",
@@ -1931,7 +2091,8 @@
       "generation_id": "gen-tts-1784824372-BWxhcKvE1rIT5ep3OIC8",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0005084,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exercício:\n>>> from pilha import Stack\n>>> p = Stack()\n>>> p.pushObj(3)\n>>> p.pushObj(8)\n>>> p.pushObj([1, 7])\n>>> p.pushObj((“nome”, “telefone”))\n>>> p.pushObj(“Aula”)\n>>> p.popObj()\n>>> p.popObj()\n>>> p.showObj()"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-162-de-225__voz-narrador.wav": {
       "fingerprint": "56408602e0870fe188d23617b6ed060739fdee6c586db452da7dda15df1d48f2",
@@ -1943,7 +2104,8 @@
       "generation_id": "gen-tts-1784824382-VIZPcYjROkSG7T4Jaav3",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0003999,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "3.6. Fila em Python (Queue)\nEstrutura chamada FIFO (First In – First Out)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-163-de-225__voz-narrador.wav": {
       "fingerprint": "563ffce40612902de969e4c70cb2a3df9deb53eed6c10dc8b9e9bf45dcee0615",
@@ -1955,7 +2117,8 @@
       "generation_id": "gen-tts-1784824390-h8V3n05q9zSVgVVIMTVU",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00026722,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Encapsulamento e pilhas apresentam duas formas de controlar complexidade: esconder detalhes internos e escolher uma ordem precisa para manipular dados. A lógica LIFO aparece em situações tão diversas quanto desfazer ações, chamadas de funções e históricos de navegação."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-164-de-225__voz-narrador.wav": {
       "fingerprint": "1d3dda43dceeef3afc01e41d1bf701dc8c739e35b2dc5ff7c85bd799378074d7",
@@ -1967,7 +2130,8 @@
       "generation_id": "gen-tts-1784824399-8yMv2Ws9L2GDCWerqvsE",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00042594,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Operações básicas:\n* Enqueue – insere um elemento no final da fila.\n* Dequeue – remove um elemento do começo da fila"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-165-de-225__voz-narrador.wav": {
       "fingerprint": "b48e8fc91893f6e9b6f7f4e1d2a926014fe51984be577734c248eaff2aa7079c",
@@ -1979,7 +2143,8 @@
       "generation_id": "gen-tts-1784824413-gb1Iv8TtRQINSu6dNcnE",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00035278,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Elementos\nFIGURA"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-166-de-225__voz-narrador.wav": {
       "fingerprint": "8a0964ba93c0d06f3ad95649d5794fcdf40e29efd40617b9330c94e05c89ae1b",
@@ -1991,7 +2156,8 @@
       "generation_id": "gen-tts-1784824422-UqAoo5l7IhA8wxSuJDJb",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00045756,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Arquivo fila.py que contém a classe Queue.\nclass Queue(object):\n ””” Método de inicialização que cria uma fila vazia\nquando instanciada. ”””\n def __init__(self):\n  self.__fila = []"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-167-de-225__voz-narrador.wav": {
       "fingerprint": "c5f2b1fbb77a4f0d63adb2a754f6ebf82e3f8fb8a08bc4a1cec7e6e6af26bdc3",
@@ -2003,7 +2169,8 @@
       "generation_id": "gen-tts-1784824430-q9Qlkfi1meuwYn7nCVrG",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00043152,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "””” Método que insere um objeto ao final da fila. ”””\n def enqueueObj(self, obj):\n  self.__fila.append(obj)\n  print(self.__fila)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-168-de-225__voz-narrador.wav": {
       "fingerprint": "edbeb3f93d3f05ba0c73bb08e1375bc1b20bc72d58ee326ca2636882461658f6",
@@ -2015,7 +2182,8 @@
       "generation_id": "gen-tts-1784824444-aTsJG3T4m3eay07FyPMw",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00047058,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "””” Método que retorna e remove o primeiro elemento da\nfila. ”””\n def dequeueObj(self):\n  if (self.__fila != []):\n   return self.__fila.pop(0)\n  else:\n   print(“Fila vazia!!!”)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-169-de-225__voz-narrador.wav": {
       "fingerprint": "9c41cf2620181eaa1334c61960d8ff954262eca1dbe3c1d3738ee0dcacd343c2",
@@ -2027,7 +2195,8 @@
       "generation_id": "gen-tts-1784824457-wT5ZhkCqUp6EIZwAnG7i",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00039742,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "””” Método que mostra a fila.”””\n def showObj(self):\n  print(self.__fila)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-170-de-225__voz-narrador.wav": {
       "fingerprint": "1fca2382e98fb2baddc20fc2d1ecb04a0fd43cf2f2baf1f6a23cef53527e2acf",
@@ -2039,7 +2208,8 @@
       "generation_id": "gen-tts-1784824464-2l4tOhICHWwwbg9M9NO9",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00052142,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exercício:\n>>> from fila import Queue\n>>> f = Queue()\n>>> f.enqueueObj(3)\n>>> f.enqueueObj (8)\n>>> f.enqueueObj ([1, 7])\n>>> f.enqueueObj ((“nome”, “telefone”))\n>>> f.enqueueObj (“Aula”)\n>>> f.dequeueObj()\n>>> f.dequeueObj()\n>>> f.showObj()"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-171-de-225__voz-narrador.wav": {
       "fingerprint": "9f4c824a3d6fffc98699c7f3da9007dd7aaab6f64eb9c5f427a8174fcff2ca0c",
@@ -2051,7 +2221,8 @@
       "generation_id": "gen-tts-1784824471-AbDOmnCZsH33p989cJDx",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00041292,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Capítulo 4\nConexão ao banco de dados\n4.1. Objeto CRUD em Banco de Dados com python"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-172-de-225__voz-narrador.wav": {
       "fingerprint": "d5a8e1810e35efce03eebc2825b4c41ad54d6f434e16aa5b41119f6b8037ed34",
@@ -2063,7 +2234,8 @@
       "generation_id": "gen-tts-1784824478-yUrXN4KlIFyLAtyNdqm4",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00042098,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Instruções SQL:\nCreate – INSERT INTO\nINSERT INTO tabela (campo1[, ...]) VALUES (valor1[, ...])"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-173-de-225__voz-narrador.wav": {
       "fingerprint": "f4f47ad623552291ac98e0b9adc6884f2ec0273489e52a0ff411ef64f438e3d1",
@@ -2075,7 +2247,8 @@
       "generation_id": "gen-tts-1784824487-UV71GSSwP47rkeNzOSTx",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00038812,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Read – SELECT\nSELECT * FROM tabela WHERE (campo1 = valor1)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-174-de-225__voz-narrador.wav": {
       "fingerprint": "b99c188cd0aa97e11acb3b44c9057f2cb3e9dd0990fe8ced5e5f6a4ee75021a7",
@@ -2087,7 +2260,8 @@
       "generation_id": "gen-tts-1784824494-uPryYuomo1bwlhntRk5M",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0003937,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Update – UPDATE\nUPDATE tabela SET campo = valorNovo WHERE (campo1 = valor1)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-175-de-225__voz-narrador.wav": {
       "fingerprint": "1827eee80e6ecd2825d0c1a5b4c5cad733a12993579f6b79b1f481eaf3fcb6ea",
@@ -2099,7 +2273,8 @@
       "generation_id": "gen-tts-1784824501-glAhGK1guNyqs8JCAF0w",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00037572,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Delete – DELETE\nDELETE FROM tabela WHERE (campo1 = valor1)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-176-de-225__voz-narrador.wav": {
       "fingerprint": "71debb0b0d3d98547807431fd3b1c2349e67b69ec5c735f43bc0b418afa6c5fd",
@@ -2111,7 +2286,8 @@
       "generation_id": "gen-tts-1784824508-E6L4wsHnbEehzJEXZk3N",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00048236,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "4.2. Acesso ao banco de dados SQL\nPrimeiro deve-se importar os drivers(módulos) do banco que irá usar:\nMySQL – import MySQLdb\nOracle – import cx_Oracle\nPostgreSQL – import psycopg2\nSQLite3 – import sqlite3"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-177-de-225__voz-narrador.wav": {
       "fingerprint": "fc37edbea31489008664c6ced594b0c1f3c00c6eeffdd5f03326521dc15662ee",
@@ -2123,7 +2299,8 @@
       "generation_id": "gen-tts-1784824521-gKzL0LzZKelWpPSsiqBv",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00026536,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "A fila oferece o contraponto intuitivo à pilha: a ordem de chegada passa a governar o atendimento. Essa metáfora atravessa sistemas operacionais, impressoras, servidores e aplicativos de mensagens, mostrando como uma estrutura elementar sustenta serviços cotidianos."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-178-de-225__voz-narrador.wav": {
       "fingerprint": "bd1a5cca048d7a1b410ea8b194fbfbd0776c53078f6af38b2037ce23e21b183c",
@@ -2135,7 +2312,8 @@
       "generation_id": "gen-tts-1784824534-OwHgheaNX8wp5BhAKy0O",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00041478,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "As conexões.\nMySQL\ncon = MySQLdb.connect(“servidor”, “usuário”, “senha”, “banco”)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-179-de-225__voz-narrador.wav": {
       "fingerprint": "1a03631fd08fcb460885704be880c830eab7a71745f2037112dfe8fe5dadccf2",
@@ -2147,7 +2325,8 @@
       "generation_id": "gen-tts-1784824543-QWEEbO2Ircr3IoTpRq0O",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00038626,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Oracle\ncon = cx_Oracle.connect(“usuário/senha@servidor”)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-180-de-225__voz-narrador.wav": {
       "fingerprint": "c6d552a8e9953e93f2d6b9d73eac6e3b71eb30a1ea803b5114e21bdb12cac3f6",
@@ -2159,7 +2338,8 @@
       "generation_id": "gen-tts-1784824549-GHvcOJwoqXrWxfphF7Mx",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00042532,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "PostgreSQL\ncon = pyscopg2.connect(host=”servidor”, user=”usuário”, password=“senha”,\ndbname=”banco”)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-181-de-225__voz-narrador.wav": {
       "fingerprint": "ea65f150e45712c3f5199625b4a1f4d0b8021ed6c9cb182e4fe2931679d90a4f",
@@ -2171,7 +2351,8 @@
       "generation_id": "gen-tts-1784824558-Ks3e4GpuNxlhvLaFm8y2",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00037262,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "SQLITE 3\ncon = sqlite3.connect(“banco”)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-182-de-225__voz-narrador.wav": {
       "fingerprint": "eea6b977bc6295a4e30e8563cf14cf46fdc0f3fc473babf7bb6ad53a2fcd1be9",
@@ -2183,7 +2364,8 @@
       "generation_id": "gen-tts-1784824566-yxTCvExMA1p2zTRQw5Ge",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00038006,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Obter uma transação (cursor)\ncur = con.cursor()"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-183-de-225__voz-narrador.wav": {
       "fingerprint": "28bbacc02a516154fd9559dc7e6a7783f5b2b38e33406cbbd274df9971269ae7",
@@ -2195,7 +2377,8 @@
       "generation_id": "gen-tts-1784824573-VHopXjkUwtfZFQPmFexB",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00038068,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Executar um SQL (execute)\ncur.execute(“ALGUM SQL”)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-184-de-225__voz-narrador.wav": {
       "fingerprint": "0720ddd2256df0aa213f377207a9180bf4064c2f21f637995e8bbb9f3d67857a",
@@ -2207,7 +2390,8 @@
       "generation_id": "gen-tts-1784824579-jq67bTKulm72zRBFcKkY",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00037572,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Salvar a transação (commit)\ncon.commit()"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-185-de-225__voz-narrador.wav": {
       "fingerprint": "088966276e4f7a9159eae2f2381e30df0501e441b9e80e965bc74dddadce1f23",
@@ -2219,7 +2403,8 @@
       "generation_id": "gen-tts-1784824587-5ExETMf1JNH7a3qUnAfN",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00047616,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Capturar resultados (fetch)\nres = cur.fetchone() # retorna um linha\nres = cur.fetchall() # retorna todas as linhas\nres = cur.dictfetchall # retorna as linha no formato de um dicionário."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-186-de-225__voz-narrador.wav": {
       "fingerprint": "e7acd6e2b973c345981858d0daf0b74c6d337ff38d28d3f2286bcdee9b0aaee7",
@@ -2231,7 +2416,8 @@
       "generation_id": "gen-tts-1784824601-NluUe2KKiRbT3xj18P9m",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0003813,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "4.3. Aplicação do CRUD"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-187-de-225__voz-narrador.wav": {
       "fingerprint": "c2405fae72b9a5394c131d158b395296026a488b0b5237edce65bc955aa502dc",
@@ -2243,7 +2429,8 @@
       "generation_id": "gen-tts-1784824614-T4VZ1zIZqMjtiFVkDoPq",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00044144,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "# coding=cp1252\nimport sqlite3\n# Criar uma conexão e uma transação\nconexão = sqlite3.connect(“aula.sqlite”)\ncursor = conexao.cursor()"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-188-de-225__voz-narrador.wav": {
       "fingerprint": "f12f704217f15d8aa9718a3eb5bb141bf6689cf3b5def1fed7de764913dd1270",
@@ -2255,7 +2442,8 @@
       "generation_id": "gen-tts-1784824634-NjkVLdDSkx4ODIaCPd8a",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00058466,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "# Criar uma tabela, antes verificar sua existência.\ncursor.execute(“select name from sqlite_master”)\nresultado = cur.fetchall()\nfor i in resultado:\n if (i == “animais”):\n  print(“Tabela animais já existe”)\n else:\n  sql = ”””create table animais\n   (id interger primary key,\n   Nome varchar(100),\n   Habitat varchar(50))”””\n  cursor.execute(sql)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-189-de-225__voz-narrador.wav": {
       "fingerprint": "2598ba6b2f4dff8cd2bfcd75a0653d7cde7e671cdca4522836d5c8a2af7a5e39",
@@ -2267,7 +2455,8 @@
       "generation_id": "gen-tts-1784824650-gY9rIpysijpNnBeGCoQe",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0004061,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "# Sentença SQL para inserir dados via SQLite\nsql = “insert into animais values (null, ?, ?)”"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-190-de-225__voz-narrador.wav": {
       "fingerprint": "e5ca510a583da775b8ccb3084193c4a3588634acd7f52a601a70e68d68673e09",
@@ -2279,7 +2468,8 @@
       "generation_id": "gen-tts-1784824656-yHGidijK2k4crRouN84q",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00041106,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "# Valores que serão registrados na tabela\nvalores = [(“Soneca”, “Doméstico”),(“Kate”, “Selvagem”)]"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-191-de-225__voz-narrador.wav": {
       "fingerprint": "0c9fa04c50957822ee90f506e4d66b08557041167dca076a2872018d01e87b8e",
@@ -2291,7 +2481,8 @@
       "generation_id": "gen-tts-1784824663-aeCptgtLBkznHAAPIp76",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00038936,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "# Inserir valores\nfor rec in valores:\n cursor.execute(sql, rec)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-192-de-225__voz-narrador.wav": {
       "fingerprint": "741d3ae67cd7c26609166d7e758bdbcf1c4d263e7f20f5df29272c68b94f20e4",
@@ -2303,7 +2494,8 @@
       "generation_id": "gen-tts-1784824671-qEOP8EFApc9YFV18IlPi",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00036828,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "# Confirma a transação\nconexao.commit()"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-193-de-225__voz-narrador.wav": {
       "fingerprint": "8b6031a8ab86871e1ed3c0a02bde1ea13a4e63c535abe5531ca9cbb1d7fea9aa",
@@ -2315,7 +2507,8 @@
       "generation_id": "gen-tts-1784824678-HXluV5I9ULiVhfq05iee",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00044144,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "# Selecionar registros\ncursor.execute(“select * from animais”)\nresultados = cursor.fetchall()\nFor rec in resultados:\n Print(“%d: %s(%s)” % rec)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-194-de-225__voz-narrador.wav": {
       "fingerprint": "8c36ad4ccd6df61dc35fc72433bf2ae97cdabfd7d6bee2dad330ed81d3c93b55",
@@ -2327,7 +2520,8 @@
       "generation_id": "gen-tts-1784824687-3SkBiJJiwncMqx7rVINO",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.000279,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "A sigla CRUD se consolidou como uma maneira prática de resumir o ciclo de vida dos dados em aplicações. É interessante notar o percurso histórico do trecho, que vai de vários bancos a SQLite, solução embutida que dispensa servidor e ainda é muito usada em protótipos e aplicativos locais."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-195-de-225__voz-narrador.wav": {
       "fingerprint": "8ffcececa9dc31e3a470bea63480dc51a178ae4a67f44415fb2c1a0adb689bc5",
@@ -2339,7 +2533,8 @@
       "generation_id": "gen-tts-1784824695-MP9am7YV737LaAXLO2zf",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00045198,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "# Alterar registros\n# Via Sqlite\nsql = “update animais set nome=?, habitat=? Where id=?”\nvalores = (“Berola”, “Selva”, 1)\ncursor.execute(sql, valores)\nconexao.commit()"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-196-de-225__voz-narrador.wav": {
       "fingerprint": "d4baad618cb44669d9d8015b070ade3a9529c279b2c41df2cf93becc9d6772e1",
@@ -2351,7 +2546,8 @@
       "generation_id": "gen-tts-1784824703-kZdhgaZuRxoEysaLWGsK",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00048236,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "# Via python\nvalores = (“Toto”, “Híbrido”, 2)\nsql = “update animais se nome=’%s’, habitate=’%s’ where\nid=’%i’” % (valores[0], valores[1], valores[2])\ncursor.execute(sql)\nconexao.commit()"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-197-de-225__voz-narrador.wav": {
       "fingerprint": "6a3a5ea715f744a96d99897e562ad2ca4e7401adabc85557f586e770b6774bf1",
@@ -2363,7 +2559,8 @@
       "generation_id": "gen-tts-1784824710-E7CL4E3KUCkzgSViw6qk",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00042532,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "# Deletar registro\nsql = “delete from animais where id=?”\nvalores = (2,)\ncursor.execute(sql, valores)\nconexao.commit()"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-198-de-225__voz-narrador.wav": {
       "fingerprint": "b2a10258574dcc766b1912edbfcc02d1a59179f696685e8afade9d36d607490a",
@@ -2375,7 +2572,8 @@
       "generation_id": "gen-tts-1784824717-fpl1K4iGZDPhiJUQgaaj",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00039122,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "# Limpar as operações pendentes no banco\nconexao.rollback()"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-199-de-225__voz-narrador.wav": {
       "fingerprint": "688e5e084a20c999206d7f7b52b322f9769de5a891e96fea1b658ea1bcaf9cad",
@@ -2387,7 +2585,8 @@
       "generation_id": "gen-tts-1784824725-f6BDArsUuRcZ55kkKH8w",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00036704,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "# Fechar a conexão\nconexao.close()"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-200-de-225__voz-narrador.wav": {
       "fingerprint": "10a344bbecb63670d6aeaf3e0ca799dfc24a2421c4e5986bb5d512bf902ec576",
@@ -2399,7 +2598,8 @@
       "generation_id": "gen-tts-1784824734-a3YPMyBKlBS6TldRFwoc",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00043958,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Agora vamos criar uma classe CRUD, genérica, capaz de receber uma conexão e poder\nexecutar as quatro operações básicas em uma tabela."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-201-de-225__voz-narrador.wav": {
       "fingerprint": "bdef7760dd00d47c1e31e66579fb1c65d4c8d99d881c0c6b9f06273529434281",
@@ -2411,7 +2611,8 @@
       "generation_id": "gen-tts-1784824740-hA9OQEo9EyXisJ8hRRpF",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00037448,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "operacao.py\n# coding= cp1252"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-202-de-225__voz-narrador.wav": {
       "fingerprint": "cb88f945d0bb91be1ad06a951946924eb209984cf0c15d66d8b02c05793b210f",
@@ -2423,7 +2624,8 @@
       "generation_id": "gen-tts-1784824749-jROOVQTCjt4caUbHy3dY",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00042594,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "\"\"\"O objetivo desta classe é fazer a operação CRUD (criar,\nler, alterar e deletar).\"\"\"\nclass Operacao:"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-203-de-225__voz-narrador.wav": {
       "fingerprint": "e406930bd0ebeb9d7e03e0f1265f540a62ee83eb2f842f3f6ade909fedcabd7e",
@@ -2435,7 +2637,8 @@
       "generation_id": "gen-tts-1784824756-XPzOJWAoy797MFlDokmd",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00044826,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "\"\"\"Método construtor que recebe a conexão do banco de\ndados\"\"\"\n    def __init__(self, conexao):\n        self.conexao = conexao\n        self.cursor = conexao.cursor()"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-204-de-225__voz-narrador.wav": {
       "fingerprint": "ccdab345ff5028b6d52de9e0910891162a0888444cb4f6067106b069530ab14d",
@@ -2447,7 +2650,8 @@
       "generation_id": "gen-tts-1784824764-6wAo9Fkv2W6P8TlmJr7Y",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0005828,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "\"\"\"Método destinado a inserir registros na tabela\nespecificada conforme os campos escolhidos\"\"\"\n    def inserir(self, tabela, campos, dados):\n        \"\"\"Gerar o SQL para inclusão\"\"\"\n        valores = ''\n        for i in campos:\n            valores+=', ?'\n        sql = \"INSERT INTO %s VALUES (null%s)\" % (tabela,\nvalores)\n        print(sql)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-205-de-225__voz-narrador.wav": {
       "fingerprint": "5032530c2abe0160203afec0a5d200efb1e0297c582de7c5205c6d7e7b6fb5ac",
@@ -2459,7 +2663,8 @@
       "generation_id": "gen-tts-1784824772-Yh45NSitF0cMG69BxjF9",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00039246,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "\"\"\"Executa SQL, insere registros\"\"\"\n        self.cursor.execute(sql, dados)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-206-de-225__voz-narrador.wav": {
       "fingerprint": "a8d7398d459a67e46ffc6d09f00b74f4d5e60a2c759f14770473ddd695bd217f",
@@ -2471,7 +2676,8 @@
       "generation_id": "gen-tts-1784824781-pE555FOnpa0ArTaZ51Ts",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0003627,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "\"\"\"Confirma a transação\"\"\"\n        self.conexao.commit()"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-207-de-225__voz-narrador.wav": {
       "fingerprint": "d8ce4a30eaa728c178b47bbdaa62419410ad4f08e45d9cc625cf15427bbe980a",
@@ -2483,7 +2689,8 @@
       "generation_id": "gen-tts-1784824788-id4i3krj5FANj2AyNkj8",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00071424,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "\"\"\"Método destinado a consultar registros da tabela\nespecificada conforme os campos escolhidos\"\"\"\n    def consultar(self, tabela, campos='', dados=''):\n        \"\"\"\n        Verifica-se se foi passado os parâmetros (campos e\ndados).\n        O 'if' testa se não foi passado os parâmetros (campos\ne dados), caso positivo, faz uma pesquisa geral da tabela;\n        O 'elif' testa se foi passado somente um parâmetro\n(campos e dados), faz uma pesquisa especifica;\n        O 'else' pressupõe-se mais de um parâmetro (campos\ne dados), faz uma pesquisa por mais de um campo."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-208-de-225__voz-narrador.wav": {
       "fingerprint": "10cd46c90d5ef255cc4f08a4ed4ac132cfb7c746a1e3d5232d36a0107d3b1c11",
@@ -2495,7 +2702,8 @@
       "generation_id": "gen-tts-1784824798-bJnZf6omZs3l5oZKlieO",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00028272,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "A tentativa de criar uma classe CRUD genérica aponta para a busca por abstração e reaproveitamento, um passo natural após aprender operações isoladas. Também é um ponto didático crucial: montar SQL por concatenação, como aparece em partes do exemplo, pode abrir espaço para injeção de comandos."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-209-de-225__voz-narrador.wav": {
       "fingerprint": "7dc13bf8b64bc7a38828ae0b4b8b4d9ed2acca8c1653eb392b2f7d5a6105aa5e",
@@ -2507,7 +2715,8 @@
       "generation_id": "gen-tts-1784824805-FFR9AoiWEr8SKxN1kglB",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00065472,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Gerar o SQL para pesquisa.\n        \"\"\"\n        if campos == '':\n            sql = \"SELECT * FROM %s\" % (tabela)\n        elif len(campos) == 1:\n            sql = \"SELECT * FROM %s WHERE %s = '%s'\" %\n(tabela, campos[0], dados[0])\n        else:\n            pesquisa = ''\n            for i in range(len(campos)):\n                pesquisa+=\"%s = '%s' AND \" % (campos[i],\ndados[i])\n            sql = \"SELECT * FROM %s WHERE %s\" % (tabela,\npesquisa[:-5])\n        print(sql)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-210-de-225__voz-narrador.wav": {
       "fingerprint": "700ab3e315938f00a8e862aa910775dd7d723a9f440b4da9f264f1a38af65bb4",
@@ -2519,7 +2728,8 @@
       "generation_id": "gen-tts-1784824812-vVYsq0SHsompbTRPu0OL",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00038192,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "\"\"\"Executa a SQL, Seleciona registros\"\"\"\n        self.cursor.execute(sql)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-211-de-225__voz-narrador.wav": {
       "fingerprint": "81cf67bf24f4662b8367517314bdf6f25491f52b41dd7df18bebbba3e90080ec",
@@ -2531,7 +2741,8 @@
       "generation_id": "gen-tts-1784824818-i3lsjElI78EJpvuhFJEY",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00038688,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "\"\"\"Recupera os resultados\"\"\"\n        resultados = self.cursor.fetchall()"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-212-de-225__voz-narrador.wav": {
       "fingerprint": "e3c6d50276bfd62fa05be65a595f4ba5b639b1536f4b319b9cae5ed113758d64",
@@ -2543,7 +2754,8 @@
       "generation_id": "gen-tts-1784824824-kjNknvcRM5mknEF1gSaI",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00040548,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "\"\"\"Mostra\"\"\"\n        for rec in resultados:\n            print (rec)\n        return resultados"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-213-de-225__voz-narrador.wav": {
       "fingerprint": "031c0592d488c0e0dab812035e7f0ec8981dad4ea1c1203d4d440f2ef9d4dac1",
@@ -2555,7 +2767,8 @@
       "generation_id": "gen-tts-1784824835-NDh4acbpqYOE5j3v2Pr4",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00063736,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "\"\"\"Método destinado a alterar registros da tabela\nespecificada conforme os campos escolhidos\"\"\"\n    def alterar(self, tabela, campos, dados):\n        \"\"\"Gerar o SQL para pesquisa e alteração\"\"\"\n        pesquisa = ''\n        for i in range(1,len(campos)):\n            pesquisa+=\"%s = '%s', \" % (campos[i], dados[i])\n        sql = \"UPDATE %s SET %s WHERE %s=%i\" % (tabela,\npesquisa[:-2], campos[0], dados[0])\n        print(sql)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-214-de-225__voz-narrador.wav": {
       "fingerprint": "80c2764ab70a3b159880527dea487e43124521cf5d038622726e0f20163c879e",
@@ -2567,7 +2780,8 @@
       "generation_id": "gen-tts-1784824848-Y4bgnUmwjUAau0WKdyDr",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0003751,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "\"\"\"Executa a SQL, altera registros\"\"\"\n        self.cursor.execute(sql)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-215-de-225__voz-narrador.wav": {
       "fingerprint": "98297c07b85d1ad414eb68b2bd4a9ccecfb94267dd8c7a33ff97caa1b80c3f9b",
@@ -2579,7 +2793,8 @@
       "generation_id": "gen-tts-1784824871-A2QZWLwpWf4KnpBzJx3i",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00037262,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "\"\"\"Confirma a transação\"\"\"\n        self.conexao.commit()"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-216-de-225__voz-narrador.wav": {
       "fingerprint": "f3cf6ba5724e4b33cea24feb1ff9ae288504a6bf637ebf4f2af052397f32ce84",
@@ -2591,7 +2806,8 @@
       "generation_id": "gen-tts-1784824889-gAaxQasAsMsSLx5TElMO",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00051956,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "\"\"\"Método destinado a anterar registros da tabela\nespecificada conforme os campos escolhidos.\"\"\"\n    def deletar(self, tabela, campos, dados):\n        \"\"\"Gerar o SQL para deleção\"\"\"\n        sql = \"DELETE FROM %s WHERE %s = %s\" % (tabela,\ncampos[0], dados[0])\n        print(sql)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-217-de-225__voz-narrador.wav": {
       "fingerprint": "e7438d5c98e000307d560e4a3c23536290404bc92374e7461666027b920ddff4",
@@ -2603,7 +2819,8 @@
       "generation_id": "gen-tts-1784824906-YJDFaKkc7WcJYwv5ni2i",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00028706,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Este desenho de consulta tenta transformar diferentes quantidades de filtros em uma única rotina, antecipando padrões de acesso a dados. Pela perspectiva atual, ele também permite discutir por que consultas parametrizadas e ORMs ganharam espaço: reduzem riscos e separam melhor dados da instrução SQL."
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-218-de-225__voz-narrador.wav": {
       "fingerprint": "76f60ca3a8a9cea964a4f09914c0ba165e2409e39f5af989f56bb6033e9865f5",
@@ -2615,7 +2832,8 @@
       "generation_id": "gen-tts-1784824918-jEog5qtK0dX42nzTDkZF",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00037696,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "\"\"\"Executar a SQL, deleta registros\"\"\"\n        self.cursor.execute(sql)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-219-de-225__voz-narrador.wav": {
       "fingerprint": "e253bd513e3b6f9a89d917408f16d7d896539199846bb195e6d717f40593ef72",
@@ -2627,7 +2845,8 @@
       "generation_id": "gen-tts-1784824932-mwzJGg2EabAymqCiamOV",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00037448,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "\"\"\"Confirma a transação\"\"\"\n        self.conexao.commit()"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-220-de-225__voz-narrador.wav": {
       "fingerprint": "077e8566db973e28dbb81dd48fe9709b24bdf56e84e7245ed068ba585cc18283",
@@ -2639,7 +2858,8 @@
       "generation_id": "gen-tts-1784824940-ifFXeIUY75vKM9PgxJTG",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00043276,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exercício:\nimport sqlite3\nconexao = sqlite3.connect(“aula.sqlite”)\nfrom operação import Operacao\no = Operacao(conexao)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-221-de-225__voz-narrador.wav": {
       "fingerprint": "d9966cc8b898267f4b0e3f2ec4d6c9092d12df00669a3ca0f56a0f4542ad961f",
@@ -2651,7 +2871,8 @@
       "generation_id": "gen-tts-1784824949-HSBxNnLrze4gN5nydJCv",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00040982,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "campos = (“nome”, “habitat”)\nvalores = (“Totó”, “Lama”)\no.inserir(“animais”, campos, valores)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-222-de-225__voz-narrador.wav": {
       "fingerprint": "1ceea3b7172f934843823f131754cea0b3668be12a42050ba130467c185736d0",
@@ -2663,7 +2884,8 @@
       "generation_id": "gen-tts-1784824956-Mx7SJM7akX6L8fZ14Xti",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0003472,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "o.consultar(“animais”)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-223-de-225__voz-narrador.wav": {
       "fingerprint": "185bec8a107a1bf62da9d44e136cc619990fc9c20756724946dd3a1dc49bd433",
@@ -2675,7 +2897,8 @@
       "generation_id": "gen-tts-1784824963-wYPVMnq4E9kxXOmRkaVf",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.000403,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "campos = (“id”, “nome”)\nvalores = (1, “Rex”)\no.alterar(“animais”, campos, valores)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-224-de-225__voz-narrador.wav": {
       "fingerprint": "73ece7cd112162e6b1f77e00d82f074e96cff1fe4f1b7c17d6681a86bd44a732",
@@ -2687,7 +2910,8 @@
       "generation_id": "gen-tts-1784824974-BDCO3m4tQEgJ67GdSEk0",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00039928,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "campos = (“id”,)\nvalores = (1,)\no.deletar(“animais”, campos, valores)"
     },
     "fonte-custom__episodio-2026-07-23-introducao-a-linguagem-de-programacao-python__modo-reflexive__chunk-225-de-225__voz-narrador.wav": {
       "fingerprint": "0e2c0ac16ff216cdf3715256ddf82260c7b99f0b85cc97e8124c310c7455119c",
@@ -2699,7 +2923,8 @@
       "generation_id": "gen-tts-1784824982-gOP7aScIyQmdsmqme5Rj",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00027404,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "O exercício final fecha o ciclo entre definição de uma classe e seu uso em um programa real, com inserção, consulta, alteração e remoção. Há algo quase documental nesse encerramento: os nomes e exemplos preservam o estilo de apostilas técnicas brasileiras de uma geração anterior."
     }
   },
   "source_key": "custom",

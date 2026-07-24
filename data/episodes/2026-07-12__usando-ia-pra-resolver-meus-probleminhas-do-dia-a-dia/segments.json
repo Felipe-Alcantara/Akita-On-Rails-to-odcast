@@ -7,7 +7,8 @@
       "kind": "chunk",
       "chunk_index": 1,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Olá a todos e bem-vindos ao nosso podcast! Hoje vamos mergulhar em um artigo super interessante do Fabio Akita, intitulado \"Usando IA pra resolver meus probleminhas do dia-a-dia\", publicado lá no AkitaOnRails.com. Akita sempre nos surpreende com suas soluções criativas, não é mesmo?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-002-de-092__voz-apresentador-b.wav": {
       "fingerprint": "b1061ccd8ecbc753685513a2d03b5eca32097fcf2d90bcca7b81267f0ee90b6e",
@@ -15,7 +16,8 @@
       "kind": "chunk",
       "chunk_index": 2,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Exatamente! E o que é fascinante é que, como ele mesmo menciona, ele não costuma escrever um artigo para cada pequeno projeto open source que desenvolve. A maioria desses projetos nasce para resolver problemas muito específicos do cotidiano dele, e um artigo dedicado para cada um seria, de fato, desproporcional."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-003-de-092__voz-apresentador-a.wav": {
       "fingerprint": "a7f2dcacee90337d4e8892d95fd59a9dcb87698c4a5c2370eccd51867c26d05d",
@@ -23,7 +25,8 @@
       "kind": "chunk",
       "chunk_index": 3,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Ah, entendi! Então, ele foi acumulando esses \"probleminhas resolvidos\" e percebeu que tinha uma coleção de projetos que nunca tinham sido apresentados ao público. Que legal que ele decidiu juntar tudo em um só lugar!"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-004-de-092__voz-apresentador-b.wav": {
       "fingerprint": "da6e99a84d441da5404b8451880477b951d07773a3b258d21182cfd288580e4f",
@@ -31,7 +34,8 @@
       "kind": "chunk",
       "chunk_index": 4,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Sim, essa foi a abordagem dele. E o padrão é bastante claro: ele se depara com uma pequena \"fricção\" diária, algo que a maioria de nós simplesmente ignora porque consertar levaria muito tempo. Mas, em vez de engolir essa irritação, ele usa um agente de IA para criar uma solução."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-005-de-092__voz-apresentador-a.wav": {
       "fingerprint": "78ffc464beadc9aee7e42487cd0c8fc41883b56dd499ceac0c085fa77e2d01be",
@@ -39,7 +43,8 @@
       "kind": "chunk",
       "chunk_index": 5,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Um agente de IA? Isso é muito interessante! Então, a IA tornou o processo de transformar uma irritação em uma ferramenta tão rápido e barato que agora vale a pena resolver quase tudo?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-006-de-092__voz-apresentador-b.wav": {
       "fingerprint": "b3c662adece303308c557a1a3fefadaa0f1bc6de4db57887804fdb9b187cb429",
@@ -47,7 +52,8 @@
       "kind": "chunk",
       "chunk_index": 6,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Precisamente. O custo-benefício se inverteu. E, para quem se interessar, todos os projetos que vamos discutir estão disponíveis no GitHub dele, com binários, releases e instruções de instalação."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-007-de-092__voz-apresentador-a.wav": {
       "fingerprint": "ed4763684198fa52e498f52073a7c41822107ecc62813fee29075fad11b2186f",
@@ -55,7 +61,8 @@
       "kind": "chunk",
       "chunk_index": 7,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Perfeito! Já vou deixar o link na descrição. E quais são os projetos que ele destacou neste artigo?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-008-de-092__voz-apresentador-b.wav": {
       "fingerprint": "21506476dd8ef540550d2ba0e3ec46d73e3dc83d68b50d5fa3be2d196062075f",
@@ -63,7 +70,8 @@
       "kind": "chunk",
       "chunk_index": 8,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Ele menciona o clock-tui, com os widgets google-calendar-tui e ghpending; o github-visualize; o frank_geary; a série de mangá em japonês que inclui FrankYomik, FRANK MANGA+ e FRANK Scanlation; o frank_lyrics; o frank_type; o distrobox-gaming e o aitrepreneur-docker. Uma lista bem completa!"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-009-de-092__voz-apresentador-a.wav": {
       "fingerprint": "6832b4ffab36b643641504c20e6d1749003c446993ed3089fc78ea3fc9ccb0e6",
@@ -71,7 +79,8 @@
       "kind": "chunk",
       "chunk_index": 9,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Uau, bastante coisa! Vamos começar com o clock-tui. O que é isso?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-010-de-092__voz-apresentador-b.wav": {
       "fingerprint": "9557f1880dea403942e71b9c8f42960a14b1339da0e6fdd8751e4ba6413d1443",
@@ -79,7 +88,8 @@
       "kind": "chunk",
       "chunk_index": 10,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "O Akita tinha um monitor secundário vertical e queria algo mais útil do que um simples papel de parede. A ideia inicial era apenas um relógio de mesa, mas ele encontrou um programa open source antigo, o clock-tui original, que estava parado. Ele decidiu fazer um fork e continuar o desenvolvimento."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-011-de-092__voz-apresentador-a.wav": {
       "fingerprint": "7a0418820345cd59a0aba45a157a07fd66d4662ebdb327f1943fc852b7091460",
@@ -87,7 +97,8 @@
       "kind": "chunk",
       "chunk_index": 11,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Então ele pegou um projeto que estava esquecido e deu uma nova vida a ele! E o que ele fez de diferente?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-012-de-092__voz-apresentador-b.wav": {
       "fingerprint": "7a64b3539a7059dabcaa6ea9498cf70dc12a6640b76b629727d424499d81091f",
@@ -95,7 +106,8 @@
       "kind": "chunk",
       "chunk_index": 12,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Ele o deixou mais bonito, modernizou as dependências em Rust e, o mais importante, adicionou suporte a widgets de comando. O relógio fica no topo, e embaixo entram painéis que rodam qualquer comando que imprima texto, cada um com atualização independente."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-013-de-092__voz-apresentador-a.wav": {
       "fingerprint": "dd0dbc721968276988373428544cf4645a723be8aed079104d269c33fe14c761",
@@ -103,7 +115,8 @@
       "kind": "chunk",
       "chunk_index": 13,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Widgets de comando? Que interessante! E ele criou alguns widgets próprios, certo?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-014-de-092__voz-apresentador-b.wav": {
       "fingerprint": "3b2137e5cfe8072da4ce9e69f7c2732bb847aacb2410f4b6ffab3472fe63293c",
@@ -111,7 +124,8 @@
       "kind": "chunk",
       "chunk_index": 14,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Sim. Um deles é o google-calendar-tui, que exibe a agenda do Google Calendar no terminal, de forma somente leitura, usando as contas que já estão configuradas no GNOME Online Accounts, sem precisar de nenhuma configuração de OAuth. Assim, ele consegue ver seus compromissos do dia rapidamente."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-015-de-092__voz-apresentador-a.wav": {
       "fingerprint": "5b25fa512241bb9c8d79bf71dc1de4f5e85fc2ae571306d10b03fe357440ae60",
@@ -119,7 +133,8 @@
       "kind": "chunk",
       "chunk_index": 15,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Isso é super prático! E qual o outro widget?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-016-de-092__voz-apresentador-b.wav": {
       "fingerprint": "bbb9c9b5267d45415777754bb8be39ea68ce209bd7c847482b03009816d08b28",
@@ -127,7 +142,8 @@
       "kind": "chunk",
       "chunk_index": 16,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "O outro é o ghpending. Ele lista issues e pull requests abertos em todos os repositórios que o Akita acompanha. Como ele tem muitos projetos open source, essa é a forma dele perceber em segundos quando há uma nova PR ou issue, sem precisar abrir o GitHub."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-017-de-092__voz-apresentador-a.wav": {
       "fingerprint": "e001d71d3439925a34770afd5a52efe46923d28e72c3e1ed3074a64110e78135",
@@ -135,7 +151,8 @@
       "kind": "chunk",
       "chunk_index": 17,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Que sacada genial para quem gerencia vários projetos! E ele até adicionou temas, inspirados em Evangelion, eu vi nas imagens!"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-018-de-092__voz-apresentador-b.wav": {
       "fingerprint": "c83e6ee2cafd042cdf27e06863a83292148ca6f7419da514922cacef41dfced3",
@@ -143,7 +160,8 @@
       "kind": "chunk",
       "chunk_index": 18,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Isso mesmo! Ele adicionou os temas 'evangelion' e 'nerv', que podem ser alternados em tempo real. Os temas são injetados nos widgets, então a paleta de cores se adapta. Para a instalação, no Arch Linux, usa-se `yay -S clock-tui-bin`. Os widgets também têm binários no AUR e nas releases do GitHub, e o ghpending também pode ser instalado via `brew` no macOS."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-019-de-092__voz-apresentador-a.wav": {
       "fingerprint": "75fa241c6b4db4b4ed3475f0bf8884045bf391780fe5456e30d4924fbfb92c84",
@@ -151,7 +169,8 @@
       "kind": "chunk",
       "chunk_index": 19,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Muito legal! Agora, sobre o github-visualize. O que é isso e por que ele o criou?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-020-de-092__voz-apresentador-b.wav": {
       "fingerprint": "e8defe18ec156eb47bbec5832fa844063b9924724853f60f2454c2356563e7d2",
@@ -159,7 +178,8 @@
       "kind": "chunk",
       "chunk_index": 20,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "O github-visualize nasceu da inspiração em um artigo do Jarred Sumner sobre a reescrita do TypeScript do Bun em Rust. O Akita gostou muito das animações dos gráficos que viu lá, e mesmo considerando o projeto 'inútil', a beleza foi motivo suficiente para ele criar sua própria versão."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-021-de-092__voz-apresentador-a.wav": {
       "fingerprint": "381b927978243bfdedf9546e4c15b66eff16206011781b3cab799bda782b1135",
@@ -167,7 +187,8 @@
       "kind": "chunk",
       "chunk_index": 21,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Inútil, mas bonito! Adorei a justificativa! E o que ele faz exatamente?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-022-de-092__voz-apresentador-b.wav": {
       "fingerprint": "ee3f05afe5b9e9df52a3b69972c64b29a39eea371226c4e4acb0956eb910b956",
@@ -175,7 +196,8 @@
       "kind": "chunk",
       "chunk_index": 22,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "É um dashboard self-hosted que monitora os repositórios do GitHub dele e reproduz o progresso com visualizações animadas. Isso inclui uma timeline de commits com linhas adicionadas e deletadas, um heat map de commits por dia e hora, e até uma \"corrida\" de CI até o verde."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-023-de-092__voz-apresentador-a.wav": {
       "fingerprint": "4237880309446c03832cf82d72b4d6d99547849a26b37829d28e185fffbdd70e",
@@ -183,7 +205,8 @@
       "kind": "chunk",
       "chunk_index": 23,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Que legal! Então ele pode ver a evolução dos projetos de uma forma bem visual. Ele pretende usar isso para algo específico?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-024-de-092__voz-apresentador-b.wav": {
       "fingerprint": "020d0950ad21393a624f9e802b437f62e4c1989f9f423b051ef7b5ffd3dade21",
@@ -191,7 +214,8 @@
       "kind": "chunk",
       "chunk_index": 24,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Ele menciona que talvez use em slides de apresentação ou para ilustrar futuros posts no blog. A instalação é feita via uma imagem pública no Docker Hub, sendo um container único com SQLite num volume, sem a necessidade de um banco de dados externo."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-025-de-092__voz-apresentador-a.wav": {
       "fingerprint": "bce1befac67b01740d6eb169bd2210e93464f55e86c4b95d75fada230477a7a8",
@@ -199,7 +223,8 @@
       "kind": "chunk",
       "chunk_index": 25,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Ótimo! Agora vamos para o Frank Geary. Pelo nome, já imagino que tem a ver com e-mail, certo?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-026-de-092__voz-apresentador-b.wav": {
       "fingerprint": "663bba8288eb90d03782354b4ac1266c80dfbb46fdad4694408074f5671196fe",
@@ -207,7 +232,8 @@
       "kind": "chunk",
       "chunk_index": 26,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Isso mesmo. O Akita escolheu o Geary, do GNOME, como seu cliente de e-mail principal. Ele o considera limpo e direto, semelhante à interface do Mail da Apple. Ele até comenta que acha o Thunderbird inchado e feio, e o Mailspring, inchado e pesado."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-027-de-092__voz-apresentador-a.wav": {
       "fingerprint": "1f336a67589d6835bd4295696ed730e4837bd590baa29e0321313426ee6d65d7",
@@ -215,7 +241,8 @@
       "kind": "chunk",
       "chunk_index": 27,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Entendi. Ele busca simplicidade. Mas o Geary tinha alguns problemas para ele, não é?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-028-de-092__voz-apresentador-b.wav": {
       "fingerprint": "8011b6a3634b88d4be8c94f1acfa6f92161c378739f25ccf416a3fafc44493cc",
@@ -223,7 +250,8 @@
       "kind": "chunk",
       "chunk_index": 28,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Sim, dois problemas cruciais. Primeiro, em seu monitor vertical, a interface de três colunas do Geary ocupava muito espaço horizontal, e não havia como recolher a primeira coluna. Segundo, e mais grave, o campo de destinatário no compositor não autocompletava de forma eficaz, forçando-o a digitar ou copiar e colar endereços."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-029-de-092__voz-apresentador-a.wav": {
       "fingerprint": "f24a3b7d75c8893afb5a230e9b225f3e80cb7f81d2950dc99d36c313d0dec88a",
@@ -231,7 +259,8 @@
       "kind": "chunk",
       "chunk_index": 29,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Nossa, isso é frustrante! E como ele resolveu?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-030-de-092__voz-apresentador-b.wav": {
       "fingerprint": "c1ea41616fed518b0ca3a43d09a8e78e8afa9118af4840d5fc76d0204ab6fb14",
@@ -239,7 +268,8 @@
       "kind": "chunk",
       "chunk_index": 30,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Inicialmente, ele usou módulos GTK externos, mas isso exigia compilar o Geary do código-fonte e recompilar a cada atualização do sistema. Cansado disso, ele fez o que deveria ter feito desde o início: um fork do Geary, criando o Frank Geary. Ele adicionou as duas funcionalidades diretamente no código: a barra lateral agora recolhe e o autocompletar de destinatários funciona consultando os contatos dos e-mails existentes."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-031-de-092__voz-apresentador-a.wav": {
       "fingerprint": "a4b70bff0ca72a96cce362711594256c702e1daa0b551aa6f26138b8e43addec",
@@ -247,7 +277,8 @@
       "kind": "chunk",
       "chunk_index": 31,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Que solução elegante! Então ele vai manter esse fork atualizado?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-032-de-092__voz-apresentador-b.wav": {
       "fingerprint": "27be3f85146f01fb5d9de57cbc3929274cc1f90b810fa2c4a680581b3069157e",
@@ -255,7 +286,8 @@
       "kind": "chunk",
       "chunk_index": 32,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Sim, ele pretende manter o fork rebaseando frequentemente do projeto original. E a melhor parte é que agora existem pacotes no AUR para o Frank Geary, tanto binário quanto para compilar do código-fonte, que substituem o Geary padrão do sistema."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-033-de-092__voz-apresentador-a.wav": {
       "fingerprint": "0bf2516e3bc41d61ecbc124486576f413b6a9764186360a7fa69225861f8c093",
@@ -263,7 +295,8 @@
       "kind": "chunk",
       "chunk_index": 33,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Facilita muito a instalação! Tem alguma dica extra para quem for usar?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-034-de-092__voz-apresentador-b.wav": {
       "fingerprint": "10473a16d394fe82079b435792d27035a32bb0718c9c93780e3fb673b9f7f14a",
@@ -271,7 +304,8 @@
       "kind": "chunk",
       "chunk_index": 34,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Sim, um detalhe importante: após instalar ou atualizar, se a opção de vigiar e-mail novo estiver ligada, o Geary continua rodando em segundo plano. Então, é bom executar `geary --quit` para garantir que nenhum processo antigo permaneça ativo."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-035-de-092__voz-apresentador-a.wav": {
       "fingerprint": "94607fbe02242ecbe368c2bfdd30217c08d503d9e05160e20bf76cd1917f449b",
@@ -279,7 +313,8 @@
       "kind": "chunk",
       "chunk_index": 35,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Boa dica! Agora, vamos falar sobre mangá em japonês. Ele mencionou FrankYomik, FRANK MANGA+ e FRANK Scanlation. O que são esses?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-036-de-092__voz-apresentador-b.wav": {
       "fingerprint": "d2fc0a9179193d52c06a8c77c3456c946067eaa8ec58bd2bdcdd5c7a775b8447",
@@ -287,7 +322,8 @@
       "kind": "chunk",
       "chunk_index": 36,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "O Akita é um grande fã de mangá japonês. O FrankYomik nasceu para ele conseguir ler mangás originais em japonês que compra na Amazon do Japão. O problema é que mangás para adultos não têm 'furigana', aquelas legendinhas em kana que indicam a leitura de kanjis difíceis. Ele não sabe ler esses kanjis raros."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-037-de-092__voz-apresentador-a.wav": {
       "fingerprint": "1d66738ceef41cb9d16250f1e87fb554b5b208bdf66588437cec28114c083852",
@@ -295,7 +331,8 @@
       "kind": "chunk",
       "chunk_index": 37,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Ah, entendi! Então o FrankYomik ajuda com isso?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-038-de-092__voz-apresentador-b.wav": {
       "fingerprint": "87db01ff04530d0ed3ab1b8558d97835cc47f60a7a060ce2aa53957eb7b17765",
@@ -303,7 +340,8 @@
       "kind": "chunk",
       "chunk_index": 38,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Exatamente! O FrankYomik adiciona furigana em tempo real sobre a página do mangá. Ele usa um modelo para detectar os balões de fala, o manga-ocr extrai o texto e o furigana, ou até uma tradução completa via LLM local, é renderizado por cima. Tudo isso rodando no próprio hardware dele."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-039-de-092__voz-apresentador-a.wav": {
       "fingerprint": "712ef3203041347c9d55ab95bc6b4b4c59d7680da26ae53e513b627cd1621940",
@@ -311,7 +349,8 @@
       "kind": "chunk",
       "chunk_index": 39,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Isso é genial! E sem violar direitos autorais, certo?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-040-de-092__voz-apresentador-b.wav": {
       "fingerprint": "63fa1ee8d2f7595a7ae35dfdb1cc5ad8fc7078543d69f11db0fca0a14512d24f",
@@ -319,7 +358,8 @@
       "kind": "chunk",
       "chunk_index": 40,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Correto. Ele destaca que funciona 'on-the-fly', sobre a imagem que ele já abriu legitimamente, sem baixar ou redistribuir páginas, o que evita infringir direitos autorais."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-041-de-092__voz-apresentador-a.wav": {
       "fingerprint": "44aeaf05824206835f305510454ad19a6d74370181809fe74232f15dbc6334a2",
@@ -327,7 +367,8 @@
       "kind": "chunk",
       "chunk_index": 41,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Muito inteligente! E o FRANK MANGA+?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-042-de-092__voz-apresentador-b.wav": {
       "fingerprint": "882eed0f47004e72593d75568c7f613ff9971da408149f7281325c60f8d48295",
@@ -335,7 +376,8 @@
       "kind": "chunk",
       "chunk_index": 42,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Ele paga a assinatura do Manga Plus, o aplicativo oficial da Shueisha, mas ele só permite ler no celular. Isso era um problema para ele, que tem um monitor grande de 32 polegadas. Então, ele construiu o FRANK MANGA+, um leitor desktop em Tauri que roda em Linux, macOS e Windows, permitindo usar a própria assinatura fora do app oficial."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-043-de-092__voz-apresentador-a.wav": {
       "fingerprint": "4c7560acc76d8bfa00f054f57a12f2ea23afeb8106620e48c39061124e3b8eb4",
@@ -343,7 +385,8 @@
       "kind": "chunk",
       "chunk_index": 43,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Ah, para ler no conforto do desktop! E a instalação?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-044-de-092__voz-apresentador-b.wav": {
       "fingerprint": "b9bce728e1bdf2c2270f91b7ee7955893991350c184a6d060009687236ddb6f9",
@@ -351,7 +394,8 @@
       "kind": "chunk",
       "chunk_index": 44,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "A instalação é via AppImage, `.deb` e `.dmg` nas releases do GitHub, ou `yay -S mangaplus-reader-bin` no Arch."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-045-de-092__voz-apresentador-a.wav": {
       "fingerprint": "833942f105c1fa82beefc84f036bd2b4a8279d0b46b990555ca2f8f665e0e0b1",
@@ -359,7 +403,8 @@
       "kind": "chunk",
       "chunk_index": 45,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "E por último, o FRANK Scanlation?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-046-de-092__voz-apresentador-b.wav": {
       "fingerprint": "46b9206d04216a98fc6c4077ace0584e132bb3ab0eb99b4300a673aabd6cb62c",
@@ -367,7 +412,8 @@
       "kind": "chunk",
       "chunk_index": 46,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Ele também lê as 'scanlations' da comunidade, que são traduções feitas por fãs. Essas scanlations ficam espalhadas por vários sites, como o MangaDex, e ele se cansou de ter dezenas de abas abertas. Então, ele criou o FRANK Scanlation, um aplicativo desktop que centraliza todas as suas scanlations favoritas em um só lugar, com biblioteca, progresso de leitura e checagem de capítulos novos."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-047-de-092__voz-apresentador-a.wav": {
       "fingerprint": "1175af09129649fc8791e84397d8d68cc11b5cd8a5b7f1b9519a2f0bd6dab0bf",
@@ -375,7 +421,8 @@
       "kind": "chunk",
       "chunk_index": 47,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Então, uma central para todas as suas leituras de mangá! E como ele faz para carregar as páginas?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-048-de-092__voz-apresentador-b.wav": {
       "fingerprint": "eb1b0fe8bfd8238eacafab9da96be9851ffbf6ddc113edbf15b91eed3a4ad445",
@@ -383,7 +430,8 @@
       "kind": "chunk",
       "chunk_index": 48,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "As janelas de leitura carregam o próprio site e injetam um leitor com spreads de página dupla e navegação por teclado. Ele usa heurísticas para detectar sequências de imagens e numeração de capítulos em qualquer URL, sem ser hardcoded para um site específico. Ele diz que virou seu jeito preferido de ler mangás que não estão disponíveis para compra."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-049-de-092__voz-apresentador-a.wav": {
       "fingerprint": "04bd5b5fd0460539e5d9913c0b27278e6f0f85ff8470119bd2d4ebc70945fcd4",
@@ -391,7 +439,8 @@
       "kind": "chunk",
       "chunk_index": 49,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Que solução robusta! E a instalação?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-050-de-092__voz-apresentador-b.wav": {
       "fingerprint": "66f3feeee55315a75f07d80fb04886c8316f219123283179dc3943a499786362",
@@ -399,7 +448,8 @@
       "kind": "chunk",
       "chunk_index": 50,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "AppImage, `.deb` e `.rpm`, além de build para macOS, nas releases do GitHub."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-051-de-092__voz-apresentador-a.wav": {
       "fingerprint": "95c1520c9979a4143f1d2a79df9279f9c85f3d34c9be30a01b3ba2036a252be7",
@@ -407,7 +457,8 @@
       "kind": "chunk",
       "chunk_index": 51,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Agora, vamos para o Frank Lyrics. Pelo nome, imagino que tem a ver com música, certo?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-052-de-092__voz-apresentador-b.wav": {
       "fingerprint": "7e7b5ad33114b5212af02b6e590c156cb22541e590d5974dab836d107fe6c39e",
@@ -415,7 +466,8 @@
       "kind": "chunk",
       "chunk_index": 52,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Isso mesmo. Ele já tinha criado o Frank Karaoke, um app para adicionar pontuação no YouTube. O Frank Lyrics surge de um caso de uso similar: ele gosta de aprender músicas novas, como aberturas de animes, e o processo de decorar a letra exige repetir a mesma linha várias vezes. No YouTube, isso é um inferno, pois é difícil acertar o ponto exato na timeline."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-053-de-092__voz-apresentador-a.wav": {
       "fingerprint": "643942e2641f4b1c08cd8d585e95fb71d2c8aadd9892d027d242b661e544f3f8",
@@ -423,7 +475,8 @@
       "kind": "chunk",
       "chunk_index": 53,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Ah, sim! Ficar caçando o ponto certo na barra de progresso é super chato. E como o Frank Lyrics resolve isso?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-054-de-092__voz-apresentador-b.wav": {
       "fingerprint": "3fdd80ffdaaba470c8636c3c96496c441fad7a1d6f16037eceb3ce439a292c34",
@@ -431,7 +484,8 @@
       "kind": "chunk",
       "chunk_index": 54,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Ele criou uma extensão de Chrome que descobre o timing correto de cada linha da letra usando os marcadores públicos do LRCLIB. Essa extensão injeta controles na própria página do YouTube, permitindo repetir a linha exata que se está decorando, quantas vezes for necessário, sem precisar mexer na timeline."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-055-de-092__voz-apresentador-a.wav": {
       "fingerprint": "8da121221a57f5e17b1db351e13198c5c3a7de4158eac83d699b619abb8c8afc",
@@ -439,7 +493,8 @@
       "kind": "chunk",
       "chunk_index": 55,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Que maravilha! E o que é esse LRCLIB?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-056-de-092__voz-apresentador-b.wav": {
       "fingerprint": "953a656b2a41a520362311b6b2088fca7cd6734e6f3d860ef58386005c9346ca",
@@ -447,7 +502,8 @@
       "kind": "chunk",
       "chunk_index": 56,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "É uma biblioteca aberta e comunitária de letras sincronizadas, onde cada linha vem com um timestamp no formato LRC, com uma API pública e gratuita."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-057-de-092__voz-apresentador-a.wav": {
       "fingerprint": "3ca775579170f89db3163c8fd2866f27bcd63f062d19f0c016a5e20cf3078773",
@@ -455,7 +511,8 @@
       "kind": "chunk",
       "chunk_index": 57,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Entendi. E a instalação da extensão?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-058-de-092__voz-apresentador-b.wav": {
       "fingerprint": "739b8bf7e669953cd277a2743225957504f3e6456c538d58b6cb5343c522a12c",
@@ -463,7 +520,8 @@
       "kind": "chunk",
       "chunk_index": 58,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Basta baixar o `.zip` das releases, descompactar, abrir `chrome://extensions`, ativar o modo desenvolvedor e fazer 'Load unpacked' apontando para a pasta."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-059-de-092__voz-apresentador-a.wav": {
       "fingerprint": "b4c17dd50b31e95f894120af16331034f641093b5299882006827e4f53a31adf",
@@ -471,7 +529,8 @@
       "kind": "chunk",
       "chunk_index": 59,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Prático! Agora, Frank Type. Tem a ver com digitação, certo?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-060-de-092__voz-apresentador-b.wav": {
       "fingerprint": "6d0edca88ba225c10527ce1cbfc5bc80bd5c172b7fc7850d152e37edb19a1341",
@@ -479,7 +538,8 @@
       "kind": "chunk",
       "chunk_index": 60,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Sim. O Akita é um entusiasta de teclados e gosta de treinar no MonkeyType, mas não aprecia digitar palavras aleatórias. Ele também conhece o TypeRacer, que usa textos públicos reais, mas o obriga a esperar outros jogadores, algo que ele detesta."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-061-de-092__voz-apresentador-a.wav": {
       "fingerprint": "14947bdaeb6164efde0fb66476915e181f2c623b51c3fb99204671525d883f6f",
@@ -487,7 +547,8 @@
       "kind": "chunk",
       "chunk_index": 61,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Então ele queria uma experiência de treino de digitação mais personalizada?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-062-de-092__voz-apresentador-b.wav": {
       "fingerprint": "77efab8cdcb3e0112dde79a56fccbf107239ecc76dcace91189a6114fdb88112",
@@ -495,7 +556,8 @@
       "kind": "chunk",
       "chunk_index": 62,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Exatamente. Ele queria uma experiência single player, com prosa de verdade, mas com a estética do MonkeyType. Então, ele criou o Frank Type, um mini-clone desses treinadores de digitação em Rails 8, que usa trechos normalizados de prosa em domínio público."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-063-de-092__voz-apresentador-a.wav": {
       "fingerprint": "ed0092cfe2f9decbd6af4667dd4d70c18b1dee46a321abe28026c5143ff7d41e",
@@ -503,7 +565,8 @@
       "kind": "chunk",
       "chunk_index": 63,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Que legal! E como ele funciona?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-064-de-092__voz-apresentador-b.wav": {
       "fingerprint": "5e70fa661e7b6713799d42fd8acfd7e645edf1113a6b2aab1e3209ba7a836521",
@@ -511,7 +574,8 @@
       "kind": "chunk",
       "chunk_index": 64,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "É um aplicativo local-first, sem necessidade de cadastro. O histórico de sessões, tempos e gráficos de perfil ficam armazenados no local storage do navegador. Ele até inclui um heat map de dígrafos para mostrar quais combinações de teclas podem atrasar o usuário."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-065-de-092__voz-apresentador-a.wav": {
       "fingerprint": "1e394873fe1251c6b6a5a5f31d80e54cca9456b3db23a61ee3fe5ff810ba6858",
@@ -519,7 +583,8 @@
       "kind": "chunk",
       "chunk_index": 65,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Isso é super útil para melhorar a digitação! E a instalação?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-066-de-092__voz-apresentador-b.wav": {
       "fingerprint": "ba768082a60d69cc57067ca298d19238b98dfc83c7fac5949defd49fbe82c314",
@@ -527,7 +592,8 @@
       "kind": "chunk",
       "chunk_index": 66,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "É um container Docker publicado como `akitaonrails/frank_type`. Um comando `curl` pode ser usado para levantar o serviço em `http://localhost:3200`."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-067-de-092__voz-apresentador-a.wav": {
       "fingerprint": "c257037f1f361bb9ef744469a2a31d9a612967fcec415e7551d0b36ef533158c",
@@ -535,7 +601,8 @@
       "kind": "chunk",
       "chunk_index": 67,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Perfeito! Agora, distrobox-gaming. Isso me parece algo para quem gosta de jogos, mas não quer bagunçar o sistema, certo?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-068-de-092__voz-apresentador-b.wav": {
       "fingerprint": "c68d862c619dc834cdad4a239a74828cdfdf4167adc43c2cc5f952e4c1e2bf19",
@@ -543,7 +610,8 @@
       "kind": "chunk",
       "chunk_index": 68,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Você acertou em cheio! O Akita joga no mesmo PC em que trabalha, mas se recusa a misturar pacotes de emulador e gambiarras de Wine com seu ambiente de desenvolvimento. A solução dele foi isolar os jogos inteiros dentro de um distrobox, que são containers que se integram ao desktop como se fossem nativos."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-069-de-092__voz-apresentador-a.wav": {
       "fingerprint": "8c1dc1dd1917aa05d5f071ad2259ef44d6bdf2d109ea2042bc0e40bdea6c963d",
@@ -551,7 +619,8 @@
       "kind": "chunk",
       "chunk_index": 69,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Que ideia inteligente para manter a organização! E o distrobox-gaming é o quê, exatamente?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-070-de-092__voz-apresentador-b.wav": {
       "fingerprint": "776d19bba0a15962fc5f2976d85469e661cff8a89a904e28e14deb1b8a12ce7d",
@@ -559,7 +628,8 @@
       "kind": "chunk",
       "chunk_index": 70,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "É um repositório de playbooks Ansible que constrói essa box Arch do zero, incluindo o ES-DE como frontend, emuladores standalone, cores do RetroArch e configurações por jogo. A regra que ele se impôs é que todo jogo novo instalado deve se tornar uma receita Ansible reproduzível, documentando todos os truques e hacks no código."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-071-de-092__voz-apresentador-a.wav": {
       "fingerprint": "fe8c296112bf6f5f8f1ad2e75667af49d6fad18a9a483b41af4530049a773eb4",
@@ -567,7 +637,8 @@
       "kind": "chunk",
       "chunk_index": 71,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Então é como uma biblioteca de como instalar jogos no Linux, especialmente os mais antigos?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-072-de-092__voz-apresentador-b.wav": {
       "fingerprint": "ac433c1bc247f1201bf61f4d2776050c765922d550266ac847dcdf9ac870e341",
@@ -575,7 +646,8 @@
       "kind": "chunk",
       "chunk_index": 72,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Exatamente! Ele instala muitos abandonware antigos, como a série Colin McRae Rally, Sega Rally Revo e OutRun 2006 Coast 2 Coast, cada um com suas particularidades de Wine, patches e configurações. O repositório está se tornando uma valiosa biblioteca de documentação sobre como instalar jogos, emuladores e retro games no Linux."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-073-de-092__voz-apresentador-a.wav": {
       "fingerprint": "e6675b6c1f90885ed39985f49b87c42c5fa5c459d7504e1f0a03c795a69e1828",
@@ -583,7 +655,8 @@
       "kind": "chunk",
       "chunk_index": 73,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Muito útil para a comunidade gamer! E ele mencionou algo similar para LLMs?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-074-de-092__voz-apresentador-b.wav": {
       "fingerprint": "2911ee43ef70042692b5ba69056e49ebfd0e3d5150b2c2c3cddc67a3a0fc7663",
@@ -591,7 +664,8 @@
       "kind": "chunk",
       "chunk_index": 74,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Sim, existe o distrobox-llm, que faz o mesmo isolamento para o ambiente de LLMs locais, como CUDA, Ollama e LM Studio, deixando apenas o driver NVIDIA no host."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-075-de-092__voz-apresentador-a.wav": {
       "fingerprint": "e6e68437d6098afb3059fd1dbe5cd041eeb4db9e313c1f63be8283a8b592e0f3",
@@ -599,7 +673,8 @@
       "kind": "chunk",
       "chunk_index": 75,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Interessante! E a instalação do distrobox-gaming?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-076-de-092__voz-apresentador-b.wav": {
       "fingerprint": "0588801a8dbf050da88ec6508ff6c902ea9d6c504f0d37cd906b90e835b32671",
@@ -607,7 +682,8 @@
       "kind": "chunk",
       "chunk_index": 76,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Envolve clonar o repositório, instalar as coleções Ansible, copiar e editar um arquivo de variáveis de host, e rodar o playbook `site.yml`."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-077-de-092__voz-apresentador-a.wav": {
       "fingerprint": "5f37a118097a921665da58a03f72dd8554c04731300c3ac9e8c171547deb1387",
@@ -615,7 +691,8 @@
       "kind": "chunk",
       "chunk_index": 77,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Certo. E por último, o aitrepreneur-docker. O que é isso?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-078-de-092__voz-apresentador-b.wav": {
       "fingerprint": "d8a2755a163308eda59ba30e431ae22983926a0345fb9fa315ec796bc124b793",
@@ -623,7 +700,8 @@
       "kind": "chunk",
       "chunk_index": 78,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Para geração de imagens, o Akita usa o ComfyUI e acompanha um youtuber chamado Aitrepreneur, que mantém receitas para instalar e configurar o ComfyUI com os modelos e workflows mais recentes. O trabalho de curadoria do Aitrepreneur é ótimo, mas seus scripts são mais antigos, pensados para rodar uma única vez em instâncias como o RunPod."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-079-de-092__voz-apresentador-a.wav": {
       "fingerprint": "92a1d4f444e23e8085d430f96386e89c949a016738977fcd03d42debf6d00887",
@@ -631,7 +709,8 @@
       "kind": "chunk",
       "chunk_index": 79,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Então o aitrepreneur-docker é uma forma de modernizar e organizar esses scripts?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-080-de-092__voz-apresentador-b.wav": {
       "fingerprint": "ae419629e0b5138a3b854f0491a1d2da386ffd356f44605b16cf9f2dee25064b",
@@ -639,7 +718,8 @@
       "kind": "chunk",
       "chunk_index": 80,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Exatamente! Com a evolução das LLMs, que agora escrevem Dockerfiles decentes, ele criou o aitrepreneur-docker para converter esses scripts em imagens e containers Docker. Isso permite rodar tudo isolado na máquina dele, sem entulhar o Linux com pacotes Python e gambiarras que poderiam desestabilizar o sistema."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-081-de-092__voz-apresentador-a.wav": {
       "fingerprint": "4bb4e237a32a7768996499a83702fc9703c357f6c187777cd54cde837b77bbba",
@@ -647,7 +727,8 @@
       "kind": "chunk",
       "chunk_index": 81,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Que solução inteligente para manter o sistema limpo! Mas tem algumas ressalvas, certo?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-082-de-092__voz-apresentador-b.wav": {
       "fingerprint": "6242edaff6387986e9acd4b6ce2352e50797ea3763f37f3c8d1d6572b75fa9e2",
@@ -655,7 +736,8 @@
       "kind": "chunk",
       "chunk_index": 82,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Sim, é importante notar que o crédito pela seleção de stack, curadoria de modelos e workflows é todo do Aitrepreneur. O repositório do Akita apenas traduz o trabalho dele para o formato Docker, e os scripts originais são conteúdo pago do Patreon, não incluídos. Além disso, o repositório não cobre tudo que o Aitrepreneur já produziu, apenas as receitas mais recentes."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-083-de-092__voz-apresentador-a.wav": {
       "fingerprint": "6c8d238d9f00bf611040d48b7ce55c3d93fd2abf96a48d5131105ae2c9397771",
@@ -663,7 +745,8 @@
       "kind": "chunk",
       "chunk_index": 83,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Entendido. Então, quem quiser o conteúdo completo deve assinar o Patreon do Aitrepreneur. E a instalação do aitrepreneur-docker?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-084-de-092__voz-apresentador-b.wav": {
       "fingerprint": "1f429cffd81cd03e8d60debb80af42bfeac4d5a100ae1af8344aa0f40976c734",
@@ -671,7 +754,8 @@
       "kind": "chunk",
       "chunk_index": 84,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "É feita com `git clone`, `make setup` para criar o `.env` com o token da Hugging Face, `make build` e `make up`."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-085-de-092__voz-apresentador-a.wav": {
       "fingerprint": "2c353995d6b0cc2f5783119db51c55b0a845c14e11baa3a1c4cddec5a7e0eb01",
@@ -679,7 +763,8 @@
       "kind": "chunk",
       "chunk_index": 85,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Muito bom! E ele mencionou outros projetos que já cobriu em posts dedicados?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-086-de-092__voz-apresentador-b.wav": {
       "fingerprint": "9d63a0fb2ff8b609b9082a999aa071fc71dae81c0e4de64db423299b2718f39a",
@@ -687,7 +772,8 @@
       "kind": "chunk",
       "chunk_index": 86,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Sim, ele destaca o ai-memory como o mais popular e com mais contribuições. O ai-jail foi o primeiro da série e é o segundo mais popular. E ele tem uma série de projetos chamada \"Frank\", em homenagem a Frank Rosenblatt, o criador do perceptron, que são projetos experimentais feitos por diversão."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-087-de-092__voz-apresentador-a.wav": {
       "fingerprint": "c7532245518e5d0eea7aa52c006ddf2ddadfdd53d5fb119a2e36f85beed4d2cb",
@@ -695,7 +781,8 @@
       "kind": "chunk",
       "chunk_index": 87,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Que legal essa homenagem! Quais outros projetos \"Frank\" ele tem?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-088-de-092__voz-apresentador-b.wav": {
       "fingerprint": "40451c1751cb30f28a3937ec9a8a23859a0440391896efa6d1081fd31ffd0054",
@@ -703,7 +790,8 @@
       "kind": "chunk",
       "chunk_index": 88,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Ele cita o Frank Sherlock, um indexador inteligente de imagens; o Frank Mega, um clone do MEGA para home server; o FrankMD, um editor de markdown; o Frank FBI, um analisador de fraudes por e-mail; e o Frank Investigator, que ensina a questionar notícias."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-089-de-092__voz-apresentador-a.wav": {
       "fingerprint": "16e362d82e3131900156ee070e835c2660940936361488fe7b6ee7ae21d5b237",
@@ -711,7 +799,8 @@
       "kind": "chunk",
       "chunk_index": 89,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Uma variedade impressionante de projetos! E todos são open source, certo?"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-090-de-092__voz-apresentador-b.wav": {
       "fingerprint": "46e9f8f132eb6f7cd0829b96e7d68fde7571fcbf4eba56873ab2566f66c489af",
@@ -719,7 +808,8 @@
       "kind": "chunk",
       "chunk_index": 90,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Sim, todos são open source e estão no GitHub dele. Ele convida a todos para contribuir com issues, pull requests ou simplesmente compartilhar com os amigos, pois cada projeto nasceu de um problema real dele e pode resolver o de outras pessoas também."
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-091-de-092__voz-apresentador-a.wav": {
       "fingerprint": "8bd2c8a3b1a5c5176b2e0509d4e981205c97dca4ba32a8c593acc206881356a2",
@@ -727,7 +817,8 @@
       "kind": "chunk",
       "chunk_index": 91,
       "chunk_total": 92,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Que iniciativa fantástica! É inspirador ver como ele transforma pequenos incômodos em soluções robustas e ainda as compartilha com a comunidade. Muito obrigado, por nos guiar por esses projetos incríveis!"
     },
     "fonte-akita__episodio-2026-07-12-usando-ia-pra-resolver-meus-probleminhas-do-dia-a-dia__modo-podcast-adaptado__chunk-092-de-092__voz-apresentador-b.wav": {
       "fingerprint": "9b756c01fa74b2d17f0cc99a0796eadd80b7646b22bc0eb586c35a15b0b47973",
@@ -735,7 +826,8 @@
       "kind": "chunk",
       "chunk_index": 92,
       "chunk_total": 92,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "De nada! Foi um prazer. E assim encerramos este episódio. Baseado no artigo \"Usando IA pra resolver meus probleminhas do dia-a-dia\", de Fabio Akita, publicado em AkitaOnRails.com, sob CC BY-NC-SA 4.0. Esta adaptação é distribuída sob CC BY-NC-SA 4.0."
     }
   },
   "source_key": "akita",

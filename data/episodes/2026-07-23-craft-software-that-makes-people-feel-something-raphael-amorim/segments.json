@@ -11,7 +11,10 @@
       "generation_id": "gen-tts-1784802123-kZRuMIHMACo9gP2HjU9S",
       "key_label": "Teste Felipe Home",
       "cost_usd": 0.0156395,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Bem-vindo. O texto de hoje se chama \"Craft software that makes people feel something\" — algo como \"faça software que faça as pessoas sentirem alguma coisa\" — e é assinado por Raphael Amorim. É um artigo pessoal, datado de onze de dezembro de 2025, e ele começa exatamente assim: o autor conta que acordou naquele dia, pegou seu café, a família tinha ido dormir, e ele tinha uma tarde livre pela frente.",
+      "voice": "Sulafat",
+      "style": "reflexivo e envolvente"
     },
     "fonte-custom__episodio-2026-07-23-craft-software-that-makes-people-feel-something-raphael-amori__modo-podcast-adaptado__chunk-002-de-016__voz-narrador.wav": {
       "fingerprint": "f779bc69c6c30875d940eb606b7b4331711a4c86eb10c433c8e35a5420bc6f8b",
@@ -23,7 +26,10 @@
       "generation_id": "gen-tts-1784802151-Tx3IY4U15Sb7SXNbHWzt",
       "key_label": "Teste Felipe Home",
       "cost_usd": 0.00769275,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "E aí ele pensou em escrever alguma coisa. Com uma ressalva bem honesta, que ele mesmo deixa no começo: \"talvez eu apague este artigo, mas, se você está lendo isso, é porque eu fui em frente\". Fomos em frente, então.",
+      "voice": "Sulafat",
+      "style": "reflexivo e envolvente"
     },
     "fonte-custom__episodio-2026-07-23-craft-software-that-makes-people-feel-something-raphael-amori__modo-podcast-adaptado__chunk-003-de-016__voz-narrador.wav": {
       "fingerprint": "0976aa7f705dcf834e790459d6356d5c738ebb66be986d98e45a26c341daa867",
@@ -35,7 +41,10 @@
       "generation_id": "gen-tts-1784802166-sWywzX08Wy8URURnv4FN",
       "key_label": "Teste Felipe Home",
       "cost_usd": 0.007236,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "O motivo do texto é uma pergunta que ele vem ouvindo com frequência: por que ele está pausando o Boo para trabalhar numa linguagem de programação? E ele achou que seria legal registrar por escrito como se sente a respeito disso.",
+      "voice": "Sulafat",
+      "style": "reflexivo e envolvente"
     },
     "fonte-custom__episodio-2026-07-23-craft-software-that-makes-people-feel-something-raphael-amori__modo-podcast-adaptado__chunk-004-de-016__voz-narrador.wav": {
       "fingerprint": "d3a06e846c82c06e4cac66ff2778f2a4054b3d99ab97573972390685bc87ffa8",
@@ -47,7 +56,10 @@
       "generation_id": "gen-tts-1784802186-oGreA3563mDYyEK1xnfM",
       "key_label": "Teste Felipe Home",
       "cost_usd": 0.0090225,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Para situar: Boo é um editor de código que ele criou exclusivamente para si mesmo. Ele é explícito nisso — nunca teve a intenção de fazer dali um editor mainstream. Claro, seria divertido se outras pessoas usassem, ele diz, mas isso nunca foi o objetivo.",
+      "voice": "Sulafat",
+      "style": "reflexivo e envolvente"
     },
     "fonte-custom__episodio-2026-07-23-craft-software-that-makes-people-feel-something-raphael-amori__modo-podcast-adaptado__chunk-005-de-016__voz-narrador.wav": {
       "fingerprint": "4436d85b89b2ee57371b00fafc843612b3c080310e23cdc67b077072ae3f5528",
@@ -59,7 +71,10 @@
       "generation_id": "gen-tts-1784802212-1WSMICGdeXrYYOrT3BKH",
       "key_label": "Teste Felipe Home",
       "cost_usd": 0.01429925,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "E não é um projeto parado no papel. Neste ano ele colocou o Boo num estado funcional, a ponto de conseguir usá-lo no seu trabalho do dia a dia. Segundo o autor, o editor tem uma navegação humano-teclado inovadora e substitui o sistema de LSP — o protocolo de servidor de linguagem, aquele que dá autocompletar e diagnósticos no editor — por algo mais rápido e menos custoso para o sistema operacional.",
+      "voice": "Sulafat",
+      "style": "reflexivo e envolvente"
     },
     "fonte-custom__episodio-2026-07-23-craft-software-that-makes-people-feel-something-raphael-amori__modo-podcast-adaptado__chunk-006-de-016__voz-narrador.wav": {
       "fingerprint": "2298653d7c46a1935c1323d1d6124cdaddeadd11c378e7f3e3c6aa867f41bede",
@@ -71,7 +86,10 @@
       "generation_id": "gen-tts-1784802233-UMfoLWBOhgap5Vt0MQi9",
       "key_label": "Teste Felipe Home",
       "cost_usd": 0.0048945,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Daí vem a segunda pergunta que ele diz ouvir sem parar: então por que, afinal, ele não abre o código do Boo? Por que não torná-lo open source?",
+      "voice": "Sulafat",
+      "style": "reflexivo e envolvente"
     },
     "fonte-custom__episodio-2026-07-23-craft-software-that-makes-people-feel-something-raphael-amori__modo-podcast-adaptado__chunk-007-de-016__voz-narrador.wav": {
       "fingerprint": "abe462be0d129197d348bc212113945c3d706459ceb2af04c41f8ac75129a496",
@@ -83,7 +101,10 @@
       "generation_id": "gen-tts-1784802244-lUQ9ipuxWVRXYH0wusJm",
       "key_label": "Teste Felipe Home",
       "cost_usd": 0.0105165,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "A resposta dele começa por um deslocamento de critério. Ele diz que sua cabeça não é movida pela ideia de aquilo ser um sucesso ou um fracasso. O usuário final do Boo é ele mesmo. E, pelo critério dele, o projeto ainda não chegou lá. Mais do que isso: ele afirma que acredita que software deveria nos inspirar.",
+      "voice": "Sulafat",
+      "style": "reflexivo e envolvente"
     },
     "fonte-custom__episodio-2026-07-23-craft-software-that-makes-people-feel-something-raphael-amori__modo-podcast-adaptado__chunk-008-de-016__voz-narrador.wav": {
       "fingerprint": "879a31aae893a9cfee53b4fdac4634d90a2117b62a2125848b12719fe591245c",
@@ -95,7 +116,10 @@
       "generation_id": "gen-tts-1784802263-CrAvUfS7n1pmHJvVYWU7",
       "key_label": "Teste Felipe Home",
       "cost_usd": 0.0133065,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "E aqui entra a parte mais pessoal do argumento. Ele trabalha, no tempo livre, no Rio Terminal e no Boo. Os dois são escritos em Rust e compartilham muitas semelhanças: arquitetura parecida, mesma linguagem, processo de release parecido, e por aí vai. O efeito disso, ele diz, é que aquilo afeta a alegria dele — porque começa a virar algo automático.",
+      "voice": "Sulafat",
+      "style": "reflexivo e envolvente"
     },
     "fonte-custom__episodio-2026-07-23-craft-software-that-makes-people-feel-something-raphael-amori__modo-podcast-adaptado__chunk-009-de-016__voz-narrador.wav": {
       "fingerprint": "3d668492d26877ca64c0c0a77aebeee6315f3bc52e185f2f0776823689f9f53a",
@@ -107,7 +131,10 @@
       "generation_id": "gen-tts-1784802285-cZtPw5rHGuV9o5wd8ww4",
       "key_label": "Teste Felipe Home",
       "cost_usd": 0.0152135,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Para explicar o que quer dizer, ele volta à infância. Desde criança gostava de montar blocos de Lego; foi provavelmente o que mais fez, além de jogar futebol e videogame. E o que ele acha divertido no Lego é justamente isto: num dia você constrói um castelo, no dia seguinte você constrói um navio. Não necessariamente com as mesmas peças e as mesmas cores — e você pode até acrescentar coisas que vêm de fora do conjunto, um graveto de madeira, por exemplo.",
+      "voice": "Sulafat",
+      "style": "reflexivo e envolvente"
     },
     "fonte-custom__episodio-2026-07-23-craft-software-that-makes-people-feel-something-raphael-amori__modo-podcast-adaptado__chunk-010-de-016__voz-narrador.wav": {
       "fingerprint": "d410f6822e8baa251e4f89f5b086a8974ce922a061eed913b78c559b0bc22792",
@@ -119,7 +146,10 @@
       "generation_id": "gen-tts-1784802310-sTcw1JWsp5JZz99SttfA",
       "key_label": "Teste Felipe Home",
       "cost_usd": 0.012105,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "A transposição para o trabalho é direta. Quando a programação se torna repetitiva, ele diz, as chances de você criar algo que faça as pessoas dizerem \"uau\" caem bastante. E ele faz questão de colocar a ressalva: isso não é uma regra, claro. Mas a formulação que ele sustenta é essa — você precisa estar inspirado para fazer software inspirador.",
+      "voice": "Sulafat",
+      "style": "reflexivo e envolvente"
     },
     "fonte-custom__episodio-2026-07-23-craft-software-that-makes-people-feel-something-raphael-amori__modo-podcast-adaptado__chunk-011-de-016__voz-narrador.wav": {
       "fingerprint": "b5843170b6219e8ebe97a9bf4b7b0116350484365d71fbfa2c65cabf7c27341a",
@@ -131,7 +161,10 @@
       "generation_id": "gen-tts-1784802349-Y4cVYuHIyvzTF6uxuWF5",
       "key_label": "Teste Felipe Home",
       "cost_usd": 0.01215475,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "O exemplo que ele sempre usa é The Legend of Zelda: Breath of the Wild. É um jogo tão bem trabalhado que ele conhece pessoas que nem gostam de videogame e mesmo assim compraram um console só para jogar aquilo — e, quando terminaram, venderam tudo. É disso que ele está falando: dedicar tempo a construir algo que, uma vez que a pessoa experimente, ela vai lembrar pelo resto da vida.",
+      "voice": "Sulafat",
+      "style": "reflexivo e envolvente"
     },
     "fonte-custom__episodio-2026-07-23-craft-software-that-makes-people-feel-something-raphael-amori__modo-podcast-adaptado__chunk-012-de-016__voz-narrador.wav": {
       "fingerprint": "ac7a526772da091db333d7e83a2e2bcd0565d5ad300f9bf5dab1ba3029d1f38a",
@@ -143,7 +176,10 @@
       "generation_id": "gen-tts-1784802379-0qnMTbwFSMasufwyE0qJ",
       "key_label": "Teste Felipe Home",
       "cost_usd": 0.008518,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "E é por isso que a lógica de projeto aqui é outra. Boo não é um negócio. Ele não precisa e nem quer ganhar dinheiro com aquilo. Não tem prazo. E não quer criar outro VS Code. Simplesmente não sente vontade de forçar a coisa a acontecer.",
+      "voice": "Sulafat",
+      "style": "reflexivo e envolvente"
     },
     "fonte-custom__episodio-2026-07-23-craft-software-that-makes-people-feel-something-raphael-amori__modo-podcast-adaptado__chunk-013-de-016__voz-narrador.wav": {
       "fingerprint": "3c944298334fb60856e3848490cdc2caeadece93336fd5b2c7ea75905b02b70e",
@@ -155,7 +191,10 @@
       "generation_id": "gen-tts-1784802397-KKrGrdv7bKHm05P5pjXl",
       "key_label": "Teste Felipe Home",
       "cost_usd": 0.011622,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Sendo assim, ele conclui, não é preciso parar de montar blocos de Lego, certo? Ele vai só estacionar o projeto ali, e quando a inspiração voltar, retoma exatamente de onde parou. Dito isso: ele pausou o Boo e está trabalhando na sua própria linguagem de programação. A ideia, eventualmente, é reescrever o Boo usando essa linguagem.",
+      "voice": "Sulafat",
+      "style": "reflexivo e envolvente"
     },
     "fonte-custom__episodio-2026-07-23-craft-software-that-makes-people-feel-something-raphael-amori__modo-podcast-adaptado__chunk-014-de-016__voz-narrador.wav": {
       "fingerprint": "372bc874c1c534235adc917b0953119b5817d9228fe9e8b443c89edcb50da3a6",
@@ -167,7 +206,10 @@
       "generation_id": "gen-tts-1784802415-xzNjSwOCQwN2JHZPGyju",
       "key_label": "Teste Felipe Home",
       "cost_usd": 0.00823425,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Ele antecipa a objeção óbvia — \"uau, isso é muito trabalho\" — e concorda: de fato, é. Mas é o hobby dele. Ele sempre amou linguagens de programação e está se divertindo muito aprendendo mais sobre binários e compiladores.",
+      "voice": "Sulafat",
+      "style": "reflexivo e envolvente"
     },
     "fonte-custom__episodio-2026-07-23-craft-software-that-makes-people-feel-something-raphael-amori__modo-podcast-adaptado__chunk-015-de-016__voz-narrador.wav": {
       "fingerprint": "bda524ae11914eabf9ddd6891055f9a96125aad861bdd5efd9d3e4c3861be27f",
@@ -179,7 +221,10 @@
       "generation_id": "gen-tts-1784802440-hsiUGMZRQinw1HxvV0ol",
       "key_label": "Teste Felipe Home",
       "cost_usd": 0.00699125,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "E a conclusão fecha o texto no mesmo tom em que ele abriu: ele não sente que precisa seguir a receita de bolo de sucesso das outras pessoas. É assim que a cabeça dele funciona, e é assim que ele vai continuar.",
+      "voice": "Sulafat",
+      "style": "reflexivo e envolvente"
     },
     "fonte-custom__episodio-2026-07-23-craft-software-that-makes-people-feel-something-raphael-amori__modo-podcast-adaptado__chunk-016-de-016__voz-narrador.wav": {
       "fingerprint": "da11f506d6efeaf2d45aab3f183d12a990a14fea731842079cf08a59f6c1620b",
@@ -191,7 +236,10 @@
       "generation_id": "gen-tts-1784802459-g7oaAhU9JsVIaj5K9p2Y",
       "key_label": "Teste Felipe Home",
       "cost_usd": 0.00758975,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Baseado no conteúdo \"Craft software that makes people feel something — Raphael Amorim\". Original: https://rapha.land/craft-software-that-makes-people-feel-something/. Adaptação em áudio gerada com inteligência artificial. Verifique os direitos do conteúdo original antes de publicar.",
+      "voice": "Sulafat",
+      "style": "reflexivo e envolvente"
     }
   },
   "source_key": "custom",

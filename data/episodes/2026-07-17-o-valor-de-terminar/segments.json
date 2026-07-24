@@ -10,7 +10,8 @@
       "kind": "chunk",
       "chunk_index": 1,
       "chunk_total": 25,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Hoje vamos conversar sobre o texto “O valor de terminar: por que projetos pequenos mudam carreiras”, cuja autoria não foi informada no conteúdo original fornecido. E ele começa com uma diferença silenciosa, mas fundamental: ter muitas ideias não é a mesma coisa que construir alguma coisa. Por que imaginar parece tão mais fácil?"
     },
     "fonte-custom__episodio-2026-07-17-o-valor-de-terminar__modo-podcast-adaptado__chunk-002-de-025__voz-apresentador-b.wav": {
       "fingerprint": "e6b953eb156dbbfd611f835d9f8e0baef84bf7b5107c8b29d650d4ba880392cf",
@@ -21,7 +22,8 @@
       "kind": "chunk",
       "chunk_index": 2,
       "chunk_total": 25,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Porque a ideia entrega entusiasmo imediato. Por alguns minutos, a gente enxerga mentalmente o produto pronto, os usuários satisfeitos e até a história que contará depois. Construir é menos cinematográfico: exige descobrir detalhes ignorados pela imaginação, escolher entre alternativas imperfeitas e continuar trabalhando quando a novidade já passou."
     },
     "fonte-custom__episodio-2026-07-17-o-valor-de-terminar__modo-podcast-adaptado__chunk-003-de-025__voz-apresentador-a.wav": {
       "fingerprint": "133c328f44d9b189c6115751f86d24f8d075570c2569ae2d34b20d389a3f1e85",
@@ -32,7 +34,8 @@
       "kind": "chunk",
       "chunk_index": 3,
       "chunk_total": 25,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "E é justamente aí que entra o valor desproporcional dos projetos pequenos, certo? Eles encurtam a distância entre a intenção e um resultado concreto."
     },
     "fonte-custom__episodio-2026-07-17-o-valor-de-terminar__modo-podcast-adaptado__chunk-004-de-025__voz-apresentador-b.wav": {
       "fingerprint": "1ad32aee2b2f388d4d27c1335abd6f3126228c87da9621577487d0f2c1e5607d",
@@ -43,7 +46,8 @@
       "kind": "chunk",
       "chunk_index": 4,
       "chunk_total": 25,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Exatamente. Pode ser um aplicativo que resolve um único incômodo, uma automação usada por apenas três pessoas ou um texto publicado para uma comunidade pequena. Segundo o texto, iniciativas assim podem ensinar mais do que meses de planejamento de uma plataforma grandiosa."
     },
     "fonte-custom__episodio-2026-07-17-o-valor-de-terminar__modo-podcast-adaptado__chunk-005-de-025__voz-apresentador-a.wav": {
       "fingerprint": "abe1dec52c9955e5ee08dfe2550e22bdb1d7842e53e01f4a07c9a954687e2346",
@@ -54,7 +58,8 @@
       "kind": "chunk",
       "chunk_index": 5,
       "chunk_total": 25,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Porque o tamanho limitado obriga quem cria a ir direto ao núcleo do problema: para quem isso existe, o que realmente precisa funcionar e o que pode ficar para depois."
     },
     "fonte-custom__episodio-2026-07-17-o-valor-de-terminar__modo-podcast-adaptado__chunk-006-de-025__voz-apresentador-b.wav": {
       "fingerprint": "1ba5afa11bdb7a5ddf48f395eb6a42f984694d789d11f5bed550ca79583e39a9",
@@ -65,7 +70,8 @@
       "kind": "chunk",
       "chunk_index": 6,
       "chunk_total": 25,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "E isso leva a uma ideia central: terminar não é apenas uma questão de disciplina. Também é uma habilidade técnica de engenharia. É preciso definir uma fronteira, reconhecer dependências, reduzir riscos e decidir claramente o que significa estar pronto. Sem esses critérios, qualquer projeto pode crescer indefinidamente."
     },
     "fonte-custom__episodio-2026-07-17-o-valor-de-terminar__modo-podcast-adaptado__chunk-007-de-025__voz-apresentador-a.wav": {
       "fingerprint": "755f27ea9d4683eca8f200f6210c5f1f18f7ed39889e3f0275c47bb6e4df2a35",
@@ -76,7 +82,8 @@
       "kind": "chunk",
       "chunk_index": 7,
       "chunk_total": 25,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Então um bom recorte não tenta descrever tudo o que o produto poderá fazer no futuro. Ele procura a menor experiência que já seja capaz de entregar valor completo."
     },
     "fonte-custom__episodio-2026-07-17-o-valor-de-terminar__modo-podcast-adaptado__chunk-008-de-025__voz-apresentador-b.wav": {
       "fingerprint": "3d431db08d614add1ce480aadb7eb2e817f41ff17e67abe0d570ee30087279c2",
@@ -87,7 +94,8 @@
       "kind": "chunk",
       "chunk_index": 8,
       "chunk_total": 25,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "O texto usa como exemplo um produto para transformar artigos em áudio. A primeira versão talvez precise somente receber um texto, gerar uma narração compreensível e salvar um arquivo que possa ser reproduzido. Recursos como catálogos, perfis, sincronização e relatórios podem ser importantes, mas não precisam impedir o fechamento desse primeiro ciclo."
     },
     "fonte-custom__episodio-2026-07-17-o-valor-de-terminar__modo-podcast-adaptado__chunk-009-de-025__voz-apresentador-a.wav": {
       "fingerprint": "75d7421fc6e3f23347098f173d7f0e2dc55fa396dac384aece3dbc2b4a96ec0c",
@@ -98,7 +106,8 @@
       "kind": "chunk",
       "chunk_index": 9,
       "chunk_total": 25,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "E fechar o ciclo é o que revela os problemas reais. O texto era grande demais? A voz começava a cansar depois de dez minutos? O custo surpreendeu? O arquivo produzido ficou difícil de encontrar?"
     },
     "fonte-custom__episodio-2026-07-17-o-valor-de-terminar__modo-podcast-adaptado__chunk-010-de-025__voz-apresentador-b.wav": {
       "fingerprint": "9af1db12a421d4a0d6acb8d5268b1d046a9c57890c14b966646a37ff810b994c",
@@ -109,7 +118,8 @@
       "kind": "chunk",
       "chunk_index": 10,
       "chunk_total": 25,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Essas perguntas concretas só aparecem quando alguém percorre o caminho inteiro. Antes disso, boa parte da discussão tende a ser apenas uma disputa entre hipóteses."
     },
     "fonte-custom__episodio-2026-07-17-o-valor-de-terminar__modo-podcast-adaptado__chunk-011-de-025__voz-apresentador-a.wav": {
       "fingerprint": "177a7361331839cd4170b0a2f2c84c7665a23d4f415d4a2b404313b9220b844c",
@@ -120,7 +130,8 @@
       "kind": "chunk",
       "chunk_index": 11,
       "chunk_total": 25,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "E quando uma pessoa finalmente usa o que foi construído, o projeto deixa de ser uma extensão do gosto de quem criou e passa a responder ao mundo. Aquilo que parecia óbvio pode não ser tão óbvio assim."
     },
     "fonte-custom__episodio-2026-07-17-o-valor-de-terminar__modo-podcast-adaptado__chunk-012-de-025__voz-apresentador-b.wav": {
       "fingerprint": "ca0dd90de863e12714d6c5794f75eeb7ecea4b3f34b578f70744b8d45bd81557",
@@ -131,7 +142,8 @@
       "kind": "chunk",
       "chunk_index": 12,
       "chunk_total": 25,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Um botão que parecia evidente pode precisar de um rótulo. Uma mensagem de erro considerada suficiente talvez não ajude ninguém a se recuperar. E o uso pode revelar que uma função tratada como secundária é essencial, enquanto outra, sofisticada e trabalhosa, permanece esquecida."
     },
     "fonte-custom__episodio-2026-07-17-o-valor-de-terminar__modo-podcast-adaptado__chunk-013-de-025__voz-apresentador-a.wav": {
       "fingerprint": "bff567a35425fbb586d7f422e4e56ad8b64c1e4250e6cdb7f3ef53046114d7b1",
@@ -142,7 +154,8 @@
       "kind": "chunk",
       "chunk_index": 13,
       "chunk_total": 25,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Esse encontro com o usuário pode ser desconfortável. Mas o texto argumenta que é justamente ele que transforma experiência em aprendizado."
     },
     "fonte-custom__episodio-2026-07-17-o-valor-de-terminar__modo-podcast-adaptado__chunk-014-de-025__voz-apresentador-b.wav": {
       "fingerprint": "b4dd20d93f150f43eeff31182275beebd245a39a792c9875f46cc6c65f75bd6a",
@@ -153,7 +166,8 @@
       "kind": "chunk",
       "chunk_index": 14,
       "chunk_total": 25,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Projetos inacabados preservam todas as possibilidades; projetos concluídos produzem evidências. Eles expõem escolhas, limitações e consequências, além de criar algo que pode ser demonstrado, criticado, medido e melhorado."
     },
     "fonte-custom__episodio-2026-07-17-o-valor-de-terminar__modo-podcast-adaptado__chunk-015-de-025__voz-apresentador-a.wav": {
       "fingerprint": "51816ac9eefe59765b209fcd91197a7b9a55f3e0abdd062247df0c88e2a5fa8e",
@@ -164,7 +178,8 @@
       "kind": "chunk",
       "chunk_index": 15,
       "chunk_total": 25,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Agora, reduzir o escopo não significa abandonar a qualidade. Pequeno não é sinônimo de descartável ou descuidado."
     },
     "fonte-custom__episodio-2026-07-17-o-valor-de-terminar__modo-podcast-adaptado__chunk-016-de-025__voz-apresentador-b.wav": {
       "fingerprint": "c91878ef7c9c46458a7e9b1daf9d97c40fff70364e95a3f19963224761f0725d",
@@ -175,7 +190,8 @@
       "kind": "chunk",
       "chunk_index": 16,
       "chunk_total": 25,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Um projeto pequeno ainda pode usar nomes claros, tratar erros, oferecer instruções honestas e ter uma arquitetura que não esconda suas limitações. Nesse contexto, qualidade significa cuidar intensamente de poucas promessas."
     },
     "fonte-custom__episodio-2026-07-17-o-valor-de-terminar__modo-podcast-adaptado__chunk-017-de-025__voz-apresentador-a.wav": {
       "fingerprint": "7d29a7eda29887c51674fde0018413159aaf5aa5a2fbbac36a1c08cd28b340f8",
@@ -186,7 +202,8 @@
       "kind": "chunk",
       "chunk_index": 17,
       "chunk_total": 25,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "O texto diz que existe uma elegância particular nos sistemas que assumem os próprios limites. Como isso aparece para quem usa?"
     },
     "fonte-custom__episodio-2026-07-17-o-valor-de-terminar__modo-podcast-adaptado__chunk-018-de-025__voz-apresentador-b.wav": {
       "fingerprint": "4903b6c05cf28583e9fcd48ea2210d26ccf148f0c9945db5b3c7d1be562c0ce7",
@@ -197,7 +214,8 @@
       "kind": "chunk",
       "chunk_index": 18,
       "chunk_total": 25,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Esses sistemas informam o que está acontecendo, falham de maneira compreensível e permitem que a pessoa retome o trabalho. Em vez de tentar parecer completos, procuram ser confiáveis. E, segundo o texto, essa confiabilidade é uma base melhor para crescer do que uma coleção de recursos conectados apenas pela metade."
     },
     "fonte-custom__episodio-2026-07-17-o-valor-de-terminar__modo-podcast-adaptado__chunk-019-de-025__voz-apresentador-a.wav": {
       "fingerprint": "e4b22efbbef3bcea2fe5c536194fb8cecd95a70b55e72e3f10c88c5d475698ac",
@@ -208,7 +226,8 @@
       "kind": "chunk",
       "chunk_index": 19,
       "chunk_total": 25,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Certo, mas como transformar essa ideia em um ciclo que realmente caiba na agenda?"
     },
     "fonte-custom__episodio-2026-07-17-o-valor-de-terminar__modo-podcast-adaptado__chunk-020-de-025__voz-apresentador-b.wav": {
       "fingerprint": "db0b9adcbdd8fc559281d90fb092a6ffb28ddda9d3a2a91481602a00d813384d",
@@ -219,7 +238,8 @@
       "kind": "chunk",
       "chunk_index": 20,
       "chunk_total": 25,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Uma forma prática é escolher um problema observado na própria rotina e limitar o primeiro ciclo a poucos dias. No início, escreva uma frase como: “Isto estará pronto quando uma pessoa conseguir...”. Depois, complete essa frase com uma ação verificável e liste somente os obstáculos que impedem essa pessoa de realizá-la."
     },
     "fonte-custom__episodio-2026-07-17-o-valor-de-terminar__modo-podcast-adaptado__chunk-021-de-025__voz-apresentador-a.wav": {
       "fingerprint": "1c5b4b29547a59badd6a167511abc3a962f9c81f424a02276e0c91745e3c5fb3",
@@ -230,7 +250,8 @@
       "kind": "chunk",
       "chunk_index": 21,
       "chunk_total": 25,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "E as novas ideias que inevitavelmente aparecem durante a construção? A gente ignora?"
     },
     "fonte-custom__episodio-2026-07-17-o-valor-de-terminar__modo-podcast-adaptado__chunk-022-de-025__voz-apresentador-b.wav": {
       "fingerprint": "50e87e4451751ac818445412509b64bb568d28e8315c8cf54c5c0ce4c2c56025",
@@ -241,7 +262,8 @@
       "kind": "chunk",
       "chunk_index": 22,
       "chunk_total": 25,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Não. Elas devem ser registradas, mas não incorporadas automaticamente ao escopo atual. Uma lista de itens para “depois” protege o foco sem desperdiçar os insights. Ao terminar o prazo, entregue a versão a alguém, observe o uso e anote o que aconteceu. O próximo passo deve nascer dessa observação, não da ansiedade de parecer ambicioso."
     },
     "fonte-custom__episodio-2026-07-17-o-valor-de-terminar__modo-podcast-adaptado__chunk-023-de-025__voz-apresentador-a.wav": {
       "fingerprint": "9107aff420df93d71c910c1b5b3735590db461c5ea1cabcd6e7bcd1acfe2461e",
@@ -252,7 +274,8 @@
       "kind": "chunk",
       "chunk_index": 23,
       "chunk_total": 25,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Então a mudança de carreira raramente vem daquela ideia isolada e brilhante. Ela aparece quando acumulamos ciclos completos: perceber, recortar, construir, entregar e aprender."
     },
     "fonte-custom__episodio-2026-07-17-o-valor-de-terminar__modo-podcast-adaptado__chunk-024-de-025__voz-apresentador-b.wav": {
       "fingerprint": "33811912644dac36e75dbaf4ccd4a3173bbf8d9feecbfb1a6fce266db9b199d2",
@@ -263,7 +286,8 @@
       "kind": "chunk",
       "chunk_index": 24,
       "chunk_total": 25,
-      "speaker": "apresentador_b"
+      "speaker": "apresentador_b",
+      "text": "Isso. Cada ciclo aumenta nossa capacidade de estimar trabalho, conversar com usuários e tomar decisões sob restrições. No fim, um projeto pequeno não é apenas uma versão reduzida de algo maior. Ele é uma unidade completa de experiência e uma prova de que conseguimos atravessar a distância entre imaginar e realizar."
     },
     "fonte-custom__episodio-2026-07-17-o-valor-de-terminar__modo-podcast-adaptado__chunk-025-de-025__voz-apresentador-a.wav": {
       "fingerprint": "2236e8e00ef8aa265e2ccaec2af20506bc73a70c8e90403dcf8af9d10c83a909",
@@ -274,7 +298,8 @@
       "kind": "chunk",
       "chunk_index": 25,
       "chunk_total": 25,
-      "speaker": "apresentador_a"
+      "speaker": "apresentador_a",
+      "text": "Baseado no conteúdo “O valor de terminar: por que projetos pequenos mudam carreiras”. Adaptação em áudio gerada com inteligência artificial. Verifique os direitos do conteúdo original antes de publicar."
     }
   },
   "source_key": "custom",

@@ -11,7 +11,10 @@
       "generation_id": "gen-tts-1784530033-erUZST4wJ9IpU6nLTCjR",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.00956925,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Welcome back, everyone! Today we're diving into a really provocative article called \"LLM Benchmark: Should I Use the One With the Highest Score?\" by Fabio Akita, published on AkitaOnRails.com. And I love this one because it tackles a question I think we've all had when we look at those big leaderboard tables.",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-002-de-063__voz-apresentador-b.wav": {
       "fingerprint": "18f9bad81f2e3d457dba709055c4b9899d75fd4607f24d922719dcd0e2248cc2",
@@ -23,7 +26,10 @@
       "generation_id": "gen-tts-1784530068-GdXJ4XuJ6syvsjbs8kdm",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.014766,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Yeah, and Akita starts with this scenario that I think every single person in the AI community has experienced. Someone opens his benchmark table, sees the rankings, and immediately asks: \"So Opus 4.7 is better than Opus 4.8 and Fable 5?\" Or \"GPT 5.4 is better than 5.5 and 5.6?\" And his answer is simply: no. It means the table was sorted by a column called score. That's it.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-003-de-063__voz-apresentador-a.wav": {
       "fingerprint": "640071ac537fb3fd18c91308f8bc49c8620d5dbf431f4826fd81d82040739913",
@@ -35,7 +41,10 @@
       "generation_id": "gen-tts-1784530089-WkI1n8gZG0nBx7UtgOZ1",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.01415275,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "That's such a simple point but it's so easy to miss! We see a ranked list and our brains immediately turn it into a competition, right? Like a world championship of intelligence. But Akita is very clear: the model at the top didn't beat all the others at everything. It generated the artifact that received the highest score in that specific test, that specific run, with that specific prompt and rubric.",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-004-de-063__voz-apresentador-b.wav": {
       "fingerprint": "6ee00aac7ae74a05e527be68a443f04e553ef249f492d62a46eedbe3167f8c6e",
@@ -47,7 +56,10 @@
       "generation_id": "gen-tts-1784530108-mhzUvO1u6aaiMhO9GKC0",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.019138,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exactly. And this leads to what I think is the most important conceptual distinction in the whole article: the score belongs to the project, not to the model as a whole. He puts it really well — the model doesn't go into an MRI machine that measures how much intelligence is inside. It receives a prompt, uses tools, writes a project, and stops. The score is an evaluation of that project, that artifact. To truly classify an LLM's full capability, you'd have to test every possible problem, in every language, with every prompt and context combination. Which is obviously impossible.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-005-de-063__voz-apresentador-a.wav": {
       "fingerprint": "ddb06d1c5f7887f5531642052be71c2eb0950e84b3c40d1f0bebf78868f848e7",
@@ -59,7 +71,10 @@
       "generation_id": "gen-tts-1784530136-KW87vrAjWdcPQhhzgKSx",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.00272925,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "So what exactly is the benchmark testing then? What's the actual task?",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-006-de-063__voz-apresentador-b.wav": {
       "fingerprint": "d1eca251d377b72e4fb4e23000ba6397ace54c327f22f3caeb8b57f791858882",
@@ -71,7 +86,10 @@
       "generation_id": "gen-tts-1784530147-ba9lL3yqeSWe9GVGYviJ",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.01461275,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Every model gets the same job: autonomously build a small chat application in Rails 8 using RubyLLM, Hotwire, Tailwind, with tests, CI tools, a Dockerfile, Docker Compose, and documentation. Then Akita evaluates the result across eight dimensions: completeness, correctness of the RubyLLM API usage, test quality, error handling, persistence, Hotwire integration, architecture, and production readiness.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-007-de-063__voz-apresentador-a.wav": {
       "fingerprint": "868645422aaa38e8267d7efde5f8616d1a4e188960e7d1837d3cdcdbe845cfa3",
@@ -83,7 +101,10 @@
       "generation_id": "gen-tts-1784530169-pjDvWt5cxp0ervteDcHb",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.00506925,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Eight dimensions — that's pretty thorough. But even with all that, Akita argues the final result is a function of way more than just the model, right?",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-008-de-063__voz-apresentador-b.wav": {
       "fingerprint": "b1e3b16240f3d020a03bb404c67715aac9ef52e96b88a78294feb8c5653486a4",
@@ -95,7 +116,10 @@
       "generation_id": "gen-tts-1784530182-RKJYQl7vUxDc0oK2etRD",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.01279475,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Right, he lays out this formula: result equals model plus prompt plus harness plus context plus tools plus snapshot plus execution plus audit. So the model is just one variable among many. The table is sorted by score because a table without order is hard to read, but that ordering doesn't transform a sample into a law of nature.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-009-de-063__voz-apresentador-a.wav": {
       "fingerprint": "317e54559e41b4af9beeeac250032afba42d35882735ab20c4e467d787a6bdc1",
@@ -107,7 +131,10 @@
       "generation_id": "gen-tts-1784530201-8Unbox1XYmkHbvFfooee",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.00466525,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "And then there's the whole non-determinism issue, which I find fascinating. These models don't produce the same output twice, do they?",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-010-de-063__voz-apresentador-b.wav": {
       "fingerprint": "fff81669d05fccf79eaa1577b9f3c0a043a92dbb519bd4848d0e99f9e8a31e92",
@@ -119,7 +146,10 @@
       "generation_id": "gen-tts-1784530223-DazTvsAcuHvEUYRuQxmv",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.01500525,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Not at all. LLMs are not deterministic. The same prompt doesn't guarantee the same tokens, the same architecture decisions, or the same sequence of tool calls. In a coding agent setup, you also have terminal outputs, response times, accumulated context, compaction, and harness behavior all adding variability. And if the provider updates a model alias between one Monday and the next, that's yet another variable changing without you touching anything.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-011-de-063__voz-apresentador-a.wav": {
       "fingerprint": "e574be20f05e3bebf87bb5fc7b01040a5e29b75b04b6e312fbe708ae124bf495",
@@ -131,7 +161,10 @@
       "generation_id": "gen-tts-1784530253-2bmvwzj8JQl64Ck6CiNa",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.0069565,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "He has some wild examples of this. Like the same Opus 4.7 with the same prompt produced results scattered between Tier 1 and Tier 3 depending on the harness. That's a huge spread!",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-012-de-063__voz-apresentador-b.wav": {
       "fingerprint": "4bf3038d0a68aa2b3c2e30df7b221584ecf6fb4fff9d1c3e69c8f05bef8185e9",
@@ -143,7 +176,10 @@
       "generation_id": "gen-tts-1784530267-jt65TUglopXMwle6RwRE",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.01261675,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Huge. And there's a cleaner recent example. Fable 5 was run again after its re-release using the same model ID on OpenRouter. First run: 94 points in 24 minutes. Second run: 93 points in 18 minutes. Different projects, different defects, different cost. One point of score difference is noise even within what's technically the same model.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-013-de-063__voz-apresentador-a.wav": {
       "fingerprint": "2c7fe0ea3a08cb88f51e57f33a29b258f98c5a2189f814b1b3cb1b72f3a25b26",
@@ -155,7 +191,10 @@
       "generation_id": "gen-tts-1784530286-gJc6yR8Qg79Df1s4OSty",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.0033365,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "And it's not just the model that varies — the harness can completely change the outcome too, right?",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-014-de-063__voz-apresentador-b.wav": {
       "fingerprint": "bb3c17856ff81bddf2389962270300833860040840b17fc68b05ce914e6bd353",
@@ -167,7 +206,10 @@
       "generation_id": "gen-tts-1784530297-4wNOgMvEPLUBAy7byB6T",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.01508925,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Absolutely. DeepSeek V4 Pro scored 69 with a DNF on OpenCode but reached 89 via DeepClaude. Kimi K2.7 scored 86 via OpenCode on OpenRouter and about 68 in an informal run through the Kimi Code CLI. Akita is careful to note there are caveats about snapshots and endpoints in both cases, because you can never perfectly isolate just the model. An agent benchmark measures the entire package.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-015-de-063__voz-apresentador-a.wav": {
       "fingerprint": "605ac4ccc0183e74f1da7fe1a873184190bf5994140897f3f36c3529dfe1baea",
@@ -179,7 +221,10 @@
       "generation_id": "gen-tts-1784530324-l6AH1xLB3We7PAU7ztsQ",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.00395725,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "OK so let's get to the juicy part — the actual scores at the top. What does the leaderboard look like?",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-016-de-063__voz-apresentador-b.wav": {
       "fingerprint": "9dd5d12ee7514a2cbff04d44b7667b0d0d0e158843a6c4ae306a9336244b8938",
@@ -191,7 +236,10 @@
       "generation_id": "gen-tts-1784530337-kDzTcpAXJCHjw4Q8aNIc",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.02292275,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "So the top of the current benchmark looks like this: Claude Opus 4.7 at 97 points, 18 minutes, about 7 dollars. GPT 5.4 xHigh at 95, 22 minutes, about 16 dollars. Claude Opus 4.8 also at 95, 17 minutes, about 6.40. Then Fable 5 at 94, 24 minutes, about 11.20. Fable 5 re-release at 93, 18 minutes, about 8.30. Gemini 3.5 Flash at 93, 18 minutes, only about 3.55. And GPT 5.6 Sol xHigh at 92, 17 minutes, roughly 8.70 equivalent in API pricing.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-017-de-063__voz-apresentador-a.wav": {
       "fingerprint": "921622dc6426e1f390c12ea187661102f69d18368d5abf25a077ec83fdf653f2",
@@ -203,7 +251,10 @@
       "generation_id": "gen-tts-1784530364-fPkSQ1MippC9ZlHwHytT",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.00506225,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "So you've got this spread from 92 to 97 at the top. But Akita says we should read all of that as basically the same group?",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-018-de-063__voz-apresentador-b.wav": {
       "fingerprint": "29b53b6983631114cda131b6236d2d17c453489d27717737c5dfd31343100e7f",
@@ -215,7 +266,10 @@
       "generation_id": "gen-tts-1784530376-4S0Zp0qm5mEX6B3GMMQX",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.01194125,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "That's his core argument. Everything above 90 is in the same ballpark. There's not enough sampling to say that 97 is 2.1 percent more intelligent than 95, let alone that it would be better at a database migration, a Rust refactor, or debugging a race condition. He's very firm on this: those few points of difference don't constitute a meaningful hierarchy.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-019-de-063__voz-apresentador-a.wav": {
       "fingerprint": "d38aa1ac9242703fc580dee3325dfc385267be31a2ae3b3b10ae4505a4e11477",
@@ -227,7 +281,10 @@
       "generation_id": "gen-tts-1784530410-cOw9MPmxRiMLN7KQC43h",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.002594,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "And he mentions a ceiling effect too, which makes a lot of sense when you think about it.",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-020-de-063__voz-apresentador-b.wav": {
       "fingerprint": "87eebe57a933e602bee4d94aca7417207817d9c73bc81759fbd5517f2ed39df5",
@@ -239,7 +296,10 @@
       "generation_id": "gen-tts-1784530422-1pwK8q10DQf4A1rUuveX",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.01628075,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Right. The benchmark app is real and has plenty of annoying details, but it's still a small greenfield Rails project with a closed scope. The best models have already saturated the task. So the order at the top ends up being decided by very specific choices: an API key guard here, where conversation history is persisted, a cookie cap there, a missing error test, a development Dockerfile instead of a production one. Those details matter for the project, but they don't prove a universal hierarchy between models.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-021-de-063__voz-apresentador-a.wav": {
       "fingerprint": "0080cf0047ff360c76e46a68d15aaddf8dd1087d5bf39a3ed8005de369fbb04e",
@@ -251,7 +311,10 @@
       "generation_id": "gen-tts-1784530444-naoup11lXq7vuvXIz1F1",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.0028735,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "So what about the gap between the top tier and the lower tiers? Does that tell us more?",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-022-de-063__voz-apresentador-b.wav": {
       "fingerprint": "cfeda22fa3f91384918bcec511429b8a54ee11cb68f44011a6b4a6bd46b9b0ba",
@@ -263,7 +326,10 @@
       "generation_id": "gen-tts-1784530456-4OReXWnvKbzKq2m4NH8U",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.0171795,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Much more, actually. Akita's rubric defines Tier A as something you could deploy as-is or with a short patch. Tier C has broken core functionality or needs a major rework. He says he can't tell you whether a 97-scoring model is truly better than a 93 for any future task, but he can absolutely tell you that the group delivering correct RubyLLM integration, useful tests, and a production-ready Docker image is in a completely different category from the group that invents APIs and tests its own broken mocks.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-023-de-063__voz-apresentador-a.wav": {
       "fingerprint": "0d240dc6a076be9a3396bd83bdac211865eab115e5ff07be6c402d460a721363",
@@ -275,7 +341,10 @@
       "generation_id": "gen-tts-1784530485-g9vNaAoUANqYLaOUCMYc",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.0035405,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "That's such a practical way to think about it. Pick your tier first, then worry about the details within that tier.",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-024-de-063__voz-apresentador-b.wav": {
       "fingerprint": "65f1cd531dcc54972dc7dd9ae66ee49c448a97b91284b8b51f5558d31d70625d",
@@ -287,7 +356,10 @@
       "generation_id": "gen-tts-1784530499-P31YYLZHFLvHmBAxWsYQ",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.0094345,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exactly his recommendation. First choose the group. Then discuss cost, speed, subscription plans, harness compatibility, and personal usage preferences. Fighting over the exact position within the 90-plus cluster is, in his words, invented precision.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-025-de-063__voz-apresentador-a.wav": {
       "fingerprint": "10f820f7a2d425551c6d0cea235f30de2d80e32a5899c91ab1ab789ab3631921",
@@ -299,7 +371,10 @@
       "generation_id": "gen-tts-1784530519-KQvE40AUA9cGriqgaNof",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.0052395,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "OK, but I know people are going to want the details. So why specifically does Opus 4.7 sit above 4.8 and Fable?",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-026-de-063__voz-apresentador-b.wav": {
       "fingerprint": "14dcb6bfe69a46179b0d6ef48af876217d308e3e9dcee7faf5cbee7f39970fe8",
@@ -311,7 +386,10 @@
       "generation_id": "gen-tts-1784530531-ISgEA28hCI0zU5dbuFjz",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.01183675,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "It comes down to very specific project decisions. Opus 4.7 got 97 because the RubyLLM integration was correct, the test doubles mimicked real method signatures, the persistence used session cookies that are multi-worker safe, and error paths were covered. In the current audit, there was no major concrete defect left to deduct points for.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-027-de-063__voz-apresentador-a.wav": {
       "fingerprint": "7950ef4b4ffbe560137105cd5e30c200ddf00e1828e997bbf225e0e1497f73aa",
@@ -323,7 +401,10 @@
       "generation_id": "gen-tts-1784530551-z9USSOOvHTQWwrwX196S",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.0020815,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "And 4.8? What cost it those two points?",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-028-de-063__voz-apresentador-b.wav": {
       "fingerprint": "f8adf13db0fe2b7d65ce662db48acf68640545f0de154bb95ac7a10cb2595d8a",
@@ -335,7 +416,10 @@
       "generation_id": "gen-tts-1784530561-x9oXw4Z0qVlGN9imEnLr",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.0114545,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Opus 4.8 also wrote an excellent project — real Rails validation, Docker, Compose, OpenRouter calls, and it even finished a minute faster. But it lost two points because the chat history stored in the cookie had no cap, risking hitting the 4 kilobyte cookie size limit, and it didn't do an explicit preflight check of the API key.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-029-de-063__voz-apresentador-a.wav": {
       "fingerprint": "7e67e6a5a2e34e756792a9c17bc00bfe26b5bc3b128bd4ce8bf99cc114d590b0",
@@ -347,7 +431,10 @@
       "generation_id": "gen-tts-1784530583-n25YQyMPGDoEbC4JO6uI",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.0032715,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "And Fable 5 actually fixed those two issues but introduced a different problem?",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-030-de-063__voz-apresentador-b.wav": {
       "fingerprint": "1e9082bdc8076bab093cd2d83dd8233e7ee790f15b203167e17a0eb0fd37e611",
@@ -359,7 +446,10 @@
       "generation_id": "gen-tts-1784530595-4c84KEbVvFouD15uhD9i",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.0155715,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exactly. Fable 5 fixed the cookie cap and the API key preflight. But in return, it chose to persist conversation history in a singleton within the process. That means the conversation disappears on restart and doesn't work properly with multiple workers. That architectural decision cost it the point that placed it below 4.8. And here's the kicker — the blind cross-audit noted that if Fable had just swapped its store for Rails.cache, it probably would have flipped the order.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-031-de-063__voz-apresentador-a.wav": {
       "fingerprint": "61303f084b586ea9a1b00f2c4465d442c36a485bb861b2174d47bb7b3a0def4c",
@@ -371,7 +461,10 @@
       "generation_id": "gen-tts-1784530616-7EcgylQbJmvphhgpzkAJ",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.00607525,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "So we're literally talking about one design decision — the storage backend — determining who's quote-unquote \"better.\" That really drives home how fragile these rankings are.",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-032-de-063__voz-apresentador-b.wav": {
       "fingerprint": "239a4c571314e281f26a4a55a5ad1d68347237eacdbc3776a2e51a4a4c07e6e3",
@@ -383,7 +476,10 @@
       "generation_id": "gen-tts-1784530631-XCTBtA4ywvtC5sFZ5gIS",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.01608625,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "It does. And the efficiency data tells yet another story. Opus 4.7 used 9.78 million tokens at 5 dollars input and 25 dollars output per million. Opus 4.8 used 8.28 million tokens at the same rate — that's 15 percent fewer billable tokens and it finished faster. Fable 5 used only 6.03 million tokens but at double the price: 10 dollars input and 50 dollars output per million.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-033-de-063__voz-apresentador-a.wav": {
       "fingerprint": "502af9eb2747c4eb3c0363cb85b6143aff6d73092d2585350be7228ba05ca71e",
@@ -395,7 +491,10 @@
       "generation_id": "gen-tts-1784530654-DxFRoomLsLaJTtAKFKtu",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.004195,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "So Fable uses fewer tokens but costs more per token. Did that extra cost buy a better result?",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-034-de-063__voz-apresentador-b.wav": {
       "fingerprint": "684c425a65cf3d1d1bf81807761be1980bd8a1ed53f308bbb21c58de000af3ed",
@@ -407,7 +506,10 @@
       "generation_id": "gen-tts-1784530666-5u5i58787qMGF3wlRFW2",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.017811,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Not in this case. And Akita is candid about his interpretation: Fable costs double per token and, for this particular problem, didn't buy a better project. He thinks it might be too much model for this test. His personal read is that Opus hit the plateau of this benchmark at version 4.7. Version 4.8 refined efficiency and behavior. Fable went to a different tier of capability and price, but this test couldn't extract that difference. He's careful to label this as a hypothesis based on results, not insider knowledge about Anthropic's training process.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-035-de-063__voz-apresentador-a.wav": {
       "fingerprint": "f7b4d8a6f5a8c09593db3d4b6bcd41cc6ec2689d287eb784cba3579056d589b9",
@@ -419,7 +521,10 @@
       "generation_id": "gen-tts-1784530696-ivDFOQ9onQ8AxJ727Nd4",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.010628,
-      "cost_exact": true
+      "cost_exact": true,
+      "text": "I appreciate that intellectual honesty. Now what about the GPT family? Same question — why does 5.4 appear above the newer versions?",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-036-de-063__voz-apresentador-b.wav": {
       "fingerprint": "ca25c4d3fa49572676717e4c64ffb96de2518706869570823db8ad088268d0d3",
@@ -431,7 +536,10 @@
       "generation_id": "gen-tts-1784530713-EvY8fFhLiAQxpF5wy6LY",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.01073175,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Again, different design decisions in the generated projects. GPT 5.4 did an API key preflight, differentiated configuration errors from provider errors, used cache with TTL and a message cap, and separated form objects from the domain. It lost points only because the Dockerfile was a development image running as root.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-037-de-063__voz-apresentador-a.wav": {
       "fingerprint": "ea1baa2c383eeddfa817b36b744fa19e4896fb7fe0cb710fad2fb0dbd57555fb",
@@ -443,7 +551,10 @@
       "generation_id": "gen-tts-1784530731-yHAUnar5bSua79zj4sO9",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.00103375,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "And 5.5?",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-038-de-063__voz-apresentador-b.wav": {
       "fingerprint": "670945dc5510f49943c7bc60eb4db4392d3cd7929253c97397414159ac36841d",
@@ -455,7 +566,10 @@
       "generation_id": "gen-tts-1784530739-lP7FqphoSHElbQid7Uh2",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.0093635,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "GPT 5.5 got the integration and multi-turn right, but it repeated the development Dockerfile problem, didn't test any error paths, and left the cookie with no byte limit. It dropped to 85 in the re-audit. That's a significant drop and actually pushed it out of the top cluster entirely.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-039-de-063__voz-apresentador-a.wav": {
       "fingerprint": "e24f8d9946cb075d211ec0c9073733697c77e5e4cbfe00ef8379b22ec9ca8b3b",
@@ -467,7 +581,10 @@
       "generation_id": "gen-tts-1784530756-mBchODHsxzkC680zJODY",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.001898,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "And 5.6 Sol bounced back?",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-040-de-063__voz-apresentador-b.wav": {
       "fingerprint": "2f3d5a317bfa5488908450ae085191150a4d56455079d347c4b3d0305edef078",
@@ -479,7 +596,10 @@
       "generation_id": "gen-tts-1784530765-GKkfolc4OvHzMXU5LYWY",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.013008,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "It did. GPT 5.6 Sol came back to 92 with much better defensive engineering, a proper multi-stage non-root Docker build, and 99.2 percent test coverage. But it shipped without a system prompt and loaded the chat history in a hidden HTML field on the client side. The rubric penalizes that because the conversation is lost on page reload and the data could be tampered with by the user.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-041-de-063__voz-apresentador-a.wav": {
       "fingerprint": "d1b0c5c5ef68105187260a6ad9f09d8b746e3a86bc810846eb6148469c1bddb9",
@@ -491,7 +611,10 @@
       "generation_id": "gen-tts-1784530785-49rqSraOBeDTjqqnZV5k",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.0039625,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Every single one of these models made a different trade-off. It's almost like they each have their own architectural taste.",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-042-de-063__voz-apresentador-b.wav": {
       "fingerprint": "e09907dd1fe9e8d74fc5a1d9a76a2e167bda086bb72d6c605fb131eb1287e0f6",
@@ -503,7 +626,10 @@
       "generation_id": "gen-tts-1784530798-ncHvmOLnvj3Mn5WB60hn",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.0167425,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "That's a great way to put it. And the efficiency numbers are really interesting here too. GPT 5.4 used 7.64 million tokens and cost about 16 dollars. GPT 5.5 used 4.9 million at about 10 dollars. And GPT 5.6 Sol used only 3.92 million at roughly 8.70 in API equivalent. So from 5.4 to 5.6, the run got about 23 percent faster and consumed nearly half the tokens.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-043-de-063__voz-apresentador-a.wav": {
       "fingerprint": "cc14168887df72af6e8812ae6300b35843b5077e7da1a12af0079092d6d1f6d1",
@@ -515,7 +641,10 @@
       "generation_id": "gen-tts-1784530829-qa2Q7PkrMSEklnJORKM2",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.00321425,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Wait, but don't the newer models cost more per token? How did they end up cheaper overall?",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-044-de-063__voz-apresentador-b.wav": {
       "fingerprint": "78e6702021ce4f754122db67ca1bc71037c7dfcbbf3300345a0637b89753b0a9",
@@ -527,7 +656,10 @@
       "generation_id": "gen-tts-1784530843-jJOX8HnoHvdOoeUQaFCB",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.01304075,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Great catch. GPT 5.4 is priced at 2.50 input and 15 dollars output per million tokens, while both 5.5 and 5.6 Sol cost 5 dollars input and 30 dollars output. So the per-token price literally doubled, but the total cost went down because the newer models were so much more efficient with their token usage. They accomplished the task with far fewer tokens.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-045-de-063__voz-apresentador-a.wav": {
       "fingerprint": "bb33b857bd879b7d3a007849d5d695b602d36abac1f7b630b135927b2955c66a",
@@ -539,7 +671,10 @@
       "generation_id": "gen-tts-1784530892-Dd9d9Uf4xbeTpZnaNZM8",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.0035335,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "So Akita's take is that 5.4 was the big leap and the later versions refined efficiency?",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-046-de-063__voz-apresentador-b.wav": {
       "fingerprint": "324aad9eba75f65b216698ce90e9bb31b23a096f2037659f4e32967872e89b82",
@@ -551,7 +686,10 @@
       "generation_id": "gen-tts-1784530905-LeTRtwmH2JpENTMTe1zX",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.01695,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "That's his intuition, yes. He feels GPT 5.4 was the jump that put the family on the quality plateau for this test, and 5.5 and 5.6 focused heavily on efficiency — using less context and finishing faster without leaving the same general ballpark of capability. But he's very upfront: he can't prove OpenAI trained those versions with that specific goal. The data shows the behavior of three runs. Saying it was a deliberate product strategy is, in his own words, his guess.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-047-de-063__voz-apresentador-a.wav": {
       "fingerprint": "f7d0b56ec1f4faa6c9fd9e3f27d96e0f020e5712813fd308c0a114602a379c65",
@@ -563,7 +701,10 @@
       "generation_id": "gen-tts-1784530930-TR4JZAWPPLSllckjXaHl",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.0057925,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "I love that he labels his interpretations so clearly. Now here's a part of the article that I think is really brave — he talks about bugs in his own audit process.",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-048-de-063__voz-apresentador-b.wav": {
       "fingerprint": "2562b6a57f0928db4703df0102c7d93a19943ed5f5b17ad9990b0561c26ffd48",
@@ -575,7 +716,10 @@
       "generation_id": "gen-tts-1784530943-zVMfh2jYLjyQ7LrC6BmJ",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.017791,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "This is crucial and honestly refreshing. He points out that the auditor — himself — is yet another variable. GPT 5.5 originally received a score of 96. Then the cross-audit against 5.6 found problems that had been overlooked. He went back, re-read the code, confirmed the defects, and the score dropped to 85. In the same review, GPT 5.4 dropped from 97 to 95 because of the development Dockerfile issue. The model didn't change. The project didn't change. The audit improved.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-049-de-063__voz-apresentador-a.wav": {
       "fingerprint": "1e46620bc9f3f06cb1af9d57dd0080805355c02b86951e660844e58522a6d38a",
@@ -587,7 +731,10 @@
       "generation_id": "gen-tts-1784530970-NCYTR61VAIBcAK07pF1t",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.0048815,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "An eleven-point drop! That's not a minor correction — that moved 5.5 from the top tier to a completely different group.",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-050-de-063__voz-apresentador-b.wav": {
       "fingerprint": "ad19f58bf58d60834b0755968c4b96c6673ef52ff3c1fb6dbad16d14c260a213",
@@ -599,7 +746,10 @@
       "generation_id": "gen-tts-1784530985-x2oCVjMDucx77EAY9wjz",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.01313925,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exactly. And it gets even more humbling. In the first version of the benchmark, Akita had marked valid RubyLLM APIs as hallucinations because he was auditing from memory instead of actually reading the gem's source code. When he went and checked the actual source, he had to redo a large portion of the ranking. He documents all of this in his earlier posts because, as he puts it, hiding the error would be worse than making it.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-051-de-063__voz-apresentador-a.wav": {
       "fingerprint": "8bfabc061f895d346305f38aac712c93c42717da274aa5970ba6fef3f27b4e69",
@@ -611,7 +761,10 @@
       "generation_id": "gen-tts-1784531029-6TF48XHWzuuwlfMD7VBs",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.00636175,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "So the score isn't just a function of the model and the project — it's also a function of how carefully the human reviewer looked at things. That's another reason not to treat these numbers as gospel.",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-052-de-063__voz-apresentador-b.wav": {
       "fingerprint": "cee6c4da2a637e37eb5d80aeff6a1c2357c8bf573c53722737648986448b8840",
@@ -623,7 +776,10 @@
       "generation_id": "gen-tts-1784531043-Qm012PYDUm408WawpsUo",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.013938,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Precisely. A rubric takes a bunch of qualitative decisions and squeezes them into a single number. It can have blind spots, bad weightings, and misinterpretations. Akita's argument is that a serious benchmark publishes everything — the prompt, the generated code, the logs, the criteria, and the corrections — so that someone else can challenge it. And he says: be even more suspicious when someone publishes only the graph.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-053-de-063__voz-apresentador-a.wav": {
       "fingerprint": "b4748430c6785680962344df67481c15d47fd1a7845b47092b135315130ab29a",
@@ -635,7 +791,10 @@
       "generation_id": "gen-tts-1784531063-YcqKTWl1DlUVHlmxVfbE",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.00404275,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "So after all this deconstruction, how does Akita actually use his own benchmark? Because he clearly still finds it valuable.",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-054-de-063__voz-apresentador-b.wav": {
       "fingerprint": "b1c1fb86b9a4fa5e5c994646e72eafea00c68c0d3135f615a50c47a60b1d26a9",
@@ -647,7 +806,10 @@
       "generation_id": "gen-tts-1784531083-WYMz8gAcGAT41RRWylrb",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.0224905,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "He uses it for three things. First, to eliminate clearly bad groups. Tier C and D fail at fundamental things in this workload, so he won't spend a week betting on them for autonomous coding. Second, to find the cluster of candidates. Above 90, he considers all of them strong, and then he chooses based on marginal cost from his subscription, speed, harness availability, and daily work behavior. And third — and I think this is the most underappreciated one — he reads the specific defects, not just the score. If your system doesn't use cookies or Docker, some of this benchmark's deductions are completely irrelevant to you. But if you need multi-turn chat and deployment, those same deductions become decisive.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-055-de-063__voz-apresentador-a.wav": {
       "fingerprint": "02f4a921a033ff16bfd7dcedc2c971e34187328bda501433783a0d62af10a5e5",
@@ -659,7 +821,10 @@
       "generation_id": "gen-tts-1784531118-hyjKhfw9r2KVB03mldlg",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.004887,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "That last point is so practical. The defects matter more than the number, because whether a defect matters depends entirely on your use case.",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-056-de-063__voz-apresentador-b.wav": {
       "fingerprint": "76663ddd1ab1ec39a750a475f2bff33648a05592986ea17c75efbb990d34be87",
@@ -671,7 +836,10 @@
       "generation_id": "gen-tts-1784531136-4aezibyHVc3lQmhjRCaI",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.016334,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Absolutely. And if the decision involves real money or production risk, Akita's advice is direct: run your own test. He says take his benchmark repository, swap the prompt for something that resembles your actual workload, run the models more than once, and do blind review. Measure time, cost, and how much human work is still needed afterward. A team maintaining a fifteen-year-old Java monolith needs a completely different benchmark than someone building a greenfield Rails prototype.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-057-de-063__voz-apresentador-a.wav": {
       "fingerprint": "c00213e07a49b48d331f7121c4d3394253daa84962313c4febc99aec0752f58c",
@@ -683,7 +851,10 @@
       "generation_id": "gen-tts-1784531162-iaqOYWlWtSCIZzb8nz4Z",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.00270775,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "And no single benchmark can crown \"the best LLM\" anyway, can it?",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-058-de-063__voz-apresentador-b.wav": {
       "fingerprint": "3377c0028afe74af4851b116c39da11f9db1154f9e9c4e980a93e91d56e5b6e3",
@@ -695,7 +866,10 @@
       "generation_id": "gen-tts-1784531174-7LLpP4aoAdQzUlhUMWvW",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.0143635,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "No, and Akita is categorical about this. There is no \"best LLM\" in absolute terms because that object doesn't exist without specifying the task. SWE-bench, Terminal-Bench, his Rails app, human preference arenas — each one tests a slice and ignores the rest. They're useful for locating groups and eliminating bad options. None of them can produce a universal winner.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-059-de-063__voz-apresentador-a.wav": {
       "fingerprint": "1d47e125d5285753ae7ee2dbb0815d20ca91e348e7b2f194421fe2749ef0fd3c",
@@ -707,7 +881,10 @@
       "generation_id": "gen-tts-1784531201-YoFF3XhXeEdmoWE1oHCW",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.0019235,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "So to wrap this up — what's his final takeaway?",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-060-de-063__voz-apresentador-b.wav": {
       "fingerprint": "684567ac21a06540da976a67a9c31c17c6b0453af676784a1d2884fd8b75e67a",
@@ -719,7 +896,10 @@
       "generation_id": "gen-tts-1784531212-iRqQbB7hMVmQIcn08Ali",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.011621,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "His conclusion is beautifully simple. Read the top of the ranking as clusters, not as a podium. The 90-plus group is in the same ballpark. Tier A is clearly more reliable than Tier C for this type of coding work. Within the good group, choose based on your harness, your subscription, your time constraints, and which defect you're willing to fix yourself.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-061-de-063__voz-apresentador-a.wav": {
       "fingerprint": "a3709165520da1b5821d89476bc9770fcf4fe81c3bdc36b9130ea3b2c9395488",
@@ -731,7 +911,10 @@
       "generation_id": "gen-tts-1784531230-TXmsc8zRsl2k3IvLsIre",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.00242875,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "And then he ends with something that I think everyone needs to hear.",
+      "voice": "Kore",
+      "style": "curioso"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-062-de-063__voz-apresentador-b.wav": {
       "fingerprint": "38cc18e666cb046394beb7dfd5dfd01ed639bff83f14561561a0856219abbbac",
@@ -743,7 +926,10 @@
       "generation_id": "gen-tts-1784531245-mBagtr95vAh2UosQuo8n",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.0117765,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "He does. He says: don't trust benchmarks. Don't trust influencers. Don't trust me. If you truly need to know which model is best for your case, define your constraints, write your methodology, run all the candidates, and bring data. Other people's opinions are useful for choosing what to test first. The technical decision remains yours.",
+      "voice": "Puck",
+      "style": "didático"
     },
     "fonte-akita__episodio-2026-07-19-llm-benchmark-devo-usar-o-que-tem-nota-maior__modo-podcast-adaptado__chunk-063-de-063__voz-apresentador-a.wav": {
       "fingerprint": "1921b497809d957bd3fbfc4171f6355c75c3ce1da03f29e61f150e06b74b2e70",
@@ -755,7 +941,10 @@
       "generation_id": "gen-tts-1784531269-OO4rDUHpcMeajfWtAjmu",
       "key_label": "Minha chave de emergencia",
       "cost_usd": 0.0247165,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "What a way to close. This has been a deep dive into Fabio Akita's analysis of LLM benchmarks and I think the big lesson is: stop being a fan of a model and start being a fan of your own testing process. This episode was based on the article \"LLM Benchmark: Devo usar o que tem nota maior?\", by Fabio Akita, published on AkitaOnRails.com at akitaonrails.com/2026/07/19/llm-benchmark-devo-usar-o-que-tem-nota-maior, under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 license. This adaptation is also distributed under CC BY-NC-SA 4.0. Thanks for listening, everyone!",
+      "voice": "Kore",
+      "style": "curioso"
     }
   },
   "source_key": "akita",

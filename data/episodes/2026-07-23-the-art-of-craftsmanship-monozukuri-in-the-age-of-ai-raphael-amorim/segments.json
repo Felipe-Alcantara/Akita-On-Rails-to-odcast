@@ -11,7 +11,10 @@
       "generation_id": "gen-tts-1784813149-QSIvjp2bGxU1aeesx840",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0002356,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Fala, pessoal! Sejam muito bem-vindos a mais um episódio. Hoje a gente vai mergulhar num artigo que me deixou super curiosa. O título é \"The Art of Craftsmanship — Monozukuri — in the Age of AI\", escrito pelo Raphael Amorim. E já adianto: é um texto que faz a gente repensar a nossa relação com inteligência artificial.",
+      "voice": "pf_dora",
+      "style": "curiosa"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-002-de-030__voz-apresentador-c.wav": {
       "fingerprint": "3bbc2f5612cdd06983818ef264922457a358138be3af7b7f1077eb4688556c4e",
@@ -23,7 +26,10 @@
       "generation_id": "gen-tts-1784813218-VwGZrWGaiMT1iGlaPKR1",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00021452,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Cara, que tema! Eu li esse artigo e fiquei animadíssimo pra discutir. Porque logo de cara o Raphael faz uma ressalva que eu acho fundamental: o artigo não é contra a IA em si. Ele é contra a forma como a IA está sendo utilizada. Isso é importante pra gente deixar claro desde o início.",
+      "voice": "pm_santa",
+      "style": "animado"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-003-de-030__voz-apresentador-b.wav": {
       "fingerprint": "51d7263c42c207742e77473a1adcf365d41cec35c985ad3a84ce1795c5c62504",
@@ -35,7 +41,10 @@
       "generation_id": "gen-tts-1784813281-5t675fLgFbSjcGicsF6Z",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00020522,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "E ele faz questão de dizer também que aquilo é a opinião pessoal dele, não uma verdade universal escrita em pedra. Então o Raphael está compartilhando a visão dele como desenvolvedor, como profissional da área, mas sem querer impor isso como regra absoluta pra ninguém.",
+      "voice": "pm_alex",
+      "style": "didático"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-004-de-030__voz-apresentador-a.wav": {
       "fingerprint": "25919e7a18de3b5257b1f68f59da77912be2bb3853908ab4c46897480da8f4ea",
@@ -47,7 +56,10 @@
       "generation_id": "gen-tts-1784813288-re2HcQHdcHopKuxlUndG",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00031744,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Perfeito. E ele começa falando sobre o que, na opinião dele, é o maior argumento de venda da IA: o tempo. O uso de inteligência artificial tem crescido bastante nos últimos anos justamente porque ela promete reduzir o tempo que a gente leva pra realizar uma tarefa. E aí ele explica que a maioria dos modelos de linguagem grandes, treinados com quantidades enormes de texto, consegue produzir texto ou código que parece feito por humanos, sob demanda.",
+      "voice": "pf_dora",
+      "style": "curiosa"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-005-de-030__voz-apresentador-c.wav": {
       "fingerprint": "91f27937e977d2fc92952bcb482244957201331a65fd3d7deb5ac947ba9a4208",
@@ -59,7 +71,10 @@
       "generation_id": "gen-tts-1784813363-KfzIzkZHZsPbdgvwgyGh",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00030318,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "E o ponto central que ele levanta é que esse fator tempo acabou se tornando mais importante do que qualquer outra coisa. O processo de criar algo ficou em segundo plano, e todo o foco foi pro resultado final. Sabe aquele pessoal nas redes sociais que posta: \"ah, bastaram três prompts pra eu criar esse jogo\" ou \"fiz essa imagem em dois minutos\"? É exatamente isso. O como foi feito não importa mais, só importa o que foi feito.",
+      "voice": "pm_santa",
+      "style": "animado"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-006-de-030__voz-apresentador-b.wav": {
       "fingerprint": "13acc381297bc1033eb2214816d3ae7e5aa689071eedabe51fcab966583b2b2a",
@@ -71,7 +86,10 @@
       "generation_id": "gen-tts-1784813441-dqUrRrkZrofTsPlCxgYk",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00025606,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "E o Raphael contextualiza isso no mundo corporativo. Ele observa que o ambiente empresarial é totalmente orientado pelo tempo. A gente mede trabalho usando representações abstratas de tempo — sprints, ciclos, e por aí vai. E é aí que a IA encontra seu espaço e se torna parte das ferramentas do dia a dia dos desenvolvedores e de outros profissionais.",
+      "voice": "pm_alex",
+      "style": "didático"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-007-de-030__voz-apresentador-a.wav": {
       "fingerprint": "55bcfa269f5a18a3d3fec721e86333fde71599d7abd0cee1230e27d77f5713b4",
@@ -83,7 +101,10 @@
       "generation_id": "gen-tts-1784813500-iqgzaVc73bkQf82Zm2Dp",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00016058,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Mas aí vem o problema, né? E é um argumento forte que ele faz: o foco em tempo nem sempre caminha junto com qualidade. Parece óbvio quando a gente ouve assim, mas no dia a dia a gente esquece disso.",
+      "voice": "pf_dora",
+      "style": "curiosa"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-008-de-030__voz-apresentador-c.wav": {
       "fingerprint": "4624fafd1c49695696f51491906d20adc6d3f304ef17c540c9eda2d42c1a6e52",
@@ -95,7 +116,10 @@
       "generation_id": "gen-tts-1784813547-vM4AdJSL6Atx4SX5Nfac",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00028582,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Exatamente! E ele diz que não está falando nada surreal. Existe até um termo que virou comum em vários lugares: AI slop. Que é basicamente aquele conteúdo genérico, sem capricho, gerado por IA. E olha que interessante: ele cita que até o CEO da Microsoft tem advogado pra que as pessoas parem de pensar na IA como slop. Ou seja, essa discussão existe, mesmo que alguns entusiastas prefiram ignorá-la.",
+      "voice": "pm_santa",
+      "style": "animado"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-009-de-030__voz-apresentador-b.wav": {
       "fingerprint": "0c48f730a0749b2b62d08d7db016019a63459fd1a8dbad61d62f64878df896db",
@@ -107,7 +131,10 @@
       "generation_id": "gen-tts-1784813598-ABHdOT3PVXeffFwNXU0J",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0002542,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "E aí o Raphael faz um levantamento honesto dos problemas do ecossistema de IA. Ele lista: a IA pode alucinar, pode dar respostas incorretas, e frequentemente traz questões de segurança e privacidade, dependendo do caso de uso. Mas — e isso é importante — ele reconhece que a IA não é perfeita, porém considera inegável o valor dela como ferramenta.",
+      "voice": "pm_alex",
+      "style": "didático"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-010-de-030__voz-apresentador-a.wav": {
       "fingerprint": "4d0bc626ac6fc8177b45c9e8c9203ca5524fd01ae9135199532f2ec8c6b4ac8d",
@@ -119,7 +146,10 @@
       "generation_id": "gen-tts-1784813655-FSQ115pzmVElYojFXFbm",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0002108,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Isso me chamou muita atenção. Ele não é radical. Ele reconhece, por exemplo, que a IA pode capacitar pessoas que não têm formação em programação a criar software. E também permite que programadores menos experientes construam sistemas mais complexos do que conseguiriam sozinhos.",
+      "voice": "pf_dora",
+      "style": "curiosa"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-011-de-030__voz-apresentador-c.wav": {
       "fingerprint": "d7eddf2d8a078f427a6adb3fe3ad8790647ce00e9084a74cbc9dd57485c2679d",
@@ -131,7 +161,10 @@
       "generation_id": "gen-tts-1784813690-wQMZ7m9VHnBvsO3CXchd",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0001829,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Ele dá um exemplo bem ilustrativo: imagina um desenvolvedor frontend que não tem expertise em codificação de vídeo. Com IA, essa pessoa poderia criar algo como um codificador de vídeo, mesmo sem dominar aquele conhecimento específico.",
+      "voice": "pm_santa",
+      "style": "animado"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-012-de-030__voz-apresentador-b.wav": {
       "fingerprint": "84cfc58117714b02e292e9e431fedffb6fba99a56b5ceec5fb73c52d7aa4fa34",
@@ -143,7 +176,10 @@
       "generation_id": "gen-tts-1784813708-YmJahq26KjySgeMwqGHM",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00031,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Mas é justamente aí que mora o perigo, segundo o Raphael. E esse é talvez o argumento mais crítico do artigo: a IA pode gerar código que não pertence verdadeiramente ao programador, que não é plenamente compreendido por ele. E o resultado disso é que o programador não tem o conhecimento necessário pra manter aquele código de forma independente. Ele não consegue dar manutenção, não consegue debugar, não consegue evoluir aquilo sozinho.",
+      "voice": "pm_alex",
+      "style": "didático"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-013-de-030__voz-apresentador-a.wav": {
       "fingerprint": "1542f30bf5e8122fe2c8b8d4774725fab70797496fbd94909244c6b7423ec9be",
@@ -155,7 +191,10 @@
       "generation_id": "gen-tts-1784813722-7UYVa2KTGm8IkHVs012s",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00020646,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "E complementando: ao usar a IA pra reduzir o tempo de desenvolvimento, a gente acaba pulando as fundações. Ou seja, aquele aprendizado fundamental que vem de escrever código, de errar, de entender por que algo funciona de um jeito e não de outro — tudo isso fica pra trás.",
+      "voice": "pf_dora",
+      "style": "curiosa"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-014-de-030__voz-apresentador-c.wav": {
       "fingerprint": "fc77d0f83311975491cb3b524fa563fb4fa40c00f8ee7541e8369239f8c579ee",
@@ -167,7 +206,10 @@
       "generation_id": "gen-tts-1784813736-Wpi1zNzuDmDr49ZTajyq",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00020274,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Aí ele faz uma afirmação que eu acho poderosa: quando uma pessoa tem verdadeira propriedade e compreensão de uma tarefa, a IA se torna o que ela deveria ser — uma ferramenta, não um tomador de decisões. Ferramenta, não decisor. Isso muda completamente a perspectiva.",
+      "voice": "pm_santa",
+      "style": "animado"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-015-de-030__voz-apresentador-b.wav": {
       "fingerprint": "8f230afa93a261fa9651e472e10c2259996c488a3454b4af3117f3a052c032a2",
@@ -179,7 +221,10 @@
       "generation_id": "gen-tts-1784813750-B2H8Lx6BXzQ4kJFkn0T4",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00025668,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "E pra ilustrar, ele conta uma experiência pessoal. Alguns anos atrás, numa empresa onde trabalhava, havia engenheiros usando IA pra gerar código numa linguagem de programação que eles tinham aprendido há apenas um mês. E, sem surpresa, não deu certo. Vários desenvolvedores, incluindo o próprio Raphael, tiveram que intervir pra consertar os problemas.",
+      "voice": "pm_alex",
+      "style": "didático"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-016-de-030__voz-apresentador-a.wav": {
       "fingerprint": "f119aee886fdf1a3ec59f2594b36bc6b7058b864288cf861d3b66d591775f8dd",
@@ -191,7 +236,10 @@
       "generation_id": "gen-tts-1784813764-CVlcAZZQCiN5lNXjiSoU",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0002201,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "E o estrago não foi pequeno, né? Ele diz que o código estava completamente quebrado e que ele acabou reescrevendo cerca de setenta por cento de tudo. Setenta por cento! E isso levou semanas de trabalho. Imagina a ironia: o que deveria ter economizado tempo acabou gerando semanas de retrabalho.",
+      "voice": "pf_dora",
+      "style": "curiosa"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-017-de-030__voz-apresentador-c.wav": {
       "fingerprint": "f5683cc6c1dd6316919fd47f9d3f9172fea18282845cdd79d94f6fe87ae274cd",
@@ -203,7 +251,10 @@
       "generation_id": "gen-tts-1784813777-gTSR0oGsTBRqJFCxRBFN",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00018848,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Mas olha que ele é justo na análise. Ele pergunta: nesse exemplo, a IA foi o problema? E responde: não, definitivamente não. A IA existe pra ajudar, não pra fazer o trabalho pelo programador. O problema foi como as pessoas usaram a ferramenta.",
+      "voice": "pm_santa",
+      "style": "animado"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-018-de-030__voz-apresentador-b.wav": {
       "fingerprint": "6d07dbf01a244ab7ec658c8db0b02bce9ebcf904535d6751a6f48188b4a51987",
@@ -215,7 +266,10 @@
       "generation_id": "gen-tts-1784813792-RI1185xpYpkVyRm3G3dA",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0002666,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "E ele observa que esse padrão de comportamento tem aumentado significativamente. Ele conta que recebe muitos pull requests — que são aquelas submissões de código pra revisão — claramente gerados por modelos de linguagem, de programadores com variados níveis de experiência, que muitas vezes não compreendem plenamente o código que estão submetendo, ou mal compreendem.",
+      "voice": "pm_alex",
+      "style": "didático"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-019-de-030__voz-apresentador-a.wav": {
       "fingerprint": "42f4e8f70aecb0ff74daedb56c45fe34339705a305a5761f54cebb6f8ac83aab",
@@ -227,7 +281,10 @@
       "generation_id": "gen-tts-1784813812-7gCAe46BIxuMr8lNF87d",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0002883,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Aí ele chega no ponto que eu acho mais bonito do artigo: a conexão com o artesanato. Ele argumenta que pra alcançar qualidade, o programador precisa ter vivenciado o que está sendo construído. O desenvolvimento de software segue o caminho do artesanato, onde o artesão, através de anos de experiência, tentativas repetidas, às vezes sorte ou talento natural, consegue produzir resultados extraordinários.",
+      "voice": "pf_dora",
+      "style": "curiosa"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-020-de-030__voz-apresentador-b.wav": {
       "fingerprint": "4e26a4e4b3faa408ba24978a90d5f6e7053f26da53bd8c876438ad64dfd97b77",
@@ -239,7 +296,10 @@
       "generation_id": "gen-tts-1784813828-Xtu6J3Oq3dPUxTEDhH2r",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00029326,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "E é aí que entra o conceito japonês de monozukuri. Literalmente, monozukuri significa \"fazer coisas\". Mas vai muito além da manufatura simples. Ele incorpora o espírito, a habilidade e o orgulho do artesanato, com forte foco em perfeição, melhoria contínua, respeito pelos materiais e entrega de produtos de alta qualidade por meio de conhecimento técnico profundo e uma abordagem holística centrada no cliente.",
+      "voice": "pm_alex",
+      "style": "didático"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-021-de-030__voz-apresentador-c.wav": {
       "fingerprint": "0517fa73a32439b598595b83854c420dfcf41f23d88c9633e4dd16acf707792c",
@@ -251,7 +311,10 @@
       "generation_id": "gen-tts-1784813840-8wxdwlHTiRVHVAkHK3LV",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00019716,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Que conceito lindo, cara! E ele dá o contexto histórico: o termo ganhou destaque no final da década de mil novecentos e noventa, quando o governo japonês usou o monozukuri pra reafirmar a força manufatureira do Japão numa economia global que estava mudando.",
+      "voice": "pm_santa",
+      "style": "animado"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-022-de-030__voz-apresentador-a.wav": {
       "fingerprint": "faa661e19bdaa42d16a9fea007ed67ee03d8cff5245d372cbc4be292a7a99566",
@@ -263,7 +326,10 @@
       "generation_id": "gen-tts-1784813851-CAg4StHX0qwQSeA2O8Kn",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00018104,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "E as empresas japonesas transformaram a manufatura numa ciência precisa. O monozukuri passou a representar dedicação, inovação e a busca incansável pela excelência na produção. É interessante pensar como isso se aplica ao software.",
+      "voice": "pf_dora",
+      "style": "curiosa"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-023-de-030__voz-apresentador-b.wav": {
       "fingerprint": "346e7ec509ceb271cf45f9139a0305d3baf06c154ae356684e50f8ed50340ddb",
@@ -275,7 +341,10 @@
       "generation_id": "gen-tts-1784813862-d7PuJKiGoJKNiVjZWI7W",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00024366,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "E aí vem aquela pergunta que todo mundo faz, especialmente quem está começando na área: a IA vai substituir os programadores? O Raphael responde de um jeito que eu acho muito honesto: sim e não. Depende inteiramente do tipo de trabalho que o programador faz. E ele até reformula a frase: depende do ofício artesanal do programador.",
+      "voice": "pm_alex",
+      "style": "didático"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-024-de-030__voz-apresentador-c.wav": {
       "fingerprint": "8f7d3bbb3ea2a5b3a562a13bdbf88e0048e93f66bf06f6ea7ccf681f7a6cd7b5",
@@ -287,7 +356,10 @@
       "generation_id": "gen-tts-1784813879-JLIHqzYoQ2wFcuJwvvna",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00023126,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "E aqui ele faz a grande ponte entre os dois conceitos. Ele diz que monozukuri é o processo do artesão, e que ultimamente a gente está perdendo esse processo por focar demais nos resultados e prestar pouca atenção ao processo em si. É como se a gente tivesse jogado fora o caminho e ficado só olhando pro destino.",
+      "voice": "pm_santa",
+      "style": "animado"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-025-de-030__voz-apresentador-a.wav": {
       "fingerprint": "78b011889ae54ce1e0782ad6784eae19960523971395f557d5a76b02f4becef7",
@@ -299,7 +371,10 @@
       "generation_id": "gen-tts-1784813890-qKPw1oWdV89G4Wi8Rpx2",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00017236,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "E a conclusão dele é clara: quanto mais profundo e especializado o conhecimento e a experiência do artesão, menor a probabilidade de ele ser substituído. Isso vale pra programação, pra manufatura, pra qualquer ofício.",
+      "voice": "pf_dora",
+      "style": "curiosa"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-026-de-030__voz-apresentador-b.wav": {
       "fingerprint": "cd1a8e05ee2d048a67931252563d3761e16a89324bc62372084ab110a142e0ec",
@@ -311,7 +386,10 @@
       "generation_id": "gen-tts-1784813898-fdkE5w8YKAGDX1oexjJl",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00021018,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "E ele fecha com uma recomendação muito prática e direta: use IA, sim, mas aprenda os fundamentos por conta própria. Pratique sem ela. Não dependa da IA pra tomar decisões que você deveria ser capaz de tomar sozinho. Caso contrário, você corre o risco de se tornar substituível.",
+      "voice": "pm_alex",
+      "style": "didático"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-027-de-030__voz-apresentador-c.wav": {
       "fingerprint": "56b348af430d944c327641d1b21f3ff7bf0349cf7810fac72091be8d45fed13f",
@@ -323,7 +401,10 @@
       "generation_id": "gen-tts-1784813905-iV4a26vNEOBIuUO2mZzY",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.00018104,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "E a frase final dele é muito marcante: a inteligência artificial não compreende nem incorpora monozukuri. Ela deve ser uma ferramenta que pertence ao artesão — e não algo que substitui o artesão. Resumindo tudo com muita elegância.",
+      "voice": "pm_santa",
+      "style": "animado"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-028-de-030__voz-apresentador-a.wav": {
       "fingerprint": "3a7586bd32e1eeaa551dcaa9fda8b74910ffae7af8bf7c4b3413c9fcf3522953",
@@ -335,7 +416,10 @@
       "generation_id": "gen-tts-1784813912-TyrPqKthvXeHPfNgh4yW",
       "key_label": "Chave Audio Teste",
       "cost_usd": 0.0003038,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "É um artigo que vale muito a pena ler na íntegra, pessoal. Antes de encerrar, a atribuição: este episódio foi baseado no conteúdo \"The Art of Craftsmanship (Monozukuri) in the Age of AI\", do Raphael Amorim. O original está disponível em rapha.land/the-art-of-craftsmanship-monozukuri-in-the-age-of-ai/. Esta adaptação em áudio foi gerada com inteligência artificial. Verifiquem os direitos do conteúdo original antes de publicar.",
+      "voice": "pf_dora",
+      "style": "curiosa"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-029-de-030__voz-apresentador-b.wav": {
       "fingerprint": "ec88f1e4fa11224aac300ad3e7f79ff1f7e6084d1ea3a1f9e2ff46718057b5d7",
@@ -347,7 +431,10 @@
       "generation_id": "gen-tts-1784813919-6BMMBVBm0Ej3aAeVbzQH",
       "key_label": "Chave Audio Teste",
       "cost_usd": 6.324e-05,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "É isso, pessoal. Até o próximo episódio!",
+      "voice": "pm_alex",
+      "style": "didático"
     },
     "fonte-custom__episodio-2026-07-23-the-art-of-craftsmanship-monozukuri-in-the-age-of-ai-raphael__modo-podcast-adaptado__chunk-030-de-030__voz-apresentador-c.wav": {
       "fingerprint": "c70a696aa55a4be0b50381a307b66d55ca99ad7a2b9bd21e6988fc6c514144d0",
@@ -359,7 +446,10 @@
       "generation_id": "gen-tts-1784813926-5n2OnGeW7JmfZpVLr2XX",
       "key_label": "Chave Audio Teste",
       "cost_usd": 5.208e-05,
-      "cost_exact": false
+      "cost_exact": false,
+      "text": "Valeu, gente! Até mais!",
+      "voice": "pm_santa",
+      "style": "animado"
     }
   },
   "source_key": "custom",
