@@ -681,9 +681,10 @@ def _cmd_status(item_id: str | None) -> dict:
         return _episode_summary(_episode_dir(item_id))
     episodes = []
     if EPISODES_DIR.is_dir():
-        for directory in sorted(EPISODES_DIR.iterdir(), reverse=True):
-            if directory.is_dir():
-                episodes.append(_episode_summary(directory))
+        directories = [d for d in EPISODES_DIR.iterdir() if d.is_dir()]
+        directories.sort(key=lambda d: d.stat().st_ctime, reverse=True)
+        for directory in directories:
+            episodes.append(_episode_summary(directory))
     running = [e for e in episodes if e["state"] == "rodando"]
     return {"episodes": episodes, "running": running, "anything_running": bool(running)}
 

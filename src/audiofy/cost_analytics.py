@@ -195,10 +195,11 @@ def load_episode_metrics(episodes_dir: Path) -> list[EpisodeMetrics]:
     if not episodes_dir.exists():
         return metrics_list
 
-    for ep_dir in sorted(episodes_dir.iterdir()):
-        if not ep_dir.is_dir():
-            continue
-
+    dirs = sorted(
+        (d for d in episodes_dir.iterdir() if d.is_dir()),
+        key=lambda d: d.stat().st_ctime,
+    )
+    for ep_dir in dirs:
         metrics_file = ep_dir / "metrics.json"
         if not metrics_file.exists():
             continue

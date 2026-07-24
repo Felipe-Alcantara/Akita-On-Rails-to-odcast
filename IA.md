@@ -1805,3 +1805,26 @@ de estimativas.
 **Risco que sobrou:** nenhuma paginação ou filtro por período na aba — com poucas dezenas de
 episódios é aceitável; crescendo muito, "custo por semana" e as listas por modelo/perfil podem
 precisar de um teto de itens exibidos.
+
+## 2026-07-23 — Correção: ordenação de episódios no mesmo dia
+
+**O que mudou:** `_cmd_status` (`src/audiofy/bridge.py`), `do_status` (`start_app.py`) e
+`load_episode_metrics` (`src/audiofy/cost_analytics.py`) ordenavam os episódios com
+`sorted(EPISODES_DIR.iterdir())`, isto é, ordem alfabética pelo **nome da pasta**
+(`YYYY-MM-DD-slug`). Quando dois ou mais episódios são criados no mesmo dia, o desempate cai no
+slug (ordem alfabética do título), não na ordem real de criação — um episódio gerado por último
+podia aparecer no meio da lista. As três funções agora ordenam pelo horário real de criação da
+pasta (`Path.stat().st_ctime`).
+
+**Motivo:** reportado pelo usuário — o episódio mais recente (`introducao-a-linguagem-de-...`,
+criado às 17h06 de 23/07) aparecia entre outros dois episódios do mesmo dia em vez de por
+primeiro/último, porque os três compartilhavam o prefixo `2026-07-23`.
+
+**Validação:** confirmado com `stat -c %W` que os três episódios de 23/07 têm horários de criação
+distintos (10:16, 13:01, 17:06) que a ordenação alfabética antiga não respeitava. Após a correção,
+`sorted(..., key=lambda d: d.stat().st_ctime, reverse=True)` devolve `introducao-a-linguagem...`
+em primeiro, como esperado. Suíte completa (424 testes) e `ruff check` passam sem alteração.
+
+**Risco que sobrou:** nenhum renomeio de pasta foi feito (a task original cogitava incluir hora no
+nome); a correção resolve via metadado do sistema de arquivos (`ctime`), que é suficiente e não
+exige migração de dados existentes.

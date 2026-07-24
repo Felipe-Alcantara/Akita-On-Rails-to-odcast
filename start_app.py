@@ -441,10 +441,14 @@ def do_status() -> None:
 
     episodes = []
     if EPISODES_DIR.is_dir():
+        directories = sorted(
+            (d for d in EPISODES_DIR.iterdir() if d.is_dir()),
+            key=lambda d: d.stat().st_ctime,
+        )
         episodes = [
             audio
-            for directory in sorted(EPISODES_DIR.iterdir())
-            if directory.is_dir() and (audio := resolve_final_audio(directory)) is not None
+            for directory in directories
+            if (audio := resolve_final_audio(directory)) is not None
         ]
     _ok(f"{len(episodes)} episódio(s) finalizado(s) em {EPISODES_DIR}")
     for episode in episodes:
