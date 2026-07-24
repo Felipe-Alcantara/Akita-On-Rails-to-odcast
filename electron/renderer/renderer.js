@@ -51,6 +51,15 @@ function chunkSeverityLabel(chunk) {
   return "sem auditoria";
 }
 
+function speakerLabel(chunk) {
+  if (!chunk.speaker) return "";
+  if (chunk.voice) {
+    const style = chunk.style ? ` (${chunk.style})` : "";
+    return ` · ${chunk.speaker}: voz ${chunk.voice}${style}`;
+  }
+  return ` · voz ${chunk.speaker}`;
+}
+
 async function openChunkReview(itemId, title, language) {
   const args = ["audio-chunks", itemId];
   if (language) args.push(`--language=${language}`);
@@ -78,7 +87,7 @@ async function openChunkReview(itemId, title, language) {
     const detail = makeElement("div", "row-main");
     const chunkIndex = chunk.chunk_index || index + 1;
     const chunkTotal = chunk.chunk_total || result.chunks.length;
-    const voice = chunk.speaker ? ` · voz ${chunk.speaker}` : "";
+    const voice = speakerLabel(chunk);
     detail.appendChild(makeElement(
       "span", "row-title", `Chunk ${chunkIndex} de ${chunkTotal}${voice}`
     ));
@@ -112,6 +121,89 @@ function closeChunkReview() {
   player.removeAttribute("src");
   player.load();
   $("chunk-modal").close();
+}
+
+let teleprompterTimingChunks = null;
+let teleprompterTimeUpdateHandler = null;
+
+function closeTeleprompter() {
+  const player = $("teleprompter-player");
+  if (teleprompterTimeUpdateHandler) {
+    player.removeEventListener("timeupdate", teleprompterTimeUpdateHandler);
+    teleprompterTimeUpdateHandler = null;
+  }
+  player.pause();
+  player.removeAttribute("src");
+  player.load();
+  teleprompterTimingChunks = null;
+  $("teleprompter-modal").close();
+}
+
+async function openTeleprompter(episode) {
+  const args = ["audio-chunks", episode.episode_id];
+  if (episode.language) args.push(`--language=${episode.language}`);
+  const result = await bridge(args);
+  if (!result.ok) {
+    alert(result.error);
+    return;
+  }
+  const title = episode.title || episode.episode_id;
+  $("teleprompter-modal-title").textContent = `Acompanhar a leitura · ${title}`;
+  const chunksWithText = result.chunks.filter((chunk) => chunk.text);
+  $("teleprompter-summary").textContent = chunksWithText.length
+    ? `${chunksWithText.length} trecho(s) de texto disponível para acompanhamento.`
+    : "Este episódio não tem texto por trecho registrado (gerado antes desse recurso).";
+
+  const textContainer = $("teleprompter-text");
+  textContainer.replaceChildren();
+  const orderedChunks = [...result.chunks].sort(
+    (a, b) => (a.chunk_index || 0) - (b.chunk_index || 0)
+  );
+  const turnElements = [];
+  for (const chunk of orderedChunks) {
+    if (!chunk.text) continue;
+    const isCommentary = chunk.kind === "commentary";
+    const turn = makeElement("div", `teleprompter-turn${isCommentary ? " commentary" : ""}`);
+    const label = isCommentary ? "comentário do narrador" : speakerLabel(chunk).replace(/^ · /, "");
+    if (label) turn.appendChild(makeElement("span", "turn-speaker", label));
+    turn.appendChild(document.createTextNode(chunk.text));
+    turnElements.push({ chunk, element: turn });
+    textContainer.appendChild(turn);
+  }
+
+  const hasTiming = orderedChunks.every(
+    (chunk) => chunk.start_seconds !== null && chunk.end_seconds !== null
+  );
+  teleprompterTimingChunks = hasTiming ? turnElements : null;
+  if (!hasTiming) {
+    $("teleprompter-now-playing").textContent =
+      "Sem auditoria de áudio completa: o destaque automático não está disponível, só o texto.";
+  } else {
+    $("teleprompter-now-playing").textContent = "Toque o episódio para acompanhar o texto.";
+  }
+
+  const player = $("teleprompter-player");
+  if (episode.mp3) {
+    player.src = projectPathToFileUrl(episode.mp3);
+    player.load();
+  }
+  teleprompterTimeUpdateHandler = () => {
+    if (!teleprompterTimingChunks) return;
+    const current = player.currentTime;
+    let activeEntry = null;
+    for (const entry of teleprompterTimingChunks) {
+      entry.element.classList.remove("active");
+      if (current >= entry.chunk.start_seconds && current < entry.chunk.end_seconds) {
+        activeEntry = entry;
+      }
+    }
+    if (activeEntry) {
+      activeEntry.element.classList.add("active");
+      activeEntry.element.scrollIntoView({ block: "center", behavior: "smooth" });
+    }
+  };
+  player.addEventListener("timeupdate", teleprompterTimeUpdateHandler);
+  $("teleprompter-modal").showModal();
 }
 
 let currentSource = "custom";
@@ -1075,9 +1167,17 @@ function renderEpisodes(episodes) {
     const profile = episode.profile_name ? ` · perfil ${episode.profile_name}` : "";
     const music = episode.background_music ? ` · música ${episode.background_music}` : "";
     const source = episode.source_key ? `fonte ${episode.source_key} · ` : "";
+    const presenters = (episode.presenters || [])
+      .map((p) => `${p.speaker}: ${p.voice}${p.style ? ` (${p.style})` : ""}`)
+      .join(", ");
+    const voices = presenters
+      ? ` · vozes: ${presenters}`
+      : episode.narration_voice
+        ? ` · voz: ${episode.narration_voice}`
+        : "";
     production.textContent =
       `${source}${generationModeLabel(episode.generation_mode)} · ` +
-      `${cost}${profile}${words}${audit}${music}`;
+      `${cost}${profile}${words}${audit}${music}${voices}`;
     if (episode.source_file) {
       production.title = `Fonte preservada: ${episode.source_file}`;
     }
@@ -1117,6 +1217,12 @@ function renderEpisodes(episodes) {
       episode.episode_id, episode.title || episode.episode_id, episode.language
     );
     actions.appendChild(chunks);
+    if (episode.mp3) {
+      const follow = makeElement("button", "ghost", "📖 acompanhar");
+      follow.title = "Acompanhar a leitura com o texto na tela";
+      follow.onclick = () => openTeleprompter(episode);
+      actions.appendChild(follow);
+    }
     const folder = document.createElement("button");
     folder.textContent = "📂";
     folder.title = "Abrir pasta";
@@ -1213,6 +1319,12 @@ $("btn-close-chunks").onclick = closeChunkReview;
 $("chunk-modal").addEventListener("cancel", (event) => {
   event.preventDefault();
   closeChunkReview();
+});
+
+$("btn-close-teleprompter").onclick = closeTeleprompter;
+$("teleprompter-modal").addEventListener("cancel", (event) => {
+  event.preventDefault();
+  closeTeleprompter();
 });
 
 // ── Configurações ─────────────────────────────────────────────────────────

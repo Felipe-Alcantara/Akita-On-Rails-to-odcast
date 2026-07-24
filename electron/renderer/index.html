@@ -223,6 +223,21 @@
     <ul id="chunk-list" class="chunk-list"></ul>
   </dialog>
 
+  <dialog id="teleprompter-modal" aria-labelledby="teleprompter-modal-title">
+    <div class="modal-header">
+      <div>
+        <h2 id="teleprompter-modal-title">Acompanhar a leitura</h2>
+        <p id="teleprompter-summary" class="muted small"></p>
+      </div>
+      <button id="btn-close-teleprompter" class="ghost" aria-label="Fechar acompanhamento">✕</button>
+    </div>
+    <audio id="teleprompter-player" controls preload="metadata">
+      Seu navegador não suporta reprodução de áudio.
+    </audio>
+    <p id="teleprompter-now-playing" class="muted small">Toque o episódio para acompanhar o texto.</p>
+    <div id="teleprompter-text" class="teleprompter-text" aria-live="polite"></div>
+  </dialog>
+
   <!-- ══ Episódios ══ -->
   <section id="tab-episodes" class="tab-page hidden" role="tabpanel"
     aria-labelledby="tab-button-episodes" aria-hidden="true" tabindex="0">
