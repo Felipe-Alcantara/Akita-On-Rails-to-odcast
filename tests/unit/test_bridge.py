@@ -184,6 +184,93 @@ class AudioChunksTest(unittest.TestCase):
         self.assertEqual(result["source_key"], "custom")
         self.assertEqual(result["audit"]["critical"], 1)
 
+    @patch("audiofy.audio_audit.read_audio_audit")
+    def test_lista_chunks_traz_voz_tom_texto_e_janela_temporal_acumulada(self, read_audit):
+        read_audit.return_value = {
+            "audited_at": "2026-07-19T10:00:00-03:00",
+            "summary": {"segments": 2, "ok": 2, "warnings": 0, "critical": 0},
+            "segments": [
+                {"file": "001.wav", "duration_seconds": 10.0, "severity": "ok"},
+                {"file": "002.wav", "duration_seconds": 4.5, "severity": "ok"},
+            ],
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            directory = Path(tmp)
+            segments = directory / "segments"
+            segments.mkdir()
+            (segments / "001.wav").write_bytes(b"audio")
+            (segments / "002.wav").write_bytes(b"audio")
+            (directory / "segments.json").write_text(
+                json.dumps(
+                    {
+                        "source_key": "custom",
+                        "generation_mode": "verbatim",
+                        "segments": {
+                            "001.wav": {
+                                "kind": "chunk",
+                                "chunk_index": 1,
+                                "chunk_total": 2,
+                                "speaker": "narrador",
+                                "voice": "Orus",
+                                "style": "Firme",
+                                "text": "Primeiro trecho.",
+                            },
+                            "002.wav": {
+                                "kind": "chunk",
+                                "chunk_index": 2,
+                                "chunk_total": 2,
+                                "speaker": "narrador",
+                                "voice": "Orus",
+                                "style": "Firme",
+                                "text": "Segundo trecho.",
+                            },
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+            with patch("audiofy.bridge._episode_dir", return_value=directory):
+                result = bridge._cmd_audio_chunks("item")
+
+        primeiro, segundo = result["chunks"]
+        self.assertEqual(primeiro["voice"], "Orus")
+        self.assertEqual(primeiro["style"], "Firme")
+        self.assertEqual(primeiro["text"], "Primeiro trecho.")
+        self.assertEqual(primeiro["start_seconds"], 0.0)
+        self.assertEqual(primeiro["end_seconds"], 10.0)
+        self.assertEqual(segundo["start_seconds"], 10.0)
+        self.assertEqual(segundo["end_seconds"], 14.5)
+
+    @patch("audiofy.audio_audit.read_audio_audit", return_value=None)
+    def test_sem_auditoria_de_audio_janela_temporal_fica_none(self, _read_audit):
+        with tempfile.TemporaryDirectory() as tmp:
+            directory = Path(tmp)
+            segments = directory / "segments"
+            segments.mkdir()
+            (segments / "001.wav").write_bytes(b"audio")
+            (directory / "segments.json").write_text(
+                json.dumps(
+                    {
+                        "source_key": "custom",
+                        "generation_mode": "verbatim",
+                        "segments": {
+                            "001.wav": {
+                                "kind": "chunk",
+                                "chunk_index": 1,
+                                "chunk_total": 1,
+                                "speaker": "narrador",
+                            }
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+            with patch("audiofy.bridge._episode_dir", return_value=directory):
+                result = bridge._cmd_audio_chunks("item")
+
+        self.assertIsNone(result["chunks"][0]["start_seconds"])
+        self.assertIsNone(result["chunks"][0]["end_seconds"])
+
 
 class CatalogContractTest(unittest.TestCase):
     @patch("audiofy.providers.openrouter.list_tts_models")
@@ -608,6 +695,59 @@ class EpisodeSummaryTest(unittest.TestCase):
         self.assertEqual(summary["retry"]["segment"], 5)
         self.assertEqual(summary["progress"], {"current": 4, "total": 10})
         self.assertEqual(summary["last_error"], "falha temporária")
+
+    def test_resume_apresentadores_unicos_a_partir_do_manifesto_de_segmentos(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            directory = Path(tmp)
+            (directory / "segments.json").write_text(
+                json.dumps(
+                    {
+                        "segments": {
+                            "001.wav": {
+                                "chunk_index": 1,
+                                "speaker": "ana",
+                                "voice": "Kore",
+                                "style": "curiosa",
+                            },
+                            "002.wav": {
+                                "chunk_index": 2,
+                                "speaker": "beto",
+                                "voice": "Puck",
+                                "style": "cético",
+                            },
+                            "003.wav": {
+                                "chunk_index": 3,
+                                "speaker": "ana",
+                                "voice": "Kore",
+                                "style": "curiosa",
+                            },
+                        }
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            summary = bridge._episode_summary(directory)
+
+        self.assertEqual(
+            summary["presenters"],
+            [
+                {"speaker": "ana", "voice": "Kore", "style": "curiosa"},
+                {"speaker": "beto", "voice": "Puck", "style": "cético"},
+            ],
+        )
+
+    def test_presenters_vazio_quando_manifesto_nao_tem_voz(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            directory = Path(tmp)
+            (directory / "segments.json").write_text(
+                json.dumps({"segments": {"001.wav": {"chunk_index": 1, "speaker": "ana"}}}),
+                encoding="utf-8",
+            )
+
+            summary = bridge._episode_summary(directory)
+
+        self.assertEqual(summary["presenters"], [])
 
     def test_mp3_parcial_nao_e_exposto_enquanto_montagem_esta_rodando(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -72,6 +72,33 @@ def _episode_dir(item_id: str, language: str = "") -> Path:
     return episode_dir(item_id, language)
 
 
+def _read_presenters_summary(directory: Path) -> list[dict]:
+    """Lista, na ordem de primeira aparição, cada apresentador com voz/tom."""
+
+    manifest_path = directory / "segments.json"
+    if not manifest_path.is_file():
+        return []
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError):
+        return []
+    entries = manifest.get("segments") if isinstance(manifest, dict) else None
+    if not isinstance(entries, dict):
+        return []
+    ordered = sorted(entries.values(), key=lambda entry: entry.get("chunk_index") or 0)
+    seen: dict[str, dict] = {}
+    for entry in ordered:
+        if not isinstance(entry, dict):
+            continue
+        speaker = entry.get("speaker")
+        voice = entry.get("voice")
+        style = entry.get("style")
+        if not speaker or not voice or speaker in seen:
+            continue
+        seen[speaker] = {"speaker": speaker, "voice": voice, "style": style or ""}
+    return list(seen.values())
+
+
 def _episode_summary(directory: Path) -> dict:
     # reconcile: um "rodando" cujo worker morreu vira "falhou" em vez de
     # ficar pendurado para sempre na interface.
@@ -129,6 +156,7 @@ def _episode_summary(directory: Path) -> dict:
             "generation_mode", metrics_data.get("generation_mode", "adaptation")
         ),
         "narration_voice": status.get("narration_voice"),
+        "presenters": _read_presenters_summary(directory),
         "key_source": status.get("key_source"),
         "background_music": status.get("background_music"),
         "background_music_cache": status.get("background_music_cache"),
@@ -200,6 +228,29 @@ def _cmd_generation_log(item_id: str, language: str = "") -> dict:
     }
 
 
+def _add_cumulative_timing(chunks: list[dict]) -> None:
+    """Preenche start/end_seconds somando duration_seconds na ordem de chunk_index.
+
+    Assume concatenação direta dos segmentos (sem silêncio/crossfade extra),
+    a mesma premissa de ``segments.txt``/ffmpeg na montagem do MP3 final. Se
+    algum chunk não tiver duração auditada, a janela temporal fica ``None``
+    para todos — uma soma parcial daria posições erradas no player.
+    """
+
+    ordenados = sorted(chunks, key=lambda chunk: chunk.get("chunk_index") or 0)
+    if not ordenados or any(chunk.get("duration_seconds") is None for chunk in ordenados):
+        for chunk in chunks:
+            chunk["start_seconds"] = None
+            chunk["end_seconds"] = None
+        return
+    acumulado = 0.0
+    for chunk in ordenados:
+        inicio = acumulado
+        acumulado += chunk["duration_seconds"]
+        chunk["start_seconds"] = round(inicio, 3)
+        chunk["end_seconds"] = round(acumulado, 3)
+
+
 def _cmd_audio_chunks(item_id: str, language: str = "") -> dict:
     """Lista somente chunks confinados ao episódio e seus achados de auditoria."""
     from .audio_audit import read_audio_audit
@@ -240,6 +291,9 @@ def _cmd_audio_chunks(item_id: str, language: str = "") -> dict:
                     "chunk_index": metadata.get("chunk_index"),
                     "chunk_total": metadata.get("chunk_total"),
                     "speaker": metadata.get("speaker"),
+                    "voice": metadata.get("voice"),
+                    "style": metadata.get("style"),
+                    "text": metadata.get("text"),
                     "duration_seconds": finding.get("duration_seconds"),
                     "severity": finding.get("severity", "unknown"),
                     "longest_silence_seconds": finding.get("longest_silence_seconds"),
@@ -247,6 +301,7 @@ def _cmd_audio_chunks(item_id: str, language: str = "") -> dict:
                     "silences": finding.get("silences", []),
                 }
             )
+    _add_cumulative_timing(chunks)
     return {
         "chunks": chunks,
         "audit": audit.get("summary") if audit else None,
