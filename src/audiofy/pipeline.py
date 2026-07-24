@@ -1088,6 +1088,9 @@ def _synthesize_turns(
                     "chunk_index": index,
                     "chunk_total": len(turns),
                     "speaker": presenter.speaker,
+                    "voice": presenter.voice,
+                    "style": presenter.style,
+                    "text": turn["text"],
                 }
             )
             entries[segment.name] = preserved
@@ -1181,6 +1184,9 @@ def _synthesize_turns(
             "chunk_index": index,
             "chunk_total": len(turns),
             "speaker": presenter.speaker,
+            "voice": presenter.voice,
+            "style": presenter.style,
+            "text": plan["turn"]["text"],
             "generation_id": speech.generation_id,
             "key_label": synthesis.key_label,
             "cost_usd": round(segment_cost, 8),

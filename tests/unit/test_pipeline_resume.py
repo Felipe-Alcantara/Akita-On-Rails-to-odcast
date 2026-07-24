@@ -207,6 +207,67 @@ class ResumableSynthesisTest(unittest.TestCase):
         self.assertFalse(entry["cost_exact"])
         estimate_cost.assert_called_once()
 
+    @patch("audiofy.pipeline.openrouter.generation_cost_usd", return_value=0.012)
+    @patch("audiofy.pipeline.openrouter.text_to_speech")
+    def test_manifesto_grava_voz_tom_e_texto_por_segmento(self, text_to_speech, _generation_cost):
+        text_to_speech.return_value = SpeechResult(b"\x00\x00" * 300, "gen-1")
+        settings = SimpleNamespace(
+            presenters=[
+                Presenter("ana", "Kore", "curiosa"),
+                Presenter("beto", "Puck", "cético"),
+            ],
+            tts_model="vendor/tts",
+            tts_format="pcm",
+            tts_sample_rate=24_000,
+            tts_retry_attempts=3,
+            tts_retry_base_seconds=0,
+            tts_retry_max_seconds=0,
+            language="pt-BR",
+        )
+
+        paths = _synthesize_turns(
+            settings,
+            self.directory,
+            [
+                {"speaker": "ana", "text": "fala da ana"},
+                {"speaker": "beto", "text": "fala do beto"},
+            ],
+            self.tracker,
+        )
+
+        manifest = json.loads((self.directory / "segments.json").read_text(encoding="utf-8"))
+        entries = manifest["segments"]
+        entry_ana = entries[paths[0].name]
+        entry_beto = entries[paths[1].name]
+        self.assertEqual(entry_ana["voice"], "Kore")
+        self.assertEqual(entry_ana["style"], "curiosa")
+        self.assertEqual(entry_ana["text"], "fala da ana")
+        self.assertEqual(entry_beto["voice"], "Puck")
+        self.assertEqual(entry_beto["style"], "cético")
+        self.assertEqual(entry_beto["text"], "fala do beto")
+
+    @patch("audiofy.pipeline.openrouter.generation_cost_usd", return_value=0.012)
+    def test_manifesto_preserva_voz_tom_e_texto_ao_reaproveitar_segmento(self, _generation_cost):
+        segments = self.directory / "segments"
+        segments.mkdir()
+        pronto = _segment_path(self.directory, 1, 1)
+        _valid_wav(pronto)
+
+        with patch("audiofy.pipeline.openrouter.text_to_speech") as text_to_speech:
+            _synthesize_turns(
+                _settings(),
+                self.directory,
+                [{"speaker": "ana", "text": "fala reaproveitada"}],
+                self.tracker,
+            )
+            text_to_speech.assert_not_called()
+
+        manifest = json.loads((self.directory / "segments.json").read_text(encoding="utf-8"))
+        entry = manifest["segments"][pronto.name]
+        self.assertEqual(entry["voice"], "Kore")
+        self.assertEqual(entry["style"], "natural")
+        self.assertEqual(entry["text"], "fala reaproveitada")
+
     @patch("audiofy.pipeline.api_key_candidates")
     @patch("audiofy.pipeline.openrouter.generation_cost_usd", return_value=0.01)
     @patch("audiofy.pipeline.openrouter.text_to_speech")
